@@ -16,6 +16,7 @@ namespace ExcelDesign.Class_Objects
         private ShipmentHeader shipmentHeaderObject;
         private PostedPackage postedPackageObject;
         private string externalDocumentNo;
+        private Warranty _warranty;
 
         public SalesHeader()
         {
@@ -49,8 +50,13 @@ namespace ExcelDesign.Class_Objects
         {
             get { return shipmentHeaderObject; }
             set { shipmentHeaderObject = value; }
-        }   
-        
+        }
+       
+        public Warranty WarrantyProp
+        {
+            get { return _warranty; }
+            set { _warranty = value; }
+        }
 
         //public List<PostedPackage> PostedPackageObject
         //{

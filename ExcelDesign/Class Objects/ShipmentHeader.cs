@@ -11,18 +11,26 @@ namespace ExcelDesign.Class_Objects
         private string externalDocumentNo;
         private string shippingDate;
         private string shippingAgentService;
+        private List<ShipmentLine> shipmentLines;
 
         public ShipmentHeader()
         {
 
         }
 
-        public ShipmentHeader(string noP, string externalDocumentNoP, string shippingDateP, string shippingAgentServiceP)
+        public ShipmentHeader(string noP, string externalDocumentNoP, string shippingDateP, string shippingAgentServiceP, List<ShipmentLine> shipmentLinesP)
         {
             this.No = noP;
             this.ExternalDocumentNo = externalDocumentNoP;
             this.ShippingDate = shippingDateP;
             this.ShippingAgentService = shippingAgentServiceP;
+            this.ShipmentLines = shipmentLinesP;
+        }
+
+        public List<ShipmentLine> ShipmentLines
+        {
+            get { return shipmentLines; }
+            set { shipmentLines = value; }
         }
 
         public string ShippingAgentService

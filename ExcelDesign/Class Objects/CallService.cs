@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ExcelDesign.ServiceFunctions;
+using System.Linq;
 
 namespace ExcelDesign.Class_Objects
 {
@@ -41,31 +42,45 @@ namespace ExcelDesign.Class_Objects
             return sl;
         }
 
-        public SalesHeader GetSalesOrders()
+        public List<SalesHeader> GetSalesOrders()
         {
-            SalesHeader returnSH = null;
+            List<SalesHeader> returnSH = null;
+            List<ShipmentHeader> shipHead = null;
+            List<ShipmentLine> shipLine = null;
+            List<PostedPackage> postPack = null;
             string status = null;
+            string orderDate = null;
             string channelName = null;
+            string orderNo = null;
+
+            List<string> insertedOrderNumbers = null;
 
             if (currResults.SOImportBuffer != null)
             {
                 status = currResults.SOImportBuffer[0].OrderStatus;
+                orderDate = currResults.SOImportBuffer[0].OrderDate;
                 channelName = currResults.SOImportBuffer[0].ChannelName;
             }
 
             if((currResults.SalesHeader != null) && (currResults.SalesShipmentHeader != null) && (currResults.PostedPackage != null))
             {
-               
-                returnSH = new SalesHeader(status,
-                                           currResults.SalesHeader[0].DocDate,
-                                           currResults.SalesHeader[0].No,
-                                           channelName,
-                                           new ShipmentHeader(currResults.SalesShipmentHeader[0].No,
-                                                              currResults.SalesShipmentHeader[0].ExtDocNo,
-                                                              currResults.SalesShipmentHeader[0].ShippingDate,
-                                                              currResults.SalesShipmentHeader[0].ShippingAgentService),
-                                           new PostedPackage(currResults.PostedPackage[0].ExtTrackNo),
-                                           currResults.SalesHeader[0].ExtDocNo);
+                if (!insertedOrderNumbers.Contains(orderNo))
+                {
+
+                }
+                returnSH.Add(new SalesHeader(status,
+                                             orderDate,
+                                             currResults.SalesHeader[0].No,
+                                             channelName,
+                                             shipHead,
+                                             postPack,
+                                             currResults.SalesHeader[0].ExtDocNo));
+
+                //new ShipmentHeader(currResults.SalesShipmentHeader[0].No,
+                //                   currResults.SalesShipmentHeader[0].ExtDocNo,
+                //                   currResults.SalesShipmentHeader[0].ShippingDate,
+                //                   currResults.SalesShipmentHeader[0].ShippingAgentService),
+                //new PostedPackage(currResults.PostedPackage[0].ExtTrackNo),
             }
 
             return returnSH;

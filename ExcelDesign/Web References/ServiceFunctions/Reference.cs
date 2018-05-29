@@ -164,8 +164,6 @@ namespace ExcelDesign.ServiceFunctions {
         
         private SOImportBuffer[] sOImportBufferField;
         
-        private Warranty[] warrantyField;
-        
         private string[] textField;
         
         /// <remarks/>
@@ -334,17 +332,6 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Warranty")]
-        public Warranty[] Warranty {
-            get {
-                return this.warrantyField;
-            }
-            set {
-                this.warrantyField = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
         public string[] Text {
             get {
@@ -371,6 +358,8 @@ namespace ExcelDesign.ServiceFunctions {
         private string extDocNoField;
         
         private string docDateField;
+        
+        private string sellToCustomerNameField;
         
         private string shipToNameField;
         
@@ -425,6 +414,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.docDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SellToCustomerName {
+            get {
+                return this.sellToCustomerNameField;
+            }
+            set {
+                this.sellToCustomerNameField = value;
             }
         }
         
@@ -586,9 +585,13 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string salesOrderNoField;
         
-        private string channelNameField;
+        private string[] channelNameField;
         
         private string customerNoField;
+        
+        private string qtyField;
+        
+        private string priceField;
         
         private string shipToNameField;
         
@@ -605,6 +608,8 @@ namespace ExcelDesign.ServiceFunctions {
         private string shipToStateField;
         
         private string shipToCountryField;
+        
+        private Warranty[] warrantyField;
         
         /// <remarks/>
         public string ExternalDocumentNo {
@@ -647,7 +652,8 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
-        public string ChannelName {
+        [System.Xml.Serialization.XmlElementAttribute("ChannelName")]
+        public string[] ChannelName {
             get {
                 return this.channelNameField;
             }
@@ -663,6 +669,26 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.customerNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Qty {
+            get {
+                return this.qtyField;
+            }
+            set {
+                this.qtyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Price {
+            get {
+                return this.priceField;
+            }
+            set {
+                this.priceField = value;
             }
         }
         
@@ -745,6 +771,17 @@ namespace ExcelDesign.ServiceFunctions {
                 this.shipToCountryField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Warranty")]
+        public Warranty[] Warranty {
+            get {
+                return this.warrantyField;
+            }
+            set {
+                this.warrantyField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -760,6 +797,8 @@ namespace ExcelDesign.ServiceFunctions {
         private string typeField;
         
         private string itemNoField;
+        
+        private string descriptionField;
         
         private string qtyField;
         
@@ -792,6 +831,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.itemNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
             }
         }
         
@@ -971,6 +1020,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string itemNoField;
         
+        private string descriptionField;
+        
         private string qtyField;
         
         private string serialNoField;
@@ -1002,6 +1053,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.itemNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
             }
         }
         
@@ -1241,6 +1302,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string itemNoField;
         
+        private string descriptionField;
+        
         private string qtyField;
         
         private string unitPriceField;
@@ -1272,6 +1335,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.itemNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
             }
         }
         
@@ -1451,6 +1524,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string itemNoField;
         
+        private string descriptionField;
+        
         private string qtyField;
         
         private string unitPriceField;
@@ -1482,6 +1557,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.itemNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
             }
         }
         
@@ -1661,6 +1746,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string itemNoField;
         
+        private string descriptionField;
+        
         private string qtyField;
         
         private string priceField;
@@ -1694,6 +1781,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.itemNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
             }
         }
         
@@ -1931,6 +2028,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string itemNoField;
         
+        private string descriptionField;
+        
         private string qtyField;
         
         private string unitPriceField;
@@ -1962,6 +2061,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.itemNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
             }
         }
         
@@ -1999,6 +2108,8 @@ namespace ExcelDesign.ServiceFunctions {
         private string extDocNoField;
         
         private string shippingDateField;
+        
+        private string orderNoField;
         
         private string shipToNameField;
         
@@ -2047,6 +2158,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.shippingDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string OrderNo {
+            get {
+                return this.orderNoField;
+            }
+            set {
+                this.orderNoField = value;
             }
         }
         
@@ -2165,6 +2286,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string itemNoField;
         
+        private string descriptionField;
+        
         private string qtyField;
         
         private string unitPriceField;
@@ -2196,6 +2319,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.itemNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
             }
         }
         

@@ -8,6 +8,7 @@
           <element minOccurs="1" maxOccurs="1" name="No" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ExtDocNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="DocDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="SellToCustomerName" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToAddress2" type="string" />
@@ -23,6 +24,7 @@
           <element minOccurs="1" maxOccurs="1" name="DocNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
           <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
         </sequence>
@@ -32,6 +34,7 @@
           <element minOccurs="1" maxOccurs="1" name="No" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ExtDocNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShippingDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="OrderNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToAddress2" type="string" />
@@ -49,6 +52,7 @@
           <element minOccurs="1" maxOccurs="1" name="DocNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
           <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
         </sequence>
@@ -77,6 +81,7 @@
           <element minOccurs="1" maxOccurs="1" name="PackNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Price" type="string" />
           <element minOccurs="1" maxOccurs="1" name="SerialNo" type="string" />
@@ -102,6 +107,7 @@
           <element minOccurs="1" maxOccurs="1" name="DocNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
           <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
         </sequence>
@@ -126,6 +132,7 @@
           <element minOccurs="1" maxOccurs="1" name="DocNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
           <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
         </sequence>
@@ -155,6 +162,7 @@
           <element minOccurs="1" maxOccurs="1" name="RecNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
           <element minOccurs="1" maxOccurs="1" name="SerialNo" type="string" />
         </sequence>
@@ -179,8 +187,16 @@
           <element minOccurs="1" maxOccurs="1" name="DocNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
           <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Warranty" mixed="true">
+        <sequence>
+          <element minOccurs="0" maxOccurs="unbounded" name="Status" type="string" />
+          <element minOccurs="0" maxOccurs="unbounded" name="Policy" type="string" />
+          <element minOccurs="0" maxOccurs="unbounded" name="DaysRemaining" type="string" />
         </sequence>
       </complexType>
       <complexType name="SOImportBuffer">
@@ -189,8 +205,10 @@
           <element minOccurs="1" maxOccurs="1" name="OrderStatus" type="string" />
           <element minOccurs="1" maxOccurs="1" name="OrderDate" type="string" />
           <element minOccurs="1" maxOccurs="1" name="SalesOrderNo" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="ChannelName" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="ChannelName" type="string" />
           <element minOccurs="1" maxOccurs="1" name="CustomerNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Price" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToAddress2" type="string" />
@@ -199,13 +217,7 @@
           <element minOccurs="1" maxOccurs="1" name="ShipToZip" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToState" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
-        </sequence>
-      </complexType>
-      <complexType name="Warranty" mixed="true">
-        <sequence>
-          <element minOccurs="0" maxOccurs="unbounded" name="Status" type="string" />
-          <element minOccurs="0" maxOccurs="unbounded" name="Policy" type="string" />
-          <element minOccurs="0" maxOccurs="unbounded" name="DaysRemaining" type="string" />
+          <element minOccurs="0" maxOccurs="unbounded" name="Warranty" type="tns:Warranty" />
         </sequence>
       </complexType>
       <complexType name="SearchResults" mixed="true">
@@ -225,7 +237,6 @@
           <element minOccurs="0" maxOccurs="unbounded" name="SalesCreditMemo" type="tns:SalesCreditMemo" />
           <element minOccurs="0" maxOccurs="unbounded" name="SalesCreditMemoLines" type="tns:SalesCreditMemoLines" />
           <element minOccurs="0" maxOccurs="unbounded" name="SOImportBuffer" type="tns:SOImportBuffer" />
-          <element minOccurs="0" maxOccurs="unbounded" name="Warranty" type="tns:Warranty" />
         </sequence>
       </complexType>
       <element name="SearchResults" type="tns:SearchResults" />

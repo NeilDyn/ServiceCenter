@@ -24,42 +24,122 @@ namespace ExcelDesign.Class_Objects
             currResults = webService.FindOrder(searchNo);
         }
 
-        public List<SalesLine> returnLines()
+        private List<ShipmentLine> ReturnShipmentLines(string no)
         {
-            List<SalesLine> sl = new List<SalesLine>();
+            List<ShipmentLine> shipLine = null;
 
-            if((currResults.SalesShipmentLine != null) && (currResults.PostedPackageLine != null))
+            string itemNo = null;
+            string description = null;
+            int quantity = 0;
+            int quantityShipped = 0;
+            double price = 0;
+            double lineAmount = 0;
+
+            for (int sl = 0; sl < currResults.SalesShipmentLine.Length; sl++)
             {
-                for (int i = 0; i < currResults.SalesShipmentLine.Length; i++)
+                if(currResults.SalesShipmentLine[sl].DocNo == no)
                 {
-                    //sl.Add(new ShipmentLine(currResults.SalesShipmentLine[i].ItemNo,
-                    //                        "Description",
-                    //                        currResults.SalesShipmentLine[i].Qty,
-                    //                        currResults.SalesShipmentLine[i].))
+                    itemNo      = currResults.SalesShipmentLine[sl].ItemNo;
+                    description = currResults.SalesShipmentLine[sl].Description;
+                    int.TryParse(currResults.SalesShipmentLine[sl].Qty, out quantity);
+                    double.TryParse(currResults.SalesShipmentLine[sl].UnitPrice, out price);
+                    lineAmount  = quantity * price;
+
+                    for (int sli = 0; sli < currResults.SalesShipmentLine.Length; sli++)
+                    {
+                        if((currResults.SalesShipmentLine[sli].DocNo == no) && (currResults.SalesShipmentLine[sli].ItemNo == itemNo))
+                        {
+                            int currQty = 0;
+                            int.TryParse(currResults.SalesShipmentLine[sli].Qty, out currQty);
+                            quantityShipped += currQty;
+                        }
+                    }
+
+                    shipLine.Add(new ShipmentLine(no, description, quantity, quantityShipped, price, lineAmount));
+
+                    itemNo = null;
+                    description = null;
+                    quantity = 0;
+                    quantityShipped = 0;
+                    price = 0;
+                    lineAmount = 0;
                 }
             }
 
-            return sl;
+            return shipLine;
+        }
+
+        private List<PostedPackage> ReturnPostedPackage()
+        {
+            List<PostedPackage> postPackage = null;
+
+            return postPackage;
+        }
+
+        private List<ShipmentHeader> ReturnShipmentHeader(string orderNo)
+        {
+            List<ShipmentHeader> shipHeader = null;
+
+            string no = null;
+            string externalDocumentNo = null;
+            string shippingDate = null;
+            string shippingAgentService = null;
+            List<ShipmentLine> shipLine = null;
+
+            for (int sh = 0; sh < currResults.SalesShipmentHeader.Length; sh++)
+            {
+                if (currResults.SalesShipmentHeader[sh].OrderNo == orderNo)
+                {
+                    no                      = currResults.SalesShipmentHeader[sh].No;
+                    externalDocumentNo      = currResults.SalesShipmentHeader[sh].ExtDocNo;
+                    shippingDate            = currResults.SalesShipmentHeader[sh].ShippingDate;
+                    shippingAgentService    = currResults.SalesShipmentHeader[sh].ShippingAgentService;
+                    shipLine = ReturnShipmentLines(no);
+
+                    shipHeader.Add(new ShipmentHeader(no, externalDocumentNo, shippingDate, shippingAgentService, shipLine));
+
+                    no = null;
+                    externalDocumentNo = null;
+                    shippingDate = null;
+                    shippingAgentService = null;
+                    shipLine = null;
+                }
+            }
+
+            return shipHeader;
         }
 
         public List<SalesHeader> GetSalesOrders()
         {
-            List<SalesHeader> returnSH = null;
-            List<ShipmentHeader> shipHead = null;
-            List<ShipmentLine> shipLine = null;
-            List<PostedPackage> postPack = null;
-            string status = null;
+            List<SalesHeader> returnSH = null;            
+            
+            string orderStatus = null;
             string orderDate = null;
-            string channelName = null;
             string orderNo = null;
+            string channelName = null;
+            List<ShipmentHeader> shipHeader = null;
+            List<PostedPackage> postPackage = null;           
+            string externalDocumentNo = null;
 
             List<string> insertedOrderNumbers = null;
 
             if (currResults.SOImportBuffer != null)
             {
-                status = currResults.SOImportBuffer[0].OrderStatus;
-                orderDate = currResults.SOImportBuffer[0].OrderDate;
-                channelName = currResults.SOImportBuffer[0].ChannelName;
+                for (int so = 0; so < currResults.SOImportBuffer.Length; so++)
+                {
+                    if (!insertedOrderNumbers.Contains(orderNo))
+                    {
+                        orderStatus = currResults.SOImportBuffer[so].OrderStatus;
+                        orderDate = currResults.SOImportBuffer[so].OrderDate;
+                        channelName = currResults.SOImportBuffer[so].ChannelName[0];
+                        orderNo = currResults.SOImportBuffer[so].SalesOrderNo;
+                        externalDocumentNo = currResults.SOImportBuffer[so].ExternalDocumentNo;
+
+                        shipHeader = ReturnShipmentHeader(orderNo);
+
+                        insertedOrderNumbers.Add(orderNo);
+                    }
+                }
             }
 
             if((currResults.SalesHeader != null) && (currResults.SalesShipmentHeader != null) && (currResults.PostedPackage != null))
@@ -68,7 +148,7 @@ namespace ExcelDesign.Class_Objects
                 {
 
                 }
-                returnSH.Add(new SalesHeader(status,
+                returnSH.Add(new SalesHeader(orderStatus,
                                              orderDate,
                                              currResults.SalesHeader[0].No,
                                              channelName,

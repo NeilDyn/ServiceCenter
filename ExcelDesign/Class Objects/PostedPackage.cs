@@ -11,7 +11,7 @@ namespace ExcelDesign.Class_Objects
         private string packageNo;
         private string shippingAgent;
         private string shippingAgentService;
-        private DateTime packDate;
+        private string packDate;
         private string sourceID;
         private string postedSourceID;
         private List<PostedPackageLine> postedPackageLines;
@@ -21,9 +21,17 @@ namespace ExcelDesign.Class_Objects
 
         }
 
-        public PostedPackage(string trackingNoP)
+        public PostedPackage(string trackingNoP, string packageNoP, string shippingAgentP, string shippingAgentServiceP, string packDateP, string sourceIDP, 
+            string postedSourceIDP, List<PostedPackageLine> postedPackageLinesP)
         {
             this.TrackingNo = trackingNoP;
+            this.PackageNo = packageNoP;
+            this.ShippingAgent = shippingAgentP;
+            this.ShippingAgentService = shippingAgentServiceP;
+            this.packDate = packDateP;
+            this.SourceID = sourceIDP;
+            this.PostedSourceID = postedSourceIDP;
+            this.PostedPackageLines = postedPackageLinesP;s
         }
 
         public string TrackingNo
@@ -53,7 +61,7 @@ namespace ExcelDesign.Class_Objects
         }
 
 
-        public DateTime PackingDate
+        public string PackingDate
         {
             get { return packDate; }
             set { packDate = value; }

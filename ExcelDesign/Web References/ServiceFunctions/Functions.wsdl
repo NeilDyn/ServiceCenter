@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/Functions" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema xmlns:tns="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" elementFormDefault="qualified" targetNamespace="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="SalesHeader">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="DocType" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="No" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ExtDocNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="DocDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress2" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToContact" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCity" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToZip" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToState" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="SalesLine">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="DocNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="SalesShipmentHeader">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="No" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ExtDocNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShippingDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress2" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToContact" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCity" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToZip" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToState" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShippingAgentCode" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShippingAgentService" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="SalesShipmentLine">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="DocNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="PostedPackage">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="PackNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ExtTrackNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShippingAgent" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShippingService" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="PostingDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="PostedSourceID" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="SourceID" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress2" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToContact" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCity" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToZip" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToState" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="PostedPackageLine">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="PackNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Price" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="SerialNo" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="SalesInvoiceHeader">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="No" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ExtDocNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="PostingDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress2" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToContact" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCity" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToZip" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToState" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="SalesInvoiceLine">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="DocNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="ReturnReceiptHeader">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="No" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ExtDocNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ReceiveDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress2" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToContact" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCity" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToZip" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToState" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="ReturnReceiptLine">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="DocNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="PostedReceive">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="No" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ExtDocNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ExtTrackNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShippingAgent" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShippingService" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ReceiveDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="PostedSourceID" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="SourceID" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipFromName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipFromAddress" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipFromAddress2" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipFromContact" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipFromCity" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipFromZip" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipFromState" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipFromCountry" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="PostedReceiveLine">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="RecNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="SerialNo" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="SalesCreditMemo">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="No" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ExtDocNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="PostingDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress2" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToContact" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCity" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToZip" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToState" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="SalesCreditMemoLines">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="DocNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="SOImportBuffer">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="ExternalDocumentNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="OrderStatus" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="OrderDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="SalesOrderNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ChannelName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CustomerNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress2" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToContact" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCity" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToZip" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToState" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Warranty" mixed="true">
+        <sequence>
+          <element minOccurs="0" maxOccurs="unbounded" name="Status" type="string" />
+          <element minOccurs="0" maxOccurs="unbounded" name="Policy" type="string" />
+          <element minOccurs="0" maxOccurs="unbounded" name="DaysRemaining" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="SearchResults" mixed="true">
+        <sequence>
+          <element minOccurs="0" maxOccurs="unbounded" name="SalesHeader" type="tns:SalesHeader" />
+          <element minOccurs="0" maxOccurs="unbounded" name="SalesLine" type="tns:SalesLine" />
+          <element minOccurs="0" maxOccurs="unbounded" name="SalesShipmentHeader" type="tns:SalesShipmentHeader" />
+          <element minOccurs="0" maxOccurs="unbounded" name="SalesShipmentLine" type="tns:SalesShipmentLine" />
+          <element minOccurs="0" maxOccurs="unbounded" name="PostedPackage" type="tns:PostedPackage" />
+          <element minOccurs="0" maxOccurs="unbounded" name="PostedPackageLine" type="tns:PostedPackageLine" />
+          <element minOccurs="0" maxOccurs="unbounded" name="SalesInvoiceHeader" type="tns:SalesInvoiceHeader" />
+          <element minOccurs="0" maxOccurs="unbounded" name="SalesInvoiceLine" type="tns:SalesInvoiceLine" />
+          <element minOccurs="0" maxOccurs="unbounded" name="ReturnReceiptHeader" type="tns:ReturnReceiptHeader" />
+          <element minOccurs="0" maxOccurs="unbounded" name="ReturnReceiptLine" type="tns:ReturnReceiptLine" />
+          <element minOccurs="0" maxOccurs="unbounded" name="PostedReceive" type="tns:PostedReceive" />
+          <element minOccurs="0" maxOccurs="unbounded" name="PostedReceiveLine" type="tns:PostedReceiveLine" />
+          <element minOccurs="0" maxOccurs="unbounded" name="SalesCreditMemo" type="tns:SalesCreditMemo" />
+          <element minOccurs="0" maxOccurs="unbounded" name="SalesCreditMemoLines" type="tns:SalesCreditMemoLines" />
+          <element minOccurs="0" maxOccurs="unbounded" name="SOImportBuffer" type="tns:SOImportBuffer" />
+          <element minOccurs="0" maxOccurs="unbounded" name="Warranty" type="tns:Warranty" />
+        </sequence>
+      </complexType>
+      <element name="SearchResults" type="tns:SearchResults" />
+    </schema>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="SearchDetermineNoType">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="searchNo" type="string" />
+            <element xmlns:q1="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" minOccurs="1" maxOccurs="1" name="searchResults" type="q1:SearchResults" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SearchDetermineNoType_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+            <element xmlns:q2="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" minOccurs="1" maxOccurs="1" name="searchResults" type="q2:SearchResults" />
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="SearchDetermineNoType">
+    <part name="parameters" element="tns:SearchDetermineNoType" />
+  </message>
+  <message name="SearchDetermineNoType_Result">
+    <part name="parameters" element="tns:SearchDetermineNoType_Result" />
+  </message>
+  <portType name="Functions_Port">
+    <operation name="SearchDetermineNoType">
+      <input name="SearchDetermineNoType" message="tns:SearchDetermineNoType" />
+      <output name="SearchDetermineNoType_Result" message="tns:SearchDetermineNoType_Result" />
+    </operation>
+  </portType>
+  <binding name="Functions_Binding" type="tns:Functions_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="SearchDetermineNoType">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:SearchDetermineNoType" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="SearchDetermineNoType">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="SearchDetermineNoType_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Functions">
+    <port name="Functions_Port" binding="tns:Functions_Binding">
+      <address location="http://jeg-svr2.jeg.local:7058/DynamicsNAV/WS/JEG_SONS,%20Inc/Codeunit/Functions" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

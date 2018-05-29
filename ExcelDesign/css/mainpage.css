@@ -1,0 +1,130 @@
+﻿body {
+}
+
+.SearchArea {
+     text-align: center;
+     vertical-align:middle;
+}
+
+.SearchArea.Textbox {
+     border-color: black;
+     border-width: 2px;
+}
+
+.HeaderLine{
+    height: 2px;
+    /* Set the hr color */
+    color: #333; /* old IE */
+    background-color: #333; /* Modern Browsers */
+}
+
+.HeaderLabel.Label{
+    margin:auto;
+    text-align: right;
+    color: #0094ff;
+    font-size: xx-large;
+    font-weight: bold;
+    vertical-align:middle
+}
+
+
+.SectionBreak{
+    margin-right:100px;
+    border: none;
+    height: 2px;
+    /* Set the hr color */
+    color: #333; /* old IE */
+    background-color: #333; /* Modern Browsers */
+}
+
+.CustomerInfo{
+    margin-left:100px;
+}
+
+.OrderInfoHeader{
+    margin-left: 100px;
+    display:block;
+    margin-right: 100px;
+}
+
+.OrderDetail{
+    margin-left: 100px;
+    display:block;
+    margin-right: 100px;
+}
+
+.detailedCustomerCaption{
+    margin-left: 100px;
+    display:inline-block;
+    text-align:right;
+    padding:5px 5px 5px 5px;
+    font-weight: bold;
+    float:left;
+}
+
+.detailedCustomerInfo{
+    float:left;
+    display:inline-block;
+    text-align:left;
+    padding:5px 5px 5px 5px;
+}
+
+.detailedCustomerCaptionCon {
+    display:inline-block;
+    text-align:right;
+    padding:5px 5px 5px 5px;
+    font-weight: bold;
+    float:left;
+    margin-top: 75px;
+}
+
+.detailedCustomerInfoCon {
+    margin-top: 75px;
+    float:left;
+    display:inline-block;
+    text-align:left;
+    padding:5px 5px 5px 5px;
+}
+
+
+.detailedOrderCaption{
+    margin-left: 68px;
+    display:inline-block;
+    text-align:right;
+    padding:5px 5px 5px 5px;
+    font-weight: bold;
+    float:left;
+}
+
+.detailedOrderInfo{
+    float:left;
+    display:inline-block;
+    text-align:left;
+    padding:5px 5px 5px 5px;
+}
+
+.detailedOrderCaptionCon {
+    display:inline-block;
+    text-align:right;
+    padding:5px 5px 5px 5px;
+    font-weight: bold;
+    float:left;
+    margin-top: 38px;
+}
+
+.detailedOrderInfoCon {
+    margin-top: 38px;
+    float:left;
+    display:inline;
+    text-align:left;
+    padding:5px 5px 5px 5px;
+}
+
+.Options li {
+    list-style-type: none;
+    margin: 0;
+    padding: 1px 1px 1px 1px;
+    overflow: hidden;
+    display: inline;
+    float: right;
+}

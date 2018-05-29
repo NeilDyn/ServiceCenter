@@ -100,6 +100,7 @@
     <Compile Include="Class Objects\SalesHeader.cs" />
     <Compile Include="Class Objects\ShipmentHeader.cs" />
     <Compile Include="Class Objects\ShipmentLine.cs" />
+    <Compile Include="Class Objects\Warranty.cs" />
     <Compile Include="Class Objects\WebService.cs" />
     <Compile Include="Class Objects\Zendesk.cs" />
     <Compile Include="Forms\Demo.aspx.cs">

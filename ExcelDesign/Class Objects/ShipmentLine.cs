@@ -14,9 +14,9 @@ namespace ExcelDesign.Class_Objects
         private double price;
         private double lineAmount;
 
-        private PostedPackageLine postedPackageLine;
+        //private PostedPackageLine postedPackageLine;
 
-        public ShipmentLine(string itemNoP, string descriptionP, int quantityP, int quantityShippedP, double priceP, double lineAmountP, PostedPackageLine postedPackageLineP)
+        public ShipmentLine(string itemNoP, string descriptionP, int quantityP, int quantityShippedP, double priceP, double lineAmountP)
         {
             this.ItemNo = itemNoP;
             this.Description = descriptionP;
@@ -24,7 +24,7 @@ namespace ExcelDesign.Class_Objects
             this.quantityShipped = quantityShippedP;
             this.Price = priceP;
             this.LineAmount = lineAmountP;
-            this.PostedPackageLine = postedPackageLineP;
+           // this.PostedPackageLine = postedPackageLineP;
         }
 
         public ShipmentLine()
@@ -32,11 +32,11 @@ namespace ExcelDesign.Class_Objects
 
         }
 
-        public PostedPackageLine PostedPackageLine
-        {
-            get { return postedPackageLine; }
-            set { postedPackageLine = value; }
-        }
+        //public PostedPackageLine PostedPackageLine
+        //{
+        //    get { return postedPackageLine; }
+        //    set { postedPackageLine = value; }
+        //}
         
         
 

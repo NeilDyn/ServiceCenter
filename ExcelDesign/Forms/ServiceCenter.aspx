@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ServiceCenter.aspx.cs" Inherits="ExcelDesign.Forms.ServiceCenter" %>
 <%@ Register Src="~/Forms/UserControls/CustomerInfo.ascx" TagName="SalesOrderHeader" TagPrefix="ci" %>
 <%@ Register Src="~/Forms/UserControls/SalesOrderHeader.ascx" TagName="SalesOrderHeader" TagPrefix="soh" %>
-<%@ Register Src="~/Forms/UserControls/SalesOrderHeader.ascx" TagName="SalesOrderDetail" TagPrefix="sod" %>
+<%@ Register Src="~/Forms/UserControls/SalesOrderDetail.ascx" TagName="SalesOrderDetail" TagPrefix="sod" %>
 
 <!DOCTYPE html>
 

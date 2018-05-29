@@ -35,43 +35,126 @@ namespace ExcelDesign.Class_Objects
             double price = 0;
             double lineAmount = 0;
 
-            for (int sl = 0; sl < currResults.SalesShipmentLine.Length; sl++)
+            if (currResults.SalesShipmentLine != null)
             {
-                if(currResults.SalesShipmentLine[sl].DocNo == no)
+                for (int sl = 0; sl < currResults.SalesShipmentLine.Length; sl++)
                 {
-                    itemNo      = currResults.SalesShipmentLine[sl].ItemNo;
-                    description = currResults.SalesShipmentLine[sl].Description;
-                    int.TryParse(currResults.SalesShipmentLine[sl].Qty, out quantity);
-                    double.TryParse(currResults.SalesShipmentLine[sl].UnitPrice, out price);
-                    lineAmount  = quantity * price;
-
-                    for (int sli = 0; sli < currResults.SalesShipmentLine.Length; sli++)
+                    if (currResults.SalesShipmentLine[sl].DocNo == no)
                     {
-                        if((currResults.SalesShipmentLine[sli].DocNo == no) && (currResults.SalesShipmentLine[sli].ItemNo == itemNo))
+                        itemNo = currResults.SalesShipmentLine[sl].ItemNo;
+                        description = currResults.SalesShipmentLine[sl].Description;
+                        int.TryParse(currResults.SalesShipmentLine[sl].Qty, out quantity);
+                        double.TryParse(currResults.SalesShipmentLine[sl].UnitPrice, out price);
+                        lineAmount = quantity * price;
+
+                        for (int sli = 0; sli < currResults.SalesShipmentLine.Length; sli++)
                         {
-                            int currQty = 0;
-                            int.TryParse(currResults.SalesShipmentLine[sli].Qty, out currQty);
-                            quantityShipped += currQty;
+                            if ((currResults.SalesShipmentLine[sli].DocNo == no) && (currResults.SalesShipmentLine[sli].ItemNo == itemNo))
+                            {
+                                int currQty = 0;
+                                int.TryParse(currResults.SalesShipmentLine[sli].Qty, out currQty);
+                                quantityShipped += currQty;
+                            }
                         }
+
+                        shipLine.Add(new ShipmentLine(no, description, quantity, quantityShipped, price, lineAmount));
+
+                        itemNo = null;
+                        description = null;
+                        quantity = 0;
+                        quantityShipped = 0;
+                        price = 0;
+                        lineAmount = 0;
                     }
-
-                    shipLine.Add(new ShipmentLine(no, description, quantity, quantityShipped, price, lineAmount));
-
-                    itemNo = null;
-                    description = null;
-                    quantity = 0;
-                    quantityShipped = 0;
-                    price = 0;
-                    lineAmount = 0;
                 }
             }
 
             return shipLine;
         }
 
-        private List<PostedPackage> ReturnPostedPackage()
+        private List<PostedPackageLine> ReturnPostedPackageLine(string postedPackageNo)
+        {
+            List<PostedPackageLine> postedPackageLine = null;
+
+            string serialNo = null;
+            string packageNo = null;
+            string itemNo = null;
+            string description = null;
+            int quantity = 0;
+            string type = null;
+            double price = 0;
+
+            if (currResults.PostedPackageLine != null)
+            {
+                for (int ppl = 0; ppl < currResults.PostedPackageLine.Length; ppl++)
+                {
+                    if (currResults.PostedPackageLine[ppl].PackNo == postedPackageNo)
+                    {
+                        serialNo = currResults.PostedPackageLine[ppl].SerialNo;
+                        packageNo = currResults.PostedPackageLine[ppl].PackNo;
+                        itemNo = currResults.PostedPackageLine[ppl].ItemNo;
+                        description = currResults.PostedPackageLine[ppl].Description;
+                        type = currResults.PostedPackageLine[ppl].Type;
+                        int.TryParse(currResults.PostedPackageLine[ppl].Qty, out quantity);
+                        double.TryParse(currResults.PostedPackageLine[ppl].Price, out price);
+
+                        postedPackageLine.Add(new PostedPackageLine(serialNo, packageNo, itemNo, description, quantity, price));
+
+                        serialNo = null;
+                        packageNo = null;
+                        itemNo = null;
+                        description = null;
+                        quantity = 0;
+                        type = null;
+                        price = 0;
+                    }
+                }
+            }
+
+            return postedPackageLine;
+        }
+
+        private List<PostedPackage> ReturnPostedPackage(string orderNo)
         {
             List<PostedPackage> postPackage = null;
+
+            string trackingNo = null;
+            string packageNo = null;
+            string shippingAgent = null;
+            string shippingAgentService = null;
+            string packDate = null;
+            string sourceID = null;
+            string postedSourceID = null;
+            List<PostedPackageLine> postedPackageLines = null;
+
+            if (currResults.PostedPackage != null)
+            {
+                for (int pp = 0; pp < currResults.PostedPackage.Length; pp++)
+                {
+                    if (currResults.PostedPackage[pp].SourceID == orderNo)
+                    {
+                        trackingNo = currResults.PostedPackage[pp].ExtTrackNo;
+                        packageNo = currResults.PostedPackage[pp].PackNo;
+                        shippingAgent = currResults.PostedPackage[pp].ShippingAgent;
+                        shippingAgentService = currResults.PostedPackage[pp].ShippingService;
+                        packDate = currResults.PostedPackage[pp].PostingDate;
+                        sourceID = currResults.PostedPackage[pp].SourceID;
+                        postedSourceID = currResults.PostedPackage[pp].PostedSourceID;
+                        postedPackageLines = ReturnPostedPackageLine(packageNo);
+
+                        postPackage.Add(new PostedPackage(trackingNo, packageNo, shippingAgent, shippingAgentService, packDate, sourceID, postedSourceID, postedPackageLines));
+
+                        trackingNo = null;
+                        packageNo = null;
+                        shippingAgent = null;
+                        shippingAgentService = null;
+                        packDate = null;
+                        sourceID = null;
+                        postedSourceID = null;
+                        postedPackageLines = null;
+                    }
+                }
+            }
 
             return postPackage;
         }
@@ -86,39 +169,41 @@ namespace ExcelDesign.Class_Objects
             string shippingAgentService = null;
             List<ShipmentLine> shipLine = null;
 
-            for (int sh = 0; sh < currResults.SalesShipmentHeader.Length; sh++)
+            if (currResults.SalesShipmentHeader != null)
             {
-                if (currResults.SalesShipmentHeader[sh].OrderNo == orderNo)
+                for (int sh = 0; sh < currResults.SalesShipmentHeader.Length; sh++)
                 {
-                    no                      = currResults.SalesShipmentHeader[sh].No;
-                    externalDocumentNo      = currResults.SalesShipmentHeader[sh].ExtDocNo;
-                    shippingDate            = currResults.SalesShipmentHeader[sh].ShippingDate;
-                    shippingAgentService    = currResults.SalesShipmentHeader[sh].ShippingAgentService;
-                    shipLine = ReturnShipmentLines(no);
+                    if (currResults.SalesShipmentHeader[sh].OrderNo == orderNo)
+                    {
+                        no = currResults.SalesShipmentHeader[sh].No;
+                        externalDocumentNo = currResults.SalesShipmentHeader[sh].ExtDocNo;
+                        shippingDate = currResults.SalesShipmentHeader[sh].ShippingDate;
+                        shippingAgentService = currResults.SalesShipmentHeader[sh].ShippingAgentService;
+                        shipLine = ReturnShipmentLines(no);
 
-                    shipHeader.Add(new ShipmentHeader(no, externalDocumentNo, shippingDate, shippingAgentService, shipLine));
+                        shipHeader.Add(new ShipmentHeader(no, externalDocumentNo, shippingDate, shippingAgentService, shipLine));
 
-                    no = null;
-                    externalDocumentNo = null;
-                    shippingDate = null;
-                    shippingAgentService = null;
-                    shipLine = null;
+                        no = null;
+                        externalDocumentNo = null;
+                        shippingDate = null;
+                        shippingAgentService = null;
+                        shipLine = null;
+                    }
                 }
             }
-
             return shipHeader;
         }
 
         public List<SalesHeader> GetSalesOrders()
         {
-            List<SalesHeader> returnSH = null;            
-            
+            List<SalesHeader> salesHead = null;
+
             string orderStatus = null;
             string orderDate = null;
             string orderNo = null;
             string channelName = null;
             List<ShipmentHeader> shipHeader = null;
-            List<PostedPackage> postPackage = null;           
+            List<PostedPackage> postPackage = null;
             string externalDocumentNo = null;
 
             List<string> insertedOrderNumbers = null;
@@ -134,36 +219,52 @@ namespace ExcelDesign.Class_Objects
                         channelName = currResults.SOImportBuffer[so].ChannelName[0];
                         orderNo = currResults.SOImportBuffer[so].SalesOrderNo;
                         externalDocumentNo = currResults.SOImportBuffer[so].ExternalDocumentNo;
-
                         shipHeader = ReturnShipmentHeader(orderNo);
+                        postPackage = ReturnPostedPackage(orderNo);
+
+                        salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo));
 
                         insertedOrderNumbers.Add(orderNo);
+
+                        orderStatus = null;
+                        orderDate = null;
+                        orderNo = null;
+                        channelName = null;
+                        shipHeader = null;
+                        postPackage = null;
+                        externalDocumentNo = null;
                     }
                 }
             }
-
-            if((currResults.SalesHeader != null) && (currResults.SalesShipmentHeader != null) && (currResults.PostedPackage != null))
+            else if (currResults.SalesHeader != null)
             {
-                if (!insertedOrderNumbers.Contains(orderNo))
+                for (int so = 0; so < currResults.SalesHeader.Length; so++)
                 {
 
-                }
-                returnSH.Add(new SalesHeader(orderStatus,
-                                             orderDate,
-                                             currResults.SalesHeader[0].No,
-                                             channelName,
-                                             shipHead,
-                                             postPack,
-                                             currResults.SalesHeader[0].ExtDocNo));
+                    orderStatus = "Unknown"; // To be Discussed
+                    orderDate = currResults.SalesHeader[so].DocDate;
+                    channelName = currResults.SalesHeader[so].SellToCustomerName;
+                    orderNo = currResults.SalesHeader[so].No;
+                    externalDocumentNo = currResults.SalesHeader[so].ExtDocNo;
+                    shipHeader = ReturnShipmentHeader(orderNo);
+                    postPackage = ReturnPostedPackage(orderNo);
 
-                //new ShipmentHeader(currResults.SalesShipmentHeader[0].No,
-                //                   currResults.SalesShipmentHeader[0].ExtDocNo,
-                //                   currResults.SalesShipmentHeader[0].ShippingDate,
-                //                   currResults.SalesShipmentHeader[0].ShippingAgentService),
-                //new PostedPackage(currResults.PostedPackage[0].ExtTrackNo),
+                    salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo));
+
+                    insertedOrderNumbers.Add(orderNo);
+
+                    orderStatus = null;
+                    orderDate = null;
+                    orderNo = null;
+                    channelName = null;
+                    shipHeader = null;
+                    postPackage = null;
+                    externalDocumentNo = null;
+
+                }
             }
 
-            return returnSH;
+            return salesHead;
         }
 
         public Customer GetCustomerInfo()

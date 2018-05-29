@@ -18,13 +18,12 @@ namespace ExcelDesign.Class_Objects
         public PostedPackageLine(string serialNoP, string packNoP, string itemNoP, string descP, int qtyP, double priceP)
         {
             this.SerialNo = serialNoP;
-            serialNo = serialNoP;
-            packageNo = packNoP;
-            itemNo = itemNoP;
-            description = descP;
-            quantity = qtyP;
-            price = priceP;
-
+            this.serialNo = serialNoP;
+            this.packageNo = packNoP;
+            this.itemNo = itemNoP;
+            this.description = descP;
+            this.quantity = qtyP;
+            this.price = priceP;
         }
 
         public PostedPackageLine()

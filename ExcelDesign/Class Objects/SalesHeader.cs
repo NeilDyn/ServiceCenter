@@ -13,8 +13,6 @@ namespace ExcelDesign.Class_Objects
         private string channelName;
         private List<ShipmentHeader> shipmentHeaderObject;
         private List<PostedPackage> postedPackageObject;
-        //private ShipmentHeader shipmentHeaderObject;
-        //private PostedPackage postedPackageObject;
         private string externalDocumentNo;
         private Warranty _warranty;
 
@@ -23,7 +21,8 @@ namespace ExcelDesign.Class_Objects
 
         }
 
-        public SalesHeader(string orderStatusP, string orderDateP, string salesOrderNoP, string channelNameP, List<ShipmentHeader> shipmentHeaderObjectP, List<PostedPackage> postedPackageObjectP, string externalDocumentNoP)
+        public SalesHeader(string orderStatusP, string orderDateP, string salesOrderNoP, string channelNameP, List<ShipmentHeader> shipmentHeaderObjectP,
+            List<PostedPackage> postedPackageObjectP, string externalDocumentNoP)
         {
             this.OrderStatus = orderStatusP;
             this.OrderDate = orderDateP;

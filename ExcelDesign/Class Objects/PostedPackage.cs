@@ -31,7 +31,7 @@ namespace ExcelDesign.Class_Objects
             this.packDate = packDateP;
             this.SourceID = sourceIDP;
             this.PostedSourceID = postedSourceIDP;
-            this.PostedPackageLines = postedPackageLinesP;s
+            this.PostedPackageLines = postedPackageLinesP;
         }
 
         public string TrackingNo

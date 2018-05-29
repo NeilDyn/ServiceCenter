@@ -6,6 +6,5 @@
     <div style="float:right; margin-right:100px"><asp:Label ID="lblTotalOrderCount" Text="" runat="server" ForeColor="#0099FF" Font-Bold="True" /> </div>
     <div style="float:right; margin-right:100px"><asp:Label ID="Label15" runat="server" Text="Totals Orders:" ForeColor="#0099FF" Font-Bold="True" /></div>
     <br />
-    <div style="float:none"><hr class="SectionBreak"/></div>
- 
+    <div style="float:none"><hr class="SectionBreak"/></div> 
 </div>  

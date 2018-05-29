@@ -11,6 +11,7 @@ namespace ExcelDesign.Forms
     public partial class ServiceCenter : System.Web.UI.Page
     {
         protected CallService cs;
+        protected Control salesOrderDetail;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,41 +40,23 @@ namespace ExcelDesign.Forms
 
         protected void PopulateOrderDetails()
         {
-            List<SalesHeader> sh = cs.GetSalesOrders();
+            int headerCount = 0;
+            List<SalesHeader> sh = cs.GetSalesOrders();       
 
-            Control salesOrderDetail = LoadControl("SaledOrderDetail.ascx");
-
-            // ((SalesOrderDetail)salesOrderDetail).PopulateControl(sh, sl);
-
-
-            //lblOrderStatus.Text = sh.OrderStatus;
-            //lblOrderDate.Text = sh.OrderDate;
-            //lblSalesOrderNumber.Text = sh.SalesOrderNo;
-            //lblChannelName.Text = sh.ChannelName;
-            //lblZendeskTicket.Text = "1234";
-            //lblZendeskTicketNo.Text = "1";
-            //lblShipmentDate.Text = sh.ShipmentHeaderObject.ShippingDate;
-            //lblShipments.Text = "1";
-            //lblPackages.Text = "1";
-            //lblShipMethod.Text = sh.ShipmentHeaderObject.ShippingAgentService;
-            //lblTrackingNo.Text = sh.PostedPackageObject.TrackingNo;
-
-            //lblExternalDocumentNo.Text = sh.ExternalDocumentNo;
-
+            foreach (SalesHeader header in sh)
+            {
+                salesOrderDetail = LoadControl("SaledOrderDetail.ascx");
+                //((SalesOrderDetail)salesOrderDetail).PopulateControl(sh);
+            }
+            
         }
 
         protected void PopulateCustomerDetails()
         {
             Customer c = cs.GetCustomerInfo();
-
-            //this.lblName.Text = c.Name;
-            //this.lblAddress1.Text = c.Address1;
-            //this.lblAddress2.Text = c.Address2;
-            //this.lblShipToContact.Text = c.ShipToContact;
-            //this.lblCity.Text = c.City;
-            //this.lblZip.Text = c.Zip;
-            //this.lblState.Text = c.State;
-            //this.lblCountry.Text = c.Country;
+            Control customerInfo = LoadControl("UserControls/CustomerInfo.ascx");
+            //((Customer))
+            
         }
     }
 }

@@ -11,7 +11,7 @@ namespace ExcelDesign.Class_Objects
         private string packageNo;
         private string itemNo;
         private string description;
-        private int quanity;
+        private int quantity;
         private string type;
         private double price;
         
@@ -22,6 +22,8 @@ namespace ExcelDesign.Class_Objects
             packageNo = packNoP;
             itemNo = itemNoP;
             description = descP;
+            quantity = qtyP;
+            price = priceP;
 
         }
 
@@ -49,8 +51,8 @@ namespace ExcelDesign.Class_Objects
 
         public int Quantity
         {
-            get { return quanity; }
-            set { quanity = value; }
+            get { return quantity; }
+            set { quantity = value; }
         }
 
 

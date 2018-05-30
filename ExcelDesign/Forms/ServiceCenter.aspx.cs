@@ -62,6 +62,8 @@ namespace ExcelDesign.Forms
                 ((SalesOrderDetail)salesOrderDetail).PopulateControl(header, headerCount);
                 this.frmOrderDetails.Controls.Add(salesOrderDetail);
             }
+
+
             
         }
 

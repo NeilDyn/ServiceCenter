@@ -61,15 +61,23 @@
 
     <br />
     <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+    <asp:Table ID="tblWarranty" runat="server" BorderStyle="Solid" BorderWidth="2px" Height="75px" Width="250px" BorderColor="Black" Caption="Warranty">
+        <asp:TableHeaderRow ID="trStatus" runat="server">
+            <asp:TableCell ID="tcStatus" runat="server" Font-Bold="True" HorizontalAlign="Right">Status:</asp:TableCell>
+            <asp:TableCell ID="tcSetStatus" runat="server"></asp:TableCell>
+        </asp:TableHeaderRow>
+        <asp:TableRow ID="trPolicy" runat="server">
+            <asp:TableCell ID="tcPolicy" runat="server" Font-Bold="True" HorizontalAlign="Right" VerticalAlign="Middle">Policy:</asp:TableCell>
+            <asp:TableCell ID="tcSetPolicy" runat="server" Font-Bold="False"></asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow ID="trDays" runat="server">
+            <asp:TableCell ID="tcDays" runat="server" Font-Bold="True" HorizontalAlign="Right">Days Remaining:</asp:TableCell>
+            <asp:TableCell ID="tcSetDays" runat="server"></asp:TableCell>
+        </asp:TableRow>
+    </asp:Table>
 
     <div runat="server">
-        <asp:GridView ID="gdvOrderView" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Height="16px" Width="1080px">
+        <asp:GridView ID="gdvOrderView" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Height="16px" Width="1200px">
             <AlternatingRowStyle BackColor="White" />
             <EditRowStyle BackColor="#2461BF" />
             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -96,7 +104,7 @@
                 <asp:Button ID="Button2" runat="server" Text="Part Request" />
             </li>
             <li>
-                <asp:Button ID="Button1" runat="server" Text="Cancel Order" OnClick="Button1_Click" />
+                <asp:Button ID="Button1" runat="server" Text="Cancel Order" />
             </li>
         </ul>
     </div>

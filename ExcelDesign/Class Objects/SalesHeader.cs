@@ -22,7 +22,7 @@ namespace ExcelDesign.Class_Objects
         }
 
         public SalesHeader(string orderStatusP, string orderDateP, string salesOrderNoP, string channelNameP, List<ShipmentHeader> shipmentHeaderObjectP,
-            List<PostedPackage> postedPackageObjectP, string externalDocumentNoP)
+            List<PostedPackage> postedPackageObjectP, string externalDocumentNoP, Warranty _warrantyP)
         {
             this.OrderStatus = orderStatusP;
             this.OrderDate = orderDateP;
@@ -31,6 +31,7 @@ namespace ExcelDesign.Class_Objects
             this.ShipmentHeaderObject = shipmentHeaderObjectP;
             this.PostedPackageObject = postedPackageObjectP;
             this.ExternalDocumentNo = externalDocumentNoP;
+            this.WarrantyProp = _warrantyP;
         }
 
         public string ExternalDocumentNo

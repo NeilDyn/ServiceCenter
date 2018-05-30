@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ExcelDesign.ServiceFunctions;
 using System.Linq;
+using System.Globalization;
 
 namespace ExcelDesign.Class_Objects
 {
@@ -44,7 +45,7 @@ namespace ExcelDesign.Class_Objects
                         itemNo = currResults.SalesShipmentLine[sl].ItemNo;
                         description = currResults.SalesShipmentLine[sl].Description;
                         int.TryParse(currResults.SalesShipmentLine[sl].Qty, out quantity);
-                        price = double.Parse(currResults.SalesShipmentLine[sl].UnitPrice);
+                        double.TryParse(currResults.SalesShipmentLine[sl].UnitPrice, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
 
                         for (int sli = 0; sli < currResults.SalesShipmentLine.Length; sli++)
@@ -96,7 +97,7 @@ namespace ExcelDesign.Class_Objects
                         description = currResults.PostedPackageLine[ppl].Description;
                         type = currResults.PostedPackageLine[ppl].Type;
                         int.TryParse(currResults.PostedPackageLine[ppl].Qty, out quantity);
-                        price = double.Parse(currResults.PostedPackageLine[ppl].Price);
+                        double.TryParse(currResults.PostedPackageLine[ppl].Price, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
 
                         postedPackageLine.Add(new PostedPackageLine(serialNo, packageNo, itemNo, description, quantity, price));
 
@@ -197,6 +198,7 @@ namespace ExcelDesign.Class_Objects
         public List<SalesHeader> GetSalesOrders()
         {
             List<SalesHeader> salesHead = new List<SalesHeader>();
+            string type = null;
 
             string orderStatus = null;
             string orderDate = null;
@@ -205,6 +207,11 @@ namespace ExcelDesign.Class_Objects
             List<ShipmentHeader> shipHeader = new List<ShipmentHeader>();
             List<PostedPackage> postPackage = new List<PostedPackage>();
             string externalDocumentNo = null;
+            Warranty warranty = null;
+
+            string status = null;
+            string policy = null;
+            string daysRemaining = null;
 
             List<string> insertedOrderNumbers = new List<string>();
 
@@ -212,17 +219,24 @@ namespace ExcelDesign.Class_Objects
             {
                 for (int so = 0; so < currResults.SOImportBuffer.Length; so++)
                 {
-                    if (!insertedOrderNumbers.Contains(orderNo))
+                    orderNo = currResults.SOImportBuffer[so].SalesOrderNo;
+
+                    if (!insertedOrderNumbers.Any(order=> order.Equals(orderNo)))
                     {
+                        //type = currResults.SOImportBuffer[so].
                         orderStatus = currResults.SOImportBuffer[so].OrderStatus;
                         orderDate = currResults.SOImportBuffer[so].OrderDate;
-                        channelName = currResults.SOImportBuffer[so].ChannelName[0];
-                        orderNo = currResults.SOImportBuffer[so].SalesOrderNo;
+                        channelName = currResults.SOImportBuffer[so].ChannelName[0];                      
                         externalDocumentNo = currResults.SOImportBuffer[so].ExternalDocumentNo;
                         shipHeader = ReturnShipmentHeader(orderNo);
                         postPackage = ReturnPostedPackage(orderNo);
 
-                        salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo));
+                        status = currResults.SOImportBuffer[so].Warranty[0].Status[0];
+                        policy = currResults.SOImportBuffer[so].Warranty[0].Policy[0]; ;
+                        daysRemaining = currResults.SOImportBuffer[so].Warranty[0].DaysRemaining[0];
+                        warranty = new Warranty(status, policy, daysRemaining);
+
+                        salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty));
 
                         insertedOrderNumbers.Add(orderNo);
 
@@ -233,6 +247,11 @@ namespace ExcelDesign.Class_Objects
                         shipHeader = new List<ShipmentHeader>();
                         postPackage = new List<PostedPackage>();
                         externalDocumentNo = null;
+                        warranty = null;
+
+                        status = null;
+                        policy = null;
+                        daysRemaining = null;
                     }
                 }
             }
@@ -249,7 +268,12 @@ namespace ExcelDesign.Class_Objects
                     shipHeader = ReturnShipmentHeader(orderNo);
                     postPackage = ReturnPostedPackage(orderNo);
 
-                    salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo));
+                    status = currResults.SalesHeader[so].Warranty2[0].Status2[0];
+                    policy = currResults.SalesHeader[so].Warranty2[0].Policy2[0]; ;
+                    daysRemaining = currResults.SalesHeader[so].Warranty2[0].DaysRemaining2[0];
+                    warranty = new Warranty(status, policy, daysRemaining);
+
+                    salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty));
 
                     insertedOrderNumbers.Add(orderNo);
 
@@ -260,7 +284,11 @@ namespace ExcelDesign.Class_Objects
                     shipHeader = null;
                     postPackage = null;
                     externalDocumentNo = null;
+                    warranty = null;
 
+                    status = null;
+                    policy = null;
+                    daysRemaining = null;
                 }
             }
 

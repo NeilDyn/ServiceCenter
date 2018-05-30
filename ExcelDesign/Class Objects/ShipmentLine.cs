@@ -36,23 +36,25 @@ namespace ExcelDesign.Class_Objects
         //{
         //    get { return postedPackageLine; }
         //    set { postedPackageLine = value; }
-        //}
+        //}       
 
-
-
-        public double LineAmount
+        public string ItemNo
         {
-            get { return lineAmount; }
-            set { lineAmount = value; }
+            get { return itemNo; }
+            set { itemNo = value; }
         }
 
-
-        public double Price
+        public string Description
         {
-            get { return price; }
-            set { price = value; }
+            get { return description; }
+            set { description = value; }
         }
 
+        public int Quantity
+        {
+            get { return quantity; }
+            set { quantity = value; }
+        }
 
         public int QuantityShipped
         {
@@ -60,25 +62,16 @@ namespace ExcelDesign.Class_Objects
             set { quantityShipped = value; }
         }
 
-
-        public int Quantity
+        public double Price
         {
-            get { return quantity; }
-            set { quantity = value; }
+            get { return price; }
+            set { price = value; }
         }
-        
 
-        public string Description
+        public double LineAmount
         {
-            get { return description; }
-            set { description = value; }
-        }
-        
-
-        public string ItemNo
-        {
-            get { return itemNo; }
-            set { itemNo = value; }
+            get { return lineAmount; }
+            set { lineAmount = value; }
         }
         
     }

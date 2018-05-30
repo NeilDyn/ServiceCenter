@@ -29,12 +29,15 @@
 
 
 .SectionBreak{
+    border-style: none;
+    border-color: inherit;
+    border-width: medium;
     margin-right:100px;
-    border: none;
     height: 2px;
     /* Set the hr color */
     color: #333; /* old IE */
-    background-color: #333; /* Modern Browsers */
+    background-color: #333;
+    width: 1200px;
 }
 
 .CustomerInfo{

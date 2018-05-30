@@ -377,6 +377,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string shipToCountryField;
         
+        private Warranty2[] warranty2Field;
+        
         /// <remarks/>
         public string DocType {
             get {
@@ -506,6 +508,78 @@ namespace ExcelDesign.ServiceFunctions {
                 this.shipToCountryField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Warranty2")]
+        public Warranty2[] Warranty2 {
+            get {
+                return this.warranty2Field;
+            }
+            set {
+                this.warranty2Field = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
+    public partial class Warranty2 {
+        
+        private string[] status2Field;
+        
+        private string[] policy2Field;
+        
+        private string[] daysRemaining2Field;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Status2")]
+        public string[] Status2 {
+            get {
+                return this.status2Field;
+            }
+            set {
+                this.status2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Policy2")]
+        public string[] Policy2 {
+            get {
+                return this.policy2Field;
+            }
+            set {
+                this.policy2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("DaysRemaining2")]
+        public string[] DaysRemaining2 {
+            get {
+                return this.daysRemaining2Field;
+            }
+            set {
+                this.daysRemaining2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -579,6 +653,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string externalDocumentNoField;
         
+        private string orderTypeField;
+        
         private string orderStatusField;
         
         private string orderDateField;
@@ -618,6 +694,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.externalDocumentNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string OrderType {
+            get {
+                return this.orderTypeField;
+            }
+            set {
+                this.orderTypeField = value;
             }
         }
         

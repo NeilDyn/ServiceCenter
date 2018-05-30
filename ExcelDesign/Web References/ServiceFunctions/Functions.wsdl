@@ -2,6 +2,13 @@
 <definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/Functions" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
     <schema xmlns:tns="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" elementFormDefault="qualified" targetNamespace="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Warranty2" mixed="true">
+        <sequence>
+          <element minOccurs="0" maxOccurs="unbounded" name="Status2" type="string" />
+          <element minOccurs="0" maxOccurs="unbounded" name="Policy2" type="string" />
+          <element minOccurs="0" maxOccurs="unbounded" name="DaysRemaining2" type="string" />
+        </sequence>
+      </complexType>
       <complexType name="SalesHeader">
         <sequence>
           <element minOccurs="1" maxOccurs="1" name="DocType" type="string" />
@@ -17,6 +24,7 @@
           <element minOccurs="1" maxOccurs="1" name="ShipToZip" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToState" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
+          <element minOccurs="0" maxOccurs="unbounded" name="Warranty2" type="tns:Warranty2" />
         </sequence>
       </complexType>
       <complexType name="SalesLine">
@@ -202,6 +210,7 @@
       <complexType name="SOImportBuffer">
         <sequence>
           <element minOccurs="1" maxOccurs="1" name="ExternalDocumentNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="OrderType" type="string" />
           <element minOccurs="1" maxOccurs="1" name="OrderStatus" type="string" />
           <element minOccurs="1" maxOccurs="1" name="OrderDate" type="string" />
           <element minOccurs="1" maxOccurs="1" name="SalesOrderNo" type="string" />

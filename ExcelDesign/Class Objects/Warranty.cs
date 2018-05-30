@@ -9,12 +9,12 @@ namespace ExcelDesign.Class_Objects
     {
         private string status;
         private string policy;
-        private int daysRemaining;
+        private string daysRemaining;
         public Warranty()
         {
 
         }
-        public Warranty(string pStatus, string pPolicy, int pDaysRemaining)
+        public Warranty(string pStatus, string pPolicy, string pDaysRemaining)
         {
             status = pStatus;
             policy = pPolicy;
@@ -32,8 +32,8 @@ namespace ExcelDesign.Class_Objects
             get { return policy; }
             set { policy = value; }
         }
-        
-        public int DaysRemaining
+
+        public string DaysRemaining
         {
             get { return daysRemaining; }
             set { daysRemaining = value; }

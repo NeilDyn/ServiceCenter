@@ -50,7 +50,19 @@
     margin-right: 100px;
 }
 
+.ReturnInfoHeader{
+    margin-left: 100px;
+    display:block;
+    margin-right: 100px;
+}
+
 .OrderDetail{
+    margin-left: 100px;
+    display:block;
+    margin-right: 100px;
+}
+
+.ReturnDetailDetail{
     margin-left: 100px;
     display:block;
     margin-right: 100px;
@@ -99,7 +111,23 @@
     float:left;
 }
 
+.detailedReturnCaption{
+    margin-left: 68px;
+    display:inline-block;
+    text-align:right;
+    padding:5px 5px 5px 5px;
+    font-weight: bold;
+    float:left;
+}
+
 .detailedOrderInfo{
+    float:left;
+    display:inline-block;
+    text-align:left;
+    padding:5px 5px 5px 5px;
+}
+
+.detailedReturnInfo{
     float:left;
     display:inline-block;
     text-align:left;
@@ -115,7 +143,41 @@
     margin-top: 38px;
 }
 
+.returnOrderCaptionCon {
+    display:inline-block;
+    text-align:right;
+    padding:5px 5px 5px 5px;
+    font-weight: bold;
+    float:left;
+    margin-top: 38px;
+}
+
+.returnOrderCaptionCon2 {
+    display:inline-block;
+    text-align:right;
+    padding:5px 5px 5px 5px;
+    font-weight: bold;
+    float:left;
+    margin-top: 38px;
+}
+
 .detailedOrderInfoCon {
+    margin-top: 38px;
+    float:left;
+    display:inline;
+    text-align:left;
+    padding:5px 5px 5px 5px;
+}
+
+.returnOrderInfoCon {
+    margin-top: 38px;
+    float:left;
+    display:inline;
+    text-align:left;
+    padding:5px 5px 5px 5px;
+}
+
+.returnOrderInfoCon2 {
     margin-top: 38px;
     float:left;
     display:inline;

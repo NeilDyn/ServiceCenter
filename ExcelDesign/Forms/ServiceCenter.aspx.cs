@@ -34,6 +34,9 @@ namespace ExcelDesign.Forms
                 try
                 {
                     cs.callService(searchValue);
+                    customerInfo = new Control();
+                    salesOrderHeader = new Control();
+                    salesOrderDetail = new Control();
                     PopulateCustomerDetails();
                     PopulateOrderDetails();
                 }

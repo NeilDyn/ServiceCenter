@@ -2,6 +2,8 @@
 <%@ Register Src="~/Forms/UserControls/CustomerInfo.ascx" TagName="CustomerInfo" TagPrefix="ci" %>
 <%@ Register Src="~/Forms/UserControls/SalesOrderHeader.ascx" TagName="SalesOrderHeader" TagPrefix="soh" %>
 <%@ Register Src="~/Forms/UserControls/SalesOrderDetail.ascx" TagName="SalesOrderDetail" TagPrefix="sod" %>
+<%@ Register Src="~/Forms/UserControls/SalesReturnHeader.ascx" TagName="SalesReturnHeader" TagPrefix="srh" %>
+<%@ Register Src="~/Forms/UserControls/SalesReturnDetail.ascx" TagName="SalesReturnDetail" TagPrefix="srd" %>
 
 <!DOCTYPE html>
 

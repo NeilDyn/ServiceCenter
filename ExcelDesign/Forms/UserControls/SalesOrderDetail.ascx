@@ -61,7 +61,8 @@
 
     <br />
     <br />
-    <asp:Table ID="tblWarranty" runat="server" BorderStyle="Solid" BorderWidth="2px" Height="75px" Width="250px" BorderColor="Black" Caption="Warranty">
+    <asp:Table ID="tblWarranty" runat="server" BorderStyle="Solid" BorderWidth="2px" Height="75px" Width="250px" BorderColor="Black" Caption="Warranty"
+        style="float:right; margin-right:100px">
         <asp:TableHeaderRow ID="trStatus" runat="server">
             <asp:TableCell ID="tcStatus" runat="server" Font-Bold="True" HorizontalAlign="Right">Status:</asp:TableCell>
             <asp:TableCell ID="tcSetStatus" runat="server"></asp:TableCell>
@@ -77,7 +78,8 @@
     </asp:Table>
 
     <div runat="server">
-        <asp:GridView ID="gdvOrderView" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Height="16px" Width="1200px">
+        <asp:GridView ID="gdvOrderView" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Height="16px" Width="100%"
+            style="margin-right:100px">
             <AlternatingRowStyle BackColor="White" />
             <EditRowStyle BackColor="#2461BF" />
             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -90,23 +92,23 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
-    </div>
 
-    <div class="Options">
-        <ul style="height: 31px">
+        <div class="Options" >
+        <ul style="height: 32px; margin-right:100px">
             <li>                          
-                <asp:Button ID="Button4" runat="server" Text="Issue Refund" />
+                <asp:Button ID="btnIssueRefun" runat="server" Text="Issue Refund" />
             </li>
             <li>                 
-                <asp:Button ID="Button3" runat="server" Text="Create Return" />
+                <asp:Button ID="btnCreateReturn" runat="server" Text="Create Return" />
             </li>
             <li>
-                <asp:Button ID="Button2" runat="server" Text="Part Request" />
+                <asp:Button ID="btnPartRequest" runat="server" Text="Part Request" />
             </li>
             <li>
-                <asp:Button ID="Button1" runat="server" Text="Cancel Order" />
+                <asp:Button ID="btnCancelOrder" runat="server" Text="Cancel Order" />
             </li>
         </ul>
     </div>
+    </div> 
 </div>
     <br />

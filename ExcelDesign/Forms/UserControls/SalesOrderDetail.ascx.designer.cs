@@ -364,39 +364,39 @@ namespace ExcelDesign.Forms.UserControls {
         protected global::System.Web.UI.WebControls.GridView gdvOrderView;
         
         /// <summary>
-        /// Button4 control.
+        /// btnIssueRefun control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button4;
+        protected global::System.Web.UI.WebControls.Button btnIssueRefun;
         
         /// <summary>
-        /// Button3 control.
+        /// btnCreateReturn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button3;
+        protected global::System.Web.UI.WebControls.Button btnCreateReturn;
         
         /// <summary>
-        /// Button2 control.
+        /// btnPartRequest control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button btnPartRequest;
         
         /// <summary>
-        /// Button1 control.
+        /// btnCancelOrder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btnCancelOrder;
     }
 }

@@ -97,6 +97,11 @@
     <Compile Include="Class Objects\Customer.cs" />
     <Compile Include="Class Objects\PostedPackage.cs" />
     <Compile Include="Class Objects\PostedPackageLine.cs" />
+    <Compile Include="Class Objects\PostedReceive.cs" />
+    <Compile Include="Class Objects\PostedReceiveLine.cs" />
+    <Compile Include="Class Objects\ReceiptHeader.cs" />
+    <Compile Include="Class Objects\ReceiptLine.cs" />
+    <Compile Include="Class Objects\ReturnHeader.cs" />
     <Compile Include="Class Objects\SalesHeader.cs" />
     <Compile Include="Class Objects\ShipmentHeader.cs" />
     <Compile Include="Class Objects\ShipmentLine.cs" />

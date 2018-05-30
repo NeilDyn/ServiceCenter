@@ -5,13 +5,19 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ExcelDesign.Class_Objects;
+using ExcelDesign.Forms.UserControls;
 
 namespace ExcelDesign.Forms
 {
     public partial class ServiceCenter : System.Web.UI.Page
     {
         protected CallService cs;
+
+        // User Controls
+        protected Control salesOrderHeader;
         protected Control salesOrderDetail;
+        protected Control customerInfo;
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -41,12 +47,20 @@ namespace ExcelDesign.Forms
         protected void PopulateOrderDetails()
         {
             int headerCount = 0;
-            List<SalesHeader> sh = cs.GetSalesOrders();       
+            List<SalesHeader> sh = cs.GetSalesOrders();
+
+            salesOrderHeader = LoadControl("UserControls/SalesOrderHeader.ascx");
+            salesOrderHeader.ID = "SalesOrderHeader";
+            ((SalesOrderHeader)salesOrderHeader).Populate(sh.Count);            
+            this.frmOrderDetails.Controls.Add(salesOrderHeader);
 
             foreach (SalesHeader header in sh)
             {
-                salesOrderDetail = LoadControl("SaledOrderDetail.ascx");
-                //((SalesOrderDetail)salesOrderDetail).PopulateControl(sh);
+                headerCount++;
+                salesOrderDetail = LoadControl("UserControls/SalesOrderDetail.ascx");
+                salesOrderDetail.ID = "SalesOrderDetail" + headerCount.ToString();
+                ((SalesOrderDetail)salesOrderDetail).PopulateControl(header, headerCount);
+                this.frmOrderDetails.Controls.Add(salesOrderDetail);
             }
             
         }
@@ -54,9 +68,10 @@ namespace ExcelDesign.Forms
         protected void PopulateCustomerDetails()
         {
             Customer c = cs.GetCustomerInfo();
-            Control customerInfo = LoadControl("UserControls/CustomerInfo.ascx");
-            //((Customer))
-            
+            customerInfo = LoadControl("UserControls/CustomerInfo.ascx");
+            customerInfo.ID = "CustomerInfo";
+            ((CustomerInfo)customerInfo).Populate(c);
+            this.frmOrderDetails.Controls.Add(customerInfo);
         }
     }
 }

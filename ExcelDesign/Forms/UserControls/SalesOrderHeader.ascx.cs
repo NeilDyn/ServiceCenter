@@ -13,5 +13,10 @@ namespace ExcelDesign.Forms.UserControls
         {
 
         }
+
+        public void Populate(int totalOrders)
+        {
+            this.lblTotalOrderCount.Text = totalOrders.ToString();
+        }
     }
 }

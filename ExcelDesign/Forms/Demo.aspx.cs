@@ -41,7 +41,7 @@ namespace ExcelDesign.Forms
                 {
                     salesOrderDetail = LoadControl("UserControls/SalesOrderDetail.ascx");
                     salesOrderDetail.ID = "SalesOrderDetail" + i.ToString();
-                    ((SalesOrderDetail)salesOrderDetail).PopulateControl(i + 1);
+                   // ((SalesOrderDetail)salesOrderDetail).PopulateControl(i + 1);
                     
                      salesOrderHeader.Controls.Add(salesOrderDetail);
                 }

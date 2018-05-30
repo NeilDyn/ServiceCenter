@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SalesOrderDetail.ascx.cs" Inherits="ExcelDesign.Forms.SalesOrderDetail" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SalesOrderDetail.ascx.cs" Inherits="ExcelDesign.Forms.UserControls.SalesOrderDetail" %>
 
 <link href="../../css/mainpage.css" rel="stylesheet" type="text/css" />
 

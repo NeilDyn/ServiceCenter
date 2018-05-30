@@ -17,14 +17,14 @@ namespace ExcelDesign.Forms.UserControls
 
         public void Populate(Customer c)
         {
-            this.lblName.Text = c.Name;
-            this.lblAddress1.Text = c.Address1;
-            this.lblAddress2.Text = c.Address2;
-            this.lblShipToContact.Text = c.ShipToContact;
-            this.lblCity.Text = c.City;
-            this.lblZip.Text = c.Zip;
-            this.lblState.Text = c.State;
-            this.lblCountry.Text = c.Country;
+            this.lblName.Text           = c.Name;
+            this.lblAddress1.Text       = c.Address1;
+            this.lblAddress2.Text       = c.Address2;
+            this.lblShipToContact.Text  = c.ShipToContact;
+            this.lblCity.Text           = c.City;
+            this.lblZip.Text            = c.Zip;
+            this.lblState.Text          = c.State;
+            this.lblCountry.Text        = c.Country;
         }
     }
 }

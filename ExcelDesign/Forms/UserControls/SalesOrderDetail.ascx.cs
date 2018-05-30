@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ExcelDesign.Class_Objects;
 
-namespace ExcelDesign.Forms
+namespace ExcelDesign.Forms.UserControls
 {
     public partial class SalesOrderDetail : System.Web.UI.UserControl
     {
@@ -20,21 +20,25 @@ namespace ExcelDesign.Forms
 
         }
 
-        public void PopulateControl(SalesHeader sh)
+        public void PopulateControl(SalesHeader sh, int headerCount)
         {
-            lblOrderStatus.Text = sh.OrderStatus;
-            lblOrderDate.Text = sh.OrderDate;
-            lblSalesOrderNumber.Text = sh.SalesOrderNo;
-            lblChannelName.Text = sh.ChannelName;
-            lblZendeskTicket.Text = "1234";
-            lblZendeskTicketNo.Text = "1";
-            lblShipmentDate.Text = sh.ShipmentHeaderObject[0].ShippingDate;
-            lblShipments.Text = sh.ShipmentHeaderObject.Count.ToString();
-            lblPackages.Text = sh.PostedPackageObject.Count.ToString();
-            lblShipMethod.Text = sh.ShipmentHeaderObject[0].ShippingAgentService;
-            lblTrackingNo.Text = sh.PostedPackageObject[0].TrackingNo;
+            this.lblOrderSequence.Text      = "Order " + headerCount.ToString();
+            this.lblOrderStatus.Text        = sh.OrderStatus;
+            this.lblOrderDate.Text          = sh.OrderDate;
+            this.lblSalesOrderNumber.Text   = sh.SalesOrderNo;
+            this.lblChannelName.Text        = sh.ChannelName;
+            this.lblZendeskTicket.Text      = "1234";
+            this.lblZendeskTicketNo.Text    = "1";
+            this.lblShipmentDate.Text       = sh.ShipmentHeaderObject[0].ShippingDate;
+            this.lblShipments.Text          = sh.ShipmentHeaderObject.Count.ToString();
+            this.lblPackages.Text           = sh.PostedPackageObject.Count.ToString();
+            this.lblShipMethod.Text         = sh.ShipmentHeaderObject[0].ShippingAgentService;
+            this.lblTrackingNo.Text         = sh.PostedPackageObject[0].TrackingNo;
 
-            lblExternalDocumentNo.Text = sh.ExternalDocumentNo;
+            this.lblExternalDocumentNo.Text = sh.ExternalDocumentNo;
+
+            this.gdvOrderView.DataSource    = sh.ShipmentHeaderObject[0].ShipmentLines;
+            this.gdvOrderView.DataBind();
         }
     }
 }

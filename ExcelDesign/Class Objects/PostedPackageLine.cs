@@ -14,7 +14,7 @@ namespace ExcelDesign.Class_Objects
         private int quantity;
         private string type;
         private double price;
-        
+
         public PostedPackageLine(string serialNoP, string packNoP, string itemNoP, string descP, int qtyP, double priceP)
         {
             this.SerialNo = serialNoP;

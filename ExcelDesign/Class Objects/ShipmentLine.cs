@@ -37,29 +37,29 @@ namespace ExcelDesign.Class_Objects
         //    get { return postedPackageLine; }
         //    set { postedPackageLine = value; }
         //}
-        
-        
+
+
 
         public double LineAmount
         {
             get { return lineAmount; }
             set { lineAmount = value; }
         }
-        
+
 
         public double Price
         {
             get { return price; }
             set { price = value; }
         }
-        
+
 
         public int QuantityShipped
         {
             get { return quantityShipped; }
             set { quantityShipped = value; }
         }
-        
+
 
         public int Quantity
         {

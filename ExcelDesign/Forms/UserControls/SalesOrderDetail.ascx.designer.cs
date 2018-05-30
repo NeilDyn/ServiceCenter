@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExcelDesign.Forms {
+namespace ExcelDesign.Forms.UserControls {
     
     
     public partial class SalesOrderDetail {

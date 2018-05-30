@@ -26,7 +26,7 @@ namespace ExcelDesign.Class_Objects
 
         private List<ShipmentLine> ReturnShipmentLines(string no)
         {
-            List<ShipmentLine> shipLine = null;
+            List<ShipmentLine> shipLine = new List<ShipmentLine>();
 
             string itemNo = null;
             string description = null;
@@ -44,7 +44,7 @@ namespace ExcelDesign.Class_Objects
                         itemNo = currResults.SalesShipmentLine[sl].ItemNo;
                         description = currResults.SalesShipmentLine[sl].Description;
                         int.TryParse(currResults.SalesShipmentLine[sl].Qty, out quantity);
-                        double.TryParse(currResults.SalesShipmentLine[sl].UnitPrice, out price);
+                        price = double.Parse(currResults.SalesShipmentLine[sl].UnitPrice);
                         lineAmount = quantity * price;
 
                         for (int sli = 0; sli < currResults.SalesShipmentLine.Length; sli++)
@@ -57,7 +57,7 @@ namespace ExcelDesign.Class_Objects
                             }
                         }
 
-                        shipLine.Add(new ShipmentLine(no, description, quantity, quantityShipped, price, lineAmount));
+                        shipLine.Add(new ShipmentLine(itemNo, description, quantity, quantityShipped, price, lineAmount));
 
                         itemNo = null;
                         description = null;
@@ -74,7 +74,7 @@ namespace ExcelDesign.Class_Objects
 
         private List<PostedPackageLine> ReturnPostedPackageLine(string postedPackageNo)
         {
-            List<PostedPackageLine> postedPackageLine = null;
+            List<PostedPackageLine> postedPackageLine = new List<PostedPackageLine>();
 
             string serialNo = null;
             string packageNo = null;
@@ -96,7 +96,7 @@ namespace ExcelDesign.Class_Objects
                         description = currResults.PostedPackageLine[ppl].Description;
                         type = currResults.PostedPackageLine[ppl].Type;
                         int.TryParse(currResults.PostedPackageLine[ppl].Qty, out quantity);
-                        double.TryParse(currResults.PostedPackageLine[ppl].Price, out price);
+                        price = double.Parse(currResults.PostedPackageLine[ppl].Price);
 
                         postedPackageLine.Add(new PostedPackageLine(serialNo, packageNo, itemNo, description, quantity, price));
 
@@ -116,7 +116,7 @@ namespace ExcelDesign.Class_Objects
 
         private List<PostedPackage> ReturnPostedPackage(string orderNo)
         {
-            List<PostedPackage> postPackage = null;
+            List<PostedPackage> postPackage = new List<PostedPackage>();
 
             string trackingNo = null;
             string packageNo = null;
@@ -125,7 +125,7 @@ namespace ExcelDesign.Class_Objects
             string packDate = null;
             string sourceID = null;
             string postedSourceID = null;
-            List<PostedPackageLine> postedPackageLines = null;
+            List<PostedPackageLine> postedPackageLines = new List<PostedPackageLine>();
 
             if (currResults.PostedPackage != null)
             {
@@ -151,7 +151,7 @@ namespace ExcelDesign.Class_Objects
                         packDate = null;
                         sourceID = null;
                         postedSourceID = null;
-                        postedPackageLines = null;
+                        postedPackageLines = new List<PostedPackageLine>();
                     }
                 }
             }
@@ -161,13 +161,13 @@ namespace ExcelDesign.Class_Objects
 
         private List<ShipmentHeader> ReturnShipmentHeader(string orderNo)
         {
-            List<ShipmentHeader> shipHeader = null;
+            List<ShipmentHeader> shipHeader = new List<ShipmentHeader>();
 
             string no = null;
             string externalDocumentNo = null;
             string shippingDate = null;
             string shippingAgentService = null;
-            List<ShipmentLine> shipLine = null;
+            List<ShipmentLine> shipLine = new List<ShipmentLine>();
 
             if (currResults.SalesShipmentHeader != null)
             {
@@ -187,7 +187,7 @@ namespace ExcelDesign.Class_Objects
                         externalDocumentNo = null;
                         shippingDate = null;
                         shippingAgentService = null;
-                        shipLine = null;
+                        shipLine = new List<ShipmentLine>();
                     }
                 }
             }
@@ -196,17 +196,17 @@ namespace ExcelDesign.Class_Objects
 
         public List<SalesHeader> GetSalesOrders()
         {
-            List<SalesHeader> salesHead = null;
+            List<SalesHeader> salesHead = new List<SalesHeader>();
 
             string orderStatus = null;
             string orderDate = null;
             string orderNo = null;
             string channelName = null;
-            List<ShipmentHeader> shipHeader = null;
-            List<PostedPackage> postPackage = null;
+            List<ShipmentHeader> shipHeader = new List<ShipmentHeader>();
+            List<PostedPackage> postPackage = new List<PostedPackage>();
             string externalDocumentNo = null;
 
-            List<string> insertedOrderNumbers = null;
+            List<string> insertedOrderNumbers = new List<string>();
 
             if (currResults.SOImportBuffer != null)
             {
@@ -230,8 +230,8 @@ namespace ExcelDesign.Class_Objects
                         orderDate = null;
                         orderNo = null;
                         channelName = null;
-                        shipHeader = null;
-                        postPackage = null;
+                        shipHeader = new List<ShipmentHeader>();
+                        postPackage = new List<PostedPackage>();
                         externalDocumentNo = null;
                     }
                 }

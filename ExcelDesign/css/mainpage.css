@@ -37,7 +37,6 @@
     /* Set the hr color */
     color: #333; /* old IE */
     background-color: #333;
-    width: 1200px;
 }
 
 .CustomerInfo{
@@ -62,9 +61,9 @@
     margin-right: 100px;
 }
 
-.ReturnDetailDetail{
+.ReturnDetail {
     margin-left: 100px;
-    display:block;
+    display: block;
     margin-right: 100px;
 }
 
@@ -112,7 +111,7 @@
 }
 
 .detailedReturnCaption{
-    margin-left: 68px;
+    margin-left: 100px;
     display:inline-block;
     text-align:right;
     padding:5px 5px 5px 5px;

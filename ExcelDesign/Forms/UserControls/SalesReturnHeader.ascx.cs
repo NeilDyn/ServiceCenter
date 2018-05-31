@@ -13,5 +13,10 @@ namespace ExcelDesign.Forms.UserControls
         {
 
         }
+
+        public void Populate(int totalReturns)
+        {
+            this.lblTotalReturnCount.Text = totalReturns.ToString();
+        }
     }
 }

@@ -2,7 +2,7 @@
 <link href="../../css/mainpage.css" rel="stylesheet" type="text/css" />
 
 <div id="ReturnDetail" runat="server" class="ReturnDetail">
-    <div style="float:left"><asp:Label ID="lblOrderSequence" Font-Bold="True" runat="server" style="text-decoration:underline" Text="Order" /></div>
+    <div style="float:left"><asp:Label ID="lblOrderSequence" Font-Bold="True" runat="server" style="text-decoration:underline" Text="Return" /></div>
     <div style="float:right; margin-right:100px"><asp:Label ID="lblExternalDocumentNo" runat="server" /></div>
     <div style="float:right; margin-right:100px"><asp:Label ID="Label13" runat="server" Text="External Document No:"/></div>  
     <div style="float:right; margin-right:100px"><asp:Label ID="lblRMANo" runat="server" /></div>

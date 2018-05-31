@@ -2,7 +2,7 @@
 
 <link href="../../css/mainpage.css" rel="stylesheet" type="text/css" />
 
-<div id="Details" runat="server" class="Ss">
+<div id="Details" runat="server">
     <div id="CustomerInfoArea" class="CustomerInfo" runat="server">
         <asp:Label ID="lblCustomerInfo" runat="server" Text="Customer Info:" ForeColor="#0099FF" Font-Bold="True" />
         <hr class="SectionBreak"/>

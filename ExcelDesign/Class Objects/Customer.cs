@@ -16,13 +16,30 @@ namespace ExcelDesign.Class_Objects
         private string zip;
         private string state;
         private string country;
+        private List<SalesHeader> salesHeaders;
+        private List<ReturnHeader> returnHeaders;
+
+        public List<ReturnHeader> ReturnHeaders
+        {
+            get { return returnHeaders; }
+            set { returnHeaders = value; }
+        }
+
+
+        public List<SalesHeader> SalesHeader
+        {
+            get { return salesHeaders; }
+            set { salesHeaders = value; }
+        }
+
 
         public Customer()
         {
 
         }
 
-        public Customer(string nameP, string address1P, string address2P, string shipToContactP, string cityP, string zipP, string stateP, string countryP)
+        public Customer(string nameP, string address1P, string address2P, string shipToContactP, string cityP, string zipP, string stateP, string countryP,
+            List<SalesHeader> salesHeadersP, List<ReturnHeader> returnHeadersP)
         {
             this.Name = nameP;
             this.Address1 = address1P;

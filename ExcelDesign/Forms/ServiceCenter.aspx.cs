@@ -100,11 +100,15 @@ namespace ExcelDesign.Forms
 
         protected void PopulateCustomerDetails()
         {
-            Customer c = cs.GetCustomerInfo();
-            customerInfo = LoadControl("UserControls/CustomerInfo.ascx");
-            customerInfo.ID = "CustomerInfo";
-            ((CustomerInfo)customerInfo).Populate(c);
-            this.frmOrderDetails.Controls.Add(customerInfo);
+            List<Customer> customers = cs.GetCustomerInfo();
+
+            foreach (Customer c in customers)
+            {
+                customerInfo = LoadControl("UserControls/CustomerInfo.ascx");
+                customerInfo.ID = "CustomerInfo";
+                ((CustomerInfo)customerInfo).Populate(c);
+                this.frmOrderDetails.Controls.Add(customerInfo);
+            }         
         }
     }
 }

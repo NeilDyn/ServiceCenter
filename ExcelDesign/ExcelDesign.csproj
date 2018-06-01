@@ -85,12 +85,16 @@
   <ItemGroup>
     <Content Include="css\mainpage.css" />
     <Content Include="Forms\ErrorForm.aspx" />
-    <Content Include="Forms\UserControls\CustomerInfo.ascx" />
-    <Content Include="Forms\UserControls\SalesOrderDetail.ascx" />
+    <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetail.ascx" />
+    <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetailHeader.ascx" />
+    <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoHeader.ascx" />
+    <Content Include="Forms\UserControls\SalesOrder\SalesOrderDetail.ascx" />
     <Content Include="Forms\ServiceCenter.aspx" />
-    <Content Include="Forms\UserControls\SalesOrderHeader.ascx" />
-    <Content Include="Forms\UserControls\SalesReturnDetail.ascx" />
-    <Content Include="Forms\UserControls\SalesReturnHeader.ascx" />
+    <Content Include="Forms\UserControls\SalesOrder\SalesOrderDetailHeader.ascx" />
+    <Content Include="Forms\UserControls\SalesOrder\SalesOrderHeader.ascx" />
+    <Content Include="Forms\UserControls\SalesReturn\SalesReturnDetail.ascx" />
+    <Content Include="Forms\UserControls\SalesReturn\SalesReturnDetailHeader.ascx" />
+    <Content Include="Forms\UserControls\SalesReturn\SalesReturnHeader.ascx" />
     <Content Include="images\Logo.png" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -117,18 +121,32 @@
     <Compile Include="Forms\ErrorForm.aspx.designer.cs">
       <DependentUpon>ErrorForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserControls\CustomerInfo.ascx.cs">
-      <DependentUpon>CustomerInfo.ascx</DependentUpon>
+    <Compile Include="Forms\UserControls\CustomerInfo\CustomerInfoDetail.ascx.cs">
+      <DependentUpon>CustomerInfoDetail.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Forms\UserControls\CustomerInfo.ascx.designer.cs">
-      <DependentUpon>CustomerInfo.ascx</DependentUpon>
+    <Compile Include="Forms\UserControls\CustomerInfo\CustomerInfoDetail.ascx.designer.cs">
+      <DependentUpon>CustomerInfoDetail.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserControls\SalesOrderDetail.ascx.cs">
+    <Compile Include="Forms\UserControls\CustomerInfo\CustomerInfoDetailHeader.ascx.cs">
+      <DependentUpon>CustomerInfoDetailHeader.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\CustomerInfo\CustomerInfoDetailHeader.ascx.designer.cs">
+      <DependentUpon>CustomerInfoDetailHeader.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\CustomerInfo\CustomerInfoHeader.ascx.cs">
+      <DependentUpon>CustomerInfoHeader.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\CustomerInfo\CustomerInfoHeader.ascx.designer.cs">
+      <DependentUpon>CustomerInfoHeader.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\SalesOrder\SalesOrderDetail.ascx.cs">
       <DependentUpon>SalesOrderDetail.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Forms\UserControls\SalesOrderDetail.ascx.designer.cs">
+    <Compile Include="Forms\UserControls\SalesOrder\SalesOrderDetail.ascx.designer.cs">
       <DependentUpon>SalesOrderDetail.ascx</DependentUpon>
     </Compile>
     <Compile Include="Forms\ServiceCenter.aspx.cs">
@@ -138,23 +156,39 @@
     <Compile Include="Forms\ServiceCenter.aspx.designer.cs">
       <DependentUpon>ServiceCenter.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserControls\SalesOrderHeader.ascx.cs">
+    <Compile Include="Forms\UserControls\SalesOrder\SalesOrderDetailHeader.ascx.cs">
+      <DependentUpon>SalesOrderDetailHeader.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\SalesOrder\SalesOrderDetailHeader.ascx.designer.cs">
+      <DependentUpon>SalesOrderDetailHeader.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\SalesOrder\SalesOrderHeader.ascx.cs">
       <DependentUpon>SalesOrderHeader.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Forms\UserControls\SalesOrderHeader.ascx.designer.cs">
+    <Compile Include="Forms\UserControls\SalesOrder\SalesOrderHeader.ascx.designer.cs">
       <DependentUpon>SalesOrderHeader.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserControls\SalesReturnDetail.ascx.cs">
+    <Compile Include="Forms\UserControls\SalesReturn\SalesReturnDetail.ascx.cs">
+      <DependentUpon>SalesReturnDetail.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\SalesReturn\SalesReturnDetail.ascx.designer.cs">
       <DependentUpon>SalesReturnDetail.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserControls\SalesReturnDetail.ascx.designer.cs">
-      <DependentUpon>SalesReturnDetail.ascx</DependentUpon>
+    <Compile Include="Forms\UserControls\SalesReturn\SalesReturnDetailHeader.ascx.cs">
+      <DependentUpon>SalesReturnDetailHeader.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Forms\UserControls\SalesReturnHeader.ascx.cs">
+    <Compile Include="Forms\UserControls\SalesReturn\SalesReturnDetailHeader.ascx.designer.cs">
+      <DependentUpon>SalesReturnDetailHeader.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\SalesReturn\SalesReturnHeader.ascx.cs">
       <DependentUpon>SalesReturnHeader.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Forms\UserControls\SalesReturnHeader.ascx.designer.cs">
+    <Compile Include="Forms\UserControls\SalesReturn\SalesReturnHeader.ascx.designer.cs">
       <DependentUpon>SalesReturnHeader.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

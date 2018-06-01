@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SalesOrderDetail.ascx.cs" Inherits="ExcelDesign.Forms.UserControls.SalesOrderDetail" %>
 
-<link href="../../css/mainpage.css" rel="stylesheet" type="text/css" />
+<link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 
 <div id="OrderDetail" runat="server" class="OrderDetail">
     <div style="float:left"><asp:Label ID="lblOrderSequence" Font-Bold="True" runat="server" style="text-decoration:underline" Text="Order" /></div>

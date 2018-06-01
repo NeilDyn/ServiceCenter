@@ -1,7 +1,4 @@
-﻿body {
-}
-
-.SearchArea {
+﻿.SearchArea {
      text-align: center;
      vertical-align:middle;
 }
@@ -27,6 +24,12 @@
     vertical-align:middle
 }
 
+.DetailHeaders {
+    margin-left: 100px;
+    display: block;
+    margin-right: 100px;
+}
+
 
 .SectionBreak{
     border-style: none;
@@ -41,6 +44,14 @@
 
 .CustomerInfo{
     margin-left:100px;
+    display:block;
+    margin-right:100px;
+}
+
+.CustomerInfoHeader {
+    margin-left: 100px;
+    display: block;
+    margin-right: 100px;
 }
 
 .OrderInfoHeader{

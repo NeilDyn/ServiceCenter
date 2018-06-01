@@ -55,6 +55,13 @@ namespace ExcelDesign.Class_Objects
             return results;
         }
 
+        public string InitiateAction(string orderNo, ActionType actionType) 
+        {
+            string result;
+            result = functions.InitiateUserAction(SessionID(), orderNo, (int)actionType);
+            return result;
+        }
+
         protected string SessionID()
         {
             return "testSesh";

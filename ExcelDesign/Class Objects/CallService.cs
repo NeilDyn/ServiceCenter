@@ -25,6 +25,12 @@ namespace ExcelDesign.Class_Objects
             currResults = webService.FindOrder(searchNo);
         }
 
+        public string InitateAction(string order, ActionType action)
+        {
+            return webService.InitiateAction(order, action);
+
+        }
+
         private List<ShipmentLine> ReturnShipmentLines(string no)
         {
             List<ShipmentLine> shipLine = new List<ShipmentLine>();

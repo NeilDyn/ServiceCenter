@@ -15,6 +15,7 @@
           <element minOccurs="1" maxOccurs="1" name="No" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ExtDocNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="DocDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ReturnTrackingNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="SellToCustomerName" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
@@ -35,6 +36,7 @@
           <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
           <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="DateCreated" type="string" />
         </sequence>
       </complexType>
       <complexType name="SalesShipmentHeader">
@@ -268,6 +270,22 @@
           </sequence>
         </complexType>
       </element>
+      <element name="InitiateUserAction">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="_ActionType" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="InitiateUserAction_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
     </schema>
   </types>
   <message name="SearchDetermineNoType">
@@ -276,10 +294,20 @@
   <message name="SearchDetermineNoType_Result">
     <part name="parameters" element="tns:SearchDetermineNoType_Result" />
   </message>
+  <message name="InitiateUserAction">
+    <part name="parameters" element="tns:InitiateUserAction" />
+  </message>
+  <message name="InitiateUserAction_Result">
+    <part name="parameters" element="tns:InitiateUserAction_Result" />
+  </message>
   <portType name="Functions_Port">
     <operation name="SearchDetermineNoType">
       <input name="SearchDetermineNoType" message="tns:SearchDetermineNoType" />
       <output name="SearchDetermineNoType_Result" message="tns:SearchDetermineNoType_Result" />
+    </operation>
+    <operation name="InitiateUserAction">
+      <input name="InitiateUserAction" message="tns:InitiateUserAction" />
+      <output name="InitiateUserAction_Result" message="tns:InitiateUserAction_Result" />
     </operation>
   </portType>
   <binding name="Functions_Binding" type="tns:Functions_Port">
@@ -290,6 +318,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="SearchDetermineNoType_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="InitiateUserAction">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:InitiateUserAction" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="InitiateUserAction">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="InitiateUserAction_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

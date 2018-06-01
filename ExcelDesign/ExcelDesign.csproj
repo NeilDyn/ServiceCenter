@@ -95,12 +95,14 @@
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnDetail.ascx" />
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnDetailHeader.ascx" />
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnHeader.ascx" />
+    <Content Include="Forms\UserControls\TestTableControl.ascx" />
     <Content Include="images\Logo.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class Objects\CallService.cs" />
     <Compile Include="Class Objects\Customer.cs" />
+    <Compile Include="Class Objects\Person.cs" />
     <Compile Include="Class Objects\PostedPackage.cs" />
     <Compile Include="Class Objects\PostedPackageLine.cs" />
     <Compile Include="Class Objects\PostedReceive.cs" />
@@ -190,6 +192,13 @@
     </Compile>
     <Compile Include="Forms\UserControls\SalesReturn\SalesReturnHeader.ascx.designer.cs">
       <DependentUpon>SalesReturnHeader.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\TestTableControl.ascx.cs">
+      <DependentUpon>TestTableControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\TestTableControl.ascx.designer.cs">
+      <DependentUpon>TestTableControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

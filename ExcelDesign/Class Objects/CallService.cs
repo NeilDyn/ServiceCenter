@@ -17,7 +17,7 @@ namespace ExcelDesign.Class_Objects
 
         public void OpenService(string searchNo)
         {
-            currResults = WebService.FindOrder(searchNo);
+            currResults = webService.FindOrder(searchNo);
         }
 
         private List<PostedPackageLine> ReturnPostedPackageLine(string postedPackageNo)

@@ -10,42 +10,33 @@
 namespace ExcelDesign.Forms.UserControls {
     
     
-    public partial class CustomerInfoDetailHeader {
+    public partial class TestTableControl {
         
         /// <summary>
-        /// CustomerInfoDetailHeaderArea control.
+        /// tblOrderInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CustomerInfoDetailHeaderArea;
+        protected global::System.Web.UI.WebControls.Table tblOrderInfo;
         
         /// <summary>
-        /// lblCustomerSequence control.
+        /// gridviewCell control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCustomerSequence;
+        protected global::System.Web.UI.WebControls.TableCell gridviewCell;
         
         /// <summary>
-        /// lblCustomerName control.
+        /// gdvTestTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCustomerName;
-        
-        /// <summary>
-        /// Label13 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label13;
+        protected global::System.Web.UI.WebControls.GridView gdvTestTable;
     }
 }

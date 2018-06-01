@@ -35,6 +35,7 @@
           <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="QtyToReceive" type="string" />
           <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
           <element minOccurs="1" maxOccurs="1" name="DateCreated" type="string" />
         </sequence>
@@ -127,6 +128,7 @@
           <element minOccurs="1" maxOccurs="1" name="No" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ExtDocNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ReceiveDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ReturnOrderNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToAddress2" type="string" />

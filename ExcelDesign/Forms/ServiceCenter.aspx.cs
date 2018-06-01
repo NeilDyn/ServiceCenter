@@ -16,6 +16,8 @@ namespace ExcelDesign.Forms
         // User Controls
         protected Control salesOrderHeader;
         protected Control salesOrderDetail;
+        protected Control salesReturnOrderHeader;
+        protected Control salesReturnOrderDetails;
         protected Control customerInfo;
 
 
@@ -33,12 +35,15 @@ namespace ExcelDesign.Forms
             {
                 try
                 {
-                    cs.callService(searchValue);
+                    cs.OpenService(searchValue);
                     customerInfo = new Control();
                     salesOrderHeader = new Control();
                     salesOrderDetail = new Control();
+                    salesReturnOrderHeader = new Control();
+                    salesReturnOrderDetails = new Control();
                     PopulateCustomerDetails();
                     PopulateOrderDetails();
+                    PopulateReturnOrderDetails();
                 }
                 catch (Exception ex)
                 {
@@ -52,22 +57,45 @@ namespace ExcelDesign.Forms
             int headerCount = 0;
             List<SalesHeader> sh = cs.GetSalesOrders();
 
-            salesOrderHeader = LoadControl("UserControls/SalesOrderHeader.ascx");
-            salesOrderHeader.ID = "SalesOrderHeader";
-            ((SalesOrderHeader)salesOrderHeader).Populate(sh.Count);            
-            this.frmOrderDetails.Controls.Add(salesOrderHeader);
-
-            foreach (SalesHeader header in sh)
+            if (sh.Count > 0)
             {
-                headerCount++;
-                salesOrderDetail = LoadControl("UserControls/SalesOrderDetail.ascx");
-                salesOrderDetail.ID = "SalesOrderDetail" + headerCount.ToString();
-                ((SalesOrderDetail)salesOrderDetail).PopulateControl(header, headerCount);
-                this.frmOrderDetails.Controls.Add(salesOrderDetail);
+                salesOrderHeader = LoadControl("UserControls/SalesOrderHeader.ascx");
+                salesOrderHeader.ID = "SalesOrderHeader";
+                ((SalesOrderHeader)salesOrderHeader).Populate(sh.Count);
+                this.frmOrderDetails.Controls.Add(salesOrderHeader);
+
+                foreach (SalesHeader header in sh)
+                {
+                    headerCount++;
+                    salesOrderDetail = LoadControl("UserControls/SalesOrderDetail.ascx");
+                    salesOrderDetail.ID = "SalesOrderDetail" + headerCount.ToString();
+                    ((SalesOrderDetail)salesOrderDetail).PopulateControl(header, headerCount);
+                    this.frmOrderDetails.Controls.Add(salesOrderDetail);
+                }
             }
+        }
 
+        protected void PopulateReturnOrderDetails()
+        {
+            int headerCount = 0;
+            List<ReturnHeader> rh = cs.GetReturnOrders();
 
-            
+            if (rh.Count > 0)
+            {
+                salesReturnOrderHeader = LoadControl("UserControls/SalesReturnHeader.ascx");
+                salesReturnOrderHeader.ID = "SalesReturnHeader";
+                ((SalesReturnHeader)salesReturnOrderHeader).Populate(rh.Count);
+                this.frmOrderDetails.Controls.Add(salesReturnOrderHeader);
+
+                foreach (ReturnHeader header in rh)
+                {
+                    headerCount++;
+                    salesReturnOrderDetails = LoadControl("UserControls/SalesReturnDetail.ascx");
+                    salesReturnOrderDetails.ID = "SalesReturnDetail" + headerCount.ToString();
+                    ((SalesReturnDetail)salesReturnOrderDetails).PopulateControl(header, headerCount);
+                    this.frmOrderDetails.Controls.Add(salesReturnOrderDetails);
+                }
+            }
         }
 
         protected void PopulateCustomerDetails()

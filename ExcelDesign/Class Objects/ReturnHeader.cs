@@ -10,7 +10,6 @@ namespace ExcelDesign.Class_Objects
         private string returnStatus;
         private string dateCreated;
         private string channelName;
-        private string receiptDate;
         private List<ReceiptHeader> receiptHeaderObj;
         private List<PostedReceive> postedReceiveObj;
         private string returnTrackingNo;
@@ -23,13 +22,12 @@ namespace ExcelDesign.Class_Objects
 
         }
 
-        public ReturnHeader(string returnStatusP, string dateCreatedP, string channelNameP, string receiptDateP, List<ReceiptHeader> receiptHeaderObjP,
+        public ReturnHeader(string returnStatusP, string dateCreatedP, string channelNameP, List<ReceiptHeader> receiptHeaderObjP,
                  List<PostedReceive> postedReceiveObjP, string returnTrackingNoP, string orderDateP, string rmaNoP, string externalDocumentNoP)
         {
             this.ReturnStatus = returnStatusP;
             this.DateCreated = dateCreatedP;
             this.ChannelName = channelNameP;
-            this.ReceiptDate = receiptDateP;
             this.ReceiptHeaderObj = receiptHeaderObjP;
             this.PostedReceiveObj = postedReceiveObjP;
             this.ReturnTrackingNo = returnTrackingNoP;
@@ -77,16 +75,7 @@ namespace ExcelDesign.Class_Objects
         {
             get { return receiptHeaderObj; }
             set { receiptHeaderObj = value; }
-        }
-        
-        
-
-        public string ReceiptDate
-        {
-            get { return receiptDate; }
-            set { receiptDate = value; }
-        }
-        
+        }      
 
         public string ChannelName
         {

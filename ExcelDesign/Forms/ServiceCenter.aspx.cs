@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ExcelDesign.Class_Objects;
 using ExcelDesign.Forms.UserControls;
+using ExcelDesign.Forms.UserControls.CustomerInfo.MainTables;
 
 namespace ExcelDesign.Forms
 {
@@ -14,12 +15,14 @@ namespace ExcelDesign.Forms
         protected CallService cs;
 
         // User Controls
+        protected Control multipleCustomers;
         protected Control salesOrderHeader;
         protected Control salesOrderDetail;
         protected Control salesReturnOrderHeader;
         protected Control salesReturnOrderDetails;
         protected Control customerInfo;
 
+        protected Control customerInfoTable;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -42,8 +45,8 @@ namespace ExcelDesign.Forms
                     salesReturnOrderHeader = new Control();
                     salesReturnOrderDetails = new Control();
                     PopulateCustomerDetails();
-                    PopulateOrderDetails();
-                    PopulateReturnOrderDetails();
+                    //PopulateOrderDetails();
+                    //PopulateReturnOrderDetails();
                 }
                 catch (Exception ex)
                 {
@@ -54,61 +57,63 @@ namespace ExcelDesign.Forms
 
         protected void PopulateOrderDetails()
         {
-            int headerCount = 0;
-            List<SalesHeader> sh = cs.GetSalesOrders();
+            //int headerCount = 0;
+            //List<SalesHeader> sh = cs.GetSalesOrders();
 
-            if (sh.Count > 0)
-            {
-                salesOrderHeader = LoadControl("UserControls/SalesOrderHeader.ascx");
-                salesOrderHeader.ID = "SalesOrderHeader";
-                ((SalesOrderHeader)salesOrderHeader).Populate(sh.Count);
-                this.frmOrderDetails.Controls.Add(salesOrderHeader);
+            //if (sh.Count > 0)
+            //{
+            //    salesOrderHeader = LoadControl("UserControls/SalesOrderHeader.ascx");
+            //    salesOrderHeader.ID = "SalesOrderHeader";
+            //    ((SalesOrderHeader)salesOrderHeader).Populate(sh.Count);
+            //    this.frmOrderDetails.Controls.Add(salesOrderHeader);
 
-                foreach (SalesHeader header in sh)
-                {
-                    headerCount++;
-                    salesOrderDetail = LoadControl("UserControls/SalesOrderDetail.ascx");
-                    salesOrderDetail.ID = "SalesOrderDetail" + headerCount.ToString();
-                    ((SalesOrderDetail)salesOrderDetail).PopulateControl(header, headerCount);
-                    this.frmOrderDetails.Controls.Add(salesOrderDetail);
-                }
-            }
+            //    foreach (SalesHeader header in sh)
+            //    {
+            //        headerCount++;
+            //        salesOrderDetail = LoadControl("UserControls/SalesOrderDetail.ascx");
+            //        salesOrderDetail.ID = "SalesOrderDetail" + headerCount.ToString();
+            //        ((SalesOrderDetail)salesOrderDetail).PopulateControl(header, headerCount);
+            //        this.frmOrderDetails.Controls.Add(salesOrderDetail);
+            //    }
+            //}
         }
 
         protected void PopulateReturnOrderDetails()
         {
-            int headerCount = 0;
-            List<ReturnHeader> rh = cs.GetReturnOrders();
+            //int headerCount = 0;
+            //List<ReturnHeader> rh = cs.GetReturnOrders();
 
-            if (rh.Count > 0)
-            {
-                salesReturnOrderHeader = LoadControl("UserControls/SalesReturnHeader.ascx");
-                salesReturnOrderHeader.ID = "SalesReturnHeader";
-                ((SalesReturnHeader)salesReturnOrderHeader).Populate(rh.Count);
-                this.frmOrderDetails.Controls.Add(salesReturnOrderHeader);
+            //if (rh.Count > 0)
+            //{
+            //    salesReturnOrderHeader = LoadControl("UserControls/SalesReturnHeader.ascx");
+            //    salesReturnOrderHeader.ID = "SalesReturnHeader";
+            //    ((SalesReturnHeader)salesReturnOrderHeader).Populate(rh.Count);
+            //    this.frmOrderDetails.Controls.Add(salesReturnOrderHeader);
 
-                foreach (ReturnHeader header in rh)
-                {
-                    headerCount++;
-                    salesReturnOrderDetails = LoadControl("UserControls/SalesReturnDetail.ascx");
-                    salesReturnOrderDetails.ID = "SalesReturnDetail" + headerCount.ToString();
-                    ((SalesReturnDetail)salesReturnOrderDetails).PopulateControl(header, headerCount);
-                    this.frmOrderDetails.Controls.Add(salesReturnOrderDetails);
-                }
-            }
+            //    foreach (ReturnHeader header in rh)
+            //    {
+            //        headerCount++;
+            //        salesReturnOrderDetails = LoadControl("UserControls/SalesReturnDetail.ascx");
+            //        salesReturnOrderDetails.ID = "SalesReturnDetail" + headerCount.ToString();
+            //        ((SalesReturnDetail)salesReturnOrderDetails).PopulateControl(header, headerCount);
+            //        this.frmOrderDetails.Controls.Add(salesReturnOrderDetails);
+            //    }
+            //}
         }
 
         protected void PopulateCustomerDetails()
-        {
+        {            
             List<Customer> customers = cs.GetCustomerInfo();
-
-            foreach (Customer c in customers)
+            if(customers.Count > 1)
             {
-                customerInfo = LoadControl("UserControls/CustomerInfo.ascx");
-                customerInfo.ID = "CustomerInfo";
-                ((CustomerInfo)customerInfo).Populate(c);
-                this.frmOrderDetails.Controls.Add(customerInfo);
-            }         
+                multipleCustomers = LoadControl("UserControls/SingleControls/MultipleCustomers.ascx");
+                this.frmOrderDetails.Controls.Add(multipleCustomers);
+            }     
+
+            customerInfoTable = LoadControl("UserControls/MainTables/CustomerInfoTable.ascx");
+            customerInfoTable.ID = "Customer_Info_Table";
+            ((CustomerInfoTable)customerInfoTable).CreateCustomerInfo(customers);
+            this.frmOrderDetails.Controls.Add(customerInfoTable);
         }
     }
 }

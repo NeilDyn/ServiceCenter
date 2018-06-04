@@ -49,6 +49,8 @@ namespace ExcelDesign.Class_Objects
             this.Zip = zip;
             this.State = stateP;
             this.Country = countryP;
+            this.SalesHeader = salesHeadersP;
+            this.ReturnHeaders = returnHeadersP;
         }
 
         public string Country

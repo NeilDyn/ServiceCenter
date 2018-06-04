@@ -11,6 +11,7 @@ namespace ExcelDesign.Class_Objects
         private string externalDocumentNo;
         private string shippingDate;
         private string shippingAgentService;
+        private string shippingAgentCode;
         private List<ShipmentLine> shipmentLines;
 
         public ShipmentHeader()
@@ -18,12 +19,14 @@ namespace ExcelDesign.Class_Objects
 
         }
 
-        public ShipmentHeader(string noP, string externalDocumentNoP, string shippingDateP, string shippingAgentServiceP, List<ShipmentLine> shipmentLinesP)
+        public ShipmentHeader(string noP, string externalDocumentNoP, string shippingDateP, string shippingAgentServiceP, string shippingAgentCodeP,
+            List<ShipmentLine> shipmentLinesP)
         {
             this.No = noP;
             this.ExternalDocumentNo = externalDocumentNoP;
             this.ShippingDate = shippingDateP;
             this.ShippingAgentService = shippingAgentServiceP;
+            this.ShippingAgentCode = shippingAgentCodeP;
             this.ShipmentLines = shipmentLinesP;
         }
 
@@ -31,6 +34,12 @@ namespace ExcelDesign.Class_Objects
         {
             get { return shipmentLines; }
             set { shipmentLines = value; }
+        }
+
+        public string ShippingAgentCode
+        {
+            get { return shippingAgentCode; }
+            set { shippingAgentCode = value; }
         }
 
         public string ShippingAgentService

@@ -16,7 +16,7 @@ namespace ExcelDesign.Class_Objects
         private static NetworkCredential credentials;
 
         protected string username = "nchristodoulou";
-        protected string password = "JEGnewedi2018!";
+        protected string password = "JEGnewedi2018`";
         protected string domain = "JEG";
 
         protected Functions functions = new Functions();

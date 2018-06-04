@@ -192,6 +192,7 @@ namespace ExcelDesign.Class_Objects
             string externalDocumentNo = string.Empty;
             string shippingDate = string.Empty;
             string shippingAgentService = string.Empty;
+            string shippingAgentCode = string.Empty;
             List<ShipmentLine> shipLine = new List<ShipmentLine>();
 
             if (currResults.SalesShipmentHeader != null)
@@ -204,14 +205,16 @@ namespace ExcelDesign.Class_Objects
                         externalDocumentNo = currResults.SalesShipmentHeader[sh].ExtDocNo;
                         shippingDate = currResults.SalesShipmentHeader[sh].ShippingDate;
                         shippingAgentService = currResults.SalesShipmentHeader[sh].ShippingAgentService;
+                        shippingAgentCode = currResults.SalesShipmentHeader[sh].ShippingAgentCode;
                         shipLine = ReturnShipmentLines(no);
 
-                        shipHeader.Add(new ShipmentHeader(no, externalDocumentNo, shippingDate, shippingAgentService, shipLine));
+                        shipHeader.Add(new ShipmentHeader(no, externalDocumentNo, shippingDate, shippingAgentService, shippingAgentCode, shipLine));
 
                         no = string.Empty;
                         externalDocumentNo = string.Empty;
                         shippingDate = string.Empty;
                         shippingAgentService = string.Empty;
+                        shippingAgentCode = string.Empty;
                         shipLine = new List<ShipmentLine>();
                     }
                 }
@@ -348,7 +351,7 @@ namespace ExcelDesign.Class_Objects
             return receiptHead;
         }
 
-        public List<ReturnHeader> GetReturnOrders()
+        public List<ReturnHeader> GetReturnOrders(string custName)
         {
             List<ReturnHeader> returnHead = new List<ReturnHeader>();
 
@@ -373,25 +376,89 @@ namespace ExcelDesign.Class_Objects
                 {
                     if (currResults.SOImportBuffer[so].OrderType == "Credit Memo")
                     {
-                        rmaNo = currResults.SOImportBuffer[so].SalesOrderNo;
-
-                        if (!insertedReturnNumners.Any(order => order.Equals(rmaNo)))
+                        if (currResults.SOImportBuffer[so].ShipToName == custName)
                         {
-                            returnStatus = currResults.SOImportBuffer[so].OrderStatus;
-                            channelName = currResults.SOImportBuffer[so].ChannelName[0];
+                            rmaNo = currResults.SOImportBuffer[so].SalesOrderNo;
+
+                            if (!insertedReturnNumners.Any(order => order.Equals(rmaNo)))
+                            {
+                                returnStatus = currResults.SOImportBuffer[so].OrderStatus;
+                                channelName = currResults.SOImportBuffer[so].ChannelName[0];
+                                receiptHeader = ReturnReceiptHeader(rmaNo);
+                                postedReceive = ReturnPostedReceive(rmaNo);
+                                //returnTrackingNo = currResults.SOImportBuffer[so];
+                                orderDate = currResults.SOImportBuffer[so].OrderDate;
+                                externalDocumentNo = currResults.SOImportBuffer[so].ExternalDocumentNo;
+
+                                for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
+                                {
+                                    if (currResults.SalesLine[sl].DocNo == rmaNo)
+                                    {
+                                        dateCreated = currResults.SalesLine[sl].DateCreated;
+                                    }
+                                }
+
+                                returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate, rmaNo, externalDocumentNo));
+                                insertedReturnNumners.Add(rmaNo);
+
+                                returnStatus = string.Empty;
+                                dateCreated = string.Empty;
+                                channelName = string.Empty;
+                                receiptHeader = new List<ReceiptHeader>();
+                                postedReceive = new List<PostedReceive>();
+                                returnTrackingNo = string.Empty;
+                                orderDate = string.Empty;
+                                rmaNo = string.Empty;
+                                externalDocumentNo = string.Empty;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (currResults.SalesHeader != null)
+            {
+                for (int so = 0; so < currResults.SalesHeader.Length; so++)
+                {
+                    if (currResults.SalesHeader[so].DocType == "Return Order")
+                    {
+                        if (currResults.SalesHeader[so].ShipToName == custName)
+                        {
+                            rmaNo = currResults.SalesHeader[so].No;
                             receiptHeader = ReturnReceiptHeader(rmaNo);
+                            channelName = currResults.SalesHeader[so].SellToCustomerName;
                             postedReceive = ReturnPostedReceive(rmaNo);
-                            //returnTrackingNo = currResults.SOImportBuffer[so];
-                            orderDate = currResults.SOImportBuffer[so].OrderDate;
-                            externalDocumentNo = currResults.SOImportBuffer[so].ExternalDocumentNo;
+                            returnTrackingNo = currResults.SalesHeader[so].ReturnTrackingNo;
+                            orderDate = currResults.SalesHeader[so].DocDate;
+                            externalDocumentNo = currResults.SalesHeader[so].ExtDocNo;
 
                             for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
                             {
-                                if (currResults.SalesLine[sl].DocNo == rmaNo)
-                                {                                  
-                                    dateCreated = currResults.SalesLine[sl].DateCreated;                                  
+                                if ((currResults.SalesLine[sl].DocNo == rmaNo) && (currResults.SalesLine[sl].Type == "Item"))
+                                {
+                                    totalCounter++;
+                                    int qtyToRec;
+                                    dateCreated = currResults.SalesLine[sl].DateCreated;
+                                    int.TryParse(currResults.SalesLine[sl].QtyToReceive, out qtyToRec);
+                                    if (qtyToRec > 0)
+                                    {
+                                        statusCounter++;
+                                    }
                                 }
-                            }               
+                            }
+
+                            if (statusCounter == totalCounter)
+                            {
+                                returnStatus = "Open";
+                            }
+                            else if (statusCounter == 0)
+                            {
+                                returnStatus = "Released";
+                            }
+                            else
+                            {
+                                returnStatus = "Partial Receipt";
+                            }
 
                             returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate, rmaNo, externalDocumentNo));
                             insertedReturnNumners.Add(rmaNo);
@@ -405,68 +472,10 @@ namespace ExcelDesign.Class_Objects
                             orderDate = string.Empty;
                             rmaNo = string.Empty;
                             externalDocumentNo = string.Empty;
+
+                            totalCounter = 0;
+                            statusCounter = 0;
                         }
-                    }
-                }
-            }
-
-            if (currResults.SalesHeader != null)
-            {
-                for (int so = 0; so < currResults.SalesHeader.Length; so++)
-                {
-                    if (currResults.SalesHeader[so].DocType == "Return Order")
-                    {
-                        channelName = currResults.SalesHeader[so].SellToCustomerName;
-                        rmaNo = currResults.SalesHeader[so].No;
-                        receiptHeader = ReturnReceiptHeader(rmaNo);
-                        postedReceive = ReturnPostedReceive(rmaNo);
-                        returnTrackingNo = currResults.SalesHeader[so].ReturnTrackingNo;
-                        orderDate = currResults.SalesHeader[so].DocDate;
-                        externalDocumentNo = currResults.SalesHeader[so].ExtDocNo;
-
-                        for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
-                        {
-                            if ((currResults.SalesLine[sl].DocNo == rmaNo) && (currResults.SalesLine[sl].Type == "Item"))
-                            {
-                                totalCounter++;
-                                int qtyToRec;
-                                dateCreated = currResults.SalesLine[sl].DateCreated;
-                                int.TryParse(currResults.SalesLine[sl].QtyToReceive, out qtyToRec);
-                                if (qtyToRec > 0)
-                                {
-                                    statusCounter++;
-                                }
-                            }
-                        }
-
-                        if (statusCounter == totalCounter)
-                        {
-                            returnStatus = "Open";
-                        }
-                        else if (statusCounter == 0)
-                        {
-                            returnStatus = "Released";
-                        }
-                        else
-                        {
-                            returnStatus = "Partial Receipt";
-                        }
-
-                        returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate, rmaNo, externalDocumentNo));
-                        insertedReturnNumners.Add(rmaNo);
-
-                        returnStatus = string.Empty;
-                        dateCreated = string.Empty;
-                        channelName = string.Empty;
-                        receiptHeader = new List<ReceiptHeader>();
-                        postedReceive = new List<PostedReceive>();
-                        returnTrackingNo = string.Empty;
-                        orderDate = string.Empty;
-                        rmaNo = string.Empty;
-                        externalDocumentNo = string.Empty;
-
-                        totalCounter = 0;
-                        statusCounter = 0;
                     }
                 }
             }
@@ -474,7 +483,7 @@ namespace ExcelDesign.Class_Objects
             return returnHead;
         }
 
-        public List<SalesHeader> GetSalesOrders()
+        public List<SalesHeader> GetSalesOrders(string custName)
         {
             List<SalesHeader> salesHead = new List<SalesHeader>();
 
@@ -501,22 +510,92 @@ namespace ExcelDesign.Class_Objects
                 for (int so = 0; so < currResults.SOImportBuffer.Length; so++)
                 {
                     if (currResults.SOImportBuffer[so].OrderType == "Sales Order")
-                    {
-                        orderNo = currResults.SOImportBuffer[so].SalesOrderNo;
-
-                        if (!insertedOrderNumbers.Any(order => order.Equals(orderNo)))
+                    {                   
+                        if (currResults.SOImportBuffer[so].ShipToName == custName)
                         {
-                            orderStatus = currResults.SOImportBuffer[so].OrderStatus;
-                            orderDate = currResults.SOImportBuffer[so].OrderDate;
-                            channelName = currResults.SOImportBuffer[so].ChannelName[0];
-                            externalDocumentNo = currResults.SOImportBuffer[so].ExternalDocumentNo;
+                            orderNo = currResults.SOImportBuffer[so].SalesOrderNo;
+
+                            if (!insertedOrderNumbers.Any(order => order.Equals(orderNo)))
+                            {
+                                orderStatus = currResults.SOImportBuffer[so].OrderStatus;
+                                orderDate = currResults.SOImportBuffer[so].OrderDate;
+                                channelName = currResults.SOImportBuffer[so].ChannelName[0];
+                                externalDocumentNo = currResults.SOImportBuffer[so].ExternalDocumentNo;
+                                shipHeader = ReturnShipmentHeader(orderNo);
+                                postPackage = ReturnPostedPackage(orderNo);
+
+                                status = currResults.SOImportBuffer[so].Warranty[0].Status[0];
+                                policy = currResults.SOImportBuffer[so].Warranty[0].Policy[0]; ;
+                                daysRemaining = currResults.SOImportBuffer[so].Warranty[0].DaysRemaining[0];
+                                warranty = new Warranty(status, policy, daysRemaining);
+
+                                salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty));
+
+                                insertedOrderNumbers.Add(orderNo);
+
+                                orderStatus = string.Empty;
+                                orderDate = string.Empty;
+                                orderNo = string.Empty;
+                                channelName = string.Empty;
+                                shipHeader = new List<ShipmentHeader>();
+                                postPackage = new List<PostedPackage>();
+                                externalDocumentNo = string.Empty;
+                                warranty = new Warranty();
+
+                                status = string.Empty;
+                                policy = string.Empty;
+                                daysRemaining = string.Empty;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (currResults.SalesHeader != null)
+            {
+                for (int so = 0; so < currResults.SalesHeader.Length; so++)
+                {
+                    if (currResults.SalesHeader[so].DocType == "Order")
+                    {       
+                        if (currResults.SalesHeader[so].ShipToName == custName)
+                        {
+                            orderDate = currResults.SalesHeader[so].DocDate;
+                            orderNo = currResults.SalesHeader[so].No;
+                            channelName = currResults.SalesHeader[so].SellToCustomerName;
+                            externalDocumentNo = currResults.SalesHeader[so].ExtDocNo;
                             shipHeader = ReturnShipmentHeader(orderNo);
                             postPackage = ReturnPostedPackage(orderNo);
 
-                            status = currResults.SOImportBuffer[so].Warranty[0].Status[0];
-                            policy = currResults.SOImportBuffer[so].Warranty[0].Policy[0]; ;
-                            daysRemaining = currResults.SOImportBuffer[so].Warranty[0].DaysRemaining[0];
+                            status = currResults.SalesHeader[so].Warranty2[0].Status2[0];
+                            policy = currResults.SalesHeader[so].Warranty2[0].Policy2[0]; ;
+                            daysRemaining = currResults.SalesHeader[so].Warranty2[0].DaysRemaining2[0];
                             warranty = new Warranty(status, policy, daysRemaining);
+
+                            for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
+                            {
+                                if ((currResults.SalesLine[sl].DocNo == orderNo) && (currResults.SalesLine[sl].Type == "Item"))
+                                {
+                                    totalCounter++;
+                                    int.TryParse(currResults.SalesLine[sl].QtyToReceive, out int qtyToRec);
+                                    if (qtyToRec > 0)
+                                    {
+                                        statusCounter++;
+                                    }
+                                }
+                            }
+
+                            if (statusCounter == totalCounter)
+                            {
+                                orderStatus = "OrderCreated";
+                            }
+                            else if (statusCounter == 0)
+                            {
+                                orderStatus = "Shipped";
+                            }
+                            else
+                            {
+                                orderStatus = "Partial Shipped";
+                            }
 
                             salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty));
 
@@ -535,70 +614,6 @@ namespace ExcelDesign.Class_Objects
                             policy = string.Empty;
                             daysRemaining = string.Empty;
                         }
-                    }
-                }
-            }
-
-            if (currResults.SalesHeader != null)
-            {
-                for (int so = 0; so < currResults.SalesHeader.Length; so++)
-                {
-                    if (currResults.SalesHeader[so].DocType == "Order")
-                    {
-                        orderDate = currResults.SalesHeader[so].DocDate;
-                        channelName = currResults.SalesHeader[so].SellToCustomerName;
-                        orderNo = currResults.SalesHeader[so].No;
-                        externalDocumentNo = currResults.SalesHeader[so].ExtDocNo;
-                        shipHeader = ReturnShipmentHeader(orderNo);
-                        postPackage = ReturnPostedPackage(orderNo);
-
-                        status = currResults.SalesHeader[so].Warranty2[0].Status2[0];
-                        policy = currResults.SalesHeader[so].Warranty2[0].Policy2[0]; ;
-                        daysRemaining = currResults.SalesHeader[so].Warranty2[0].DaysRemaining2[0];
-                        warranty = new Warranty(status, policy, daysRemaining);
-
-                        for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
-                        {
-                            if ((currResults.SalesLine[sl].DocNo == orderNo) && (currResults.SalesLine[sl].Type == "Item"))
-                            {
-                                totalCounter++;
-                                int.TryParse(currResults.SalesLine[sl].QtyToReceive, out int qtyToRec);
-                                if (qtyToRec > 0)
-                                {
-                                    statusCounter++;
-                                }
-                            }
-                        }
-
-                        if (statusCounter == totalCounter)
-                        {
-                            orderStatus = "OrderCreated";
-                        }
-                        else if (statusCounter == 0)
-                        {
-                            orderStatus = "Shipped";
-                        }
-                        else
-                        {
-                            orderStatus = "Partial Shipped";
-                        }
-
-                        salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty));
-
-                        insertedOrderNumbers.Add(orderNo);
-
-                        orderStatus = string.Empty;
-                        orderDate = string.Empty;
-                        orderNo = string.Empty;
-                        channelName = string.Empty;
-                        shipHeader = new List<ShipmentHeader>();
-                        postPackage = new List<PostedPackage>();
-                        externalDocumentNo = string.Empty;
-                        warranty = new Warranty();
-
-                        status = string.Empty;
-                        policy = string.Empty;
-                        daysRemaining = string.Empty;
                     }
                 }
             }
@@ -638,10 +653,11 @@ namespace ExcelDesign.Class_Objects
                         shipToZip = currResults.SOImportBuffer[c].ShipToZip;
                         shipToState = currResults.SOImportBuffer[c].ShipToState;
                         shipToCountry = currResults.SOImportBuffer[c].ShipToCountry;
-                        salesHeaders = GetSalesOrders();
-                        returnHeaders = GetReturnOrders();
+                        salesHeaders = GetSalesOrders(shipToName);
+                        returnHeaders = GetReturnOrders(shipToName);
 
                         returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
+                        customerNames.Add(shipToName);
 
                         shipToName = string.Empty;
                         shipToAddress1 = string.Empty;
@@ -673,10 +689,11 @@ namespace ExcelDesign.Class_Objects
                         shipToZip = currResults.SalesShipmentHeader[c].ShipToZip;
                         shipToState = currResults.SalesShipmentHeader[c].ShipToState;
                         shipToCountry = currResults.SalesShipmentHeader[c].ShipToCountry;
-                        salesHeaders = GetSalesOrders();
-                        returnHeaders = GetReturnOrders();
+                        salesHeaders = GetSalesOrders(shipToName);
+                        returnHeaders = GetReturnOrders(shipToName);
 
                         returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
+                        customerNames.Add(shipToName);
 
                         shipToName = string.Empty;
                         shipToAddress1 = string.Empty;
@@ -708,10 +725,11 @@ namespace ExcelDesign.Class_Objects
                         shipToZip = currResults.SalesHeader[c].ShipToZip;
                         shipToState = currResults.SalesHeader[c].ShipToState;
                         shipToCountry = currResults.SalesHeader[c].ShipToCountry;
-                        salesHeaders = GetSalesOrders();
-                        returnHeaders = GetReturnOrders();
+                        salesHeaders = GetSalesOrders(shipToName);
+                        returnHeaders = GetReturnOrders(shipToName);
 
                         returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
+                        customerNames.Add(shipToName);
 
                         shipToName = string.Empty;
                         shipToAddress1 = string.Empty;
@@ -743,10 +761,11 @@ namespace ExcelDesign.Class_Objects
                         shipToZip = currResults.ReturnReceiptHeader[c].ShipToZip;
                         shipToState = currResults.ReturnReceiptHeader[c].ShipToState;
                         shipToCountry = currResults.ReturnReceiptHeader[c].ShipToCountry;
-                        salesHeaders = GetSalesOrders();
-                        returnHeaders = GetReturnOrders();
+                        salesHeaders = GetSalesOrders(shipToName);
+                        returnHeaders = GetReturnOrders(shipToName);
 
                         returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
+                        customerNames.Add(shipToName);
 
                         shipToName = string.Empty;
                         shipToAddress1 = string.Empty;

@@ -88,6 +88,7 @@
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetail.ascx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetailHeader.ascx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoHeader.ascx" />
+    <Content Include="Forms\UserControls\MainTables\CustomerInfoTable.ascx" />
     <Content Include="Forms\UserControls\SalesOrder\SalesOrderDetail.ascx" />
     <Content Include="Forms\ServiceCenter.aspx" />
     <Content Include="Forms\UserControls\SalesOrder\SalesOrderDetailHeader.ascx" />
@@ -95,6 +96,12 @@
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnDetail.ascx" />
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnDetailHeader.ascx" />
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnHeader.ascx" />
+    <Content Include="Forms\UserControls\SingleControls\MultipleCustomers.ascx" />
+    <Content Include="Forms\UserControls\TableData\SingleCustomerTableDetail.ascx" />
+    <Content Include="Forms\UserControls\TableData\SingleSalesOrderDetail.ascx" />
+    <Content Include="Forms\UserControls\MainTables\SalesOrderHeaderTable.ascx" />
+    <Content Include="Forms\UserControls\TableHeaders\SingleCustomerTableHeader.ascx" />
+    <Content Include="Forms\UserControls\TableHeaders\SingleSalesOrderTableHeader.ascx" />
     <Content Include="Forms\UserControls\TestTableControl.ascx" />
     <Content Include="images\Logo.png" />
     <Content Include="Web.config" />
@@ -145,6 +152,13 @@
     <Compile Include="Forms\UserControls\CustomerInfo\CustomerInfoHeader.ascx.designer.cs">
       <DependentUpon>CustomerInfoHeader.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserControls\MainTables\CustomerInfoTable.ascx.cs">
+      <DependentUpon>CustomerInfoTable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\MainTables\CustomerInfoTable.ascx.designer.cs">
+      <DependentUpon>CustomerInfoTable.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UserControls\SalesOrder\SalesOrderDetail.ascx.cs">
       <DependentUpon>SalesOrderDetail.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -193,6 +207,48 @@
     </Compile>
     <Compile Include="Forms\UserControls\SalesReturn\SalesReturnHeader.ascx.designer.cs">
       <DependentUpon>SalesReturnHeader.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\SingleControls\MultipleCustomers.ascx.cs">
+      <DependentUpon>MultipleCustomers.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\SingleControls\MultipleCustomers.ascx.designer.cs">
+      <DependentUpon>MultipleCustomers.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\SingleCustomerTableDetail.ascx.cs">
+      <DependentUpon>SingleCustomerTableDetail.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\SingleCustomerTableDetail.ascx.designer.cs">
+      <DependentUpon>SingleCustomerTableDetail.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\SingleSalesOrderDetail.ascx.cs">
+      <DependentUpon>SingleSalesOrderDetail.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\SingleSalesOrderDetail.ascx.designer.cs">
+      <DependentUpon>SingleSalesOrderDetail.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\MainTables\SalesOrderHeaderTable.ascx.cs">
+      <DependentUpon>SalesOrderHeaderTable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\MainTables\SalesOrderHeaderTable.ascx.designer.cs">
+      <DependentUpon>SalesOrderHeaderTable.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableHeaders\SingleCustomerTableHeader.ascx.cs">
+      <DependentUpon>SingleCustomerTableHeader.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableHeaders\SingleCustomerTableHeader.ascx.designer.cs">
+      <DependentUpon>SingleCustomerTableHeader.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableHeaders\SingleSalesOrderTableHeader.ascx.cs">
+      <DependentUpon>SingleSalesOrderTableHeader.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableHeaders\SingleSalesOrderTableHeader.ascx.designer.cs">
+      <DependentUpon>SingleSalesOrderTableHeader.ascx</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserControls\TestTableControl.ascx.cs">
       <DependentUpon>TestTableControl.ascx</DependentUpon>
@@ -258,6 +314,7 @@
       <CachedSettingsPropName>ExcelDesign_ServiceFunctions_Functions</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

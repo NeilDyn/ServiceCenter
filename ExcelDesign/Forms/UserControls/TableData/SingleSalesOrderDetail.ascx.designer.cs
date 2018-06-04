@@ -7,162 +7,144 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExcelDesign.Forms.UserControls {
+namespace ExcelDesign.Forms.UserControls.TableData {
     
     
-    public partial class CustomerInfoDetail {
+    public partial class SingleSalesOrderDetail {
         
         /// <summary>
-        /// Details control.
+        /// tblSingleSalesOrderDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Details;
+        protected global::System.Web.UI.WebControls.Table tblSingleSalesOrderDetail;
         
         /// <summary>
-        /// lblNameCaption control.
+        /// tcOrderStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNameCaption;
+        protected global::System.Web.UI.WebControls.TableCell tcOrderStatus;
         
         /// <summary>
-        /// lblAddress1Caption control.
+        /// tcOrderDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAddress1Caption;
+        protected global::System.Web.UI.WebControls.TableCell tcOrderDate;
         
         /// <summary>
-        /// lblAddress2Caption control.
+        /// tcShipmentDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAddress2Caption;
+        protected global::System.Web.UI.WebControls.TableCell tcShipmentDate;
         
         /// <summary>
-        /// lblShipToContactCaption control.
+        /// tcSalesOrderNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblShipToContactCaption;
+        protected global::System.Web.UI.WebControls.TableCell tcSalesOrderNo;
         
         /// <summary>
-        /// lblCityCaption control.
+        /// tcShipmentsTotal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCityCaption;
+        protected global::System.Web.UI.WebControls.TableCell tcShipmentsTotal;
         
         /// <summary>
-        /// lblZipCaption control.
+        /// tcStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblZipCaption;
+        protected global::System.Web.UI.WebControls.TableCell tcStatus;
         
         /// <summary>
-        /// lblName control.
+        /// tcChannelName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblName;
+        protected global::System.Web.UI.WebControls.TableCell tcChannelName;
         
         /// <summary>
-        /// lblAddress1 control.
+        /// tcPackagesCount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAddress1;
+        protected global::System.Web.UI.WebControls.TableCell tcPackagesCount;
         
         /// <summary>
-        /// lblAddress2 control.
+        /// tcPolicy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAddress2;
+        protected global::System.Web.UI.WebControls.TableCell tcPolicy;
         
         /// <summary>
-        /// lblShipToContact control.
+        /// tcZendeskTicketNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblShipToContact;
+        protected global::System.Web.UI.WebControls.TableCell tcZendeskTicketNo;
         
         /// <summary>
-        /// lblCity control.
+        /// tcShipMethod control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCity;
+        protected global::System.Web.UI.WebControls.TableCell tcShipMethod;
         
         /// <summary>
-        /// lblZip control.
+        /// tcDaysRemaining control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblZip;
+        protected global::System.Web.UI.WebControls.TableCell tcDaysRemaining;
         
         /// <summary>
-        /// lblStateCaption control.
+        /// tcZendeskTickets control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStateCaption;
+        protected global::System.Web.UI.WebControls.TableCell tcZendeskTickets;
         
         /// <summary>
-        /// lblCountryCaption control.
+        /// tcTrackingNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCountryCaption;
-        
-        /// <summary>
-        /// lblState control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblState;
-        
-        /// <summary>
-        /// lblCountry control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCountry;
+        protected global::System.Web.UI.WebControls.TableCell tcTrackingNo;
     }
 }

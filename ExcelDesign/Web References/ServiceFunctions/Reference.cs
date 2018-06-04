@@ -2441,6 +2441,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string qtyToReceiveField;
         
+        private string qtyShippedField;
+        
         private string unitPriceField;
         
         private string dateCreatedField;
@@ -2502,6 +2504,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.qtyToReceiveField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string QtyShipped {
+            get {
+                return this.qtyShippedField;
+            }
+            set {
+                this.qtyShippedField = value;
             }
         }
         

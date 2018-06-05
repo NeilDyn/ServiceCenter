@@ -10,70 +10,52 @@
 namespace ExcelDesign.Forms.UserControls.TableData {
     
     
-    public partial class SingleSalesOrderDetail {
+    public partial class SingleReturnOrderDetail {
         
         /// <summary>
-        /// tblSingleSalesOrderDetail control.
+        /// tblSingleReturnOrderDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblSingleSalesOrderDetail;
+        protected global::System.Web.UI.WebControls.Table tblSingleReturnOrderDetail;
         
         /// <summary>
-        /// tcOrderStatus control.
+        /// tcReturnStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcOrderStatus;
+        protected global::System.Web.UI.WebControls.TableCell tcReturnStatus;
         
         /// <summary>
-        /// tcOrderDate control.
+        /// tcDateCreated control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcOrderDate;
+        protected global::System.Web.UI.WebControls.TableCell tcDateCreated;
         
         /// <summary>
-        /// tcShipmentDate control.
+        /// tcReceiptDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcShipmentDate;
+        protected global::System.Web.UI.WebControls.TableCell tcReceiptDate;
         
         /// <summary>
-        /// tcSalesOrderNo control.
+        /// tcReturnTrackingNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcSalesOrderNo;
-        
-        /// <summary>
-        /// tcShipmentsTotal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcShipmentsTotal;
-        
-        /// <summary>
-        /// tcStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcStatus;
+        protected global::System.Web.UI.WebControls.TableCell tcReturnTrackingNo;
         
         /// <summary>
         /// tcChannelName control.
@@ -85,22 +67,22 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         protected global::System.Web.UI.WebControls.TableCell tcChannelName;
         
         /// <summary>
-        /// tcPackagesCount control.
+        /// tcReceiptsTotal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcPackagesCount;
+        protected global::System.Web.UI.WebControls.TableCell tcReceiptsTotal;
         
         /// <summary>
-        /// tcPolicy control.
+        /// tcOrderDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcPolicy;
+        protected global::System.Web.UI.WebControls.TableCell tcOrderDate;
         
         /// <summary>
         /// tcZendeskTicketNo control.
@@ -112,22 +94,13 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         protected global::System.Web.UI.WebControls.TableCell tcZendeskTicketNo;
         
         /// <summary>
-        /// tcShipMethod control.
+        /// tcPackagesCount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcShipMethod;
-        
-        /// <summary>
-        /// tcDaysRemaining control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcDaysRemaining;
+        protected global::System.Web.UI.WebControls.TableCell tcPackagesCount;
         
         /// <summary>
         /// tcZendeskTickets control.
@@ -139,21 +112,12 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         protected global::System.Web.UI.WebControls.TableCell tcZendeskTickets;
         
         /// <summary>
-        /// tcTrackingNo control.
+        /// tblReturnDetailLines control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcTrackingNo;
-        
-        /// <summary>
-        /// tblOrderDetailLines control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblOrderDetailLines;
+        protected global::System.Web.UI.WebControls.Table tblReturnDetailLines;
     }
 }

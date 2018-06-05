@@ -7,36 +7,45 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExcelDesign.Forms.UserControls.CustomerInfo.MainTables {
+namespace ExcelDesign.Forms.UserControls.MainTables {
     
     
-    public partial class CustomerInfoTable {
+    public partial class ReturnOrderHeaderTable {
         
         /// <summary>
-        /// tblCustomerInfo control.
+        /// tblReturnOrderHeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblCustomerInfo;
+        protected global::System.Web.UI.WebControls.Table tblReturnOrderHeader;
         
         /// <summary>
-        /// infoHeaders control.
+        /// ExpandCurrentCustomer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderRow infoHeaders;
+        protected global::System.Web.UI.WebControls.TableHeaderCell ExpandCurrentCustomer;
         
         /// <summary>
-        /// thcTotalCustomers control.
+        /// btnExpandCurrentCustomer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell thcTotalCustomers;
+        protected global::System.Web.UI.WebControls.Button btnExpandCurrentCustomer;
+        
+        /// <summary>
+        /// thcTotalReturns control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell thcTotalReturns;
     }
 }

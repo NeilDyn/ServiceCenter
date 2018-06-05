@@ -50,7 +50,9 @@ namespace ExcelDesign.Forms
                 }
                 catch (Exception ex)
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+                    Session["Error"] = ex.Message;
+                    Response.Redirect("ErrorForm.aspx");
+                    //ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
                 }
             }
         }

@@ -3,7 +3,7 @@
 
 <link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 
-<asp:Table ID="tblSingleSalesOrderTableHeader" runat="server" Width="85%" Height="100%">
+<asp:Table ID="tblSingleSalesOrderTableHeader" runat="server" Width="100%" Height="100%">
     <asp:TableHeaderRow TableSection="TableHeader" runat="server">
         <asp:TableHeaderCell runat="server" ID="ExpandCurrentCustomer" Width="2%">
             <asp:Button ID="btnExpandCurrentCustomer" runat="server" Text="+" />     

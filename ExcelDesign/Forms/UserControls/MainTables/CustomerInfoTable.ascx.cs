@@ -33,7 +33,7 @@ namespace ExcelDesign.Forms.UserControls.CustomerInfo.MainTables
                 ((SingleCustomerTableHeader)singleCustomerTableHeader).AddDetails(cust, count);
 
                 tc.Height = new Unit("100%");
-                tc.ColumnSpan = 3;
+                tc.ColumnSpan = this.infoHeaders.Cells.Count;
 
                 tc.Controls.Add(singleCustomerTableHeader);
                 tr.Cells.Add(tc);

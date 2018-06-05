@@ -36,18 +36,28 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcZip.Text = cust.Zip;
             this.tcState.Text = cust.Country;
 
-            salesOrderHeader = LoadControl(salesOrderHeaderPath);
-            ((SalesOrderHeaderTable)salesOrderHeader).LoadHeader(cust.SalesHeader);
-
-            salesCell.Width = new Unit("100%");
-            salesCell.ColumnSpan = 6;
-            salesCell.Controls.Add(salesOrderHeader);
-            salesRow.Cells.Add(salesCell);
-            this.tblSingleCustomerDetail.Rows.Add(salesRow);         
-
-            foreach (ReturnHeader returnHeader in cust.ReturnHeaders)
+            if (cust.SalesHeader.Count > 0)
             {
+                salesOrderHeader = LoadControl(salesOrderHeaderPath);
+                ((SalesOrderHeaderTable)salesOrderHeader).LoadHeader(cust.SalesHeader);
 
+                salesCell.Width = new Unit("100%");
+                salesCell.ColumnSpan = 6;
+                salesCell.Controls.Add(salesOrderHeader);
+                salesRow.Cells.Add(salesCell);
+                this.tblSingleCustomerDetail.Rows.Add(salesRow);
+            }
+
+            if (cust.ReturnHeaders.Count > 0)
+            {
+                returnOrderHeader = LoadControl(returnOrderHeaderPath);
+                ((ReturnOrderHeaderTable)returnOrderHeader).LoadHeader(cust.ReturnHeaders);
+
+                returnCell.Width = new Unit("100%");
+                returnCell.ColumnSpan = 6;
+                returnCell.Controls.Add(returnOrderHeader);
+                returnRow.Cells.Add(returnCell);
+                this.tblSingleCustomerDetail.Rows.Add(returnRow);
             }
         }
     }

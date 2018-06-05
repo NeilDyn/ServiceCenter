@@ -2,14 +2,16 @@
 
 <link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 
-<asp:Table ID="tblSingleSalesOrderDetail" runat="server" Height="100%" Width="85%">
+<asp:Table ID="tblSingleSalesOrderDetail" runat="server" Height="100%" Width="100%">
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
         <asp:TableCell Text="Order Status:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcOrderStatus" />
     </asp:TableRow>
         <asp:TableRow>
-        <asp:TableCell />
+        <asp:TableCell>
+            <br />
+        </asp:TableCell>
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
@@ -56,5 +58,30 @@
         <asp:TableCell runat="server" ID="tcZendeskTickets" />
         <asp:TableCell Text="Tracking #:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcTrackingNo" />
+    </asp:TableRow>
+    <asp:TableRow>
+        <asp:TableCell />
+    </asp:TableRow>
+    <asp:TableRow>
+        <asp:TableCell />
+        <asp:TableCell ColumnSpan ="8" >
+            <asp:Table runat="server" ID="tblOrderDetailLines" Height="100%" Width="100%">
+                <asp:TableHeaderRow>
+                    <asp:TableHeaderCell Text="Item No." />
+                    <asp:TableHeaderCell Text="Description"/>
+                    <asp:TableHeaderCell Text="Qty" />
+                    <asp:TableHeaderCell Text="Qty Shipped" />
+                    <asp:TableHeaderCell Text="Price" />
+                    <asp:TableHeaderCell Text="Line Amt" />
+                    <asp:TableHeaderCell Text="Serial #"/>
+                    <asp:TableHeaderCell Text="" />
+                </asp:TableHeaderRow>
+                <asp:TableHeaderRow>
+                    <asp:TableHeaderCell ColumnSpan="8">
+                        <hr class="HeaderLine"/>
+                    </asp:TableHeaderCell>
+                </asp:TableHeaderRow>
+            </asp:Table>
+        </asp:TableCell>
     </asp:TableRow>
 </asp:Table>

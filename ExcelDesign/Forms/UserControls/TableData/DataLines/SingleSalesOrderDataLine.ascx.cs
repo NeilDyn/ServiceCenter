@@ -5,16 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-
-namespace ExcelDesign.Forms
+namespace ExcelDesign.Forms.UserControls.TableData.DataLines
 {
-    public partial class ErrorForm : System.Web.UI.Page
+    public partial class SingleSalesOrderDataLine : System.Web.UI.UserControl
     {
-        protected Control test;
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.errorMessage.InnerText = Session["Error"].ToString();
+
         }
     }
 }

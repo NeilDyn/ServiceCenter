@@ -30,7 +30,7 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
 
             singleSalesOrderDetailTable = LoadControl(singleSalesOrderDetailPath);
             singleSalesOrderDetailTable.ID = "singleSalesOrderDetailTable_" + headCount.ToString();
-            ((SingleSalesOrderDetail)singleSalesOrderDetailTable).PopulateDetail(sh);
+            ((SingleSalesOrderDetail)singleSalesOrderDetailTable).PopulateDetail(sh, headCount);
 
             tc.Height = new Unit("100%");
             tc.ColumnSpan = 4;

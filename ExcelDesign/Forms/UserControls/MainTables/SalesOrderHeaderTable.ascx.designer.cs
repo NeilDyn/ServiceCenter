@@ -47,14 +47,5 @@ namespace ExcelDesign.Forms.UserControls.MainTables {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableHeaderCell thcTotalOrders;
-        
-        /// <summary>
-        /// salesOrderDetailHeader control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableRow salesOrderDetailHeader;
     }
 }

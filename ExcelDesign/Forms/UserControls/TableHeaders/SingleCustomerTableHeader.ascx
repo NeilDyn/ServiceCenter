@@ -29,9 +29,6 @@
         <asp:TableHeaderCell runat="server" ID="thcCustomerName" HorizontalAlign="Left" style="text-align:left"/>
         <asp:TableHeaderCell HorizontalAlign="Right" />
     </asp:TableHeaderRow>
-    <asp:TableRow runat="server" ID="customerDetails" TableSection="TableBody">
-
-    </asp:TableRow>
 </asp:Table>
 
 

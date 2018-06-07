@@ -24,6 +24,9 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             this.SalesOrderSequence.Text = "Order " + HeadCount.ToString();
             this.thcExternalDocumentNo.Text = Header.ExternalDocumentNo;
 
+            this.singleSalesOrderDetail.ID = "singleSalesOrderDetail_" + CustID.ToString() + "_" + HeadCount.ToString();
+            this.btnExpandCurrentOrder.ID = "btnExpandCurrentOrder_" + CustID.ToString() + "_" + HeadCount.ToString();
+
             if (Session["SingleSalesOrderTableHeader_" + CustID.ToString()] == null)
             {
                 Session["SingleSalesOrderTableHeader_" + CustID.ToString()] = this.tblSingleSalesOrderTableHeader;
@@ -34,7 +37,7 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
         public void PopulateHeader()
         {          
             TableCell tc = new TableCell();
-            TableRow tr = new TableRow();
+ 
          
             singleSalesOrderDetailTable = LoadControl(singleSalesOrderDetailPath);
             singleSalesOrderDetailTable.ID = "singleSalesOrderDetailTable_" + HeadCount.ToString();
@@ -46,8 +49,7 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             ((SingleSalesOrderDetail)singleSalesOrderDetailTable).CountID = HeadCount;
             ((SingleSalesOrderDetail)singleSalesOrderDetailTable).CustID = CustID;
 
-            tr.Cells.Add(tc);
-            this.tblSingleSalesOrderTableHeader.Rows.Add(tr);
+            this.singleSalesOrderDetail.Cells.Add(tc);
             Session["SingleSalesOrderTableHeaderDetailCell_CustID" + CustID.ToString() + "_" + HeadCount.ToString()] = tc;
         }
 

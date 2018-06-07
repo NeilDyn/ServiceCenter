@@ -23,8 +23,9 @@ namespace ExcelDesign.Forms.UserControls.MainTables
         protected void Page_Load(object sender, EventArgs e)
         {
             this.thcTotalOrders.Text = SalesHeaderList.Count.ToString();
+            this.btnExpandOrder.ID = "btnExpandOrder_" + CustID.ToString();
 
-            if(Session["SalesOrderHeaderTable_" + CustID.ToString()] == null)
+            if (Session["SalesOrderHeaderTable_" + CustID.ToString()] == null)
             {
                 Session["SalesOrderHeaderTable_" + CustID.ToString()] = this.tblSalesOrderHeader;
             }
@@ -51,6 +52,7 @@ namespace ExcelDesign.Forms.UserControls.MainTables
                 tc.ColumnSpan = 7;
                 tc.Controls.Add(singleSalesOrderHeader);
                 tr.Cells.Add(tc);
+                tr.ID = "salesOrderDetailHeader_" + CustID.ToString();
                 this.tblSalesOrderHeader.Rows.Add(tr);
                 salesCount++;
                 Session["SalesOrderHeaderTableCell_CustID" + CustID.ToString() + "_" + salesCount.ToString()] = tc;

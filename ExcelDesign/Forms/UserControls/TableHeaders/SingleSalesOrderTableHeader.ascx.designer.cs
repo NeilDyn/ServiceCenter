@@ -31,13 +31,13 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders {
         protected global::System.Web.UI.WebControls.TableHeaderCell ExpandCurrentCustomer;
         
         /// <summary>
-        /// btnExpandCurrentCustomer control.
+        /// btnExpandCurrentOrder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExpandCurrentCustomer;
+        protected global::System.Web.UI.WebControls.Button btnExpandCurrentOrder;
         
         /// <summary>
         /// SalesOrderSequence control.
@@ -56,5 +56,14 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableHeaderCell thcExternalDocumentNo;
+        
+        /// <summary>
+        /// singleSalesOrderDetail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableRow singleSalesOrderDetail;
     }
 }

@@ -6,7 +6,7 @@
 <asp:Table ID="tblSalesOrderHeader" runat="server" Width="100%" Height="100%">
     <asp:TableHeaderRow TableSection="TableHeader">
         <asp:TableHeaderCell runat="server" ID="ExpandCurrentCustomer" Width="2%">
-            <asp:Button ID="btnExpandCurrentCustomer" runat="server" Text="+" />     
+            <asp:Button ID="btnExpandOrders" runat="server" Text="+" />     
         </asp:TableHeaderCell>
         <asp:TableHeaderCell Text="Order Info:" HorizontalAlign="Left" ForeColor="#0099FF" Font-Bold="True" Font-Size="Large"/>
         <asp:TableHeaderCell Text="Total Orders:" HorizontalAlign="Right" ForeColor="#0099FF" Font-Bold="True" Font-Size="Large"/>

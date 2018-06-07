@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using ExcelDesign.Class_Objects;
 using ExcelDesign.Forms.UserControls;
 using ExcelDesign.Forms.UserControls.CustomerInfo.MainTables;
+using ExcelDesign.Forms.UserControls.TableData;
+using ExcelDesign.Forms.UserControls.TableHeaders;
 
 namespace ExcelDesign.Forms
 {
@@ -26,10 +28,80 @@ namespace ExcelDesign.Forms
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Convert.ToString(ViewState["Generated"]) == "true")
+            {
+                //RetrieveData();
+                if (IsPostBack)
+                {
+                    for (int custID = 1; custID < Convert.ToInt32(Session["CustomerCount"]) + 1; custID++)
+                    {
+                        TableRow tr = new TableRow();
+                        TableCell tc = new TableCell();
+                        for (int so = 1; so < Convert.ToInt32(Session["SalesOrderCount_" + custID.ToString()]) + 1; so++)
+                        {
+                            if (Session["SingleSalesOrderTableHeaderDetailCell_CustID" + custID.ToString() + "_" + so.ToString()] != null)
+                            {
 
+                                tr.Cells.Add((TableCell)Session["SingleSalesOrderTableHeaderDetailCell_CustID" + custID.ToString() + "_" + so.ToString()]);
+                                ((Table)Session["SingleSalesOrderTableHeader" + custID.ToString()]).Rows.Add(tr);
+
+                                tc = new TableCell();
+                                tr = new TableRow();
+                                tc.Controls.Add(((Table)Session["SingleSalesOrderTableHeader" + custID.ToString()]));
+                                tr.Cells.Add(tc);
+                                ((Table)Session["SalesOrderHeaderTableCell_CustID" + custID.ToString() + "_" + so.ToString()]).Rows.Add(tr);
+
+                                tr = new TableRow();
+                                tr.Cells.Add((TableCell)Session["SalesOrderHeaderTableCell_CustID" + custID.ToString() + "_" + so.ToString()]);
+                                ((Table)Session["SalesOrderHeaderTable_" + custID.ToString()]).Rows.Add(tr);
+
+                                tc = new TableCell();
+                                tr = new TableRow();
+                                tc.Controls.Add((Table)Session["SalesOrderHeaderTable_" + custID.ToString()]);
+                                tr.Cells.Add(tc);
+                                ((Table)Session["SingleCustomerDetailTableCell_" + custID.ToString()]).Rows.Add(tr);
+                            }
+
+                            tr = new TableRow();
+                            tr.Cells.Add((TableCell)Session["SingleCustomerDetailTableCell_" + custID.ToString()]);
+                            ((Table)Session["SingleCustomerTableDetailTable_" + custID.ToString()]).Rows.Add(tr);
+
+                            if (Session["SingelCustomerTableHeaderCell_" + custID.ToString()] != null)
+                            {
+                                tr = new TableRow();
+                                tr.Cells.Add((TableCell)Session["SingelCustomerTableHeaderCell_" + custID.ToString()]);
+                                ((Table)Session["SingleCustomerTableHeader_" + custID.ToString()]).Rows.Add(tr);
+                            }
+
+                            tr = new TableRow();
+                            tr.Cells.Add((TableCell)Session["SingleCustomerInfoCell_" + custID.ToString()]);
+                            ((Table)Session["CustomerInfoTable"]).Rows.Add(tr);
+                        }
+                    }
+
+                    if (Session["MultipleCustomers"] != null)
+                    {
+                        this.frmOrderDetails.Controls.Add(((Control)Session["MultipleCustomers"]));
+                    }
+                    if (Session["CustomerInfoTable"] != null)
+                    {
+                        this.frmOrderDetails.Controls.Add((Control)Session["CustomerInfoTable"]);
+                    }
+                }
+            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToString(ViewState["Generate"]) != "true")
+            {
+                Session.Clear();
+                RetrieveData();
+                ViewState["Generated"] = "true";
+            }
+        }
+
+        protected void RetrieveData()
         {
             string searchValue = txtSearchBox.Text;
             cs = new CallService();
@@ -44,9 +116,7 @@ namespace ExcelDesign.Forms
                     salesOrderDetail = new Control();
                     salesReturnOrderHeader = new Control();
                     salesReturnOrderDetails = new Control();
-                    PopulateCustomerDetails();
-                    //PopulateOrderDetails();
-                    //PopulateReturnOrderDetails();
+                    PopulateData();
                 }
                 catch (Exception ex)
                 {
@@ -57,65 +127,28 @@ namespace ExcelDesign.Forms
             }
         }
 
-        protected void PopulateOrderDetails()
+        protected void PopulateData()
         {
-            //int headerCount = 0;
-            //List<SalesHeader> sh = cs.GetSalesOrders();
-
-            //if (sh.Count > 0)
-            //{
-            //    salesOrderHeader = LoadControl("UserControls/SalesOrderHeader.ascx");
-            //    salesOrderHeader.ID = "SalesOrderHeader";
-            //    ((SalesOrderHeader)salesOrderHeader).Populate(sh.Count);
-            //    this.frmOrderDetails.Controls.Add(salesOrderHeader);
-
-            //    foreach (SalesHeader header in sh)
-            //    {
-            //        headerCount++;
-            //        salesOrderDetail = LoadControl("UserControls/SalesOrderDetail.ascx");
-            //        salesOrderDetail.ID = "SalesOrderDetail" + headerCount.ToString();
-            //        ((SalesOrderDetail)salesOrderDetail).PopulateControl(header, headerCount);
-            //        this.frmOrderDetails.Controls.Add(salesOrderDetail);
-            //    }
-            //}
-        }
-
-        protected void PopulateReturnOrderDetails()
-        {
-            //int headerCount = 0;
-            //List<ReturnHeader> rh = cs.GetReturnOrders();
-
-            //if (rh.Count > 0)
-            //{
-            //    salesReturnOrderHeader = LoadControl("UserControls/SalesReturnHeader.ascx");
-            //    salesReturnOrderHeader.ID = "SalesReturnHeader";
-            //    ((SalesReturnHeader)salesReturnOrderHeader).Populate(rh.Count);
-            //    this.frmOrderDetails.Controls.Add(salesReturnOrderHeader);
-
-            //    foreach (ReturnHeader header in rh)
-            //    {
-            //        headerCount++;
-            //        salesReturnOrderDetails = LoadControl("UserControls/SalesReturnDetail.ascx");
-            //        salesReturnOrderDetails.ID = "SalesReturnDetail" + headerCount.ToString();
-            //        ((SalesReturnDetail)salesReturnOrderDetails).PopulateControl(header, headerCount);
-            //        this.frmOrderDetails.Controls.Add(salesReturnOrderDetails);
-            //    }
-            //}
-        }
-
-        protected void PopulateCustomerDetails()
-        {            
             List<Customer> customers = cs.GetCustomerInfo();
-            if(customers.Count > 1)
+            if (customers.Count > 1)
             {
                 multipleCustomers = LoadControl("UserControls/SingleControls/MultipleCustomers.ascx");
                 this.frmOrderDetails.Controls.Add(multipleCustomers);
-            }     
+                Session["MultipleCustomers"] = multipleCustomers;
+            }
 
             customerInfoTable = LoadControl("UserControls/MainTables/CustomerInfoTable.ascx");
             customerInfoTable.ID = "Customer_Info_Table";
-            ((CustomerInfoTable)customerInfoTable).CreateCustomerInfo(customers);
+            ((CustomerInfoTable)customerInfoTable).CustomerList = customers;
+            ((CustomerInfoTable)customerInfoTable).CreateCustomerInfo();
             this.frmOrderDetails.Controls.Add(customerInfoTable);
+
+            //Session["CustomerInfoControl"] = customerInfoTable;
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Write("TEST");
         }
     }
 }

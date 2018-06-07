@@ -11,31 +11,60 @@ namespace ExcelDesign.Forms.UserControls.TableData
     public partial class SingleSalesOrderDetail : System.Web.UI.UserControl
     {
         protected SalesHeader detailHeader;
+        public SalesHeader Sh { get; set; }
+        public int CountID { get; set; }
+        public int CustID { get; set; }
+
+        protected TableRow buttonRow = new TableRow();
+        protected TableCell cancelOrderCell = new TableCell();
+        protected TableCell partRequestCell = new TableCell();
+        protected TableCell createReturnCell = new TableCell();
+        protected TableCell issueRefundcell = new TableCell();
+
+        protected Button btnCancelOrder = new Button();
+        protected Button btnPartRequest = new Button();
+        protected Button btnCreateReturn = new Button();
+        protected Button btnIssueRefund = new Button();
+
+        protected override void OnInit(EventArgs e)
+        {
+            base.OnInit(e);
+
+            PopulateDetail();
+
+            if (Session["SingleSalesOrderDetailTable_" + CustID.ToString()] == null)
+            {
+                Session["SingleSalesOrderDetailTable_" + CustID.ToString()] = this.tblSingleSalesOrderDetail;
+            }
+
+            PopulateLines(Sh);
+            CreateButtons(CountID);
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
-        public void PopulateDetail(SalesHeader sh, int countID)
+        public void PopulateDetail()
         {
             int totalShipments = 0;
             int totalTrackingNos = 0;
             string shipmentMethod = string.Empty;
 
-            this.tcOrderStatus.Text = sh.OrderStatus;
-            this.tcOrderDate.Text = sh.OrderDate;
-            this.tcSalesOrderNo.Text = sh.SalesOrderNo;
-            this.tcChannelName.Text = sh.ChannelName;
+            this.tcOrderStatus.Text = Sh.OrderStatus;
+            this.tcOrderDate.Text = Sh.OrderDate;
+            this.tcSalesOrderNo.Text = Sh.SalesOrderNo;
+            this.tcChannelName.Text = Sh.ChannelName;
 
-            if (sh.ShipmentHeaderObject.Count > 0)
+            if (Sh.ShipmentHeaderObject.Count > 0)
             {
-                this.tcShipmentDate.Text = sh.ShipmentHeaderObject[0].ShippingDate;
-                shipmentMethod = sh.ShipmentHeaderObject[0].ShippingAgentService;
-                shipmentMethod += " " + sh.ShipmentHeaderObject[0].ShippingAgentCode;
+                this.tcShipmentDate.Text = Sh.ShipmentHeaderObject[0].ShippingDate;
+                shipmentMethod = Sh.ShipmentHeaderObject[0].ShippingAgentService;
+                shipmentMethod += " " + Sh.ShipmentHeaderObject[0].ShippingAgentCode;
             }
 
-            foreach (ShipmentHeader shipmentHeader in sh.ShipmentHeaderObject)
+            foreach (ShipmentHeader shipmentHeader in Sh.ShipmentHeaderObject)
             {
                 foreach (ShipmentLine shipmentLine in shipmentHeader.ShipmentLines)
                 {
@@ -44,12 +73,12 @@ namespace ExcelDesign.Forms.UserControls.TableData
             }
 
             this.tcShipmentsTotal.Text = totalShipments.ToString();
-            this.tcPackagesCount.Text = sh.PostedPackageObject.Count.ToString();
-            
+            this.tcPackagesCount.Text = Sh.PostedPackageObject.Count.ToString();
 
-            totalTrackingNos = sh.PostedPackageObject.Count;
 
-            if (sh.PostedPackageObject.Count > 0)
+            totalTrackingNos = Sh.PostedPackageObject.Count;
+
+            if (Sh.PostedPackageObject.Count > 0)
             {
                 if (totalTrackingNos != 1)
                 {
@@ -57,31 +86,17 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 }
                 else
                 {
-                    this.tcTrackingNo.Text = sh.PostedPackageObject[0].TrackingNo;
+                    this.tcTrackingNo.Text = Sh.PostedPackageObject[0].TrackingNo;
                 }
             }
 
-            this.tcStatus.Text = sh.WarrantyProp.Status;
-            this.tcPolicy.Text = sh.WarrantyProp.Policy;
-            this.tcDaysRemaining.Text = sh.WarrantyProp.DaysRemaining;
-
-            PopulateLines(sh);
-            CreateButtons(countID);
+            this.tcStatus.Text = Sh.WarrantyProp.Status;
+            this.tcPolicy.Text = Sh.WarrantyProp.Policy;
+            this.tcDaysRemaining.Text = Sh.WarrantyProp.DaysRemaining;                  
         }
 
         public void CreateButtons(int countID)
-        {
-            TableRow buttonRow = new TableRow();
-            TableCell cancelOrderCell = new TableCell();
-            TableCell partRequestCell = new TableCell();
-            TableCell createReturnCell = new TableCell();
-            TableCell issueRefundcell = new TableCell();
-
-            Button btnCancelOrder = new Button();
-            Button btnPartRequest = new Button();
-            Button btnCreateReturn = new Button();
-            Button btnIssueRefund = new Button();
-
+        {           
             btnCancelOrder.Text = "Cancel Order";
             btnCancelOrder.ID = "btnCancelOrder_" + countID.ToString();
             btnCancelOrder.Click += new EventHandler(CancelOrder);
@@ -96,27 +111,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             btnIssueRefund.Text = "Issue Refund";
             btnIssueRefund.ID = "btnIssueRefund_" + countID.ToString();
-            btnIssueRefund.Click += new EventHandler(IssueRefund);
-
-            cancelOrderCell.Controls.Add(btnCancelOrder);
-            partRequestCell.Controls.Add(btnPartRequest);
-            createReturnCell.Controls.Add(btnCreateReturn);
-            issueRefundcell.Controls.Add(btnIssueRefund);
-
-            buttonRow.Cells.Add(new TableCell());
-            buttonRow.Cells.Add(new TableCell());
-            buttonRow.Cells.Add(new TableCell());
-            buttonRow.Cells.Add(cancelOrderCell);
-            buttonRow.Cells.Add(partRequestCell);
-            buttonRow.Cells.Add(createReturnCell);
-            buttonRow.Cells.Add(issueRefundcell);
-
-            TableCell breakCell = new TableCell();
-            TableRow breakRow = new TableRow();
-            breakCell.Text = "<br/>";
-            breakRow.Cells.Add(breakCell);
-            this.tblOrderDetailLines.Rows.Add(breakRow);
-            this.tblOrderDetailLines.Rows.Add(buttonRow);
+            btnIssueRefund.Click += new EventHandler(IssueRefund);          
         }
 
         protected void CancelOrder(object sender, EventArgs e)
@@ -140,8 +135,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
         protected void IssueRefund(object sender, EventArgs e)
         {
-            var page = HttpContext.Current.CurrentHandler as Page;
-            page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert(ISSUE A REFUND FOR THIS ORDER!);", true);
+            this.tblOrderDetailLines.Caption = "ISSUE REFUND CLICKED!";
         }
 
         private void PopulateLines(SalesHeader sh)
@@ -232,6 +226,26 @@ namespace ExcelDesign.Forms.UserControls.TableData
             totalRow.Cells.Add(new TableCell());
 
             this.tblOrderDetailLines.Rows.Add(totalRow);
+
+            cancelOrderCell.Controls.Add(btnCancelOrder);
+            partRequestCell.Controls.Add(btnPartRequest);
+            createReturnCell.Controls.Add(btnCreateReturn);
+            issueRefundcell.Controls.Add(btnIssueRefund);
+
+            buttonRow.Cells.Add(new TableCell());
+            buttonRow.Cells.Add(new TableCell());
+            buttonRow.Cells.Add(new TableCell());
+            buttonRow.Cells.Add(cancelOrderCell);
+            buttonRow.Cells.Add(partRequestCell);
+            buttonRow.Cells.Add(createReturnCell);
+            buttonRow.Cells.Add(issueRefundcell);
+
+            TableCell breakCell = new TableCell();
+            TableRow breakRow = new TableRow();
+            breakCell.Text = "<br/>";
+            breakRow.Cells.Add(breakCell);
+            this.tblOrderDetailLines.Rows.Add(breakRow);
+            this.tblOrderDetailLines.Rows.Add(buttonRow);
         }
     }
 }

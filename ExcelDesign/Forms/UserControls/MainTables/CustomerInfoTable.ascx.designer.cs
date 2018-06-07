@@ -19,7 +19,7 @@ namespace ExcelDesign.Forms.UserControls.CustomerInfo.MainTables {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblCustomerInfo;
+        public global::System.Web.UI.WebControls.Table tblCustomerInfo;
         
         /// <summary>
         /// infoHeaders control.

@@ -23,7 +23,6 @@ namespace ExcelDesign.Forms.UserControls.MainTables
         protected void Page_Load(object sender, EventArgs e)
         {
             this.thcTotalOrders.Text = SalesHeaderList.Count.ToString();
-            this.btnExpandOrders.Click += new EventHandler(ExpandOrder);
 
             if(Session["SalesOrderHeaderTable_" + CustID.ToString()] == null)
             {
@@ -31,39 +30,30 @@ namespace ExcelDesign.Forms.UserControls.MainTables
             }
 
             Session["SalesOrderCount_" + CustID.ToString()] = SalesHeaderList.Count;
+
+            LoadData();
         }
 
-        protected void ExpandOrder(object sender, EventArgs e)
+        protected void LoadData()
         {
-            if(btnExpandOrders.Text == "+")
+            int salesCount = 1;
+            foreach (SalesHeader salesHeader in SalesHeaderList)
             {
-                btnExpandOrders.Text = "-";
+                tr = new TableRow();
+                tc = new TableCell();
+                singleSalesOrderHeader = LoadControl(singleSalesOrderHeaderPath);
+                singleSalesOrderHeader.ID = "singleSalesOrderHeader_" + salesCount.ToString();
+                ((SingleSalesOrderTableHeader)singleSalesOrderHeader).Header = salesHeader;
+                ((SingleSalesOrderTableHeader)singleSalesOrderHeader).HeadCount = salesCount;
+                ((SingleSalesOrderTableHeader)singleSalesOrderHeader).CustID = CustID;
 
-                int salesCount = 1;
-                foreach (SalesHeader salesHeader in SalesHeaderList)
-                {
-                    tr = new TableRow();
-                    tc = new TableCell();
-                    singleSalesOrderHeader = LoadControl(singleSalesOrderHeaderPath);
-                    singleSalesOrderHeader.ID = "singleSalesOrderHeader_" + salesCount.ToString();
-                    ((SingleSalesOrderTableHeader)singleSalesOrderHeader).Header = salesHeader;
-                    ((SingleSalesOrderTableHeader)singleSalesOrderHeader).HeadCount = salesCount;
-                    ((SingleSalesOrderTableHeader)singleSalesOrderHeader).CustID = CustID;
-
-                    tc.Height = new Unit("100%");
-                    tc.ColumnSpan = 7;
-                    tc.Controls.Add(singleSalesOrderHeader);
-                    tr.Cells.Add(tc);
-                    this.tblSalesOrderHeader.Rows.Add(tr);
-                    salesCount++;
-                    Session["SalesOrderHeaderTableCell_CustID" + CustID.ToString() + "_" + salesCount.ToString()] = tc;
-                }
-            }
-            else
-            {
-                btnExpandOrders.Text = "+";
-
-                this.tblSalesOrderHeader.Rows.Remove(tr);
+                tc.Height = new Unit("100%");
+                tc.ColumnSpan = 7;
+                tc.Controls.Add(singleSalesOrderHeader);
+                tr.Cells.Add(tc);
+                this.tblSalesOrderHeader.Rows.Add(tr);
+                salesCount++;
+                Session["SalesOrderHeaderTableCell_CustID" + CustID.ToString() + "_" + salesCount.ToString()] = tc;
             }
         }
     }

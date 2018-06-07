@@ -28,67 +28,67 @@ namespace ExcelDesign.Forms
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Convert.ToString(ViewState["Generated"]) == "true")
-            {
-                //RetrieveData();
-                if (IsPostBack)
-                {
-                    for (int custID = 1; custID < Convert.ToInt32(Session["CustomerCount"]) + 1; custID++)
-                    {
-                        TableRow tr = new TableRow();
-                        TableCell tc = new TableCell();
-                        for (int so = 1; so < Convert.ToInt32(Session["SalesOrderCount_" + custID.ToString()]) + 1; so++)
-                        {
-                            if (Session["SingleSalesOrderTableHeaderDetailCell_CustID" + custID.ToString() + "_" + so.ToString()] != null)
-                            {
+            //if (Convert.ToString(ViewState["Generated"]) == "true")
+            //{
+            //    //RetrieveData();
+            //    if (IsPostBack)
+            //    {
+            //        for (int custID = 1; custID < Convert.ToInt32(Session["CustomerCount"]) + 1; custID++)
+            //        {
+            //            TableRow tr = new TableRow();
+            //            TableCell tc = new TableCell();
+            //            for (int so = 1; so < Convert.ToInt32(Session["SalesOrderCount_" + custID.ToString()]) + 1; so++)
+            //            {
+            //                if (Session["SingleSalesOrderTableHeaderDetailCell_CustID" + custID.ToString() + "_" + so.ToString()] != null)
+            //                {
 
-                                tr.Cells.Add((TableCell)Session["SingleSalesOrderTableHeaderDetailCell_CustID" + custID.ToString() + "_" + so.ToString()]);
-                                ((Table)Session["SingleSalesOrderTableHeader" + custID.ToString()]).Rows.Add(tr);
+            //                    tr.Cells.Add((TableCell)Session["SingleSalesOrderTableHeaderDetailCell_CustID" + custID.ToString() + "_" + so.ToString()]);
+            //                    ((Table)Session["SingleSalesOrderTableHeader" + custID.ToString()]).Rows.Add(tr);
 
-                                tc = new TableCell();
-                                tr = new TableRow();
-                                tc.Controls.Add(((Table)Session["SingleSalesOrderTableHeader" + custID.ToString()]));
-                                tr.Cells.Add(tc);
-                                ((Table)Session["SalesOrderHeaderTableCell_CustID" + custID.ToString() + "_" + so.ToString()]).Rows.Add(tr);
+            //                    tc = new TableCell();
+            //                    tr = new TableRow();
+            //                    tc.Controls.Add(((Table)Session["SingleSalesOrderTableHeader" + custID.ToString()]));
+            //                    tr.Cells.Add(tc);
+            //                    ((Table)Session["SalesOrderHeaderTableCell_CustID" + custID.ToString() + "_" + so.ToString()]).Rows.Add(tr);
 
-                                tr = new TableRow();
-                                tr.Cells.Add((TableCell)Session["SalesOrderHeaderTableCell_CustID" + custID.ToString() + "_" + so.ToString()]);
-                                ((Table)Session["SalesOrderHeaderTable_" + custID.ToString()]).Rows.Add(tr);
+            //                    tr = new TableRow();
+            //                    tr.Cells.Add((TableCell)Session["SalesOrderHeaderTableCell_CustID" + custID.ToString() + "_" + so.ToString()]);
+            //                    ((Table)Session["SalesOrderHeaderTable_" + custID.ToString()]).Rows.Add(tr);
 
-                                tc = new TableCell();
-                                tr = new TableRow();
-                                tc.Controls.Add((Table)Session["SalesOrderHeaderTable_" + custID.ToString()]);
-                                tr.Cells.Add(tc);
-                                ((Table)Session["SingleCustomerDetailTableCell_" + custID.ToString()]).Rows.Add(tr);
-                            }
+            //                    tc = new TableCell();
+            //                    tr = new TableRow();
+            //                    tc.Controls.Add((Table)Session["SalesOrderHeaderTable_" + custID.ToString()]);
+            //                    tr.Cells.Add(tc);
+            //                    ((Table)Session["SingleCustomerDetailTableCell_" + custID.ToString()]).Rows.Add(tr);
+            //                }
 
-                            tr = new TableRow();
-                            tr.Cells.Add((TableCell)Session["SingleCustomerDetailTableCell_" + custID.ToString()]);
-                            ((Table)Session["SingleCustomerTableDetailTable_" + custID.ToString()]).Rows.Add(tr);
+            //                tr = new TableRow();
+            //                tr.Cells.Add((TableCell)Session["SingleCustomerDetailTableCell_" + custID.ToString()]);
+            //                ((Table)Session["SingleCustomerTableDetailTable_" + custID.ToString()]).Rows.Add(tr);
 
-                            if (Session["SingelCustomerTableHeaderCell_" + custID.ToString()] != null)
-                            {
-                                tr = new TableRow();
-                                tr.Cells.Add((TableCell)Session["SingelCustomerTableHeaderCell_" + custID.ToString()]);
-                                ((Table)Session["SingleCustomerTableHeader_" + custID.ToString()]).Rows.Add(tr);
-                            }
+            //                if (Session["SingelCustomerTableHeaderCell_" + custID.ToString()] != null)
+            //                {
+            //                    tr = new TableRow();
+            //                    tr.Cells.Add((TableCell)Session["SingelCustomerTableHeaderCell_" + custID.ToString()]);
+            //                    ((Table)Session["SingleCustomerTableHeader_" + custID.ToString()]).Rows.Add(tr);
+            //                }
 
-                            tr = new TableRow();
-                            tr.Cells.Add((TableCell)Session["SingleCustomerInfoCell_" + custID.ToString()]);
-                            ((Table)Session["CustomerInfoTable"]).Rows.Add(tr);
-                        }
-                    }
+            //                tr = new TableRow();
+            //                tr.Cells.Add((TableCell)Session["SingleCustomerInfoCell_" + custID.ToString()]);
+            //                ((Table)Session["CustomerInfoTable"]).Rows.Add(tr);
+            //            }
+            //        }
 
-                    if (Session["MultipleCustomers"] != null)
-                    {
-                        this.frmOrderDetails.Controls.Add(((Control)Session["MultipleCustomers"]));
-                    }
-                    if (Session["CustomerInfoTable"] != null)
-                    {
-                        this.frmOrderDetails.Controls.Add((Control)Session["CustomerInfoTable"]);
-                    }
-                }
-            }
+            //        if (Session["MultipleCustomers"] != null)
+            //        {
+            //            this.frmOrderDetails.Controls.Add(((Control)Session["MultipleCustomers"]));
+            //        }
+            //        if (Session["CustomerInfoTable"] != null)
+            //        {
+            //            this.frmOrderDetails.Controls.Add((Control)Session["CustomerInfoTable"]);
+            //        }
+            //    }
+            //}
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)

@@ -5,6 +5,9 @@
     <title>Customer Service Center</title>
     <link href="../css/mainpage.css" rel="stylesheet" type="text/css" />
 </head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <body>
     <form id="frmOrderDetails" runat="server">
@@ -20,7 +23,6 @@
             <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" style="margin-left: 30px" Text="Search" />
         </div>      
         <br />     
-        <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
     </form>
 </body>
 </html>

@@ -18,6 +18,11 @@ namespace ExcelDesign.Forms.UserControls.TableData
         public Customer Cust { get; set; }
         public int CustNo { get; set; }
 
+        private TableRow salesRow;
+        private TableRow returnRow;
+        private TableCell salesCell;
+        private TableCell returnCell;
+
         protected const string salesOrderHeaderPath = "../MainTables/SalesOrderHeaderTable.ascx";
         protected const string returnOrderHeaderPath = "../MainTables/ReturnOrderHeaderTable.ascx";
      
@@ -39,12 +44,10 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
         public void PopulateData()
         {
-            TableRow salesRow = new TableRow();
-            TableRow returnRow = new TableRow();
-            TableCell salesCell = new TableCell();
-            TableCell returnCell = new TableCell();
-
-            
+            salesRow = new TableRow();
+            returnRow = new TableRow();
+            salesCell = new TableCell();
+            returnCell = new TableCell();
 
             if (Cust.SalesHeader.Count > 0)
             {
@@ -57,13 +60,15 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 salesCell.Controls.Add(salesOrderHeader);
                 salesRow.Cells.Add(salesCell);
                 this.tblSingleCustomerDetail.Rows.Add(salesRow);
+
                 Session["SingleCustomerDetailTableCell_" + CustNo.ToString()] = salesCell;
             }
 
             if (Cust.ReturnHeaders.Count > 0)
             {
                 returnOrderHeader = LoadControl(returnOrderHeaderPath);
-                ((ReturnOrderHeaderTable)returnOrderHeader).LoadHeader(Cust.ReturnHeaders);
+                ((ReturnOrderHeaderTable)returnOrderHeader).ReturnHeaderList = Cust.ReturnHeaders;
+                ((ReturnOrderHeaderTable)returnOrderHeader).CustID = CustNo;
 
                 returnCell.Width = new Unit("100%");
                 returnCell.ColumnSpan = 6;

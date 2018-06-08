@@ -10,27 +10,57 @@ namespace ExcelDesign.Forms.UserControls.TableData
 {
     public partial class SingleReturnOrderDetail : System.Web.UI.UserControl
     {
+        public ReturnHeader Rh { get; set; }
+        public int CountID { get; set; }
+        public int CustID { get; set; }
+
+        protected TableRow buttonRow = new TableRow();
+        protected TableCell createExchangeCell = new TableCell();
+        protected TableCell issueRefundCell = new TableCell();
+
+        protected Button btnCreateExchange = new Button();
+        protected Button btnIssueRefund = new Button();
+
         protected void Page_Load(object sender, EventArgs e)
+        {
+            CreateButtons();
+            LoadData();
+            PopulateLines();      
+            FormatPage();
+        }
+
+        protected void FormatPage()
         {
 
         }
 
-        public void PopulateDetail(ReturnHeader rh)
+        protected void CreateButtons()
+        {
+            btnCreateExchange.Text = "Create Exchange";
+            btnCreateExchange.ID = "btnCreateExchange" + CustID.ToString() + "_" + CountID.ToString();
+            btnCreateExchange.OnClientClick = "return false;";
+
+            btnIssueRefund.Text = "Issue Refund";
+            btnIssueRefund.ID = "btnIssueRefund" + CustID.ToString() + "_" + CountID.ToString();
+            btnIssueRefund.OnClientClick = "return false;";
+        }
+
+        protected void LoadData()
         {
             int totalReceipts = 0;
 
-            this.tcReturnStatus.Text = rh.ReturnStatus;
-            this.tcDateCreated.Text = rh.DateCreated;
-            this.tcChannelName.Text = rh.ChannelName;          
-            this.tcReturnTrackingNo.Text = rh.ReturnTrackingNo;
-            this.tcOrderDate.Text = rh.OrderDate;
+            this.tcReturnStatus.Text = Rh.ReturnStatus;
+            this.tcDateCreated.Text = Rh.DateCreated;
+            this.tcChannelName.Text = Rh.ChannelName;
+            this.tcReturnTrackingNo.Text = Rh.ReturnTrackingNo;
+            this.tcOrderDate.Text = Rh.OrderDate;
 
-            if(rh.PostedReceiveObj.Count > 0)
+            if (Rh.PostedReceiveObj.Count > 0)
             {
-                this.tcReceiptDate.Text = rh.ReceiptHeaderObj[0].ReceiptDate;
+                this.tcReceiptDate.Text = Rh.ReceiptHeaderObj[0].ReceiptDate;
             }
 
-            foreach (ReceiptHeader receiptHeader in rh.ReceiptHeaderObj)
+            foreach (ReceiptHeader receiptHeader in Rh.ReceiptHeaderObj)
             {
                 foreach (ReceiptLine receiptLine in receiptHeader.ReceiptLines)
                 {
@@ -39,19 +69,17 @@ namespace ExcelDesign.Forms.UserControls.TableData
             }
 
             this.tcReceiptsTotal.Text = totalReceipts.ToString();
-            this.tcPackagesCount.Text = rh.PostedReceiveObj.Count.ToString();
-
-            PopulateLines(rh);
+            this.tcPackagesCount.Text = Rh.PostedReceiveObj.Count.ToString();      
         }
 
-        private void PopulateLines(ReturnHeader rh)
+        private void PopulateLines()
         {
             double total = 0;
             TableRow totalRow = new TableRow();
             TableCell totalString = new TableCell();
             TableCell totalCell = new TableCell();
 
-            foreach (ReceiptHeader header in rh.ReceiptHeaderObj)
+            foreach (ReceiptHeader header in Rh.ReceiptHeaderObj)
             {
                 foreach (ReceiptLine line in header.ReceiptLines)
                 {
@@ -78,7 +106,12 @@ namespace ExcelDesign.Forms.UserControls.TableData
                     price.Text = "$      " + line.Price.ToString();
                     lineAmount.Text = "$      " + line.LineAmount.ToString();
 
-                    foreach (PostedReceive receive in rh.PostedReceiveObj)
+                    qty.HorizontalAlign = HorizontalAlign.Center;
+                    qtyReceived.HorizontalAlign = HorizontalAlign.Center;
+                    price.HorizontalAlign = HorizontalAlign.Center;
+                    lineAmount.HorizontalAlign = HorizontalAlign.Center;
+
+                    foreach (PostedReceive receive in Rh.PostedReceiveObj)
                     {
                         foreach (PostedReceiveLine receiveLine in receive.PostedReceiveLines)
                         {
@@ -132,6 +165,25 @@ namespace ExcelDesign.Forms.UserControls.TableData
             totalRow.Cells.Add(new TableCell());
 
             this.tblReturnDetailLines.Rows.Add(totalRow);
+
+            createExchangeCell.Controls.Add(btnCreateExchange);
+            issueRefundCell.Controls.Add(btnIssueRefund);
+
+            buttonRow.Cells.Add(new TableCell());
+            buttonRow.Cells.Add(new TableCell());
+            buttonRow.Cells.Add(new TableCell());
+            buttonRow.Cells.Add(new TableCell());
+            buttonRow.Cells.Add(new TableCell());
+            buttonRow.Cells.Add(new TableCell());
+            buttonRow.Cells.Add(createExchangeCell);
+            buttonRow.Cells.Add(issueRefundCell);
+
+            TableCell breakCell = new TableCell();
+            TableRow breakRow = new TableRow();
+            breakCell.Text = "<br/>";
+            breakRow.Cells.Add(breakCell);
+            this.tblReturnDetailLines.Rows.Add(breakRow);
+            this.tblReturnDetailLines.Rows.Add(buttonRow);
         }
     }
 }

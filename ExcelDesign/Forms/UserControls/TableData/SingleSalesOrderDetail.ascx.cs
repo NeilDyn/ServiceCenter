@@ -10,7 +10,6 @@ namespace ExcelDesign.Forms.UserControls.TableData
 {
     public partial class SingleSalesOrderDetail : System.Web.UI.UserControl
     {
-        protected SalesHeader detailHeader;
         public SalesHeader Sh { get; set; }
         public int CountID { get; set; }
         public int CustID { get; set; }
@@ -26,10 +25,9 @@ namespace ExcelDesign.Forms.UserControls.TableData
         protected Button btnCreateReturn = new Button();
         protected Button btnIssueRefund = new Button();
 
-        protected override void OnInit(EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            base.OnInit(e);
-
+            CreateButtons();
             PopulateDetail();
 
             if (Session["SingleSalesOrderDetailTable_" + CustID.ToString()] == null)
@@ -37,16 +35,16 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 Session["SingleSalesOrderDetailTable_" + CustID.ToString()] = this.tblSingleSalesOrderDetail;
             }
 
-            PopulateLines(Sh);
-            CreateButtons(CountID);
+            PopulateLines();
+            FormatPage();
         }
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected void FormatPage()
         {
-            
+
         }
 
-        public void PopulateDetail()
+        protected void PopulateDetail()
         {
             int totalShipments = 0;
             int totalTrackingNos = 0;
@@ -60,8 +58,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
             if (Sh.ShipmentHeaderObject.Count > 0)
             {
                 this.tcShipmentDate.Text = Sh.ShipmentHeaderObject[0].ShippingDate;
-                shipmentMethod = Sh.ShipmentHeaderObject[0].ShippingAgentService;
-                shipmentMethod += " " + Sh.ShipmentHeaderObject[0].ShippingAgentCode;
+                shipmentMethod = Sh.ShipmentHeaderObject[0].ShippingAgentCode;
+                shipmentMethod += " " + Sh.ShipmentHeaderObject[0].ShippingAgentService;
             }
 
             foreach (ShipmentHeader shipmentHeader in Sh.ShipmentHeaderObject)
@@ -74,6 +72,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             this.tcShipmentsTotal.Text = totalShipments.ToString();
             this.tcPackagesCount.Text = Sh.PostedPackageObject.Count.ToString();
+            this.tcShipMethod.Text = shipmentMethod;
 
 
             totalTrackingNos = Sh.PostedPackageObject.Count;
@@ -95,57 +94,33 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcDaysRemaining.Text = Sh.WarrantyProp.DaysRemaining;                  
         }
 
-        public void CreateButtons(int countID)
+        public void CreateButtons()
         {           
             btnCancelOrder.Text = "Cancel Order";
-            btnCancelOrder.ID = "btnCancelOrder_" + countID.ToString();
-            btnCancelOrder.Click += new EventHandler(CancelOrder);
+            btnCancelOrder.ID = "btnCancelOrder_" + CustID.ToString() + "_" + CountID.ToString();
+            btnCancelOrder.OnClientClick = "return false;";
 
             btnPartRequest.Text = "Part Request";
-            btnPartRequest.ID= "btnPartRequest_" + countID.ToString();
-            btnPartRequest.Click += new EventHandler(PartRequest);
+            btnPartRequest.ID= "btnPartRequest_" + CustID.ToString() + "_" + CountID.ToString();
+            btnPartRequest.OnClientClick = "return false;";
 
             btnCreateReturn.Text = "Create Return";
-            btnCreateReturn.ID = "btnCreateReturn_" + countID.ToString();
-            btnCreateReturn.Click += new EventHandler(CreateReturn);
+            btnCreateReturn.ID = "btnCreateReturn_" + CustID.ToString() + "_" + CountID.ToString();
+            btnCreateReturn.OnClientClick = "return false;";
 
             btnIssueRefund.Text = "Issue Refund";
-            btnIssueRefund.ID = "btnIssueRefund_" + countID.ToString();
-            btnIssueRefund.Click += new EventHandler(IssueRefund);          
+            btnIssueRefund.ID = "btnIssueRefund_" + CustID.ToString() + "_" + CountID.ToString();
+            btnIssueRefund.OnClientClick = "return false;";
         }
 
-        protected void CancelOrder(object sender, EventArgs e)
-        {
-            Button btn = sender as Button;
-            var page = HttpContext.Current.CurrentHandler as Page;
-            page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + btn.ID.ToString() + "': CANCEL THIS ORDER!);", true);
-        }
-
-        protected void PartRequest(object sender, EventArgs e)
-        {
-            var page = HttpContext.Current.CurrentHandler as Page;
-            page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert(PARTIAL THIS ORDER!);", true);
-        }
-
-        protected void CreateReturn(object sender, EventArgs e)
-        {
-            var page = HttpContext.Current.CurrentHandler as Page;
-            page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert(CREATE A RETURN FOR THIS ORDER!);", true);
-        }
-
-        protected void IssueRefund(object sender, EventArgs e)
-        {
-            this.tblOrderDetailLines.Caption = "ISSUE REFUND CLICKED!";
-        }
-
-        private void PopulateLines(SalesHeader sh)
+        private void PopulateLines()
         {
             double total = 0;
             TableRow totalRow = new TableRow();
             TableCell totalString = new TableCell();
             TableCell totalCell = new TableCell();
 
-            foreach (ShipmentHeader header in sh.ShipmentHeaderObject)
+            foreach (ShipmentHeader header in Sh.ShipmentHeaderObject)
             {
                 foreach (ShipmentLine line in header.ShipmentLines)
                 {
@@ -172,7 +147,12 @@ namespace ExcelDesign.Forms.UserControls.TableData
                     price.Text = "$      " + line.Price.ToString();
                     lineAmount.Text = "$      " + line.LineAmount.ToString();
 
-                    foreach (PostedPackage package in sh.PostedPackageObject)
+                    qty.HorizontalAlign = HorizontalAlign.Center;
+                    qtyShipped.HorizontalAlign = HorizontalAlign.Center;
+                    price.HorizontalAlign = HorizontalAlign.Center;
+                    lineAmount.HorizontalAlign = HorizontalAlign.Center;
+
+                    foreach (PostedPackage package in Sh.PostedPackageObject)
                     {
                         foreach (PostedPackageLine packageLine in package.PostedPackageLines)
                         {
@@ -232,6 +212,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             createReturnCell.Controls.Add(btnCreateReturn);
             issueRefundcell.Controls.Add(btnIssueRefund);
 
+            buttonRow.Cells.Add(new TableCell());
             buttonRow.Cells.Add(new TableCell());
             buttonRow.Cells.Add(new TableCell());
             buttonRow.Cells.Add(new TableCell());

@@ -1,6 +1,14 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SingleSalesOrderDetail.ascx.cs" Inherits="ExcelDesign.Forms.UserControls.TableData.SingleSalesOrderDetail" %>
 
 <link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("[id$=btnCancelOrder_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+            alert("Hi, order can be cancelled.");
+        });
+    });
+</script>
 
 <asp:Table ID="tblSingleSalesOrderDetail" runat="server" Height="100%" Width="100%">
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">

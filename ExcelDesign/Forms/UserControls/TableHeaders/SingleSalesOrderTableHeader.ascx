@@ -27,7 +27,4 @@
         <asp:TableHeaderCell Font-Bold="true" Text="External Document No:" HorizontalAlign="Right" style="text-align:right"/>
         <asp:TableHeaderCell runat="server" ID="thcExternalDocumentNo" HorizontalAlign="Right" style="text-align:left"/>
     </asp:TableHeaderRow>
-    <asp:TableRow runat="server" ID="singleSalesOrderDetail" TableSection="TableBody">
-
-    </asp:TableRow>
 </asp:Table>

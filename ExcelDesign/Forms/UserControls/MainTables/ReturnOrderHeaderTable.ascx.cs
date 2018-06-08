@@ -12,31 +12,41 @@ namespace ExcelDesign.Forms.UserControls.MainTables
     public partial class ReturnOrderHeaderTable : System.Web.UI.UserControl
     {
         protected Control singleReturnOrderHeader;
+        public List<ReturnHeader> ReturnHeaderList { get; set; }
+        public int CustID { get; set; }
+
+        private TableRow tr;
+        private TableCell tc;
 
         protected const string singleReturnOrderHeaderPath = "../TableHeaders/SingleReturnOrderTableHeader.ascx";
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.thcTotalReturns.Text = ReturnHeaderList.Count.ToString();
+            this.btnExpandReturn.ID = "btnExpandReturn_" + CustID.ToString();
 
+            PopulateData();
         }
 
-        public void LoadHeader(List<ReturnHeader> returnHeaderList)
+        protected void PopulateData()
         {
-            this.thcTotalReturns.Text = returnHeaderList.Count.ToString();
-
             int returnCount = 1;
-            foreach (ReturnHeader returnHeader in returnHeaderList)
+            foreach (ReturnHeader returnHeader in ReturnHeaderList)
             {
-                TableRow tr = new TableRow();
-                TableCell tc = new TableCell();
+                tr = new TableRow();
+                tc = new TableCell();
                 singleReturnOrderHeader = LoadControl(singleReturnOrderHeaderPath);
                 singleReturnOrderHeader.ID = "singleSalesReturnHeader_" + returnCount.ToString();
-                ((SingleReturnOrderTableHeader)singleReturnOrderHeader).PopulateHeader(returnHeader, returnCount);
+
+                ((SingleReturnOrderTableHeader)singleReturnOrderHeader).Header = returnHeader;
+                ((SingleReturnOrderTableHeader)singleReturnOrderHeader).HeadCount = returnCount;
+                ((SingleReturnOrderTableHeader)singleReturnOrderHeader).CustID = CustID;
 
                 tc.Height = new Unit("100%");
                 tc.ColumnSpan = 7;
                 tc.Controls.Add(singleReturnOrderHeader);
                 tr.Cells.Add(tc);
+                tr.ID = "salesReturnDetailHeader_" + CustID.ToString();
                 this.tblReturnOrderHeader.Rows.Add(tr);
                 returnCount++;
             }

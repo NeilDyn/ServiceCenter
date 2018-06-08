@@ -31,13 +31,13 @@ namespace ExcelDesign.Forms.UserControls.MainTables {
         protected global::System.Web.UI.WebControls.TableHeaderCell ExpandCurrentCustomer;
         
         /// <summary>
-        /// btnExpandCurrentCustomer control.
+        /// btnExpandReturn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExpandCurrentCustomer;
+        protected global::System.Web.UI.WebControls.Button btnExpandReturn;
         
         /// <summary>
         /// thcTotalReturns control.

@@ -13,30 +13,41 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
     {
         protected Control singleReturnOrderDetailTable;
 
+        public ReturnHeader Header { get; set; }
+        public int HeadCount { get; set; }
+        public int CustID { get; set; }
+
+        private TableRow tr;
+        private TableCell tc;
+
         protected const string singleReturnOrderDetailPath = "../TableData/SingleReturnOrderDetail.ascx";
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.ReturnOrderSequence.Text = "Return " + HeadCount.ToString();
+            this.thcRMANo.Text = Header.RMANo;
+            this.thcExternalDocumentNo.Text = Header.ExternalDocumentNo;
 
+            this.btnExpandCurrentReturn.ID = "btnExpandCurrentReturn_" + CustID.ToString() + "_" + HeadCount.ToString();
+            PopulateData();
         }
 
-        public void PopulateHeader(ReturnHeader rh, int headCount)
+        protected void PopulateData()
         {
-            TableCell tc = new TableCell();
-            TableRow tr = new TableRow();
-
-            this.ReturnOrderSequence.Text = "Return " + headCount.ToString();
-            this.thcRMANo.Text = rh.RMANo;
-            this.thcExternalDocumentNo.Text = rh.ExternalDocumentNo;
-
+            tc = new TableCell();
+            tr = new TableRow();
+        
             singleReturnOrderDetailTable = LoadControl(singleReturnOrderDetailPath);
-            singleReturnOrderDetailTable.ID = "singleReturnOrderDetailTable_" + headCount.ToString();
-            ((SingleReturnOrderDetail)singleReturnOrderDetailTable).PopulateDetail(rh);
+            singleReturnOrderDetailTable.ID = "singleReturnOrderDetailTable_" + HeadCount.ToString();
+            ((SingleReturnOrderDetail)singleReturnOrderDetailTable).Rh = Header;
+            ((SingleReturnOrderDetail)singleReturnOrderDetailTable).CountID = HeadCount;
+            ((SingleReturnOrderDetail)singleReturnOrderDetailTable).CustID = CustID;
 
             tc.Height = new Unit("100%");
             tc.ColumnSpan = 4;
             tc.Controls.Add(singleReturnOrderDetailTable);
             tr.Cells.Add(tc);
+            tr.ID = "singleReturnOrderDetail_" + CustID.ToString() + "_" + HeadCount.ToString();
             this.tblSingleReturnOrderTableHeader.Rows.Add(tr);
         }
     }

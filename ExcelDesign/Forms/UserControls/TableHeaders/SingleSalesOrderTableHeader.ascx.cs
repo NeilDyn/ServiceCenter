@@ -17,6 +17,9 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
 
         public int CustID { get; set; }
 
+        private TableRow tr;
+        private TableCell tc;
+
         protected const string singleSalesOrderDetailPath = "../TableData/SingleSalesOrderDetail.ascx";
 
         protected void Page_Load(object sender, EventArgs e)
@@ -24,7 +27,6 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             this.SalesOrderSequence.Text = "Order " + HeadCount.ToString();
             this.thcExternalDocumentNo.Text = Header.ExternalDocumentNo;
 
-            this.singleSalesOrderDetail.ID = "singleSalesOrderDetail_" + CustID.ToString() + "_" + HeadCount.ToString();
             this.btnExpandCurrentOrder.ID = "btnExpandCurrentOrder_" + CustID.ToString() + "_" + HeadCount.ToString();
 
             if (Session["SingleSalesOrderTableHeader_" + CustID.ToString()] == null)
@@ -35,10 +37,10 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
         }
 
         public void PopulateHeader()
-        {          
-            TableCell tc = new TableCell();
- 
-         
+        {
+            tr = new TableRow();
+            tc = new TableCell();
+            
             singleSalesOrderDetailTable = LoadControl(singleSalesOrderDetailPath);
             singleSalesOrderDetailTable.ID = "singleSalesOrderDetailTable_" + HeadCount.ToString();
            
@@ -48,14 +50,12 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             ((SingleSalesOrderDetail)singleSalesOrderDetailTable).Sh = Header;
             ((SingleSalesOrderDetail)singleSalesOrderDetailTable).CountID = HeadCount;
             ((SingleSalesOrderDetail)singleSalesOrderDetailTable).CustID = CustID;
+      
+            tr.Cells.Add(tc);
+            tr.ID = "singleSalesOrderDetail_" + CustID.ToString() + "_" + HeadCount.ToString();
 
-            this.singleSalesOrderDetail.Cells.Add(tc);
+            this.tblSingleSalesOrderTableHeader.Rows.Add(tr);
             Session["SingleSalesOrderTableHeaderDetailCell_CustID" + CustID.ToString() + "_" + HeadCount.ToString()] = tc;
-        }
-
-        protected void btnExpandCurrentCustomer_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

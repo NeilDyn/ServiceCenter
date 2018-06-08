@@ -8,7 +8,7 @@
         <asp:TableCell Text="Return Status:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcReturnStatus" />
     </asp:TableRow>
-        <asp:TableRow>
+    <asp:TableRow>
         <asp:TableCell>
             <br />
         </asp:TableCell>

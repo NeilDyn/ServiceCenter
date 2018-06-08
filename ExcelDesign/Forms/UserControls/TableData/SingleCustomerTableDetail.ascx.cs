@@ -71,7 +71,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 ((ReturnOrderHeaderTable)returnOrderHeader).CustID = CustNo;
 
                 returnCell.Width = new Unit("100%");
-                returnCell.ColumnSpan = 6;
+                returnCell.ColumnSpan = 8;
                 returnCell.Controls.Add(returnOrderHeader);
                 returnRow.Cells.Add(returnCell);
                 this.tblSingleCustomerDetail.Rows.Add(returnRow);

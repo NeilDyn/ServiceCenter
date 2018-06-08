@@ -99,7 +99,9 @@
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnDetailHeader.ascx" />
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnHeader.ascx" />
     <Content Include="Forms\UserControls\SingleControls\MultipleCustomers.ascx" />
-    <Content Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderDataLine.ascx" />
+    <Content Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderPackages.ascx" />
+    <Content Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderShipments.ascx" />
+    <Content Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderTrackingNos.ascx" />
     <Content Include="Forms\UserControls\TableData\SingleCustomerTableDetail.ascx" />
     <Content Include="Forms\UserControls\TableData\SingleReturnOrderDetail.ascx" />
     <Content Include="Forms\UserControls\TableHeaders\SingleReturnOrderTableHeader.ascx" />
@@ -234,12 +236,26 @@
     <Compile Include="Forms\UserControls\SingleControls\MultipleCustomers.ascx.designer.cs">
       <DependentUpon>MultipleCustomers.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderDataLine.ascx.cs">
-      <DependentUpon>SingleSalesOrderDataLine.ascx</DependentUpon>
+    <Compile Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderPackages.ascx.cs">
+      <DependentUpon>SingleSalesOrderPackages.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderDataLine.ascx.designer.cs">
-      <DependentUpon>SingleSalesOrderDataLine.ascx</DependentUpon>
+    <Compile Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderPackages.ascx.designer.cs">
+      <DependentUpon>SingleSalesOrderPackages.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderShipments.ascx.cs">
+      <DependentUpon>SingleSalesOrderShipments.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderShipments.ascx.designer.cs">
+      <DependentUpon>SingleSalesOrderShipments.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderTrackingNos.ascx.cs">
+      <DependentUpon>SingleSalesOrderTrackingNos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderTrackingNos.ascx.designer.cs">
+      <DependentUpon>SingleSalesOrderTrackingNos.ascx</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserControls\TableData\SingleCustomerTableDetail.ascx.cs">
       <DependentUpon>SingleCustomerTableDetail.ascx</DependentUpon>

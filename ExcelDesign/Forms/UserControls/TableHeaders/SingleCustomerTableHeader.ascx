@@ -29,6 +29,11 @@
         <asp:TableHeaderCell runat="server" ID="thcCustomerName" HorizontalAlign="Left" style="text-align:left"/>
         <asp:TableHeaderCell HorizontalAlign="Right" />
     </asp:TableHeaderRow>
+    <%--<asp:TableFooterRow>
+        <asp:TableCell ColumnSpan ="5">
+            <hr class="Seperator"/>
+        </asp:TableCell>
+    </asp:TableFooterRow>--%>
 </asp:Table>
 
 

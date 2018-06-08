@@ -1,13 +1,50 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SingleSalesOrderDetail.ascx.cs" Inherits="ExcelDesign.Forms.UserControls.TableData.SingleSalesOrderDetail" %>
+<%@ Register Src="~/Forms/UserControls/TableData/DataLines/SingleSalesOrderShipments.ascx" TagName="SingleSalesOrderShipments" TagPrefix="ssos"%>
+<%@ Register Src="~/Forms/UserControls/TableData/DataLines/SingleSalesOrderPackages.ascx" TagName="SingleSalesOrderPackages" TagPrefix="ssop"%>
+<%@ Register Src="~/Forms/UserControls/TableData/DataLines/SingleSalesOrderTrackingNos.ascx" TagName="SingleSalesOrderTrackingNos" TagPrefix="ssotn" %>
 
 <link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        $("[id$=expandShipments_<%= this.CustID %>_<%= this.CountID %>]").hide();   
+        $("[id$=expandSerialNos_<%= this.CustID %>_<%= this.CountID %>]").hide();
+        $("[id$=expandPackages_<%= this.CustID %>_<%= this.CountID %>]").hide();
+
+        <%--var lineArray = new Array();
+        lineArray = <%=this.lineNumbers%>;
+
+        for (var i = 0; i < lineArray.length; i++) {
+            if (lineArray[i] > 1) {
+                for (var l = 0; l < lineArray[i]; l++) {
+                    $("[id$=showMoreSerialLine_<%= this.CustID %>_<%= this.CountID %>]_" + lineArray[i] + "_" + l).hide();
+                }
+            }
+            
+        }--%>
+        
         $("[id$=btnCancelOrder_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
             alert("Hi, order can be cancelled.");
         });
     });
+
+    function expandShipments<%=this.CustID %><%= this.CountID %>() {
+            $("[id$=expandShipments_<%= this.CustID %>_<%= this.CountID %>]").toggle();
+    };
+
+    function expandSerialNos<%=this.CustID %><%= this.CountID %>() {
+            $("[id$=expandSerialNos_<%= this.CustID %>_<%= this.CountID %>]").toggle();
+    };
+
+    function expandPackages<%=this.CustID %><%= this.CountID %>() {
+            $("[id$=expandPackages_<%= this.CustID %>_<%= this.CountID %>]").toggle();
+    };
+
+    <%--function showMoreLines(lineNo) {
+        var singleArray = new Array();
+        var singleArray = <%=this.lineNumbers%>;
+        var line = singleArray[lineNo];
+    }--%>
 </script>
 
 <asp:Table ID="tblSingleSalesOrderDetail" runat="server" Height="100%" Width="100%">
@@ -40,6 +77,9 @@
         <asp:TableCell runat="server" ID="tcStatus" />
         <asp:TableCell />
     </asp:TableRow>
+    <asp:TableRow runat="server" ID="expandShipments" TableSection="TableBody" HorizontalAlign="Justify">
+        <asp:TableCell><br /></asp:TableCell>
+    </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
         <asp:TableCell Text="Channel Name:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
@@ -49,6 +89,9 @@
         <asp:TableCell Text="Policy:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcPolicy" />
         <asp:TableCell />
+    </asp:TableRow>
+    <asp:TableRow runat="server" ID="expandPackages" TableSection="TableBody" HorizontalAlign="Justify">
+        <asp:TableCell><br /></asp:TableCell>
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
@@ -66,6 +109,9 @@
         <asp:TableCell runat="server" ID="tcZendeskTickets" />
         <asp:TableCell Text="Tracking #:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcTrackingNo" />
+    </asp:TableRow>
+    <asp:TableRow runat="server" ID="expandSerialNos" TableSection="TableBody" HorizontalAlign="Justify">
+        <asp:TableCell><br /></asp:TableCell>
     </asp:TableRow>
     <asp:TableRow>
         <asp:TableCell />

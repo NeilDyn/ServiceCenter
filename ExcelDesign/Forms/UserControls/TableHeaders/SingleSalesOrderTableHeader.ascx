@@ -9,9 +9,11 @@
 
         $("[id$=btnExpandCurrentOrder_<%= this.CustID %>_<%= this.HeadCount %>]").click(function () {
             $("[id$=singleSalesOrderDetail_<%= this.CustID %>_<%= this.HeadCount %>]").toggle();
+
             if ($("[id$=btnExpandCurrentOrder_<%= this.CustID %>_<%= this.HeadCount %>]").val() == "+") {
                 $("[id$=btnExpandCurrentOrder_<%= this.CustID %>_<%= this.HeadCount %>]").val("-");
-            } else {
+            }
+            else {
                 $("[id$=btnExpandCurrentOrder_<%= this.CustID %>_<%= this.HeadCount %>]").val("+");
             }
         });
@@ -27,4 +29,9 @@
         <asp:TableHeaderCell Font-Bold="true" Text="External Document No:" HorizontalAlign="Right" style="text-align:right"/>
         <asp:TableHeaderCell runat="server" ID="thcExternalDocumentNo" HorizontalAlign="Right" style="text-align:left"/>
     </asp:TableHeaderRow>
+    <%--<asp:TableFooterRow>
+        <asp:TableCell ColumnSpan ="4">
+            <hr class="Seperator"/>
+        </asp:TableCell>
+    </asp:TableFooterRow>--%>
 </asp:Table>

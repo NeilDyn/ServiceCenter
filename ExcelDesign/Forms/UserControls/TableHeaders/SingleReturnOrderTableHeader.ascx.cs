@@ -44,7 +44,7 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             ((SingleReturnOrderDetail)singleReturnOrderDetailTable).CustID = CustID;
 
             tc.Height = new Unit("100%");
-            tc.ColumnSpan = 4;
+            tc.ColumnSpan = 6;
             tc.Controls.Add(singleReturnOrderDetailTable);
             tr.Cells.Add(tc);
             tr.ID = "singleReturnOrderDetail_" + CustID.ToString() + "_" + HeadCount.ToString();

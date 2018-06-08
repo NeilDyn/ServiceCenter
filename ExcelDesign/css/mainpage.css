@@ -30,6 +30,13 @@
     background-color: #333; /* Modern Browsers */
 }
 
+.Seperator {
+    height: 3px;
+    /* Set the hr color */
+    color: #001d5a; /* old IE */
+    background-color: #001d5a; /* Modern Browsers */
+}
+
 .TableHeaderLine {
     height: 2px;
     /* Set the hr color */
@@ -224,4 +231,9 @@
     overflow: hidden;
     display: inline;
     float: right;
+}
+
+.TotalLine {
+    border-collapse: collapse;
+    border-top: 2px solid black;
 }

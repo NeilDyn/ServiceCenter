@@ -76,6 +76,15 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         protected global::System.Web.UI.WebControls.TableCell tcStatus;
         
         /// <summary>
+        /// expandShipments control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableRow expandShipments;
+        
+        /// <summary>
         /// tcChannelName control.
         /// </summary>
         /// <remarks>
@@ -101,6 +110,15 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableCell tcPolicy;
+        
+        /// <summary>
+        /// expandPackages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableRow expandPackages;
         
         /// <summary>
         /// tcZendeskTicketNo control.
@@ -146,6 +164,15 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableCell tcTrackingNo;
+        
+        /// <summary>
+        /// expandSerialNos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableRow expandSerialNos;
         
         /// <summary>
         /// tblOrderDetailLines control.

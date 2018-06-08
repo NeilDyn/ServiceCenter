@@ -29,4 +29,9 @@
         <asp:TableHeaderCell Font-Bold="true" Text="External Document No:" HorizontalAlign="Right" Style="text-align: right" />
         <asp:TableHeaderCell runat="server" ID="thcExternalDocumentNo" HorizontalAlign="Right" Style="text-align: left" />
     </asp:TableHeaderRow>
+    <%--<asp:TableFooterRow>
+        <asp:TableCell ColumnSpan ="6">
+            <hr class="Seperator"/>
+        </asp:TableCell>
+    </asp:TableFooterRow>--%>
 </asp:Table>

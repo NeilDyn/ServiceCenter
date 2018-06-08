@@ -41,11 +41,19 @@
           <element minOccurs="1" maxOccurs="1" name="DateCreated" type="string" />
         </sequence>
       </complexType>
+      <complexType name="Warranty3" mixed="true">
+        <sequence>
+          <element minOccurs="0" maxOccurs="unbounded" name="Status3" type="string" />
+          <element minOccurs="0" maxOccurs="unbounded" name="Policy3" type="string" />
+          <element minOccurs="0" maxOccurs="unbounded" name="DaysRemaining3" type="string" />
+        </sequence>
+      </complexType>
       <complexType name="SalesShipmentHeader">
         <sequence>
           <element minOccurs="1" maxOccurs="1" name="No" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ExtDocNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShippingDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="OrderDate" type="string" />
           <element minOccurs="1" maxOccurs="1" name="OrderNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
@@ -57,6 +65,7 @@
           <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShippingAgentCode" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShippingAgentService" type="string" />
+          <element minOccurs="0" maxOccurs="unbounded" name="Warranty3" type="tns:Warranty3" />
         </sequence>
       </complexType>
       <complexType name="SalesShipmentLine">
@@ -129,7 +138,9 @@
           <element minOccurs="1" maxOccurs="1" name="No" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ExtDocNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ReceiveDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="OrderDate" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ReturnOrderNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="SellToCustomerName" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToAddress2" type="string" />

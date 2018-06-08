@@ -414,6 +414,8 @@ namespace ExcelDesign.Class_Objects
                         }
                     }
                 }
+                if (returnHead.Count > 0)
+                return returnHead;
             }
 
             if (currResults.SalesHeader != null)
@@ -478,6 +480,8 @@ namespace ExcelDesign.Class_Objects
                         }
                     }
                 }
+                if (returnHead.Count > 0)
+                return returnHead;
             }
 
             if (currResults.ReturnReceiptHeader != null)
@@ -487,9 +491,9 @@ namespace ExcelDesign.Class_Objects
                   
                         if (currResults.ReturnReceiptHeader[so].ShipToName == custName)
                         {
-                            rmaNo = currResults.ReturnReceiptHeader[so].No;
+                            rmaNo = currResults.ReturnReceiptHeader[so].ReturnOrderNo;
                             receiptHeader = ReturnReceiptHeader(rmaNo);
-                            //channelName = currResults.ReturnReceiptHeader[so].SellToCustomerName;
+                            channelName = currResults.ReturnReceiptHeader[so].SellToCustomerName;
                             postedReceive = ReturnPostedReceive(rmaNo);
                             //returnTrackingNo = currResults.ReturnReceiptHeader[so].ReturnTrackingNo;
                             orderDate = currResults.ReturnReceiptHeader[so].ReceiveDate;
@@ -588,6 +592,8 @@ namespace ExcelDesign.Class_Objects
                         }
                     }
                 }
+                if (salesHead.Count > 0)
+                    return salesHead;
             }
 
             if (currResults.SalesHeader != null)
@@ -655,6 +661,8 @@ namespace ExcelDesign.Class_Objects
                         }
                     }
                 }
+                if (salesHead.Count > 0)
+                    return salesHead;
             }
             if (currResults.SalesShipmentHeader != null)
             {
@@ -663,17 +671,17 @@ namespace ExcelDesign.Class_Objects
 
                     if (currResults.SalesShipmentHeader[so].ShipToName == custName)
                     {
-                        orderDate = currResults.SalesShipmentHeader[so].ShippingDate;
+                        orderDate = currResults.SalesShipmentHeader[so].OrderDate;
                         orderNo = currResults.SalesShipmentHeader[so].OrderNo;
                         channelName = currResults.SalesShipmentHeader[so].ShipToName;
                         externalDocumentNo = currResults.SalesShipmentHeader[so].ExtDocNo;
                         shipHeader = ReturnShipmentHeader(orderNo);
                         postPackage = ReturnPostedPackage(orderNo);
 
-                        //status = currResults.SalesHeader[so].Warranty2[0].Status2[0];
-                        //policy = currResults.SalesHeader[so].Warranty2[0].Policy2[0]; ;
-                        //daysRemaining = currResults.SalesHeader[so].Warranty2[0].DaysRemaining2[0];
-                        //warranty = new Warranty(status, policy, daysRemaining);
+                        status = currResults.SalesShipmentHeader[so].Warranty3[0].Status3[0];
+                        policy = currResults.SalesShipmentHeader[so].Warranty3[0].Policy3[0]; ;
+                        daysRemaining = currResults.SalesShipmentHeader[so].Warranty3[0].DaysRemaining3[0];
+                        warranty = new Warranty(status, policy, daysRemaining);
 
                         orderStatus = "Shipped";
 

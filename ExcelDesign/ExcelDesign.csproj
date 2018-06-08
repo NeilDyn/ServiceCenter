@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\mainpage.css" />
+    <Content Include="Default.aspx" />
     <Content Include="Forms\ErrorForm.aspx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetail.ascx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetailHeader.ascx" />
@@ -128,6 +129,13 @@
     <Compile Include="Class Objects\Warranty.cs" />
     <Compile Include="Class Objects\WebService.cs" />
     <Compile Include="Class Objects\Zendesk.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ErrorForm.aspx.cs">
       <DependentUpon>ErrorForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

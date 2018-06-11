@@ -7,14 +7,14 @@ namespace ExcelDesign.Class_Objects
 {
     public class SalesHeader
     {
-        private string orderStatus;
-        private string orderDate;
-        private string salesOrderNo;
-        private string channelName;
-        private List<ShipmentHeader> shipmentHeaderObject;
-        private List<PostedPackage> postedPackageObject;
-        private string externalDocumentNo;
-        private Warranty _warranty;
+        public string ExternalDocumentNo { get; set; }
+        public List<PostedPackage> PostedPackageObject { get; set; }
+        public List<ShipmentHeader> ShipmentHeaderObject { get; set; }
+        public Warranty WarrantyProp { get; set; }
+        public string ChannelName { get; set; }
+        public string SalesOrderNo { get; set; }
+        public string OrderDate { get; set; }
+        public string OrderStatus { get; set; }
 
         public SalesHeader()
         {
@@ -33,71 +33,5 @@ namespace ExcelDesign.Class_Objects
             this.ExternalDocumentNo = externalDocumentNoP;
             this.WarrantyProp = _warrantyP;
         }
-
-        public string ExternalDocumentNo
-        {
-            get { return externalDocumentNo; }
-            set { externalDocumentNo = value; }
-        }
-
-        public List<PostedPackage> PostedPackageObject
-        {
-            get { return postedPackageObject; }
-            set { postedPackageObject = value; }
-        }
-
-        public List<ShipmentHeader> ShipmentHeaderObject
-        {
-            get { return shipmentHeaderObject; }
-            set { shipmentHeaderObject = value; }
-        }
-       
-        public Warranty WarrantyProp
-        {
-            get { return _warranty; }
-            set { _warranty = value; }
-        }
-
-        //public List<PostedPackage> PostedPackageObject
-        //{
-        //    get { return postedPackageObject; }
-        //    set { postedPackageObject = value; }
-        //}
-        
-
-        //public List<ShipmentHeader> ShipmentHeaderObject
-        //{
-        //    get { return shipmentHeaderObject; }
-        //    set { shipmentHeaderObject = value; }
-        //}      
-        
-
-        public string ChannelName
-        {
-            get { return channelName; }
-            set { channelName = value; }
-        }
-        
-
-        public string SalesOrderNo
-        {
-            get { return salesOrderNo; }
-            set { salesOrderNo = value; }
-        }
-        
-
-        public string OrderDate
-        {
-            get { return orderDate; }
-            set { orderDate = value; }
-        }
-        
-
-        public string OrderStatus
-        {
-            get { return orderStatus; }
-            set { orderStatus = value; }
-        }
-        
     }
 }

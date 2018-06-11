@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExcelDesign.Forms.UserControls.TableData.DataLines {
+namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines {
     
     
     public partial class SingleSalesOrderShipments {

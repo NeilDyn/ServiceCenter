@@ -1,8 +1,8 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SingleSalesOrderTrackingNos.ascx.cs" Inherits="ExcelDesign.Forms.UserControls.TableData.DataLines.SingleSalesOrderTrackingNos" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SingleSalesOrderPackages.ascx.cs" Inherits="ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines.SingleSalesOrderPackages" %>
 
-<link href="../../../../css/mainpage.css" rel="stylesheet" type="text/css" />
+<link href="../../../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 
-<asp:Table ID="tblPackageLines" runat="server" Height="100%" Width="100%">
+<asp:Table ID="tblSalesPackageLines" runat="server" Height="100%" Width="100%">
     <asp:TableHeaderRow>
         <asp:TableHeaderCell Text="Package No." />
         <asp:TableHeaderCell Text="Package Date" />

@@ -1,11 +1,11 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SingleSalesOrderPackages.ascx.cs" Inherits="ExcelDesign.Forms.UserControls.TableData.DataLines.SingleSalesOrderPackages" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SingleReturnOrderPackages.ascx.cs" Inherits="ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines.SingleReturnOrderPackages" %>
 
-<link href="../../../../css/mainpage.css" rel="stylesheet" type="text/css" />
+<link href="../../../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 
-<asp:Table ID="tblPackageLines" runat="server" Height="100%" Width="100%">
+<asp:Table ID="tblReturnPackageLines" runat="server" Height="100%" Width="100%">
     <asp:TableHeaderRow>
-        <asp:TableHeaderCell Text="Package No." />
-        <asp:TableHeaderCell Text="Package Date" />
+        <asp:TableHeaderCell Text="Receive No." />
+        <asp:TableHeaderCell Text="Receive Date" />
         <asp:TableHeaderCell Text="Item" />
         <asp:TableHeaderCell Text="Description" />
         <asp:TableHeaderCell Text="Qty" />

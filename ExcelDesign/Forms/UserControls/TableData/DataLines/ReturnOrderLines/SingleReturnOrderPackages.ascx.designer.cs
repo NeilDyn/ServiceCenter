@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExcelDesign.Forms.UserControls.TableData.DataLines {
+namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines {
     
     
-    public partial class SingleSalesOrderPackages {
+    public partial class SingleReturnOrderPackages {
         
         /// <summary>
-        /// tblPackageLines control.
+        /// tblReturnPackageLines control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblPackageLines;
+        protected global::System.Web.UI.WebControls.Table tblReturnPackageLines;
     }
 }

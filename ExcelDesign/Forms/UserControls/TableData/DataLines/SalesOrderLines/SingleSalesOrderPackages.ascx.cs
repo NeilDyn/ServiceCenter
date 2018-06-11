@@ -1,16 +1,18 @@
-﻿using ExcelDesign.Class_Objects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ExcelDesign.Class_Objects;
+using ExcelDesign.Class_Objects.Enums;
 
-namespace ExcelDesign.Forms.UserControls.TableData.DataLines
+namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
 {
-    public partial class SingleSalesOrderTrackingNos : System.Web.UI.UserControl
+    public partial class SingleSalesOrderPackages : System.Web.UI.UserControl
     {
         public List<PostedPackage> PostedPackage { get; set; }
+
         protected string shipMethod;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -20,6 +22,8 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines
 
         public void PopulateData()
         {
+            TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
+
             foreach (PostedPackage postedPack in PostedPackage)
             {
                 foreach (PostedPackageLine postPackLine in postedPack.PostedPackageLines)
@@ -36,7 +40,7 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines
                     TableCell trackingNo = new TableCell();
 
                     shipMethod = postedPack.ShippingAgent;
-                    shipMethod += postedPack.ShippingAgentService;
+                    shipMethod += " " + postedPack.ShippingAgentService;
 
                     packNo.Text = postPackLine.PackageNo;
                     packDate.Text = postedPack.PackingDate;
@@ -45,7 +49,10 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines
                     qty.Text = postPackLine.Quantity.ToString();
                     serialNo.Text = postPackLine.SerialNo;
                     carrier.Text = shipMethod;
-                    trackingNo.Text = postedPack.TrackingNo;
+
+                    string trackNo = postedPack.TrackingNo;
+                    Enum.TryParse(postedPack.ShippingAgent, out trackType);
+                    trackingNo.Text = SetTrackingNo(trackType, trackNo);
 
                     qty.HorizontalAlign = HorizontalAlign.Center;
 
@@ -58,9 +65,38 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines
                     tr.Cells.Add(carrier);
                     tr.Cells.Add(trackingNo);
 
-                    this.tblPackageLines.Rows.Add(tr);
+                    this.tblSalesPackageLines.Rows.Add(tr);
                 }
             }
+        }
+
+        protected string SetTrackingNo(TrackingTypeEnum trackType, string trackNo)
+        {
+            string textString = string.Empty;
+
+            switch (trackType)
+            {
+                case TrackingTypeEnum.FEDEX:
+                    textString = "<a href='http://www.fedex.com/Tracking?language=english&cntry_code=us&tracknumbers=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
+                case TrackingTypeEnum.UPS:
+                    textString = "<a href='http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
+                case TrackingTypeEnum.UPSRT:
+                    textString = "<a href='http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
+                case TrackingTypeEnum.USPOSTAL:
+                    textString = "<a href='https://www.stamps.com/shipstatus/?confirmation=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
+                default:
+                    break;
+            }
+
+            return textString;
         }
     }
 }

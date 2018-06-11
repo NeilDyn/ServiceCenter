@@ -1,6 +1,6 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SingleSalesOrderShipments.ascx.cs" Inherits="ExcelDesign.Forms.UserControls.TableData.DataLines.SingleSalesOrderShipments" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SingleSalesOrderShipments.ascx.cs" Inherits="ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines.SingleSalesOrderShipments" %>
 
-<link href="../../../../css/mainpage.css" rel="stylesheet" type="text/css" />
+<link href="../../../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 
 <asp:Table ID="tblShipmentLines" runat="server" Height="100%" Width="100%">
     <asp:TableHeaderRow>

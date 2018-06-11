@@ -1,7 +1,36 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SingleReturnOrderDetail.ascx.cs" Inherits="ExcelDesign.Forms.UserControls.TableData.SingleReturnOrderDetail" %>
-
+<%@ Register Src="~/Forms/UserControls/TableData/DataLines/ReturnOrderLines/SingleReturnOrderReceipts.ascx" TagName="SingleReturnOrderReceipts" TagPrefix="sror" %>
+<%@ Register Src="~/Forms/UserControls/TableData/DataLines/ReturnOrderLines/SingleReturnOrderPackages.ascx" TagName="SingleReturnOrderPackages" TagPrefix="srop" %>
 <link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("[id$=expandReceipts_<%= this.CustID %>_<%= this.CountID %>]").hide();   
+        $("[id$=expandReceives_<%= this.CustID %>_<%= this.CountID %>]").hide();
+        $("[id*=showMoreReturnLines_<%= this.CustID %>_<%= this.CountID %>]").hide();
+        
+        $("[id$=btnCreateExchange<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+            alert("Hi, return <%= this.Rh.RMANo %> can be exchanged.");
+        });
 
+        $("[id$=btnIssueRefund<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+            alert("Hi, return <%= this.Rh.RMANo %> can be refunded.");
+        });
+    });
+
+    function expandMoreReturnLines<%= this.CustID %><%= this.CountID %>(lineID) {
+        $("[id*=showMoreReturnLines_<%= this.CustID %>_<%= this.CountID %>_" + lineID + "]").toggle();
+    }
+
+    function expandReceipts<%=this.CustID %><%= this.CountID %>() {
+            $("[id$=expandReceipts_<%= this.CustID %>_<%= this.CountID %>]").toggle();
+    };
+
+
+    function expandReceives<%=this.CustID %><%= this.CountID %>() {
+            $("[id$=expandReceives_<%= this.CustID %>_<%= this.CountID %>]").toggle();
+    };
+</script>
 <asp:Table ID="tblSingleReturnOrderDetail" runat="server" Height="100%" Width="100%">
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
@@ -31,12 +60,18 @@
         <asp:TableCell Text="Order Date:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcOrderDate" />
     </asp:TableRow>
+    <asp:TableRow runat="server" ID="expandReceipts" TableSection="TableBody" HorizontalAlign="Justify">
+        <asp:TableCell><br /></asp:TableCell>
+    </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
         <asp:TableCell Text="Zendesk Ticket #:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcZendeskTicketNo" />
         <asp:TableCell Text="Package(s):" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcPackagesCount" />
+    </asp:TableRow>
+    <asp:TableRow runat="server" ID="expandReceives" TableSection="TableBody" HorizontalAlign="Justify">
+        <asp:TableCell><br /></asp:TableCell>
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />

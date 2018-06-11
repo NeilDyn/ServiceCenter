@@ -140,6 +140,7 @@
           <element minOccurs="1" maxOccurs="1" name="ReceiveDate" type="string" />
           <element minOccurs="1" maxOccurs="1" name="OrderDate" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ReturnOrderNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShippingAgent" type="string" />
           <element minOccurs="1" maxOccurs="1" name="SellToCustomerName" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />

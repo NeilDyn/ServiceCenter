@@ -6,13 +6,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ExcelDesign.ServiceFunctions;
 using System.Net;
+using ExcelDesign.Class_Objects.Enums;
 
 namespace ExcelDesign.Class_Objects
 {
     public class WebService
     {
-        private string baseURL = "http://jeg-svr2.jeg.local:7058/DynamicsNAV/WS/JEG_SONS,%20Inc/";
-        private string functionsURL = "Codeunit/Functions";
+        private readonly string baseURL = "http://jeg-svr2.jeg.local:7058/DynamicsNAV/WS/JEG_SONS,%20Inc/";
+        private readonly string functionsURL = "Codeunit/Functions";
         private static NetworkCredential credentials;
 
         protected string username = "nchristodoulou";

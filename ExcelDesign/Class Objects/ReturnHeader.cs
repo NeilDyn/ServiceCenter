@@ -7,15 +7,15 @@ namespace ExcelDesign.Class_Objects
 {
     public class ReturnHeader
     {
-        private string returnStatus;
-        private string dateCreated;
-        private string channelName;
-        private List<ReceiptHeader> receiptHeaderObj;
-        private List<PostedReceive> postedReceiveObj;
-        private string returnTrackingNo;
-        private string orderDate;
-        private string rmaNo;
-        private string externalDocumentNo;
+        public string ExternalDocumentNo { get; set; }
+        public string RMANo { get; set; }
+        public string OrderDate { get; set; }
+        public string ReturnTrackingNo { get; set; }
+        public List<PostedReceive> PostedReceiveObj { get; set; }
+        public List<ReceiptHeader> ReceiptHeaderObj { get; set; }
+        public string ChannelName { get; set; }
+        public string DateCreated { get; set; }
+        public string ReturnStatus { get; set; }
 
         public ReturnHeader()
         {
@@ -35,67 +35,5 @@ namespace ExcelDesign.Class_Objects
             this.RMANo = rmaNoP;
             this.ExternalDocumentNo = externalDocumentNoP;
         }
-
-        public string ExternalDocumentNo
-        {
-            get { return externalDocumentNo; }
-            set { externalDocumentNo = value; }
-        }
-        
-
-        public string RMANo
-        {
-            get { return rmaNo; }
-            set { rmaNo = value; }
-        }
-        
-
-        public string OrderDate
-        {
-            get { return orderDate; }
-            set { orderDate = value; }
-        }
-        
-
-        public string ReturnTrackingNo
-        {
-            get { return returnTrackingNo; }
-            set { returnTrackingNo = value; }
-        }
-        
-
-        public List<PostedReceive> PostedReceiveObj
-        {
-            get { return postedReceiveObj; }
-            set { postedReceiveObj = value; }
-        }
-        
-
-        public List<ReceiptHeader> ReceiptHeaderObj
-        {
-            get { return receiptHeaderObj; }
-            set { receiptHeaderObj = value; }
-        }      
-
-        public string ChannelName
-        {
-            get { return channelName; }
-            set { channelName = value; }
-        }
-        
-
-        public string DateCreated
-        {
-            get { return dateCreated; }
-            set { dateCreated = value; }
-        }
-        
-
-        public string ReturnStatus
-        {
-            get { return returnStatus; }
-            set { returnStatus = value; }
-        }
-        
     }
 }

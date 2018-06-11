@@ -99,9 +99,11 @@
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnDetailHeader.ascx" />
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnHeader.ascx" />
     <Content Include="Forms\UserControls\SingleControls\MultipleCustomers.ascx" />
-    <Content Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderPackages.ascx" />
-    <Content Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderShipments.ascx" />
-    <Content Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderTrackingNos.ascx" />
+    <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderPackages.ascx" />
+    <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderReceipts.ascx" />
+    <Content Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderPackages.ascx" />
+    <Content Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderShipments.ascx" />
+    <Content Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderTrackingNos.ascx" />
     <Content Include="Forms\UserControls\TableData\SingleCustomerTableDetail.ascx" />
     <Content Include="Forms\UserControls\TableData\SingleReturnOrderDetail.ascx" />
     <Content Include="Forms\UserControls\TableHeaders\SingleReturnOrderTableHeader.ascx" />
@@ -109,15 +111,14 @@
     <Content Include="Forms\UserControls\MainTables\SalesOrderHeaderTable.ascx" />
     <Content Include="Forms\UserControls\TableHeaders\SingleCustomerTableHeader.ascx" />
     <Content Include="Forms\UserControls\TableHeaders\SingleSalesOrderTableHeader.ascx" />
-    <Content Include="Forms\UserControls\TestTableControl.ascx" />
     <Content Include="images\Logo.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class Objects\ActionClassEnum.cs" />
+    <Compile Include="Class Objects\Enums\ActionClassEnum.cs" />
     <Compile Include="Class Objects\CallService.cs" />
     <Compile Include="Class Objects\Customer.cs" />
-    <Compile Include="Class Objects\Person.cs" />
+    <Compile Include="Class Objects\Enums\TrackingTypeEnum.cs" />
     <Compile Include="Class Objects\PostedPackage.cs" />
     <Compile Include="Class Objects\PostedPackageLine.cs" />
     <Compile Include="Class Objects\PostedReceive.cs" />
@@ -236,25 +237,39 @@
     <Compile Include="Forms\UserControls\SingleControls\MultipleCustomers.ascx.designer.cs">
       <DependentUpon>MultipleCustomers.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderPackages.ascx.cs">
+    <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderPackages.ascx.cs">
+      <DependentUpon>SingleReturnOrderPackages.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderPackages.ascx.designer.cs">
+      <DependentUpon>SingleReturnOrderPackages.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderReceipts.ascx.cs">
+      <DependentUpon>SingleReturnOrderReceipts.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderReceipts.ascx.designer.cs">
+      <DependentUpon>SingleReturnOrderReceipts.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderPackages.ascx.cs">
       <DependentUpon>SingleSalesOrderPackages.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderPackages.ascx.designer.cs">
+    <Compile Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderPackages.ascx.designer.cs">
       <DependentUpon>SingleSalesOrderPackages.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderShipments.ascx.cs">
+    <Compile Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderShipments.ascx.cs">
       <DependentUpon>SingleSalesOrderShipments.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderShipments.ascx.designer.cs">
+    <Compile Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderShipments.ascx.designer.cs">
       <DependentUpon>SingleSalesOrderShipments.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderTrackingNos.ascx.cs">
+    <Compile Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderTrackingNos.ascx.cs">
       <DependentUpon>SingleSalesOrderTrackingNos.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Forms\UserControls\TableData\DataLines\SingleSalesOrderTrackingNos.ascx.designer.cs">
+    <Compile Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderTrackingNos.ascx.designer.cs">
       <DependentUpon>SingleSalesOrderTrackingNos.ascx</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserControls\TableData\SingleCustomerTableDetail.ascx.cs">
@@ -305,13 +320,6 @@
     </Compile>
     <Compile Include="Forms\UserControls\TableHeaders\SingleSalesOrderTableHeader.ascx.designer.cs">
       <DependentUpon>SingleSalesOrderTableHeader.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UserControls\TestTableControl.ascx.cs">
-      <DependentUpon>TestTableControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Forms\UserControls\TestTableControl.ascx.designer.cs">
-      <DependentUpon>TestTableControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

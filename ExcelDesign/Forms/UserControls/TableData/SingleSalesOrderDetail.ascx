@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SingleSalesOrderDetail.ascx.cs" Inherits="ExcelDesign.Forms.UserControls.TableData.SingleSalesOrderDetail" %>
-<%@ Register Src="~/Forms/UserControls/TableData/DataLines/SingleSalesOrderShipments.ascx" TagName="SingleSalesOrderShipments" TagPrefix="ssos"%>
-<%@ Register Src="~/Forms/UserControls/TableData/DataLines/SingleSalesOrderPackages.ascx" TagName="SingleSalesOrderPackages" TagPrefix="ssop"%>
-<%@ Register Src="~/Forms/UserControls/TableData/DataLines/SingleSalesOrderTrackingNos.ascx" TagName="SingleSalesOrderTrackingNos" TagPrefix="ssotn" %>
+<%@ Register Src="~/Forms/UserControls/TableData/DataLines/SalesOrderLines/SingleSalesOrderShipments.ascx" TagName="SingleSalesOrderShipments" TagPrefix="ssos"%>
+<%@ Register Src="~/Forms/UserControls/TableData/DataLines/SalesOrderLines/SingleSalesOrderPackages.ascx" TagName="SingleSalesOrderPackages" TagPrefix="ssop"%>
+<%@ Register Src="~/Forms/UserControls/TableData/DataLines/SalesOrderLines/SingleSalesOrderTrackingNos.ascx" TagName="SingleSalesOrderTrackingNos" TagPrefix="ssotn" %>
 
 <link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -10,23 +10,28 @@
         $("[id$=expandShipments_<%= this.CustID %>_<%= this.CountID %>]").hide();   
         $("[id$=expandSerialNos_<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id$=expandPackages_<%= this.CustID %>_<%= this.CountID %>]").hide();
-
-        <%--var lineArray = new Array();
-        lineArray = <%=this.lineNumbers%>;
-
-        for (var i = 0; i < lineArray.length; i++) {
-            if (lineArray[i] > 1) {
-                for (var l = 0; l < lineArray[i]; l++) {
-                    $("[id$=showMoreSerialLine_<%= this.CustID %>_<%= this.CountID %>]_" + lineArray[i] + "_" + l).hide();
-                }
-            }
-            
-        }--%>
+        $("[id*=showMoreOrderLines_<%= this.CustID %>_<%= this.CountID %>]").hide();
         
         $("[id$=btnCancelOrder_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            alert("Hi, order can be cancelled.");
+            alert("Hi, order <%= this.Sh.SalesOrderNo %> can be cancelled.");
+        });
+
+        $("[id$=btnPartRequest_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+            alert("Hi, order <%= this.Sh.SalesOrderNo %> be Partially Requested.");
+        });
+
+        $("[id$=btnCreateReturn_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+            alert("Hi, order <%= this.Sh.SalesOrderNo %> be Returned.");
+        });
+
+        $("[id$=btnIssueRefund_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+            alert("Hi, order <%= this.Sh.SalesOrderNo %> can be Refunded.");
         });
     });
+
+    function expandMoreOrderLines<%= this.CustID %><%= this.CountID %>(lineID) {
+        $("[id*=showMoreOrderLines_<%= this.CustID %>_<%= this.CountID %>_" + lineID + "]").toggle();
+    }
 
     function expandShipments<%=this.CustID %><%= this.CountID %>() {
             $("[id$=expandShipments_<%= this.CustID %>_<%= this.CountID %>]").toggle();
@@ -39,12 +44,6 @@
     function expandPackages<%=this.CustID %><%= this.CountID %>() {
             $("[id$=expandPackages_<%= this.CustID %>_<%= this.CountID %>]").toggle();
     };
-
-    <%--function showMoreLines(lineNo) {
-        var singleArray = new Array();
-        var singleArray = <%=this.lineNumbers%>;
-        var line = singleArray[lineNo];
-    }--%>
 </script>
 
 <asp:Table ID="tblSingleSalesOrderDetail" runat="server" Height="100%" Width="100%">

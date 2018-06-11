@@ -7,50 +7,25 @@ namespace ExcelDesign.Class_Objects
 {
     public class ReceiptHeader
     {
-        private string no;
-        private string externalDocumentNo;
-        private string receiptDate;
-        private List<ReceiptLine> receiptLines;
+        public List<ReceiptLine> ReceiptLines { get; set; }
+        public string ReceiptDate { get; set; }
+        public string ExternalDocumentNo { get; set; }
+        public string No { get; set; }
+        public string ShippingAgentCode { get; set; }
 
         public ReceiptHeader()
         {
 
         }
 
-        public ReceiptHeader(string noP, string externalDocumentNoP, string receiptDateP, List<ReceiptLine> receiptLinesP)
+        public ReceiptHeader(string noP, string externalDocumentNoP, string receiptDateP, List<ReceiptLine> receiptLinesP, 
+            string shippingAgentCodeP)
         {
             this.No = noP;
             this.ExternalDocumentNo = externalDocumentNoP;
             this.ReceiptDate = receiptDateP;
             this.ReceiptLines = receiptLinesP;
+            this.ShippingAgentCode = shippingAgentCodeP;
         }
-
-        public List<ReceiptLine> ReceiptLines
-        {
-            get { return receiptLines; }
-            set { receiptLines = value; }
-        }
-
-
-        public string ReceiptDate
-        {
-            get { return receiptDate; }
-            set { receiptDate = value; }
-        }
-
-
-        public string ExternalDocumentNo
-        {
-            get { return externalDocumentNo; }
-            set { externalDocumentNo = value; }
-        }
-
-
-        public string No
-        {
-            get { return no; }
-            set { no = value; }
-        }
-
     }
 }

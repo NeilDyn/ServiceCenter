@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ExcelDesign.Class_Objects;
 
-namespace ExcelDesign.Forms.UserControls.TableData.DataLines
+namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
 {
     public partial class SingleSalesOrderShipments : System.Web.UI.UserControl
     {
@@ -15,7 +15,7 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //PopulateData();
+
         }
 
         public void PopulateData()

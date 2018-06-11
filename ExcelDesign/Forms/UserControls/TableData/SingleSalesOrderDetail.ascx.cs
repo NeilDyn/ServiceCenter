@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ExcelDesign.Class_Objects;
-using ExcelDesign.Forms.UserControls.TableData.DataLines;
+using ExcelDesign.Class_Objects.Enums;
+using ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines;
 
 namespace ExcelDesign.Forms.UserControls.TableData
 {
@@ -34,9 +35,9 @@ namespace ExcelDesign.Forms.UserControls.TableData
         protected Control singleSalesOrderPackageLines;
         protected Control singleSalesOrderTrackingLines;
 
-        protected const string singleSalesOrderShipmentLinesPath = "DataLines/SingleSalesOrderShipments.ascx";
-        protected const string singleSalesOrderPackageLinesPath = "DataLines/SingleSalesOrderPackages.ascx";
-        protected const string singleSalesOrderTrackingLinesPath = "DataLines/SingleSalesOrderTrackingNos.ascx";
+        protected const string singleSalesOrderShipmentLinesPath = "DataLines/SalesOrderLines/SingleSalesOrderShipments.ascx";
+        protected const string singleSalesOrderPackageLinesPath = "DataLines/SalesOrderLines/SingleSalesOrderPackages.ascx";
+        protected const string singleSalesOrderTrackingLinesPath = "DataLines/SalesOrderLines/SingleSalesOrderTrackingNos.ascx";
 
         //public int[] lineNumbers;
 
@@ -63,12 +64,15 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcOrderDate.Text = Sh.OrderDate;
             this.tcSalesOrderNo.Text = Sh.SalesOrderNo;
             this.tcChannelName.Text = Sh.ChannelName;
+            TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
 
             if (Sh.ShipmentHeaderObject.Count > 0)
             {
                 this.tcShipmentDate.Text = Sh.ShipmentHeaderObject[0].ShippingDate;
                 shipmentMethod = Sh.ShipmentHeaderObject[0].ShippingAgentCode;
                 shipmentMethod += " " + Sh.ShipmentHeaderObject[0].ShippingAgentService;
+
+                Enum.TryParse(Sh.ShipmentHeaderObject[0].ShippingAgentCode, out trackType);
             }
 
             foreach (ShipmentHeader shipmentHeader in Sh.ShipmentHeaderObject)
@@ -97,11 +101,11 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 {
                     PopulateSerialLines();
                     this.tcTrackingNo.Text = "<a href='javascript:expandSerialNos" + CustID.ToString() + "" + CountID.ToString() + "()'>" + "Multiple</a>";
-
                 }
                 else
-                {
-                    this.tcTrackingNo.Text = Sh.PostedPackageObject[0].TrackingNo;
+                {                   
+                    string trackNo = Sh.PostedPackageObject[0].TrackingNo;
+                    this.tcTrackingNo.Text = SetTrackingNo(trackType, trackNo);                
                 }
             }
 
@@ -109,6 +113,35 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcStatus.Text = Sh.WarrantyProp.Status;
             this.tcPolicy.Text = Sh.WarrantyProp.Policy;
             this.tcDaysRemaining.Text = Sh.WarrantyProp.DaysRemaining;
+        }
+
+        protected string SetTrackingNo(TrackingTypeEnum trackType, string trackNo)
+        {
+            string textString = string.Empty;
+
+            switch (trackType)
+            {
+                case TrackingTypeEnum.FEDEX:
+                    textString = "<a href='http://www.fedex.com/Tracking?language=english&cntry_code=us&tracknumbers=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
+                case TrackingTypeEnum.UPS:
+                    textString = "<a href='http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
+                case TrackingTypeEnum.UPSRT:
+                    textString = "<a href='http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
+                case TrackingTypeEnum.USPOSTAL:
+                    textString = "<a href='https://www.stamps.com/shipstatus/?confirmation=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
+                default:
+                    break;
+            }
+
+            return textString;
         }
 
         protected void CreateButtons()
@@ -138,20 +171,21 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             TableCell totalString = new TableCell();
             TableCell totalCell = new TableCell();
-
-            //int lineCount = - 1;
+            
+            int lineCount = 0;
 
             foreach (ShipmentHeader header in Sh.ShipmentHeaderObject)
             {
                 foreach (ShipmentLine line in header.ShipmentLines)
                 {
-                    //lineCount++;
+                    lineCount++;
 
                     TableRow lineRow = new TableRow();
                     string itemNoS = string.Empty;
                     string firstSerialNo = string.Empty;
                     int packageSerialCount = -1;
-                    
+                    List<string> moreLines = new List<string>();
+
                     TableCell itemNo = new TableCell();
                     TableCell desc = new TableCell();
                     TableCell qty = new TableCell();
@@ -159,7 +193,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                     TableCell price = new TableCell();
                     TableCell lineAmount = new TableCell();
                     TableCell serialNo = new TableCell();
-                    TableCell moreSerial = new TableCell();
+                    TableCell moreSerial = new TableCell();                
 
                     itemNoS = line.ItemNo;
                     itemNo.Text = line.ItemNo;
@@ -182,25 +216,26 @@ namespace ExcelDesign.Forms.UserControls.TableData
                             if (packageLine.ItemNo == itemNoS)
                             {
                                 packageSerialCount++;
-                                //lineNumbers[packageSerialCount] = lineCount;
                                 
                                 if (packageSerialCount <= 1)
                                 {
                                     firstSerialNo = packageLine.SerialNo;
                                 }
+                                else
+                                {
+                                    moreLines.Add(packageLine.SerialNo);
+                                }
                             }
                         }
                     }
 
-                    //lineNumbers[lineCount] = packageSerialCount;
-
                     serialNo.Text = firstSerialNo;
                     serialNo.HorizontalAlign = HorizontalAlign.Center;
+
+                    lineRow.ID = "salesInfoLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
                     if (packageSerialCount > 1)
                     {
-                        moreSerial.Text = "Show More";
-                        moreSerial.Font.Underline = true;
-                        moreSerial.Style.Value = "text-decoration-color: blue;";
+                        moreSerial.Text =  "<a href='javascript:expandMoreOrderLines" + CustID.ToString() + CountID.ToString() + "(" + lineCount + ")'> Show More </a>";
                     }
 
                     lineRow.Cells.Add(itemNo);
@@ -211,8 +246,31 @@ namespace ExcelDesign.Forms.UserControls.TableData
                     lineRow.Cells.Add(lineAmount);
                     lineRow.Cells.Add(serialNo);
                     lineRow.Cells.Add(moreSerial);
-
+                    
                     this.tblOrderDetailLines.Rows.Add(lineRow);
+
+                    foreach (string serial in moreLines)
+                    {
+                        TableCell moreSerialNo = new TableCell
+                        {
+                            Text = serial,
+                            HorizontalAlign = HorizontalAlign.Center
+                        };
+
+                        TableRow moreTableRow = new TableRow();
+
+                        moreTableRow.Cells.Add(new TableCell());
+                        moreTableRow.Cells.Add(new TableCell());
+                        moreTableRow.Cells.Add(new TableCell());
+                        moreTableRow.Cells.Add(new TableCell());
+                        moreTableRow.Cells.Add(new TableCell());
+                        moreTableRow.Cells.Add(new TableCell());
+                        moreTableRow.Cells.Add(moreSerialNo);
+                        moreTableRow.Cells.Add(new TableCell());
+
+                        moreTableRow.ID = "showMoreOrderLines_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
+                        this.tblOrderDetailLines.Rows.Add(moreTableRow);
+                    }
                 }
             }
 

@@ -7,12 +7,12 @@ namespace ExcelDesign.Class_Objects
 {
     public class ShipmentHeader
     {
-        private string no;
-        private string externalDocumentNo;
-        private string shippingDate;
-        private string shippingAgentService;
-        private string shippingAgentCode;
-        private List<ShipmentLine> shipmentLines;
+        public List<ShipmentLine> ShipmentLines { get; set; }
+        public string ShippingAgentCode { get; set; }
+        public string ShippingAgentService { get; set; }
+        public string ShippingDate { get; set; }
+        public string ExternalDocumentNo { get; set; }
+        public string No { get; set; }
 
         public ShipmentHeader()
         {
@@ -29,45 +29,5 @@ namespace ExcelDesign.Class_Objects
             this.ShippingAgentCode = shippingAgentCodeP;
             this.ShipmentLines = shipmentLinesP;
         }
-
-        public List<ShipmentLine> ShipmentLines
-        {
-            get { return shipmentLines; }
-            set { shipmentLines = value; }
-        }
-
-        public string ShippingAgentCode
-        {
-            get { return shippingAgentCode; }
-            set { shippingAgentCode = value; }
-        }
-
-        public string ShippingAgentService
-        {
-            get { return shippingAgentService; }
-            set { shippingAgentService = value; }
-        }
-        
-
-        public string ShippingDate
-        {
-            get { return shippingDate; }
-            set { shippingDate = value; }
-        }
-        
-
-        public string ExternalDocumentNo
-        {
-            get { return externalDocumentNo; }
-            set { externalDocumentNo = value; }
-        }
-        
-
-        public string No
-        {
-            get { return no; }
-            set { no = value; }
-        }
-        
     }
 }

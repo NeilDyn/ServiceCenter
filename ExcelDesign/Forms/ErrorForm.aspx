@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ErrorForm.aspx.cs" Inherits="ExcelDesign.Forms.ErrorForm" %>
-<%@ Register Src="~/Forms/UserControls/TestTableControl.ascx" TagName="OrderInfoTable" TagPrefix="tblOrderInfo" %>
 
 <!DOCTYPE html>
 

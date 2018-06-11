@@ -85,6 +85,15 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         protected global::System.Web.UI.WebControls.TableCell tcOrderDate;
         
         /// <summary>
+        /// expandReceipts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableRow expandReceipts;
+        
+        /// <summary>
         /// tcZendeskTicketNo control.
         /// </summary>
         /// <remarks>
@@ -101,6 +110,15 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableCell tcPackagesCount;
+        
+        /// <summary>
+        /// expandReceives control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableRow expandReceives;
         
         /// <summary>
         /// tcZendeskTickets control.

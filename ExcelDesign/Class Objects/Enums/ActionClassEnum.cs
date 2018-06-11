@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ExcelDesign.Class_Objects
+namespace ExcelDesign.Class_Objects.Enums
 {
     public enum ActionType
     {

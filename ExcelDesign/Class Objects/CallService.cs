@@ -249,8 +249,7 @@ namespace ExcelDesign.Class_Objects
                         {
                             if ((currResults.SalesShipmentLine[sli].DocNo == no) && (currResults.SalesShipmentLine[sli].ItemNo == itemNo))
                             {
-                                int currQty;
-                                int.TryParse(currResults.SalesShipmentLine[sli].Qty, out currQty);
+                                int.TryParse(currResults.SalesShipmentLine[sli].Qty, out int currQty);
                                 quantityShipped += currQty;
                             }
                         }
@@ -297,8 +296,7 @@ namespace ExcelDesign.Class_Objects
                         {
                             if ((currResults.ReturnReceiptLine[rli].DocNo == no) && (currResults.ReturnReceiptLine[rli].ItemNo == itemNo))
                             {
-                                int currQty;
-                                int.TryParse(currResults.ReturnReceiptLine[rli].Qty, out currQty);
+                                int.TryParse(currResults.ReturnReceiptLine[rli].Qty, out int currQty);
                                 quantityReceived += currQty;
                             }
                         }
@@ -326,6 +324,8 @@ namespace ExcelDesign.Class_Objects
             string externalDocumentNo = string.Empty;
             string receiptDate = string.Empty;
             List<ReceiptLine> receiptLines = new List<ReceiptLine>();
+            string shippingAgentCode = string.Empty;
+            string shippingAgentService = string.Empty;
 
             if (currResults.ReturnReceiptHeader != null)
             {
@@ -335,15 +335,18 @@ namespace ExcelDesign.Class_Objects
                     {
                         no = currResults.ReturnReceiptHeader[rh].No;
                         externalDocumentNo = currResults.ReturnReceiptHeader[rh].ExtDocNo;
-                        receiptDate = currResults.ReturnReceiptHeader[rh].ReceiveDate;
+                        receiptDate = currResults.ReturnReceiptHeader[rh].ReceiveDate;                       
                         receiptLines = ReturnReceiptLines(no);
+                        shippingAgentCode = currResults.ReturnReceiptHeader[rh].ShippingAgent;
 
-                        receiptHead.Add(new ReceiptHeader(no, externalDocumentNo, receiptDate, receiptLines));
+                        receiptHead.Add(new ReceiptHeader(no, externalDocumentNo, receiptDate, receiptLines, shippingAgentCode));
 
                         no = string.Empty;
                         externalDocumentNo = string.Empty;
                         receiptDate = string.Empty;
                         receiptLines = new List<ReceiptLine>();
+                        shippingAgentCode = string.Empty;
+                        shippingAgentService = string.Empty;
                     }
                 }
             }
@@ -439,9 +442,8 @@ namespace ExcelDesign.Class_Objects
                                 if ((currResults.SalesLine[sl].DocNo == rmaNo) && (currResults.SalesLine[sl].Type == "Item"))
                                 {
                                     totalCounter++;
-                                    int qtyToRec;
                                     dateCreated = currResults.SalesLine[sl].DateCreated;
-                                    int.TryParse(currResults.SalesLine[sl].QtyToReceive, out qtyToRec);
+                                    int.TryParse(currResults.SalesLine[sl].QtyToReceive, out int qtyToRec);
                                     if (qtyToRec > 0)
                                     {
                                         statusCounter++;

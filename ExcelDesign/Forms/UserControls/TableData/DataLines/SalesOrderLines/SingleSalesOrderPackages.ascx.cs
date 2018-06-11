@@ -92,6 +92,10 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
                     textString = "<a href='https://www.stamps.com/shipstatus/?confirmation=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
                     break;
 
+                case TrackingTypeEnum.Invalid:
+                    textString = trackNo;
+                    break;
+
                 default:
                     break;
             }

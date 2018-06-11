@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ExcelDesign.Class_Objects;
+using ExcelDesign.Class_Objects.Enums;
 using ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines;
 
 namespace ExcelDesign.Forms.UserControls.TableData
@@ -62,10 +63,10 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             this.tcReturnStatus.Text = Rh.ReturnStatus;
             this.tcDateCreated.Text = Rh.DateCreated;
-            this.tcChannelName.Text = Rh.ChannelName;
-            this.tcReturnTrackingNo.Text = Rh.ReturnTrackingNo;
+            this.tcChannelName.Text = Rh.ChannelName;            
             this.tcOrderDate.Text = Rh.OrderDate;
-
+            TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
+           
             if (Rh.PostedReceiveObj.Count > 0)
             {           
                 PopulateReceiveLines();
@@ -75,6 +76,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             if (Rh.ReceiptHeaderObj.Count > 0)
             {
+                Enum.TryParse(Rh.ReceiptHeaderObj[0].ShippingAgentCode, out trackType);              
+
                 this.tcReceiptDate.Text = Rh.ReceiptHeaderObj[0].ReceiptDate;
                 foreach (ReceiptHeader receiptHeader in Rh.ReceiptHeaderObj)
                 {
@@ -84,6 +87,9 @@ namespace ExcelDesign.Forms.UserControls.TableData
                     }
                 }
             }
+
+            string trackNo = Rh.ReturnTrackingNo;
+            this.tcReturnTrackingNo.Text = SetTrackingNo(trackType, trackNo);
 
             if (totalReceipts > 0)
             {
@@ -98,7 +104,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             double total = 0;
             TableRow totalRow = new TableRow();
             TableCell totalString = new TableCell();
-            TableCell totalCell = new TableCell();
+            TableCell totalCell = new TableCell();      
 
             int lineCount = 0;
 
@@ -268,6 +274,39 @@ namespace ExcelDesign.Forms.UserControls.TableData
             receiptCell.Width = new Unit("100%");
             this.expandReceipts.Cells.Add(receiptCell);
             this.expandReceipts.ID = "expandReceipts_" + CustID.ToString() + "_" + CountID.ToString();
+        }
+
+        protected string SetTrackingNo(TrackingTypeEnum trackType, string trackNo)
+        {
+            string textString = string.Empty;
+
+            switch (trackType)
+            {
+                case TrackingTypeEnum.FEDEX:
+                    textString = "<a href='http://www.fedex.com/Tracking?language=english&cntry_code=us&tracknumbers=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
+                case TrackingTypeEnum.UPS:
+                    textString = "<a href='http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
+                case TrackingTypeEnum.UPSRT:
+                    textString = "<a href='http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
+                case TrackingTypeEnum.USPOSTAL:
+                    textString = "<a href='https://www.stamps.com/shipstatus/?confirmation=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
+                case TrackingTypeEnum.Invalid:
+                    textString = trackNo;
+                    break;
+
+                default:
+                    break;
+            }
+
+            return textString;
         }
     }
 }

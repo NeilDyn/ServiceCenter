@@ -53,7 +53,6 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
                     Enum.TryParse(postedPack.ShippingAgent, out trackType);
                     trackingNo.Text = SetTrackingNo(trackType, trackNo);
 
-
                     qty.HorizontalAlign = HorizontalAlign.Center;
 
                     tr.Cells.Add(packNo);
@@ -90,6 +89,10 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
 
                 case TrackingTypeEnum.USPOSTAL:
                     textString = "<a href='https://www.stamps.com/shipstatus/?confirmation=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
+                case TrackingTypeEnum.Invalid:
+                    textString = trackNo;
                     break;
 
                 default:

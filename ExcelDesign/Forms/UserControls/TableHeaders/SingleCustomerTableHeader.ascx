@@ -10,9 +10,13 @@
 
         $("[id$=btnExpload_<%= this.Count %>]").click(function () {
             $("[id$=customerDetails_<%= this.Count %>]").toggle();
-            if ($("[id$=btnExpload_<%= this.Count %>]").val() == "+") {
+
+            if ($("[id$=btnExpload_<%= this.Count %>]").val() == "+")
+            {
                 $("[id$=btnExpload_<%= this.Count %>]").val("-");
-            } else {
+            }
+            else
+            {
                 $("[id$=btnExpload_<%= this.Count %>]").val("+");
             }
         });

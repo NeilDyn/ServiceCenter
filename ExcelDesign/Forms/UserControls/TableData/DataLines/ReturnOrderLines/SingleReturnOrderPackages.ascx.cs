@@ -1,4 +1,5 @@
 ﻿using ExcelDesign.Class_Objects;
+using ExcelDesign.Class_Objects.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
 
         public void PopulateData()
         {
+            TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
+
             foreach (PostedReceive postedReceive in PostedReceive)
             {
                 foreach (PostedReceiveLine postReceiveLine in postedReceive.PostedReceiveLines)
@@ -46,7 +49,10 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                     qty.Text = postReceiveLine.Quantity.ToString();
                     serialNo.Text = postReceiveLine.SerialNo;
                     carrier.Text = shipMethod;
-                    trackingNo.Text = postedReceive.TrackingNo;
+
+                    string trackNo = postedReceive.TrackingNo;
+                    Enum.TryParse(postedReceive.ShippingAgent, out trackType);
+                    trackingNo.Text = SetTrackingNo(trackType, trackNo);
 
                     qty.HorizontalAlign = HorizontalAlign.Center;
 
@@ -62,6 +68,39 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                     this.tblReturnPackageLines.Rows.Add(tr);
                 }
             }
+        }
+
+        protected string SetTrackingNo(TrackingTypeEnum trackType, string trackNo)
+        {
+            string textString = string.Empty;
+
+            switch (trackType)
+            {
+                case TrackingTypeEnum.FEDEX:
+                    textString = "<a href='http://www.fedex.com/Tracking?language=english&cntry_code=us&tracknumbers=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
+                case TrackingTypeEnum.UPS:
+                    textString = "<a href='http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
+                case TrackingTypeEnum.UPSRT:
+                    textString = "<a href='http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
+                case TrackingTypeEnum.USPOSTAL:
+                    textString = "<a href='https://www.stamps.com/shipstatus/?confirmation=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
+                case TrackingTypeEnum.Invalid:
+                    textString = trackNo;
+                    break;
+
+                default:
+                    break;
+            }
+
+            return textString;
         }
     }
 }

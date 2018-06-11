@@ -39,8 +39,6 @@ namespace ExcelDesign.Forms.UserControls.TableData
         protected const string singleSalesOrderPackageLinesPath = "DataLines/SalesOrderLines/SingleSalesOrderPackages.ascx";
         protected const string singleSalesOrderTrackingLinesPath = "DataLines/SalesOrderLines/SingleSalesOrderTrackingNos.ascx";
 
-        //public int[] lineNumbers;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             CreateButtons();
@@ -56,7 +54,6 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
         protected void PopulateDetail()
         {
-            int totalShipments = 0;
             int totalTrackingNos = 0;
             string shipmentMethod = string.Empty;
 
@@ -72,25 +69,14 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 shipmentMethod = Sh.ShipmentHeaderObject[0].ShippingAgentCode;
                 shipmentMethod += " " + Sh.ShipmentHeaderObject[0].ShippingAgentService;
 
+                this.tcShipmentsTotal.Text = "<a href='javascript:expandShipments" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Sh.ShipmentHeaderObject.Count.ToString() + "</a>";
+                this.tcShipmentsTotal.ID = "tcShipmentsTotal_" + CustID.ToString() + "_" + CountID.ToString();
+                this.tcShipMethod.Text = shipmentMethod;            
+
                 Enum.TryParse(Sh.ShipmentHeaderObject[0].ShippingAgentCode, out trackType);
-            }
 
-            foreach (ShipmentHeader shipmentHeader in Sh.ShipmentHeaderObject)
-            {
-                foreach (ShipmentLine shipmentLine in shipmentHeader.ShipmentLines)
-                {
-                    totalShipments += shipmentLine.Quantity;
-                }
-            }
-
-            this.tcShipmentsTotal.Text = "<a href='javascript:expandShipments" + CustID.ToString() + "" + CountID.ToString() + "()'>" + totalShipments.ToString() + "</a>";
-            this.tcShipmentsTotal.ID = "tcShipmentsTotal_" + CustID.ToString() + "_" + CountID.ToString();
-            this.tcShipMethod.Text = shipmentMethod;
-
-            if (totalShipments > 0)
-            {
                 PopulateShipmentLines();
-            }
+            }        
 
             if (Sh.PostedPackageObject.Count > 0)
             {
@@ -137,6 +123,10 @@ namespace ExcelDesign.Forms.UserControls.TableData
                     textString = "<a href='https://www.stamps.com/shipstatus/?confirmation=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
                     break;
 
+                case TrackingTypeEnum.Invalid:
+                    textString = trackNo;
+                    break;
+
                 default:
                     break;
             }
@@ -178,98 +168,113 @@ namespace ExcelDesign.Forms.UserControls.TableData
             {
                 foreach (ShipmentLine line in header.ShipmentLines)
                 {
-                    lineCount++;
-
-                    TableRow lineRow = new TableRow();
-                    string itemNoS = string.Empty;
-                    string firstSerialNo = string.Empty;
-                    int packageSerialCount = -1;
-                    List<string> moreLines = new List<string>();
-
-                    TableCell itemNo = new TableCell();
-                    TableCell desc = new TableCell();
-                    TableCell qty = new TableCell();
-                    TableCell qtyShipped = new TableCell();
-                    TableCell price = new TableCell();
-                    TableCell lineAmount = new TableCell();
-                    TableCell serialNo = new TableCell();
-                    TableCell moreSerial = new TableCell();                
-
-                    itemNoS = line.ItemNo;
-                    itemNo.Text = line.ItemNo;
-                    desc.Text = line.Description;
-                    qty.Text = line.Quantity.ToString();
-                    qtyShipped.Text = line.QuantityShipped.ToString();
-                    total += line.LineAmount;
-                    price.Text = "$      " + line.Price.ToString();
-                    lineAmount.Text = "$      " + line.LineAmount.ToString();
-
-                    qty.HorizontalAlign = HorizontalAlign.Center;
-                    qtyShipped.HorizontalAlign = HorizontalAlign.Center;
-                    price.HorizontalAlign = HorizontalAlign.Right;
-                    lineAmount.HorizontalAlign = HorizontalAlign.Right;
-                
-                    foreach (PostedPackage package in Sh.PostedPackageObject)
+                    if (line.Quantity > 0)
                     {
-                        foreach (PostedPackageLine packageLine in package.PostedPackageLines)
+                        lineCount++;
+
+                        if (lineCount > 1)
                         {
-                            if (packageLine.ItemNo == itemNoS)
+                            TableRow blankRow = new TableRow();
+                            TableCell blankCell = new TableCell
                             {
-                                packageSerialCount++;
-                                
-                                if (packageSerialCount <= 1)
+                                Text = "<br />"
+                            };
+                            blankRow.Cells.Add(blankCell);
+                            this.tblOrderDetailLines.Rows.Add(blankRow);
+                        }
+
+                        TableRow lineRow = new TableRow();
+                        string itemNoS = string.Empty;
+                        string firstSerialNo = string.Empty;
+                        int packageSerialCount = 0;
+                        List<string> moreLines = new List<string>();
+
+                        TableCell itemNo = new TableCell();
+                        TableCell desc = new TableCell();
+                        TableCell qty = new TableCell();
+                        TableCell qtyShipped = new TableCell();
+                        TableCell price = new TableCell();
+                        TableCell lineAmount = new TableCell();
+                        TableCell serialNo = new TableCell();
+                        TableCell moreSerial = new TableCell();
+
+                        itemNoS = line.ItemNo;
+                        itemNo.Text = line.ItemNo;
+                        desc.Text = line.Description;
+                        qty.Text = line.Quantity.ToString();
+                        qtyShipped.Text = line.QuantityShipped.ToString();
+                        total += line.LineAmount;
+                        price.Text = "$      " + line.Price.ToString();
+                        lineAmount.Text = "$      " + line.LineAmount.ToString();
+
+                        qty.HorizontalAlign = HorizontalAlign.Center;
+                        qtyShipped.HorizontalAlign = HorizontalAlign.Center;
+                        price.HorizontalAlign = HorizontalAlign.Right;
+                        lineAmount.HorizontalAlign = HorizontalAlign.Right;
+
+                        foreach (PostedPackage package in Sh.PostedPackageObject)
+                        {
+                            foreach (PostedPackageLine packageLine in package.PostedPackageLines)
+                            {
+                                if (packageLine.ItemNo == itemNoS)
                                 {
-                                    firstSerialNo = packageLine.SerialNo;
-                                }
-                                else
-                                {
-                                    moreLines.Add(packageLine.SerialNo);
+                                    packageSerialCount++;
+
+                                    if (packageSerialCount == 1)
+                                    {
+                                        firstSerialNo = packageLine.SerialNo;
+                                    }
+                                    else
+                                    {
+                                        moreLines.Add(packageLine.SerialNo);
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    serialNo.Text = firstSerialNo;
-                    serialNo.HorizontalAlign = HorizontalAlign.Center;
+                        serialNo.Text = firstSerialNo;
+                        serialNo.HorizontalAlign = HorizontalAlign.Center;
 
-                    lineRow.ID = "salesInfoLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
-                    if (packageSerialCount > 1)
-                    {
-                        moreSerial.Text =  "<a href='javascript:expandMoreOrderLines" + CustID.ToString() + CountID.ToString() + "(" + lineCount + ")'> Show More </a>";
-                    }
-
-                    lineRow.Cells.Add(itemNo);
-                    lineRow.Cells.Add(desc);
-                    lineRow.Cells.Add(qty);
-                    lineRow.Cells.Add(qtyShipped);
-                    lineRow.Cells.Add(price);
-                    lineRow.Cells.Add(lineAmount);
-                    lineRow.Cells.Add(serialNo);
-                    lineRow.Cells.Add(moreSerial);
-                    
-                    this.tblOrderDetailLines.Rows.Add(lineRow);
-
-                    foreach (string serial in moreLines)
-                    {
-                        TableCell moreSerialNo = new TableCell
+                        lineRow.ID = "salesInfoLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
+                        if (packageSerialCount > 1)
                         {
-                            Text = serial,
-                            HorizontalAlign = HorizontalAlign.Center
-                        };
+                            moreSerial.ID = "moreOrderLines_" + CustID.ToString() + CountID.ToString();
+                            moreSerial.Text = "<a href='javascript:expandMoreOrderLines" + CustID.ToString() + CountID.ToString() + "(" + lineCount + ")'> Show More </a>";                           
+                        }
 
-                        TableRow moreTableRow = new TableRow();
+                        lineRow.Cells.Add(itemNo);
+                        lineRow.Cells.Add(desc);
+                        lineRow.Cells.Add(qty);
+                        lineRow.Cells.Add(qtyShipped);
+                        lineRow.Cells.Add(price);
+                        lineRow.Cells.Add(lineAmount);
+                        lineRow.Cells.Add(serialNo);
+                        lineRow.Cells.Add(moreSerial);
 
-                        moreTableRow.Cells.Add(new TableCell());
-                        moreTableRow.Cells.Add(new TableCell());
-                        moreTableRow.Cells.Add(new TableCell());
-                        moreTableRow.Cells.Add(new TableCell());
-                        moreTableRow.Cells.Add(new TableCell());
-                        moreTableRow.Cells.Add(new TableCell());
-                        moreTableRow.Cells.Add(moreSerialNo);
-                        moreTableRow.Cells.Add(new TableCell());
+                        this.tblOrderDetailLines.Rows.Add(lineRow);
 
-                        moreTableRow.ID = "showMoreOrderLines_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
-                        this.tblOrderDetailLines.Rows.Add(moreTableRow);
+                        foreach (string serial in moreLines)
+                        {
+                            TableCell moreSerialNo = new TableCell
+                            {
+                                Text = serial,
+                                HorizontalAlign = HorizontalAlign.Center
+                            };
+
+                            TableRow moreTableRow = new TableRow();
+
+                            moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(moreSerialNo);
+                            moreTableRow.Cells.Add(new TableCell());
+
+                            moreTableRow.ID = "showMoreOrderLines_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
+                            this.tblOrderDetailLines.Rows.Add(moreTableRow);
+                        }
                     }
                 }
             }

@@ -49,7 +49,7 @@
         <asp:TableCell Text="Receipt Date:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcReceiptDate" />
         <asp:TableCell Text="Return Tracking #:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
-        <asp:TableCell runat="server" ID="tcReturnTrackingNo" Font-Underline="true" style="text-decoration-color:blue"/>
+        <asp:TableCell runat="server" ID="tcReturnTrackingNo" />
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />

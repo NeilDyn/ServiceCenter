@@ -335,7 +335,7 @@ namespace ExcelDesign.Class_Objects
                     {
                         no = currResults.ReturnReceiptHeader[rh].No;
                         externalDocumentNo = currResults.ReturnReceiptHeader[rh].ExtDocNo;
-                        receiptDate = currResults.ReturnReceiptHeader[rh].ReceiveDate;                       
+                        receiptDate = currResults.ReturnReceiptHeader[rh].ReceiveDate;
                         receiptLines = ReturnReceiptLines(no);
                         shippingAgentCode = currResults.ReturnReceiptHeader[rh].ShippingAgent;
 
@@ -418,7 +418,7 @@ namespace ExcelDesign.Class_Objects
                     }
                 }
                 if (returnHead.Count > 0)
-                return returnHead;
+                    return returnHead;
             }
 
             if (currResults.SalesHeader != null)
@@ -427,7 +427,7 @@ namespace ExcelDesign.Class_Objects
                 {
                     if (currResults.SalesHeader[so].DocType == "Return Order")
                     {
-                        if (currResults.SalesHeader[so].ShipToName == custName)
+                        if (currResults.SalesHeader[so].ShipToName == custName && custName == "Shipping Department")
                         {
                             rmaNo = currResults.SalesHeader[so].No;
                             receiptHeader = ReturnReceiptHeader(rmaNo);
@@ -483,45 +483,43 @@ namespace ExcelDesign.Class_Objects
                     }
                 }
                 if (returnHead.Count > 0)
-                return returnHead;
+                    return returnHead;
             }
 
             if (currResults.ReturnReceiptHeader != null)
             {
                 for (int so = 0; so < currResults.ReturnReceiptHeader.Length; so++)
                 {
-                  
-                        if (currResults.ReturnReceiptHeader[so].ShipToName == custName)
-                        {
-                            rmaNo = currResults.ReturnReceiptHeader[so].ReturnOrderNo;
-                            receiptHeader = ReturnReceiptHeader(rmaNo);
-                            channelName = currResults.ReturnReceiptHeader[so].SellToCustomerName;
-                            postedReceive = ReturnPostedReceive(rmaNo);
-                            //returnTrackingNo = currResults.ReturnReceiptHeader[so].ReturnTrackingNo;
-                            orderDate = currResults.ReturnReceiptHeader[so].ReceiveDate;
-                            externalDocumentNo = currResults.ReturnReceiptHeader[so].ExtDocNo;
 
-                           
-                                returnStatus = "Released";
-                            
+                    if (currResults.ReturnReceiptHeader[so].ShipToName == custName)
+                    {
+                        rmaNo = currResults.ReturnReceiptHeader[so].ReturnOrderNo;
+                        receiptHeader = ReturnReceiptHeader(rmaNo);
+                        channelName = currResults.ReturnReceiptHeader[so].SellToCustomerName;
+                        postedReceive = ReturnPostedReceive(rmaNo);
+                        //returnTrackingNo = currResults.ReturnReceiptHeader[so].ReturnTrackingNo;
+                        orderDate = currResults.ReturnReceiptHeader[so].ReceiveDate;
+                        externalDocumentNo = currResults.ReturnReceiptHeader[so].ExtDocNo;
 
-                            returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate, rmaNo, externalDocumentNo));
-                            insertedReturnNumners.Add(rmaNo);
+                        returnStatus = "Released";
 
-                            returnStatus = string.Empty;
-                            dateCreated = string.Empty;
-                            channelName = string.Empty;
-                            receiptHeader = new List<ReceiptHeader>();
-                            postedReceive = new List<PostedReceive>();
-                            returnTrackingNo = string.Empty;
-                            orderDate = string.Empty;
-                            rmaNo = string.Empty;
-                            externalDocumentNo = string.Empty;
+                        returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate, rmaNo, externalDocumentNo));
+                        insertedReturnNumners.Add(rmaNo);
 
-                            totalCounter = 0;
-                            statusCounter = 0;
-                        }
-                    
+                        returnStatus = string.Empty;
+                        dateCreated = string.Empty;
+                        channelName = string.Empty;
+                        receiptHeader = new List<ReceiptHeader>();
+                        postedReceive = new List<PostedReceive>();
+                        returnTrackingNo = string.Empty;
+                        orderDate = string.Empty;
+                        rmaNo = string.Empty;
+                        externalDocumentNo = string.Empty;
+
+                        totalCounter = 0;
+                        statusCounter = 0;
+                    }
+
                 }
             }
 
@@ -666,46 +664,53 @@ namespace ExcelDesign.Class_Objects
                 if (salesHead.Count > 0)
                     return salesHead;
             }
+
             if (currResults.SalesShipmentHeader != null)
             {
                 for (int so = 0; so < currResults.SalesShipmentHeader.Length; so++)
                 {
-
                     if (currResults.SalesShipmentHeader[so].ShipToName == custName)
                     {
-                        orderDate = currResults.SalesShipmentHeader[so].OrderDate;
                         orderNo = currResults.SalesShipmentHeader[so].OrderNo;
-                        channelName = currResults.SalesShipmentHeader[so].ShipToName;
-                        externalDocumentNo = currResults.SalesShipmentHeader[so].ExtDocNo;
-                        shipHeader = ReturnShipmentHeader(orderNo);
-                        postPackage = ReturnPostedPackage(orderNo);
 
-                        status = currResults.SalesShipmentHeader[so].Warranty3[0].Status3[0];
-                        policy = currResults.SalesShipmentHeader[so].Warranty3[0].Policy3[0]; ;
-                        daysRemaining = currResults.SalesShipmentHeader[so].Warranty3[0].DaysRemaining3[0];
-                        warranty = new Warranty(status, policy, daysRemaining);
+                        if (!insertedOrderNumbers.Any(order => order.Equals(orderNo)))
+                        {
+                            orderDate = currResults.SalesShipmentHeader[so].OrderDate;
+                            channelName = currResults.SalesShipmentHeader[so].ShipToName;
+                            externalDocumentNo = currResults.SalesShipmentHeader[so].ExtDocNo;
+                            shipHeader = ReturnShipmentHeader(orderNo);
+                            postPackage = ReturnPostedPackage(orderNo);
 
-                        orderStatus = "Shipped";
+                            status = currResults.SalesShipmentHeader[so].Warranty3[0].Status3[0];
+                            policy = currResults.SalesShipmentHeader[so].Warranty3[0].Policy3[0]; ;
+                            daysRemaining = currResults.SalesShipmentHeader[so].Warranty3[0].DaysRemaining3[0];
+                            warranty = new Warranty(status, policy, daysRemaining);
 
-                        salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty));
+                            orderStatus = "Shipped";
 
-                        insertedOrderNumbers.Add(orderNo);
+                            salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty));
 
-                        orderStatus = string.Empty;
-                        orderDate = string.Empty;
-                        orderNo = string.Empty;
-                        channelName = string.Empty;
-                        shipHeader = new List<ShipmentHeader>();
-                        postPackage = new List<PostedPackage>();
-                        externalDocumentNo = string.Empty;
-                        warranty = new Warranty();
+                            insertedOrderNumbers.Add(orderNo);
 
-                        status = string.Empty;
-                        policy = string.Empty;
-                        daysRemaining = string.Empty;
+                            orderStatus = string.Empty;
+                            orderDate = string.Empty;
+                            orderNo = string.Empty;
+                            channelName = string.Empty;
+                            shipHeader = new List<ShipmentHeader>();
+                            postPackage = new List<PostedPackage>();
+                            externalDocumentNo = string.Empty;
+                            warranty = new Warranty();
+
+                            status = string.Empty;
+                            policy = string.Empty;
+                            daysRemaining = string.Empty;
+                        }
                     }
 
                 }
+
+                if (salesHead.Count > 0)
+                    return salesHead;
             }
 
             return salesHead;

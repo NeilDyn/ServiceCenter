@@ -30,14 +30,14 @@
     });
 
     function expandMoreOrderLines<%= this.CustID %><%= this.CountID %>(lineID) {
-        $("[id*=showMoreOrderLines_<%= this.CustID %>_<%= this.CountID %>_" + lineID + "]").toggle();
-
-        <%--if ($("[id$=moreOrderLines_<%= this.CustID %>_<%= this.CountID %>_" + lineID + "]").val() == "Show More") {
-            $("[id$=moreOrderLines_<%= this.CustID %>_<%= this.CountID %>_" + lineID + "]").val("Show Less");
+        if ($("a#expandMoreClickOrderLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text() == "Show More") {
+            $("a#expandMoreClickOrderLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text("Show Less");
         }
         else {
-            $("[id$=moreOrderLines_<%= this.CustID %>_<%= this.CountID %>_" + lineID + "]")).val("Show More");
-        }--%>
+            $("a#expandMoreClickOrderLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text("Show More");
+        }
+
+        $("[id*=showMoreOrderLines_<%= this.CustID %>_<%= this.CountID %>_" + lineID + "]").toggle();      
     };
 
     function expandShipments<%=this.CustID %><%= this.CountID %>() {

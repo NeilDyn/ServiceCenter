@@ -4,6 +4,7 @@
 
 <asp:Table ID="tblShipmentLines" runat="server" Height="100%" Width="100%">
     <asp:TableHeaderRow>
+        <asp:TableHeaderCell />
         <asp:TableHeaderCell Text="Shipment No." />
         <asp:TableHeaderCell Text="Shipment Date" />
         <asp:TableHeaderCell Text="Item" />
@@ -12,6 +13,7 @@
         <asp:TableHeaderCell Text="Ship Method" />
     </asp:TableHeaderRow>
     <asp:TableHeaderRow>
+        <asp:TableHeaderCell />
         <asp:TableHeaderCell ColumnSpan="6">
             <hr class="HeaderLine" />
         </asp:TableHeaderCell>

@@ -21,10 +21,6 @@ namespace ExcelDesign.Forms.UserControls.CustomerInfo.MainTables
         {
             this.thcTotalCustomers.Text = CustomerList.Count.ToString();
 
-            if (Session["CustomerInfoTable"] == null)
-            {
-                Session["CustomerInfoTable"] = this.tblCustomerInfo;
-            }
             //CreateCustomerInfo();        
         }
 
@@ -49,7 +45,6 @@ namespace ExcelDesign.Forms.UserControls.CustomerInfo.MainTables
                 tc.Controls.Add(singleCustomerTableHeader);
                 tr.Cells.Add(tc);
                 this.tblCustomerInfo.Rows.Add(tr);                
-                Session["SingleCustomerInfoCell_" + count.ToString()] = tc;
                 count++;
             }
         }

@@ -389,7 +389,6 @@ namespace ExcelDesign.Class_Objects
                                 channelName = currResults.SOImportBuffer[so].ChannelName[0];
                                 receiptHeader = ReturnReceiptHeader(rmaNo);
                                 postedReceive = ReturnPostedReceive(rmaNo);
-                                //returnTrackingNo = currResults.SOImportBuffer[so];
                                 orderDate = currResults.SOImportBuffer[so].OrderDate;
                                 externalDocumentNo = currResults.SOImportBuffer[so].ExternalDocumentNo;
 
@@ -427,7 +426,7 @@ namespace ExcelDesign.Class_Objects
                 {
                     if (currResults.SalesHeader[so].DocType == "Return Order")
                     {
-                        if (currResults.SalesHeader[so].ShipToName == custName && custName == "Shipping Department")
+                        if (currResults.SalesHeader[so].ShipToName == custName || custName == "Shipping Department")
                         {
                             rmaNo = currResults.SalesHeader[so].No;
                             receiptHeader = ReturnReceiptHeader(rmaNo);
@@ -494,11 +493,11 @@ namespace ExcelDesign.Class_Objects
                     if (currResults.ReturnReceiptHeader[so].ShipToName == custName)
                     {
                         rmaNo = currResults.ReturnReceiptHeader[so].ReturnOrderNo;
+                        dateCreated = currResults.ReturnReceiptHeader[so].ReceiveDate;
                         receiptHeader = ReturnReceiptHeader(rmaNo);
                         channelName = currResults.ReturnReceiptHeader[so].SellToCustomerName;
                         postedReceive = ReturnPostedReceive(rmaNo);
-                        //returnTrackingNo = currResults.ReturnReceiptHeader[so].ReturnTrackingNo;
-                        orderDate = currResults.ReturnReceiptHeader[so].ReceiveDate;
+                        orderDate = currResults.ReturnReceiptHeader[so].OrderDate;
                         externalDocumentNo = currResults.ReturnReceiptHeader[so].ExtDocNo;
 
                         returnStatus = "Released";

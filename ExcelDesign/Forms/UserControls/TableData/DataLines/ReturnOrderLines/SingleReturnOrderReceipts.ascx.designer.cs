@@ -13,12 +13,12 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines {
     public partial class SingleReturnOrderReceipts {
         
         /// <summary>
-        /// tblReceiveLines control.
+        /// tblReceiptLines control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblReceiveLines;
+        protected global::System.Web.UI.WebControls.Table tblReceiptLines;
     }
 }

@@ -172,17 +172,6 @@ namespace ExcelDesign.Forms.UserControls.TableData
                     {
                         lineCount++;
 
-                        if (lineCount > 1)
-                        {
-                            TableRow blankRow = new TableRow();
-                            TableCell blankCell = new TableCell
-                            {
-                                Text = "<br />"
-                            };
-                            blankRow.Cells.Add(blankCell);
-                            this.tblOrderDetailLines.Rows.Add(blankRow);
-                        }
-
                         TableRow lineRow = new TableRow();
                         string itemNoS = string.Empty;
                         string firstSerialNo = string.Empty;
@@ -237,9 +226,9 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
                         lineRow.ID = "salesInfoLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
                         if (packageSerialCount > 1)
-                        {
-                            moreSerial.ID = "moreOrderLines_" + CustID.ToString() + CountID.ToString();
-                            moreSerial.Text = "<a href='javascript:expandMoreOrderLines" + CustID.ToString() + CountID.ToString() + "(" + lineCount + ")'> Show More </a>";                           
+                        {                           
+                            moreSerial.Text = "<a id='expandMoreClickOrderLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString() + "' href ='javascript:expandMoreOrderLines" + CustID.ToString() + CountID.ToString() + "(" + lineCount + ")'>Show More</a>";
+                            moreSerial.ID = "expandShowMoreOrderLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
                         }
 
                         lineRow.Cells.Add(itemNo);
@@ -273,7 +262,20 @@ namespace ExcelDesign.Forms.UserControls.TableData
                             moreTableRow.Cells.Add(new TableCell());
 
                             moreTableRow.ID = "showMoreOrderLines_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
-                            this.tblOrderDetailLines.Rows.Add(moreTableRow);
+                            this.tblOrderDetailLines.Rows.Add(moreTableRow);                           
+                        }
+
+                        if (moreLines.Count > 0)
+                        {
+                            TableRow blankRow = new TableRow();
+                            TableCell blankCell = new TableCell
+                            {
+                                Text = "<br />"
+                            };
+
+                            blankRow.Cells.Add(blankCell);
+                            blankRow.ID = "showMoreOrderLines_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
+                            this.tblOrderDetailLines.Rows.Add(blankRow);
                         }
                     }
                 }

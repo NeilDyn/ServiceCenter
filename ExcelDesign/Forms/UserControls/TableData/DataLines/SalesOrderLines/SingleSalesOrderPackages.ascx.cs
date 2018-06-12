@@ -23,13 +23,29 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
         public void PopulateData()
         {
             TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
+            int packCount = 0;
 
             foreach (PostedPackage postedPack in PostedPackage)
             {
+                packCount++;
+
+                TableRow packHeaderRow = new TableRow();
+                TableCell packageHeader = new TableCell
+                {
+                    Text = "Package " + packCount.ToString(),
+                };
+
+                packageHeader.Font.Underline = true;
+                packageHeader.Font.Bold = true;
+
+                packHeaderRow.Cells.Add(packageHeader);
+                this.tblSalesPackageLines.Rows.Add(packHeaderRow);
+
                 foreach (PostedPackageLine postPackLine in postedPack.PostedPackageLines)
                 {
                     TableRow tr = new TableRow();
 
+                    TableCell blankCell = new TableCell();
                     TableCell packNo = new TableCell();
                     TableCell packDate = new TableCell();
                     TableCell item = new TableCell();
@@ -56,6 +72,7 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
 
                     qty.HorizontalAlign = HorizontalAlign.Center;
 
+                    tr.Cells.Add(blankCell);
                     tr.Cells.Add(packNo);
                     tr.Cells.Add(packDate);
                     tr.Cells.Add(item);

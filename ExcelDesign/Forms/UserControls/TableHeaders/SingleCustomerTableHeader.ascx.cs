@@ -15,6 +15,7 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
         protected Control customerDetail;
         public Customer SingleCustomer { get; set; }
         public int Count { get; set; }
+        public bool ActiveCustomer { get; set; }
 
         private TableRow tr;
         private TableCell tc;
@@ -24,14 +25,13 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
         protected void Page_Load(object sender, EventArgs e)
         {
             this.btnExpload.ID = "btnExpload_" + Count.ToString();
+            this.btnSelectCustomer.ID = "btnSelectCustomer_" + Count.ToString();
 
             this.CustomerSequence.Text = "Customer " + Count.ToString();
             this.thcCustomerName.Text = SingleCustomer.Name;
 
-            if (Session["SingleCustomerTableHeader_" + Count.ToString()] == null)
-            {
-                Session["SingleCustomerTableHeader_" + Count.ToString()] = this.tblSingleCustomerTableHeader;
-            }
+            this.ID = "customerHeader_" + Count.ToString();
+
             LoadData();
         }
 
@@ -45,7 +45,7 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             ((SingleCustomerTableDetail)customerDetail).CustNo = Count;
 
             tc.Height = new Unit("100%");
-            tc.ColumnSpan = 4;
+            tc.ColumnSpan = 6;
             tc.Controls.Add(customerDetail);
             tr.Cells.Add(tc);
             tr.ID = "customerDetails_" + Count.ToString();

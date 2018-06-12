@@ -19,36 +19,57 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
 
         public void PopulateData()
         {
+            int receiptCount = 0;
+
             foreach (ReceiptHeader rh in ReceiptHeaders)
             {
+                receiptCount++;
+
+                TableRow receiptHeaderRow = new TableRow();
+                TableCell receiptHeader = new TableCell
+                {
+                    Text = "Receipt " + receiptCount.ToString(),
+                };
+
+                receiptHeader.Font.Underline = true;
+                receiptHeader.Font.Bold = true;
+
+                receiptHeaderRow.Cells.Add(receiptHeader);
+                this.tblReceiptLines.Rows.Add(receiptHeaderRow);
+
                 foreach (ReceiptLine rl in rh.ReceiptLines)
                 {
-                    TableRow tr = new TableRow();
+                    if (rl.Quantity > 0)
+                    {
+                        TableRow tr = new TableRow();
 
-                    TableCell receiptNo = new TableCell();
-                    TableCell receiptDate = new TableCell();
-                    TableCell item = new TableCell();
-                    TableCell desc = new TableCell();
-                    TableCell qty = new TableCell();
-                    TableCell shipMethod = new TableCell();
+                        TableCell blankCell = new TableCell();
+                        TableCell receiptNo = new TableCell();
+                        TableCell receiptDate = new TableCell();
+                        TableCell item = new TableCell();
+                        TableCell desc = new TableCell();
+                        TableCell qty = new TableCell();
+                        TableCell shipMethod = new TableCell();
 
-                    receiptNo.Text = rh.No;
-                    receiptDate.Text = rh.ReceiptDate;
-                    item.Text = rl.ItemNo;
-                    desc.Text = rl.Description;
-                    qty.Text = rl.Quantity.ToString();
-                    shipMethod.Text = rh.ShippingAgentCode;
+                        receiptNo.Text = rh.No;
+                        receiptDate.Text = rh.ReceiptDate;
+                        item.Text = rl.ItemNo;
+                        desc.Text = rl.Description;
+                        qty.Text = rl.Quantity.ToString();
+                        shipMethod.Text = rh.ShippingAgentCode;
 
-                    qty.HorizontalAlign = HorizontalAlign.Center;
+                        qty.HorizontalAlign = HorizontalAlign.Center;
 
-                    tr.Cells.Add(receiptNo);
-                    tr.Cells.Add(receiptDate);
-                    tr.Cells.Add(item);
-                    tr.Cells.Add(desc);
-                    tr.Cells.Add(qty);
-                    tr.Cells.Add(shipMethod);
+                        tr.Cells.Add(blankCell);
+                        tr.Cells.Add(receiptNo);
+                        tr.Cells.Add(receiptDate);
+                        tr.Cells.Add(item);
+                        tr.Cells.Add(desc);
+                        tr.Cells.Add(qty);
+                        tr.Cells.Add(shipMethod);
 
-                    this.tblReceiveLines.Rows.Add(tr);
+                        this.tblReceiptLines.Rows.Add(tr);
+                    }
                 }
             }
         }

@@ -59,8 +59,6 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
         protected void LoadData()
         {
-            int totalReceipts = 0;
-
             this.tcReturnStatus.Text = Rh.ReturnStatus;
             this.tcDateCreated.Text = Rh.DateCreated;
             this.tcChannelName.Text = Rh.ChannelName;            
@@ -79,24 +77,12 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 Enum.TryParse(Rh.ReceiptHeaderObj[0].ShippingAgentCode, out trackType);              
 
                 this.tcReceiptDate.Text = Rh.ReceiptHeaderObj[0].ReceiptDate;
-                foreach (ReceiptHeader receiptHeader in Rh.ReceiptHeaderObj)
-                {
-                    foreach (ReceiptLine receiptLine in receiptHeader.ReceiptLines)
-                    {
-                        totalReceipts += receiptLine.Quantity;
-                    }
-                }
+                this.tcReceiptsTotal.Text = "<a href='javascript:expandReceipts" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Rh.ReceiptHeaderObj.Count.ToString() + "</a>";
+                PopulateReceiptLines();
             }
 
             string trackNo = Rh.ReturnTrackingNo;
             this.tcReturnTrackingNo.Text = SetTrackingNo(trackType, trackNo);
-
-            if (totalReceipts > 0)
-            {
-                PopulateReceiptLines();
-            }
-
-            this.tcReceiptsTotal.Text = "<a href='javascript:expandReceipts" + CustID.ToString() + "" + CountID.ToString() + "()'>" + totalReceipts.ToString() + "</a>";
         }
 
         protected void PopulateLines()
@@ -112,99 +98,117 @@ namespace ExcelDesign.Forms.UserControls.TableData
             {
                 foreach (ReceiptLine line in header.ReceiptLines)
                 {
-                    lineCount++;
-
-                    TableRow lineRow = new TableRow();
-                    string itemNoS = string.Empty;
-                    string firstSerialNo = string.Empty;
-                    int receiveSerialCount = 0;
-                    List<string> moreLines = new List<string>();
-
-                    TableCell itemNo = new TableCell();
-                    TableCell desc = new TableCell();
-                    TableCell qty = new TableCell();
-                    TableCell qtyReceived = new TableCell();
-                    TableCell price = new TableCell();
-                    TableCell lineAmount = new TableCell();
-                    TableCell serialNo = new TableCell();
-                    TableCell moreSerial = new TableCell();
-
-                    itemNoS = line.ItemNo;
-                    itemNo.Text = line.ItemNo;
-                    desc.Text = line.Description;
-                    qty.Text = line.Quantity.ToString();
-                    qtyReceived.Text = line.QuantityReceived.ToString();
-                    total += line.LineAmount;
-                    price.Text = "$      " + line.Price.ToString();
-                    lineAmount.Text = "$      " + line.LineAmount.ToString();
-
-                    qty.HorizontalAlign = HorizontalAlign.Center;
-                    qtyReceived.HorizontalAlign = HorizontalAlign.Center;
-                    price.HorizontalAlign = HorizontalAlign.Center;
-                    lineAmount.HorizontalAlign = HorizontalAlign.Center;
-
-                    foreach (PostedReceive receive in Rh.PostedReceiveObj)
+                    if (line.Quantity > 0)
                     {
-                        foreach (PostedReceiveLine receiveLine in receive.PostedReceiveLines)
-                        {
-                            if (receiveLine.ItemNo == itemNoS)
-                            {
-                                receiveSerialCount++;
+                        lineCount++;
 
-                                if (receiveSerialCount <= 1)
+                        TableRow lineRow = new TableRow();
+                        string itemNoS = string.Empty;
+                        string firstSerialNo = string.Empty;
+                        int receiveSerialCount = 0;
+                        List<string> moreLines = new List<string>();
+
+                        TableCell itemNo = new TableCell();
+                        TableCell desc = new TableCell();
+                        TableCell qty = new TableCell();
+                        TableCell qtyReceived = new TableCell();
+                        TableCell price = new TableCell();
+                        TableCell lineAmount = new TableCell();
+                        TableCell serialNo = new TableCell();
+                        TableCell moreSerial = new TableCell();
+
+                        itemNoS = line.ItemNo;
+                        itemNo.Text = line.ItemNo;
+                        desc.Text = line.Description;
+                        qty.Text = line.Quantity.ToString();
+                        qtyReceived.Text = line.QuantityReceived.ToString();
+                        total += line.LineAmount;
+                        price.Text = "$      " + line.Price.ToString();
+                        lineAmount.Text = "$      " + line.LineAmount.ToString();
+
+                        qty.HorizontalAlign = HorizontalAlign.Center;
+                        qtyReceived.HorizontalAlign = HorizontalAlign.Center;
+                        price.HorizontalAlign = HorizontalAlign.Right;
+                        lineAmount.HorizontalAlign = HorizontalAlign.Right;
+
+                        foreach (PostedReceive receive in Rh.PostedReceiveObj)
+                        {
+                            foreach (PostedReceiveLine receiveLine in receive.PostedReceiveLines)
+                            {
+                                if (receiveLine.ItemNo == itemNoS)
                                 {
-                                    firstSerialNo = receiveLine.SerialNo;
-                                }
-                                else
-                                {
-                                    moreLines.Add(receiveLine.SerialNo);
+                                    receiveSerialCount++;
+
+                                    if (receiveSerialCount == 1)
+                                    {
+                                        firstSerialNo = receiveLine.SerialNo;
+                                    }
+                                    else
+                                    {
+                                        moreLines.Add(receiveLine.SerialNo);
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    serialNo.Text = firstSerialNo;
-                    serialNo.HorizontalAlign = HorizontalAlign.Center;
+                        serialNo.Text = firstSerialNo;
+                        serialNo.HorizontalAlign = HorizontalAlign.Center;
 
-                    lineRow.ID = "returnInfoLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
+                        lineRow.ID = "returnInfoLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
 
-                    if (receiveSerialCount > 1)
-                    {
-                        moreSerial.Text = "<a href='javascript:expandMoreReturnLines" + CustID.ToString() + CountID.ToString() + "(" + lineCount + ")'> Show More </a>";
-                    }
-
-                    lineRow.Cells.Add(itemNo);
-                    lineRow.Cells.Add(desc);
-                    lineRow.Cells.Add(qty);
-                    lineRow.Cells.Add(qtyReceived);
-                    lineRow.Cells.Add(price);
-                    lineRow.Cells.Add(lineAmount);
-                    lineRow.Cells.Add(serialNo);
-                    lineRow.Cells.Add(moreSerial);
-
-                    this.tblReturnDetailLines.Rows.Add(lineRow);
-
-                    foreach (string serial in moreLines)
-                    {
-                        TableCell moreSerialNo = new TableCell
+                        if (receiveSerialCount > 1)
                         {
-                            Text = serial,
-                            HorizontalAlign = HorizontalAlign.Center
-                        };
+                            moreSerial.Text = "<a id='expandMoreClickReturnLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString() + "' href ='javascript:expandMoreReturnLines" + CustID.ToString() + CountID.ToString() + "(" + lineCount + ")'>Show More</a>";
+                            moreSerial.ID = "expandShowMoreReturnLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
+                        }
 
-                        TableRow moreTableRow = new TableRow();
+                        lineRow.Cells.Add(itemNo);
+                        lineRow.Cells.Add(desc);
+                        lineRow.Cells.Add(qty);
+                        lineRow.Cells.Add(qtyReceived);
+                        lineRow.Cells.Add(price);
+                        lineRow.Cells.Add(lineAmount);
+                        lineRow.Cells.Add(serialNo);
+                        lineRow.Cells.Add(moreSerial);
 
-                        moreTableRow.Cells.Add(new TableCell());
-                        moreTableRow.Cells.Add(new TableCell());
-                        moreTableRow.Cells.Add(new TableCell());
-                        moreTableRow.Cells.Add(new TableCell());
-                        moreTableRow.Cells.Add(new TableCell());
-                        moreTableRow.Cells.Add(new TableCell());
-                        moreTableRow.Cells.Add(moreSerialNo);
-                        moreTableRow.Cells.Add(new TableCell());
+                        this.tblReturnDetailLines.Rows.Add(lineRow);
 
-                        moreTableRow.ID = "showMoreReturnLines_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
-                        this.tblReturnDetailLines.Rows.Add(moreTableRow);
+                        foreach (string serial in moreLines)
+                        {
+                            TableCell moreSerialNo = new TableCell
+                            {
+                                Text = serial,
+                                HorizontalAlign = HorizontalAlign.Center
+                            };
+
+                            TableRow moreTableRow = new TableRow();
+
+                            moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(moreSerialNo);
+                            moreTableRow.Cells.Add(new TableCell());
+
+                            moreTableRow.ID = "showMoreReturnLines_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
+                            this.tblReturnDetailLines.Rows.Add(moreTableRow);
+                        }
+
+                        if (moreLines.Count > 0)
+                        {
+                            TableRow blankRow = new TableRow();
+                            TableCell blankCell = new TableCell
+                            {
+                                Text = "<br />"
+                            };
+
+                            blankRow.Cells.Add(blankCell);
+                            blankRow.ID = "showMoreReturnLines_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
+                            this.tblReturnDetailLines.Rows.Add(blankRow);
+                        }
+
                     }
                 }
             }
@@ -214,6 +218,15 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             totalCell.Text = "$      " + total.ToString();
             totalCell.Font.Bold = true;
+
+            totalString.HorizontalAlign = HorizontalAlign.Right;
+            totalCell.HorizontalAlign = HorizontalAlign.Right;
+
+            totalString.Attributes.CssStyle.Add("border-top", "2px solid black");
+            totalString.Attributes.CssStyle.Add("border-collapse", "collapse");
+
+            totalCell.Attributes.CssStyle.Add("border-top", "2px solid black");
+            totalCell.Attributes.CssStyle.Add("border-collapse", "collapse");
 
             totalRow.Cells.Add(new TableCell());
             totalRow.Cells.Add(new TableCell());

@@ -4,17 +4,14 @@
 
 <asp:Table ID="tblPackageLines" runat="server" Height="100%" Width="100%">
     <asp:TableHeaderRow>
-        <asp:TableHeaderCell Text="Package No." />
+        <asp:TableHeaderCell />
         <asp:TableHeaderCell Text="Package Date" />
-        <asp:TableHeaderCell Text="Item" />
-        <asp:TableHeaderCell Text="Description" />
-        <asp:TableHeaderCell Text="Qty" />
-        <asp:TableHeaderCell Text="Serial No." />
         <asp:TableHeaderCell Text="Carrier" />
         <asp:TableHeaderCell Text="Tracking No." />
     </asp:TableHeaderRow>
     <asp:TableHeaderRow>
-        <asp:TableHeaderCell ColumnSpan="8">
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell ColumnSpan="3">
             <hr class="HeaderLine" />
         </asp:TableHeaderCell>
     </asp:TableHeaderRow>

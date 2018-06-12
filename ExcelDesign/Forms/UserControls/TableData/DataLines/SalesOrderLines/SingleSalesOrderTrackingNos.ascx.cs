@@ -22,50 +22,47 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
         public void PopulateData()
         {
             TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
+            int packCount = 0;
 
             foreach (PostedPackage postedPack in PostedPackage)
             {
-                foreach (PostedPackageLine postPackLine in postedPack.PostedPackageLines)
+                packCount++;
+
+                TableRow packHeaderRow = new TableRow();
+                TableCell packageHeader = new TableCell
                 {
-                    TableRow tr = new TableRow();
+                    Text = "Package " + packCount.ToString(),
+                };
 
-                    TableCell packNo = new TableCell();
-                    TableCell packDate = new TableCell();
-                    TableCell item = new TableCell();
-                    TableCell desc = new TableCell();
-                    TableCell qty = new TableCell();
-                    TableCell serialNo = new TableCell();
-                    TableCell carrier = new TableCell();
-                    TableCell trackingNo = new TableCell();
+                packageHeader.Font.Underline = true;
+                packageHeader.Font.Bold = true;
 
-                    shipMethod = postedPack.ShippingAgent;
-                    shipMethod += " " + postedPack.ShippingAgentService;
+                packHeaderRow.Cells.Add(packageHeader);
+                this.tblPackageLines.Rows.Add(packHeaderRow);
 
-                    packNo.Text = postPackLine.PackageNo;
-                    packDate.Text = postedPack.PackingDate;
-                    item.Text = postPackLine.ItemNo;
-                    desc.Text = postPackLine.Description;
-                    qty.Text = postPackLine.Quantity.ToString();
-                    serialNo.Text = postPackLine.SerialNo;
-                    carrier.Text = shipMethod;
+                TableRow tr = new TableRow();
 
-                    string trackNo = postedPack.TrackingNo;
-                    Enum.TryParse(postedPack.ShippingAgent, out trackType);
-                    trackingNo.Text = SetTrackingNo(trackType, trackNo);
+                TableCell blankCell = new TableCell();
+                TableCell packDate = new TableCell();
+                TableCell carrier = new TableCell();
+                TableCell trackingNo = new TableCell();
 
-                    qty.HorizontalAlign = HorizontalAlign.Center;
+                shipMethod = postedPack.ShippingAgent;
+                shipMethod += " " + postedPack.ShippingAgentService;
 
-                    tr.Cells.Add(packNo);
-                    tr.Cells.Add(packDate);
-                    tr.Cells.Add(item);
-                    tr.Cells.Add(desc);
-                    tr.Cells.Add(qty);
-                    tr.Cells.Add(serialNo);
-                    tr.Cells.Add(carrier);
-                    tr.Cells.Add(trackingNo);
+                packDate.Text = postedPack.PackingDate;
+                carrier.Text = shipMethod;
 
-                    this.tblPackageLines.Rows.Add(tr);
-                }
+                string trackNo = postedPack.TrackingNo;
+                Enum.TryParse(postedPack.ShippingAgent, out trackType);
+                trackingNo.Text = SetTrackingNo(trackType, trackNo);
+
+                tr.Cells.Add(blankCell);
+                tr.Cells.Add(packDate);
+                tr.Cells.Add(carrier);
+                tr.Cells.Add(trackingNo);
+
+                this.tblPackageLines.Rows.Add(tr);
             }
         }
 

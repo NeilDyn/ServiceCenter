@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ExcelDesign.Class_Objects;
@@ -28,66 +29,16 @@ namespace ExcelDesign.Forms
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Convert.ToString(ViewState["Generated"]) == "true")
-            //{
-            //    //RetrieveData();
-            //    if (IsPostBack)
-            //    {
-            //        for (int custID = 1; custID < Convert.ToInt32(Session["CustomerCount"]) + 1; custID++)
-            //        {
-            //            TableRow tr = new TableRow();
-            //            TableCell tc = new TableCell();
-            //            for (int so = 1; so < Convert.ToInt32(Session["SalesOrderCount_" + custID.ToString()]) + 1; so++)
-            //            {
-            //                if (Session["SingleSalesOrderTableHeaderDetailCell_CustID" + custID.ToString() + "_" + so.ToString()] != null)
-            //                {
-
-            //                    tr.Cells.Add((TableCell)Session["SingleSalesOrderTableHeaderDetailCell_CustID" + custID.ToString() + "_" + so.ToString()]);
-            //                    ((Table)Session["SingleSalesOrderTableHeader" + custID.ToString()]).Rows.Add(tr);
-
-            //                    tc = new TableCell();
-            //                    tr = new TableRow();
-            //                    tc.Controls.Add(((Table)Session["SingleSalesOrderTableHeader" + custID.ToString()]));
-            //                    tr.Cells.Add(tc);
-            //                    ((Table)Session["SalesOrderHeaderTableCell_CustID" + custID.ToString() + "_" + so.ToString()]).Rows.Add(tr);
-
-            //                    tr = new TableRow();
-            //                    tr.Cells.Add((TableCell)Session["SalesOrderHeaderTableCell_CustID" + custID.ToString() + "_" + so.ToString()]);
-            //                    ((Table)Session["SalesOrderHeaderTable_" + custID.ToString()]).Rows.Add(tr);
-
-            //                    tc = new TableCell();
-            //                    tr = new TableRow();
-            //                    tc.Controls.Add((Table)Session["SalesOrderHeaderTable_" + custID.ToString()]);
-            //                    tr.Cells.Add(tc);
-            //                    ((Table)Session["SingleCustomerDetailTableCell_" + custID.ToString()]).Rows.Add(tr);
-            //                }
-
-            //                tr = new TableRow();
-            //                tr.Cells.Add((TableCell)Session["SingleCustomerDetailTableCell_" + custID.ToString()]);
-            //                ((Table)Session["SingleCustomerTableDetailTable_" + custID.ToString()]).Rows.Add(tr);
-
-            //                if (Session["SingelCustomerTableHeaderCell_" + custID.ToString()] != null)
-            //                {
-            //                    tr = new TableRow();
-            //                    tr.Cells.Add((TableCell)Session["SingelCustomerTableHeaderCell_" + custID.ToString()]);
-            //                    ((Table)Session["SingleCustomerTableHeader_" + custID.ToString()]).Rows.Add(tr);
-            //                }
-
-            //                tr = new TableRow();
-            //                tr.Cells.Add((TableCell)Session["SingleCustomerInfoCell_" + custID.ToString()]);
-            //                ((Table)Session["CustomerInfoTable"]).Rows.Add(tr);
-            //            }
-            //        }
-
-            //        if (Session["MultipleCustomers"] != null)
-            //        {
-            //            this.frmOrderDetails.Controls.Add(((Control)Session["MultipleCustomers"]));
-            //        }
-            //        if (Session["CustomerInfoTable"] != null)
-            //        {
-            //            this.frmOrderDetails.Controls.Add((Control)Session["CustomerInfoTable"]);
-            //        }
-            //    }
+            //if(IsPostBack)
+           // {
+                //if(Session["ActiveCustomer"] != null)
+                //{
+                //    customerInfoTable = LoadControl("UserControls/MainTables/CustomerInfoTable.ascx");
+                //    customerInfoTable.ID = "Customer_Info_Table";
+                //    ((CustomerInfoTable)customerInfoTable).CustomerList = (List<Customer>)Session["ActiveCustomer"];
+                //    ((CustomerInfoTable)customerInfoTable).CreateCustomerInfo();
+                //    this.frmOrderDetails.Controls.Add(customerInfoTable);
+                //}
             //}
         }
 
@@ -142,13 +93,13 @@ namespace ExcelDesign.Forms
             ((CustomerInfoTable)customerInfoTable).CustomerList = customers;
             ((CustomerInfoTable)customerInfoTable).CreateCustomerInfo();
             this.frmOrderDetails.Controls.Add(customerInfoTable);
-
-            //Session["CustomerInfoControl"] = customerInfoTable;
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        public static void SetActiveCustomer()
         {
-            Response.Write("TEST");
+            //HttpContext.Current.Session["ActiveCustomer"] = selectedCustomer;
+            HttpContext.Current.Response.Write("Test");
+            //return true;
         }
     }
 }

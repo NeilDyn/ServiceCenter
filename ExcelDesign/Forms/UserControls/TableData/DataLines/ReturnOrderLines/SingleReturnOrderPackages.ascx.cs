@@ -23,13 +23,29 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
         public void PopulateData()
         {
             TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
+            int receiveCount = 0;
 
             foreach (PostedReceive postedReceive in PostedReceive)
             {
+                receiveCount++;
+
+                TableRow receiveHeaderRow = new TableRow();
+                TableCell receiveHeader = new TableCell
+                {
+                    Text = "Receive " + receiveCount.ToString(),
+                };
+
+                receiveHeader.Font.Underline = true;
+                receiveHeader.Font.Bold = true;
+
+                receiveHeaderRow.Cells.Add(receiveHeader);
+                this.tblReturnPackageLines.Rows.Add(receiveHeaderRow);
+
                 foreach (PostedReceiveLine postReceiveLine in postedReceive.PostedReceiveLines)
                 {
                     TableRow tr = new TableRow();
 
+                    TableCell blankCell = new TableCell();
                     TableCell packNo = new TableCell();
                     TableCell packDate = new TableCell();
                     TableCell item = new TableCell();
@@ -56,6 +72,7 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
 
                     qty.HorizontalAlign = HorizontalAlign.Center;
 
+                    tr.Cells.Add(blankCell);
                     tr.Cells.Add(packNo);
                     tr.Cells.Add(packDate);
                     tr.Cells.Add(item);

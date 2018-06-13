@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Services;
 using System.Web.UI;
@@ -18,38 +19,46 @@ namespace ExcelDesign.Forms
         protected CallService cs;
 
         // User Controls
-        protected Control multipleCustomers;
+        protected static Control multipleCustomers;
         protected Control salesOrderHeader;
         protected Control salesOrderDetail;
         protected Control salesReturnOrderHeader;
         protected Control salesReturnOrderDetails;
         protected Control customerInfo;
 
-        protected Control customerInfoTable;
+        protected static Control customerInfoTable;
+
+        protected List<Customer> customers = new List<Customer>();
+        protected AjaxControl ajaxService = new AjaxControl();
+
+        protected SendService nonStaticService = new SendService();
+        protected static SendService StaticService = new SendService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if(IsPostBack)
-           // {
-                //if(Session["ActiveCustomer"] != null)
-                //{
-                //    customerInfoTable = LoadControl("UserControls/MainTables/CustomerInfoTable.ascx");
-                //    customerInfoTable.ID = "Customer_Info_Table";
-                //    ((CustomerInfoTable)customerInfoTable).CustomerList = (List<Customer>)Session["ActiveCustomer"];
-                //    ((CustomerInfoTable)customerInfoTable).CreateCustomerInfo();
-                //    this.frmOrderDetails.Controls.Add(customerInfoTable);
-                //}
-            //}
+            ClientScript.GetPostBackEventReference(this, string.Empty);
+
+            if (IsPostBack)
+            {
+                if (Session["ActiveCustomer"] != null)
+                {
+                    customers = new List<Customer>();
+                    StaticService.CustomerList = customers;
+                    customers.Add((Customer)Session["ActiveCustomer"]);
+                    customerInfoTable = LoadControl("UserControls/MainTables/CustomerInfoTable.ascx");
+                    customerInfoTable.ID = "Customer_Info_Table";
+                    ((CustomerInfoTable)customerInfoTable).CustomerList = customers;
+                    ((CustomerInfoTable)customerInfoTable).CreateCustomerInfo();
+                    this.frmOrderDetails.Controls.Add(customerInfoTable);
+                    Session["ActiveCustomer"] = null;
+                }
+            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            if (Convert.ToString(ViewState["Generate"]) != "true")
-            {
-                Session.Clear();
-                RetrieveData();
-                ViewState["Generated"] = "true";
-            }
+            Session.Clear();
+            RetrieveData();
         }
 
         protected void RetrieveData()
@@ -93,13 +102,25 @@ namespace ExcelDesign.Forms
             ((CustomerInfoTable)customerInfoTable).CustomerList = customers;
             ((CustomerInfoTable)customerInfoTable).CreateCustomerInfo();
             this.frmOrderDetails.Controls.Add(customerInfoTable);
+
+            StaticService.CustomerList = customers;
         }
 
-        public static void SetActiveCustomer()
+        [WebMethod]
+        public static string SetActiveCustomer(int custID)
         {
-            //HttpContext.Current.Session["ActiveCustomer"] = selectedCustomer;
-            HttpContext.Current.Response.Write("Test");
-            //return true;
+            try
+            {
+                StaticService.SetActiveCustomer(custID);
+            }
+            catch (Exception e)
+            {
+                HttpContext.Current.Session["Error"] = e.Message;
+                HttpContext.Current.Response.Redirect("ErrorForm.aspx");
+                return e.Message;
+            }
+
+            return "1";
         }
     }
 }

@@ -4,7 +4,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("[id$=salesReturnDetailHeader_<%= this.CustID %>]").hide();
+        if (<%= this.ReturnOrdersCount %> > 1) {
+            $("[id$=salesReturnDetailHeader_<%= this.CustID %>]").hide();
+        }
 
         $("[id$=btnExpandReturn_<%= this.CustID %>]").click(function () {
             $("[id$=salesReturnDetailHeader_<%= this.CustID %>]").toggle();

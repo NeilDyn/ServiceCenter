@@ -14,6 +14,8 @@ namespace ExcelDesign.Forms.UserControls.MainTables
         protected Control singleReturnOrderHeader;
         public List<ReturnHeader> ReturnHeaderList { get; set; }
         public int CustID { get; set; }
+        public int CustomerCount { get; set; }
+        public int ReturnOrdersCount { get; set; }
 
         private TableRow tr;
         private TableCell tc;
@@ -23,7 +25,15 @@ namespace ExcelDesign.Forms.UserControls.MainTables
         protected void Page_Load(object sender, EventArgs e)
         {
             this.thcTotalReturns.Text = ReturnHeaderList.Count.ToString();
-            this.btnExpandReturn.ID = "btnExpandReturn_" + CustID.ToString();
+             
+            if(ReturnOrdersCount == 1)
+            {
+                this.btnExpandReturn.Visible = false;
+            }
+            else
+            {
+                this.btnExpandReturn.ID = "btnExpandReturn_" + CustID.ToString();
+            }
 
             PopulateData();
         }
@@ -41,6 +51,8 @@ namespace ExcelDesign.Forms.UserControls.MainTables
                 ((SingleReturnOrderTableHeader)singleReturnOrderHeader).Header = returnHeader;
                 ((SingleReturnOrderTableHeader)singleReturnOrderHeader).HeadCount = returnCount;
                 ((SingleReturnOrderTableHeader)singleReturnOrderHeader).CustID = CustID;
+                ((SingleReturnOrderTableHeader)singleReturnOrderHeader).CustomerCount = CustomerCount;
+                ((SingleReturnOrderTableHeader)singleReturnOrderHeader).ReturnOrdersCount = ReturnOrdersCount;
 
                 tc.Height = new Unit("100%");
                 tc.ColumnSpan = 7;

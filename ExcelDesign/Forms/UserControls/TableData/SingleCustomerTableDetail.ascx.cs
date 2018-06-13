@@ -17,6 +17,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
         public Customer Cust { get; set; }
         public int CustNo { get; set; }
+        public int CustomerCount { get; set; }
 
         private TableRow salesRow;
         private TableRow returnRow;
@@ -33,12 +34,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcShiptoContact.Text = Cust.ShipToContact;
             this.tcCity.Text = Cust.City;
             this.tcZip.Text = Cust.Zip;
-            this.tcState.Text = Cust.Country;
-
-            if (Session["SingleCustomerTableDetailTable_" + CustNo.ToString()] == null)
-            {
-                Session["SingleCustomerTableDetailTable_" + CustNo.ToString()] = this.tblSingleCustomerDetail;
-            }
+            this.tcState.Text = Cust.Country;   
+            
             PopulateData();        
         }
 
@@ -54,14 +51,14 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 salesOrderHeader = LoadControl(salesOrderHeaderPath);
                 ((SalesOrderHeaderTable)salesOrderHeader).SalesHeaderList = Cust.SalesHeader;
                 ((SalesOrderHeaderTable)salesOrderHeader).CustID = CustNo;
+                ((SalesOrderHeaderTable)salesOrderHeader).CustomerCount = CustomerCount;
+                ((SalesOrderHeaderTable)salesOrderHeader).SalesOrderCount = Cust.SalesHeader.Count;
 
                 salesCell.Width = new Unit("100%");
                 salesCell.ColumnSpan = 6;
                 salesCell.Controls.Add(salesOrderHeader);
                 salesRow.Cells.Add(salesCell);
                 this.tblSingleCustomerDetail.Rows.Add(salesRow);
-
-                Session["SingleCustomerDetailTableCell_" + CustNo.ToString()] = salesCell;
             }
 
             if (Cust.ReturnHeaders.Count > 0)
@@ -69,6 +66,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 returnOrderHeader = LoadControl(returnOrderHeaderPath);
                 ((ReturnOrderHeaderTable)returnOrderHeader).ReturnHeaderList = Cust.ReturnHeaders;
                 ((ReturnOrderHeaderTable)returnOrderHeader).CustID = CustNo;
+                ((ReturnOrderHeaderTable)returnOrderHeader).CustomerCount = CustomerCount;
+                ((ReturnOrderHeaderTable)returnOrderHeader).ReturnOrdersCount = Cust.ReturnHeaders.Count;
 
                 returnCell.Width = new Unit("100%");
                 returnCell.ColumnSpan = 8;

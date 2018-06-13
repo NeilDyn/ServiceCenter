@@ -19,9 +19,7 @@ namespace ExcelDesign.Forms.UserControls.CustomerInfo.MainTables
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.thcTotalCustomers.Text = CustomerList.Count.ToString();
-
-            //CreateCustomerInfo();        
+            this.thcTotalCustomers.Text = CustomerList.Count.ToString();    
         }
 
         public void CreateCustomerInfo()
@@ -38,6 +36,7 @@ namespace ExcelDesign.Forms.UserControls.CustomerInfo.MainTables
                 singleCustomerTableHeader.ID = "Customer " + count.ToString();
                 ((SingleCustomerTableHeader)singleCustomerTableHeader).SingleCustomer = cust;
                 ((SingleCustomerTableHeader)singleCustomerTableHeader).Count = count;
+                ((SingleCustomerTableHeader)singleCustomerTableHeader).CustomerCount = CustomerList.Count;
 
                 tc.Height = new Unit("100%");
                 tc.ColumnSpan = this.infoHeaders.Cells.Count;

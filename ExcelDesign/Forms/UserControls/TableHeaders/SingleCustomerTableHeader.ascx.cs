@@ -15,7 +15,7 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
         protected Control customerDetail;
         public Customer SingleCustomer { get; set; }
         public int Count { get; set; }
-        public bool ActiveCustomer { get; set; }
+        public int CustomerCount { get; set; }
 
         private TableRow tr;
         private TableCell tc;
@@ -23,11 +23,22 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
         protected const string customerDetailPath = "../TableData/SingleCustomerTableDetail.ascx";
 
         protected void Page_Load(object sender, EventArgs e)
-        {
-            this.btnExpload.ID = "btnExpload_" + Count.ToString();
-            this.btnSelectCustomer.ID = "btnSelectCustomer_" + Count.ToString();
-
-            this.CustomerSequence.Text = "Customer " + Count.ToString();
+        {           
+            if(CustomerCount == 1)
+            {
+                this.CustomerSequence.Text = "Customer";
+                this.btnExpload.Visible = false;
+                this.btnSelectCustomer.Visible = false;
+                this.lblSelectActive.Visible = false;
+            }
+            else
+            {
+                this.CustomerSequence.Text = "Customer " + Count.ToString();
+                this.btnExpload.ID = "btnExpload_" + Count.ToString();
+                this.btnSelectCustomer.ID = "btnSelectCustomer_" + Count.ToString();
+                this.btnReload.ID = "btnReload_" + Count.ToString();
+            }
+            
             this.thcCustomerName.Text = SingleCustomer.Name;
 
             this.ID = "customerHeader_" + Count.ToString();
@@ -43,6 +54,7 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             customerDetail = LoadControl(customerDetailPath);
             ((SingleCustomerTableDetail)customerDetail).Cust = SingleCustomer;
             ((SingleCustomerTableDetail)customerDetail).CustNo = Count;
+            ((SingleCustomerTableDetail)customerDetail).CustomerCount = CustomerCount;
 
             tc.Height = new Unit("100%");
             tc.ColumnSpan = 6;
@@ -53,5 +65,4 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             Session["SingelCustomerTableHeaderCell_" + Count.ToString()] = tc;
         }
     }
-
 }

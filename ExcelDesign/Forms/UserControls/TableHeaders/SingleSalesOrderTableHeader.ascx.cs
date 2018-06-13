@@ -14,6 +14,8 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
         protected Control singleSalesOrderDetailTable;
         public SalesHeader Header { get; set; }
         public int HeadCount { get; set; }
+        public int CustomerCount { get; set; }
+        public int SalesOrderCount { get; set; }
 
         public int CustID { get; set; }
 
@@ -24,15 +26,20 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.SalesOrderSequence.Text = "Order " + HeadCount.ToString();
+            
             this.thcExternalDocumentNo.Text = Header.ExternalDocumentNo;
 
-            this.btnExpandCurrentOrder.ID = "btnExpandCurrentOrder_" + CustID.ToString() + "_" + HeadCount.ToString();
-
-            if (Session["SingleSalesOrderTableHeader_" + CustID.ToString()] == null)
+            if(SalesOrderCount == 1)
             {
-                Session["SingleSalesOrderTableHeader_" + CustID.ToString()] = this.tblSingleSalesOrderTableHeader;
+                this.btnExpandCurrentOrder.Visible = false;
+                this.SalesOrderSequence.Text = "Order";
             }
+            else
+            {
+                this.SalesOrderSequence.Text = "Order " + HeadCount.ToString();
+                this.btnExpandCurrentOrder.ID = "btnExpandCurrentOrder_" + CustID.ToString() + "_" + HeadCount.ToString();
+            }
+            
             PopulateHeader();
         }
 
@@ -50,7 +57,8 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             ((SingleSalesOrderDetail)singleSalesOrderDetailTable).Sh = Header;
             ((SingleSalesOrderDetail)singleSalesOrderDetailTable).CountID = HeadCount;
             ((SingleSalesOrderDetail)singleSalesOrderDetailTable).CustID = CustID;
-      
+            ((SingleSalesOrderDetail)singleSalesOrderDetailTable).CustomerCount = CustomerCount;
+
             tr.Cells.Add(tc);
             tr.ID = "singleSalesOrderDetail_" + CustID.ToString() + "_" + HeadCount.ToString();
 

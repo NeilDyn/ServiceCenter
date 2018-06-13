@@ -489,7 +489,6 @@ namespace ExcelDesign.Class_Objects
             {
                 for (int so = 0; so < currResults.ReturnReceiptHeader.Length; so++)
                 {
-
                     if (currResults.ReturnReceiptHeader[so].ShipToName == custName)
                     {
                         rmaNo = currResults.ReturnReceiptHeader[so].ReturnOrderNo;
@@ -518,7 +517,6 @@ namespace ExcelDesign.Class_Objects
                         totalCounter = 0;
                         statusCounter = 0;
                     }
-
                 }
             }
 
@@ -810,71 +808,74 @@ namespace ExcelDesign.Class_Objects
                 {
                     shipToName = currResults.SalesHeader[c].ShipToName;
 
-                    if (!customerNames.Any(order => order.Equals(shipToName)))
+                    if (currResults.SalesHeader[c].DocType == "Order")
                     {
-                        shipToAddress1 = currResults.SalesHeader[c].ShipToAddress;
-                        shipToAddress2 = currResults.SalesHeader[c].ShipToAddress2;
-                        shipToContact = currResults.SalesHeader[c].ShipToContact;
-                        shipToCity = currResults.SalesHeader[c].ShipToCity;
-                        shipToZip = currResults.SalesHeader[c].ShipToZip;
-                        shipToState = currResults.SalesHeader[c].ShipToState;
-                        shipToCountry = currResults.SalesHeader[c].ShipToCountry;
-                        salesHeaders = GetSalesOrders(shipToName);
-                        returnHeaders = GetReturnOrders(shipToName);
+                        if (!customerNames.Any(order => order.Equals(shipToName)))
+                        {
+                            shipToAddress1 = currResults.SalesHeader[c].ShipToAddress;
+                            shipToAddress2 = currResults.SalesHeader[c].ShipToAddress2;
+                            shipToContact = currResults.SalesHeader[c].ShipToContact;
+                            shipToCity = currResults.SalesHeader[c].ShipToCity;
+                            shipToZip = currResults.SalesHeader[c].ShipToZip;
+                            shipToState = currResults.SalesHeader[c].ShipToState;
+                            shipToCountry = currResults.SalesHeader[c].ShipToCountry;
+                            salesHeaders = GetSalesOrders(shipToName);
+                            returnHeaders = GetReturnOrders(shipToName);
 
-                        returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
-                        customerNames.Add(shipToName);
+                            returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
+                            customerNames.Add(shipToName);
 
-                        shipToName = string.Empty;
-                        shipToAddress1 = string.Empty;
-                        shipToAddress2 = string.Empty;
-                        shipToContact = string.Empty;
-                        shipToCity = string.Empty;
-                        shipToZip = string.Empty;
-                        shipToState = string.Empty;
-                        shipToCountry = string.Empty;
+                            shipToName = string.Empty;
+                            shipToAddress1 = string.Empty;
+                            shipToAddress2 = string.Empty;
+                            shipToContact = string.Empty;
+                            shipToCity = string.Empty;
+                            shipToZip = string.Empty;
+                            shipToState = string.Empty;
+                            shipToCountry = string.Empty;
 
-                        salesHeaders = new List<SalesHeader>();
-                        returnHeaders = new List<ReturnHeader>();
+                            salesHeaders = new List<SalesHeader>();
+                            returnHeaders = new List<ReturnHeader>();
+                        }
                     }
                 }
             }
 
-            if (currResults.ReturnReceiptHeader != null)
-            {
-                for (int c = 0; c < currResults.ReturnReceiptHeader.Length; c++)
-                {
-                    shipToName = currResults.ReturnReceiptHeader[c].ShipToName;
+            //if (currResults.ReturnReceiptHeader != null)
+            //{
+            //    for (int c = 0; c < currResults.ReturnReceiptHeader.Length; c++)
+            //    {
+            //        shipToName = currResults.ReturnReceiptHeader[c].ShipToName;
 
-                    if (!customerNames.Any(order => order.Equals(shipToName)))
-                    {
-                        shipToAddress1 = currResults.ReturnReceiptHeader[c].ShipToAddress;
-                        shipToAddress2 = currResults.ReturnReceiptHeader[c].ShipToAddress2;
-                        shipToContact = currResults.ReturnReceiptHeader[c].ShipToContact;
-                        shipToCity = currResults.ReturnReceiptHeader[c].ShipToCity;
-                        shipToZip = currResults.ReturnReceiptHeader[c].ShipToZip;
-                        shipToState = currResults.ReturnReceiptHeader[c].ShipToState;
-                        shipToCountry = currResults.ReturnReceiptHeader[c].ShipToCountry;
-                        salesHeaders = GetSalesOrders(shipToName);
-                        returnHeaders = GetReturnOrders(shipToName);
+            //        if (!customerNames.Any(order => order.Equals(shipToName)))
+            //        {
+            //            shipToAddress1 = currResults.ReturnReceiptHeader[c].ShipToAddress;
+            //            shipToAddress2 = currResults.ReturnReceiptHeader[c].ShipToAddress2;
+            //            shipToContact = currResults.ReturnReceiptHeader[c].ShipToContact;
+            //            shipToCity = currResults.ReturnReceiptHeader[c].ShipToCity;
+            //            shipToZip = currResults.ReturnReceiptHeader[c].ShipToZip;
+            //            shipToState = currResults.ReturnReceiptHeader[c].ShipToState;
+            //            shipToCountry = currResults.ReturnReceiptHeader[c].ShipToCountry;
+            //            salesHeaders = GetSalesOrders(shipToName);
+            //            returnHeaders = GetReturnOrders(shipToName);
 
-                        returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
-                        customerNames.Add(shipToName);
+            //            returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
+            //            customerNames.Add(shipToName);
 
-                        shipToName = string.Empty;
-                        shipToAddress1 = string.Empty;
-                        shipToAddress2 = string.Empty;
-                        shipToContact = string.Empty;
-                        shipToCity = string.Empty;
-                        shipToZip = string.Empty;
-                        shipToState = string.Empty;
-                        shipToCountry = string.Empty;
+            //            shipToName = string.Empty;
+            //            shipToAddress1 = string.Empty;
+            //            shipToAddress2 = string.Empty;
+            //            shipToContact = string.Empty;
+            //            shipToCity = string.Empty;
+            //            shipToZip = string.Empty;
+            //            shipToState = string.Empty;
+            //            shipToCountry = string.Empty;
 
-                        salesHeaders = new List<SalesHeader>();
-                        returnHeaders = new List<ReturnHeader>();
-                    }
-                }
-            }
+            //            salesHeaders = new List<SalesHeader>();
+            //            returnHeaders = new List<ReturnHeader>();
+            //        }
+            //    }
+            //}
 
             return returnCust;
         }

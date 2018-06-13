@@ -15,6 +15,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
         public ReturnHeader Rh { get; set; }
         public int CountID { get; set; }
         public int CustID { get; set; }
+        public int CustomerCount { get; set; }
 
         protected TableRow buttonRow = new TableRow();
 
@@ -35,7 +36,11 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            CreateButtons();
+            if(CustomerCount == 1)
+            {
+                CreateButtons();
+            }
+
             LoadData();
             PopulateLines();      
             FormatPage();
@@ -239,24 +244,28 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             this.tblReturnDetailLines.Rows.Add(totalRow);
 
-            createExchangeCell.Controls.Add(btnCreateExchange);
-            issueRefundCell.Controls.Add(btnIssueRefund);
-
-            buttonRow.Cells.Add(new TableCell());
-            buttonRow.Cells.Add(new TableCell());
-            buttonRow.Cells.Add(new TableCell());
-            buttonRow.Cells.Add(new TableCell());
-            buttonRow.Cells.Add(new TableCell());
-            buttonRow.Cells.Add(new TableCell());
-            buttonRow.Cells.Add(createExchangeCell);
-            buttonRow.Cells.Add(issueRefundCell);
-
             TableCell breakCell = new TableCell();
             TableRow breakRow = new TableRow();
             breakCell.Text = "<br/>";
             breakRow.Cells.Add(breakCell);
             this.tblReturnDetailLines.Rows.Add(breakRow);
-            this.tblReturnDetailLines.Rows.Add(buttonRow);
+
+            if(CustomerCount == 1)
+            {
+                createExchangeCell.Controls.Add(btnCreateExchange);
+                issueRefundCell.Controls.Add(btnIssueRefund);
+
+                buttonRow.Cells.Add(new TableCell());
+                buttonRow.Cells.Add(new TableCell());
+                buttonRow.Cells.Add(new TableCell());
+                buttonRow.Cells.Add(new TableCell());
+                buttonRow.Cells.Add(new TableCell());
+                buttonRow.Cells.Add(new TableCell());
+                buttonRow.Cells.Add(createExchangeCell);
+                buttonRow.Cells.Add(issueRefundCell);
+
+                this.tblReturnDetailLines.Rows.Add(buttonRow);
+            }           
         }
 
         protected void PopulateReceiveLines()

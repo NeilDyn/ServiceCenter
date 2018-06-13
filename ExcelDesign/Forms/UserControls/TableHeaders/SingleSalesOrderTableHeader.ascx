@@ -5,7 +5,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("[id$=singleSalesOrderDetail_<%= this.CustID %>_<%= this.HeadCount %>]").hide();
+        if (<%= this.SalesOrderCount %> > 1) {
+            $("[id$=singleSalesOrderDetail_<%= this.CustID %>_<%= this.HeadCount %>]").hide();
+        }
 
         $("[id$=btnExpandCurrentOrder_<%= this.CustID %>_<%= this.HeadCount %>]").click(function () {
             $("[id$=singleSalesOrderDetail_<%= this.CustID %>_<%= this.HeadCount %>]").toggle();
@@ -29,9 +31,4 @@
         <asp:TableHeaderCell Font-Bold="true" Text="External Document No:" HorizontalAlign="Right" style="text-align:right"/>
         <asp:TableHeaderCell runat="server" ID="thcExternalDocumentNo" HorizontalAlign="Right" style="text-align:left"/>
     </asp:TableHeaderRow>
-    <%--<asp:TableFooterRow>
-        <asp:TableCell ColumnSpan ="4">
-            <hr class="Seperator"/>
-        </asp:TableCell>
-    </asp:TableFooterRow>--%>
 </asp:Table>

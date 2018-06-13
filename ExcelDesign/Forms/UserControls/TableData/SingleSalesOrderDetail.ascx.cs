@@ -15,6 +15,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
         public SalesHeader Sh { get; set; }
         public int CountID { get; set; }
         public int CustID { get; set; }
+        public int CustomerCount { get; set; }
 
         protected TableRow buttonRow = new TableRow();
         protected TableCell cancelOrderCell = new TableCell();
@@ -41,7 +42,11 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            CreateButtons();
+            if(CustomerCount == 1)
+            {
+                CreateButtons();
+            }
+
             PopulateDetail();
             PopulateLines();
             FormatPage();
@@ -305,28 +310,32 @@ namespace ExcelDesign.Forms.UserControls.TableData
             totalRow.Cells.Add(new TableCell());
             totalRow.Cells.Add(new TableCell());
 
-            this.tblOrderDetailLines.Rows.Add(totalRow);
-
-            cancelOrderCell.Controls.Add(btnCancelOrder);
-            partRequestCell.Controls.Add(btnPartRequest);
-            createReturnCell.Controls.Add(btnCreateReturn);
-            issueRefundcell.Controls.Add(btnIssueRefund);
-
-            buttonRow.Cells.Add(new TableCell());
-            buttonRow.Cells.Add(new TableCell());
-            buttonRow.Cells.Add(new TableCell());
-            buttonRow.Cells.Add(new TableCell());
-            buttonRow.Cells.Add(cancelOrderCell);
-            buttonRow.Cells.Add(partRequestCell);
-            buttonRow.Cells.Add(createReturnCell);
-            buttonRow.Cells.Add(issueRefundcell);
+            this.tblOrderDetailLines.Rows.Add(totalRow);      
 
             TableCell breakCell = new TableCell();
             TableRow breakRow = new TableRow();
             breakCell.Text = "<br/>";
             breakRow.Cells.Add(breakCell);
             this.tblOrderDetailLines.Rows.Add(breakRow);
-            this.tblOrderDetailLines.Rows.Add(buttonRow);
+
+            if(CustomerCount == 1)
+            {
+                cancelOrderCell.Controls.Add(btnCancelOrder);
+                partRequestCell.Controls.Add(btnPartRequest);
+                createReturnCell.Controls.Add(btnCreateReturn);
+                issueRefundcell.Controls.Add(btnIssueRefund);
+
+                buttonRow.Cells.Add(new TableCell());
+                buttonRow.Cells.Add(new TableCell());
+                buttonRow.Cells.Add(new TableCell());
+                buttonRow.Cells.Add(new TableCell());
+                buttonRow.Cells.Add(cancelOrderCell);
+                buttonRow.Cells.Add(partRequestCell);
+                buttonRow.Cells.Add(createReturnCell);
+                buttonRow.Cells.Add(issueRefundcell);
+
+                this.tblOrderDetailLines.Rows.Add(buttonRow);
+            }          
         }
 
         protected void PopulateShipmentLines()

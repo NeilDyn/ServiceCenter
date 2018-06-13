@@ -33,6 +33,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private System.Threading.SendOrPostCallback InitiateUserActionOperationCompleted;
         
+        private System.Threading.SendOrPostCallback CreateReturnOrderOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -78,6 +80,9 @@ namespace ExcelDesign.ServiceFunctions {
         public event InitiateUserActionCompletedEventHandler InitiateUserActionCompleted;
         
         /// <remarks/>
+        public event CreateReturnOrderCompletedEventHandler CreateReturnOrderCompleted;
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:SearchDetermineNoType", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="SearchDetermineNoType_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
         public string SearchDetermineNoType(string sessionID, string searchNo, ref SearchResults searchResults) {
@@ -115,34 +120,78 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:InitiateUserAction", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="InitiateUserAction_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string InitiateUserAction(string sessionID, string orderNo, int _ActionType) {
+        public string InitiateUserAction(string sessionID, string orderNo, string extDocNo, int _ActionType, string returnReasonCode, int _DefectOpts) {
             object[] results = this.Invoke("InitiateUserAction", new object[] {
                         sessionID,
                         orderNo,
-                        _ActionType});
+                        extDocNo,
+                        _ActionType,
+                        returnReasonCode,
+                        _DefectOpts});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void InitiateUserActionAsync(string sessionID, string orderNo, int _ActionType) {
-            this.InitiateUserActionAsync(sessionID, orderNo, _ActionType, null);
+        public void InitiateUserActionAsync(string sessionID, string orderNo, string extDocNo, int _ActionType, string returnReasonCode, int _DefectOpts) {
+            this.InitiateUserActionAsync(sessionID, orderNo, extDocNo, _ActionType, returnReasonCode, _DefectOpts, null);
         }
         
         /// <remarks/>
-        public void InitiateUserActionAsync(string sessionID, string orderNo, int _ActionType, object userState) {
+        public void InitiateUserActionAsync(string sessionID, string orderNo, string extDocNo, int _ActionType, string returnReasonCode, int _DefectOpts, object userState) {
             if ((this.InitiateUserActionOperationCompleted == null)) {
                 this.InitiateUserActionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInitiateUserActionOperationCompleted);
             }
             this.InvokeAsync("InitiateUserAction", new object[] {
                         sessionID,
                         orderNo,
-                        _ActionType}, this.InitiateUserActionOperationCompleted, userState);
+                        extDocNo,
+                        _ActionType,
+                        returnReasonCode,
+                        _DefectOpts}, this.InitiateUserActionOperationCompleted, userState);
         }
         
         private void OnInitiateUserActionOperationCompleted(object arg) {
             if ((this.InitiateUserActionCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.InitiateUserActionCompleted(this, new InitiateUserActionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CreateReturnOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CreateReturnOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string CreateReturnOrder(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, [System.Xml.Serialization.XmlElementAttribute("lineDetails")] string[] lineDetails) {
+            object[] results = this.Invoke("CreateReturnOrder", new object[] {
+                        orderNo,
+                        extDocNo,
+                        returnReasonCode,
+                        _DefectOpts,
+                        lineDetails});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string[] lineDetails) {
+            this.CreateReturnOrderAsync(orderNo, extDocNo, returnReasonCode, _DefectOpts, lineDetails, null);
+        }
+        
+        /// <remarks/>
+        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string[] lineDetails, object userState) {
+            if ((this.CreateReturnOrderOperationCompleted == null)) {
+                this.CreateReturnOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateReturnOrderOperationCompleted);
+            }
+            this.InvokeAsync("CreateReturnOrder", new object[] {
+                        orderNo,
+                        extDocNo,
+                        returnReasonCode,
+                        _DefectOpts,
+                        lineDetails}, this.CreateReturnOrderOperationCompleted, userState);
+        }
+        
+        private void OnCreateReturnOrderOperationCompleted(object arg) {
+            if ((this.CreateReturnOrderCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CreateReturnOrderCompleted(this, new CreateReturnOrderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -202,6 +251,10 @@ namespace ExcelDesign.ServiceFunctions {
         private SalesCreditMemoLines[] salesCreditMemoLinesField;
         
         private SOImportBuffer[] sOImportBufferField;
+        
+        private ReturnReasonCode[] returnReasonCodeField;
+        
+        private DefectOptions[] defectOptionsField;
         
         private string[] textField;
         
@@ -367,6 +420,28 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.sOImportBufferField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ReturnReasonCode")]
+        public ReturnReasonCode[] ReturnReasonCode {
+            get {
+                return this.returnReasonCodeField;
+            }
+            set {
+                this.returnReasonCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("DefectOptions")]
+        public DefectOptions[] DefectOptions {
+            get {
+                return this.defectOptionsField;
+            }
+            set {
+                this.defectOptionsField = value;
             }
         }
         
@@ -629,6 +704,451 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
+    public partial class DefectOptions {
+        
+        private string[] blankField;
+        
+        private string[] noLongerWantedField;
+        
+        private string[] pWrongNetworkField;
+        
+        private string[] notAsExpectedField;
+        
+        private string[] shippingBoxChrushedField;
+        
+        private string[] phoneBoxChrushedField;
+        
+        private string[] packageWetField;
+        
+        private string[] unresponsiveLCDField;
+        
+        private string[] doesNotChargeField;
+        
+        private string[] badKeypadField;
+        
+        private string[] badMicEarpieceSpeakerField;
+        
+        private string[] noPowerField;
+        
+        private string[] noWIfiField;
+        
+        private string[] noSignalField;
+        
+        private string[] resetsItselfField;
+        
+        private string[] badCameraField;
+        
+        private string[] callsDroppedField;
+        
+        private string[] doesNotReadSIMField;
+        
+        private string[] doesNotReadSDField;
+        
+        private string[] phoneIsLockedField;
+        
+        private string[] wrongBandsListedField;
+        
+        private string[] wrongColorModelField;
+        
+        private string[] cantSetupMMSField;
+        
+        private string[] notInEnglishField;
+        
+        private string[] uSedCustomerInfoField;
+        
+        private string[] usedCallTimerField;
+        
+        private string[] usedAccessoriesField;
+        
+        private string[] usedScratehcesDentsDingsField;
+        
+        private string[] boxNotSealedField;
+        
+        private string[] softwareField;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Blank")]
+        public string[] Blank {
+            get {
+                return this.blankField;
+            }
+            set {
+                this.blankField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("NoLongerWanted")]
+        public string[] NoLongerWanted {
+            get {
+                return this.noLongerWantedField;
+            }
+            set {
+                this.noLongerWantedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("PWrongNetwork")]
+        public string[] PWrongNetwork {
+            get {
+                return this.pWrongNetworkField;
+            }
+            set {
+                this.pWrongNetworkField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("NotAsExpected")]
+        public string[] NotAsExpected {
+            get {
+                return this.notAsExpectedField;
+            }
+            set {
+                this.notAsExpectedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ShippingBoxChrushed")]
+        public string[] ShippingBoxChrushed {
+            get {
+                return this.shippingBoxChrushedField;
+            }
+            set {
+                this.shippingBoxChrushedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("PhoneBoxChrushed")]
+        public string[] PhoneBoxChrushed {
+            get {
+                return this.phoneBoxChrushedField;
+            }
+            set {
+                this.phoneBoxChrushedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("PackageWet")]
+        public string[] PackageWet {
+            get {
+                return this.packageWetField;
+            }
+            set {
+                this.packageWetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("UnresponsiveLCD")]
+        public string[] UnresponsiveLCD {
+            get {
+                return this.unresponsiveLCDField;
+            }
+            set {
+                this.unresponsiveLCDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("DoesNotCharge")]
+        public string[] DoesNotCharge {
+            get {
+                return this.doesNotChargeField;
+            }
+            set {
+                this.doesNotChargeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("BadKeypad")]
+        public string[] BadKeypad {
+            get {
+                return this.badKeypadField;
+            }
+            set {
+                this.badKeypadField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("BadMicEarpieceSpeaker")]
+        public string[] BadMicEarpieceSpeaker {
+            get {
+                return this.badMicEarpieceSpeakerField;
+            }
+            set {
+                this.badMicEarpieceSpeakerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("NoPower")]
+        public string[] NoPower {
+            get {
+                return this.noPowerField;
+            }
+            set {
+                this.noPowerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("NoWIfi")]
+        public string[] NoWIfi {
+            get {
+                return this.noWIfiField;
+            }
+            set {
+                this.noWIfiField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("NoSignal")]
+        public string[] NoSignal {
+            get {
+                return this.noSignalField;
+            }
+            set {
+                this.noSignalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ResetsItself")]
+        public string[] ResetsItself {
+            get {
+                return this.resetsItselfField;
+            }
+            set {
+                this.resetsItselfField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("BadCamera")]
+        public string[] BadCamera {
+            get {
+                return this.badCameraField;
+            }
+            set {
+                this.badCameraField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("CallsDropped")]
+        public string[] CallsDropped {
+            get {
+                return this.callsDroppedField;
+            }
+            set {
+                this.callsDroppedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("DoesNotReadSIM")]
+        public string[] DoesNotReadSIM {
+            get {
+                return this.doesNotReadSIMField;
+            }
+            set {
+                this.doesNotReadSIMField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("DoesNotReadSD")]
+        public string[] DoesNotReadSD {
+            get {
+                return this.doesNotReadSDField;
+            }
+            set {
+                this.doesNotReadSDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("PhoneIsLocked")]
+        public string[] PhoneIsLocked {
+            get {
+                return this.phoneIsLockedField;
+            }
+            set {
+                this.phoneIsLockedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("WrongBandsListed")]
+        public string[] WrongBandsListed {
+            get {
+                return this.wrongBandsListedField;
+            }
+            set {
+                this.wrongBandsListedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("WrongColorModel")]
+        public string[] WrongColorModel {
+            get {
+                return this.wrongColorModelField;
+            }
+            set {
+                this.wrongColorModelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("CantSetupMMS")]
+        public string[] CantSetupMMS {
+            get {
+                return this.cantSetupMMSField;
+            }
+            set {
+                this.cantSetupMMSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("NotInEnglish")]
+        public string[] NotInEnglish {
+            get {
+                return this.notInEnglishField;
+            }
+            set {
+                this.notInEnglishField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("USedCustomerInfo")]
+        public string[] USedCustomerInfo {
+            get {
+                return this.uSedCustomerInfoField;
+            }
+            set {
+                this.uSedCustomerInfoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("UsedCallTimer")]
+        public string[] UsedCallTimer {
+            get {
+                return this.usedCallTimerField;
+            }
+            set {
+                this.usedCallTimerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("UsedAccessories")]
+        public string[] UsedAccessories {
+            get {
+                return this.usedAccessoriesField;
+            }
+            set {
+                this.usedAccessoriesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("UsedScratehcesDentsDings")]
+        public string[] UsedScratehcesDentsDings {
+            get {
+                return this.usedScratehcesDentsDingsField;
+            }
+            set {
+                this.usedScratehcesDentsDingsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("BoxNotSealed")]
+        public string[] BoxNotSealed {
+            get {
+                return this.boxNotSealedField;
+            }
+            set {
+                this.boxNotSealedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Software")]
+        public string[] Software {
+            get {
+                return this.softwareField;
+            }
+            set {
+                this.softwareField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
+    public partial class ReturnReasonCode {
+        
+        private string reasonCodeField;
+        
+        private string descriptionField;
+        
+        /// <remarks/>
+        public string ReasonCode {
+            get {
+                return this.reasonCodeField;
+            }
+            set {
+                this.reasonCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
             }
         }
     }
@@ -2707,6 +3227,32 @@ namespace ExcelDesign.ServiceFunctions {
         private object[] results;
         
         internal InitiateUserActionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void CreateReturnOrderCompletedEventHandler(object sender, CreateReturnOrderCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CreateReturnOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal CreateReturnOrderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

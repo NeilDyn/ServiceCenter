@@ -6,7 +6,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("[id$=salesOrderDetailHeader_<%= this.CustID %>]").hide();
+        if (<%= this.SalesOrderCount %> > 1) {
+            $("[id$=salesOrderDetailHeader_<%= this.CustID %>]").hide();
+        }
 
         $("[id$=btnExpandOrder_<%= this.CustID %>]").click(function () {
             $("[id$=salesOrderDetailHeader_<%= this.CustID %>]").toggle();

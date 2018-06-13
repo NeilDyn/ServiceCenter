@@ -14,6 +14,8 @@ namespace ExcelDesign.Forms.UserControls.MainTables
         protected Control singleSalesOrderHeader;
         public List<SalesHeader> SalesHeaderList { get; set; }
         public int CustID { get; set; }
+        public int CustomerCount { get; set; }
+        public int SalesOrderCount { get; set; }
 
         private TableRow tr;
         private TableCell tc;
@@ -23,14 +25,15 @@ namespace ExcelDesign.Forms.UserControls.MainTables
         protected void Page_Load(object sender, EventArgs e)
         {
             this.thcTotalOrders.Text = SalesHeaderList.Count.ToString();
-            this.btnExpandOrder.ID = "btnExpandOrder_" + CustID.ToString();
-
-            if (Session["SalesOrderHeaderTable_" + CustID.ToString()] == null)
+            
+            if(SalesOrderCount == 1)
             {
-                Session["SalesOrderHeaderTable_" + CustID.ToString()] = this.tblSalesOrderHeader;
+                this.btnExpandOrder.Visible = false;
             }
-
-            Session["SalesOrderCount_" + CustID.ToString()] = SalesHeaderList.Count;
+            else
+            {
+                this.btnExpandOrder.ID = "btnExpandOrder_" + CustID.ToString();
+            }
 
             LoadData();
         }
@@ -47,6 +50,8 @@ namespace ExcelDesign.Forms.UserControls.MainTables
                 ((SingleSalesOrderTableHeader)singleSalesOrderHeader).Header = salesHeader;
                 ((SingleSalesOrderTableHeader)singleSalesOrderHeader).HeadCount = salesCount;
                 ((SingleSalesOrderTableHeader)singleSalesOrderHeader).CustID = CustID;
+                ((SingleSalesOrderTableHeader)singleSalesOrderHeader).CustomerCount = CustomerCount;
+                ((SingleSalesOrderTableHeader)singleSalesOrderHeader).SalesOrderCount = SalesOrderCount;
 
                 tc.Height = new Unit("100%");
                 tc.ColumnSpan = 7;
@@ -55,7 +60,6 @@ namespace ExcelDesign.Forms.UserControls.MainTables
                 tr.ID = "salesOrderDetailHeader_" + CustID.ToString();
                 this.tblSalesOrderHeader.Rows.Add(tr);
                 salesCount++;
-                Session["SalesOrderHeaderTableCell_CustID" + CustID.ToString() + "_" + salesCount.ToString()] = tc;
             }
         }
     }

@@ -5,7 +5,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("[id$=singleReturnOrderDetail_<%= this.CustID %>_<%= this.HeadCount %>]").hide();
+        if (<%= this.ReturnOrdersCount %> > 1) {
+            $("[id$=singleReturnOrderDetail_<%= this.CustID %>_<%= this.HeadCount %>]").hide();
+        }
 
         $("[id$=btnExpandCurrentReturn_<%= this.CustID %>_<%= this.HeadCount %>]").click(function () {
             $("[id$=singleReturnOrderDetail_<%= this.CustID %>_<%= this.HeadCount %>]").toggle();

@@ -59,8 +59,8 @@ namespace ExcelDesign.Class_Objects
         public string InitiateAction(string orderNo, ActionType actionType) 
         {
             string result;
-            result = functions.InitiateUserAction(SessionID(), orderNo, (int)actionType);
-            return result;
+            //result = functions.InitiateUserAction(SessionID(), orderNo, (int)actionType);
+            return null;
         }
 
         protected string SessionID()

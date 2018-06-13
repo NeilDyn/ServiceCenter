@@ -246,6 +246,46 @@
           <element minOccurs="0" maxOccurs="unbounded" name="Warranty" type="tns:Warranty" />
         </sequence>
       </complexType>
+      <complexType name="ReturnReasonCode">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="ReasonCode" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="DefectOptions" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Blank" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="NoLongerWanted" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="PWrongNetwork" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="NotAsExpected" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="ShippingBoxChrushed" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="PhoneBoxChrushed" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="PackageWet" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="UnresponsiveLCD" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="DoesNotCharge" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="BadKeypad" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="BadMicEarpieceSpeaker" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="NoPower" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="NoWIfi" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="NoSignal" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="ResetsItself" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="BadCamera" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="CallsDropped" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="DoesNotReadSIM" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="DoesNotReadSD" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="PhoneIsLocked" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="WrongBandsListed" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="WrongColorModel" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="CantSetupMMS" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="NotInEnglish" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="USedCustomerInfo" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="UsedCallTimer" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="UsedAccessories" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="UsedScratehcesDentsDings" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="BoxNotSealed" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="Software" type="string" />
+        </sequence>
+      </complexType>
       <complexType name="SearchResults" mixed="true">
         <sequence>
           <element minOccurs="0" maxOccurs="unbounded" name="SalesHeader" type="tns:SalesHeader" />
@@ -263,6 +303,8 @@
           <element minOccurs="0" maxOccurs="unbounded" name="SalesCreditMemo" type="tns:SalesCreditMemo" />
           <element minOccurs="0" maxOccurs="unbounded" name="SalesCreditMemoLines" type="tns:SalesCreditMemoLines" />
           <element minOccurs="0" maxOccurs="unbounded" name="SOImportBuffer" type="tns:SOImportBuffer" />
+          <element minOccurs="1" maxOccurs="unbounded" name="ReturnReasonCode" type="tns:ReturnReasonCode" />
+          <element minOccurs="1" maxOccurs="unbounded" name="DefectOptions" type="tns:DefectOptions" />
         </sequence>
       </complexType>
       <element name="SearchResults" type="tns:SearchResults" />
@@ -290,11 +332,32 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
             <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="extDocNo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="_ActionType" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="returnReasonCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="_DefectOpts" type="int" />
           </sequence>
         </complexType>
       </element>
       <element name="InitiateUserAction_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CreateReturnOrder">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="extDocNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="returnReasonCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="_DefectOpts" type="int" />
+            <element minOccurs="1" maxOccurs="unbounded" name="lineDetails" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CreateReturnOrder_Result">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
@@ -315,6 +378,12 @@
   <message name="InitiateUserAction_Result">
     <part name="parameters" element="tns:InitiateUserAction_Result" />
   </message>
+  <message name="CreateReturnOrder">
+    <part name="parameters" element="tns:CreateReturnOrder" />
+  </message>
+  <message name="CreateReturnOrder_Result">
+    <part name="parameters" element="tns:CreateReturnOrder_Result" />
+  </message>
   <portType name="Functions_Port">
     <operation name="SearchDetermineNoType">
       <input name="SearchDetermineNoType" message="tns:SearchDetermineNoType" />
@@ -323,6 +392,10 @@
     <operation name="InitiateUserAction">
       <input name="InitiateUserAction" message="tns:InitiateUserAction" />
       <output name="InitiateUserAction_Result" message="tns:InitiateUserAction_Result" />
+    </operation>
+    <operation name="CreateReturnOrder">
+      <input name="CreateReturnOrder" message="tns:CreateReturnOrder" />
+      <output name="CreateReturnOrder_Result" message="tns:CreateReturnOrder_Result" />
     </operation>
   </portType>
   <binding name="Functions_Binding" type="tns:Functions_Port">
@@ -342,6 +415,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="InitiateUserAction_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CreateReturnOrder">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:CreateReturnOrder" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CreateReturnOrder">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CreateReturnOrder_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

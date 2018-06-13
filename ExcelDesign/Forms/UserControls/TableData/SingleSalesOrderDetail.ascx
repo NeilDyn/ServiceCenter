@@ -13,7 +13,9 @@
         $("[id*=showMoreOrderLines_<%= this.CustID %>_<%= this.CountID %>]").hide();
 
         $("[id$=btnCancelOrder_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            alert("Hi, order <%= this.Sh.SalesOrderNo %> can be cancelled.");
+            //alert("Hi, order <%= this.Sh.SalesOrderNo %> can be cancelled.");
+
+            
         });
 
         $("[id$=btnPartRequest_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
@@ -21,7 +23,13 @@
         });
 
         $("[id$=btnCreateReturn_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            alert("Hi, order <%= this.Sh.SalesOrderNo %> be Returned.");
+            var width = 800;
+            var height = 600;
+            var left = (screen.width - width) / 2;
+            var top = (screen.height - height) / 2;
+            window.open("FunctionForms/CreateReturn.aspx?OrderNo=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>",
+                null,
+                "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no, directories=no");
         });
 
         $("[id$=btnIssueRefund_<%= this.CustID %>_<%= this.CountID %>]").click(function () {

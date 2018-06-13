@@ -353,11 +353,29 @@
             <element minOccurs="1" maxOccurs="1" name="extDocNo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="returnReasonCode" type="string" />
             <element minOccurs="1" maxOccurs="1" name="_DefectOpts" type="int" />
-            <element minOccurs="1" maxOccurs="unbounded" name="lineDetails" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="notes" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="includeResourceLines" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="printRmaInstructions" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="createUPSReturnLabel" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="lineDetails" type="string" />
           </sequence>
         </complexType>
       </element>
       <element name="CreateReturnOrder_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CancelOrder">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="test" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CancelOrder_Result">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
@@ -384,6 +402,12 @@
   <message name="CreateReturnOrder_Result">
     <part name="parameters" element="tns:CreateReturnOrder_Result" />
   </message>
+  <message name="CancelOrder">
+    <part name="parameters" element="tns:CancelOrder" />
+  </message>
+  <message name="CancelOrder_Result">
+    <part name="parameters" element="tns:CancelOrder_Result" />
+  </message>
   <portType name="Functions_Port">
     <operation name="SearchDetermineNoType">
       <input name="SearchDetermineNoType" message="tns:SearchDetermineNoType" />
@@ -396,6 +420,10 @@
     <operation name="CreateReturnOrder">
       <input name="CreateReturnOrder" message="tns:CreateReturnOrder" />
       <output name="CreateReturnOrder_Result" message="tns:CreateReturnOrder_Result" />
+    </operation>
+    <operation name="CancelOrder">
+      <input name="CancelOrder" message="tns:CancelOrder" />
+      <output name="CancelOrder_Result" message="tns:CancelOrder_Result" />
     </operation>
   </portType>
   <binding name="Functions_Binding" type="tns:Functions_Port">
@@ -424,6 +452,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="CreateReturnOrder_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CancelOrder">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:CancelOrder" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CancelOrder">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CancelOrder_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

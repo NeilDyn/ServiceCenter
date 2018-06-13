@@ -35,6 +35,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private System.Threading.SendOrPostCallback CreateReturnOrderOperationCompleted;
         
+        private System.Threading.SendOrPostCallback CancelOrderOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -81,6 +83,9 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         public event CreateReturnOrderCompletedEventHandler CreateReturnOrderCompleted;
+        
+        /// <remarks/>
+        public event CancelOrderCompletedEventHandler CancelOrderCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:SearchDetermineNoType", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="SearchDetermineNoType_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -160,23 +165,27 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CreateReturnOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CreateReturnOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string CreateReturnOrder(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, [System.Xml.Serialization.XmlElementAttribute("lineDetails")] string[] lineDetails) {
+        public string CreateReturnOrder(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string lineDetails) {
             object[] results = this.Invoke("CreateReturnOrder", new object[] {
                         orderNo,
                         extDocNo,
                         returnReasonCode,
                         _DefectOpts,
+                        notes,
+                        includeResourceLines,
+                        printRmaInstructions,
+                        createUPSReturnLabel,
                         lineDetails});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string[] lineDetails) {
-            this.CreateReturnOrderAsync(orderNo, extDocNo, returnReasonCode, _DefectOpts, lineDetails, null);
+        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string lineDetails) {
+            this.CreateReturnOrderAsync(orderNo, extDocNo, returnReasonCode, _DefectOpts, notes, includeResourceLines, printRmaInstructions, createUPSReturnLabel, lineDetails, null);
         }
         
         /// <remarks/>
-        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string[] lineDetails, object userState) {
+        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string lineDetails, object userState) {
             if ((this.CreateReturnOrderOperationCompleted == null)) {
                 this.CreateReturnOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateReturnOrderOperationCompleted);
             }
@@ -185,6 +194,10 @@ namespace ExcelDesign.ServiceFunctions {
                         extDocNo,
                         returnReasonCode,
                         _DefectOpts,
+                        notes,
+                        includeResourceLines,
+                        printRmaInstructions,
+                        createUPSReturnLabel,
                         lineDetails}, this.CreateReturnOrderOperationCompleted, userState);
         }
         
@@ -192,6 +205,36 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.CreateReturnOrderCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.CreateReturnOrderCompleted(this, new CreateReturnOrderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CancelOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CancelOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string CancelOrder(bool test) {
+            object[] results = this.Invoke("CancelOrder", new object[] {
+                        test});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void CancelOrderAsync(bool test) {
+            this.CancelOrderAsync(test, null);
+        }
+        
+        /// <remarks/>
+        public void CancelOrderAsync(bool test, object userState) {
+            if ((this.CancelOrderOperationCompleted == null)) {
+                this.CancelOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCancelOrderOperationCompleted);
+            }
+            this.InvokeAsync("CancelOrder", new object[] {
+                        test}, this.CancelOrderOperationCompleted, userState);
+        }
+        
+        private void OnCancelOrderOperationCompleted(object arg) {
+            if ((this.CancelOrderCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CancelOrderCompleted(this, new CancelOrderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -3253,6 +3296,32 @@ namespace ExcelDesign.ServiceFunctions {
         private object[] results;
         
         internal CreateReturnOrderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void CancelOrderCompletedEventHandler(object sender, CancelOrderCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CancelOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal CancelOrderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

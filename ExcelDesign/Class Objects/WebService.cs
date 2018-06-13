@@ -16,12 +16,11 @@ namespace ExcelDesign.Class_Objects
         private readonly string functionsURL = "Codeunit/Functions";
         private static NetworkCredential credentials;
 
-        protected string username = "nchristodoulou";
-        protected string password = "JEGnewedi2018`";
+        protected string username = "jbotha";
+        protected string password = "Ws33hr1st3ll3_C_";
         protected string domain = "JEG";
 
         protected Functions functions = new Functions();
-
 
         public WebService()
         {
@@ -66,6 +65,16 @@ namespace ExcelDesign.Class_Objects
         protected string SessionID()
         {
             return "testSesh";
+        }
+
+        public string CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, int defect, string notes,
+            bool includeResource, bool printRMA, bool createLabel, string lineDetails)
+        {
+            string returnRMA;
+
+            returnRMA = functions.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, defect, notes, createLabel, printRMA, includeResource, lineDetails);
+
+            return returnRMA;
         }
     }
 }

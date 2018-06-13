@@ -16,6 +16,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
         public int CountID { get; set; }
         public int CustID { get; set; }
         public int CustomerCount { get; set; }
+        public string OrderNo { get; set; }
+        public string DocNo { get; set; }
 
         protected TableRow buttonRow = new TableRow();
         protected TableCell cancelOrderCell = new TableCell();
@@ -67,6 +69,9 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcSalesOrderNo.Text = Sh.SalesOrderNo;
             this.tcChannelName.Text = Sh.ChannelName;
             TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
+
+            OrderNo = Sh.SalesOrderNo;
+            DocNo = Sh.ExternalDocumentNo;
 
             if (Sh.ShipmentHeaderObject.Count > 0)
             {

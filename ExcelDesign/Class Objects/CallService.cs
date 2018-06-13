@@ -2,6 +2,8 @@
 using System.Linq;
 using ExcelDesign.ServiceFunctions;
 using System.Globalization;
+using ExcelDesign.Class_Objects.FunctionData;
+using System.Web;
 
 namespace ExcelDesign.Class_Objects
 {
@@ -877,7 +879,56 @@ namespace ExcelDesign.Class_Objects
             //    }
             //}
 
+            SetFunctionData();
+
             return returnCust;
+        }
+
+        private void SetFunctionData()
+        {
+            List<ReturnReason> rrList = new List<ReturnReason>();
+
+            List<Defects> doList = new List<Defects>
+            {
+                new Defects(currResults.DefectOptions[0].Blank[0]),
+                new Defects(currResults.DefectOptions[0].BadCamera[0]),
+                new Defects(currResults.DefectOptions[0].BadKeypad[0]),
+                new Defects(currResults.DefectOptions[0].BadMicEarpieceSpeaker[0]),              
+                new Defects(currResults.DefectOptions[0].BoxNotSealed[0]),
+                new Defects(currResults.DefectOptions[0].CallsDropped[0]),
+                new Defects(currResults.DefectOptions[0].CantSetupMMS[0]),
+                new Defects(currResults.DefectOptions[0].DoesNotCharge[0]),
+                new Defects(currResults.DefectOptions[0].DoesNotReadSD[0]),
+                new Defects(currResults.DefectOptions[0].DoesNotReadSIM[0]),
+                new Defects(currResults.DefectOptions[0].NoLongerWanted[0]),
+                new Defects(currResults.DefectOptions[0].NoPower[0]),
+                new Defects(currResults.DefectOptions[0].NoSignal[0]),
+                new Defects(currResults.DefectOptions[0].NotAsExpected[0]),
+                new Defects(currResults.DefectOptions[0].NotInEnglish[0]),
+                new Defects(currResults.DefectOptions[0].NoWIfi[0]),
+                new Defects(currResults.DefectOptions[0].PackageWet[0]),
+                new Defects(currResults.DefectOptions[0].PhoneBoxChrushed[0]),
+                new Defects(currResults.DefectOptions[0].PhoneIsLocked[0]),
+                new Defects(currResults.DefectOptions[0].PWrongNetwork[0]),
+                new Defects(currResults.DefectOptions[0].ResetsItself[0]),
+                new Defects(currResults.DefectOptions[0].ShippingBoxChrushed[0]),
+                new Defects(currResults.DefectOptions[0].Software[0]),
+                new Defects(currResults.DefectOptions[0].UnresponsiveLCD[0]),
+                new Defects(currResults.DefectOptions[0].UsedAccessories[0]),
+                new Defects(currResults.DefectOptions[0].UsedCallTimer[0]),
+                new Defects(currResults.DefectOptions[0].USedCustomerInfo[0]),
+                new Defects(currResults.DefectOptions[0].UsedScratehcesDentsDings[0]),
+                new Defects(currResults.DefectOptions[0].WrongBandsListed[0]),
+                new Defects(currResults.DefectOptions[0].WrongColorModel[0])
+            };
+
+            for (int i = 0; i < currResults.ReturnReasonCode.Length; i++)
+            {
+                rrList.Add(new ReturnReason(currResults.ReturnReasonCode[i].ReasonCode, currResults.ReturnReasonCode[i].Description));
+            }
+
+            HttpContext.Current.Session["Defects"] = doList;
+            HttpContext.Current.Session["ReturnReasons"] = rrList;
         }
     }
 }

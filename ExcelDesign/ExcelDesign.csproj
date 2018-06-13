@@ -87,6 +87,7 @@
     <Content Include="css\mainpage.css" />
     <Content Include="Default.aspx" />
     <Content Include="Forms\ErrorForm.aspx" />
+    <Content Include="Forms\FunctionForms\CreateReturn.aspx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetail.ascx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetailHeader.ascx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoHeader.ascx" />
@@ -124,6 +125,8 @@
     <Compile Include="Class Objects\CallService.cs" />
     <Compile Include="Class Objects\Customer.cs" />
     <Compile Include="Class Objects\Enums\TrackingTypeEnum.cs" />
+    <Compile Include="Class Objects\FunctionData\Defects.cs" />
+    <Compile Include="Class Objects\FunctionData\ReturnReason.cs" />
     <Compile Include="Class Objects\PostedPackage.cs" />
     <Compile Include="Class Objects\PostedPackageLine.cs" />
     <Compile Include="Class Objects\PostedReceive.cs" />
@@ -151,6 +154,13 @@
     </Compile>
     <Compile Include="Forms\ErrorForm.aspx.designer.cs">
       <DependentUpon>ErrorForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\CreateReturn.aspx.cs">
+      <DependentUpon>CreateReturn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\CreateReturn.aspx.designer.cs">
+      <DependentUpon>CreateReturn.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserControls\CustomerInfo\CustomerInfoDetail.ascx.cs">
       <DependentUpon>CustomerInfoDetail.ascx</DependentUpon>

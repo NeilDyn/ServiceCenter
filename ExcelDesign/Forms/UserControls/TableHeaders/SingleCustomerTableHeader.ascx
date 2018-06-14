@@ -61,6 +61,6 @@
         <asp:TableHeaderCell HorizontalAlign="Right" />
     </asp:TableHeaderRow>
 </asp:Table>
-<asp:Button ID="btnReload" runat="server" Text="reloadPage" Visible="false" />
+
 
 

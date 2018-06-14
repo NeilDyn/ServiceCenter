@@ -36,7 +36,6 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
                 this.CustomerSequence.Text = "Customer " + Count.ToString();
                 this.btnExpload.ID = "btnExpload_" + Count.ToString();
                 this.btnSelectCustomer.ID = "btnSelectCustomer_" + Count.ToString();
-                this.btnReload.ID = "btnReload_" + Count.ToString();
             }
             
             this.thcCustomerName.Text = SingleCustomer.Name;

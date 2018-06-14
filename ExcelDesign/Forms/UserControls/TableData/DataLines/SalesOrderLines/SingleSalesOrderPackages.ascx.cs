@@ -25,6 +25,14 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
             TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
             int packCount = 0;
 
+            TableRow breakRow = new TableRow();
+            TableCell breakCell = new TableCell
+            {
+                Text = "<br />"
+            };
+
+            breakRow.Cells.Add(breakCell);
+
             foreach (PostedPackage postedPack in PostedPackage)
             {
                 packCount++;
@@ -83,8 +91,9 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
                     tr.Cells.Add(trackingNo);
 
                     this.tblSalesPackageLines.Rows.Add(tr);
-                }
+                }               
             }
+            this.tblSalesPackageLines.Rows.Add(breakRow);
         }
 
         protected string SetTrackingNo(TrackingTypeEnum trackType, string trackNo)

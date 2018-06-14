@@ -24,7 +24,7 @@ namespace ExcelDesign.Class_Objects
         }
 
         public string CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, int defect, string notes,
-            bool includeResource, bool printRMA, bool createLabel)
+            bool includeResource, bool printRMA, bool createLabel, string email)
         {
             string returnRMA;
 

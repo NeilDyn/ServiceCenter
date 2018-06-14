@@ -31,7 +31,9 @@ namespace ExcelDesign.Forms.UserControls.CustomerInfo.MainTables
             foreach (Customer cust in CustomerList)
             {
                 TableRow tr = new TableRow();
+                TableRow lineRow = new TableRow();
                 TableCell tc = new TableCell();
+                TableCell line = new TableCell();
                 singleCustomerTableHeader = LoadControl(customerDetailPath);
                 singleCustomerTableHeader.ID = "Customer " + count.ToString();
                 ((SingleCustomerTableHeader)singleCustomerTableHeader).SingleCustomer = cust;
@@ -41,9 +43,16 @@ namespace ExcelDesign.Forms.UserControls.CustomerInfo.MainTables
                 tc.Height = new Unit("100%");
                 tc.ColumnSpan = this.infoHeaders.Cells.Count;
 
+                line.Height = new Unit("100%");
+                line.ColumnSpan = this.infoHeaders.Cells.Count;
+                line.Text = "<hr class='Seperator'/>";
+
                 tc.Controls.Add(singleCustomerTableHeader);
                 tr.Cells.Add(tc);
-                this.tblCustomerInfo.Rows.Add(tr);                
+                lineRow.Cells.Add(line);
+                this.tblCustomerInfo.Rows.Add(tr);
+                this.tblCustomerInfo.Rows.Add(lineRow);
+                
                 count++;
             }
         }

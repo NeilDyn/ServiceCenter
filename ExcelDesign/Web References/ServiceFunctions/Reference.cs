@@ -2089,6 +2089,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string shippingAgentField;
         
+        private string sellToCustomerNoField;
+        
         private string sellToCustomerNameField;
         
         private string shipToNameField;
@@ -2164,6 +2166,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.shippingAgentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SellToCustomerNo {
+            get {
+                return this.sellToCustomerNoField;
+            }
+            set {
+                this.sellToCustomerNoField = value;
             }
         }
         
@@ -2922,6 +2934,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string orderNoField;
         
+        private string sellToCustomerNoField;
+        
         private string shipToNameField;
         
         private string shipToAddressField;
@@ -2991,6 +3005,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.orderNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SellToCustomerNo {
+            get {
+                return this.sellToCustomerNoField;
+            }
+            set {
+                this.sellToCustomerNoField = value;
             }
         }
         

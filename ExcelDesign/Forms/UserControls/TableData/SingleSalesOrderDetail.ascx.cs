@@ -215,7 +215,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         {
                             foreach (PostedPackageLine packageLine in package.PostedPackageLines)
                             {
-                                if (packageLine.ItemNo == itemNoS)
+                                if (packageLine.ItemNo == itemNoS && package.PostedSourceID == header.No)
                                 {
                                     packageSerialCount++;
 

@@ -37,6 +37,13 @@
     background-color: #001d5a; /* Modern Browsers */
 }
 
+.SeperatorOrders {
+    height: 2px;
+    /* Set the hr color */
+    color: #c1c1c1; /* old IE */
+    background-color: #c1c1c1; /* Modern Browsers */
+}
+
 .TableHeaderLine {
     height: 2px;
     /* Set the hr color */

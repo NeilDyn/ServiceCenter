@@ -140,7 +140,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         {
                             foreach (PostedReceiveLine receiveLine in receive.PostedReceiveLines)
                             {
-                                if (receiveLine.ItemNo == itemNoS)
+                                if (receiveLine.ItemNo == itemNoS && receive.PostedSourceID == header.No)
                                 {
                                     receiveSerialCount++;
 

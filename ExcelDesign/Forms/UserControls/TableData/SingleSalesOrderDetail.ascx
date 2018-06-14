@@ -13,9 +13,7 @@
         $("[id*=showMoreOrderLines_<%= this.CustID %>_<%= this.CountID %>]").hide();
 
         $("[id$=btnCancelOrder_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            //alert("Hi, order <%= this.Sh.SalesOrderNo %> can be cancelled.");
 
-            
         });
 
         $("[id$=btnPartRequest_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
@@ -23,8 +21,8 @@
         });
 
         $("[id$=btnCreateReturn_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            var width = 800;
-            var height = 600;
+            var width = 850;
+            var height = 350;
             var left = (screen.width - width) / 2;
             var top = (screen.height - height) / 2;
             window.open("FunctionForms/CreateReturn.aspx?OrderNo=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>",

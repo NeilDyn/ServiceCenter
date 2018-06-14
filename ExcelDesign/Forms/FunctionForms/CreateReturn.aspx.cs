@@ -16,6 +16,7 @@ namespace ExcelDesign.Forms.FunctionForms
         protected string notes;
         protected string returnReason;
         protected int defect;
+        protected string email;
 
         protected bool resources;
         protected bool printRMA;
@@ -23,7 +24,7 @@ namespace ExcelDesign.Forms.FunctionForms
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
                 List<Defects> doList = (List<Defects>)Session["Defects"];
                 List<ReturnReason> rrList = (List<ReturnReason>)Session["ReturnReasons"];
@@ -32,7 +33,7 @@ namespace ExcelDesign.Forms.FunctionForms
                 this.ddlDefectOptions.DataSource = doList;
                 this.ddlDefectOptions.DataBind();
 
-                this.ddlReturnReason.DataValueField = "ReasonCode";
+                this.ddlReturnReason.DataValueField = "Description";
                 this.ddlReturnReason.DataSource = rrList;
                 this.ddlReturnReason.DataBind();
 
@@ -44,27 +45,74 @@ namespace ExcelDesign.Forms.FunctionForms
         protected void btnCreateRMA_Click(object sender, EventArgs e)
         {
             string returnRMA;
+            int returnReasonSelect;
 
             try
             {
+                returnReasonSelect = ddlReturnReason.SelectedIndex;
                 orderNo = tcOrderNo.Text;
                 docNo = tcDocNo.Text;
                 notes = txtNotes.Text;
-                returnReason = ddlReturnReason.SelectedItem.Text;
+                returnReason = ((List<ReturnReason>)Session["ReturnReasons"])[returnReasonSelect].ReasonCode;
                 defect = ddlDefectOptions.SelectedIndex;
                 resources = cbxResources.Checked;
                 printRMA = cbxPrintRMA.Checked;
                 createLabel = cbxCreateLable.Checked;
+                email = txtCustEmail.Text;
 
-                SendService ss = new SendService();
-                returnRMA = ss.CreateReturnOrder(orderNo, docNo, returnReason, defect, notes, resources, printRMA, createLabel);
+                string validateMsg = ValidateInput();
 
-                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + returnRMA + "');", true);
+                if (validateMsg == "All Input Valid")
+                {
+                    SendService ss = new SendService();
+                    returnRMA = ss.CreateReturnOrder(orderNo, docNo, returnReason, defect, notes, resources, printRMA, createLabel, email);
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + returnRMA + "');", true);
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + validateMsg + "');", true);
+                }
+
             }
             catch (Exception ex)
             {
-                Session["Error"] = ex.Message;
-                Response.Redirect("../ErrorForm.aspx");
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            }
+        }
+
+        protected string ValidateInput()
+        {
+            string valid = "All Input Valid";
+
+            try
+            {
+                if (!String.IsNullOrWhiteSpace(returnReason))
+                {
+                    if (defect > 0)
+                    {
+                        if (createLabel && !String.IsNullOrWhiteSpace(email))
+                        {
+                            return valid;
+                        }
+                        else
+                        {
+                            return "Updated email is required for creating a return label.";
+                        }
+                    }
+                    else
+                    {
+                        return "Please select a valid defect option.";
+                    }
+
+                }
+                else
+                {
+                    return "Please select a valid return reason";
+                }
+            }
+            catch (Exception e)
+            {
+                return e.Message;
             }
         }
     }

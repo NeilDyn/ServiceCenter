@@ -25,6 +25,14 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
             TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
             int receiveCount = 0;
 
+            TableRow breakRow = new TableRow();
+            TableCell breakCell = new TableCell
+            {
+                Text = "<br />"
+            };
+
+            breakRow.Cells.Add(breakCell);
+
             foreach (PostedReceive postedReceive in PostedReceive)
             {
                 receiveCount++;
@@ -85,6 +93,8 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                     this.tblReturnPackageLines.Rows.Add(tr);
                 }
             }
+
+            this.tblReturnPackageLines.Rows.Add(breakRow);
         }
 
         protected string SetTrackingNo(TrackingTypeEnum trackType, string trackNo)

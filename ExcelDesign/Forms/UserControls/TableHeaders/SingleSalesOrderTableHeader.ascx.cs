@@ -22,6 +22,9 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
         private TableRow tr;
         private TableCell tc;
 
+        private TableRow lineRow;
+        private TableCell lineCell;
+
         protected const string singleSalesOrderDetailPath = "../TableData/SingleSalesOrderDetail.ascx";
 
         protected void Page_Load(object sender, EventArgs e)
@@ -47,7 +50,17 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
         {
             tr = new TableRow();
             tc = new TableCell();
-            
+
+            lineRow = new TableRow();
+            lineCell = new TableCell
+            {
+                Text = "<hr class='SeperatorOrders'/>",
+                Height = new Unit("100%"),
+                ColumnSpan = 4
+            };
+
+            lineRow.Cells.Add(lineCell);
+
             singleSalesOrderDetailTable = LoadControl(singleSalesOrderDetailPath);
             singleSalesOrderDetailTable.ID = "singleSalesOrderDetailTable_" + HeadCount.ToString();
            
@@ -63,7 +76,7 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             tr.ID = "singleSalesOrderDetail_" + CustID.ToString() + "_" + HeadCount.ToString();
 
             this.tblSingleSalesOrderTableHeader.Rows.Add(tr);
-            Session["SingleSalesOrderTableHeaderDetailCell_CustID" + CustID.ToString() + "_" + HeadCount.ToString()] = tc;
+            this.tblSingleSalesOrderTableHeader.Rows.Add(lineRow);
         }
     }
 }

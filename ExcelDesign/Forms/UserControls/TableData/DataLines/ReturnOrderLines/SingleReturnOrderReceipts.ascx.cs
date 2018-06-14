@@ -21,6 +21,14 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
         {
             int receiptCount = 0;
 
+            TableRow breakRow = new TableRow();
+            TableCell breakCell = new TableCell
+            {
+                Text = "<br />"
+            };
+
+            breakRow.Cells.Add(breakCell);
+
             foreach (ReceiptHeader rh in ReceiptHeaders)
             {
                 receiptCount++;
@@ -72,6 +80,8 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                     }
                 }
             }
+
+            this.tblReceiptLines.Rows.Add(breakRow);
         }
     }
 }

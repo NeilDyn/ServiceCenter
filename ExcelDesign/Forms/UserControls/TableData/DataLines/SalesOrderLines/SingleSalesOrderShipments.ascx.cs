@@ -22,6 +22,14 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
         {
             int shipCount = 0;
 
+            TableRow breakRow = new TableRow();
+            TableCell breakCell = new TableCell
+            {
+                Text = "<br />"
+            };
+
+            breakRow.Cells.Add(breakCell);
+
             foreach (ShipmentHeader sh in ShipmentHeaders)
             {
                 shipCount++;
@@ -76,6 +84,8 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
                     }
                 }
             }
+
+            this.tblShipmentLines.Rows.Add(breakRow);
         }
     }
 }

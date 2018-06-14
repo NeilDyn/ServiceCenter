@@ -20,7 +20,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
         public int CustomerCount { get; set; }
 
         private TableRow salesRow;
-        private TableRow returnRow;
+        private TableRow returnRow;        
         private TableCell salesCell;
         private TableCell returnCell;
 

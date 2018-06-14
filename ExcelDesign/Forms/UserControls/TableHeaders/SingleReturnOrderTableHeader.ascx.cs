@@ -22,6 +22,9 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
         private TableRow tr;
         private TableCell tc;
 
+        private TableRow lineRow;
+        private TableCell lineCell;
+
         protected const string singleReturnOrderDetailPath = "../TableData/SingleReturnOrderDetail.ascx";
 
         protected void Page_Load(object sender, EventArgs e)
@@ -48,7 +51,15 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
         {
             tc = new TableCell();
             tr = new TableRow();
-        
+
+            lineRow = new TableRow();
+            lineCell = new TableCell
+            {
+                Text = "<hr class='SeperatorOrders'/>",
+                Height = new Unit("100%"),
+                ColumnSpan = 6
+            };
+
             singleReturnOrderDetailTable = LoadControl(singleReturnOrderDetailPath);
             singleReturnOrderDetailTable.ID = "singleReturnOrderDetailTable_" + HeadCount.ToString();
             ((SingleReturnOrderDetail)singleReturnOrderDetailTable).Rh = Header;
@@ -62,6 +73,7 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             tr.Cells.Add(tc);
             tr.ID = "singleReturnOrderDetail_" + CustID.ToString() + "_" + HeadCount.ToString();
             this.tblSingleReturnOrderTableHeader.Rows.Add(tr);
+            this.tblSingleReturnOrderTableHeader.Rows.Add(lineRow);
         }
     }
 }

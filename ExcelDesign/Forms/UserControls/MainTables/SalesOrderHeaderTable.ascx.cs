@@ -41,6 +41,7 @@ namespace ExcelDesign.Forms.UserControls.MainTables
         protected void LoadData()
         {
             int salesCount = 1;
+
             foreach (SalesHeader salesHeader in SalesHeaderList)
             {
                 tr = new TableRow();

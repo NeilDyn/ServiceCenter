@@ -3,7 +3,7 @@
 <link href="../../../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 
 <asp:Table ID="tblSalesPackageLines" runat="server" Height="100%" Width="100%">
-    <asp:TableHeaderRow>
+    <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
         <asp:TableHeaderCell/>
         <asp:TableHeaderCell Text="Package No." />
         <asp:TableHeaderCell Text="Package Date" />

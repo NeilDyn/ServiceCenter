@@ -96,7 +96,7 @@
         <asp:TableCell ColumnSpan ="8" >
             <asp:Table runat="server" ID="tblReturnDetailLines" Height="100%" Width="100%">
                 <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
-                    <asp:TableHeaderCell Text="Item No." HorizontalAlign="Left"/>
+                    <asp:TableHeaderCell Text="Item No." HorizontalAlign="Right"/>
                     <asp:TableHeaderCell Text="Description" HorizontalAlign="Left"/>
                     <asp:TableHeaderCell Text="Qty" />
                     <asp:TableHeaderCell Text="Qty Received" />

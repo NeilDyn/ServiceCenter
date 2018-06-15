@@ -3,19 +3,6 @@
      vertical-align:middle;
 }
 
-form {
-    font-family: Calibri;
-}
-
-table {
-    table-layout: fixed;
-}
-
-td {
-    white-space: nowrap;
-    overflow: hidden;
-}
-
 .SearchArea.Textbox {
      border-color: black;
      border-width: 2px;

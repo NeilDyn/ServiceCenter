@@ -824,11 +824,6 @@ namespace ExcelDesign.Class_Objects
                         salesHeaders = GetSalesOrders(shipToName, shipToAddress1);
                         returnHeaders = GetReturnOrdersFromShipmentHeader(salesHeaders);
 
-                        if (returnHeaders.Count == 0)
-                        {
-                            returnHeaders = GetReturnOrdersFromSalesHeader(salesHeaders);
-                        }
-
                         returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
                         customerNames.Add(shipToName);
 

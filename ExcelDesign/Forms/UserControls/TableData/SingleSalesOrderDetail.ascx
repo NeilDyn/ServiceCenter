@@ -21,13 +21,20 @@
         });
 
         $("[id$=btnCreateReturn_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            var width = 850;
-            var height = 350;
-            var left = (screen.width - width) / 2;
-            var top = (screen.height - height) / 2;
-            window.open("FunctionForms/CreateReturn.aspx?OrderNo=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>",
-                null,
-                "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no, directories=no");
+            if ("<%= this.tcStatus.Text.ToUpper() %>" == "OPEN")
+            {
+                    var width = 850;
+                    var height = 350;
+                    var left = (screen.width - width) / 2;
+                    var top = (screen.height - height) / 2;
+                    window.open("FunctionForms/CreateReturn.aspx?OrderNo=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>",
+                        null,
+                        "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+            }
+            else
+            {
+                alert("Warranty status is not OPEN for current order: <%= this.OrderNo %>.");
+            }
         });
 
         $("[id$=btnIssueRefund_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
@@ -36,10 +43,12 @@
     });
 
     function expandMoreOrderLines<%= this.CustID %><%= this.CountID %>(lineID) {
-        if ($("a#expandMoreClickOrderLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text() == "Show More") {
+        if ($("a#expandMoreClickOrderLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text() == "Show More")
+        {
             $("a#expandMoreClickOrderLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text("Show Less");
         }
-        else {
+        else
+        {
             $("a#expandMoreClickOrderLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text("Show More");
         }
 
@@ -108,7 +117,9 @@
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
         <asp:TableCell Text="Zendesk Ticket #:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
-        <asp:TableCell runat="server" ID="tcZendeskTicketNo" />
+        <asp:TableCell runat="server" ID="tcZendeskTicketNo">
+            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        </asp:TableCell>
         <asp:TableCell Text="Ship Method:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcShipMethod" />
         <asp:TableCell Text="Days Remaining:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
@@ -132,14 +143,14 @@
         <asp:TableCell />
         <asp:TableCell ColumnSpan="8">
             <asp:Table runat="server" ID="tblOrderDetailLines" Height="100%" Width="100%">
-                <asp:TableHeaderRow>
-                    <asp:TableHeaderCell Text="Item No." />
-                    <asp:TableHeaderCell Text="Description" />
+                <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
+                    <asp:TableHeaderCell Text="Item No." HorizontalAlign="Right"/>
+                    <asp:TableHeaderCell Text="Description" HorizontalAlign="Left"/>
                     <asp:TableHeaderCell Text="Qty" />
                     <asp:TableHeaderCell Text="Qty Shipped" />
-                    <asp:TableHeaderCell Text="Price" />
-                    <asp:TableHeaderCell Text="Line Amt" />
-                    <asp:TableHeaderCell Text="Serial #" />
+                    <asp:TableHeaderCell Text="Price" HorizontalAlign="Left"/>
+                    <asp:TableHeaderCell Text="Line Amt" HorizontalAlign="Left" />
+                    <asp:TableHeaderCell Text="Serial #" HorizontalAlign="Left"/>
                     <asp:TableHeaderCell Text="" />
                 </asp:TableHeaderRow>
                 <asp:TableHeaderRow>

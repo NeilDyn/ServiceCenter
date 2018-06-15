@@ -47,13 +47,14 @@
 </script>
 
 <asp:Table ID="tblSingleCustomerTableHeader" runat="server" Width="100%" Height="100%">
-    <asp:TableHeaderRow TableSection="TableHeader" runat="server">
+    <asp:TableHeaderRow TableSection="TableHeader" runat="server" ID="custRow">
         <asp:TableHeaderCell runat="server" ID="ExpandCurrentCustomer" Width="2%">
             <asp:Button ID="btnExpload" runat="server" Text="+" OnClientClick="return false;" />
         </asp:TableHeaderCell>
         <asp:TableHeaderCell runat="server" ID="CustomerSequence" Font-Bold="true" Font-Underline="true" Font-Size="Large" HorizontalAlign="Left" />
         <asp:TableHeaderCell Font-Bold="true" Text="Name:" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableHeaderCell runat="server" ID="thcCustomerName" HorizontalAlign="Left" Style="text-align: left" />
+        
         <asp:TableHeaderCell HorizontalAlign="Right" ID="lblSelectActive" Text="Select As Active:" />
         <asp:TableHeaderCell HorizontalAlign="Right">
             <asp:Button ID="btnSelectCustomer" runat="server" Text="Set Active" OnClientClick="return false;" />

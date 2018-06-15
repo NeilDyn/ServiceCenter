@@ -6,8 +6,8 @@
 <asp:Table ID="tblSingleCustomerDetail" runat="server" Height="100%" Width="100%">
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
-        <asp:TableCell Text="Address 1:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
-        <asp:TableCell runat="server" ID="tcAddress1" HorizontalAlign="Left"/>
+        <asp:TableHeaderCell Text="Address 1:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
+        <asp:TableHeaderCell runat="server" ID="tcAddress1" HorizontalAlign="Left"/>
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />

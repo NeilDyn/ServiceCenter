@@ -56,7 +56,7 @@ namespace ExcelDesign.Forms.UserControls.MainTables
                 ((SingleReturnOrderTableHeader)singleReturnOrderHeader).ReturnOrdersCount = ReturnOrdersCount;
 
                 tc.Height = new Unit("100%");
-                tc.ColumnSpan = 7;
+                tc.ColumnSpan = 8;
                 tc.Controls.Add(singleReturnOrderHeader);
                 tr.Cells.Add(tc);
                 tr.ID = "salesReturnDetailHeader_" + CustID.ToString();

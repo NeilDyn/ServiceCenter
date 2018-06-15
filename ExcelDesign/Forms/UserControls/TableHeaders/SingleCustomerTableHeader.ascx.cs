@@ -39,6 +39,7 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             }
             
             this.thcCustomerName.Text = SingleCustomer.Name;
+            
 
             this.ID = "customerHeader_" + Count.ToString();
 
@@ -56,7 +57,8 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             ((SingleCustomerTableDetail)customerDetail).CustomerCount = CustomerCount;
 
             tc.Height = new Unit("100%");
-            tc.ColumnSpan = 6;
+            tc.Width = new Unit("100%");
+            tc.ColumnSpan = this.custRow.Cells.Count;
             tc.Controls.Add(customerDetail);
             tr.Cells.Add(tc);
             tr.ID = "customerDetails_" + Count.ToString();

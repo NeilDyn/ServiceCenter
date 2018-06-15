@@ -68,11 +68,11 @@ namespace ExcelDesign.Class_Objects
         }
 
         public string CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, int defect, string notes,
-            bool includeResource, bool printRMA, bool createLabel, string lineDetails)
+            bool includeResource, bool printRMA, bool createLabel, string lineDetails, string email)
         {
             string returnRMA;
 
-            returnRMA = functions.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, defect, notes, createLabel, printRMA, includeResource, lineDetails);
+            returnRMA = functions.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, defect, notes, createLabel, printRMA, includeResource, lineDetails, email);
 
             return returnRMA;
         }

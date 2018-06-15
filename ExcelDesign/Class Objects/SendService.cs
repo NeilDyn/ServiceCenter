@@ -28,7 +28,7 @@ namespace ExcelDesign.Class_Objects
         {
             string returnRMA;
 
-            returnRMA = webService.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, defect, notes, createLabel, printRMA, includeResource, string.Empty);
+            returnRMA = webService.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, defect, notes, createLabel, printRMA, includeResource, string.Empty, email);
 
             return returnRMA;
         }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -47,14 +46,10 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
                 shipHeaderRow.Cells.Add(shipmentHeader);
                 this.tblShipmentLines.Rows.Add(shipHeaderRow);
 
-                int lineCount = 0;
-
                 foreach (ShipmentLine sl in sh.ShipmentLines)
                 {
                     if (sl.Quantity > 0)
                     {
-                        lineCount++;
-
                         TableRow tr = new TableRow();
 
                         TableCell blankCell = new TableCell();
@@ -84,15 +79,6 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
                         tr.Cells.Add(desc);
                         tr.Cells.Add(qty);
                         tr.Cells.Add(shipMethod);
-
-                        if (lineCount % 2 == 0)
-                        {
-                            tr.BackColor = Color.White;
-                        }
-                        else
-                        {
-                            tr.BackColor = ColorTranslator.FromHtml("#EFF3FB");
-                        }
 
                         this.tblShipmentLines.Rows.Add(tr);
                     }

@@ -152,6 +152,10 @@ namespace ExcelDesign.Forms.UserControls.TableData
                     textString = "<a href='https://www.stamps.com/shipstatus/?confirmation=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
                     break;
 
+                case TrackingTypeEnum.AMAZON:
+                    textString = "<a href='http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
                 case TrackingTypeEnum.Invalid:
                     textString = trackNo;
                     break;

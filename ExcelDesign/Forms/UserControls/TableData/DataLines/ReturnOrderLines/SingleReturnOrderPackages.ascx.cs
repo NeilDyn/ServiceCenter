@@ -146,6 +146,10 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                     textString = trackNo;
                     break;
 
+                case TrackingTypeEnum.AMAZON:
+                    textString = "<a href='http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    break;
+
                 default:
                     textString = trackNo;
                     break;

@@ -11,6 +11,7 @@ namespace ExcelDesign.Class_Objects.Enums
         FEDEX = 1,
         UPS = 2,
         UPSRT = 3,
-        USPOSTAL = 4
+        USPOSTAL = 4,
+        AMAZON = 5
     }
 }

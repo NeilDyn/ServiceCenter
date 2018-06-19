@@ -2,6 +2,7 @@
 using ExcelDesign.Class_Objects.Enums;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -49,8 +50,12 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                 receiveHeaderRow.Cells.Add(receiveHeader);
                 this.tblReturnPackageLines.Rows.Add(receiveHeaderRow);
 
+                int lineCount = 0;
+
                 foreach (PostedReceiveLine postReceiveLine in postedReceive.PostedReceiveLines)
                 {
+                    lineCount++;
+
                     TableRow tr = new TableRow();
 
                     TableCell blankCell = new TableCell();
@@ -89,6 +94,15 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                     tr.Cells.Add(serialNo);
                     tr.Cells.Add(carrier);
                     tr.Cells.Add(trackingNo);
+                    if (lineCount % 2 == 0)
+                    {
+                        tr.BackColor = Color.White;
+                    }
+                    else
+                    {
+                        tr.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                    }
+
 
                     this.tblReturnPackageLines.Rows.Add(tr);
                 }
@@ -124,6 +138,7 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                     break;
 
                 default:
+                    textString = trackNo;
                     break;
             }
 

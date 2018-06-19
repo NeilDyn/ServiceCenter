@@ -881,8 +881,8 @@ namespace ExcelDesign.Class_Objects
                 }
             }
 
-            //if (currResults.ReturnReceiptHeader != null)
-            //{
+            if (currResults.ReturnReceiptHeader != null)
+            {
             //    for (int c = 0; c < currResults.ReturnReceiptHeader.Length; c++)
             //    {
             //        shipToName = currResults.ReturnReceiptHeader[c].ShipToName;
@@ -915,7 +915,7 @@ namespace ExcelDesign.Class_Objects
             //            returnHeaders = new List<ReturnHeader>();
             //        }  
         //}
-            //}
+            }
 
             SetFunctionData();
 
@@ -951,9 +951,10 @@ namespace ExcelDesign.Class_Objects
                         {
                             if (currResults.SalesHeader[so].ExtDocNo == sh.ExternalDocumentNo)
                             {
+                                rmaNo = currResults.SalesHeader[so].No;
+
                                 if (!insertedReturnNumbners.Any(order => order.Equals(rmaNo)))
-                                {
-                                    rmaNo = currResults.SalesHeader[so].No;
+                                {                                 
                                     receiptHeader = ReturnReceiptHeader(rmaNo);
                                     channelName = currResults.SalesHeader[so].SellToCustomerName;
 
@@ -1044,9 +1045,10 @@ namespace ExcelDesign.Class_Objects
                             if (currResults.ReturnReceiptHeader[so].ExtDocNo == ssh.ExternalDocumentNo &&
                                 currResults.ReturnReceiptHeader[so].SellToCustomerNo == ssh.SellToCustomerNo)
                             {
+                                rmaNo = currResults.ReturnReceiptHeader[so].ReturnOrderNo;
+
                                 if (!insertedReturnNumbners.Any(order => order.Equals(rmaNo)))
-                                {
-                                    rmaNo = currResults.ReturnReceiptHeader[so].ReturnOrderNo;
+                                {                                  
                                     dateCreated = currResults.ReturnReceiptHeader[so].ReceiveDate;
                                     receiptHeader = ReturnReceiptHeader(rmaNo);
                                     channelName = currResults.ReturnReceiptHeader[so].SellToCustomerName;
@@ -1082,7 +1084,6 @@ namespace ExcelDesign.Class_Objects
 
             return returnHead;
         }
-
 
         private void SetFunctionData()
         {

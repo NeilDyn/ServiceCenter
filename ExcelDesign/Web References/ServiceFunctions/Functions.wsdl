@@ -329,6 +329,29 @@
           </sequence>
         </complexType>
       </element>
+      <element name="CreateReturnOrder">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="extDocNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="returnReasonCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="_DefectOpts" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="notes" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="includeResourceLines" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="printRmaInstructions" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="createUPSReturnLabel" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="lineDetails" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="emailAddress" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CreateReturnOrder_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="InitiateUserAction">
         <complexType>
           <sequence>
@@ -342,28 +365,6 @@
         </complexType>
       </element>
       <element name="InitiateUserAction_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="CreateReturnOrder">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="extDocNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="returnReasonCode" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="_DefectOpts" type="int" />
-            <element minOccurs="1" maxOccurs="1" name="notes" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="includeResourceLines" type="boolean" />
-            <element minOccurs="1" maxOccurs="1" name="printRmaInstructions" type="boolean" />
-            <element minOccurs="1" maxOccurs="1" name="createUPSReturnLabel" type="boolean" />
-            <element minOccurs="1" maxOccurs="1" name="lineDetails" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="CreateReturnOrder_Result">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
@@ -392,17 +393,17 @@
   <message name="SearchDetermineNoType_Result">
     <part name="parameters" element="tns:SearchDetermineNoType_Result" />
   </message>
-  <message name="InitiateUserAction">
-    <part name="parameters" element="tns:InitiateUserAction" />
-  </message>
-  <message name="InitiateUserAction_Result">
-    <part name="parameters" element="tns:InitiateUserAction_Result" />
-  </message>
   <message name="CreateReturnOrder">
     <part name="parameters" element="tns:CreateReturnOrder" />
   </message>
   <message name="CreateReturnOrder_Result">
     <part name="parameters" element="tns:CreateReturnOrder_Result" />
+  </message>
+  <message name="InitiateUserAction">
+    <part name="parameters" element="tns:InitiateUserAction" />
+  </message>
+  <message name="InitiateUserAction_Result">
+    <part name="parameters" element="tns:InitiateUserAction_Result" />
   </message>
   <message name="CancelOrder">
     <part name="parameters" element="tns:CancelOrder" />
@@ -415,13 +416,13 @@
       <input name="SearchDetermineNoType" message="tns:SearchDetermineNoType" />
       <output name="SearchDetermineNoType_Result" message="tns:SearchDetermineNoType_Result" />
     </operation>
-    <operation name="InitiateUserAction">
-      <input name="InitiateUserAction" message="tns:InitiateUserAction" />
-      <output name="InitiateUserAction_Result" message="tns:InitiateUserAction_Result" />
-    </operation>
     <operation name="CreateReturnOrder">
       <input name="CreateReturnOrder" message="tns:CreateReturnOrder" />
       <output name="CreateReturnOrder_Result" message="tns:CreateReturnOrder_Result" />
+    </operation>
+    <operation name="InitiateUserAction">
+      <input name="InitiateUserAction" message="tns:InitiateUserAction" />
+      <output name="InitiateUserAction_Result" message="tns:InitiateUserAction_Result" />
     </operation>
     <operation name="CancelOrder">
       <input name="CancelOrder" message="tns:CancelOrder" />
@@ -439,21 +440,21 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
-    <operation name="InitiateUserAction">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:InitiateUserAction" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="InitiateUserAction">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="InitiateUserAction_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
     <operation name="CreateReturnOrder">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:CreateReturnOrder" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="CreateReturnOrder">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="CreateReturnOrder_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="InitiateUserAction">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:InitiateUserAction" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="InitiateUserAction">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="InitiateUserAction_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -176,6 +177,16 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         lineRow.Cells.Add(serialNo);
                         lineRow.Cells.Add(moreSerial);
 
+                        if (lineCount % 2 == 0)
+                        {
+                            lineRow.BackColor = Color.White;
+                        }
+                        else
+                        {
+                            lineRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                        }
+
+                        lineRow.Attributes.CssStyle.Add("border-collapse", "collapse");
                         this.tblReturnDetailLines.Rows.Add(lineRow);
 
                         foreach (string serial in moreLines)
@@ -197,6 +208,16 @@ namespace ExcelDesign.Forms.UserControls.TableData
                             moreTableRow.Cells.Add(moreSerialNo);
                             moreTableRow.Cells.Add(new TableCell());
 
+                            if (lineCount % 2 == 0)
+                            {
+                                moreTableRow.BackColor = Color.White;
+                            }
+                            else
+                            {
+                                moreTableRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                            }
+
+                            moreTableRow.Attributes.CssStyle.Add("border-collapse", "collapse");
                             moreTableRow.ID = "showMoreReturnLines_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
                             this.tblReturnDetailLines.Rows.Add(moreTableRow);
                         }

@@ -39,11 +39,9 @@ namespace ExcelDesign.Forms.UserControls.CustomerInfo.MainTables
                 ((SingleCustomerTableHeader)singleCustomerTableHeader).CustomerCount = CustomerList.Count;
 
                 tc.Height = new Unit("100%");
-                tc.Width = new Unit("100%");
                 tc.ColumnSpan = this.infoHeaders.Cells.Count;
 
                 line.Height = new Unit("100%");
-                line.Width = new Unit("100%");
                 line.ColumnSpan = this.infoHeaders.Cells.Count;
                 line.Text = "<hr class='Seperator'/>";
 

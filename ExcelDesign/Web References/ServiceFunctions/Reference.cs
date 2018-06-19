@@ -31,9 +31,9 @@ namespace ExcelDesign.ServiceFunctions {
         
         private System.Threading.SendOrPostCallback SearchDetermineNoTypeOperationCompleted;
         
-        private System.Threading.SendOrPostCallback InitiateUserActionOperationCompleted;
-        
         private System.Threading.SendOrPostCallback CreateReturnOrderOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback InitiateUserActionOperationCompleted;
         
         private System.Threading.SendOrPostCallback CancelOrderOperationCompleted;
         
@@ -79,10 +79,10 @@ namespace ExcelDesign.ServiceFunctions {
         public event SearchDetermineNoTypeCompletedEventHandler SearchDetermineNoTypeCompleted;
         
         /// <remarks/>
-        public event InitiateUserActionCompletedEventHandler InitiateUserActionCompleted;
+        public event CreateReturnOrderCompletedEventHandler CreateReturnOrderCompleted;
         
         /// <remarks/>
-        public event CreateReturnOrderCompletedEventHandler CreateReturnOrderCompleted;
+        public event InitiateUserActionCompletedEventHandler InitiateUserActionCompleted;
         
         /// <remarks/>
         public event CancelOrderCompletedEventHandler CancelOrderCompleted;
@@ -119,46 +119,6 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.SearchDetermineNoTypeCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.SearchDetermineNoTypeCompleted(this, new SearchDetermineNoTypeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:InitiateUserAction", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="InitiateUserAction_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string InitiateUserAction(string sessionID, string orderNo, string extDocNo, int _ActionType, string returnReasonCode, int _DefectOpts) {
-            object[] results = this.Invoke("InitiateUserAction", new object[] {
-                        sessionID,
-                        orderNo,
-                        extDocNo,
-                        _ActionType,
-                        returnReasonCode,
-                        _DefectOpts});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void InitiateUserActionAsync(string sessionID, string orderNo, string extDocNo, int _ActionType, string returnReasonCode, int _DefectOpts) {
-            this.InitiateUserActionAsync(sessionID, orderNo, extDocNo, _ActionType, returnReasonCode, _DefectOpts, null);
-        }
-        
-        /// <remarks/>
-        public void InitiateUserActionAsync(string sessionID, string orderNo, string extDocNo, int _ActionType, string returnReasonCode, int _DefectOpts, object userState) {
-            if ((this.InitiateUserActionOperationCompleted == null)) {
-                this.InitiateUserActionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInitiateUserActionOperationCompleted);
-            }
-            this.InvokeAsync("InitiateUserAction", new object[] {
-                        sessionID,
-                        orderNo,
-                        extDocNo,
-                        _ActionType,
-                        returnReasonCode,
-                        _DefectOpts}, this.InitiateUserActionOperationCompleted, userState);
-        }
-        
-        private void OnInitiateUserActionOperationCompleted(object arg) {
-            if ((this.InitiateUserActionCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.InitiateUserActionCompleted(this, new InitiateUserActionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -205,6 +165,46 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.CreateReturnOrderCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.CreateReturnOrderCompleted(this, new CreateReturnOrderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:InitiateUserAction", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="InitiateUserAction_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string InitiateUserAction(string sessionID, string orderNo, string extDocNo, int _ActionType, string returnReasonCode, int _DefectOpts) {
+            object[] results = this.Invoke("InitiateUserAction", new object[] {
+                        sessionID,
+                        orderNo,
+                        extDocNo,
+                        _ActionType,
+                        returnReasonCode,
+                        _DefectOpts});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void InitiateUserActionAsync(string sessionID, string orderNo, string extDocNo, int _ActionType, string returnReasonCode, int _DefectOpts) {
+            this.InitiateUserActionAsync(sessionID, orderNo, extDocNo, _ActionType, returnReasonCode, _DefectOpts, null);
+        }
+        
+        /// <remarks/>
+        public void InitiateUserActionAsync(string sessionID, string orderNo, string extDocNo, int _ActionType, string returnReasonCode, int _DefectOpts, object userState) {
+            if ((this.InitiateUserActionOperationCompleted == null)) {
+                this.InitiateUserActionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnInitiateUserActionOperationCompleted);
+            }
+            this.InvokeAsync("InitiateUserAction", new object[] {
+                        sessionID,
+                        orderNo,
+                        extDocNo,
+                        _ActionType,
+                        returnReasonCode,
+                        _DefectOpts}, this.InitiateUserActionOperationCompleted, userState);
+        }
+        
+        private void OnInitiateUserActionOperationCompleted(object arg) {
+            if ((this.InitiateUserActionCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.InitiateUserActionCompleted(this, new InitiateUserActionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -3283,17 +3283,17 @@ namespace ExcelDesign.ServiceFunctions {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
-    public delegate void InitiateUserActionCompletedEventHandler(object sender, InitiateUserActionCompletedEventArgs e);
+    public delegate void CreateReturnOrderCompletedEventHandler(object sender, CreateReturnOrderCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class InitiateUserActionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class CreateReturnOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal InitiateUserActionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal CreateReturnOrderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -3309,17 +3309,17 @@ namespace ExcelDesign.ServiceFunctions {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
-    public delegate void CreateReturnOrderCompletedEventHandler(object sender, CreateReturnOrderCompletedEventArgs e);
+    public delegate void InitiateUserActionCompletedEventHandler(object sender, InitiateUserActionCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class CreateReturnOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class InitiateUserActionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal CreateReturnOrderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal InitiateUserActionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -45,10 +46,14 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                 receiptHeaderRow.Cells.Add(receiptHeader);
                 this.tblReceiptLines.Rows.Add(receiptHeaderRow);
 
+                int lineCount = 0;
+
                 foreach (ReceiptLine rl in rh.ReceiptLines)
                 {
                     if (rl.Quantity > 0)
                     {
+                        lineCount++;
+
                         TableRow tr = new TableRow();
 
                         TableCell blankCell = new TableCell();
@@ -75,6 +80,15 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                         tr.Cells.Add(desc);
                         tr.Cells.Add(qty);
                         tr.Cells.Add(shipMethod);
+
+                        if (lineCount % 2 == 0)
+                        {
+                            tr.BackColor = Color.White;
+                        }
+                        else
+                        {
+                            tr.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                        }
 
                         this.tblReceiptLines.Rows.Add(tr);
                     }

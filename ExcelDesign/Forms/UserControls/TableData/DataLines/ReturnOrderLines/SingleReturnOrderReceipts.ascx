@@ -5,12 +5,12 @@
 <asp:Table ID="tblReceiptLines" runat="server" Height="100%" Width="100%">
     <asp:TableHeaderRow>
         <asp:TableHeaderCell />
-        <asp:TableHeaderCell Text="Receive No." />
-        <asp:TableHeaderCell Text="Receive Date" />
-        <asp:TableHeaderCell Text="Item" />
-        <asp:TableHeaderCell Text="Description" />
+        <asp:TableHeaderCell Text="Receipt No." HorizontalAlign="Left"/>
+        <asp:TableHeaderCell Text="Receipt Date" HorizontalAlign="Left"/>
+        <asp:TableHeaderCell Text="Item" HorizontalAlign="Left"/>
+        <asp:TableHeaderCell Text="Description"  HorizontalAlign="Left"/>
         <asp:TableHeaderCell Text="Qty" />
-        <asp:TableHeaderCell Text="Ship Method" />
+        <asp:TableHeaderCell Text="Ship Method" HorizontalAlign="Left"/>
     </asp:TableHeaderRow>
     <asp:TableHeaderRow>
         <asp:TableHeaderCell />

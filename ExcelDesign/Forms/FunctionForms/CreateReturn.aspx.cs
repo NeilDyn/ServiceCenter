@@ -90,13 +90,20 @@ namespace ExcelDesign.Forms.FunctionForms
                 {
                     if (defect > 0)
                     {
-                        if (createLabel && !String.IsNullOrWhiteSpace(email))
+                        if (createLabel)
                         {
-                            return valid;
-                        }
+                            if(!String.IsNullOrWhiteSpace(email))
+                            {
+                                return valid;
+                            }
+                            else
+                            {
+                                return "Updated email is required for creating a return label.";
+                            }
+                        } 
                         else
                         {
-                            return "Updated email is required for creating a return label.";
+                            return valid;
                         }
                     }
                     else

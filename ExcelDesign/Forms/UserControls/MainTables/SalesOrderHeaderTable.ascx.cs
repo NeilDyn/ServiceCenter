@@ -55,7 +55,7 @@ namespace ExcelDesign.Forms.UserControls.MainTables
                 ((SingleSalesOrderTableHeader)singleSalesOrderHeader).SalesOrderCount = SalesOrderCount;
 
                 tc.Height = new Unit("100%");
-                tc.ColumnSpan = 7;
+                tc.ColumnSpan = 4;
                 tc.Controls.Add(singleSalesOrderHeader);
                 tr.Cells.Add(tc);
                 tr.ID = "salesOrderDetailHeader_" + CustID.ToString();

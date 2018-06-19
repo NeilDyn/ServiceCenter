@@ -108,7 +108,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             this.tcPackagesCount.Text = "<a href='javascript:expandPackages" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Sh.PostedPackageObject.Count.ToString() + "</a>";
 
-            if(Sh.WarrantyProp != null)
+            if (Sh.WarrantyProp != null)
             {
                 this.tcStatus.Text = Sh.WarrantyProp.Status;
 
@@ -261,8 +261,6 @@ namespace ExcelDesign.Forms.UserControls.TableData
                             moreSerial.ID = "expandShowMoreOrderLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
                         }
 
-                        
-
                         lineRow.Cells.Add(itemNo);
                         lineRow.Cells.Add(desc);
                         lineRow.Cells.Add(qty);
@@ -282,6 +280,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         }
 
                         lineRow.Attributes.CssStyle.Add("border-collapse", "collapse");
+
                         this.tblOrderDetailLines.Rows.Add(lineRow);
 
                         foreach (string serial in moreLines)
@@ -343,8 +342,10 @@ namespace ExcelDesign.Forms.UserControls.TableData
             totalCell.HorizontalAlign = HorizontalAlign.Right;
 
             totalString.Attributes.CssStyle.Add("border-top", "2px solid black");
+            totalString.Attributes.CssStyle.Add("border-collapse", "collapse");
 
-            totalCell.Attributes.CssStyle.Add("border-top", "2px solid black");          
+            totalCell.Attributes.CssStyle.Add("border-top", "2px solid black");
+            totalCell.Attributes.CssStyle.Add("border-collapse", "collapse");
 
             totalRow.Cells.Add(new TableCell());
             totalRow.Cells.Add(new TableCell());
@@ -355,8 +356,6 @@ namespace ExcelDesign.Forms.UserControls.TableData
             totalRow.Cells.Add(new TableCell());
             totalRow.Cells.Add(new TableCell());
 
-            totalRow.Attributes.CssStyle.Add("border-collapse", "collapse");
-            totalRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
             this.tblOrderDetailLines.Rows.Add(totalRow);      
 
             TableCell breakCell = new TableCell();

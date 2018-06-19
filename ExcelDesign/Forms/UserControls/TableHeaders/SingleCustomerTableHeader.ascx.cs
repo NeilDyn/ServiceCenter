@@ -61,7 +61,6 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             tr.Cells.Add(tc);
             tr.ID = "customerDetails_" + Count.ToString();
             this.tblSingleCustomerTableHeader.Rows.Add(tr);
-            Session["SingelCustomerTableHeaderCell_" + Count.ToString()] = tc;
         }
     }
 }

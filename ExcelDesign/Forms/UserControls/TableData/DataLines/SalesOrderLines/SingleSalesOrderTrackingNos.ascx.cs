@@ -2,6 +2,7 @@
 using ExcelDesign.Class_Objects.Enums;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -32,9 +33,12 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
 
             breakRow.Cells.Add(breakCell);
 
+            int lineCount = 0;
+
             foreach (PostedPackage postedPack in PostedPackage)
             {
                 packCount++;
+                lineCount++;
 
                 TableRow packHeaderRow = new TableRow();
                 TableCell packageHeader = new TableCell
@@ -70,6 +74,15 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
                 tr.Cells.Add(carrier);
                 tr.Cells.Add(trackingNo);
 
+                if (lineCount % 2 == 0)
+                {
+                    tr.BackColor = Color.White;
+                }
+                else
+                {
+                    tr.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                }
+
                 this.tblPackageLines.Rows.Add(tr);
             }
             this.tblPackageLines.Rows.Add(breakRow);
@@ -102,6 +115,7 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
                     break;
 
                 default:
+                    textString = trackNo;
                     break;
             }
 

@@ -55,7 +55,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 ((SalesOrderHeaderTable)salesOrderHeader).SalesOrderCount = Cust.SalesHeader.Count;
 
                 salesCell.Width = new Unit("100%");
-                salesCell.ColumnSpan = 9;
+                salesCell.ColumnSpan = 6;
                 salesCell.Controls.Add(salesOrderHeader);
                 salesRow.Cells.Add(salesCell);
                 this.tblSingleCustomerDetail.Rows.Add(salesRow);
@@ -70,7 +70,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 ((ReturnOrderHeaderTable)returnOrderHeader).ReturnOrdersCount = Cust.ReturnHeaders.Count;
 
                 returnCell.Width = new Unit("100%");
-                returnCell.ColumnSpan = 9;
+                returnCell.ColumnSpan = 8;
                 returnCell.Controls.Add(returnOrderHeader);
                 returnRow.Cells.Add(returnCell);
                 this.tblSingleCustomerDetail.Rows.Add(returnRow);

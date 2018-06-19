@@ -22,6 +22,8 @@ namespace ExcelDesign.Forms.FunctionForms
         protected bool printRMA;
         protected bool createLabel;
 
+        protected const string windowClose = "< script language=javascript>parent.window.close();</script>";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -67,6 +69,7 @@ namespace ExcelDesign.Forms.FunctionForms
                     SendService ss = new SendService();
                     returnRMA = ss.CreateReturnOrder(orderNo, docNo, returnReason, defect, notes, resources, printRMA, createLabel, email);
                     ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + returnRMA + "');", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "closeWindow", "parent.window.close();", true);
                 }
                 else
                 {

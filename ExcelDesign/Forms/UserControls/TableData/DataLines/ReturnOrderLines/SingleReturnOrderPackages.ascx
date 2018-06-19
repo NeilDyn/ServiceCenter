@@ -3,16 +3,16 @@
 <link href="../../../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 
 <asp:Table ID="tblReturnPackageLines" runat="server" Height="100%" Width="100%">
-    <asp:TableHeaderRow>
+    <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
         <asp:TableHeaderCell />
-        <asp:TableHeaderCell Text="Receive No." />
-        <asp:TableHeaderCell Text="Receive Date" />
-        <asp:TableHeaderCell Text="Item" />
-        <asp:TableHeaderCell Text="Description" />
+        <asp:TableHeaderCell Text="Receive No." HorizontalAlign="Left" />
+        <asp:TableHeaderCell Text="Receive Date" HorizontalAlign="Left"/>
+        <asp:TableHeaderCell Text="Item" HorizontalAlign="Left" />
+        <asp:TableHeaderCell Text="Description" HorizontalAlign="Left"/>
         <asp:TableHeaderCell Text="Qty" />
-        <asp:TableHeaderCell Text="Serial No." />
-        <asp:TableHeaderCell Text="Carrier" />
-        <asp:TableHeaderCell Text="Tracking No." />
+        <asp:TableHeaderCell Text="Serial No." HorizontalAlign="Left"/>
+        <asp:TableHeaderCell Text="Carrier" HorizontalAlign="Left"/>
+        <asp:TableHeaderCell Text="Tracking No." HorizontalAlign="Left"/>
     </asp:TableHeaderRow>
     <asp:TableHeaderRow>
         <asp:TableHeaderCell />

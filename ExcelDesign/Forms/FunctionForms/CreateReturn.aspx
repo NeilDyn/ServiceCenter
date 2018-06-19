@@ -17,6 +17,10 @@
                 parent.window.close();
             };
         };
+
+        function CloseAfterCreate() {
+            parent.window.close();
+        };
     </script>
 </head>
 <body>

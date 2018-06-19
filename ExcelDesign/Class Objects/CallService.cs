@@ -824,6 +824,11 @@ namespace ExcelDesign.Class_Objects
                         salesHeaders = GetSalesOrders(shipToName, shipToAddress1);
                         returnHeaders = GetReturnOrdersFromShipmentHeader(salesHeaders);
 
+                        if (returnHeaders.Count == 0)
+                        {
+                            returnHeaders = GetReturnOrdersFromSalesHeader(salesHeaders);
+                        }
+
                         returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
                         customerNames.Add(shipToName);
 
@@ -922,7 +927,7 @@ namespace ExcelDesign.Class_Objects
             return returnCust;
         }
 
-        public List<ReturnHeader> GetReturnOrdersFromSalesHeader(List<SalesHeader> salesHeaders)
+        private List<ReturnHeader> GetReturnOrdersFromSalesHeader(List<SalesHeader> salesHeaders)
         {
             List<ReturnHeader> returnHead = new List<ReturnHeader>();
 
@@ -956,14 +961,13 @@ namespace ExcelDesign.Class_Objects
                                     rmaNo = currResults.SalesHeader[so].No;
                                     receiptHeader = ReturnReceiptHeader(rmaNo);
                                     channelName = currResults.SalesHeader[so].SellToCustomerName;
-
-                                    foreach (ReceiptHeader rh in receiptHeader)
-                                    {
-                                        postedReceive.AddRange(ReturnPostedReceive(rmaNo, rh.No));
-                                    }
-
                                     orderDate = currResults.SalesHeader[so].DocDate;
                                     externalDocumentNo = currResults.SalesHeader[so].ExtDocNo;
+
+                                    if (receiptHeader.Count == 0)
+                                    {
+                                        receiptHeader = ReturnShipmentReceiptHeader(externalDocumentNo);
+                                    }
 
                                     for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
                                     {
@@ -1017,7 +1021,7 @@ namespace ExcelDesign.Class_Objects
             return returnHead;
         }
 
-        public List<ReturnHeader> GetReturnOrdersFromShipmentHeader(List<SalesHeader> salesHeaders)
+        private List<ReturnHeader> GetReturnOrdersFromShipmentHeader(List<SalesHeader> salesHeaders)
         {
             List<ReturnHeader> returnHead = new List<ReturnHeader>();
 
@@ -1044,20 +1048,27 @@ namespace ExcelDesign.Class_Objects
                             if (currResults.ReturnReceiptHeader[so].ExtDocNo == ssh.ExternalDocumentNo &&
                                 currResults.ReturnReceiptHeader[so].SellToCustomerNo == ssh.SellToCustomerNo)
                             {
+                                rmaNo = currResults.ReturnReceiptHeader[so].ReturnOrderNo;
+
                                 if (!insertedReturnNumbners.Any(order => order.Equals(rmaNo)))
-                                {
-                                    rmaNo = currResults.ReturnReceiptHeader[so].ReturnOrderNo;
+                                {                                 
                                     dateCreated = currResults.ReturnReceiptHeader[so].ReceiveDate;
                                     receiptHeader = ReturnReceiptHeader(rmaNo);
                                     channelName = currResults.ReturnReceiptHeader[so].SellToCustomerName;
-
-                                    foreach (ReceiptHeader rh in receiptHeader)
-                                    {
-                                        postedReceive.AddRange(ReturnPostedReceive(rmaNo, rh.No));
-                                    }
-                                    
                                     orderDate = currResults.ReturnReceiptHeader[so].OrderDate;
                                     externalDocumentNo = currResults.ReturnReceiptHeader[so].ExtDocNo;
+
+                                    if (receiptHeader.Count > 0)
+                                    {
+                                        foreach (ReceiptHeader rh in receiptHeader)
+                                        {
+                                            postedReceive.AddRange(ReturnPostedReceive(rmaNo, rh.No));
+                                        }
+                                    }
+                                    else
+                                    {
+                                        receiptHeader = ReturnShipmentReceiptHeader(externalDocumentNo);
+                                    }
 
                                     returnStatus = "Released";
 
@@ -1083,6 +1094,72 @@ namespace ExcelDesign.Class_Objects
             return returnHead;
         }
 
+        private List<ReceiptHeader> ReturnShipmentReceiptHeader(string extDocNo)
+        {
+            List<ReceiptHeader> receipts = new List<ReceiptHeader>();
+
+            string no = string.Empty;
+            string externalDocumentNo = string.Empty;
+            string receiptDate = string.Empty;
+            List<ReceiptLine> receiptLines = new List<ReceiptLine>();
+            string shippingAgentCode = string.Empty;
+            string shippingAgentService = string.Empty;
+
+            if(currResults.SalesShipmentHeader != null)
+            {
+                for (int sh = 0; sh < currResults.SalesShipmentHeader.Length; sh++)
+                {
+                    if (currResults.SalesShipmentHeader[sh].ExtDocNo == extDocNo)
+                    {
+                        externalDocumentNo = extDocNo;
+                        receiptLines = ReturnShipmentReceiptLines(currResults.SalesShipmentHeader[sh].No);
+
+                        receipts.Add(new ReceiptHeader(no, externalDocumentNo, receiptDate, receiptLines, shippingAgentCode));
+
+                        no = string.Empty;
+                        externalDocumentNo = string.Empty;
+                        receiptDate = string.Empty;
+                        receiptLines = new List<ReceiptLine>();
+                        shippingAgentCode = string.Empty;
+                        shippingAgentService = string.Empty;
+                    }
+                }
+            }
+
+            return receipts;
+        }
+
+        private List<ReceiptLine> ReturnShipmentReceiptLines(string no)
+        {
+            List<ReceiptLine> receiptLines = new List<ReceiptLine>();
+
+            string itemNo = string.Empty;
+            string description = string.Empty;
+            int quantity = 0;
+            int quantityReceived = 0;
+            double price = 0;
+            double lineAmount = 0;
+
+            if (currResults.SalesShipmentLine != null)
+            {
+                for (int rl = 0; rl < currResults.SalesShipmentLine.Length; rl++)
+                {
+                    if (currResults.SalesShipmentLine[rl].DocNo == no)
+                    {
+                        itemNo = currResults.SalesShipmentLine[rl].ItemNo;
+                        description = currResults.SalesShipmentLine[rl].Description;
+                        int.TryParse(currResults.SalesShipmentLine[rl].Qty, out quantity);
+                        double.TryParse(currResults.SalesShipmentLine[rl].UnitPrice, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
+                        lineAmount = quantity * price;
+                        quantityReceived = 0;
+
+                        receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount));
+                    }
+                }
+            }
+
+            return receiptLines;
+        }
 
         private void SetFunctionData()
         {

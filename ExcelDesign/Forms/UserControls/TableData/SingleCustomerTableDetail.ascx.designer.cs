@@ -28,7 +28,7 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcAddress1;
+        protected global::System.Web.UI.WebControls.TableCell tcAddress1;
         
         /// <summary>
         /// tcAddress2 control.

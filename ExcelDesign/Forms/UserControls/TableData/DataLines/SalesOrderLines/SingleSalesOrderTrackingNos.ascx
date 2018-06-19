@@ -3,11 +3,11 @@
 <link href="../../../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 
 <asp:Table ID="tblPackageLines" runat="server" Height="100%" Width="100%">
-    <asp:TableHeaderRow>
+    <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1"> 
         <asp:TableHeaderCell />
-        <asp:TableHeaderCell Text="Package Date" />
-        <asp:TableHeaderCell Text="Carrier" />
-        <asp:TableHeaderCell Text="Tracking No." />
+        <asp:TableHeaderCell Text="Package Date" HorizontalAlign="Left"/>
+        <asp:TableHeaderCell Text="Carrier" HorizontalAlign="Left"/>
+        <asp:TableHeaderCell Text="Tracking No." HorizontalAlign="Left"/>
     </asp:TableHeaderRow>
     <asp:TableHeaderRow>
         <asp:TableHeaderCell />

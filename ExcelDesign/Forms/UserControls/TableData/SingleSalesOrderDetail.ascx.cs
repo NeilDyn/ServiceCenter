@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -106,9 +107,27 @@ namespace ExcelDesign.Forms.UserControls.TableData
             }
 
             this.tcPackagesCount.Text = "<a href='javascript:expandPackages" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Sh.PostedPackageObject.Count.ToString() + "</a>";
-            this.tcStatus.Text = Sh.WarrantyProp.Status;
-            this.tcPolicy.Text = Sh.WarrantyProp.Policy;
-            this.tcDaysRemaining.Text = Sh.WarrantyProp.DaysRemaining;
+
+            if(Sh.WarrantyProp != null)
+            {
+                this.tcStatus.Text = Sh.WarrantyProp.Status;
+
+                if (Sh.WarrantyProp.Status.ToUpper() == "OPEN")
+                {
+                    this.tcStatus.Attributes.Add("bgcolor", "LawnGreen");
+                }
+                else if (Sh.WarrantyProp.Status.ToUpper() == "CLOSED")
+                {
+                    this.tcStatus.Attributes.Add("bgcolor", "Crimson");
+                }
+                else
+                {
+                    this.tcStatus.Attributes.Add("bgcolor", "White");
+                }
+
+                this.tcPolicy.Text = Sh.WarrantyProp.Policy;
+                this.tcDaysRemaining.Text = Sh.WarrantyProp.DaysRemaining;
+            }
         }
 
         protected string SetTrackingNo(TrackingTypeEnum trackType, string trackNo)
@@ -138,6 +157,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                     break;
 
                 default:
+                    textString = trackNo;
                     break;
             }
 
@@ -241,6 +261,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                             moreSerial.ID = "expandShowMoreOrderLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
                         }
 
+                        
+
                         lineRow.Cells.Add(itemNo);
                         lineRow.Cells.Add(desc);
                         lineRow.Cells.Add(qty);
@@ -250,6 +272,16 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         lineRow.Cells.Add(serialNo);
                         lineRow.Cells.Add(moreSerial);
 
+                        if (lineCount % 2 == 0)
+                        {
+                            lineRow.BackColor = Color.White;
+                        }
+                        else
+                        {
+                            lineRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                        }
+
+                        lineRow.Attributes.CssStyle.Add("border-collapse", "collapse");
                         this.tblOrderDetailLines.Rows.Add(lineRow);
 
                         foreach (string serial in moreLines)
@@ -271,6 +303,16 @@ namespace ExcelDesign.Forms.UserControls.TableData
                             moreTableRow.Cells.Add(moreSerialNo);
                             moreTableRow.Cells.Add(new TableCell());
 
+                            if (lineCount % 2 == 0)
+                            {
+                                moreTableRow.BackColor = Color.White;
+                            }
+                            else
+                            {
+                                moreTableRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                            }
+
+                            moreTableRow.Attributes.CssStyle.Add("border-collapse", "collapse");
                             moreTableRow.ID = "showMoreOrderLines_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
                             this.tblOrderDetailLines.Rows.Add(moreTableRow);                           
                         }
@@ -301,10 +343,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
             totalCell.HorizontalAlign = HorizontalAlign.Right;
 
             totalString.Attributes.CssStyle.Add("border-top", "2px solid black");
-            totalString.Attributes.CssStyle.Add("border-collapse", "collapse");
 
-            totalCell.Attributes.CssStyle.Add("border-top", "2px solid black");
-            totalCell.Attributes.CssStyle.Add("border-collapse", "collapse");
+            totalCell.Attributes.CssStyle.Add("border-top", "2px solid black");          
 
             totalRow.Cells.Add(new TableCell());
             totalRow.Cells.Add(new TableCell());
@@ -315,6 +355,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
             totalRow.Cells.Add(new TableCell());
             totalRow.Cells.Add(new TableCell());
 
+            totalRow.Attributes.CssStyle.Add("border-collapse", "collapse");
+            totalRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
             this.tblOrderDetailLines.Rows.Add(totalRow);      
 
             TableCell breakCell = new TableCell();

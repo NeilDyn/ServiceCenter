@@ -31,15 +31,6 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders {
         protected global::System.Web.UI.WebControls.TableHeaderCell ExpandCurrentCustomer;
         
         /// <summary>
-        /// btnExpload control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExpload;
-        
-        /// <summary>
         /// CustomerSequence control.
         /// </summary>
         /// <remarks>

@@ -27,14 +27,14 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             if(CustomerCount == 1)
             {
                 this.CustomerSequence.Text = "Customer";
-                this.btnExpload.Visible = false;
+                //this.btnExpload.Visible = false;
                 this.btnSelectCustomer.Visible = false;
                 this.lblSelectActive.Visible = false;
             }
             else
             {
                 this.CustomerSequence.Text = "Customer " + Count.ToString();
-                this.btnExpload.ID = "btnExpload_" + Count.ToString();
+                //this.btnExpload.ID = "btnExpload_" + Count.ToString();
                 this.btnSelectCustomer.ID = "btnSelectCustomer_" + Count.ToString();
             }
             

@@ -5,9 +5,9 @@
 
 <asp:Table ID="tblCustomerInfo" runat="server" style="margin-left: 100px; margin-right:100px;" Width="85%">
     <asp:TableHeaderRow TableSection="TableHeader" runat="server" ID="infoHeaders">
-        <asp:TableHeaderCell Text="Customer Info:" HorizontalAlign="Left" ForeColor="#0099FF" Font-Bold="True" Font-Size="Large"/>
-        <asp:TableHeaderCell Text="Total Customers:" HorizontalAlign="Right" ForeColor="#0099FF" Font-Bold="True" Font-Size="Large"/>
-        <asp:TableHeaderCell runat="server" ID="thcTotalCustomers" HorizontalAlign="Right" ForeColor="#0099FF" Font-Bold="True" Font-Size="Large"/>
+        <asp:TableHeaderCell Text="Customer Info:" HorizontalAlign="Left" ForeColor="#0099FF" Font-Bold="True" Font-Size="Large" Width="25%"/>
+        <asp:TableHeaderCell Text="Total Customers:" HorizontalAlign="Right" ForeColor="#0099FF" Font-Bold="True" Font-Size="Large" Width="25%"/>
+        <asp:TableHeaderCell runat="server" ID="thcTotalCustomers" HorizontalAlign="Right" ForeColor="#0099FF" Font-Bold="True" Font-Size="Large" Width ="25%"/>
     </asp:TableHeaderRow>
     <asp:TableRow>
         <asp:TableCell ColumnSpan="3">

@@ -29,7 +29,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
      
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.tcAddress1.Text = Cust.Address1;
+            //this.tcAddress1.Text = Cust.Address1;
             this.tcAddress2.Text = Cust.Address2;
             this.tcShiptoContact.Text = Cust.ShipToContact;
             this.tcCity.Text = Cust.City;
@@ -56,7 +56,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 ((SalesOrderHeaderTable)salesOrderHeader).SalesOrderCount = Cust.SalesHeader.Count;
 
                 salesCell.Width = new Unit("100%");
-                salesCell.ColumnSpan = 5;
+                salesCell.ColumnSpan = 6;
                 salesCell.Controls.Add(salesOrderHeader);
                 salesRow.Cells.Add(salesCell);
                 this.tblSingleCustomerDetail.Rows.Add(salesRow);
@@ -71,7 +71,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 ((ReturnOrderHeaderTable)returnOrderHeader).ReturnOrdersCount = Cust.ReturnHeaders.Count;
 
                 returnCell.Width = new Unit("100%");
-                returnCell.ColumnSpan = 5;
+                returnCell.ColumnSpan = 6;
                 returnCell.Controls.Add(returnOrderHeader);
                 returnRow.Cells.Add(returnCell);
                 this.tblSingleCustomerDetail.Rows.Add(returnRow);

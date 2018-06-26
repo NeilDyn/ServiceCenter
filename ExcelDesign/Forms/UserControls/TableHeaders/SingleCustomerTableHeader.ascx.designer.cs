@@ -67,6 +67,15 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders {
         protected global::System.Web.UI.WebControls.TableHeaderCell thcCustomerName;
         
         /// <summary>
+        /// tcAddress1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcAddress1;
+        
+        /// <summary>
         /// lblSelectActive control.
         /// </summary>
         /// <remarks>

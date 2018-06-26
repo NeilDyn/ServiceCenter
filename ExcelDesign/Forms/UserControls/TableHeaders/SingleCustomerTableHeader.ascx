@@ -48,17 +48,18 @@
 
 <asp:Table ID="tblSingleCustomerTableHeader" runat="server" Width="100%" Height="100%">
     <asp:TableHeaderRow TableSection="TableHeader" runat="server" ID="customerColumns">
-        <asp:TableHeaderCell runat="server" ID="ExpandCurrentCustomer" Width="2%">
+        <asp:TableHeaderCell runat="server" ID="ExpandCurrentCustomer" Width="5%">
             <asp:Button ID="btnExpload" runat="server" Text="+" OnClientClick="return false;" />
         </asp:TableHeaderCell>
-        <asp:TableHeaderCell runat="server" ID="CustomerSequence" Font-Bold="true" Font-Underline="true" Font-Size="Large" HorizontalAlign="Left" />
-        <asp:TableHeaderCell Font-Bold="true" Text="Name:" HorizontalAlign="Left" Style="text-align: right" />
-        <asp:TableHeaderCell runat="server" ID="thcCustomerName" HorizontalAlign="Left" Style="text-align: left" />
-        <asp:TableHeaderCell HorizontalAlign="Right" ID="lblSelectActive" Text="Select As Active:" />
+        <asp:TableHeaderCell runat="server" ID="CustomerSequence" Font-Bold="true" Font-Underline="true" Font-Size="Large" HorizontalAlign="Left"/>
+        <asp:TableHeaderCell Font-Bold="true" Text="Name:" HorizontalAlign="Left" Style="text-align: right"/>
+        <asp:TableHeaderCell runat="server" ID="thcCustomerName" HorizontalAlign="Left" Style="text-align: left"/>
+        <asp:TableHeaderCell Text="Address 1:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
+        <asp:TableHeaderCell runat="server" ID="tcAddress1" HorizontalAlign="Left" Style="text-align: left"/>
+        <asp:TableHeaderCell HorizontalAlign="Right" ID="lblSelectActive" Text="Select As Active:"/>
         <asp:TableHeaderCell HorizontalAlign="Right">
             <asp:Button ID="btnSelectCustomer" runat="server" Text="Set Active" OnClientClick="return false;" />
         </asp:TableHeaderCell>
-        <asp:TableHeaderCell HorizontalAlign="Right" />
     </asp:TableHeaderRow>
 </asp:Table>
 

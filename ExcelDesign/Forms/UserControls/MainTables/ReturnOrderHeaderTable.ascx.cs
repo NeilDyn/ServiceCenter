@@ -21,6 +21,7 @@ namespace ExcelDesign.Forms.UserControls.MainTables
         private TableCell tc;
 
         protected const string singleReturnOrderHeaderPath = "../TableHeaders/SingleReturnOrderTableHeader.ascx";
+        public int returnCount = 1;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,8 +41,6 @@ namespace ExcelDesign.Forms.UserControls.MainTables
 
         protected void PopulateData()
         {
-            int returnCount = 1;
-
             foreach (ReturnHeader returnHeader in ReturnHeaderList)
             {
                 tr = new TableRow();
@@ -59,7 +58,7 @@ namespace ExcelDesign.Forms.UserControls.MainTables
                 tc.ColumnSpan = 4;
                 tc.Controls.Add(singleReturnOrderHeader);
                 tr.Cells.Add(tc);
-                tr.ID = "salesReturnDetailHeader_" + CustID.ToString();
+                tr.ID = "salesReturnDetailHeader_" + CustID.ToString() + "_" + returnCount.ToString();
                 this.tblReturnOrderHeader.Rows.Add(tr);
                 returnCount++;
             }

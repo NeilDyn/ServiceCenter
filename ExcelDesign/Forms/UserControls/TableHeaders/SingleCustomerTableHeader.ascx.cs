@@ -39,6 +39,7 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             }
             
             this.thcCustomerName.Text = SingleCustomer.Name;
+            this.tcAddress1.Text = SingleCustomer.Address1;
 
             this.ID = "customerHeader_" + Count.ToString();
 

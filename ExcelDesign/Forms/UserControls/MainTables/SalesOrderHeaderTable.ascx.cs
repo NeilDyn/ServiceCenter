@@ -47,6 +47,7 @@ namespace ExcelDesign.Forms.UserControls.MainTables
                 tc = new TableCell();
                 singleSalesOrderHeader = LoadControl(singleSalesOrderHeaderPath);
                 singleSalesOrderHeader.ID = "singleSalesOrderHeader_" + salesCount.ToString();
+
                 ((SingleSalesOrderTableHeader)singleSalesOrderHeader).Header = salesHeader;
                 ((SingleSalesOrderTableHeader)singleSalesOrderHeader).HeadCount = salesCount;
                 ((SingleSalesOrderTableHeader)singleSalesOrderHeader).CustID = CustID;
@@ -57,7 +58,7 @@ namespace ExcelDesign.Forms.UserControls.MainTables
                 tc.ColumnSpan = 4;
                 tc.Controls.Add(singleSalesOrderHeader);
                 tr.Cells.Add(tc);
-                tr.ID = "salesOrderDetailHeader_" + CustID.ToString() + "_" + salesCount.ToString();
+                tr.ID = "salesOrderDetailHeader_" + CustID.ToString();
                 this.tblSalesOrderHeader.Rows.Add(tr);
                 salesCount++;
             }

@@ -5,11 +5,11 @@
 <script type="text/javascript">
     $(document).ready(function () {
         if (<%= this.ReturnOrdersCount %> > 1) {
-            $("[id$=salesReturnDetailHeader_<%= this.CustID %>_<%= this.returnCount %>]").hide();
+            $("[id$=salesReturnDetailHeader_<%= this.CustID %>]").hide();
         }
 
         $("[id$=btnExpandReturn_<%= this.CustID %>]").click(function () {
-            $("[id$=salesReturnDetailHeader_<%= this.CustID %>_<%= this.returnCount %>]").toggle();
+            $("[id$=salesReturnDetailHeader_<%= this.CustID %>]").toggle();
             if ($("[id$=btnExpandReturn_<%= this.CustID %>]").val() == "+") {
                 $("[id$=btnExpandReturn_<%= this.CustID %>]").val("-");
             } else {

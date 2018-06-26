@@ -34,7 +34,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcShiptoContact.Text = Cust.ShipToContact;
             this.tcCity.Text = Cust.City;
             this.tcZip.Text = Cust.Zip;
-            this.tcState.Text = Cust.Country;   
+            this.tcState.Text = Cust.State;
+            this.tcCountry.Text = Cust.Country;
             
             PopulateData();        
         }

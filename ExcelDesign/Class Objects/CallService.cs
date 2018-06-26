@@ -763,16 +763,18 @@ namespace ExcelDesign.Class_Objects
             List<ReturnHeader> returnHeaders = new List<ReturnHeader>();
 
             List<string> customerNames = new List<string>();
+            List<string> shipAddresses = new List<string>();
 
             if (currResults.SOImportBuffer != null)
             {
                 for (int c = 0; c < currResults.SOImportBuffer.Length; c++)
                 {
                     shipToName = currResults.SOImportBuffer[c].ShipToName;
+                    shipToAddress1 = currResults.SOImportBuffer[c].ShipToAddress;
 
-                    if (!customerNames.Any(order => order.Equals(shipToName)))
-                    {
-                        shipToAddress1 = currResults.SOImportBuffer[c].ShipToAddress;
+                    if (!customerNames.Any(order => order.Equals(shipToName)) ||
+                        !shipAddresses.Any(address => address.Equals(shipToAddress1)))
+                    {                       
                         shipToAddress2 = currResults.SOImportBuffer[c].ShipToAddress2;
                         shipToContact = currResults.SOImportBuffer[c].ShipToContact;
                         shipToCity = currResults.SOImportBuffer[c].ShipToCity;
@@ -790,6 +792,7 @@ namespace ExcelDesign.Class_Objects
 
                         returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
                         customerNames.Add(shipToName);
+                        shipAddresses.Add(shipToAddress1);
 
                         shipToName = string.Empty;
                         shipToAddress1 = string.Empty;
@@ -811,10 +814,11 @@ namespace ExcelDesign.Class_Objects
                 for (int c = 0; c < currResults.SalesShipmentHeader.Length; c++)
                 {
                     shipToName = currResults.SalesShipmentHeader[c].ShipToName;
+                    shipToAddress1 = currResults.SalesShipmentHeader[c].ShipToAddress;
 
-                    if (!customerNames.Any(order => order.Equals(shipToName)))
-                    {
-                        shipToAddress1 = currResults.SalesShipmentHeader[c].ShipToAddress;
+                    if (!customerNames.Any(order => order.Equals(shipToName)) ||
+                        !shipAddresses.Any(address => address.Equals(shipToAddress1)))
+                    {                        
                         shipToAddress2 = currResults.SalesShipmentHeader[c].ShipToAddress2;
                         shipToContact = currResults.SalesShipmentHeader[c].ShipToContact;
                         shipToCity = currResults.SalesShipmentHeader[c].ShipToCity;
@@ -826,6 +830,7 @@ namespace ExcelDesign.Class_Objects
 
                         returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
                         customerNames.Add(shipToName);
+                        shipAddresses.Add(shipToAddress1);
 
                         shipToName = string.Empty;
                         shipToAddress1 = string.Empty;
@@ -847,12 +852,13 @@ namespace ExcelDesign.Class_Objects
                 for (int c = 0; c < currResults.SalesHeader.Length; c++)
                 {
                     shipToName = currResults.SalesHeader[c].ShipToName;
+                    shipToAddress1 = currResults.SalesHeader[c].ShipToAddress;
 
                     if (currResults.SalesHeader[c].DocType == "Order")
                     {
-                        if (!customerNames.Any(order => order.Equals(shipToName)))
-                        {
-                            shipToAddress1 = currResults.SalesHeader[c].ShipToAddress;
+                        if (!customerNames.Any(order => order.Equals(shipToName)) ||
+                            !shipAddresses.Any(address => address.Equals(shipToAddress1)))
+                        {                          
                             shipToAddress2 = currResults.SalesHeader[c].ShipToAddress2;
                             shipToContact = currResults.SalesHeader[c].ShipToContact;
                             shipToCity = currResults.SalesHeader[c].ShipToCity;
@@ -864,6 +870,7 @@ namespace ExcelDesign.Class_Objects
 
                             returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
                             customerNames.Add(shipToName);
+                            shipAddresses.Add(shipToAddress1);
 
                             shipToName = string.Empty;
                             shipToAddress1 = string.Empty;

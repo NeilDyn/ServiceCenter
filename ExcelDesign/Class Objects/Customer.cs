@@ -32,7 +32,7 @@ namespace ExcelDesign.Class_Objects
             this.Address2 = address2P;
             this.ShipToContact = shipToContactP;
             this.City = cityP;
-            this.Zip = Zip;
+            this.Zip = zipP;
             this.State = stateP;
             this.Country = countryP;
             this.SalesHeader = salesHeadersP;

@@ -115,7 +115,7 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
                     break;
 
                 case TrackingTypeEnum.AMAZON:
-                    textString = "<a href='http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
+                    textString = "<a href='https://www.packagemapping.com/track/auto/" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
                     break;
 
                 default:

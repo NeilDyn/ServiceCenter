@@ -8,7 +8,7 @@
         <asp:TableHeaderCell Text="Receive No." HorizontalAlign="Left" />
         <asp:TableHeaderCell Text="Receive Date" HorizontalAlign="Left"/>
         <asp:TableHeaderCell Text="Item" HorizontalAlign="Left" />
-        <asp:TableHeaderCell Text="Description" HorizontalAlign="Left"/>
+        <asp:TableHeaderCell Text="Description" HorizontalAlign="Left" Width="30%"/>
         <asp:TableHeaderCell Text="Qty" />
         <asp:TableHeaderCell Text="Serial No." HorizontalAlign="Left"/>
         <asp:TableHeaderCell Text="Carrier" HorizontalAlign="Left"/>

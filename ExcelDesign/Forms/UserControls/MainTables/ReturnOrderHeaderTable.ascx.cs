@@ -58,7 +58,7 @@ namespace ExcelDesign.Forms.UserControls.MainTables
                 tc.ColumnSpan = 4;
                 tc.Controls.Add(singleReturnOrderHeader);
                 tr.Cells.Add(tc);
-                tr.ID = "salesReturnDetailHeader_" + CustID.ToString();
+                tr.ID = "salesReturnDetailHeader_" + CustID.ToString() + "_" + returnCount.ToString();
                 this.tblReturnOrderHeader.Rows.Add(tr);
                 returnCount++;
             }

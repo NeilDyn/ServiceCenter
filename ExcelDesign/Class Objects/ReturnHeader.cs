@@ -33,7 +33,7 @@ namespace ExcelDesign.Class_Objects
             this.ReturnTrackingNo = returnTrackingNoP;
             this.OrderDate = orderDateP;
             this.RMANo = rmaNoP;
-            this.ExternalDocumentNo = externalDocumentNoP;
+            this.ExternalDocumentNo = externalDocumentNoP;           
         }
     }
 }

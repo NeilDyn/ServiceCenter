@@ -52,12 +52,6 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             PopulateDetail();
             PopulateLines();
-            FormatPage();
-        }
-
-        protected void FormatPage()
-        {
-
         }
 
         protected void PopulateDetail()
@@ -287,8 +281,12 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
                         this.tblOrderDetailLines.Rows.Add(lineRow);
 
+                        int moreLineCount = 0;
+
                         foreach (string serial in moreLines)
                         {
+                            moreLineCount++;
+
                             TableCell moreSerialNo = new TableCell
                             {
                                 Text = serial,
@@ -316,7 +314,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                             }
 
                             moreTableRow.Attributes.CssStyle.Add("border-collapse", "collapse");
-                            moreTableRow.ID = "showMoreOrderLines_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
+                            moreTableRow.ID = "showMoreOrderLines_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString() + "_" + moreLineCount.ToString();
                             this.tblOrderDetailLines.Rows.Add(moreTableRow);                           
                         }
 

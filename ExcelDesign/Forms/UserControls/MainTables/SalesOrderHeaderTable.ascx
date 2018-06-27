@@ -7,11 +7,11 @@
 <script type="text/javascript">
     $(document).ready(function () {
         if (<%= this.SalesOrderCount %> > 1) {
-            $("[id$=salesOrderDetailHeader_<%= this.CustID %>]").hide();
+            $("[id*=salesOrderDetailHeader_<%= this.CustID %>]").hide();
         }
 
         $("[id$=btnExpandOrder_<%= this.CustID %>]").click(function () {
-            $("[id$=salesOrderDetailHeader_<%= this.CustID %>]").toggle();
+            $("[id*=salesOrderDetailHeader_<%= this.CustID %>]").toggle();
             if ($("[id$=btnExpandOrder_<%= this.CustID %>]").val() == "+") {
                 $("[id$=btnExpandOrder_<%= this.CustID %>]").val("-");
             } else {

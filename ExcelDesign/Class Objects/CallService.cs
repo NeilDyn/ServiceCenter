@@ -46,7 +46,7 @@ namespace ExcelDesign.Class_Objects
                         description = currResults.PostedPackageLine[ppl].Description;
                         type = currResults.PostedPackageLine[ppl].Type;
                         int.TryParse(currResults.PostedPackageLine[ppl].Qty, out quantity);
-                        double.TryParse(currResults.PostedPackageLine[ppl].Price, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
+                        double.TryParse(currResults.PostedPackageLine[ppl].Price.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
 
                         postedPackageLine.Add(new PostedPackageLine(serialNo, packageNo, itemNo, description, quantity, price));
 
@@ -239,6 +239,7 @@ namespace ExcelDesign.Class_Objects
             int quantityShipped = 0;
             double price = 0;
             double lineAmount = 0;
+            List<string> insertedItems = new List<string>();
 
             if (currResults.SalesShipmentLine != null)
             {
@@ -249,19 +250,34 @@ namespace ExcelDesign.Class_Objects
                         itemNo = currResults.SalesShipmentLine[sl].ItemNo;
                         description = currResults.SalesShipmentLine[sl].Description;
                         int.TryParse(currResults.SalesShipmentLine[sl].Qty, out quantity);
-                        double.TryParse(currResults.SalesShipmentLine[sl].UnitPrice, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
+                        double.TryParse(currResults.SalesShipmentLine[sl].UnitPrice.Replace(",", "") , NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
 
-                        for (int sli = 0; sli < currResults.SalesShipmentLine.Length; sli++)
+                        if (insertedItems.Any(item => item.Equals(itemNo)))
                         {
-                            if ((currResults.SalesShipmentLine[sli].DocNo == no) && (currResults.SalesShipmentLine[sli].ItemNo == itemNo))
+                            foreach (ShipmentLine existingItem in shipLine)
                             {
-                                int.TryParse(currResults.SalesShipmentLine[sli].Qty, out int currQty);
-                                quantityShipped += currQty;
+                                if (existingItem.ItemNo == itemNo)
+                                {
+                                    existingItem.Quantity += quantity;
+                                    existingItem.LineAmount = existingItem.Quantity * price;
+                                }
                             }
                         }
+                        else
+                        {
+                            for (int sli = 0; sli < currResults.SalesShipmentLine.Length; sli++)
+                            {
+                                if ((currResults.SalesShipmentLine[sli].DocNo == no) && (currResults.SalesShipmentLine[sli].ItemNo == itemNo))
+                                {
+                                    int.TryParse(currResults.SalesShipmentLine[sli].Qty, out int currQty);
+                                    quantityShipped += currQty;
+                                }
+                            }
 
-                        shipLine.Add(new ShipmentLine(itemNo, description, quantity, quantityShipped, price, lineAmount));
+                            shipLine.Add(new ShipmentLine(itemNo, description, quantity, quantityShipped, price, lineAmount));
+                            insertedItems.Add(itemNo);
+                        }
 
                         itemNo = string.Empty;
                         description = string.Empty;
@@ -286,6 +302,7 @@ namespace ExcelDesign.Class_Objects
             int quantityReceived = 0;
             double price = 0;
             double lineAmount = 0;
+            List<string> insertedItems = new List<string>();
 
             if (currResults.ReturnReceiptLine != null)
             {
@@ -296,19 +313,34 @@ namespace ExcelDesign.Class_Objects
                         itemNo = currResults.ReturnReceiptLine[rl].ItemNo;
                         description = currResults.ReturnReceiptLine[rl].Description;
                         int.TryParse(currResults.ReturnReceiptLine[rl].Qty, out quantity);
-                        double.TryParse(currResults.ReturnReceiptLine[rl].UnitPrice, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
+                        double.TryParse(currResults.ReturnReceiptLine[rl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
 
-                        for (int rli = 0; rli < currResults.ReturnReceiptLine.Length; rli++)
+                        if (insertedItems.Any(item => item.Equals(itemNo)))
                         {
-                            if ((currResults.ReturnReceiptLine[rli].DocNo == no) && (currResults.ReturnReceiptLine[rli].ItemNo == itemNo))
+                            foreach (ReceiptLine existingItem in receiptLine)
                             {
-                                int.TryParse(currResults.ReturnReceiptLine[rli].Qty, out int currQty);
-                                quantityReceived += currQty;
+                                if (existingItem.ItemNo == itemNo)
+                                {
+                                    existingItem.Quantity += quantity;
+                                    existingItem.LineAmount = existingItem.Quantity * price;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (int rli = 0; rli < currResults.ReturnReceiptLine.Length; rli++)
+                            {
+                                if ((currResults.ReturnReceiptLine[rli].DocNo == no) && (currResults.ReturnReceiptLine[rli].ItemNo == itemNo))
+                                {
+                                    int.TryParse(currResults.ReturnReceiptLine[rli].Qty, out int currQty);
+                                    quantityReceived += currQty;
+                                }
                             }
                         }
 
                         receiptLine.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount));
+                        insertedItems.Add(itemNo);
 
                         itemNo = string.Empty;
                         description = string.Empty;
@@ -346,7 +378,7 @@ namespace ExcelDesign.Class_Objects
                         receiptLines = ReturnReceiptLines(no);
                         shippingAgentCode = currResults.ReturnReceiptHeader[rh].ShippingAgent;
 
-                        receiptHead.Add(new ReceiptHeader(no, externalDocumentNo, receiptDate, receiptLines, shippingAgentCode));
+                        receiptHead.Add(new ReceiptHeader(no, externalDocumentNo, receiptDate, receiptLines, shippingAgentCode, false));
 
                         no = string.Empty;
                         externalDocumentNo = string.Empty;
@@ -859,38 +891,41 @@ namespace ExcelDesign.Class_Objects
                     shipToName = currResults.SalesHeader[c].ShipToName;
                     shipToAddress1 = currResults.SalesHeader[c].ShipToAddress;
 
-                    if (!customerNames.Any(order => order.Equals(shipToName)) ||
-                        !shipAddresses.Any(address => address.Equals(shipToAddress1)))
+                    if (currResults.SalesHeader[c].DocType == "Order")
                     {
-                        shipToAddress2 = currResults.SalesHeader[c].ShipToAddress2;
-                        shipToContact = currResults.SalesHeader[c].ShipToContact;
-                        shipToCity = currResults.SalesHeader[c].ShipToCity;
-                        shipToZip = currResults.SalesHeader[c].ShipToZip;
-                        shipToState = currResults.SalesHeader[c].ShipToState;
-                        shipToCountry = currResults.SalesHeader[c].ShipToCountry;
-                        salesHeaders = GetSalesOrders(shipToName, shipToAddress1);                        
-                        returnHeaders = GetReturnOrdersFromSalesHeader(salesHeaders);
-
-                        if (returnHeaders.Count == 0)
+                        if (!customerNames.Any(order => order.Equals(shipToName)) ||
+                            !shipAddresses.Any(address => address.Equals(shipToAddress1)))
                         {
-                            returnHeaders = GetReturnOrders(shipToName, shipToAddress1);
+                            shipToAddress2 = currResults.SalesHeader[c].ShipToAddress2;
+                            shipToContact = currResults.SalesHeader[c].ShipToContact;
+                            shipToCity = currResults.SalesHeader[c].ShipToCity;
+                            shipToZip = currResults.SalesHeader[c].ShipToZip;
+                            shipToState = currResults.SalesHeader[c].ShipToState;
+                            shipToCountry = currResults.SalesHeader[c].ShipToCountry;
+                            salesHeaders = GetSalesOrders(shipToName, shipToAddress1);
+                            returnHeaders = GetReturnOrdersFromSalesHeader(salesHeaders);
+
+                            if (returnHeaders.Count == 0)
+                            {
+                                returnHeaders = GetReturnOrders(shipToName, shipToAddress1);
+                            }
+
+                            returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
+                            customerNames.Add(shipToName);
+                            shipAddresses.Add(shipToAddress1);
+
+                            shipToName = string.Empty;
+                            shipToAddress1 = string.Empty;
+                            shipToAddress2 = string.Empty;
+                            shipToContact = string.Empty;
+                            shipToCity = string.Empty;
+                            shipToZip = string.Empty;
+                            shipToState = string.Empty;
+                            shipToCountry = string.Empty;
+
+                            salesHeaders = new List<SalesHeader>();
+                            returnHeaders = new List<ReturnHeader>();
                         }
-
-                        returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
-                        customerNames.Add(shipToName);
-                        shipAddresses.Add(shipToAddress1);
-
-                        shipToName = string.Empty;
-                        shipToAddress1 = string.Empty;
-                        shipToAddress2 = string.Empty;
-                        shipToContact = string.Empty;
-                        shipToCity = string.Empty;
-                        shipToZip = string.Empty;
-                        shipToState = string.Empty;
-                        shipToCountry = string.Empty;
-
-                        salesHeaders = new List<SalesHeader>();
-                        returnHeaders = new List<ReturnHeader>();
                     }
                 }
             }
@@ -976,7 +1011,7 @@ namespace ExcelDesign.Class_Objects
 
                                     if (receiptHeader.Count == 0)
                                     {
-                                        receiptHeader = ReturnShipmentReceiptHeader(externalDocumentNo);
+                                        receiptHeader = ReturnShipmentReceiptHeader(sh.SalesOrderNo, externalDocumentNo);
                                     }
 
                                     for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
@@ -1098,7 +1133,7 @@ namespace ExcelDesign.Class_Objects
             return returnHead;
         }
 
-        private List<ReceiptHeader> ReturnShipmentReceiptHeader(string extDocNo)
+        private List<ReceiptHeader> ReturnShipmentReceiptHeader(string orderNo, string extDocNo)
         {
             List<ReceiptHeader> receipts = new List<ReceiptHeader>();
 
@@ -1113,12 +1148,13 @@ namespace ExcelDesign.Class_Objects
             {
                 for (int sh = 0; sh < currResults.SalesShipmentHeader.Length; sh++)
                 {
-                    if (currResults.SalesShipmentHeader[sh].ExtDocNo == extDocNo)
+                    if (currResults.SalesShipmentHeader[sh].ExtDocNo == extDocNo &&
+                        currResults.SalesShipmentHeader[sh].OrderNo == orderNo)
                     {
                         externalDocumentNo = extDocNo;
                         receiptLines = ReturnShipmentReceiptLines(currResults.SalesShipmentHeader[sh].No);
 
-                        receipts.Add(new ReceiptHeader(no, externalDocumentNo, receiptDate, receiptLines, shippingAgentCode));
+                        receipts.Add(new ReceiptHeader(no, externalDocumentNo, receiptDate, receiptLines, shippingAgentCode, true));
 
                         no = string.Empty;
                         externalDocumentNo = string.Empty;
@@ -1153,7 +1189,7 @@ namespace ExcelDesign.Class_Objects
                         itemNo = currResults.SalesShipmentLine[rl].ItemNo;
                         description = currResults.SalesShipmentLine[rl].Description;
                         int.TryParse(currResults.SalesShipmentLine[rl].Qty, out quantity);
-                        double.TryParse(currResults.SalesShipmentLine[rl].UnitPrice, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
+                        double.TryParse(currResults.SalesShipmentLine[rl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
                         quantityReceived = 0;
 

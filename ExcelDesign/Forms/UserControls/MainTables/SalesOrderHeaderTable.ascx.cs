@@ -58,7 +58,7 @@ namespace ExcelDesign.Forms.UserControls.MainTables
                 tc.ColumnSpan = 4;
                 tc.Controls.Add(singleSalesOrderHeader);
                 tr.Cells.Add(tc);
-                tr.ID = "salesOrderDetailHeader_" + CustID.ToString();
+                tr.ID = "salesOrderDetailHeader_" + CustID.ToString() + "_" + salesCount.ToString();
                 this.tblSalesOrderHeader.Rows.Add(tr);
                 salesCount++;
             }

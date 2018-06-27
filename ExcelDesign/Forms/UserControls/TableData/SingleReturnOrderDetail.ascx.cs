@@ -17,6 +17,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
         public int CountID { get; set; }
         public int CustID { get; set; }
         public int CustomerCount { get; set; }
+        public string RMANo { get; set; }
+        public string DocNo { get; set; }
 
         protected TableRow buttonRow = new TableRow();
 
@@ -44,12 +46,6 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             LoadData();
             PopulateLines();      
-            FormatPage();
-        }
-
-        protected void FormatPage()
-        {
-
         }
 
         protected void CreateButtons()
@@ -70,7 +66,10 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcChannelName.Text = Rh.ChannelName;            
             this.tcOrderDate.Text = Rh.OrderDate;
             TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
-           
+
+            RMANo = Rh.RMANo;
+            DocNo = Rh.ExternalDocumentNo;
+
             if (Rh.PostedReceiveObj.Count > 0)
             {           
                 PopulateReceiveLines();
@@ -80,11 +79,18 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             if (Rh.ReceiptHeaderObj.Count > 0)
             {
-                Enum.TryParse(Rh.ReceiptHeaderObj[0].ShippingAgentCode, out trackType);              
+                if (!Rh.ReceiptHeaderObj[0].PopulatedFromShipmentHeader)
+                {
+                    Enum.TryParse(Rh.ReceiptHeaderObj[0].ShippingAgentCode, out trackType);
 
-                this.tcReceiptDate.Text = Rh.ReceiptHeaderObj[0].ReceiptDate;
-                this.tcReceiptsTotal.Text = "<a href='javascript:expandReceipts" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Rh.ReceiptHeaderObj.Count.ToString() + "</a>";
-                PopulateReceiptLines();
+                    this.tcReceiptDate.Text = Rh.ReceiptHeaderObj[0].ReceiptDate;
+                    this.tcReceiptsTotal.Text = "<a href='javascript:expandReceipts" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Rh.ReceiptHeaderObj.Count.ToString() + "</a>";
+                    PopulateReceiptLines();
+                }
+                else
+                {
+                    this.tcReceiptsTotal.Text = "<a href='javascript:expandReceipts" + CustID.ToString() + "" + CountID.ToString() + "()'>0</a>";
+                }
             }
 
             string trackNo = Rh.ReturnTrackingNo;
@@ -96,7 +102,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             double total = 0;
             TableRow totalRow = new TableRow();
             TableCell totalString = new TableCell();
-            TableCell totalCell = new TableCell();      
+            TableCell totalCell = new TableCell();          
 
             int lineCount = 0;
 
@@ -189,8 +195,11 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         lineRow.Attributes.CssStyle.Add("border-collapse", "collapse");
                         this.tblReturnDetailLines.Rows.Add(lineRow);
 
+                        int moreLineCount = 0;
                         foreach (string serial in moreLines)
                         {
+                            moreLineCount++;
+
                             TableCell moreSerialNo = new TableCell
                             {
                                 Text = serial,
@@ -231,7 +240,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                             };
 
                             blankRow.Cells.Add(blankCell);
-                            blankRow.ID = "showMoreReturnLines_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
+                            blankRow.ID = "showMoreReturnLines_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString() + "_" + moreLineCount.ToString();
                             this.tblReturnDetailLines.Rows.Add(blankRow);
                         }
 

@@ -33,6 +33,9 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             }
             else
             {
+                this.btnExpload.Visible = true;
+                this.btnSelectCustomer.Visible = true;
+                this.lblSelectActive.Visible = true;
                 this.CustomerSequence.Text = "Customer " + Count.ToString();
                 this.btnExpload.ID = "btnExpload_" + Count.ToString();
                 this.btnSelectCustomer.ID = "btnSelectCustomer_" + Count.ToString();

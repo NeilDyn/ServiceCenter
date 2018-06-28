@@ -23,9 +23,7 @@ namespace ExcelDesign.Forms.UserControls.CustomerInfo.MainTables
         }
 
         public void CreateCustomerInfo()
-        {
-            Session["CustomerCount"] = CustomerList.Count.ToString();
-                  
+        {                  
             int count = 1;
 
             foreach (Customer cust in CustomerList)

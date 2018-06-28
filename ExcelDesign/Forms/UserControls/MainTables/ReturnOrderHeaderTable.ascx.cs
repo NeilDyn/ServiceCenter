@@ -33,6 +33,7 @@ namespace ExcelDesign.Forms.UserControls.MainTables
             }
             else
             {
+                this.btnExpandReturn.Visible = true;
                 this.btnExpandReturn.ID = "btnExpandReturn_" + CustID.ToString();
             }
 

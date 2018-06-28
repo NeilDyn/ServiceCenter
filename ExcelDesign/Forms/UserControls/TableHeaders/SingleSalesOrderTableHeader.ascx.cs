@@ -39,6 +39,7 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             }
             else
             {
+                this.btnExpandCurrentOrder.Visible = true;
                 this.SalesOrderSequence.Text = "Order " + HeadCount.ToString();
                 this.btnExpandCurrentOrder.ID = "btnExpandCurrentOrder_" + CustID.ToString() + "_" + HeadCount.ToString();
             }

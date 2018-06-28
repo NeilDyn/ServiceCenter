@@ -40,6 +40,7 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             }
             else
             {
+                this.btnExpandCurrentReturn.Visible = true;
                 this.ReturnOrderSequence.Text = "Return " + HeadCount.ToString();
                 this.btnExpandCurrentReturn.ID = "btnExpandCurrentReturn_" + CustID.ToString() + "_" + HeadCount.ToString();
             }

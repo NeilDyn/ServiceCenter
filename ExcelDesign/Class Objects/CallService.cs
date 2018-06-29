@@ -239,6 +239,7 @@ namespace ExcelDesign.Class_Objects
             int quantityShipped = 0;
             double price = 0;
             double lineAmount = 0;
+            string type = string.Empty;
             List<string> insertedItems = new List<string>();
 
             if (currResults.SalesShipmentLine != null)
@@ -252,6 +253,7 @@ namespace ExcelDesign.Class_Objects
                         int.TryParse(currResults.SalesShipmentLine[sl].Qty, out quantity);
                         double.TryParse(currResults.SalesShipmentLine[sl].UnitPrice.Replace(",", "") , NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
+                        type = currResults.SalesShipmentLine[sl].Type;
 
                         if (insertedItems.Any(item => item.Equals(itemNo)))
                         {
@@ -275,7 +277,7 @@ namespace ExcelDesign.Class_Objects
                                 }
                             }
 
-                            shipLine.Add(new ShipmentLine(itemNo, description, quantity, quantityShipped, price, lineAmount));
+                            shipLine.Add(new ShipmentLine(itemNo, description, quantity, quantityShipped, price, lineAmount, type));
                             insertedItems.Add(itemNo);
                         }
 
@@ -1008,6 +1010,7 @@ namespace ExcelDesign.Class_Objects
                                     channelName = currResults.SalesHeader[so].SellToCustomerName;
                                     orderDate = currResults.SalesHeader[so].DocDate;
                                     externalDocumentNo = currResults.SalesHeader[so].ExtDocNo;
+                                    returnTrackingNo = currResults.SalesHeader[so].ReturnTrackingNo;
 
                                     if (receiptHeader.Count == 0)
                                     {

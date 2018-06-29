@@ -359,8 +359,8 @@
             <element minOccurs="1" maxOccurs="1" name="includeResourceLines" type="boolean" />
             <element minOccurs="1" maxOccurs="1" name="printRmaInstructions" type="boolean" />
             <element minOccurs="1" maxOccurs="1" name="createUPSReturnLabel" type="boolean" />
-            <element minOccurs="1" maxOccurs="1" name="lineDetails" type="string" />
             <element minOccurs="1" maxOccurs="1" name="emailAddress" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lineDetails" type="string" />
           </sequence>
         </complexType>
       </element>

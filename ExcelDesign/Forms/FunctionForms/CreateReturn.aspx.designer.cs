@@ -49,15 +49,6 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.TableHeaderCell tcDocNo;
         
         /// <summary>
-        /// ddlReturnReason control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlReturnReason;
-        
-        /// <summary>
         /// ddlDefectOptions control.
         /// </summary>
         /// <remarks>
@@ -65,6 +56,60 @@ namespace ExcelDesign.Forms.FunctionForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDefectOptions;
+        
+        /// <summary>
+        /// tblCreateReturnOrderTableDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblCreateReturnOrderTableDetails;
+        
+        /// <summary>
+        /// HeaderItem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell HeaderItem;
+        
+        /// <summary>
+        /// HeaderDesc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell HeaderDesc;
+        
+        /// <summary>
+        /// HeaderQty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell HeaderQty;
+        
+        /// <summary>
+        /// HeaderActionQty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell HeaderActionQty;
+        
+        /// <summary>
+        /// HeaderReturnReasonCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell HeaderReturnReasonCode;
         
         /// <summary>
         /// txtNotes control.

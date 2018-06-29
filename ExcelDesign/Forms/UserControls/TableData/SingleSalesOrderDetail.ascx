@@ -23,8 +23,8 @@
         $("[id$=btnCreateReturn_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
             if ("<%= this.tcStatus.Text.ToUpper() %>" == "OPEN")
             {
-                    var width = 850;
-                    var height = 350;
+                    var width = 1000;
+                    var height = 400;
                     var left = (screen.width - width) / 2;
                     var top = (screen.height - height) / 2;
                     window.open("FunctionForms/CreateReturn.aspx?OrderNo=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>",

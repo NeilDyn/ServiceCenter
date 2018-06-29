@@ -24,11 +24,11 @@ namespace ExcelDesign.Class_Objects
         }
 
         public string CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, int defect, string notes,
-            bool includeResource, bool printRMA, bool createLabel, string email)
+            bool includeResource, bool printRMA, bool createLabel, string email, string lineValues)
         {
             string returnRMA;
 
-            returnRMA = webService.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, defect, notes, createLabel, printRMA, includeResource, string.Empty, email);
+            returnRMA = webService.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, defect, notes, createLabel, printRMA, includeResource, email, lineValues);
 
             return returnRMA;
         }

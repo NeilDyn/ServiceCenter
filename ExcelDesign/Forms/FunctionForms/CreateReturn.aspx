@@ -34,16 +34,34 @@
                 <asp:TableHeaderCell Text="External Document No:" />
                 <asp:TableHeaderCell ID="tcDocNo" runat="server" />
             </asp:TableRow>
-            <asp:TableRow>
+           <%-- <asp:TableRow>
                 <asp:TableCell Text="Return Reason: " />
                 <asp:TableCell>
                     <asp:DropDownList ID="ddlReturnReason" runat="server" Width="50%"/>
                 </asp:TableCell>
-            </asp:TableRow>
+            </asp:TableRow>--%>
             <asp:TableRow>
                 <asp:TableCell Text="Defect Options: " />
                 <asp:TableCell>
                     <asp:DropDownList ID="ddlDefectOptions" runat="server" Width="50%"/>
+                </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow>
+                <asp:TableCell ColumnSpan="5">
+                    <asp:Table runat="server" ID="tblCreateReturnOrderTableDetails" Height="100%" Width="100%">
+                        <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
+                            <asp:TableHeaderCell Text="Item No." HorizontalAlign="Left" ID="HeaderItem"/>
+                            <asp:TableHeaderCell Text="Description" HorizontalAlign="Left" Width="30%" ID="HeaderDesc"/>
+                            <asp:TableHeaderCell Text="Qty" ID="HeaderQty"/>
+                            <asp:TableHeaderCell Text="Action Qty." ID="HeaderActionQty"/>
+                            <asp:TableHeaderCell Text="Return Reason Code" HorizontalAlign="Left" ID="HeaderReturnReasonCode"/>
+                        </asp:TableHeaderRow>
+                    </asp:Table>
+                </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow>
+                <asp:TableCell>
+                    <br />
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>

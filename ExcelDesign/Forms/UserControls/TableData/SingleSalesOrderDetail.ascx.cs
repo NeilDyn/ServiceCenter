@@ -48,8 +48,13 @@ namespace ExcelDesign.Forms.UserControls.TableData
             if(CustomerCount == 1)
             {
                 CreateButtons();
+                Session["ShipmentHeader"] = Sh.ShipmentHeaderObject;
             }
-
+            else
+            {
+                Session["ShipmentHeader"] = null;
+            }
+        
             PopulateDetail();
             PopulateLines();
         }
@@ -185,7 +190,6 @@ namespace ExcelDesign.Forms.UserControls.TableData
         {
             double total = 0;
             TableRow totalRow = new TableRow();
-            TableRow lineCell = new TableRow();
 
             TableCell totalString = new TableCell();
             TableCell totalCell = new TableCell();
@@ -200,7 +204,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                     {
                         lineCount++;
 
-                        TableRow lineRow = new TableRow();
+                        TableRow singleRow = new TableRow();
                         string itemNoS = string.Empty;
                         string firstSerialNo = string.Empty;
                         int packageSerialCount = 0;
@@ -252,34 +256,34 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         serialNo.Text = firstSerialNo;
                         serialNo.HorizontalAlign = HorizontalAlign.Center;
 
-                        lineRow.ID = "salesInfoLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
+                        singleRow.ID = "salesInfoLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
                         if (packageSerialCount > 1)
                         {                           
                             moreSerial.Text = "<a id='expandMoreClickOrderLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString() + "' href ='javascript:expandMoreOrderLines" + CustID.ToString() + CountID.ToString() + "(" + lineCount + ")'>Show More</a>";
                             moreSerial.ID = "expandShowMoreOrderLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
                         }
 
-                        lineRow.Cells.Add(itemNo);
-                        lineRow.Cells.Add(desc);
-                        lineRow.Cells.Add(qty);
-                        lineRow.Cells.Add(qtyShipped);
-                        lineRow.Cells.Add(price);
-                        lineRow.Cells.Add(lineAmount);
-                        lineRow.Cells.Add(serialNo);
-                        lineRow.Cells.Add(moreSerial);
+                        singleRow.Cells.Add(itemNo);
+                        singleRow.Cells.Add(desc);
+                        singleRow.Cells.Add(qty);
+                        singleRow.Cells.Add(qtyShipped);
+                        singleRow.Cells.Add(price);
+                        singleRow.Cells.Add(lineAmount);
+                        singleRow.Cells.Add(serialNo);
+                        singleRow.Cells.Add(moreSerial);
 
                         if (lineCount % 2 == 0)
                         {
-                            lineRow.BackColor = Color.White;
+                            singleRow.BackColor = Color.White;
                         }
                         else
                         {
-                            lineRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                            singleRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
                         }
 
-                        lineRow.Attributes.CssStyle.Add("border-collapse", "collapse");
+                        singleRow.Attributes.CssStyle.Add("border-collapse", "collapse");
 
-                        this.tblOrderDetailLines.Rows.Add(lineRow);
+                        this.tblOrderDetailLines.Rows.Add(singleRow);
 
                         int moreLineCount = 0;
 

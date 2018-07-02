@@ -165,7 +165,7 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CreateReturnOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CreateReturnOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string CreateReturnOrder(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails) {
+        public string CreateReturnOrder(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ref ReturnOrder createdReturn) {
             object[] results = this.Invoke("CreateReturnOrder", new object[] {
                         orderNo,
                         extDocNo,
@@ -176,17 +176,19 @@ namespace ExcelDesign.ServiceFunctions {
                         printRmaInstructions,
                         createUPSReturnLabel,
                         emailAddress,
-                        lineDetails});
+                        lineDetails,
+                        createdReturn});
+            createdReturn = ((ReturnOrder)(results[1]));
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails) {
-            this.CreateReturnOrderAsync(orderNo, extDocNo, returnReasonCode, _DefectOpts, notes, includeResourceLines, printRmaInstructions, createUPSReturnLabel, emailAddress, lineDetails, null);
+        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn) {
+            this.CreateReturnOrderAsync(orderNo, extDocNo, returnReasonCode, _DefectOpts, notes, includeResourceLines, printRmaInstructions, createUPSReturnLabel, emailAddress, lineDetails, createdReturn, null);
         }
         
         /// <remarks/>
-        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, object userState) {
+        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn, object userState) {
             if ((this.CreateReturnOrderOperationCompleted == null)) {
                 this.CreateReturnOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateReturnOrderOperationCompleted);
             }
@@ -200,7 +202,8 @@ namespace ExcelDesign.ServiceFunctions {
                         printRmaInstructions,
                         createUPSReturnLabel,
                         emailAddress,
-                        lineDetails}, this.CreateReturnOrderOperationCompleted, userState);
+                        lineDetails,
+                        createdReturn}, this.CreateReturnOrderOperationCompleted, userState);
         }
         
         private void OnCreateReturnOrderOperationCompleted(object arg) {
@@ -738,6 +741,422 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.daysRemaining2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="urn:microsoft-dynamics-nav/xmlports/x50101")]
+    public partial class SalesLine1 {
+        
+        private string docNoField;
+        
+        private string typeField;
+        
+        private string itemNoField;
+        
+        private string descriptionField;
+        
+        private string qtyField;
+        
+        private string qtyToReceiveField;
+        
+        private string qtyShippedField;
+        
+        private string unitPriceField;
+        
+        private string dateCreatedField;
+        
+        /// <remarks/>
+        public string DocNo {
+            get {
+                return this.docNoField;
+            }
+            set {
+                this.docNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ItemNo {
+            get {
+                return this.itemNoField;
+            }
+            set {
+                this.itemNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Qty {
+            get {
+                return this.qtyField;
+            }
+            set {
+                this.qtyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string QtyToReceive {
+            get {
+                return this.qtyToReceiveField;
+            }
+            set {
+                this.qtyToReceiveField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string QtyShipped {
+            get {
+                return this.qtyShippedField;
+            }
+            set {
+                this.qtyShippedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string UnitPrice {
+            get {
+                return this.unitPriceField;
+            }
+            set {
+                this.unitPriceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DateCreated {
+            get {
+                return this.dateCreatedField;
+            }
+            set {
+                this.dateCreatedField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="Warranty2", Namespace="urn:microsoft-dynamics-nav/xmlports/x50101")]
+    public partial class Warranty21 {
+        
+        private string[] status2Field;
+        
+        private string[] policy2Field;
+        
+        private string[] daysRemaining2Field;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Status2")]
+        public string[] Status2 {
+            get {
+                return this.status2Field;
+            }
+            set {
+                this.status2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Policy2")]
+        public string[] Policy2 {
+            get {
+                return this.policy2Field;
+            }
+            set {
+                this.policy2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("DaysRemaining2")]
+        public string[] DaysRemaining2 {
+            get {
+                return this.daysRemaining2Field;
+            }
+            set {
+                this.daysRemaining2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesHeader", Namespace="urn:microsoft-dynamics-nav/xmlports/x50101")]
+    public partial class SalesHeader1 {
+        
+        private string docTypeField;
+        
+        private string noField;
+        
+        private string extDocNoField;
+        
+        private string docDateField;
+        
+        private string returnTrackingNoField;
+        
+        private string sellToCustomerNameField;
+        
+        private string shipToNameField;
+        
+        private string shipToAddressField;
+        
+        private string shipToAddress2Field;
+        
+        private string shipToContactField;
+        
+        private string shipToCityField;
+        
+        private string shipToZipField;
+        
+        private string shipToStateField;
+        
+        private string shipToCountryField;
+        
+        private Warranty21[] warranty2Field;
+        
+        /// <remarks/>
+        public string DocType {
+            get {
+                return this.docTypeField;
+            }
+            set {
+                this.docTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string No {
+            get {
+                return this.noField;
+            }
+            set {
+                this.noField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ExtDocNo {
+            get {
+                return this.extDocNoField;
+            }
+            set {
+                this.extDocNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DocDate {
+            get {
+                return this.docDateField;
+            }
+            set {
+                this.docDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ReturnTrackingNo {
+            get {
+                return this.returnTrackingNoField;
+            }
+            set {
+                this.returnTrackingNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SellToCustomerName {
+            get {
+                return this.sellToCustomerNameField;
+            }
+            set {
+                this.sellToCustomerNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToName {
+            get {
+                return this.shipToNameField;
+            }
+            set {
+                this.shipToNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToAddress {
+            get {
+                return this.shipToAddressField;
+            }
+            set {
+                this.shipToAddressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToAddress2 {
+            get {
+                return this.shipToAddress2Field;
+            }
+            set {
+                this.shipToAddress2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToContact {
+            get {
+                return this.shipToContactField;
+            }
+            set {
+                this.shipToContactField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToCity {
+            get {
+                return this.shipToCityField;
+            }
+            set {
+                this.shipToCityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToZip {
+            get {
+                return this.shipToZipField;
+            }
+            set {
+                this.shipToZipField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToState {
+            get {
+                return this.shipToStateField;
+            }
+            set {
+                this.shipToStateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToCountry {
+            get {
+                return this.shipToCountryField;
+            }
+            set {
+                this.shipToCountryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Warranty2")]
+        public Warranty21[] Warranty2 {
+            get {
+                return this.warranty2Field;
+            }
+            set {
+                this.warranty2Field = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50101")]
+    public partial class ReturnOrder {
+        
+        private SalesHeader1[] salesHeaderField;
+        
+        private SalesLine1[] salesLineField;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SalesHeader")]
+        public SalesHeader1[] SalesHeader {
+            get {
+                return this.salesHeaderField;
+            }
+            set {
+                this.salesHeaderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
+        public SalesLine1[] SalesLine {
+            get {
+                return this.salesLineField;
+            }
+            set {
+                this.salesLineField = value;
             }
         }
         
@@ -3331,6 +3750,14 @@ namespace ExcelDesign.ServiceFunctions {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public ReturnOrder createdReturn {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ReturnOrder)(this.results[1]));
             }
         }
     }

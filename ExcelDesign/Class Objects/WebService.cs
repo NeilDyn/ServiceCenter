@@ -67,12 +67,12 @@ namespace ExcelDesign.Class_Objects
             return "testSesh";
         }
 
-        public string CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, int defect, string notes,
+        public ReturnOrder CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, int defect, string notes,
             bool includeResource, bool printRMA, bool createLabel, string email, string lineValues)
         {
-            string returnRMA;
+            ReturnOrder returnRMA = new ReturnOrder();
 
-            returnRMA = functions.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, defect, notes, createLabel, printRMA, includeResource, email, lineValues);
+            functions.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, defect, notes, createLabel, printRMA, includeResource, email, lineValues, ref returnRMA);
 
             return returnRMA;
         }

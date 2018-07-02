@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ExcelDesign.Class_Objects;
+using ExcelDesign.Class_Objects.CreatedReturn;
 using ExcelDesign.Class_Objects.FunctionData;
 
 namespace ExcelDesign.Forms.FunctionForms
@@ -23,8 +24,6 @@ namespace ExcelDesign.Forms.FunctionForms
         protected bool resources;
         protected bool printRMA;
         protected bool createLabel;
-
-        protected const string windowClose = "< script language=javascript>parent.window.close();</script>";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -124,9 +123,8 @@ namespace ExcelDesign.Forms.FunctionForms
             }
         }
 
-        protected void btnCreateRMA_Click(object sender, EventArgs e)
+        protected void BtnCreateRMA_Click(object sender, EventArgs e)
         {
-            string returnRMA;
             StringBuilder lineBuild = new StringBuilder();
             string lineError = "";
 
@@ -215,16 +213,17 @@ namespace ExcelDesign.Forms.FunctionForms
                     if (allValidLines)
                     {
                         string lineValues = lineBuild.ToString();
+                        CreatedReturnHeader crh = new CreatedReturnHeader();
 
                         SendService ss = new SendService();
-                        returnRMA = ss.CreateReturnOrder(orderNo, docNo, string.Empty, defect, notes, resources, printRMA, createLabel, email, lineValues);
-                        ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + returnRMA + "');", true);
-                        ClientScript.RegisterStartupScript(this.GetType(), "closeWindow", "parent.window.close();", true);
+                        crh = ss.CreateReturnOrder(orderNo, docNo, string.Empty, defect, notes, resources, printRMA, createLabel, email, lineValues);
+                        Session["CreatedRMA"] = crh;
+                        ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + "');", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "openCreatedRMA", "OpenCreatedRMA();", true);                      
                     }
                     else
                     {
                         Response.Write(lineError);
-                        //ClientScript.RegisterStartupScript(this.GetType(), "lineError", "alert('" + lineError + "');", true);
                     }
                 }
                 else

@@ -311,6 +311,54 @@
       </complexType>
       <element name="SearchResults" type="tns:SearchResults" />
     </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50101" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50101" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Warranty2" mixed="true">
+        <sequence>
+          <element minOccurs="0" maxOccurs="unbounded" name="Status2" type="string" />
+          <element minOccurs="0" maxOccurs="unbounded" name="Policy2" type="string" />
+          <element minOccurs="0" maxOccurs="unbounded" name="DaysRemaining2" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="SalesHeader">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="DocType" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="No" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ExtDocNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="DocDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ReturnTrackingNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="SellToCustomerName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress2" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToContact" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCity" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToZip" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToState" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
+          <element minOccurs="0" maxOccurs="unbounded" name="Warranty2" type="tns:Warranty2" />
+        </sequence>
+      </complexType>
+      <complexType name="SalesLine">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="DocNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="QtyToReceive" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="QtyShipped" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="DateCreated" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="ReturnOrder" mixed="true">
+        <sequence>
+          <element minOccurs="0" maxOccurs="unbounded" name="SalesHeader" type="tns:SalesHeader" />
+          <element minOccurs="0" maxOccurs="unbounded" name="SalesLine" type="tns:SalesLine" />
+        </sequence>
+      </complexType>
+      <element name="ReturnOrder" type="tns:ReturnOrder" />
+    </schema>
     <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions" xmlns="http://www.w3.org/2001/XMLSchema">
       <element name="SearchDetermineNoType">
         <complexType>
@@ -361,6 +409,7 @@
             <element minOccurs="1" maxOccurs="1" name="createUPSReturnLabel" type="boolean" />
             <element minOccurs="1" maxOccurs="1" name="emailAddress" type="string" />
             <element minOccurs="1" maxOccurs="1" name="lineDetails" type="string" />
+            <element xmlns:q3="urn:microsoft-dynamics-nav/xmlports/x50101" minOccurs="1" maxOccurs="1" name="createdReturn" type="q3:ReturnOrder" />
           </sequence>
         </complexType>
       </element>
@@ -368,6 +417,7 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+            <element xmlns:q4="urn:microsoft-dynamics-nav/xmlports/x50101" minOccurs="1" maxOccurs="1" name="createdReturn" type="q4:ReturnOrder" />
           </sequence>
         </complexType>
       </element>

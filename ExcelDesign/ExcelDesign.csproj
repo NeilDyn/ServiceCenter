@@ -87,6 +87,7 @@
     <Content Include="css\mainpage.css" />
     <Content Include="Default.aspx" />
     <Content Include="Forms\ErrorForm.aspx" />
+    <Content Include="Forms\FunctionForms\CreatedRMA.aspx" />
     <Content Include="Forms\FunctionForms\CreateReturn.aspx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetail.ascx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetailHeader.ascx" />
@@ -121,6 +122,8 @@
       <DependentUpon>AjaxControl.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Class Objects\CreatedReturn\CreatedReturnHeader.cs" />
+    <Compile Include="Class Objects\CreatedReturn\CreatedReturnLines.cs" />
     <Compile Include="Class Objects\Enums\ActionClassEnum.cs" />
     <Compile Include="Class Objects\CallService.cs" />
     <Compile Include="Class Objects\Customer.cs" />
@@ -154,6 +157,13 @@
     </Compile>
     <Compile Include="Forms\ErrorForm.aspx.designer.cs">
       <DependentUpon>ErrorForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\CreatedRMA.aspx.cs">
+      <DependentUpon>CreatedRMA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\CreatedRMA.aspx.designer.cs">
+      <DependentUpon>CreatedRMA.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\FunctionForms\CreateReturn.aspx.cs">
       <DependentUpon>CreateReturn.aspx</DependentUpon>
@@ -364,6 +374,9 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Web References\ServiceFunctions\SearchResults.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ServiceFunctions\ReturnOrder.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">

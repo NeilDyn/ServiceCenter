@@ -40,6 +40,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="iTextSharp, Version=4.1.6.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca">
+      <HintPath>..\packages\iTextSharp-LGPL.4.1.6\lib\iTextSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -85,10 +88,12 @@
   <ItemGroup>
     <Content Include="AjaxControl.asmx" />
     <Content Include="css\mainpage.css" />
+    <Content Include="css\ReturnInstructions.css" />
     <Content Include="Default.aspx" />
     <Content Include="Forms\ErrorForm.aspx" />
     <Content Include="Forms\FunctionForms\CreatedRMA.aspx" />
     <Content Include="Forms\FunctionForms\CreateReturn.aspx" />
+    <Content Include="Forms\FunctionForms\RMAPDFForm.aspx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetail.ascx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetailHeader.ascx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoHeader.ascx" />
@@ -124,6 +129,7 @@
     </Compile>
     <Compile Include="Class Objects\CreatedReturn\CreatedReturnHeader.cs" />
     <Compile Include="Class Objects\CreatedReturn\CreatedReturnLines.cs" />
+    <Compile Include="Class Objects\Documents\RMAInstructionsPDF.cs" />
     <Compile Include="Class Objects\Enums\ActionClassEnum.cs" />
     <Compile Include="Class Objects\CallService.cs" />
     <Compile Include="Class Objects\Customer.cs" />
@@ -171,6 +177,13 @@
     </Compile>
     <Compile Include="Forms\FunctionForms\CreateReturn.aspx.designer.cs">
       <DependentUpon>CreateReturn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\RMAPDFForm.aspx.cs">
+      <DependentUpon>RMAPDFForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\RMAPDFForm.aspx.designer.cs">
+      <DependentUpon>RMAPDFForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserControls\CustomerInfo\CustomerInfoDetail.ascx.cs">
       <DependentUpon>CustomerInfoDetail.ascx</DependentUpon>
@@ -408,7 +421,10 @@
       <CachedSettingsPropName>ExcelDesign_ServiceFunctions_Functions</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="fonts\" />
+    <Folder Include="PDFs\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

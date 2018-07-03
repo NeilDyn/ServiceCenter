@@ -61,7 +61,7 @@
         </asp:GridView>
         <br />
         <asp:Button ID="BtnClose" runat="server" Text="Close" Style="float: right" OnClientClick="CloseWindow();"/>
-        <asp:Button ID="BtnViewRMAInstructions" runat="server" Text="View RMA Instructions" Style="float: right"  />
+        <asp:Button ID="BtnViewRMAInstructions" runat="server" Text="View RMA Instructions" Style="float: right" OnClick="BtnViewRMAInstructions_Click"  />
     </form>
 </body>
 </html>

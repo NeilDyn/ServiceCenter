@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -7,6 +8,7 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ExcelDesign.Class_Objects;
+using ExcelDesign.Class_Objects.Documents;
 using ExcelDesign.Forms.UserControls;
 using ExcelDesign.Forms.UserControls.CustomerInfo.MainTables;
 using ExcelDesign.Forms.UserControls.TableData;
@@ -121,6 +123,11 @@ namespace ExcelDesign.Forms
             }
 
             return "1";
+        }
+
+        protected void BtnCreatePDF_Click(object sender, EventArgs e)
+        {
+                     
         }
     }
 }

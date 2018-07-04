@@ -1,4 +1,5 @@
-﻿using ExcelDesign.Class_Objects.CreatedReturn;
+﻿using ExcelDesign.Class_Objects;
+using ExcelDesign.Class_Objects.CreatedReturn;
 using ExcelDesign.Class_Objects.Documents;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,9 @@ namespace ExcelDesign.Forms.FunctionForms
     public partial class CreatedRMA : System.Web.UI.Page
     {
         protected CreatedReturnHeader CRH { get; set; }
+        public string OrderNo { get; set; }
+        public string ExtDocNo { get; set; }
+        public string Update { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -45,6 +49,10 @@ namespace ExcelDesign.Forms.FunctionForms
                     {
                         BtnPrintRMAInstructions.Visible = false;
                     }
+
+                    OrderNo = Convert.ToString(Request.QueryString["OrderNo"]);
+                    ExtDocNo = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
+                    Update = "True";
                 }
                 catch (Exception ex)
                 {
@@ -112,6 +120,21 @@ namespace ExcelDesign.Forms.FunctionForms
                 singleRow.Attributes.CssStyle.Add("border-collapse", "collapse");
                 TblReturnHeaderLines.Rows.Add(singleRow);
             }
+        }
+
+        protected void BtnCancelRMA_Click(object sender, EventArgs e)
+        {
+            SendService ss = new SendService();
+
+            string delete = ss.DeleteRMA(CRH.RMANo);
+
+            ClientScript.RegisterStartupScript(this.GetType(), "deletedRMA", "alert('" + delete + "');", true);
+            ClientScript.RegisterStartupScript(this.GetType(), "closeRMA", "parent.window.close();", true); 
+        }
+
+        protected void BtnUpdateRMA_Click(object sender, EventArgs e)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "updateRMA", "UpdateRMA();", true);
         }
     }
 }

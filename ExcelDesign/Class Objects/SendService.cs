@@ -115,5 +115,10 @@ namespace ExcelDesign.Class_Objects
 
             return ctl;
         }
+
+        public string DeleteRMA(string rmaNo)
+        {
+            return webService.DeleteRMA(rmaNo);
+        }
     }
 }

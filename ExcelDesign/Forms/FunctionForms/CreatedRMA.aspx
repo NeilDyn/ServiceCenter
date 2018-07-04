@@ -21,6 +21,20 @@
         function OpenPDF() {
             window.open("RMAPDFForm.aspx?RMANo=<%= this.CRH.RMANo %>", "_blank");
         };
+
+        function UpdateRMA() {
+            var width = 1500;
+            var height = 500;
+            var left = (screen.width - width) + 500;
+            var top = (screen.height - height) * 0.5;
+            window.open("CreateReturn.aspx?OrderNo=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.ExtDocNo %>&CreateOrUpdate=<%= this.Update %>",
+                null,
+                "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+        };
+
+        function DeleteConfirmation() {
+            return window.confirm("Are you sure you wish to delete this Return?");
+        }
     </script>
 </head>
 <body>
@@ -50,20 +64,20 @@
             </asp:Table>
         </div>
         <br />
-        <asp:Table ID="TblReturnHeaderLines" runat="server" Height ="100%" Width="100%">
+        <asp:Table ID="TblReturnHeaderLines" runat="server" Height="100%" Width="100%">
             <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
-                <asp:TableHeaderCell Text ="Item No" HorizontalAlign ="Left" />
-                <asp:TableHeaderCell Text ="Description" HorizontalAlign ="Left" Width ="50%" />
-                <asp:TableHeaderCell Text ="Quantity" />
-                <asp:TableHeaderCell Text ="Price" HorizontalAlign="Left" />
-                <asp:TableHeaderCell Text ="Line Amount" HorizontalAlign ="Left" />
+                <asp:TableHeaderCell Text="Item No" HorizontalAlign="Left" />
+                <asp:TableHeaderCell Text="Description" HorizontalAlign="Left" Width="50%" />
+                <asp:TableHeaderCell Text="Quantity" />
+                <asp:TableHeaderCell Text="Price" HorizontalAlign="Left" />
+                <asp:TableHeaderCell Text="Line Amount" HorizontalAlign="Left" />
             </asp:TableHeaderRow>
         </asp:Table>
         <br />
-        <asp:Button ID="BtnClose" runat="server" Text="Close" Style="float: right" OnClientClick="CloseWindow();"/>
-        <asp:Button ID="BtnCancelRMA" runat="server" Text="Cancel Return" Style="float: right"/>
-        <asp:Button ID="BtnUpdateRMA" runat="server" Text="Update Return" Style="float: right"/>
-        <asp:Button ID="BtnPrintRMAInstructions" runat="server" Text="Print RMA Instructions" Style="float: right" OnClientClick="OpenPDF();"  />
+        <asp:Button ID="BtnClose" runat="server" Text="Close" Style="float: right" OnClientClick="CloseWindow();" />
+        <asp:Button ID="BtnCancelRMA" runat="server" Text="Cancel Return" Style="float: right" OnClick="BtnCancelRMA_Click" OnClientClick="return DeleteConfirmation();"/>
+        <asp:Button ID="BtnUpdateRMA" runat="server" Text="Update Return" Style="float: right" OnClick="BtnUpdateRMA_Click"  />
+        <asp:Button ID="BtnPrintRMAInstructions" runat="server" Text="Print RMA Instructions" Style="float: right" OnClientClick="OpenPDF();" />
     </form>
 </body>
 </html>

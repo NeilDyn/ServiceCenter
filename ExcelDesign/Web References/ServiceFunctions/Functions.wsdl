@@ -428,6 +428,20 @@
           </sequence>
         </complexType>
       </element>
+      <element name="DeleteReturnOrder">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="rmaNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="DeleteReturnOrder_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="CancelOrder">
         <complexType>
           <sequence>
@@ -474,6 +488,12 @@
   <message name="CreateReturnOrder_Result">
     <part name="parameters" element="tns:CreateReturnOrder_Result" />
   </message>
+  <message name="DeleteReturnOrder">
+    <part name="parameters" element="tns:DeleteReturnOrder" />
+  </message>
+  <message name="DeleteReturnOrder_Result">
+    <part name="parameters" element="tns:DeleteReturnOrder_Result" />
+  </message>
   <message name="CancelOrder">
     <part name="parameters" element="tns:CancelOrder" />
   </message>
@@ -498,6 +518,10 @@
     <operation name="CreateReturnOrder">
       <input name="CreateReturnOrder" message="tns:CreateReturnOrder" />
       <output name="CreateReturnOrder_Result" message="tns:CreateReturnOrder_Result" />
+    </operation>
+    <operation name="DeleteReturnOrder">
+      <input name="DeleteReturnOrder" message="tns:DeleteReturnOrder" />
+      <output name="DeleteReturnOrder_Result" message="tns:DeleteReturnOrder_Result" />
     </operation>
     <operation name="CancelOrder">
       <input name="CancelOrder" message="tns:CancelOrder" />
@@ -534,6 +558,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="CreateReturnOrder_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="DeleteReturnOrder">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:DeleteReturnOrder" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="DeleteReturnOrder">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="DeleteReturnOrder_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

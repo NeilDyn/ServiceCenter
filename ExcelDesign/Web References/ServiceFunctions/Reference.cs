@@ -35,6 +35,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private System.Threading.SendOrPostCallback CreateReturnOrderOperationCompleted;
         
+        private System.Threading.SendOrPostCallback DeleteReturnOrderOperationCompleted;
+        
         private System.Threading.SendOrPostCallback CancelOrderOperationCompleted;
         
         private System.Threading.SendOrPostCallback SetDebugOperationCompleted;
@@ -85,6 +87,9 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         public event CreateReturnOrderCompletedEventHandler CreateReturnOrderCompleted;
+        
+        /// <remarks/>
+        public event DeleteReturnOrderCompletedEventHandler DeleteReturnOrderCompleted;
         
         /// <remarks/>
         public event CancelOrderCompletedEventHandler CancelOrderCompleted;
@@ -215,6 +220,36 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.CreateReturnOrderCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.CreateReturnOrderCompleted(this, new CreateReturnOrderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:DeleteReturnOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="DeleteReturnOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string DeleteReturnOrder(string rmaNo) {
+            object[] results = this.Invoke("DeleteReturnOrder", new object[] {
+                        rmaNo});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void DeleteReturnOrderAsync(string rmaNo) {
+            this.DeleteReturnOrderAsync(rmaNo, null);
+        }
+        
+        /// <remarks/>
+        public void DeleteReturnOrderAsync(string rmaNo, object userState) {
+            if ((this.DeleteReturnOrderOperationCompleted == null)) {
+                this.DeleteReturnOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDeleteReturnOrderOperationCompleted);
+            }
+            this.InvokeAsync("DeleteReturnOrder", new object[] {
+                        rmaNo}, this.DeleteReturnOrderOperationCompleted, userState);
+        }
+        
+        private void OnDeleteReturnOrderOperationCompleted(object arg) {
+            if ((this.DeleteReturnOrderCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.DeleteReturnOrderCompleted(this, new DeleteReturnOrderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -3837,6 +3872,32 @@ namespace ExcelDesign.ServiceFunctions {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((ReturnOrder)(this.results[1]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void DeleteReturnOrderCompletedEventHandler(object sender, DeleteReturnOrderCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class DeleteReturnOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal DeleteReturnOrderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
             }
         }
     }

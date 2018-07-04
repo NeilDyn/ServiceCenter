@@ -27,7 +27,7 @@
             var height = 400;
             var left = (screen.width - width) / 2;
             var top = (screen.height - height) / 2;
-            window.open("CreatedRMA.aspx?PrintRMAInstructions=<%= this.printRMA %>",
+            window.open("CreatedRMA.aspx?PrintRMAInstructions=<%= this.printRMA %>&OrderNo=<%= this.tcOrderNo.Text%>&ExternalDocumentNo=<%= this.tcDocNo.Text%>",
                 null,
                 "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
         }

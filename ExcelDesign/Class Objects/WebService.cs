@@ -76,5 +76,10 @@ namespace ExcelDesign.Class_Objects
 
             return returnRMA;
         }
+
+        public string DeleteRMA(string rmaNo)
+        {
+            return functions.DeleteReturnOrder(rmaNo);
+        }
     }
 }

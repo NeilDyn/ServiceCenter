@@ -2,6 +2,7 @@
 using ExcelDesign.Class_Objects.Documents;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -13,7 +14,6 @@ namespace ExcelDesign.Forms.FunctionForms
     public partial class CreatedRMA : System.Web.UI.Page
     {
         protected CreatedReturnHeader CRH { get; set; }
-        protected MemoryStream MemStream { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -33,20 +33,17 @@ namespace ExcelDesign.Forms.FunctionForms
                     tcReturnTrackingNo.Text = CRH.ReturnTrackingNo;
                     tcOrderDate.Text = CRH.OrderDate;
 
-                    gdvReturnHeaderLines.DataSource = CRH.CreatedReturnLines;
-                    gdvReturnHeaderLines.DataBind();
+                    PopulateLines();
 
                     printRMA = Convert.ToString(Request.QueryString["PrintRMAInstructions"]);
 
                     if (printRMA.ToUpper() == "TRUE")
                     {
-                        BtnViewRMAInstructions.Visible = true;
-                        RMAInstructionsPDF createPDF = new RMAInstructionsPDF();
-                        MemStream = createPDF.CreatePDF(CRH.RMANo);
+                        BtnPrintRMAInstructions.Visible = true;                 
                     }
                     else
                     {
-                        BtnViewRMAInstructions.Visible = false;
+                        BtnPrintRMAInstructions.Visible = false;
                     }
                 }
                 catch (Exception ex)
@@ -56,24 +53,65 @@ namespace ExcelDesign.Forms.FunctionForms
             }           
         }
 
-        protected void gdvReturnHeaderLines_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void PopulateLines()
         {
-            if(e.Row.RowType == DataControlRowType.DataRow)
-            {
-                e.Row.Cells[2].HorizontalAlign = HorizontalAlign.Center;
-                e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Right;
-                e.Row.Cells[4].HorizontalAlign = HorizontalAlign.Right;
-            }
-        }
+            int lineCount = 0;
 
-        protected void BtnViewRMAInstructions_Click(object sender, EventArgs e)
-        {
-            Response.Clear();
-            Response.ContentType = "application/pdf";
-            Response.OutputStream.Write(MemStream.GetBuffer(), 0, MemStream.GetBuffer().Length);
-            Response.OutputStream.Flush();
-            Response.OutputStream.Close();
-            Response.End();
+            foreach (CreatedReturnLines line in CRH.CreatedReturnLines)
+            {
+                lineCount++;
+
+                TableRow singleRow = new TableRow();
+
+                TableCell itemNo = new TableCell();
+                TableCell desc = new TableCell();
+                TableCell qty = new TableCell();
+                TableCell price = new TableCell();
+                TableCell lineAmount = new TableCell();
+
+                TextBox qtyEdit = new TextBox
+                {
+                    ID = "qtyEdit" + lineCount.ToString(),
+                    Text = line.Quantity.ToString(),
+                    Width = new Unit("15%")
+                };
+
+                itemNo.ID = "itemNoR_" + lineCount.ToString();
+                qty.ID = "itemQuanityR_" + lineCount.ToString();
+                desc.ID = "descR_" + lineCount.ToString();
+                price.ID = "priceR_" + lineCount.ToString();
+                lineAmount.ID = "lineAmountR_" + lineCount.ToString();
+
+                itemNo.Text = line.ItemNo;
+                desc.Text = line.Description;
+                qty.Controls.Add(qtyEdit);
+                price.Text = "$     " + line.Price.ToString();
+                lineAmount.Text = "$    " + line.LineAmount.ToString();
+
+                qty.HorizontalAlign = HorizontalAlign.Center;
+                price.HorizontalAlign = HorizontalAlign.Right;
+                lineAmount.HorizontalAlign = HorizontalAlign.Right;
+
+                singleRow.ID = "CreatedReturnOrderLineRow_" + lineCount.ToString();
+
+                singleRow.Cells.Add(itemNo);
+                singleRow.Cells.Add(desc);
+                singleRow.Cells.Add(qty);
+                singleRow.Cells.Add(price);
+                singleRow.Cells.Add(lineAmount);
+
+                if (lineCount % 2 == 0)
+                {
+                    singleRow.BackColor = Color.White;
+                }
+                else
+                {
+                    singleRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                }
+
+                singleRow.Attributes.CssStyle.Add("border-collapse", "collapse");
+                TblReturnHeaderLines.Rows.Add(singleRow);
+            }
         }
     }
 }

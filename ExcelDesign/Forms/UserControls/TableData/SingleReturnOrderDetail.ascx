@@ -17,6 +17,10 @@
         $("[id$=btnIssueRefund<%= this.CustID %>_<%= this.CountID %>]").click(function () {
             alert("Hi, return <%= this.Rh.RMANo %> can be refunded.");
         });
+
+        $("[id$=btnPrintRMAInstructions<%= this.CustID%>_<%= this.CountID %>]").click(function () {
+            window.open("FunctionForms/RMAPDFForm.aspx?RMANo=<%= this.Rh.RMANo %>", "_blank");
+        });
     });
 
     function expandMoreReturnLines<%= this.CustID %><%= this.CountID %>(lineID) {

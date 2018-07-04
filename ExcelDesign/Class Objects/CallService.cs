@@ -251,7 +251,7 @@ namespace ExcelDesign.Class_Objects
                         itemNo = currResults.SalesShipmentLine[sl].ItemNo;
                         description = currResults.SalesShipmentLine[sl].Description;
                         int.TryParse(currResults.SalesShipmentLine[sl].Qty, out quantity);
-                        double.TryParse(currResults.SalesShipmentLine[sl].UnitPrice.Replace(",", "") , NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
+                        double.TryParse(currResults.SalesShipmentLine[sl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
                         type = currResults.SalesShipmentLine[sl].Type;
 
@@ -596,6 +596,8 @@ namespace ExcelDesign.Class_Objects
             string policy = string.Empty;
             string daysRemaining = string.Empty;
 
+            bool rmaExists = false;
+
             List<string> insertedOrderNumbers = new List<string>();
 
             int statusCounter = 0;
@@ -629,7 +631,21 @@ namespace ExcelDesign.Class_Objects
                                 daysRemaining = currResults.SOImportBuffer[so].Warranty[0].DaysRemaining[0];
                                 warranty = new Warranty(status, policy, daysRemaining);
 
-                                salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty));
+                                if (currResults.ExtendedSalesHeader != null)
+                                {
+                                    for (int ex = 0; ex < currResults.ExtendedSalesHeader.Length; ex++)
+                                    {
+                                        foreach (ShipmentHeader sh in shipHeader)
+                                        {
+                                            if (currResults.ExtendedSalesHeader[ex].SSHNo == sh.No)
+                                            {
+                                                rmaExists = true;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty, rmaExists));
 
                                 insertedOrderNumbers.Add(orderNo);
 
@@ -645,6 +661,7 @@ namespace ExcelDesign.Class_Objects
                                 status = string.Empty;
                                 policy = string.Empty;
                                 daysRemaining = string.Empty;
+                                rmaExists = false;
                             }
                         }
                     }
@@ -703,7 +720,22 @@ namespace ExcelDesign.Class_Objects
                                 orderStatus = "Partial Shipped";
                             }
 
-                            salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty));
+
+                            if (currResults.ExtendedSalesHeader != null)
+                            {
+                                for (int ex = 0; ex < currResults.ExtendedSalesHeader.Length; ex++)
+                                {
+                                    foreach (ShipmentHeader sh in shipHeader)
+                                    {
+                                        if (currResults.ExtendedSalesHeader[ex].SSHNo == sh.No)
+                                        {
+                                            rmaExists = true;
+                                        }
+                                    }
+                                }
+                            }
+
+                            salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty, rmaExists));
 
                             insertedOrderNumbers.Add(orderNo);
 
@@ -719,6 +751,7 @@ namespace ExcelDesign.Class_Objects
                             status = string.Empty;
                             policy = string.Empty;
                             daysRemaining = string.Empty;
+                            rmaExists = false;
                         }
                     }
                 }
@@ -753,7 +786,22 @@ namespace ExcelDesign.Class_Objects
 
                             orderStatus = "Shipped";
 
-                            salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty));
+
+                            if (currResults.ExtendedSalesHeader != null)
+                            {
+                                for (int ex = 0; ex < currResults.ExtendedSalesHeader.Length; ex++)
+                                {
+                                    foreach (ShipmentHeader sh in shipHeader)
+                                    {
+                                        if (currResults.ExtendedSalesHeader[ex].SSHNo == sh.No)
+                                        {
+                                            rmaExists = true;
+                                        }
+                                    }
+                                }
+                            }
+
+                            salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty, rmaExists));
 
                             insertedOrderNumbers.Add(orderNo);
 
@@ -769,9 +817,9 @@ namespace ExcelDesign.Class_Objects
                             status = string.Empty;
                             policy = string.Empty;
                             daysRemaining = string.Empty;
+                            rmaExists = false;
                         }
                     }
-
                 }
 
                 if (salesHead.Count > 0)
@@ -862,7 +910,7 @@ namespace ExcelDesign.Class_Objects
                         salesHeaders = GetSalesOrders(shipToName, shipToAddress1);
                         returnHeaders = GetReturnOrdersFromShipmentHeader(salesHeaders);
 
-                        if(returnHeaders.Count == 0)
+                        if (returnHeaders.Count == 0)
                         {
                             returnHeaders = GetReturnOrdersFromSalesHeader(salesHeaders);
                         }
@@ -1014,7 +1062,7 @@ namespace ExcelDesign.Class_Objects
 
                                     if (receiptHeader.Count == 0)
                                     {
-                                        receiptHeader = ReturnShipmentReceiptHeader(sh.SalesOrderNo, externalDocumentNo);
+                                        receiptHeader = ReturnShipmentReceiptHeader(sh.SalesOrderNo, externalDocumentNo, rmaNo);
                                     }
 
                                     for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
@@ -1136,7 +1184,7 @@ namespace ExcelDesign.Class_Objects
             return returnHead;
         }
 
-        private List<ReceiptHeader> ReturnShipmentReceiptHeader(string orderNo, string extDocNo)
+        private List<ReceiptHeader> ReturnShipmentReceiptHeader(string orderNo, string extDocNo, string rmaNo)
         {
             List<ReceiptHeader> receipts = new List<ReceiptHeader>();
 
@@ -1146,6 +1194,41 @@ namespace ExcelDesign.Class_Objects
             List<ReceiptLine> receiptLines = new List<ReceiptLine>();
             string shippingAgentCode = string.Empty;
             string shippingAgentService = string.Empty;
+
+            //Check extended sales header
+            string extendedSalesHeaderSSHNo = string.Empty;
+
+            for (int ex = 0; ex < currResults.ExtendedSalesHeader.Length; ex++)
+            {
+                if (currResults.ExtendedSalesHeader[ex].RMANo == rmaNo)
+                {
+                    extendedSalesHeaderSSHNo = currResults.ExtendedSalesHeader[ex].SSHNo;
+
+                    for (int exs = 0; exs < currResults.SalesShipmentHeader.Length; exs++)
+                    {
+                        if (extendedSalesHeaderSSHNo == currResults.SalesShipmentHeader[exs].No)
+                        {
+                            externalDocumentNo = extDocNo;
+                            receiptLines = ReturnSalesLineReceiptLines(rmaNo);
+
+                            receipts.Add(new ReceiptHeader(no, externalDocumentNo, receiptDate, receiptLines, shippingAgentCode, true));
+
+                            no = string.Empty;
+                            externalDocumentNo = string.Empty;
+                            receiptDate = string.Empty;
+                            receiptLines = new List<ReceiptLine>();
+                            shippingAgentCode = string.Empty;
+                            shippingAgentService = string.Empty;
+                        }
+                    }
+                }
+            }
+
+            if (receipts != null)
+            {
+                return receipts;
+            }
+            //
 
             if (currResults.SalesShipmentHeader != null)
             {
@@ -1193,6 +1276,38 @@ namespace ExcelDesign.Class_Objects
                         description = currResults.SalesShipmentLine[rl].Description;
                         int.TryParse(currResults.SalesShipmentLine[rl].Qty, out quantity);
                         double.TryParse(currResults.SalesShipmentLine[rl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
+                        lineAmount = quantity * price;
+                        quantityReceived = 0;
+
+                        receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount));
+                    }
+                }
+            }
+
+            return receiptLines;
+        }
+
+        private List<ReceiptLine> ReturnSalesLineReceiptLines(string no)
+        {
+            List<ReceiptLine> receiptLines = new List<ReceiptLine>();
+
+            string itemNo = string.Empty;
+            string description = string.Empty;
+            int quantity = 0;
+            int quantityReceived = 0;
+            double price = 0;
+            double lineAmount = 0;
+
+            if (currResults.SalesLine != null)
+            {
+                for (int slr = 0; slr < currResults.SalesLine.Length; slr++)
+                {
+                    if (currResults.SalesLine[slr].DocNo == no)
+                    {
+                        itemNo = currResults.SalesLine[slr].ItemNo;
+                        description = currResults.SalesLine[slr].Description;
+                        int.TryParse(currResults.SalesLine[slr].Qty, out quantity);
+                        double.TryParse(currResults.SalesLine[slr].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
                         quantityReceived = 0;
 

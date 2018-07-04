@@ -15,6 +15,7 @@ namespace ExcelDesign.Class_Objects
         public string SalesOrderNo { get; set; }
         public string OrderDate { get; set; }
         public string OrderStatus { get; set; }
+        public bool RMAExists { get; set; }
 
         public SalesHeader()
         {
@@ -22,7 +23,7 @@ namespace ExcelDesign.Class_Objects
         }
 
         public SalesHeader(string orderStatusP, string orderDateP, string salesOrderNoP, string channelNameP, List<ShipmentHeader> shipmentHeaderObjectP,
-            List<PostedPackage> postedPackageObjectP, string externalDocumentNoP, Warranty _warrantyP)
+            List<PostedPackage> postedPackageObjectP, string externalDocumentNoP, Warranty _warrantyP, bool rmaExistsP)
         {
             this.OrderStatus = orderStatusP;
             this.OrderDate = orderDateP;
@@ -32,6 +33,7 @@ namespace ExcelDesign.Class_Objects
             this.PostedPackageObject = postedPackageObjectP;
             this.ExternalDocumentNo = externalDocumentNoP;
             this.WarrantyProp = _warrantyP;
+            this.RMAExists = rmaExistsP;
         }
     }
 }

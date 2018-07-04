@@ -25,6 +25,8 @@ namespace ExcelDesign.Forms.FunctionForms
         protected bool printRMA;
         protected bool createLabel;
 
+        protected string updateRma = string.Empty;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
@@ -38,6 +40,12 @@ namespace ExcelDesign.Forms.FunctionForms
 
                 tcOrderNo.Text = Convert.ToString(Request.QueryString["OrderNo"]);
                 tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
+                updateRma = Convert.ToString(Request.QueryString["CreateOrUpdate"]);
+
+                if (updateRma.ToUpper() == "TRUE")
+                {
+                    btnCreateRMA.Text = "Update RMA";
+                }
             }
 
             LoadCreateReturnLines();
@@ -80,7 +88,8 @@ namespace ExcelDesign.Forms.FunctionForms
                         TextBox actionQtyInsert = new TextBox
                         {
                             ID = "actionQtyInsert_" + lineCount.ToString(),
-                            Text = "0"
+                            Text = line.Quantity.ToString(),
+                            Width = new Unit("15%")
                         };
 
                         ddlReturnReasonCode.DataBind();
@@ -98,6 +107,7 @@ namespace ExcelDesign.Forms.FunctionForms
                         returnReasonCode.Controls.Add(ddlReturnReasonCode);
 
                         qty.HorizontalAlign = HorizontalAlign.Center;
+                        actionQty.HorizontalAlign = HorizontalAlign.Center;
 
                         singleRow.ID = "returnOrderLineRow_" + lineCount.ToString();
 

@@ -248,6 +248,12 @@
           <element minOccurs="0" maxOccurs="unbounded" name="Warranty" type="tns:Warranty" />
         </sequence>
       </complexType>
+      <complexType name="ExtendedSalesHeader">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="RMANo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="SSHNo" type="string" />
+        </sequence>
+      </complexType>
       <complexType name="ReturnReasonCode">
         <sequence>
           <element minOccurs="1" maxOccurs="1" name="ReasonCode" type="string" />
@@ -305,6 +311,7 @@
           <element minOccurs="0" maxOccurs="unbounded" name="SalesCreditMemo" type="tns:SalesCreditMemo" />
           <element minOccurs="0" maxOccurs="unbounded" name="SalesCreditMemoLines" type="tns:SalesCreditMemoLines" />
           <element minOccurs="0" maxOccurs="unbounded" name="SOImportBuffer" type="tns:SOImportBuffer" />
+          <element minOccurs="0" maxOccurs="unbounded" name="ExtendedSalesHeader" type="tns:ExtendedSalesHeader" />
           <element minOccurs="1" maxOccurs="unbounded" name="ReturnReasonCode" type="tns:ReturnReasonCode" />
           <element minOccurs="1" maxOccurs="unbounded" name="DefectOptions" type="tns:DefectOptions" />
         </sequence>
@@ -435,6 +442,18 @@
           </sequence>
         </complexType>
       </element>
+      <element name="SetDebug">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="debug" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SetDebug_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
     </schema>
   </types>
   <message name="SearchDetermineNoType">
@@ -461,6 +480,12 @@
   <message name="CancelOrder_Result">
     <part name="parameters" element="tns:CancelOrder_Result" />
   </message>
+  <message name="SetDebug">
+    <part name="parameters" element="tns:SetDebug" />
+  </message>
+  <message name="SetDebug_Result">
+    <part name="parameters" element="tns:SetDebug_Result" />
+  </message>
   <portType name="Functions_Port">
     <operation name="SearchDetermineNoType">
       <input name="SearchDetermineNoType" message="tns:SearchDetermineNoType" />
@@ -477,6 +502,10 @@
     <operation name="CancelOrder">
       <input name="CancelOrder" message="tns:CancelOrder" />
       <output name="CancelOrder_Result" message="tns:CancelOrder_Result" />
+    </operation>
+    <operation name="SetDebug">
+      <input name="SetDebug" message="tns:SetDebug" />
+      <output name="SetDebug_Result" message="tns:SetDebug_Result" />
     </operation>
   </portType>
   <binding name="Functions_Binding" type="tns:Functions_Port">
@@ -514,6 +543,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="CancelOrder_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="SetDebug">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:SetDebug" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="SetDebug">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="SetDebug_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

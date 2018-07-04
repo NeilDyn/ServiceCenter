@@ -17,6 +17,10 @@
                 parent.window.close();
             };
         };
+
+        function OpenPDF() {
+            window.open("RMAPDFForm.aspx?RMANo=<%= this.CRH.RMANo %>", "_blank");
+        };
     </script>
 </head>
 <body>
@@ -46,22 +50,20 @@
             </asp:Table>
         </div>
         <br />
-        <asp:GridView ID="gdvReturnHeaderLines" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Height="100%" Width="100%" OnRowDataBound="gdvReturnHeaderLines_RowDataBound">
-            <AlternatingRowStyle BackColor="White" />
-            <EditRowStyle BackColor="#2461BF" />
-            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-            <RowStyle BackColor="#EFF3FB" />
-            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-            <SortedAscendingCellStyle BackColor="#F5F7FB" />
-            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-            <SortedDescendingCellStyle BackColor="#E9EBEF" />
-            <SortedDescendingHeaderStyle BackColor="#4870BE" />
-        </asp:GridView>
+        <asp:Table ID="TblReturnHeaderLines" runat="server" Height ="100%" Width="100%">
+            <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
+                <asp:TableHeaderCell Text ="Item No" HorizontalAlign ="Left" />
+                <asp:TableHeaderCell Text ="Description" HorizontalAlign ="Left" Width ="50%" />
+                <asp:TableHeaderCell Text ="Quantity" />
+                <asp:TableHeaderCell Text ="Price" HorizontalAlign="Left" />
+                <asp:TableHeaderCell Text ="Line Amount" HorizontalAlign ="Left" />
+            </asp:TableHeaderRow>
+        </asp:Table>
         <br />
         <asp:Button ID="BtnClose" runat="server" Text="Close" Style="float: right" OnClientClick="CloseWindow();"/>
-        <asp:Button ID="BtnViewRMAInstructions" runat="server" Text="View RMA Instructions" Style="float: right" OnClick="BtnViewRMAInstructions_Click"  />
+        <asp:Button ID="BtnCancelRMA" runat="server" Text="Cancel Return" Style="float: right"/>
+        <asp:Button ID="BtnUpdateRMA" runat="server" Text="Update Return" Style="float: right"/>
+        <asp:Button ID="BtnPrintRMAInstructions" runat="server" Text="Print RMA Instructions" Style="float: right" OnClientClick="OpenPDF();"  />
     </form>
 </body>
 </html>

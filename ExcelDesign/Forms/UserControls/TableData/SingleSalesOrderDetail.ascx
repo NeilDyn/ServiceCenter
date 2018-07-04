@@ -23,11 +23,11 @@
         $("[id$=btnCreateReturn_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
             if ("<%= this.tcStatus.Text.ToUpper() %>" == "OPEN")
             {
-                    var width = 1000;
-                    var height = 400;
-                    var left = (screen.width - width) / 2;
-                    var top = (screen.height - height) / 2;
-                    window.open("FunctionForms/CreateReturn.aspx?OrderNo=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>",
+                    var width = 1500;
+                    var height = 500;
+                    var left = (screen.width - width) + 500;
+                    var top = (screen.height - height) * 0.5;
+                    window.open("FunctionForms/CreateReturn.aspx?OrderNo=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= this.Sh.RMAExists %>",
                         null,
                         "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
             }

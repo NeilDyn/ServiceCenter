@@ -37,6 +37,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private System.Threading.SendOrPostCallback CancelOrderOperationCompleted;
         
+        private System.Threading.SendOrPostCallback SetDebugOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -86,6 +88,9 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         public event CancelOrderCompletedEventHandler CancelOrderCompleted;
+        
+        /// <remarks/>
+        public event SetDebugCompletedEventHandler SetDebugCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:SearchDetermineNoType", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="SearchDetermineNoType_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -244,6 +249,34 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:SetDebug", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="SetDebug_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SetDebug(bool debug) {
+            this.Invoke("SetDebug", new object[] {
+                        debug});
+        }
+        
+        /// <remarks/>
+        public void SetDebugAsync(bool debug) {
+            this.SetDebugAsync(debug, null);
+        }
+        
+        /// <remarks/>
+        public void SetDebugAsync(bool debug, object userState) {
+            if ((this.SetDebugOperationCompleted == null)) {
+                this.SetDebugOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSetDebugOperationCompleted);
+            }
+            this.InvokeAsync("SetDebug", new object[] {
+                        debug}, this.SetDebugOperationCompleted, userState);
+        }
+        
+        private void OnSetDebugOperationCompleted(object arg) {
+            if ((this.SetDebugCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SetDebugCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -299,6 +332,8 @@ namespace ExcelDesign.ServiceFunctions {
         private SalesCreditMemoLines[] salesCreditMemoLinesField;
         
         private SOImportBuffer[] sOImportBufferField;
+        
+        private ExtendedSalesHeader[] extendedSalesHeaderField;
         
         private ReturnReasonCode[] returnReasonCodeField;
         
@@ -468,6 +503,17 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.sOImportBufferField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ExtendedSalesHeader")]
+        public ExtendedSalesHeader[] ExtendedSalesHeader {
+            get {
+                return this.extendedSalesHeaderField;
+            }
+            set {
+                this.extendedSalesHeaderField = value;
             }
         }
         
@@ -1613,6 +1659,39 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.descriptionField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
+    public partial class ExtendedSalesHeader {
+        
+        private string rMANoField;
+        
+        private string sSHNoField;
+        
+        /// <remarks/>
+        public string RMANo {
+            get {
+                return this.rMANoField;
+            }
+            set {
+                this.rMANoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SSHNo {
+            get {
+                return this.sSHNoField;
+            }
+            set {
+                this.sSHNoField = value;
             }
         }
     }
@@ -3787,6 +3866,10 @@ namespace ExcelDesign.ServiceFunctions {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void SetDebugCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

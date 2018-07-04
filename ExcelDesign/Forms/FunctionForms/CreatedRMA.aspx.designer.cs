@@ -85,13 +85,13 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.TableHeaderCell tcChannelName;
         
         /// <summary>
-        /// gdvReturnHeaderLines control.
+        /// TblReturnHeaderLines control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gdvReturnHeaderLines;
+        protected global::System.Web.UI.WebControls.Table TblReturnHeaderLines;
         
         /// <summary>
         /// BtnClose control.
@@ -103,12 +103,30 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.Button BtnClose;
         
         /// <summary>
-        /// BtnViewRMAInstructions control.
+        /// BtnCancelRMA control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnViewRMAInstructions;
+        protected global::System.Web.UI.WebControls.Button BtnCancelRMA;
+        
+        /// <summary>
+        /// BtnUpdateRMA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnUpdateRMA;
+        
+        /// <summary>
+        /// BtnPrintRMAInstructions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnPrintRMAInstructions;
     }
 }

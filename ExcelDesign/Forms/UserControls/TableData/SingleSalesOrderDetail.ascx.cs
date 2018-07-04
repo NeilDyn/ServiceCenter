@@ -45,16 +45,26 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(CustomerCount == 1)
+            if (CustomerCount == 1)
             {
                 CreateButtons();
+
+                if (Sh.RMAExists)
+                {
+                    btnCreateReturn.Text = "Update Return";
+                }
+                else
+                {
+                    btnCreateReturn.Text = "Create Return";
+                }
+
                 Session["ShipmentHeader"] = Sh.ShipmentHeaderObject;
             }
             else
             {
                 Session["ShipmentHeader"] = null;
             }
-        
+
             PopulateDetail();
             PopulateLines();
         }
@@ -81,12 +91,12 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
                 this.tcShipmentsTotal.Text = "<a href='javascript:expandShipments" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Sh.ShipmentHeaderObject.Count.ToString() + "</a>";
                 this.tcShipmentsTotal.ID = "tcShipmentsTotal_" + CustID.ToString() + "_" + CountID.ToString();
-                this.tcShipMethod.Text = shipmentMethod;            
+                this.tcShipMethod.Text = shipmentMethod;
 
                 Enum.TryParse(Sh.ShipmentHeaderObject[0].ShippingAgentCode, out trackType);
 
                 PopulateShipmentLines();
-            }        
+            }
 
             if (Sh.PostedPackageObject.Count > 0)
             {
@@ -99,9 +109,9 @@ namespace ExcelDesign.Forms.UserControls.TableData
                     this.tcTrackingNo.Text = "<a href='javascript:expandSerialNos" + CustID.ToString() + "" + CountID.ToString() + "()'>" + "Multiple</a>";
                 }
                 else
-                {                   
+                {
                     string trackNo = Sh.PostedPackageObject[0].TrackingNo;
-                    this.tcTrackingNo.Text = SetTrackingNo(trackType, trackNo);                
+                    this.tcTrackingNo.Text = SetTrackingNo(trackType, trackNo);
                 }
             }
 
@@ -193,7 +203,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             TableCell totalString = new TableCell();
             TableCell totalCell = new TableCell();
-            
+
             int lineCount = 0;
 
             foreach (ShipmentHeader header in Sh.ShipmentHeaderObject)
@@ -258,7 +268,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
                         singleRow.ID = "salesInfoLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
                         if (packageSerialCount > 1)
-                        {                           
+                        {
                             moreSerial.Text = "<a id='expandMoreClickOrderLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString() + "' href ='javascript:expandMoreOrderLines" + CustID.ToString() + CountID.ToString() + "(" + lineCount + ")'>Show More</a>";
                             moreSerial.ID = "expandShowMoreOrderLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
                         }
@@ -319,7 +329,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
                             moreTableRow.Attributes.CssStyle.Add("border-collapse", "collapse");
                             moreTableRow.ID = "showMoreOrderLines_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString() + "_" + moreLineCount.ToString();
-                            this.tblOrderDetailLines.Rows.Add(moreTableRow);                           
+                            this.tblOrderDetailLines.Rows.Add(moreTableRow);
                         }
 
                         if (moreLines.Count > 0)
@@ -362,7 +372,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             totalRow.Cells.Add(new TableCell());
             totalRow.Cells.Add(new TableCell());
 
-            this.tblOrderDetailLines.Rows.Add(totalRow);      
+            this.tblOrderDetailLines.Rows.Add(totalRow);
 
             TableCell breakCell = new TableCell();
             TableRow breakRow = new TableRow();
@@ -370,7 +380,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             breakRow.Cells.Add(breakCell);
             this.tblOrderDetailLines.Rows.Add(breakRow);
 
-            if(CustomerCount == 1)
+            if (CustomerCount == 1)
             {
                 cancelOrderCell.Controls.Add(btnCancelOrder);
                 partRequestCell.Controls.Add(btnPartRequest);
@@ -387,7 +397,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 buttonRow.Cells.Add(issueRefundcell);
 
                 this.tblOrderDetailLines.Rows.Add(buttonRow);
-            }          
+            }
         }
 
         protected void PopulateShipmentLines()

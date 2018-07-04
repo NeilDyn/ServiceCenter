@@ -24,12 +24,14 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
         protected TableCell createExchangeCell = new TableCell();
         protected TableCell issueRefundCell = new TableCell();
+        protected TableCell printRMAInstructions = new TableCell();
 
         protected TableCell receiptCell;
         protected TableCell receiveCell;
 
         protected Button btnCreateExchange = new Button();
         protected Button btnIssueRefund = new Button();
+        protected Button btnPrintRMAInstructions = new Button();
 
         protected Control singleReturnOrderReceiptLines;
         protected Control singleReturnOrderReceiveLines;
@@ -57,6 +59,10 @@ namespace ExcelDesign.Forms.UserControls.TableData
             btnIssueRefund.Text = "Issue Refund";
             btnIssueRefund.ID = "btnIssueRefund" + CustID.ToString() + "_" + CountID.ToString();
             btnIssueRefund.OnClientClick = "return false;";
+
+            btnPrintRMAInstructions.Text = "Print RMA Instructions";
+            btnPrintRMAInstructions.ID = "btnPrintRMAInstructions" + CustID.ToString() + "_" + CountID.ToString();
+            btnPrintRMAInstructions.OnClientClick = "return false;";
         }
 
         protected void LoadData()
@@ -284,13 +290,14 @@ namespace ExcelDesign.Forms.UserControls.TableData
             {
                 createExchangeCell.Controls.Add(btnCreateExchange);
                 issueRefundCell.Controls.Add(btnIssueRefund);
+                printRMAInstructions.Controls.Add(btnPrintRMAInstructions);
 
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
-                buttonRow.Cells.Add(new TableCell());
+                buttonRow.Cells.Add(printRMAInstructions);
                 buttonRow.Cells.Add(createExchangeCell);
                 buttonRow.Cells.Add(issueRefundCell);
 

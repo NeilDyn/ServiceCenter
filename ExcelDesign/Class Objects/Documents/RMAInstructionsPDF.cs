@@ -74,10 +74,10 @@ of the box to ensure prompt resolution for your return.";
                     returnAddressList.SetListSymbol("");
                     returnAddressList.IndentationLeft = 30f;
                     returnAddressList.Add(new ListItem(" ", font));
-                    returnAddressList.Add(new ListItem("CTJ", font));
+                    returnAddressList.Add(new ListItem("RETURNS DEPT", font));
                     returnAddressList.Add(new ListItem(rmaNo, font));
-                    returnAddressList.Add(new ListItem("400 Arlington Blvd.", font));
-                    returnAddressList.Add(new ListItem("Logan Township, NJ 08085", font));
+                    returnAddressList.Add(new ListItem("20000 NE, 15TH CT", font));
+                    returnAddressList.Add(new ListItem("Miami, FL 33179", font));
                     returnAddressList.Add(new ListItem(" ", font));
 
                     checkList.IndentationLeft = 30f;

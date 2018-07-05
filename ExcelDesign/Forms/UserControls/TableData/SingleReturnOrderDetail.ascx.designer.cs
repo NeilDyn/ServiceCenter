@@ -103,13 +103,13 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         protected global::System.Web.UI.WebControls.TableCell tcZendeskTicketNo;
         
         /// <summary>
-        /// TextBox1 control.
+        /// txtZendeskTicketNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txtZendeskTicketNo;
         
         /// <summary>
         /// tcPackagesCount control.
@@ -119,6 +119,15 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableCell tcPackagesCount;
+        
+        /// <summary>
+        /// tcEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcEmail;
         
         /// <summary>
         /// expandReceives control.

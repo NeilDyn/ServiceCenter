@@ -100,29 +100,31 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:SearchDetermineNoType", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="SearchDetermineNoType_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string SearchDetermineNoType(string sessionID, string searchNo, ref SearchResults searchResults) {
+        public string SearchDetermineNoType(string sessionID, string searchNo, ref SearchResults searchResults, int _SearchOption) {
             object[] results = this.Invoke("SearchDetermineNoType", new object[] {
                         sessionID,
                         searchNo,
-                        searchResults});
+                        searchResults,
+                        _SearchOption});
             searchResults = ((SearchResults)(results[1]));
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void SearchDetermineNoTypeAsync(string sessionID, string searchNo, SearchResults searchResults) {
-            this.SearchDetermineNoTypeAsync(sessionID, searchNo, searchResults, null);
+        public void SearchDetermineNoTypeAsync(string sessionID, string searchNo, SearchResults searchResults, int _SearchOption) {
+            this.SearchDetermineNoTypeAsync(sessionID, searchNo, searchResults, _SearchOption, null);
         }
         
         /// <remarks/>
-        public void SearchDetermineNoTypeAsync(string sessionID, string searchNo, SearchResults searchResults, object userState) {
+        public void SearchDetermineNoTypeAsync(string sessionID, string searchNo, SearchResults searchResults, int _SearchOption, object userState) {
             if ((this.SearchDetermineNoTypeOperationCompleted == null)) {
                 this.SearchDetermineNoTypeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSearchDetermineNoTypeOperationCompleted);
             }
             this.InvokeAsync("SearchDetermineNoType", new object[] {
                         sessionID,
                         searchNo,
-                        searchResults}, this.SearchDetermineNoTypeOperationCompleted, userState);
+                        searchResults,
+                        _SearchOption}, this.SearchDetermineNoTypeOperationCompleted, userState);
         }
         
         private void OnSearchDetermineNoTypeOperationCompleted(object arg) {
@@ -1710,6 +1712,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string sSHNoField;
         
+        private string emailField;
+        
         /// <remarks/>
         public string RMANo {
             get {
@@ -1727,6 +1731,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.sSHNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
             }
         }
     }

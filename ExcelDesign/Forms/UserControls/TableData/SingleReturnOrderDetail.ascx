@@ -79,10 +79,12 @@
         <asp:TableCell />
         <asp:TableCell Text="Zendesk Ticket #:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcZendeskTicketNo">
-            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtZendeskTicketNo" runat="server"></asp:TextBox>
         </asp:TableCell>
         <asp:TableCell Text="Package(s):" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcPackagesCount" />
+        <asp:TableCell Text="Email:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
+        <asp:TableCell runat="server" ID="tcEmail" />
     </asp:TableRow>
     <asp:TableRow runat="server" ID="expandReceives" TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell><br /></asp:TableCell>

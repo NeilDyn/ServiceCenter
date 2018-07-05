@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ExcelDesign.Class_Objects;
 using ExcelDesign.Class_Objects.Documents;
+using ExcelDesign.Class_Objects.Enums;
 using ExcelDesign.Forms.UserControls;
 using ExcelDesign.Forms.UserControls.CustomerInfo.MainTables;
 using ExcelDesign.Forms.UserControls.TableData;
@@ -66,13 +67,63 @@ namespace ExcelDesign.Forms
         protected void RetrieveData()
         {
             string searchValue = txtSearchBox.Text;
+            SearchOptions so = SearchOptions.Preset;
+            string searchOption = string.Empty;
+            int searchSelection = -2;
+
             cs = new CallService();
 
             if (searchValue != null && !string.IsNullOrWhiteSpace(searchValue))
             {
+                searchOption = DdlSearchOptions.SelectedValue.Replace(" ", "").Replace("-", "");
+                Enum.TryParse(searchOption, out so);
+
+                switch(so)
+                {
+                    case SearchOptions.Default:
+                        searchSelection = 0;
+                        break;
+
+                    case SearchOptions.SearchAll:
+                        searchSelection = 1;
+                        break;
+
+                    case SearchOptions.PONumber:
+                        searchSelection = 2;
+                        break;
+
+                    case SearchOptions.TrackingNo:
+                        searchSelection = 3;
+                        break;
+
+                    case SearchOptions.IMEI:
+                        searchSelection = 4;
+                        break;
+
+                    case SearchOptions.ShiptoName:
+                        searchSelection = 5;
+                        break;
+
+                    case SearchOptions.ShiptoAddress:
+                        searchSelection = 6;
+                        break;
+
+                    case SearchOptions.RMANo:
+                        searchSelection = 7;
+                        break;
+
+                    case SearchOptions.Preset:
+                        searchSelection = 0;
+                        break;
+
+                    default:
+                        searchSelection = 0;
+                        break;
+                }
+
                 try
                 {
-                    cs.OpenService(searchValue);
+                    cs.OpenService(searchValue, searchSelection);
                     customerInfo = new Control();
                     salesOrderHeader = new Control();
                     salesOrderDetail = new Control();

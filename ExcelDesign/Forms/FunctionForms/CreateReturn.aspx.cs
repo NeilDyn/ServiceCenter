@@ -14,7 +14,7 @@ namespace ExcelDesign.Forms.FunctionForms
 {
     public partial class CreateReturn : System.Web.UI.Page
     {
-        protected List<ShipmentHeader> Sh;
+        protected List<SalesHeader> Sh;
         protected string orderNo;
         protected string docNo;
         protected string notes;
@@ -29,7 +29,7 @@ namespace ExcelDesign.Forms.FunctionForms
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
                 List<Defects> doList = (List<Defects>)Session["Defects"];
                 List<ReturnReason> rrList = (List<ReturnReason>)Session["ReturnReasons"];
@@ -56,78 +56,84 @@ namespace ExcelDesign.Forms.FunctionForms
         {
             TableRow lineRow = new TableRow();
 
-            Sh = (List<ShipmentHeader>)Session["ShipmentHeader"];
+            Sh = (List<SalesHeader>)Session["SalesHeaders"];
 
             List<ReturnReason> rrList = (List<ReturnReason>)Session["ReturnReasons"];
 
             int lineCount = 0;
 
-            foreach (ShipmentHeader header in Sh)
+            foreach (SalesHeader head in Sh)
             {
-                foreach (ShipmentLine line in header.ShipmentLines)
+                foreach (ShipmentHeader header in head.ShipmentHeaderObject)
                 {
-                    if (line.Quantity > 0 && line.Type.ToUpper() == "ITEM")
+                    if (head.SalesOrderNo == tcOrderNo.Text)
                     {
-                        lineCount++;
-
-                        TableRow singleRow = new TableRow();
-
-                        TableCell itemNo = new TableCell();
-                        TableCell desc = new TableCell();
-                        TableCell qty = new TableCell();
-                        TableCell actionQty = new TableCell();
-                        TableCell returnReasonCode = new TableCell();
-
-                        DropDownList ddlReturnReasonCode = new DropDownList
+                        foreach (ShipmentLine line in header.ShipmentLines)
                         {
-                            DataValueField = "Description",
-                            DataSource = rrList,
-                            ID = "ddlReturnReasonCode_" + lineCount.ToString()
-                        };
+                            if (line.Quantity > 0 && line.Type.ToUpper() == "ITEM")
+                            {
+                                lineCount++;
 
-                        TextBox actionQtyInsert = new TextBox
-                        {
-                            ID = "actionQtyInsert_" + lineCount.ToString(),
-                            Text = line.Quantity.ToString(),
-                            Width = new Unit("15%")
-                        };
+                                TableRow singleRow = new TableRow();
 
-                        ddlReturnReasonCode.DataBind();
+                                TableCell itemNo = new TableCell();
+                                TableCell desc = new TableCell();
+                                TableCell qty = new TableCell();
+                                TableCell actionQty = new TableCell();
+                                TableCell returnReasonCode = new TableCell();
 
-                        itemNo.ID = "itemNo_" + lineCount.ToString();
-                        qty.ID = "itemQuanity_" + lineCount.ToString();
-                        desc.ID = "desc_" + lineCount.ToString();
-                        actionQty.ID = "actionQty_" + lineCount.ToString();
-                        returnReasonCode.ID = "returnReasonCode_" + lineCount.ToString();
+                                DropDownList ddlReturnReasonCode = new DropDownList
+                                {
+                                    DataValueField = "Description",
+                                    DataSource = rrList,
+                                    ID = "ddlReturnReasonCode_" + lineCount.ToString()
+                                };
 
-                        itemNo.Text = line.ItemNo;
-                        desc.Text = line.Description;
-                        qty.Text = line.Quantity.ToString();
-                        actionQty.Controls.Add(actionQtyInsert);
-                        returnReasonCode.Controls.Add(ddlReturnReasonCode);
+                                TextBox actionQtyInsert = new TextBox
+                                {
+                                    ID = "actionQtyInsert_" + lineCount.ToString(),
+                                    Text = line.Quantity.ToString(),
+                                    Width = new Unit("15%")
+                                };
 
-                        qty.HorizontalAlign = HorizontalAlign.Center;
-                        actionQty.HorizontalAlign = HorizontalAlign.Center;
+                                ddlReturnReasonCode.DataBind();
 
-                        singleRow.ID = "returnOrderLineRow_" + lineCount.ToString();
+                                itemNo.ID = "itemNo_" + lineCount.ToString();
+                                qty.ID = "itemQuanity_" + lineCount.ToString();
+                                desc.ID = "desc_" + lineCount.ToString();
+                                actionQty.ID = "actionQty_" + lineCount.ToString();
+                                returnReasonCode.ID = "returnReasonCode_" + lineCount.ToString();
 
-                        singleRow.Cells.Add(itemNo);
-                        singleRow.Cells.Add(desc);
-                        singleRow.Cells.Add(qty);
-                        singleRow.Cells.Add(actionQty);
-                        singleRow.Cells.Add(returnReasonCode);
+                                itemNo.Text = line.ItemNo;
+                                desc.Text = line.Description;
+                                qty.Text = line.Quantity.ToString();
+                                actionQty.Controls.Add(actionQtyInsert);
+                                returnReasonCode.Controls.Add(ddlReturnReasonCode);
 
-                        if (lineCount % 2 == 0)
-                        {
-                            singleRow.BackColor = Color.White;
+                                qty.HorizontalAlign = HorizontalAlign.Center;
+                                actionQty.HorizontalAlign = HorizontalAlign.Center;
+
+                                singleRow.ID = "returnOrderLineRow_" + lineCount.ToString();
+
+                                singleRow.Cells.Add(itemNo);
+                                singleRow.Cells.Add(desc);
+                                singleRow.Cells.Add(qty);
+                                singleRow.Cells.Add(actionQty);
+                                singleRow.Cells.Add(returnReasonCode);
+
+                                if (lineCount % 2 == 0)
+                                {
+                                    singleRow.BackColor = Color.White;
+                                }
+                                else
+                                {
+                                    singleRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                                }
+
+                                singleRow.Attributes.CssStyle.Add("border-collapse", "collapse");
+                                tblCreateReturnOrderTableDetails.Rows.Add(singleRow);
+                            }
                         }
-                        else
-                        {
-                            singleRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
-                        }
-
-                        singleRow.Attributes.CssStyle.Add("border-collapse", "collapse");
-                        tblCreateReturnOrderTableDetails.Rows.Add(singleRow);
                     }
                 }
             }
@@ -167,8 +173,8 @@ namespace ExcelDesign.Forms.FunctionForms
                         controlCount = 0;
 
                         foreach (TableCell cell in row.Cells)
-                        {                          
-                           if (cell.ID.Contains("itemNo_"))
+                        {
+                            if (cell.ID.Contains("itemNo_"))
                             {
                                 itemNo = cell.Text.ToString();
                             }
@@ -229,7 +235,7 @@ namespace ExcelDesign.Forms.FunctionForms
                         crh = ss.CreateReturnOrder(orderNo, docNo, string.Empty, defect, notes, resources, printRMA, createLabel, email, lineValues);
                         Session["CreatedRMA"] = crh;
                         ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + "');", true);
-                        ClientScript.RegisterStartupScript(this.GetType(), "openCreatedRMA", "OpenCreatedRMA();", true);                      
+                        ClientScript.RegisterStartupScript(this.GetType(), "openCreatedRMA", "OpenCreatedRMA();", true);
                     }
                     else
                     {

@@ -17,7 +17,7 @@ namespace ExcelDesign.Class_Objects
         private static NetworkCredential credentials;
 
         protected string username = "jbotha";
-        protected string password = "Ws33hr1st3ll3_C_";
+        protected string password = "Ws33hr1st3ll3!C!";
         protected string domain = "JEG";
 
         protected Functions functions = new Functions();
@@ -47,11 +47,11 @@ namespace ExcelDesign.Class_Objects
             functions.Credentials = credentials;
         }
 
-        public SearchResults FindOrder(string searchNo)
+        public SearchResults FindOrder(string searchNo, int searchOption)
         {
             SearchResults results = new SearchResults();
    
-            functions.SearchDetermineNoType(SessionID(), searchNo, ref results);
+            functions.SearchDetermineNoType(SessionID(), searchNo, ref results, searchOption);
             return results;
         }
 

@@ -16,6 +16,11 @@ td {
     overflow: hidden;
 }
 
+.SearchArea.DropDownList {
+    border-color: black;
+    border-width: 2px;
+}
+
 .SearchArea.Textbox {
      border-color: black;
      border-width: 2px;

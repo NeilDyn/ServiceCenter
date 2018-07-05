@@ -56,13 +56,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 else
                 {
                     btnCreateReturn.Text = "Create Return";
-                }
-
-                Session["ShipmentHeader"] = Sh.ShipmentHeaderObject;
-            }
-            else
-            {
-                Session["ShipmentHeader"] = null;
+                }               
             }
 
             PopulateDetail();
@@ -235,8 +229,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         qty.Text = line.Quantity.ToString();
                         qtyShipped.Text = line.QuantityShipped.ToString();
                         total += line.LineAmount;
-                        price.Text = "$      " + line.Price.ToString();
-                        lineAmount.Text = "$      " + line.LineAmount.ToString();
+                        price.Text = "$      " + line.Price.ToGBString();
+                        lineAmount.Text = "$      " + line.LineAmount.ToGBString();
 
                         qty.HorizontalAlign = HorizontalAlign.Center;
                         qtyShipped.HorizontalAlign = HorizontalAlign.Center;
@@ -351,7 +345,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             totalString.Text = "Total:";
             totalString.Font.Bold = true;
 
-            totalCell.Text = "$      " + total.ToString();
+            totalCell.Text = "$      " + total.ToGBString();
             totalCell.Font.Bold = true;
 
             totalString.HorizontalAlign = HorizontalAlign.Right;

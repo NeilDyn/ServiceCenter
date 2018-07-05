@@ -130,9 +130,11 @@
     <Compile Include="Class Objects\CreatedReturn\CreatedReturnHeader.cs" />
     <Compile Include="Class Objects\CreatedReturn\CreatedReturnLines.cs" />
     <Compile Include="Class Objects\Documents\RMAInstructionsPDF.cs" />
+    <Compile Include="Class Objects\DoubleExtensions.cs" />
     <Compile Include="Class Objects\Enums\ActionClassEnum.cs" />
     <Compile Include="Class Objects\CallService.cs" />
     <Compile Include="Class Objects\Customer.cs" />
+    <Compile Include="Class Objects\Enums\SearchOptions.cs" />
     <Compile Include="Class Objects\Enums\TrackingTypeEnum.cs" />
     <Compile Include="Class Objects\FunctionData\Defects.cs" />
     <Compile Include="Class Objects\FunctionData\ReturnReason.cs" />

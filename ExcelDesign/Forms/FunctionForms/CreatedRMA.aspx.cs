@@ -93,8 +93,8 @@ namespace ExcelDesign.Forms.FunctionForms
                 itemNo.Text = line.ItemNo;
                 desc.Text = line.Description;
                 qty.Controls.Add(qtyEdit);
-                price.Text = "$     " + line.Price.ToString();
-                lineAmount.Text = "$    " + line.LineAmount.ToString();
+                price.Text = "$     " + line.Price.ToGBString();
+                lineAmount.Text = "$    " + line.LineAmount.ToGBString();
 
                 qty.HorizontalAlign = HorizontalAlign.Center;
                 price.HorizontalAlign = HorizontalAlign.Right;

@@ -22,6 +22,17 @@
             <asp:Label ID="Label1" runat="server" Text="Search" ForeColor="#0099FF" Font-Bold="True"/>
             <asp:TextBox ID="txtSearchBox" runat="server" Width="700px" BorderColor="Black" BorderWidth="2px" style="margin-left: 35px" />
             <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" style="margin-left: 30px" Text="Search" />
+            <asp:Label ID="Label2" runat="server" Text="Search Options:" ForeColor="#0099FF" Font-Bold="True" style="margin-left: 30px" />
+            <asp:DropDownList ID="DdlSearchOptions" runat="server" style="margin-left: 35px" Width="200px">
+                <asp:ListItem Value="Default"></asp:ListItem>
+                <asp:ListItem Value="Search All"></asp:ListItem>
+                <asp:ListItem Value="PO Number"></asp:ListItem>
+                <asp:ListItem Value="Tracking No"></asp:ListItem>
+                <asp:ListItem Value="IMEI"></asp:ListItem>
+                <asp:ListItem Value="Ship-to Name"></asp:ListItem>
+                <asp:ListItem Value="Ship-to Address"></asp:ListItem>
+                <asp:ListItem Value="RMA-No"></asp:ListItem>
+            </asp:DropDownList>
         </div>      
         <br />   
     </form>

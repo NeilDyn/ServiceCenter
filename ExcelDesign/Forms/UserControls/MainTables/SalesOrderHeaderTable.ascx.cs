@@ -37,6 +37,15 @@ namespace ExcelDesign.Forms.UserControls.MainTables
                 this.btnExpandOrder.ID = "btnExpandOrder_" + CustID.ToString();
             }
 
+            if (CustomerCount == 1)
+            {
+                Session["SalesHeaders"] = SalesHeaderList;
+            }
+            else
+            {
+                Session["SalesHeaders"] = null;
+            }
+
             LoadData();
         }
 

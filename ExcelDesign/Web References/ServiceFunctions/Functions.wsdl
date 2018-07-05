@@ -252,6 +252,7 @@
         <sequence>
           <element minOccurs="1" maxOccurs="1" name="RMANo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="SSHNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Email" type="string" />
         </sequence>
       </complexType>
       <complexType name="ReturnReasonCode">
@@ -373,6 +374,7 @@
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
             <element minOccurs="1" maxOccurs="1" name="searchNo" type="string" />
             <element xmlns:q1="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" minOccurs="1" maxOccurs="1" name="searchResults" type="q1:SearchResults" />
+            <element minOccurs="1" maxOccurs="1" name="_SearchOption" type="int" />
           </sequence>
         </complexType>
       </element>

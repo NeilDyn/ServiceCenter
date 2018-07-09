@@ -177,7 +177,7 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CreateReturnOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CreateReturnOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string CreateReturnOrder(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ref ReturnOrder createdReturn) {
+        public string CreateReturnOrder(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ref ReturnOrder createdReturn, bool updateRMA) {
             object[] results = this.Invoke("CreateReturnOrder", new object[] {
                         orderNo,
                         extDocNo,
@@ -189,18 +189,19 @@ namespace ExcelDesign.ServiceFunctions {
                         createUPSReturnLabel,
                         emailAddress,
                         lineDetails,
-                        createdReturn});
+                        createdReturn,
+                        updateRMA});
             createdReturn = ((ReturnOrder)(results[1]));
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn) {
-            this.CreateReturnOrderAsync(orderNo, extDocNo, returnReasonCode, _DefectOpts, notes, includeResourceLines, printRmaInstructions, createUPSReturnLabel, emailAddress, lineDetails, createdReturn, null);
+        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn, bool updateRMA) {
+            this.CreateReturnOrderAsync(orderNo, extDocNo, returnReasonCode, _DefectOpts, notes, includeResourceLines, printRmaInstructions, createUPSReturnLabel, emailAddress, lineDetails, createdReturn, updateRMA, null);
         }
         
         /// <remarks/>
-        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn, object userState) {
+        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn, bool updateRMA, object userState) {
             if ((this.CreateReturnOrderOperationCompleted == null)) {
                 this.CreateReturnOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateReturnOrderOperationCompleted);
             }
@@ -215,7 +216,8 @@ namespace ExcelDesign.ServiceFunctions {
                         createUPSReturnLabel,
                         emailAddress,
                         lineDetails,
-                        createdReturn}, this.CreateReturnOrderOperationCompleted, userState);
+                        createdReturn,
+                        updateRMA}, this.CreateReturnOrderOperationCompleted, userState);
         }
         
         private void OnCreateReturnOrderOperationCompleted(object arg) {
@@ -844,7 +846,7 @@ namespace ExcelDesign.ServiceFunctions {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="urn:microsoft-dynamics-nav/xmlports/x50101")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="urn:microsoft-dynamics-nav/xmlports/x50002")]
     public partial class SalesLine1 {
         
         private string docNoField;
@@ -961,7 +963,7 @@ namespace ExcelDesign.ServiceFunctions {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="Warranty2", Namespace="urn:microsoft-dynamics-nav/xmlports/x50101")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="Warranty2", Namespace="urn:microsoft-dynamics-nav/xmlports/x50002")]
     public partial class Warranty21 {
         
         private string[] status2Field;
@@ -1022,7 +1024,7 @@ namespace ExcelDesign.ServiceFunctions {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesHeader", Namespace="urn:microsoft-dynamics-nav/xmlports/x50101")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesHeader", Namespace="urn:microsoft-dynamics-nav/xmlports/x50002")]
     public partial class SalesHeader1 {
         
         private string docTypeField;
@@ -1212,7 +1214,7 @@ namespace ExcelDesign.ServiceFunctions {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50101")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50002")]
     public partial class ReturnOrder {
         
         private SalesHeader1[] salesHeaderField;

@@ -27,7 +27,7 @@
             var height = 500;
             var left = (screen.width - width) + 500;
             var top = (screen.height - height) * 0.5;
-            window.open("CreateReturn.aspx?OrderNo=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.ExtDocNo %>&CreateOrUpdate=<%= this.Update %>",
+            window.open("CreateReturn.aspx?No=<%= this.RmaNo %>&ExternalDocumentNo=<%= this.ExtDocNo %>&CreateOrUpdate=<%= this.Update %>&CreatedOrderNo=<%= this.OrderNo %>",
                 null,
                 "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
         };

@@ -199,6 +199,8 @@ namespace ExcelDesign.Class_Objects
             string shippingAgentCode = string.Empty;
             string sellToCustomerNo = string.Empty;
             List<ShipmentLine> shipLine = new List<ShipmentLine>();
+            List<ReceiptLine> returnLine = new List<ReceiptLine>();
+            List<string> rmaNo = new List<string>();
 
             if (currResults.SalesShipmentHeader != null)
             {
@@ -213,8 +215,20 @@ namespace ExcelDesign.Class_Objects
                         shippingAgentCode = currResults.SalesShipmentHeader[sh].ShippingAgentCode;
                         shipLine = ReturnShipmentLines(no);
                         sellToCustomerNo = currResults.SalesShipmentHeader[sh].SellToCustomerNo;
+                        returnLine = GetShipmentReturnLines(no);
 
-                        shipHeader.Add(new ShipmentHeader(no, externalDocumentNo, shippingDate, shippingAgentService, shippingAgentCode, shipLine, sellToCustomerNo));
+                        if(currResults.ExtendedSalesHeader != null)
+                        {
+                            for (int esh = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
+                            {
+                                if (currResults.ExtendedSalesHeader[esh].SSHNo == no)
+                                {
+                                    rmaNo.Add(currResults.ExtendedSalesHeader[esh].RMANo);
+                                }
+                            }
+                        }
+
+                        shipHeader.Add(new ShipmentHeader(no, externalDocumentNo, shippingDate, shippingAgentService, shippingAgentCode, shipLine, sellToCustomerNo, returnLine, rmaNo));
 
                         no = string.Empty;
                         externalDocumentNo = string.Empty;
@@ -223,6 +237,8 @@ namespace ExcelDesign.Class_Objects
                         shippingAgentCode = string.Empty;
                         sellToCustomerNo = string.Empty;
                         shipLine = new List<ShipmentLine>();
+                        returnLine = new List<ReceiptLine>();
+                        rmaNo = new List<string>();
                     }
                 }
             }
@@ -339,10 +355,10 @@ namespace ExcelDesign.Class_Objects
                                     quantityReceived += currQty;
                                 }
                             }
-                        }
 
-                        receiptLine.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount));
-                        insertedItems.Add(itemNo);
+                            receiptLine.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount));
+                            insertedItems.Add(itemNo);
+                        }                    
 
                         itemNo = string.Empty;
                         description = string.Empty;
@@ -1234,6 +1250,7 @@ namespace ExcelDesign.Class_Objects
 
         private List<ReceiptHeader> ReturnShipmentReceiptHeader(string orderNo, string extDocNo, string rmaNo)
         {
+            //Before Extended Sales Header linking shipments to returns
             List<ReceiptHeader> receipts = new List<ReceiptHeader>();
 
             string no = string.Empty;
@@ -1363,6 +1380,111 @@ namespace ExcelDesign.Class_Objects
                         quantityReceived = 0;
 
                         receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount));
+                    }
+                }
+            }
+
+            return receiptLines;
+        }
+
+        private List<ReceiptLine> GetShipmentReturnLines(string no)
+        {
+            List<ReceiptLine> singleReceipt = new List<ReceiptLine>();
+            List<ReceiptLine> receiptLines = new List<ReceiptLine>();
+
+            string itemNo = string.Empty;
+            string description = string.Empty;
+            int quantity = 0;
+            int quantityReceived = 0;
+            double price = 0;
+            double lineAmount = 0;
+            List<string> insertedItems = new List<string>();
+
+            List<string> rmaNo = new List<string>();
+
+            if(currResults.ExtendedSalesHeader != null)
+            {
+                for (int esh = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
+                {
+                    if(currResults.ExtendedSalesHeader[esh].SSHNo == no)
+                    {
+                        rmaNo.Add(currResults.ExtendedSalesHeader[esh].RMANo);
+                    }
+                }
+            }
+
+            if(rmaNo.Count != 0)
+            {
+                if (currResults.SalesLine != null)
+                {
+                    for (int slr = 0; slr < currResults.SalesLine.Length; slr++)
+                    {
+                        foreach (string rmaLine in rmaNo)
+                        {
+                            if (currResults.SalesLine[slr].DocNo == rmaLine)
+                            {
+                                itemNo = currResults.SalesLine[slr].ItemNo;
+                                description = currResults.SalesLine[slr].Description;
+                                int.TryParse(currResults.SalesLine[slr].Qty, out quantity);
+                                double.TryParse(currResults.SalesLine[slr].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
+                                lineAmount = quantity * price;
+                                quantityReceived = 0;
+
+                                receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount));
+                                insertedItems.Add(itemNo);
+                            }
+                        }
+                    }
+                }
+
+                if (currResults.ReturnReceiptLine != null)
+                {
+                    for (int rl = 0; rl < currResults.ReturnReceiptLine.Length; rl++)
+                    {
+                        foreach (string rmaLine in rmaNo)
+                        {
+                            if (currResults.ReturnReceiptLine[rl].DocNo == rmaLine)
+                            {
+                                itemNo = currResults.ReturnReceiptLine[rl].ItemNo;
+                                description = currResults.ReturnReceiptLine[rl].Description;
+                                int.TryParse(currResults.ReturnReceiptLine[rl].Qty, out quantity);
+                                double.TryParse(currResults.ReturnReceiptLine[rl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
+                                lineAmount = quantity * price;
+
+                                if (insertedItems.Any(item => item.Equals(itemNo)))
+                                {
+                                    foreach (ReceiptLine existingItem in receiptLines)
+                                    {
+                                        if (existingItem.ItemNo == itemNo)
+                                        {
+                                            existingItem.Quantity += quantity;
+                                            existingItem.LineAmount = existingItem.Quantity * price;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    for (int rli = 0; rli < currResults.ReturnReceiptLine.Length; rli++)
+                                    {
+                                        if ((currResults.ReturnReceiptLine[rli].DocNo == no) && (currResults.ReturnReceiptLine[rli].ItemNo == itemNo))
+                                        {
+                                            int.TryParse(currResults.ReturnReceiptLine[rli].Qty, out int currQty);
+                                            quantityReceived += currQty;
+                                        }
+                                    }
+
+                                    receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount));
+                                    insertedItems.Add(itemNo);
+                                }
+
+                                itemNo = string.Empty;
+                                description = string.Empty;
+                                quantity = 0;
+                                quantityReceived = 0;
+                                price = 0;
+                                lineAmount = 0;
+                            }
+                        }
                     }
                 }
             }

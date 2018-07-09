@@ -13,11 +13,12 @@ namespace ExcelDesign.Class_Objects
     public class WebService
     {
         private readonly string baseURL = "http://jeg-svr2.jeg.local:7058/DynamicsNAV/WS/JEG_SONS,%20Inc/";
+        //private readonly string baseURL = "http://jeg-svr2:7047/production/WS/JEG_SONS,%20Inc/";
         private readonly string functionsURL = "Codeunit/Functions";
         private static NetworkCredential credentials;
 
-        protected string username = "jbotha";
-        protected string password = "Ws33hr1st3ll3!C!";
+        protected string username = "mswart";
+        protected string password = "MPSP~ssword";
         protected string domain = "JEG";
 
         protected Functions functions = new Functions();
@@ -68,11 +69,11 @@ namespace ExcelDesign.Class_Objects
         }
 
         public ReturnOrder CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, int defect, string notes,
-            bool includeResource, bool printRMA, bool createLabel, string email, string lineValues)
+            bool includeResource, bool printRMA, bool createLabel, string email, string lineValues, bool update)
         {
             ReturnOrder returnRMA = new ReturnOrder();
 
-            functions.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, defect, notes, createLabel, printRMA, includeResource, email, lineValues, ref returnRMA);
+            functions.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, defect, notes, createLabel, printRMA, includeResource, email, lineValues, ref returnRMA, update);
 
             return returnRMA;
         }

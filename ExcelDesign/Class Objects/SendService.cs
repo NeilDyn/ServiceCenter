@@ -26,12 +26,12 @@ namespace ExcelDesign.Class_Objects
         }
 
         public CreatedReturnHeader CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, int defect, string notes,
-            bool includeResource, bool printRMA, bool createLabel, string email, string lineValues)
+            bool includeResource, bool printRMA, bool createLabel, string email, string lineValues, bool update)
         {
             ReturnOrder returnRMA = new ReturnOrder();
             CreatedReturnHeader cth = new CreatedReturnHeader();
 
-            returnRMA = webService.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, defect, notes, createLabel, printRMA, includeResource, email, lineValues);
+            returnRMA = webService.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, defect, notes, createLabel, printRMA, includeResource, email, lineValues, update);
 
             cth = CreateReturnRMA(returnRMA);
 

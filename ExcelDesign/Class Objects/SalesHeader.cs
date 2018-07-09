@@ -15,7 +15,6 @@ namespace ExcelDesign.Class_Objects
         public string SalesOrderNo { get; set; }
         public string OrderDate { get; set; }
         public string OrderStatus { get; set; }
-        public bool RMAExists { get; set; }
 
         public SalesHeader()
         {
@@ -33,7 +32,6 @@ namespace ExcelDesign.Class_Objects
             this.PostedPackageObject = postedPackageObjectP;
             this.ExternalDocumentNo = externalDocumentNoP;
             this.WarrantyProp = _warrantyP;
-            this.RMAExists = rmaExistsP;
         }
     }
 }

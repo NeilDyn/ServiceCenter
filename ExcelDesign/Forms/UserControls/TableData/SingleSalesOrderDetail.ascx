@@ -27,7 +27,7 @@
                     var height = 500;
                     var left = (screen.width - width) + 500;
                     var top = (screen.height - height) * 0.5;
-                    window.open("FunctionForms/CreateReturn.aspx?OrderNo=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= this.Sh.RMAExists %>",
+                    window.open("FunctionForms/CreateReturn.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
                         null,
                         "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
             }

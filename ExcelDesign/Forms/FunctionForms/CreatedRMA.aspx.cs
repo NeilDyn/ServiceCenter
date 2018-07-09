@@ -16,6 +16,7 @@ namespace ExcelDesign.Forms.FunctionForms
     {
         protected CreatedReturnHeader CRH { get; set; }
         public string OrderNo { get; set; }
+        public string RmaNo { get; set; }
         public string ExtDocNo { get; set; }
         public string Update { get; set; }
 
@@ -29,6 +30,7 @@ namespace ExcelDesign.Forms.FunctionForms
                 {
                     CRH = (CreatedReturnHeader)Session["CreatedRMA"];
                     Title = "Return: " + CRH.RMANo;
+                    RmaNo = CRH.RMANo;
 
                     tcRmaNo.Text = CRH.RMANo;
                     tcExternalDocNo.Text = CRH.ExternalDocumentNo;

@@ -47,16 +47,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
         {
             if (CustomerCount == 1)
             {
-                CreateButtons();
-
-                if (Sh.RMAExists)
-                {
-                    btnCreateReturn.Text = "Update Return";
-                }
-                else
-                {
-                    btnCreateReturn.Text = "Create Return";
-                }               
+                CreateButtons();             
             }
 
             PopulateDetail();

@@ -12,7 +12,14 @@
         });
 
         function CloseWindow() {
-            var c = window.confirm("Are you sure you wish to cancel creating this return?");
+            var c;
+
+            if ("<%= this.btnCreateRMA.Text %>" == "Update RMA") {
+                c = window.confirm("Are you sure you wish to cancel updating this return?");
+            } else {
+                c = window.confirm("Are you sure you wish to cancel creating this return?");
+            }
+
             if (c == true) {
                 parent.window.close();
             };
@@ -27,18 +34,18 @@
             var height = 400;
             var left = (screen.width - width) / 2;
             var top = (screen.height - height) / 2;
-            window.open("CreatedRMA.aspx?PrintRMAInstructions=<%= this.printRMA %>&OrderNo=<%= this.tcOrderNo.Text%>&ExternalDocumentNo=<%= this.tcDocNo.Text%>",
+            window.open("CreatedRMA.aspx?PrintRMAInstructions=<%= this.printRMA %>&OrderNo=<%= this.tcNo.Text%>&ExternalDocumentNo=<%= this.tcDocNo.Text%>",
                 null,
                 "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
-        }
+        };
     </script>
 </head>
 <body>
     <form id="frmCreateReturnOrder" runat="server">
         <asp:Table ID="tblRMAInfo" runat="server" Height="100%" Width="100%">
             <asp:TableRow>
-                <asp:TableHeaderCell Text="Order No:" />
-                <asp:TableHeaderCell ID="tcOrderNo" runat="server" />
+                <asp:TableHeaderCell Text="Order No:" ID="noTitle" />
+                <asp:TableHeaderCell ID="tcNo" runat="server" />
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableHeaderCell Text="External Document No:" />
@@ -57,7 +64,7 @@
                             <asp:TableHeaderCell Text="Item No." HorizontalAlign="Left" ID="HeaderItem" />
                             <asp:TableHeaderCell Text="Description" HorizontalAlign="Left" Width="30%" ID="HeaderDesc" />
                             <asp:TableHeaderCell Text="Qty" ID="HeaderQty" />
-                            <asp:TableHeaderCell Text="Action Qty." ID="HeaderActionQty" Width="15%"/>
+                            <asp:TableHeaderCell Text="Action Qty." ID="HeaderActionQty" Width="15%" />
                             <asp:TableHeaderCell Text="Return Reason Code" HorizontalAlign="Left" ID="HeaderReturnReasonCode" />
                         </asp:TableHeaderRow>
                     </asp:Table>
@@ -83,17 +90,20 @@
             <asp:TableRow>
                 <asp:TableCell Text="Include Resource Lines: " Width="20%" />
                 <asp:TableCell>
-                    <asp:CheckBox ID="cbxResources" runat="server" /></asp:TableCell>
+                    <asp:CheckBox ID="cbxResources" runat="server" />
+                </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell Text="Print RMA Instructions: " />
                 <asp:TableCell>
-                    <asp:CheckBox ID="cbxPrintRMA" runat="server" Checked="true" /></asp:TableCell>
+                    <asp:CheckBox ID="cbxPrintRMA" runat="server" Checked="true" />
+                </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell Text="Create Return Label: " />
                 <asp:TableCell>
-                    <asp:CheckBox ID="cbxCreateLable" runat="server" /></asp:TableCell>
+                    <asp:CheckBox ID="cbxCreateLable" runat="server" />
+                </asp:TableCell>
             </asp:TableRow>
             <asp:TableFooterRow HorizontalAlign="Right">
                 <asp:TableHeaderCell />

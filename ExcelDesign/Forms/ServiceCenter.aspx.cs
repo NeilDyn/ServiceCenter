@@ -19,7 +19,7 @@ namespace ExcelDesign.Forms
 {
     public partial class ServiceCenter : System.Web.UI.Page
     {
-        protected CallService cs;
+        protected CallService cs = new CallService();
 
         // User Controls
         protected static Control multipleCustomers;
@@ -45,9 +45,11 @@ namespace ExcelDesign.Forms
             {
                 if (Session["ActiveCustomer"] != null)
                 {
-                    customers = new List<Customer>();
-                    StaticService.CustomerList = customers;
-                    customers.Add((Customer)Session["ActiveCustomer"]);
+                    customers = new List<Customer>
+                    {
+                        (Customer)Session["ActiveCustomer"]
+                    };
+
                     customerInfoTable = LoadControl("UserControls/MainTables/CustomerInfoTable.ascx");
                     customerInfoTable.ID = "Customer_Info_Table";
                     ((CustomerInfoTable)customerInfoTable).CustomerList = customers;
@@ -70,8 +72,6 @@ namespace ExcelDesign.Forms
             SearchOptions so = SearchOptions.Preset;
             string searchOption = string.Empty;
             int searchSelection = -2;
-
-            cs = new CallService();
 
             if (searchValue != null && !string.IsNullOrWhiteSpace(searchValue))
             {
@@ -135,7 +135,6 @@ namespace ExcelDesign.Forms
                 {
                     Session["Error"] = ex.Message;
                     Response.Redirect("ErrorForm.aspx");
-                    //ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
                 }
             }
         }

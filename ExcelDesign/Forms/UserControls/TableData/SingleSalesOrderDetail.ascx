@@ -140,7 +140,6 @@
         <asp:TableCell />
     </asp:TableRow>
     <asp:TableRow>
-        <asp:TableCell />
         <asp:TableCell ColumnSpan="8">
             <asp:Table runat="server" ID="tblOrderDetailLines" Height="100%" Width="100%">
                 <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">

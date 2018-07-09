@@ -76,6 +76,7 @@ namespace ExcelDesign.Forms
             if (searchValue != null && !string.IsNullOrWhiteSpace(searchValue))
             {
                 searchOption = DdlSearchOptions.SelectedValue.Replace(" ", "").Replace("-", "");
+                searchOption = searchOption.Replace("(ExludesShiptoFilters)", "");
                 Enum.TryParse(searchOption, out so);
 
                 switch(so)

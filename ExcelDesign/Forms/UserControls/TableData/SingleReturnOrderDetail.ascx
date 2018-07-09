@@ -109,7 +109,6 @@
         <asp:TableCell />
     </asp:TableRow>
     <asp:TableRow>
-        <asp:TableCell />
         <asp:TableCell ColumnSpan="8">
             <asp:Table runat="server" ID="tblReturnDetailLines" Height="100%" Width="100%">
                 <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
@@ -120,7 +119,7 @@
                     <asp:TableHeaderCell Text="Price" HorizontalAlign="Left" />
                     <asp:TableHeaderCell Text="Line Amt" HorizontalAlign="Left" />
                     <asp:TableHeaderCell Text="Serial #" />
-                    <asp:TableHeaderCell Text="" />
+                    <asp:TableHeaderCell Text=""  Width="15%"/>
                 </asp:TableHeaderRow>
                 <asp:TableHeaderRow>
                     <asp:TableHeaderCell ColumnSpan="8">

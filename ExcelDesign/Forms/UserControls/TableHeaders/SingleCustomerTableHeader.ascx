@@ -56,6 +56,10 @@
         <asp:TableHeaderCell runat="server" ID="thcCustomerName" HorizontalAlign="Left" Style="text-align: left"/>
         <asp:TableHeaderCell Text="Address 1:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableHeaderCell runat="server" ID="tcAddress1" HorizontalAlign="Left" Style="text-align: left"/>
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell />
         <asp:TableHeaderCell HorizontalAlign="Right" ID="lblSelectActive" Text="Select As Active:"/>
         <asp:TableHeaderCell HorizontalAlign="Right">
             <asp:Button ID="btnSelectCustomer" runat="server" Text="Set Active" OnClientClick="return false;" />

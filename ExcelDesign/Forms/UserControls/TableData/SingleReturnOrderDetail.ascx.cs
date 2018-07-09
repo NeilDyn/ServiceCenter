@@ -304,10 +304,10 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
-                buttonRow.Cells.Add(printRMAInstructions);
                 buttonRow.Cells.Add(updateRMA);
                 buttonRow.Cells.Add(createExchangeCell);
                 buttonRow.Cells.Add(issueRefundCell);
+                buttonRow.Cells.Add(printRMAInstructions);
 
                 this.tblReturnDetailLines.Rows.Add(buttonRow);
             }           

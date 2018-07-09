@@ -370,10 +370,11 @@ namespace ExcelDesign.Forms.UserControls.TableData
                     break;
 
                 case TrackingTypeEnum.Invalid:
-                    textString = trackNo;
+                    textString = "<a href='https://www.packagemapping.com/track/auto/" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
                     break;
 
                 default:
+                    textString = "<a href='https://www.packagemapping.com/track/auto/" + trackNo + "' target = '_blank'>" + trackNo + "</a >";
                     break;
             }
 

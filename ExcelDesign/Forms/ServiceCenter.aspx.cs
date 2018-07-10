@@ -76,8 +76,6 @@ namespace ExcelDesign.Forms
                     activeUser = (User)Session["ActiveUser"];
                 }
 
-                Session.Clear();
-
                 Session["ActiveUser"] = activeUser;
                 RetrieveData();
             }
@@ -196,11 +194,6 @@ namespace ExcelDesign.Forms
             }
 
             return "1";
-        }
-
-        protected void BtnCreatePDF_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

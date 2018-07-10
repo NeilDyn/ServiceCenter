@@ -157,6 +157,15 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.CheckBox cbxPrintRMA;
         
         /// <summary>
+        /// lblCreateLable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell lblCreateLable;
+        
+        /// <summary>
         /// cbxCreateLable control.
         /// </summary>
         /// <remarks>

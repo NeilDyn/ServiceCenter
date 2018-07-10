@@ -110,7 +110,7 @@
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
-                <asp:TableCell Text="Create Return Label: " ForeColor="#0099FF" Font-Bold="true" Style="text-align:right; padding-right:30px"/>
+                <asp:TableCell ID="lblCreateLable" Text="Create Return Label: " ForeColor="#0099FF" Font-Bold="true" Style="text-align:right; padding-right:30px"/>
                 <asp:TableCell>
                     <asp:CheckBox ID="cbxCreateLable" runat="server" />
                 </asp:TableCell>

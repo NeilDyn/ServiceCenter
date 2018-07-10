@@ -58,6 +58,20 @@ namespace ExcelDesign.Forms.FunctionForms
                     noTitle.Text = "Order No:";
                     btnCreateRMA.Text = "Create RMA";
                 }
+
+                if(Session["ActiveUser"] != null)
+                {
+                    User activeUser = (User)Session["ActiveUser"];
+
+                    if(!activeUser.Admin && !activeUser.Developer)
+                    {
+                        if(!activeUser.CreateReturnLabel)
+                        {
+                            cbxCreateLable.Visible = false;
+                            lblCreateLable.Visible = false;
+                        }
+                    }
+                }
             }
 
             createdOrderNo = Convert.ToString(Request.QueryString["CreatedOrderNo"]);

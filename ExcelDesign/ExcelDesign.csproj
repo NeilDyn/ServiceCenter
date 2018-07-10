@@ -86,7 +86,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AjaxControl.asmx" />
     <Content Include="css\mainpage.css" />
     <Content Include="css\ReturnInstructions.css" />
     <Content Include="Default.aspx" />
@@ -94,6 +93,7 @@
     <Content Include="Forms\FunctionForms\CreatedRMA.aspx" />
     <Content Include="Forms\FunctionForms\CreateReturn.aspx" />
     <Content Include="Forms\FunctionForms\RMAPDFForm.aspx" />
+    <Content Include="Forms\LoginPage.aspx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetail.ascx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetailHeader.ascx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoHeader.ascx" />
@@ -123,10 +123,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AjaxControl.asmx.cs">
-      <DependentUpon>AjaxControl.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Class Objects\CreatedReturn\CreatedReturnHeader.cs" />
     <Compile Include="Class Objects\CreatedReturn\CreatedReturnLines.cs" />
     <Compile Include="Class Objects\Documents\RMAInstructionsPDF.cs" />
@@ -149,6 +145,7 @@
     <Compile Include="Class Objects\SendService.cs" />
     <Compile Include="Class Objects\ShipmentHeader.cs" />
     <Compile Include="Class Objects\ShipmentLine.cs" />
+    <Compile Include="Class Objects\User.cs" />
     <Compile Include="Class Objects\Warranty.cs" />
     <Compile Include="Class Objects\WebService.cs" />
     <Compile Include="Class Objects\Zendesk.cs" />
@@ -186,6 +183,13 @@
     </Compile>
     <Compile Include="Forms\FunctionForms\RMAPDFForm.aspx.designer.cs">
       <DependentUpon>RMAPDFForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoginPage.aspx.cs">
+      <DependentUpon>LoginPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\LoginPage.aspx.designer.cs">
+      <DependentUpon>LoginPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserControls\CustomerInfo\CustomerInfoDetail.ascx.cs">
       <DependentUpon>CustomerInfoDetail.ascx</DependentUpon>
@@ -394,6 +398,9 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\ServiceFunctions\ReturnOrder.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ServiceFunctions\UserSetup.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">

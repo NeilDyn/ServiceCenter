@@ -42,23 +42,23 @@
         <div>
             <asp:Table ID="tblHeaderDetails" runat="server" Width="80%" Height="100%">
                 <asp:TableHeaderRow>
-                    <asp:TableHeaderCell Text="RMA No:" Style="text-align: left" Font-Bold="true" HorizontalAlign="right" />
+                    <asp:TableHeaderCell Text="RMA No:" Style="text-align: left" Font-Bold="true" HorizontalAlign="right" ForeColor="#0099FF"/>
                     <asp:TableHeaderCell runat="server" ID="tcRmaNo" HorizontalAlign="Left" Style="text-align: left" />
-                    <asp:TableHeaderCell Text="Return Tracking No:" Style="text-align: left" HorizontalAlign="right" />
+                    <asp:TableHeaderCell Text="Return Tracking No:" Style="text-align: left" HorizontalAlign="right" ForeColor="#0099FF"/>
                     <asp:TableHeaderCell runat="server" ID="tcReturnTrackingNo" HorizontalAlign="Left" Style="text-align: left" />
                 </asp:TableHeaderRow>
                 <asp:TableHeaderRow>
-                    <asp:TableHeaderCell Text="External Document No:" Style="text-align: left" HorizontalAlign="right" />
+                    <asp:TableHeaderCell Text="External Document No:" Style="text-align: left" HorizontalAlign="right" ForeColor="#0099FF"/>
                     <asp:TableHeaderCell runat="server" ID="tcExternalDocNo" HorizontalAlign="Left" Style="text-align: left" />
-                    <asp:TableHeaderCell Text="Order Date:" Style="text-align: left" HorizontalAlign="right" />
+                    <asp:TableHeaderCell Text="Order Date:" Style="text-align: left" HorizontalAlign="right" ForeColor="#0099FF"/>
                     <asp:TableHeaderCell runat="server" ID="tcOrderDate" HorizontalAlign="Left" Style="text-align: left" />
                 </asp:TableHeaderRow>
                 <asp:TableHeaderRow>
-                    <asp:TableHeaderCell Text="Date Created:" Style="text-align: left" HorizontalAlign="right" />
+                    <asp:TableHeaderCell Text="Date Created:" Style="text-align: left" HorizontalAlign="right" ForeColor="#0099FF"/>
                     <asp:TableHeaderCell runat="server" ID="tcDateCreated" HorizontalAlign="Left" Style="text-align: left" />
                 </asp:TableHeaderRow>
                 <asp:TableHeaderRow>
-                    <asp:TableHeaderCell Text="Channel Name:" Style="text-align: left" HorizontalAlign="right" />
+                    <asp:TableHeaderCell Text="Channel Name:" Style="text-align: left" HorizontalAlign="right" ForeColor="#0099FF"/>
                     <asp:TableHeaderCell runat="server" ID="tcChannelName" HorizontalAlign="Left" Style="text-align: left" />
                 </asp:TableHeaderRow>
             </asp:Table>
@@ -73,6 +73,7 @@
                 <asp:TableHeaderCell Text="Line Amount" HorizontalAlign="Left" />
             </asp:TableHeaderRow>
         </asp:Table>
+        <br />
         <br />
         <asp:Button ID="BtnClose" runat="server" Text="Close" Style="float: right" OnClientClick="CloseWindow();" />
         <asp:Button ID="BtnCancelRMA" runat="server" Text="Cancel Return" Style="float: right" OnClick="BtnCancelRMA_Click" OnClientClick="return DeleteConfirmation();"/>

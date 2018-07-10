@@ -7,19 +7,14 @@ using System.Web.UI.WebControls;
 using ExcelDesign.ServiceFunctions;
 using System.Net;
 using ExcelDesign.Class_Objects.Enums;
+using System.Configuration;
 
 namespace ExcelDesign.Class_Objects
 {
     public class WebService
-    {
-        private readonly string baseURL = "http://jeg-svr2.jeg.local:7058/DynamicsNAV/WS/JEG_SONS,%20Inc/";
-        //private readonly string baseURL = "http://jeg-svr2:7047/production/WS/JEG_SONS,%20Inc/";
+    { 
         private readonly string functionsURL = "Codeunit/Functions";
         private static NetworkCredential credentials;
-
-        protected string username = "mswart";
-        protected string password = "MPSP~ssword";
-        protected string domain = "JEG";
 
         protected Functions functions = new Functions();
 
@@ -31,8 +26,8 @@ namespace ExcelDesign.Class_Objects
             }
             catch (Exception e)
             {
-                var page = HttpContext.Current.CurrentHandler as Page;
-                page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + e.Message + "');", true);
+                HttpContext.Current.Session["Error"] = e.Message;
+                HttpContext.Current.Response.Redirect("ErrorForm.aspx");
             }
         }
 
@@ -43,6 +38,22 @@ namespace ExcelDesign.Class_Objects
 
         private void InitializeConnection()
         {
+            string username = ConfigurationManager.AppSettings["webServiceUserName"].ToString();
+            string password = ConfigurationManager.AppSettings["webServicePassword"].ToString();
+            string domain = ConfigurationManager.AppSettings["webServiceDomain"].ToString();
+
+            string baseURL = string.Empty;
+            string mode = null; // Convert.ToString(HttpContext.Current.Session["ProductionMode"]);
+
+            if (mode != null)
+            {
+                baseURL = "http://jeg-svr2:7047/production/WS/JEG_SONS,%20Inc/";
+            }
+            else
+            {
+                baseURL = "http://jeg-svr2.jeg.local:7058/DynamicsNAV/WS/JEG_SONS,%20Inc/";
+            }
+
             credentials = new NetworkCredential(username, password, domain);
             functions.Url = baseURL + functionsURL;
             functions.Credentials = credentials;
@@ -81,6 +92,17 @@ namespace ExcelDesign.Class_Objects
         public string DeleteRMA(string rmaNo)
         {
             return functions.DeleteReturnOrder(rmaNo);
+        }
+
+        public User UserLogin(string userName, string password)
+        {
+            UserSetup us = new UserSetup();
+
+            functions.LogIn(userName, password, ref us);
+
+            User login = new User(us);
+
+            return login;
         }
     }
 }

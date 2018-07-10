@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/Functions" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50003" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50003" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="User">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="UserID" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CreateRMA" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CreateRetLabel" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Admin" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Developer" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="SessionID" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="UserSetup" mixed="true">
+        <sequence>
+          <element minOccurs="0" maxOccurs="unbounded" name="User" type="tns:User" />
+        </sequence>
+      </complexType>
+      <element name="UserSetup" type="tns:UserSetup" />
+    </schema>
     <schema xmlns:tns="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" elementFormDefault="qualified" targetNamespace="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" xmlns="http://www.w3.org/2001/XMLSchema">
       <complexType name="Warranty2" mixed="true">
         <sequence>
@@ -368,12 +386,29 @@
       <element name="ReturnOrder" type="tns:ReturnOrder" />
     </schema>
     <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="LogIn">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userID" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="password" type="string" />
+            <element xmlns:q1="urn:microsoft-dynamics-nav/xmlports/x50003" minOccurs="1" maxOccurs="1" name="webSvcUserSetup" type="q1:UserSetup" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="LogIn_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+            <element xmlns:q2="urn:microsoft-dynamics-nav/xmlports/x50003" minOccurs="1" maxOccurs="1" name="webSvcUserSetup" type="q2:UserSetup" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="SearchDetermineNoType">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
             <element minOccurs="1" maxOccurs="1" name="searchNo" type="string" />
-            <element xmlns:q1="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" minOccurs="1" maxOccurs="1" name="searchResults" type="q1:SearchResults" />
+            <element xmlns:q3="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" minOccurs="1" maxOccurs="1" name="searchResults" type="q3:SearchResults" />
             <element minOccurs="1" maxOccurs="1" name="_SearchOption" type="int" />
           </sequence>
         </complexType>
@@ -382,7 +417,7 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-            <element xmlns:q2="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" minOccurs="1" maxOccurs="1" name="searchResults" type="q2:SearchResults" />
+            <element xmlns:q4="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" minOccurs="1" maxOccurs="1" name="searchResults" type="q4:SearchResults" />
           </sequence>
         </complexType>
       </element>
@@ -418,7 +453,7 @@
             <element minOccurs="1" maxOccurs="1" name="createUPSReturnLabel" type="boolean" />
             <element minOccurs="1" maxOccurs="1" name="emailAddress" type="string" />
             <element minOccurs="1" maxOccurs="1" name="lineDetails" type="string" />
-            <element xmlns:q3="urn:microsoft-dynamics-nav/xmlports/x50002" minOccurs="1" maxOccurs="1" name="createdReturn" type="q3:ReturnOrder" />
+            <element xmlns:q5="urn:microsoft-dynamics-nav/xmlports/x50002" minOccurs="1" maxOccurs="1" name="createdReturn" type="q5:ReturnOrder" />
             <element minOccurs="1" maxOccurs="1" name="updateRMA" type="boolean" />
           </sequence>
         </complexType>
@@ -427,7 +462,7 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-            <element xmlns:q4="urn:microsoft-dynamics-nav/xmlports/x50002" minOccurs="1" maxOccurs="1" name="createdReturn" type="q4:ReturnOrder" />
+            <element xmlns:q6="urn:microsoft-dynamics-nav/xmlports/x50002" minOccurs="1" maxOccurs="1" name="createdReturn" type="q6:ReturnOrder" />
           </sequence>
         </complexType>
       </element>
@@ -473,6 +508,12 @@
       </element>
     </schema>
   </types>
+  <message name="LogIn">
+    <part name="parameters" element="tns:LogIn" />
+  </message>
+  <message name="LogIn_Result">
+    <part name="parameters" element="tns:LogIn_Result" />
+  </message>
   <message name="SearchDetermineNoType">
     <part name="parameters" element="tns:SearchDetermineNoType" />
   </message>
@@ -510,6 +551,10 @@
     <part name="parameters" element="tns:SetDebug_Result" />
   </message>
   <portType name="Functions_Port">
+    <operation name="LogIn">
+      <input name="LogIn" message="tns:LogIn" />
+      <output name="LogIn_Result" message="tns:LogIn_Result" />
+    </operation>
     <operation name="SearchDetermineNoType">
       <input name="SearchDetermineNoType" message="tns:SearchDetermineNoType" />
       <output name="SearchDetermineNoType_Result" message="tns:SearchDetermineNoType_Result" />
@@ -537,6 +582,15 @@
   </portType>
   <binding name="Functions_Binding" type="tns:Functions_Port">
     <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="LogIn">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:LogIn" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="LogIn">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="LogIn_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="SearchDetermineNoType">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:SearchDetermineNoType" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="SearchDetermineNoType">

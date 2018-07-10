@@ -79,13 +79,6 @@ namespace ExcelDesign.Forms.FunctionForms
                 TableCell price = new TableCell();
                 TableCell lineAmount = new TableCell();
 
-                TextBox qtyEdit = new TextBox
-                {
-                    ID = "qtyEdit" + lineCount.ToString(),
-                    Text = line.Quantity.ToString(),
-                    Width = new Unit("15%")
-                };
-
                 itemNo.ID = "itemNoR_" + lineCount.ToString();
                 qty.ID = "itemQuanityR_" + lineCount.ToString();
                 desc.ID = "descR_" + lineCount.ToString();
@@ -94,7 +87,7 @@ namespace ExcelDesign.Forms.FunctionForms
 
                 itemNo.Text = line.ItemNo;
                 desc.Text = line.Description;
-                qty.Controls.Add(qtyEdit);
+                qty.Text = line.Quantity.ToString();
                 price.Text = "$     " + line.Price.ToGBString();
                 lineAmount.Text = "$    " + line.LineAmount.ToGBString();
 

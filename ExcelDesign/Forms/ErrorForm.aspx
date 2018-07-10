@@ -8,15 +8,14 @@
 </head>
 <body>
     <form id="frmErrorPage" runat="server">
-       <h2>
-           An Error Has Occurred
-       </h2>
+        <h2>An Error Has Occurred
+        </h2>
 
-        <p runat="server" id="errorMessage"/>
+        <p runat="server" id="errorMessage" />
 
         <ul>
             <li>
-                <asp:HyperLink ID="linkHome" runat="server" NavigateUrl="~/Forms/ServiceCenter.aspx" Text="Return to homepage"/>
+                <asp:HyperLink ID="linkHome" runat="server" NavigateUrl="~/Forms/ServiceCenter.aspx" Text="Return to homepage" />
             </li>
         </ul>
     </form>

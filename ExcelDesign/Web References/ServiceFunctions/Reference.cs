@@ -29,6 +29,8 @@ namespace ExcelDesign.ServiceFunctions {
     [System.Web.Services.WebServiceBindingAttribute(Name="Functions_Binding", Namespace="urn:microsoft-dynamics-schemas/codeunit/Functions")]
     public partial class Functions : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
+        private System.Threading.SendOrPostCallback LogInOperationCompleted;
+        
         private System.Threading.SendOrPostCallback SearchDetermineNoTypeOperationCompleted;
         
         private System.Threading.SendOrPostCallback InitiateUserActionOperationCompleted;
@@ -80,6 +82,9 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        public event LogInCompletedEventHandler LogInCompleted;
+        
+        /// <remarks/>
         public event SearchDetermineNoTypeCompletedEventHandler SearchDetermineNoTypeCompleted;
         
         /// <remarks/>
@@ -96,6 +101,41 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         public event SetDebugCompletedEventHandler SetDebugCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:LogIn", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="LogIn_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string LogIn(string userID, string password, ref UserSetup webSvcUserSetup) {
+            object[] results = this.Invoke("LogIn", new object[] {
+                        userID,
+                        password,
+                        webSvcUserSetup});
+            webSvcUserSetup = ((UserSetup)(results[1]));
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void LogInAsync(string userID, string password, UserSetup webSvcUserSetup) {
+            this.LogInAsync(userID, password, webSvcUserSetup, null);
+        }
+        
+        /// <remarks/>
+        public void LogInAsync(string userID, string password, UserSetup webSvcUserSetup, object userState) {
+            if ((this.LogInOperationCompleted == null)) {
+                this.LogInOperationCompleted = new System.Threading.SendOrPostCallback(this.OnLogInOperationCompleted);
+            }
+            this.InvokeAsync("LogIn", new object[] {
+                        userID,
+                        password,
+                        webSvcUserSetup}, this.LogInOperationCompleted, userState);
+        }
+        
+        private void OnLogInOperationCompleted(object arg) {
+            if ((this.LogInCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.LogInCompleted(this, new LogInCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:SearchDetermineNoType", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="SearchDetermineNoType_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -339,242 +379,21 @@ namespace ExcelDesign.ServiceFunctions {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
-    public partial class SearchResults {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50003")]
+    public partial class UserSetup {
         
-        private SalesHeader[] salesHeaderField;
-        
-        private SalesLine[] salesLineField;
-        
-        private SalesShipmentHeader[] salesShipmentHeaderField;
-        
-        private SalesShipmentLine[] salesShipmentLineField;
-        
-        private PostedPackage[] postedPackageField;
-        
-        private PostedPackageLine[] postedPackageLineField;
-        
-        private SalesInvoiceHeader[] salesInvoiceHeaderField;
-        
-        private SalesInvoiceLine[] salesInvoiceLineField;
-        
-        private ReturnReceiptHeader[] returnReceiptHeaderField;
-        
-        private ReturnReceiptLine[] returnReceiptLineField;
-        
-        private PostedReceive[] postedReceiveField;
-        
-        private PostedReceiveLine[] postedReceiveLineField;
-        
-        private SalesCreditMemo[] salesCreditMemoField;
-        
-        private SalesCreditMemoLines[] salesCreditMemoLinesField;
-        
-        private SOImportBuffer[] sOImportBufferField;
-        
-        private ExtendedSalesHeader[] extendedSalesHeaderField;
-        
-        private ReturnReasonCode[] returnReasonCodeField;
-        
-        private DefectOptions[] defectOptionsField;
+        private User[] userField;
         
         private string[] textField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SalesHeader")]
-        public SalesHeader[] SalesHeader {
+        [System.Xml.Serialization.XmlElementAttribute("User")]
+        public User[] User {
             get {
-                return this.salesHeaderField;
+                return this.userField;
             }
             set {
-                this.salesHeaderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
-        public SalesLine[] SalesLine {
-            get {
-                return this.salesLineField;
-            }
-            set {
-                this.salesLineField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SalesShipmentHeader")]
-        public SalesShipmentHeader[] SalesShipmentHeader {
-            get {
-                return this.salesShipmentHeaderField;
-            }
-            set {
-                this.salesShipmentHeaderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SalesShipmentLine")]
-        public SalesShipmentLine[] SalesShipmentLine {
-            get {
-                return this.salesShipmentLineField;
-            }
-            set {
-                this.salesShipmentLineField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("PostedPackage")]
-        public PostedPackage[] PostedPackage {
-            get {
-                return this.postedPackageField;
-            }
-            set {
-                this.postedPackageField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("PostedPackageLine")]
-        public PostedPackageLine[] PostedPackageLine {
-            get {
-                return this.postedPackageLineField;
-            }
-            set {
-                this.postedPackageLineField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SalesInvoiceHeader")]
-        public SalesInvoiceHeader[] SalesInvoiceHeader {
-            get {
-                return this.salesInvoiceHeaderField;
-            }
-            set {
-                this.salesInvoiceHeaderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SalesInvoiceLine")]
-        public SalesInvoiceLine[] SalesInvoiceLine {
-            get {
-                return this.salesInvoiceLineField;
-            }
-            set {
-                this.salesInvoiceLineField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ReturnReceiptHeader")]
-        public ReturnReceiptHeader[] ReturnReceiptHeader {
-            get {
-                return this.returnReceiptHeaderField;
-            }
-            set {
-                this.returnReceiptHeaderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ReturnReceiptLine")]
-        public ReturnReceiptLine[] ReturnReceiptLine {
-            get {
-                return this.returnReceiptLineField;
-            }
-            set {
-                this.returnReceiptLineField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("PostedReceive")]
-        public PostedReceive[] PostedReceive {
-            get {
-                return this.postedReceiveField;
-            }
-            set {
-                this.postedReceiveField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("PostedReceiveLine")]
-        public PostedReceiveLine[] PostedReceiveLine {
-            get {
-                return this.postedReceiveLineField;
-            }
-            set {
-                this.postedReceiveLineField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SalesCreditMemo")]
-        public SalesCreditMemo[] SalesCreditMemo {
-            get {
-                return this.salesCreditMemoField;
-            }
-            set {
-                this.salesCreditMemoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SalesCreditMemoLines")]
-        public SalesCreditMemoLines[] SalesCreditMemoLines {
-            get {
-                return this.salesCreditMemoLinesField;
-            }
-            set {
-                this.salesCreditMemoLinesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SOImportBuffer")]
-        public SOImportBuffer[] SOImportBuffer {
-            get {
-                return this.sOImportBufferField;
-            }
-            set {
-                this.sOImportBufferField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ExtendedSalesHeader")]
-        public ExtendedSalesHeader[] ExtendedSalesHeader {
-            get {
-                return this.extendedSalesHeaderField;
-            }
-            set {
-                this.extendedSalesHeaderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ReturnReasonCode")]
-        public ReturnReasonCode[] ReturnReasonCode {
-            get {
-                return this.returnReasonCodeField;
-            }
-            set {
-                this.returnReasonCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("DefectOptions")]
-        public DefectOptions[] DefectOptions {
-            get {
-                return this.defectOptionsField;
-            }
-            set {
-                this.defectOptionsField = value;
+                this.userField = value;
             }
         }
         
@@ -595,248 +414,78 @@ namespace ExcelDesign.ServiceFunctions {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
-    public partial class SalesHeader {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50003")]
+    public partial class User {
         
-        private string docTypeField;
+        private string userIDField;
         
-        private string noField;
+        private string createRMAField;
         
-        private string extDocNoField;
+        private string createRetLabelField;
         
-        private string docDateField;
+        private string adminField;
         
-        private string returnTrackingNoField;
+        private string developerField;
         
-        private string sellToCustomerNameField;
-        
-        private string shipToNameField;
-        
-        private string shipToAddressField;
-        
-        private string shipToAddress2Field;
-        
-        private string shipToContactField;
-        
-        private string shipToCityField;
-        
-        private string shipToZipField;
-        
-        private string shipToStateField;
-        
-        private string shipToCountryField;
-        
-        private Warranty2[] warranty2Field;
+        private string sessionIDField;
         
         /// <remarks/>
-        public string DocType {
+        public string UserID {
             get {
-                return this.docTypeField;
+                return this.userIDField;
             }
             set {
-                this.docTypeField = value;
+                this.userIDField = value;
             }
         }
         
         /// <remarks/>
-        public string No {
+        public string CreateRMA {
             get {
-                return this.noField;
+                return this.createRMAField;
             }
             set {
-                this.noField = value;
+                this.createRMAField = value;
             }
         }
         
         /// <remarks/>
-        public string ExtDocNo {
+        public string CreateRetLabel {
             get {
-                return this.extDocNoField;
+                return this.createRetLabelField;
             }
             set {
-                this.extDocNoField = value;
+                this.createRetLabelField = value;
             }
         }
         
         /// <remarks/>
-        public string DocDate {
+        public string Admin {
             get {
-                return this.docDateField;
+                return this.adminField;
             }
             set {
-                this.docDateField = value;
+                this.adminField = value;
             }
         }
         
         /// <remarks/>
-        public string ReturnTrackingNo {
+        public string Developer {
             get {
-                return this.returnTrackingNoField;
+                return this.developerField;
             }
             set {
-                this.returnTrackingNoField = value;
+                this.developerField = value;
             }
         }
         
         /// <remarks/>
-        public string SellToCustomerName {
+        public string SessionID {
             get {
-                return this.sellToCustomerNameField;
+                return this.sessionIDField;
             }
             set {
-                this.sellToCustomerNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShipToName {
-            get {
-                return this.shipToNameField;
-            }
-            set {
-                this.shipToNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShipToAddress {
-            get {
-                return this.shipToAddressField;
-            }
-            set {
-                this.shipToAddressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShipToAddress2 {
-            get {
-                return this.shipToAddress2Field;
-            }
-            set {
-                this.shipToAddress2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShipToContact {
-            get {
-                return this.shipToContactField;
-            }
-            set {
-                this.shipToContactField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShipToCity {
-            get {
-                return this.shipToCityField;
-            }
-            set {
-                this.shipToCityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShipToZip {
-            get {
-                return this.shipToZipField;
-            }
-            set {
-                this.shipToZipField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShipToState {
-            get {
-                return this.shipToStateField;
-            }
-            set {
-                this.shipToStateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShipToCountry {
-            get {
-                return this.shipToCountryField;
-            }
-            set {
-                this.shipToCountryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Warranty2")]
-        public Warranty2[] Warranty2 {
-            get {
-                return this.warranty2Field;
-            }
-            set {
-                this.warranty2Field = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
-    public partial class Warranty2 {
-        
-        private string[] status2Field;
-        
-        private string[] policy2Field;
-        
-        private string[] daysRemaining2Field;
-        
-        private string[] textField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Status2")]
-        public string[] Status2 {
-            get {
-                return this.status2Field;
-            }
-            set {
-                this.status2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Policy2")]
-        public string[] Policy2 {
-            get {
-                return this.policy2Field;
-            }
-            set {
-                this.policy2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("DaysRemaining2")]
-        public string[] DaysRemaining2 {
-            get {
-                return this.daysRemaining2Field;
-            }
-            set {
-                this.daysRemaining2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
-            get {
-                return this.textField;
-            }
-            set {
-                this.textField = value;
+                this.sessionIDField = value;
             }
         }
     }
@@ -3794,6 +3443,547 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.dateCreatedField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
+    public partial class Warranty2 {
+        
+        private string[] status2Field;
+        
+        private string[] policy2Field;
+        
+        private string[] daysRemaining2Field;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Status2")]
+        public string[] Status2 {
+            get {
+                return this.status2Field;
+            }
+            set {
+                this.status2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Policy2")]
+        public string[] Policy2 {
+            get {
+                return this.policy2Field;
+            }
+            set {
+                this.policy2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("DaysRemaining2")]
+        public string[] DaysRemaining2 {
+            get {
+                return this.daysRemaining2Field;
+            }
+            set {
+                this.daysRemaining2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
+    public partial class SalesHeader {
+        
+        private string docTypeField;
+        
+        private string noField;
+        
+        private string extDocNoField;
+        
+        private string docDateField;
+        
+        private string returnTrackingNoField;
+        
+        private string sellToCustomerNameField;
+        
+        private string shipToNameField;
+        
+        private string shipToAddressField;
+        
+        private string shipToAddress2Field;
+        
+        private string shipToContactField;
+        
+        private string shipToCityField;
+        
+        private string shipToZipField;
+        
+        private string shipToStateField;
+        
+        private string shipToCountryField;
+        
+        private Warranty2[] warranty2Field;
+        
+        /// <remarks/>
+        public string DocType {
+            get {
+                return this.docTypeField;
+            }
+            set {
+                this.docTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string No {
+            get {
+                return this.noField;
+            }
+            set {
+                this.noField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ExtDocNo {
+            get {
+                return this.extDocNoField;
+            }
+            set {
+                this.extDocNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DocDate {
+            get {
+                return this.docDateField;
+            }
+            set {
+                this.docDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ReturnTrackingNo {
+            get {
+                return this.returnTrackingNoField;
+            }
+            set {
+                this.returnTrackingNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SellToCustomerName {
+            get {
+                return this.sellToCustomerNameField;
+            }
+            set {
+                this.sellToCustomerNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToName {
+            get {
+                return this.shipToNameField;
+            }
+            set {
+                this.shipToNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToAddress {
+            get {
+                return this.shipToAddressField;
+            }
+            set {
+                this.shipToAddressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToAddress2 {
+            get {
+                return this.shipToAddress2Field;
+            }
+            set {
+                this.shipToAddress2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToContact {
+            get {
+                return this.shipToContactField;
+            }
+            set {
+                this.shipToContactField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToCity {
+            get {
+                return this.shipToCityField;
+            }
+            set {
+                this.shipToCityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToZip {
+            get {
+                return this.shipToZipField;
+            }
+            set {
+                this.shipToZipField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToState {
+            get {
+                return this.shipToStateField;
+            }
+            set {
+                this.shipToStateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToCountry {
+            get {
+                return this.shipToCountryField;
+            }
+            set {
+                this.shipToCountryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Warranty2")]
+        public Warranty2[] Warranty2 {
+            get {
+                return this.warranty2Field;
+            }
+            set {
+                this.warranty2Field = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
+    public partial class SearchResults {
+        
+        private SalesHeader[] salesHeaderField;
+        
+        private SalesLine[] salesLineField;
+        
+        private SalesShipmentHeader[] salesShipmentHeaderField;
+        
+        private SalesShipmentLine[] salesShipmentLineField;
+        
+        private PostedPackage[] postedPackageField;
+        
+        private PostedPackageLine[] postedPackageLineField;
+        
+        private SalesInvoiceHeader[] salesInvoiceHeaderField;
+        
+        private SalesInvoiceLine[] salesInvoiceLineField;
+        
+        private ReturnReceiptHeader[] returnReceiptHeaderField;
+        
+        private ReturnReceiptLine[] returnReceiptLineField;
+        
+        private PostedReceive[] postedReceiveField;
+        
+        private PostedReceiveLine[] postedReceiveLineField;
+        
+        private SalesCreditMemo[] salesCreditMemoField;
+        
+        private SalesCreditMemoLines[] salesCreditMemoLinesField;
+        
+        private SOImportBuffer[] sOImportBufferField;
+        
+        private ExtendedSalesHeader[] extendedSalesHeaderField;
+        
+        private ReturnReasonCode[] returnReasonCodeField;
+        
+        private DefectOptions[] defectOptionsField;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SalesHeader")]
+        public SalesHeader[] SalesHeader {
+            get {
+                return this.salesHeaderField;
+            }
+            set {
+                this.salesHeaderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
+        public SalesLine[] SalesLine {
+            get {
+                return this.salesLineField;
+            }
+            set {
+                this.salesLineField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SalesShipmentHeader")]
+        public SalesShipmentHeader[] SalesShipmentHeader {
+            get {
+                return this.salesShipmentHeaderField;
+            }
+            set {
+                this.salesShipmentHeaderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SalesShipmentLine")]
+        public SalesShipmentLine[] SalesShipmentLine {
+            get {
+                return this.salesShipmentLineField;
+            }
+            set {
+                this.salesShipmentLineField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("PostedPackage")]
+        public PostedPackage[] PostedPackage {
+            get {
+                return this.postedPackageField;
+            }
+            set {
+                this.postedPackageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("PostedPackageLine")]
+        public PostedPackageLine[] PostedPackageLine {
+            get {
+                return this.postedPackageLineField;
+            }
+            set {
+                this.postedPackageLineField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SalesInvoiceHeader")]
+        public SalesInvoiceHeader[] SalesInvoiceHeader {
+            get {
+                return this.salesInvoiceHeaderField;
+            }
+            set {
+                this.salesInvoiceHeaderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SalesInvoiceLine")]
+        public SalesInvoiceLine[] SalesInvoiceLine {
+            get {
+                return this.salesInvoiceLineField;
+            }
+            set {
+                this.salesInvoiceLineField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ReturnReceiptHeader")]
+        public ReturnReceiptHeader[] ReturnReceiptHeader {
+            get {
+                return this.returnReceiptHeaderField;
+            }
+            set {
+                this.returnReceiptHeaderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ReturnReceiptLine")]
+        public ReturnReceiptLine[] ReturnReceiptLine {
+            get {
+                return this.returnReceiptLineField;
+            }
+            set {
+                this.returnReceiptLineField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("PostedReceive")]
+        public PostedReceive[] PostedReceive {
+            get {
+                return this.postedReceiveField;
+            }
+            set {
+                this.postedReceiveField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("PostedReceiveLine")]
+        public PostedReceiveLine[] PostedReceiveLine {
+            get {
+                return this.postedReceiveLineField;
+            }
+            set {
+                this.postedReceiveLineField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SalesCreditMemo")]
+        public SalesCreditMemo[] SalesCreditMemo {
+            get {
+                return this.salesCreditMemoField;
+            }
+            set {
+                this.salesCreditMemoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SalesCreditMemoLines")]
+        public SalesCreditMemoLines[] SalesCreditMemoLines {
+            get {
+                return this.salesCreditMemoLinesField;
+            }
+            set {
+                this.salesCreditMemoLinesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SOImportBuffer")]
+        public SOImportBuffer[] SOImportBuffer {
+            get {
+                return this.sOImportBufferField;
+            }
+            set {
+                this.sOImportBufferField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ExtendedSalesHeader")]
+        public ExtendedSalesHeader[] ExtendedSalesHeader {
+            get {
+                return this.extendedSalesHeaderField;
+            }
+            set {
+                this.extendedSalesHeaderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ReturnReasonCode")]
+        public ReturnReasonCode[] ReturnReasonCode {
+            get {
+                return this.returnReasonCodeField;
+            }
+            set {
+                this.returnReasonCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("DefectOptions")]
+        public DefectOptions[] DefectOptions {
+            get {
+                return this.defectOptionsField;
+            }
+            set {
+                this.defectOptionsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void LogInCompletedEventHandler(object sender, LogInCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class LogInCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal LogInCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public UserSetup webSvcUserSetup {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((UserSetup)(this.results[1]));
             }
         }
     }

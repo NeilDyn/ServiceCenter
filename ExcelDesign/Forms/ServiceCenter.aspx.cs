@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.Security;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -32,7 +33,6 @@ namespace ExcelDesign.Forms
         protected static Control customerInfoTable;
 
         protected List<Customer> customers = new List<Customer>();
-        protected AjaxControl ajaxService = new AjaxControl();
 
         protected SendService nonStaticService = new SendService();
         protected static SendService StaticService = new SendService();
@@ -40,6 +40,11 @@ namespace ExcelDesign.Forms
         protected void Page_Load(object sender, EventArgs e)
         {
             ClientScript.GetPostBackEventReference(this, string.Empty);
+
+            if (!this.Page.User.Identity.IsAuthenticated || Session["ActiveUser"] == null)
+            {
+                FormsAuthentication.RedirectToLoginPage();
+            }
 
             if (IsPostBack)
             {
@@ -62,8 +67,25 @@ namespace ExcelDesign.Forms
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            Session.Clear();
-            RetrieveData();
+            if (Session["SessionID"] != null)
+            {
+                User activeUser = new User();
+
+                if (Session["ActiveUser"] != null)
+                {
+                    activeUser = (User)Session["ActiveUser"];
+                }
+
+                Session.Clear();
+
+                Session["ActiveUser"] = activeUser;
+                RetrieveData();
+            }
+            else
+            {
+                Session.Clear();
+                FormsAuthentication.RedirectToLoginPage();
+            }
         }
 
         protected void RetrieveData()
@@ -79,7 +101,7 @@ namespace ExcelDesign.Forms
                 searchOption = searchOption.Replace("(ExludesShiptoFilters)", "");
                 Enum.TryParse(searchOption, out so);
 
-                switch(so)
+                switch (so)
                 {
                     case SearchOptions.Default:
                         searchSelection = 0;
@@ -178,7 +200,7 @@ namespace ExcelDesign.Forms
 
         protected void BtnCreatePDF_Click(object sender, EventArgs e)
         {
-                     
+
         }
     }
 }

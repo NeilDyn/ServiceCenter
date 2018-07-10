@@ -17,6 +17,11 @@ namespace ExcelDesign.Class_Objects
             webService = new WebService();
         }
 
+        public User LoginUser(string userID, string password)
+        {
+            return webService.UserLogin(userID, password);
+        }
+
         public void OpenService(string searchNo, int searchOption)
         {
             currResults = webService.FindOrder(searchNo, searchOption);

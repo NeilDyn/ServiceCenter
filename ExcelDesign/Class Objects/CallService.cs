@@ -1255,9 +1255,16 @@ namespace ExcelDesign.Class_Objects
                                         receiptHeader = ReturnReceiptHeader(rmaNo);
                                         channelName = currResults.ReturnReceiptHeader[so].SellToCustomerName;
 
-                                        foreach (ReceiptHeader rh in receiptHeader)
+                                        if(receiptHeader.Count == 0)
                                         {
-                                            postedReceive.AddRange(ReturnPostedReceive(rmaNo, rh.No));
+                                            receiptHeader.AddRange(ReturnShipmentReceiptHeader(sh.SalesOrderNo, externalDocumentNo, rmaNo));
+                                        }
+                                        else
+                                        {
+                                            foreach (ReceiptHeader rh in receiptHeader)
+                                            {
+                                                postedReceive.AddRange(ReturnPostedReceive(rmaNo, rh.No));
+                                            }
                                         }
 
                                         orderDate = currResults.ReturnReceiptHeader[so].OrderDate;

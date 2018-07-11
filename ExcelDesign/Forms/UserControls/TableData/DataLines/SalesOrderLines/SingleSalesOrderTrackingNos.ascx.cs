@@ -63,11 +63,15 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
                 shipMethod += " " + postedPack.ShippingAgentService;
 
                 packDate.Text = postedPack.PackingDate;
+                packDate.ToolTip = postedPack.PackingDate;
+
                 carrier.Text = shipMethod;
+                carrier.ToolTip = shipMethod;
 
                 string trackNo = postedPack.TrackingNo;
                 Enum.TryParse(postedPack.ShippingAgent, out trackType);
                 trackingNo.Text = SetTrackingNo(trackType, trackNo);
+                trackingNo.ToolTip = trackNo;
 
                 tr.Cells.Add(blankCell);
                 tr.Cells.Add(packDate);

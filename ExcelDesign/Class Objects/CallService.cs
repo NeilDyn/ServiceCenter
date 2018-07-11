@@ -222,7 +222,7 @@ namespace ExcelDesign.Class_Objects
                         sellToCustomerNo = currResults.SalesShipmentHeader[sh].SellToCustomerNo;
                         returnLine = GetShipmentReturnLines(no);
 
-                        if(currResults.ExtendedSalesHeader != null)
+                        if (currResults.ExtendedSalesHeader != null)
                         {
                             for (int esh = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
                             {
@@ -363,7 +363,7 @@ namespace ExcelDesign.Class_Objects
 
                             receiptLine.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount));
                             insertedItems.Add(itemNo);
-                        }                    
+                        }
 
                         itemNo = string.Empty;
                         description = string.Empty;
@@ -416,7 +416,7 @@ namespace ExcelDesign.Class_Objects
             return receiptHead;
         }
 
-        public List<ReturnHeader> GetReturnOrders(string custName, string shipAddress)
+        public List<ReturnHeader> GetReturnOrders(string custName, string shipAddress, ref List<string> readRMA)
         {
             List<ReturnHeader> returnHead = new List<ReturnHeader>();
 
@@ -430,6 +430,7 @@ namespace ExcelDesign.Class_Objects
             string rmaNo = string.Empty;
             string externalDocumentNo = string.Empty;
             string email = string.Empty;
+            bool returnLabelCreated = false;
 
             List<string> insertedReturnNumbners = new List<string>();
 
@@ -446,52 +447,57 @@ namespace ExcelDesign.Class_Objects
                         {
                             rmaNo = currResults.SOImportBuffer[so].SalesOrderNo;
 
-                            if (!insertedReturnNumbners.Any(order => order.Equals(rmaNo)))
+                            if (!readRMA.Any(rma => rma.Equals(rmaNo)))
                             {
-                                returnStatus = currResults.SOImportBuffer[so].OrderStatus;
-                                channelName = currResults.SOImportBuffer[so].ChannelName[0];
-                                receiptHeader = ReturnReceiptHeader(rmaNo);
-
-                                foreach (ReceiptHeader rh in receiptHeader)
+                                if (!insertedReturnNumbners.Any(order => order.Equals(rmaNo)))
                                 {
-                                    postedReceive.AddRange(ReturnPostedReceive(rmaNo, rh.No));
-                                }
+                                    returnStatus = currResults.SOImportBuffer[so].OrderStatus;
+                                    channelName = currResults.SOImportBuffer[so].ChannelName[0];
+                                    receiptHeader = ReturnReceiptHeader(rmaNo);
 
-                                orderDate = currResults.SOImportBuffer[so].OrderDate;
-                                externalDocumentNo = currResults.SOImportBuffer[so].ExternalDocumentNo;                             
-
-                                for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
-                                {
-                                    if (currResults.SalesLine[sl].DocNo == rmaNo)
+                                    foreach (ReceiptHeader rh in receiptHeader)
                                     {
-                                        dateCreated = currResults.SalesLine[sl].DateCreated;
+                                        postedReceive.AddRange(ReturnPostedReceive(rmaNo, rh.No));
                                     }
-                                }
 
-                                if (currResults.ExtendedSalesHeader != null)
-                                {
-                                    for (int esh = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
+                                    orderDate = currResults.SOImportBuffer[so].OrderDate;
+                                    externalDocumentNo = currResults.SOImportBuffer[so].ExternalDocumentNo;
+
+                                    for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
                                     {
-                                        if (currResults.ExtendedSalesHeader[esh].RMANo == rmaNo)
+                                        if (currResults.SalesLine[sl].DocNo == rmaNo)
                                         {
-                                            email = currResults.ExtendedSalesHeader[esh].Email;
+                                            dateCreated = currResults.SalesLine[sl].DateCreated;
                                         }
                                     }
+
+                                    if (currResults.ExtendedSalesHeader != null)
+                                    {
+                                        for (int esh = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
+                                        {
+                                            if (currResults.ExtendedSalesHeader[esh].RMANo == rmaNo)
+                                            {
+                                                email = currResults.ExtendedSalesHeader[esh].Email;
+                                            }
+                                        }
+                                    }
+
+                                    returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate, rmaNo, externalDocumentNo, email, false));
+                                    insertedReturnNumbners.Add(rmaNo);
+                                    readRMA.Add(rmaNo);
+
+                                    returnStatus = string.Empty;
+                                    dateCreated = string.Empty;
+                                    channelName = string.Empty;
+                                    receiptHeader = new List<ReceiptHeader>();
+                                    postedReceive = new List<PostedReceive>();
+                                    returnTrackingNo = string.Empty;
+                                    orderDate = string.Empty;
+                                    rmaNo = string.Empty;
+                                    externalDocumentNo = string.Empty;
+                                    email = string.Empty;
+                                    returnLabelCreated = false;
                                 }
-
-                                returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate, rmaNo, externalDocumentNo, email));
-                                insertedReturnNumbners.Add(rmaNo);
-
-                                returnStatus = string.Empty;
-                                dateCreated = string.Empty;
-                                channelName = string.Empty;
-                                receiptHeader = new List<ReceiptHeader>();
-                                postedReceive = new List<PostedReceive>();
-                                returnTrackingNo = string.Empty;
-                                orderDate = string.Empty;
-                                rmaNo = string.Empty;
-                                externalDocumentNo = string.Empty;
-                                email = string.Empty;
                             }
                         }
                     }
@@ -509,73 +515,82 @@ namespace ExcelDesign.Class_Objects
                         if (currResults.SalesHeader[so].ShipToName == custName && currResults.SalesHeader[so].ShipToAddress == shipAddress)
                         {
                             rmaNo = currResults.SalesHeader[so].No;
-                            receiptHeader = ReturnReceiptHeader(rmaNo);
-                            channelName = currResults.SalesHeader[so].SellToCustomerName;
 
-                            foreach (ReceiptHeader rh in receiptHeader)
+                            if (!readRMA.Any(rma => rma.Equals(rmaNo)))
                             {
-                                postedReceive.AddRange(ReturnPostedReceive(rmaNo, rh.No));
-                            }
-
-                            returnTrackingNo = currResults.SalesHeader[so].ReturnTrackingNo;
-                            orderDate = currResults.SalesHeader[so].DocDate;
-                            externalDocumentNo = currResults.SalesHeader[so].ExtDocNo;
-                            //email = currResults.SalesHeader[so].
-
-                            for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
-                            {
-                                if ((currResults.SalesLine[sl].DocNo == rmaNo) && (currResults.SalesLine[sl].Type == "Item"))
+                                if (!insertedReturnNumbners.Any(order => order.Equals(rmaNo)))
                                 {
-                                    totalCounter++;
-                                    dateCreated = currResults.SalesLine[sl].DateCreated;
-                                    int.TryParse(currResults.SalesLine[sl].QtyToReceive, out int qtyToRec);
-                                    if (qtyToRec > 0)
+                                    receiptHeader = ReturnReceiptHeader(rmaNo);
+                                    channelName = currResults.SalesHeader[so].SellToCustomerName;
+                                    returnLabelCreated = currResults.SalesHeader[so].UPSRetLabelCreated.ToUpper() == "YES" ? true : false;
+
+                                    foreach (ReceiptHeader rh in receiptHeader)
                                     {
-                                        statusCounter++;
+                                        postedReceive.AddRange(ReturnPostedReceive(rmaNo, rh.No));
                                     }
+
+                                    returnTrackingNo = currResults.SalesHeader[so].ReturnTrackingNo;
+                                    orderDate = currResults.SalesHeader[so].DocDate;
+                                    externalDocumentNo = currResults.SalesHeader[so].ExtDocNo;
+
+                                    for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
+                                    {
+                                        if ((currResults.SalesLine[sl].DocNo == rmaNo) && (currResults.SalesLine[sl].Type == "Item"))
+                                        {
+                                            totalCounter++;
+                                            dateCreated = currResults.SalesLine[sl].DateCreated;
+                                            int.TryParse(currResults.SalesLine[sl].QtyToReceive, out int qtyToRec);
+                                            if (qtyToRec > 0)
+                                            {
+                                                statusCounter++;
+                                            }
+                                        }
+                                    }
+
+                                    if (statusCounter == totalCounter)
+                                    {
+                                        returnStatus = "Open";
+                                    }
+                                    else if (statusCounter == 0)
+                                    {
+                                        returnStatus = "Released";
+                                    }
+                                    else
+                                    {
+                                        returnStatus = "Partial Receipt";
+                                    }
+
+                                    if (currResults.ExtendedSalesHeader != null)
+                                    {
+                                        for (int esh = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
+                                        {
+                                            if (currResults.ExtendedSalesHeader[esh].RMANo == rmaNo)
+                                            {
+                                                email = currResults.ExtendedSalesHeader[esh].Email;
+                                            }
+                                        }
+                                    }
+
+                                    returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate, rmaNo, externalDocumentNo, email, returnLabelCreated));
+                                    insertedReturnNumbners.Add(rmaNo);
+                                    readRMA.Add(rmaNo);
+
+                                    returnStatus = string.Empty;
+                                    dateCreated = string.Empty;
+                                    channelName = string.Empty;
+                                    receiptHeader = new List<ReceiptHeader>();
+                                    postedReceive = new List<PostedReceive>();
+                                    returnTrackingNo = string.Empty;
+                                    orderDate = string.Empty;
+                                    rmaNo = string.Empty;
+                                    externalDocumentNo = string.Empty;
+                                    email = string.Empty;
+                                    returnLabelCreated = false;
+
+                                    totalCounter = 0;
+                                    statusCounter = 0;
                                 }
                             }
-
-                            if (statusCounter == totalCounter)
-                            {
-                                returnStatus = "Open";
-                            }
-                            else if (statusCounter == 0)
-                            {
-                                returnStatus = "Released";
-                            }
-                            else
-                            {
-                                returnStatus = "Partial Receipt";
-                            }
-
-                            if (currResults.ExtendedSalesHeader != null)
-                            {
-                                for (int esh = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
-                                {
-                                    if (currResults.ExtendedSalesHeader[esh].RMANo == rmaNo)
-                                    {
-                                        email = currResults.ExtendedSalesHeader[esh].Email;
-                                    }
-                                }
-                            }
-
-                            returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate, rmaNo, externalDocumentNo, email));
-                            insertedReturnNumbners.Add(rmaNo);
-
-                            returnStatus = string.Empty;
-                            dateCreated = string.Empty;
-                            channelName = string.Empty;
-                            receiptHeader = new List<ReceiptHeader>();
-                            postedReceive = new List<PostedReceive>();
-                            returnTrackingNo = string.Empty;
-                            orderDate = string.Empty;
-                            rmaNo = string.Empty;
-                            externalDocumentNo = string.Empty;
-                            email = string.Empty;
-
-                            totalCounter = 0;
-                            statusCounter = 0;
                         }
                     }
                 }
@@ -590,47 +605,55 @@ namespace ExcelDesign.Class_Objects
                     if (currResults.ReturnReceiptHeader[so].ShipToName == custName && currResults.ReturnReceiptHeader[so].ShipToAddress == shipAddress)
                     {
                         rmaNo = currResults.ReturnReceiptHeader[so].ReturnOrderNo;
-                        dateCreated = currResults.ReturnReceiptHeader[so].ReceiveDate;
-                        receiptHeader = ReturnReceiptHeader(rmaNo);
-                        channelName = currResults.ReturnReceiptHeader[so].SellToCustomerName;
 
-                        foreach (ReceiptHeader rh in receiptHeader)
+                        if (!readRMA.Any(rma => rma.Equals(rmaNo)))
                         {
-                            postedReceive.AddRange(ReturnPostedReceive(rmaNo, rh.No));
-                        }
-
-                        orderDate = currResults.ReturnReceiptHeader[so].OrderDate;
-                        externalDocumentNo = currResults.ReturnReceiptHeader[so].ExtDocNo;
-
-                        returnStatus = "Released";
-
-                        if (currResults.ExtendedSalesHeader != null)
-                        {
-                            for (int esh = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
+                            if (!insertedReturnNumbners.Any(order => order.Equals(rmaNo)))
                             {
-                                if (currResults.ExtendedSalesHeader[esh].RMANo == rmaNo)
+                                dateCreated = currResults.ReturnReceiptHeader[so].ReceiveDate;
+                                receiptHeader = ReturnReceiptHeader(rmaNo);
+                                channelName = currResults.ReturnReceiptHeader[so].SellToCustomerName;
+
+                                foreach (ReceiptHeader rh in receiptHeader)
                                 {
-                                    email = currResults.ExtendedSalesHeader[esh].Email;
+                                    postedReceive.AddRange(ReturnPostedReceive(rmaNo, rh.No));
                                 }
+
+                                orderDate = currResults.ReturnReceiptHeader[so].OrderDate;
+                                externalDocumentNo = currResults.ReturnReceiptHeader[so].ExtDocNo;
+
+                                returnStatus = "Released";
+
+                                if (currResults.ExtendedSalesHeader != null)
+                                {
+                                    for (int esh = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
+                                    {
+                                        if (currResults.ExtendedSalesHeader[esh].RMANo == rmaNo)
+                                        {
+                                            email = currResults.ExtendedSalesHeader[esh].Email;
+                                        }
+                                    }
+                                }
+
+                                returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate, rmaNo, externalDocumentNo, email, false));
+                                insertedReturnNumbners.Add(rmaNo);
+                                readRMA.Add(rmaNo);
+
+                                returnStatus = string.Empty;
+                                dateCreated = string.Empty;
+                                channelName = string.Empty;
+                                receiptHeader = new List<ReceiptHeader>();
+                                postedReceive = new List<PostedReceive>();
+                                returnTrackingNo = string.Empty;
+                                orderDate = string.Empty;
+                                rmaNo = string.Empty;
+                                externalDocumentNo = string.Empty;
+                                email = string.Empty;
+
+                                totalCounter = 0;
+                                statusCounter = 0;
                             }
                         }
-
-                        returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate, rmaNo, externalDocumentNo, email));
-                        insertedReturnNumbners.Add(rmaNo);
-
-                        returnStatus = string.Empty;
-                        dateCreated = string.Empty;
-                        channelName = string.Empty;
-                        receiptHeader = new List<ReceiptHeader>();
-                        postedReceive = new List<PostedReceive>();
-                        returnTrackingNo = string.Empty;
-                        orderDate = string.Empty;
-                        rmaNo = string.Empty;
-                        externalDocumentNo = string.Empty;
-                        email = string.Empty;
-
-                        totalCounter = 0;
-                        statusCounter = 0;
                     }
                 }
             }
@@ -906,6 +929,8 @@ namespace ExcelDesign.Class_Objects
             List<string> customerNames = new List<string>();
             List<string> shipAddresses = new List<string>();
 
+            List<string> readRMA = new List<string>();
+
             if (currResults.SOImportBuffer != null)
             {
                 for (int c = 0; c < currResults.SOImportBuffer.Length; c++)
@@ -924,47 +949,8 @@ namespace ExcelDesign.Class_Objects
                         shipToCountry = currResults.SOImportBuffer[c].ShipToCountry;
                         salesHeaders = GetSalesOrders(shipToName, shipToAddress1);
 
-                        returnHeaders = GetReturnOrdersFromSalesHeader(salesHeaders);
-                        returnHeaders.AddRange(GetReturnOrdersFromShipmentHeader(salesHeaders));
-
-                        returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
-                        customerNames.Add(shipToName);
-                        shipAddresses.Add(shipToAddress1);
-
-                        shipToName = string.Empty;
-                        shipToAddress1 = string.Empty;
-                        shipToAddress2 = string.Empty;
-                        shipToContact = string.Empty;
-                        shipToCity = string.Empty;
-                        shipToZip = string.Empty;
-                        shipToState = string.Empty;
-                        shipToCountry = string.Empty;
-
-                        salesHeaders = new List<SalesHeader>();
-                        returnHeaders = new List<ReturnHeader>();
-                    }
-                }
-            }
-
-            if (currResults.SalesShipmentHeader != null)
-            {
-                for (int c = 0; c < currResults.SalesShipmentHeader.Length; c++)
-                {
-                    shipToName = currResults.SalesShipmentHeader[c].ShipToName;
-                    shipToAddress1 = currResults.SalesShipmentHeader[c].ShipToAddress;
-
-                    if (!customerNames.Any(order => order.Equals(shipToName)) ||
-                        !shipAddresses.Any(address => address.Equals(shipToAddress1)))
-                    {
-                        shipToAddress2 = currResults.SalesShipmentHeader[c].ShipToAddress2;
-                        shipToContact = currResults.SalesShipmentHeader[c].ShipToContact;
-                        shipToCity = currResults.SalesShipmentHeader[c].ShipToCity;
-                        shipToZip = currResults.SalesShipmentHeader[c].ShipToZip;
-                        shipToState = currResults.SalesShipmentHeader[c].ShipToState;
-                        shipToCountry = currResults.SalesShipmentHeader[c].ShipToCountry;
-                        salesHeaders = GetSalesOrders(shipToName, shipToAddress1);
-                        returnHeaders = GetReturnOrdersFromShipmentHeader(salesHeaders);
-                        returnHeaders.AddRange(GetReturnOrdersFromSalesHeader(salesHeaders));
+                        returnHeaders = GetReturnOrdersFromSalesHeader(salesHeaders, ref readRMA);
+                        returnHeaders.AddRange(GetReturnOrdersFromShipmentHeader(salesHeaders, ref readRMA));
 
                         returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
                         customerNames.Add(shipToName);
@@ -1004,8 +990,8 @@ namespace ExcelDesign.Class_Objects
                             shipToState = currResults.SalesHeader[c].ShipToState;
                             shipToCountry = currResults.SalesHeader[c].ShipToCountry;
                             salesHeaders = GetSalesOrders(shipToName, shipToAddress1);
-                            returnHeaders = GetReturnOrdersFromSalesHeader(salesHeaders);
-                            returnHeaders.AddRange(GetReturnOrders(shipToName, shipToAddress1));
+                            returnHeaders.AddRange(GetReturnOrders(shipToName, shipToAddress1, ref readRMA));
+                            returnHeaders = GetReturnOrdersFromSalesHeader(salesHeaders, ref readRMA);
 
                             returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
                             customerNames.Add(shipToName);
@@ -1026,6 +1012,45 @@ namespace ExcelDesign.Class_Objects
                     }
                 }
             }
+
+            if (currResults.SalesShipmentHeader != null)
+            {
+                for (int c = 0; c < currResults.SalesShipmentHeader.Length; c++)
+                {
+                    shipToName = currResults.SalesShipmentHeader[c].ShipToName;
+                    shipToAddress1 = currResults.SalesShipmentHeader[c].ShipToAddress;
+
+                    if (!customerNames.Any(order => order.Equals(shipToName)) ||
+                        !shipAddresses.Any(address => address.Equals(shipToAddress1)))
+                    {
+                        shipToAddress2 = currResults.SalesShipmentHeader[c].ShipToAddress2;
+                        shipToContact = currResults.SalesShipmentHeader[c].ShipToContact;
+                        shipToCity = currResults.SalesShipmentHeader[c].ShipToCity;
+                        shipToZip = currResults.SalesShipmentHeader[c].ShipToZip;
+                        shipToState = currResults.SalesShipmentHeader[c].ShipToState;
+                        shipToCountry = currResults.SalesShipmentHeader[c].ShipToCountry;
+                        salesHeaders = GetSalesOrders(shipToName, shipToAddress1);
+                        returnHeaders.AddRange(GetReturnOrdersFromSalesHeader(salesHeaders, ref readRMA));
+                        returnHeaders = GetReturnOrdersFromShipmentHeader(salesHeaders, ref readRMA);                      
+
+                        returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
+                        customerNames.Add(shipToName);
+                        shipAddresses.Add(shipToAddress1);
+
+                        shipToName = string.Empty;
+                        shipToAddress1 = string.Empty;
+                        shipToAddress2 = string.Empty;
+                        shipToContact = string.Empty;
+                        shipToCity = string.Empty;
+                        shipToZip = string.Empty;
+                        shipToState = string.Empty;
+                        shipToCountry = string.Empty;
+
+                        salesHeaders = new List<SalesHeader>();
+                        returnHeaders = new List<ReturnHeader>();
+                    }
+                }
+            }           
 
             if (currResults.ReturnReceiptHeader != null)
             {
@@ -1068,7 +1093,7 @@ namespace ExcelDesign.Class_Objects
             return returnCust;
         }
 
-        public List<ReturnHeader> GetReturnOrdersFromSalesHeader(List<SalesHeader> salesHeaders)
+        public List<ReturnHeader> GetReturnOrdersFromSalesHeader(List<SalesHeader> salesHeaders, ref List<string> readRMA)
         {
             List<ReturnHeader> returnHead = new List<ReturnHeader>();
 
@@ -1082,6 +1107,7 @@ namespace ExcelDesign.Class_Objects
             string rmaNo = string.Empty;
             string externalDocumentNo = string.Empty;
             string email = string.Empty;
+            bool returnLabelCreated = false;
 
             List<string> insertedReturnNumbners = new List<string>();
 
@@ -1100,69 +1126,87 @@ namespace ExcelDesign.Class_Objects
                             {
                                 rmaNo = currResults.SalesHeader[so].No;
 
-                                if (!insertedReturnNumbners.Any(order => order.Equals(rmaNo)))
+                                if (!readRMA.Any(rma => rma.Equals(rmaNo)))
                                 {
-                                    receiptHeader = ReturnReceiptHeader(rmaNo);
-                                    channelName = currResults.SalesHeader[so].SellToCustomerName;
-                                    orderDate = currResults.SalesHeader[so].DocDate;
-                                    externalDocumentNo = currResults.SalesHeader[so].ExtDocNo;
-                                    returnTrackingNo = currResults.SalesHeader[so].ReturnTrackingNo;
-                                    receiptHeader.AddRange(ReturnShipmentReceiptHeader(sh.SalesOrderNo, externalDocumentNo, rmaNo));
-
-                                    for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
+                                    if (!insertedReturnNumbners.Any(order => order.Equals(rmaNo)))
                                     {
-                                        if ((currResults.SalesLine[sl].DocNo == rmaNo) && (currResults.SalesLine[sl].Type == "Item"))
+                                        receiptHeader = ReturnReceiptHeader(rmaNo);
+                                        channelName = currResults.SalesHeader[so].SellToCustomerName;
+                                        orderDate = currResults.SalesHeader[so].DocDate;
+                                        externalDocumentNo = currResults.SalesHeader[so].ExtDocNo;
+                                        returnTrackingNo = currResults.SalesHeader[so].ReturnTrackingNo;
+
+                                        if (receiptHeader.Count == 0)
                                         {
-                                            totalCounter++;
-                                            dateCreated = currResults.SalesLine[sl].DateCreated;
-                                            int.TryParse(currResults.SalesLine[sl].QtyToReceive, out int qtyToRec);
-                                            if (qtyToRec > 0)
+                                            receiptHeader.AddRange(ReturnShipmentReceiptHeader(sh.SalesOrderNo, externalDocumentNo, rmaNo));
+                                        }
+                                        else
+                                        {
+                                            foreach (ReceiptHeader rh in receiptHeader)
                                             {
-                                                statusCounter++;
+                                                postedReceive.AddRange(ReturnPostedReceive(rmaNo, rh.No));
                                             }
                                         }
-                                    }
 
-                                    if (statusCounter == totalCounter)
-                                    {
-                                        returnStatus = "Open";
-                                    }
-                                    else if (statusCounter == 0)
-                                    {
-                                        returnStatus = "Released";
-                                    }
-                                    else
-                                    {
-                                        returnStatus = "Partial Receipt";
-                                    }
+                                        returnLabelCreated = currResults.SalesHeader[so].UPSRetLabelCreated.ToUpper() == "YES" ? true : false;
 
-                                    if (currResults.ExtendedSalesHeader != null)
-                                    {
-                                        for (int esh = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
+                                        for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
                                         {
-                                            if (currResults.ExtendedSalesHeader[esh].RMANo == rmaNo)
+                                            if ((currResults.SalesLine[sl].DocNo == rmaNo) && (currResults.SalesLine[sl].Type == "Item"))
                                             {
-                                                email = currResults.ExtendedSalesHeader[esh].Email;
+                                                totalCounter++;
+                                                dateCreated = currResults.SalesLine[sl].DateCreated;
+                                                int.TryParse(currResults.SalesLine[sl].QtyToReceive, out int qtyToRec);
+                                                if (qtyToRec > 0)
+                                                {
+                                                    statusCounter++;
+                                                }
                                             }
                                         }
+
+                                        if (statusCounter == totalCounter)
+                                        {
+                                            returnStatus = "Open";
+                                        }
+                                        else if (statusCounter == 0)
+                                        {
+                                            returnStatus = "Released";
+                                        }
+                                        else
+                                        {
+                                            returnStatus = "Partial Receipt";
+                                        }
+
+                                        if (currResults.ExtendedSalesHeader != null)
+                                        {
+                                            for (int esh = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
+                                            {
+                                                if (currResults.ExtendedSalesHeader[esh].RMANo == rmaNo)
+                                                {
+                                                    email = currResults.ExtendedSalesHeader[esh].Email;
+                                                }
+                                            }
+                                        }
+
+                                        returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate, rmaNo, externalDocumentNo, email, returnLabelCreated));
+                                        insertedReturnNumbners.Add(rmaNo);
+                                        readRMA.Add(rmaNo);
+
+                                        returnStatus = string.Empty;
+                                        dateCreated = string.Empty;
+                                        channelName = string.Empty;
+                                        receiptHeader = new List<ReceiptHeader>();
+                                        postedReceive = new List<PostedReceive>();
+                                        returnTrackingNo = string.Empty;
+                                        orderDate = string.Empty;
+                                        rmaNo = string.Empty;
+                                        externalDocumentNo = string.Empty;
+                                        email = string.Empty;
+                                        returnLabelCreated = false;
+
+                                        totalCounter = 0;
+                                        statusCounter = 0;
                                     }
-
-                                    returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate, rmaNo, externalDocumentNo, email));
-                                    insertedReturnNumbners.Add(rmaNo);
-
-                                    returnStatus = string.Empty;
-                                    dateCreated = string.Empty;
-                                    channelName = string.Empty;
-                                    receiptHeader = new List<ReceiptHeader>();
-                                    postedReceive = new List<PostedReceive>();
-                                    returnTrackingNo = string.Empty;
-                                    orderDate = string.Empty;
-                                    rmaNo = string.Empty;
-                                    externalDocumentNo = string.Empty;
-                                    email = string.Empty;
-
-                                    totalCounter = 0;
-                                    statusCounter = 0;
                                 }
                             }
                         }
@@ -1173,7 +1217,7 @@ namespace ExcelDesign.Class_Objects
             return returnHead;
         }
 
-        public List<ReturnHeader> GetReturnOrdersFromShipmentHeader(List<SalesHeader> salesHeaders)
+        public List<ReturnHeader> GetReturnOrdersFromShipmentHeader(List<SalesHeader> salesHeaders, ref List<string> readRMA)
         {
             List<ReturnHeader> returnHead = new List<ReturnHeader>();
 
@@ -1203,46 +1247,50 @@ namespace ExcelDesign.Class_Objects
                             {
                                 rmaNo = currResults.ReturnReceiptHeader[so].ReturnOrderNo;
 
-                                if (!insertedReturnNumbners.Any(order => order.Equals(rmaNo)))
+                                if (!readRMA.Any(rma => rma.Equals(rmaNo)))
                                 {
-                                    dateCreated = currResults.ReturnReceiptHeader[so].ReceiveDate;
-                                    receiptHeader = ReturnReceiptHeader(rmaNo);
-                                    channelName = currResults.ReturnReceiptHeader[so].SellToCustomerName;
-
-                                    foreach (ReceiptHeader rh in receiptHeader)
+                                    if (!insertedReturnNumbners.Any(order => order.Equals(rmaNo)))
                                     {
-                                        postedReceive.AddRange(ReturnPostedReceive(rmaNo, rh.No));
-                                    }
+                                        dateCreated = currResults.ReturnReceiptHeader[so].ReceiveDate;
+                                        receiptHeader = ReturnReceiptHeader(rmaNo);
+                                        channelName = currResults.ReturnReceiptHeader[so].SellToCustomerName;
 
-                                    orderDate = currResults.ReturnReceiptHeader[so].OrderDate;
-                                    externalDocumentNo = currResults.ReturnReceiptHeader[so].ExtDocNo;
-
-                                    returnStatus = "Released";
-
-                                    if (currResults.ExtendedSalesHeader != null)
-                                    {
-                                        for (int esh = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
+                                        foreach (ReceiptHeader rh in receiptHeader)
                                         {
-                                            if (currResults.ExtendedSalesHeader[esh].RMANo == rmaNo)
+                                            postedReceive.AddRange(ReturnPostedReceive(rmaNo, rh.No));
+                                        }
+
+                                        orderDate = currResults.ReturnReceiptHeader[so].OrderDate;
+                                        externalDocumentNo = currResults.ReturnReceiptHeader[so].ExtDocNo;
+
+                                        returnStatus = "Released";
+
+                                        if (currResults.ExtendedSalesHeader != null)
+                                        {
+                                            for (int esh = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
                                             {
-                                                email = currResults.ExtendedSalesHeader[esh].Email;
+                                                if (currResults.ExtendedSalesHeader[esh].RMANo == rmaNo)
+                                                {
+                                                    email = currResults.ExtendedSalesHeader[esh].Email;
+                                                }
                                             }
                                         }
+
+                                        returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate, rmaNo, externalDocumentNo, email, false));
+                                        insertedReturnNumbners.Add(rmaNo);
+                                        readRMA.Add(rmaNo);
+
+                                        returnStatus = string.Empty;
+                                        dateCreated = string.Empty;
+                                        channelName = string.Empty;
+                                        receiptHeader = new List<ReceiptHeader>();
+                                        postedReceive = new List<PostedReceive>();
+                                        returnTrackingNo = string.Empty;
+                                        orderDate = string.Empty;
+                                        rmaNo = string.Empty;
+                                        externalDocumentNo = string.Empty;
+                                        email = string.Empty;
                                     }
-
-                                    returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate, rmaNo, externalDocumentNo, email));
-                                    insertedReturnNumbners.Add(rmaNo);
-
-                                    returnStatus = string.Empty;
-                                    dateCreated = string.Empty;
-                                    channelName = string.Empty;
-                                    receiptHeader = new List<ReceiptHeader>();
-                                    postedReceive = new List<PostedReceive>();
-                                    returnTrackingNo = string.Empty;
-                                    orderDate = string.Empty;
-                                    rmaNo = string.Empty;
-                                    externalDocumentNo = string.Empty;
-                                    email = string.Empty;
                                 }
                             }
                         }
@@ -1407,18 +1455,18 @@ namespace ExcelDesign.Class_Objects
 
             List<string> rmaNo = new List<string>();
 
-            if(currResults.ExtendedSalesHeader != null)
+            if (currResults.ExtendedSalesHeader != null)
             {
                 for (int esh = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
                 {
-                    if(currResults.ExtendedSalesHeader[esh].SSHNo == no)
+                    if (currResults.ExtendedSalesHeader[esh].SSHNo == no)
                     {
                         rmaNo.Add(currResults.ExtendedSalesHeader[esh].RMANo);
                     }
                 }
             }
 
-            if(rmaNo.Count != 0)
+            if (rmaNo.Count != 0)
             {
                 if (currResults.SalesLine != null)
                 {

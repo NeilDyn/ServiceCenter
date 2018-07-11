@@ -63,6 +63,11 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcOrderDate.Text = Sh.OrderDate;
             this.tcSalesOrderNo.Text = Sh.SalesOrderNo;
             this.tcChannelName.Text = Sh.ChannelName;
+
+            this.tcOrderStatus.ToolTip = Sh.OrderStatus;
+            this.tcOrderDate.ToolTip = Sh.OrderDate;
+            this.tcSalesOrderNo.ToolTip = Sh.SalesOrderNo;
+            this.tcChannelName.ToolTip = Sh.ChannelName;
             TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
 
             OrderNo = Sh.SalesOrderNo;
@@ -71,12 +76,14 @@ namespace ExcelDesign.Forms.UserControls.TableData
             if (Sh.ShipmentHeaderObject.Count > 0)
             {
                 this.tcShipmentDate.Text = Sh.ShipmentHeaderObject[0].ShippingDate;
+                this.tcShipmentDate.ToolTip = Sh.ShipmentHeaderObject[0].ShippingDate;
                 shipmentMethod = Sh.ShipmentHeaderObject[0].ShippingAgentCode;
                 shipmentMethod += " " + Sh.ShipmentHeaderObject[0].ShippingAgentService;
 
                 this.tcShipmentsTotal.Text = "<a href='javascript:expandShipments" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Sh.ShipmentHeaderObject.Count.ToString() + "</a>";
                 this.tcShipmentsTotal.ID = "tcShipmentsTotal_" + CustID.ToString() + "_" + CountID.ToString();
                 this.tcShipMethod.Text = shipmentMethod;
+                this.tcShipMethod.ToolTip = shipmentMethod;
 
                 Enum.TryParse(Sh.ShipmentHeaderObject[0].ShippingAgentCode, out trackType);
 
@@ -97,6 +104,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 {
                     string trackNo = Sh.PostedPackageObject[0].TrackingNo;
                     this.tcTrackingNo.Text = SetTrackingNo(trackType, trackNo);
+                    this.tcTrackingNo.ToolTip = trackNo;
                 }
             }
 
@@ -216,7 +224,9 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
                         itemNoS = line.ItemNo;
                         itemNo.Text = line.ItemNo;
+                        itemNo.ToolTip = line.ItemNo;
                         desc.Text = line.Description;
+                        desc.ToolTip = line.Description;
                         qty.Text = line.Quantity.ToString();
                         qtyShipped.Text = line.QuantityShipped.ToString();
                         total += line.LineAmount;
@@ -249,6 +259,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         }
 
                         serialNo.Text = firstSerialNo;
+                        serialNo.ToolTip = firstSerialNo;
                         serialNo.HorizontalAlign = HorizontalAlign.Center;
 
                         singleRow.ID = "salesInfoLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
@@ -289,7 +300,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                             TableCell moreSerialNo = new TableCell
                             {
                                 Text = serial,
-                                HorizontalAlign = HorizontalAlign.Center
+                                HorizontalAlign = HorizontalAlign.Center,
+                                ToolTip = serial
                             };
 
                             TableRow moreTableRow = new TableRow();

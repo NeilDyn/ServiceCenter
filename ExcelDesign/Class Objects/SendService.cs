@@ -120,5 +120,10 @@ namespace ExcelDesign.Class_Objects
         {
             return webService.DeleteRMA(rmaNo);
         }
+
+        public void IssueReturnLabel(string rmaNo, string email)
+        {
+            webService.IssueReturnLabel(rmaNo, email);
+        }
     }
 }

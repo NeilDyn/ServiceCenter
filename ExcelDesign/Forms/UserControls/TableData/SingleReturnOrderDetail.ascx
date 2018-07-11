@@ -32,6 +32,32 @@
                 null,
                 "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
         });
+
+        $("[id$=btnIssueReturnLabel<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+            var rmaNo = "<%= this.Rh.RMANo %>";
+            var emailIn = prompt("Please enter a valid email address:");
+
+            if (emailIn == null || emailIn == "") {
+                alert("Invalid email address entered.")
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: "ServiceCenter.aspx/IssueReturnLabel",
+                    data: JSON.stringify({ rmaNo: rmaNo, email: emailIn }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function () {
+                        alert("Return Label Created for Return: " + rmaNo)
+                    },
+                    error: function (xhr, status, text) {
+                        console.log(xhr.status);
+                        console.log(xhr.text);
+                        console.log(xhr.responseText);
+                    },
+                });
+            }
+        });
     });
 
     function expandMoreReturnLines<%= this.CustID %><%= this.CountID %>(lineID) {
@@ -104,6 +130,8 @@
         <asp:TableCell />
         <asp:TableCell Text="Zendesk Ticket(s):" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcZendeskTickets" />
+        <asp:TableCell Text="UPS Return Label Created:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
+        <asp:TableCell runat="server" ID="tcUPSReturnLabelCreated" />
     </asp:TableRow>
     <asp:TableRow>
         <asp:TableCell />

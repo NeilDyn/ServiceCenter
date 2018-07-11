@@ -26,6 +26,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
         protected TableCell issueRefundCell = new TableCell();
         protected TableCell printRMAInstructions = new TableCell();
         protected TableCell updateRMA = new TableCell();
+        protected TableCell issueReturnLabel = new TableCell();
 
         protected TableCell receiptCell;
         protected TableCell receiveCell;
@@ -34,6 +35,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
         protected Button btnIssueRefund = new Button();
         protected Button btnPrintRMAInstructions = new Button();
         protected Button btnUpdateRMA = new Button();
+        protected Button btnIssueReturnLabel = new Button();
 
         protected Control singleReturnOrderReceiptLines;
         protected Control singleReturnOrderReceiveLines;
@@ -49,7 +51,32 @@ namespace ExcelDesign.Forms.UserControls.TableData
             }
 
             LoadData();
-            PopulateLines();      
+            PopulateLines();
+
+            if(tcUPSReturnLabelCreated.Text.ToUpper() == "YES")
+            {
+                btnIssueReturnLabel.Visible = false;
+            }
+            else
+            {
+                User activeUser = (User)Session["ActiveUser"];
+
+                if (!activeUser.Admin && !activeUser.Developer)
+                {
+                    if (!activeUser.CreateReturnLabel)
+                    {
+                        btnIssueReturnLabel.Visible = false;
+                    }
+                    else
+                    {
+                        btnIssueReturnLabel.Visible = true;
+                    }
+                }
+                else
+                {
+                    btnIssueReturnLabel.Visible = true;
+                }
+            }
         }
 
         protected void CreateButtons()
@@ -69,6 +96,10 @@ namespace ExcelDesign.Forms.UserControls.TableData
             btnUpdateRMA.Text = "Update RMA";
             btnUpdateRMA.ID = "btnUpdateRMA" + CustID.ToString() + "_" + CountID.ToString();
             btnUpdateRMA.OnClientClick = "return false;";
+
+            btnIssueReturnLabel.Text = "Issue Return Label";
+            btnIssueReturnLabel.ID = "btnIssueReturnLabel" + CustID.ToString() + "_" + CountID.ToString();
+            btnIssueReturnLabel.OnClientClick = "return false;";
         }
 
         protected void LoadData()
@@ -78,6 +109,22 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcChannelName.Text = Rh.ChannelName;            
             this.tcOrderDate.Text = Rh.OrderDate;
             this.tcEmail.Text = Rh.Email;
+
+            this.tcReturnStatus.ToolTip = Rh.ReturnStatus;
+            this.tcDateCreated.ToolTip = Rh.DateCreated;
+            this.tcChannelName.ToolTip = Rh.ChannelName;
+            this.tcOrderDate.ToolTip = Rh.OrderDate;
+            this.tcEmail.ToolTip = Rh.Email;
+            
+            if(Rh.ReturnLabelCreated)
+            {
+                this.tcUPSReturnLabelCreated.Text = "Yes";
+            }
+            else
+            {
+                this.tcUPSReturnLabelCreated.Text = "No";
+            }
+
             TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
 
             RMANo = Rh.RMANo;
@@ -97,6 +144,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                     Enum.TryParse(Rh.ReceiptHeaderObj[0].ShippingAgentCode, out trackType);
 
                     this.tcReceiptDate.Text = Rh.ReceiptHeaderObj[0].ReceiptDate;
+                    this.tcReceiptDate.ToolTip = Rh.ReceiptHeaderObj[0].ReceiptDate;
                     this.tcReceiptsTotal.Text = "<a href='javascript:expandReceipts" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Rh.ReceiptHeaderObj.Count.ToString() + "</a>";
                     PopulateReceiptLines();
                 }
@@ -108,6 +156,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             string trackNo = Rh.ReturnTrackingNo;
             this.tcReturnTrackingNo.Text = SetTrackingNo(trackType, trackNo);
+            this.tcReturnTrackingNo.ToolTip = trackNo;
         }
 
         protected void PopulateLines()
@@ -144,7 +193,9 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
                         itemNoS = line.ItemNo;
                         itemNo.Text = line.ItemNo;
+                        itemNo.ToolTip = line.ItemNo;
                         desc.Text = line.Description;
+                        desc.ToolTip = line.Description;
                         qty.Text = line.Quantity.ToString();
                         qtyReceived.Text = line.QuantityReceived.ToString();
                         total += line.LineAmount;
@@ -177,6 +228,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         }
 
                         serialNo.Text = firstSerialNo;
+                        serialNo.ToolTip = firstSerialNo;
                         serialNo.HorizontalAlign = HorizontalAlign.Center;
 
                         lineRow.ID = "returnInfoLine_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString();
@@ -216,7 +268,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                             TableCell moreSerialNo = new TableCell
                             {
                                 Text = serial,
-                                HorizontalAlign = HorizontalAlign.Center
+                                HorizontalAlign = HorizontalAlign.Center,
+                                ToolTip = serial
                             };
 
                             TableRow moreTableRow = new TableRow();
@@ -299,14 +352,15 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 issueRefundCell.Controls.Add(btnIssueRefund);
                 updateRMA.Controls.Add(btnUpdateRMA);
                 printRMAInstructions.Controls.Add(btnPrintRMAInstructions);
+                issueReturnLabel.Controls.Add(btnIssueReturnLabel);
 
-                buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(updateRMA);
                 buttonRow.Cells.Add(createExchangeCell);
                 buttonRow.Cells.Add(issueRefundCell);
+                buttonRow.Cells.Add(issueReturnLabel);
                 buttonRow.Cells.Add(printRMAInstructions);
 
                 this.tblReturnDetailLines.Rows.Add(buttonRow);

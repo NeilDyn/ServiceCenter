@@ -33,6 +33,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private System.Threading.SendOrPostCallback SearchDetermineNoTypeOperationCompleted;
         
+        private System.Threading.SendOrPostCallback SetDateFiltersOperationCompleted;
+        
         private System.Threading.SendOrPostCallback InitiateUserActionOperationCompleted;
         
         private System.Threading.SendOrPostCallback CreateReturnOrderOperationCompleted;
@@ -40,6 +42,8 @@ namespace ExcelDesign.ServiceFunctions {
         private System.Threading.SendOrPostCallback DeleteReturnOrderOperationCompleted;
         
         private System.Threading.SendOrPostCallback CancelOrderOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback IssueReturnLabelOperationCompleted;
         
         private System.Threading.SendOrPostCallback SetDebugOperationCompleted;
         
@@ -88,6 +92,9 @@ namespace ExcelDesign.ServiceFunctions {
         public event SearchDetermineNoTypeCompletedEventHandler SearchDetermineNoTypeCompleted;
         
         /// <remarks/>
+        public event SetDateFiltersCompletedEventHandler SetDateFiltersCompleted;
+        
+        /// <remarks/>
         public event InitiateUserActionCompletedEventHandler InitiateUserActionCompleted;
         
         /// <remarks/>
@@ -98,6 +105,9 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         public event CancelOrderCompletedEventHandler CancelOrderCompleted;
+        
+        /// <remarks/>
+        public event IssueReturnLabelCompletedEventHandler IssueReturnLabelCompleted;
         
         /// <remarks/>
         public event SetDebugCompletedEventHandler SetDebugCompleted;
@@ -171,6 +181,32 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.SearchDetermineNoTypeCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.SearchDetermineNoTypeCompleted(this, new SearchDetermineNoTypeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:SetDateFilters", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="SetDateFilters_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SetDateFilters() {
+            this.Invoke("SetDateFilters", new object[0]);
+        }
+        
+        /// <remarks/>
+        public void SetDateFiltersAsync() {
+            this.SetDateFiltersAsync(null);
+        }
+        
+        /// <remarks/>
+        public void SetDateFiltersAsync(object userState) {
+            if ((this.SetDateFiltersOperationCompleted == null)) {
+                this.SetDateFiltersOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSetDateFiltersOperationCompleted);
+            }
+            this.InvokeAsync("SetDateFilters", new object[0], this.SetDateFiltersOperationCompleted, userState);
+        }
+        
+        private void OnSetDateFiltersOperationCompleted(object arg) {
+            if ((this.SetDateFiltersCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SetDateFiltersCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -324,6 +360,36 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.CancelOrderCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.CancelOrderCompleted(this, new CancelOrderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:IssueReturnLabel", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="IssueReturnLabel_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void IssueReturnLabel(string rMANo, string emailAddress) {
+            this.Invoke("IssueReturnLabel", new object[] {
+                        rMANo,
+                        emailAddress});
+        }
+        
+        /// <remarks/>
+        public void IssueReturnLabelAsync(string rMANo, string emailAddress) {
+            this.IssueReturnLabelAsync(rMANo, emailAddress, null);
+        }
+        
+        /// <remarks/>
+        public void IssueReturnLabelAsync(string rMANo, string emailAddress, object userState) {
+            if ((this.IssueReturnLabelOperationCompleted == null)) {
+                this.IssueReturnLabelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIssueReturnLabelOperationCompleted);
+            }
+            this.InvokeAsync("IssueReturnLabel", new object[] {
+                        rMANo,
+                        emailAddress}, this.IssueReturnLabelOperationCompleted, userState);
+        }
+        
+        private void OnIssueReturnLabelOperationCompleted(object arg) {
+            if ((this.IssueReturnLabelCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.IssueReturnLabelCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -3544,6 +3610,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string shipToCountryField;
         
+        private string uPSRetLabelCreatedField;
+        
         private Warranty2[] warranty2Field;
         
         /// <remarks/>
@@ -3683,6 +3751,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.shipToCountryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string UPSRetLabelCreated {
+            get {
+                return this.uPSRetLabelCreatedField;
+            }
+            set {
+                this.uPSRetLabelCreatedField = value;
             }
         }
         
@@ -4024,6 +4102,10 @@ namespace ExcelDesign.ServiceFunctions {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void SetDateFiltersCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void InitiateUserActionCompletedEventHandler(object sender, InitiateUserActionCompletedEventArgs e);
     
     /// <remarks/>
@@ -4133,6 +4215,10 @@ namespace ExcelDesign.ServiceFunctions {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void IssueReturnLabelCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]

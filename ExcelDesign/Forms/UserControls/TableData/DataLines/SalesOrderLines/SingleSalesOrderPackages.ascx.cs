@@ -72,16 +72,29 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
                     shipMethod += " " + postedPack.ShippingAgentService;
 
                     packNo.Text = postPackLine.PackageNo;
+                    packNo.ToolTip = postPackLine.PackageNo;
+
                     packDate.Text = postedPack.PackingDate;
+                    packDate.ToolTip = postedPack.PackingDate;
+
                     item.Text = postPackLine.ItemNo;
+                    item.ToolTip = postPackLine.ItemNo;
+
                     desc.Text = postPackLine.Description;
+                    desc.ToolTip = postPackLine.Description;
+
                     qty.Text = postPackLine.Quantity.ToString();
+
                     serialNo.Text = postPackLine.SerialNo;
+                    serialNo.ToolTip = postPackLine.SerialNo;
+
                     carrier.Text = shipMethod;
+                    carrier.ToolTip = shipMethod;
 
                     string trackNo = postedPack.TrackingNo;
                     Enum.TryParse(postedPack.ShippingAgent, out trackType);
                     trackingNo.Text = SetTrackingNo(trackType, trackNo);
+                    trackingNo.ToolTip = trackNo;
 
                     qty.HorizontalAlign = HorizontalAlign.Center;
 

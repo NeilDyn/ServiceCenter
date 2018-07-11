@@ -43,6 +43,7 @@
           <element minOccurs="1" maxOccurs="1" name="ShipToZip" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToState" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="UPSRetLabelCreated" type="string" />
           <element minOccurs="0" maxOccurs="unbounded" name="Warranty2" type="tns:Warranty2" />
         </sequence>
       </complexType>
@@ -421,6 +422,16 @@
           </sequence>
         </complexType>
       </element>
+      <element name="SetDateFilters">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="SetDateFilters_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
       <element name="InitiateUserAction">
         <complexType>
           <sequence>
@@ -494,6 +505,19 @@
           </sequence>
         </complexType>
       </element>
+      <element name="IssueReturnLabel">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="rMANo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="emailAddress" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="IssueReturnLabel_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
       <element name="SetDebug">
         <complexType>
           <sequence>
@@ -520,6 +544,12 @@
   <message name="SearchDetermineNoType_Result">
     <part name="parameters" element="tns:SearchDetermineNoType_Result" />
   </message>
+  <message name="SetDateFilters">
+    <part name="parameters" element="tns:SetDateFilters" />
+  </message>
+  <message name="SetDateFilters_Result">
+    <part name="parameters" element="tns:SetDateFilters_Result" />
+  </message>
   <message name="InitiateUserAction">
     <part name="parameters" element="tns:InitiateUserAction" />
   </message>
@@ -544,6 +574,12 @@
   <message name="CancelOrder_Result">
     <part name="parameters" element="tns:CancelOrder_Result" />
   </message>
+  <message name="IssueReturnLabel">
+    <part name="parameters" element="tns:IssueReturnLabel" />
+  </message>
+  <message name="IssueReturnLabel_Result">
+    <part name="parameters" element="tns:IssueReturnLabel_Result" />
+  </message>
   <message name="SetDebug">
     <part name="parameters" element="tns:SetDebug" />
   </message>
@@ -558,6 +594,10 @@
     <operation name="SearchDetermineNoType">
       <input name="SearchDetermineNoType" message="tns:SearchDetermineNoType" />
       <output name="SearchDetermineNoType_Result" message="tns:SearchDetermineNoType_Result" />
+    </operation>
+    <operation name="SetDateFilters">
+      <input name="SetDateFilters" message="tns:SetDateFilters" />
+      <output name="SetDateFilters_Result" message="tns:SetDateFilters_Result" />
     </operation>
     <operation name="InitiateUserAction">
       <input name="InitiateUserAction" message="tns:InitiateUserAction" />
@@ -574,6 +614,10 @@
     <operation name="CancelOrder">
       <input name="CancelOrder" message="tns:CancelOrder" />
       <output name="CancelOrder_Result" message="tns:CancelOrder_Result" />
+    </operation>
+    <operation name="IssueReturnLabel">
+      <input name="IssueReturnLabel" message="tns:IssueReturnLabel" />
+      <output name="IssueReturnLabel_Result" message="tns:IssueReturnLabel_Result" />
     </operation>
     <operation name="SetDebug">
       <input name="SetDebug" message="tns:SetDebug" />
@@ -597,6 +641,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="SearchDetermineNoType_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="SetDateFilters">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:SetDateFilters" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="SetDateFilters">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="SetDateFilters_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -633,6 +686,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="CancelOrder_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="IssueReturnLabel">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:IssueReturnLabel" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="IssueReturnLabel">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="IssueReturnLabel_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

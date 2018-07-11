@@ -104,5 +104,10 @@ namespace ExcelDesign.Class_Objects
 
             return login;
         }
+
+        public void IssueReturnLabel(string rmaNo, string email)
+        {
+            functions.IssueReturnLabel(rmaNo, email);
+        }
     }
 }

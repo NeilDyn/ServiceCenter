@@ -10,7 +10,6 @@
             $("[id$=customerDetails_<%= this.Count %>]").hide();
         }
 
-
         $("[id$=btnExpload_<%= this.Count %>]").click(function () {
             $("[id$=customerDetails_<%= this.Count %>]").toggle();
 

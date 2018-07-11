@@ -17,6 +17,7 @@ namespace ExcelDesign.Class_Objects
         public string DateCreated { get; set; }
         public string ReturnStatus { get; set; }
         public string Email { get; set; }
+        public bool ReturnLabelCreated { get; set; }
 
         public ReturnHeader()
         {
@@ -24,7 +25,8 @@ namespace ExcelDesign.Class_Objects
         }
 
         public ReturnHeader(string returnStatusP, string dateCreatedP, string channelNameP, List<ReceiptHeader> receiptHeaderObjP,
-                 List<PostedReceive> postedReceiveObjP, string returnTrackingNoP, string orderDateP, string rmaNoP, string externalDocumentNoP, string emailP)
+                 List<PostedReceive> postedReceiveObjP, string returnTrackingNoP, string orderDateP, string rmaNoP, string externalDocumentNoP, string emailP,
+                 bool returnLabelCreatedP)
         {
             this.ReturnStatus = returnStatusP;
             this.DateCreated = dateCreatedP;
@@ -36,6 +38,7 @@ namespace ExcelDesign.Class_Objects
             this.RMANo = rmaNoP;
             this.ExternalDocumentNo = externalDocumentNoP;
             this.Email = emailP;
+            this.ReturnLabelCreated = returnLabelCreatedP;
         }
     }
 }

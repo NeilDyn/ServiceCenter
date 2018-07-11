@@ -65,11 +65,21 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                         TableCell shipMethod = new TableCell();
 
                         receiptNo.Text = rh.No;
+                        receiptNo.ToolTip = rh.No;
+
                         receiptDate.Text = rh.ReceiptDate;
+                        receiptDate.ToolTip = rh.ReceiptDate;
+
                         item.Text = rl.ItemNo;
+                        item.ToolTip = rl.ItemNo;
+
                         desc.Text = rl.Description;
+                        desc.ToolTip = rl.Description;
+
                         qty.Text = rl.Quantity.ToString();
+
                         shipMethod.Text = rh.ShippingAgentCode;
+                        shipMethod.ToolTip = rh.ShippingAgentCode;
 
                         qty.HorizontalAlign = HorizontalAlign.Center;
 

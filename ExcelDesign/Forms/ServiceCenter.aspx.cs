@@ -195,5 +195,22 @@ namespace ExcelDesign.Forms
 
             return "1";
         }
+
+        [WebMethod]
+        public static string IssueReturnLabel(string rmaNo, string email)
+        {
+            try
+            {
+                StaticService.IssueReturnLabel(rmaNo, email);
+            }
+            catch (Exception e)
+            {
+                HttpContext.Current.Session["Error"] = e.Message;
+                HttpContext.Current.Response.Redirect("ErrorForm.aspx");
+                return e.Message;
+            }
+
+            return "1";
+        }
     }
 }

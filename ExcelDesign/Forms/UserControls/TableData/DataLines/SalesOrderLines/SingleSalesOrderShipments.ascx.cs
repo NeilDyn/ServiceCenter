@@ -69,11 +69,21 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
                         shipmentMethod += " " + sh.ShippingAgentService;
 
                         shipNo.Text = sh.No;
+                        shipNo.ToolTip = sh.No;
+
                         shipDate.Text = sh.ShippingDate;
+                        shipDate.ToolTip = sh.ShippingDate;
+
                         item.Text = sl.ItemNo;
+                        item.ToolTip = sl.ItemNo;
+
                         desc.Text = sl.Description;
+                        desc.ToolTip = sl.Description;
+
                         qty.Text = sl.Quantity.ToString();
+
                         shipMethod.Text = shipmentMethod;
+                        shipMethod.ToolTip = shipmentMethod;
 
                         qty.HorizontalAlign = HorizontalAlign.Center;
 

@@ -8,12 +8,12 @@ form {
 }
 
 table {
-    table-layout: fixed;
+    /*table-layout: fixed;*/
 }
 
 td {
-    white-space: nowrap;
-    overflow: hidden;
+    /*white-space: normal;*/
+    /*overflow: hidden;*/
 }
 
 .SearchArea.DropDownList {

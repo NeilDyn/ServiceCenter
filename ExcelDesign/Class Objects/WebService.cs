@@ -43,9 +43,10 @@ namespace ExcelDesign.Class_Objects
             string domain = ConfigurationManager.AppSettings["webServiceDomain"].ToString();
 
             string baseURL = string.Empty;
-            string mode = null; // Convert.ToString(HttpContext.Current.Session["ProductionMode"]);
+            //string mode = Convert.ToString(HttpContext.Current.Session["DevelopmentState"]);
 
-            if (mode != null)
+            string mode = null;
+            if ((mode != null) && (mode == "Production Mode"))
             {
                 baseURL = "http://jeg-svr2:7047/production/WS/JEG_SONS,%20Inc/";
             }
@@ -108,6 +109,20 @@ namespace ExcelDesign.Class_Objects
         public void IssueReturnLabel(string rmaNo, string email)
         {
             functions.IssueReturnLabel(rmaNo, email);
+        }
+
+        public CreatedExchangeOrder CreateExchange(string rmaNo)
+        {
+            CreatedExchangeOrder eo = new CreatedExchangeOrder();
+
+            functions.CreateExchangeOrder(rmaNo, ref eo);
+
+            return eo;
+        }
+
+        public void UpdateUserPassword(string currentUser, string password)
+        {
+            functions.UpdateUserPassword(currentUser, password);
         }
     }
 }

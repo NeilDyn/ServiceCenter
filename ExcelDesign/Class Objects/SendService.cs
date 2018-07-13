@@ -1,4 +1,5 @@
-﻿using ExcelDesign.Class_Objects.CreatedReturn;
+﻿using ExcelDesign.Class_Objects.CreatedExchange;
+using ExcelDesign.Class_Objects.CreatedReturn;
 using ExcelDesign.ServiceFunctions;
 using System;
 using System.Collections.Generic;
@@ -116,6 +117,96 @@ namespace ExcelDesign.Class_Objects
             return ctl;
         }
 
+        public string CreateExchange(string rmaNo)
+        {
+            CreatedExchangeOrder eo = new CreatedExchangeOrder();
+            CreatedExchangeHeader ceh = new CreatedExchangeHeader();
+
+            eo = webService.CreateExchange(rmaNo);
+
+            ceh = CreateExchangeOrder(eo);
+            HttpContext.Current.Session["CreatedExchange"] = ceh;
+            return ceh.OrderNo;
+        }
+
+        public CreatedExchangeHeader CreateExchangeOrder(CreatedExchangeOrder eo)
+        {
+            CreatedExchangeHeader ceh = new CreatedExchangeHeader();
+            string orderNo = string.Empty;
+            string externalDocumentNo = string.Empty;
+            string orderDate = string.Empty;
+            string channelName = string.Empty;
+            string shipMethod = string.Empty;
+            string rmaNo = string.Empty;
+            List<CreatedExchangeLines> lines = new List<CreatedExchangeLines>();
+
+            if(eo.SalesHeader != null)
+            {
+                orderNo = eo.SalesHeader[0].No;
+                externalDocumentNo = eo.SalesHeader[0].ExtDocNo;
+                orderDate = eo.SalesHeader[0].DocDate;
+                channelName = eo.SalesHeader[0].ShipToContact;
+                //shipMethod = eo.SalesHeader[0].Sh
+                rmaNo = eo.SalesHeader[0].RMANo;
+                lines = CreateExchangeOrderLines(eo);
+
+                ceh.OrderNo = orderNo;
+                ceh.ExternalDocumentNo = externalDocumentNo;
+                ceh.OrderDate = orderDate;
+                ceh.ChannelName = channelName;
+                ceh.ShipMethod = shipMethod;
+                ceh.RMANo = rmaNo;
+                ceh.ExchangeLines = lines;
+
+                orderNo = string.Empty;
+                externalDocumentNo = string.Empty;
+                orderDate = string.Empty;
+                channelName = string.Empty;
+                shipMethod = string.Empty;
+                rmaNo = string.Empty;
+                lines = new List<CreatedExchangeLines>();
+            }
+
+            return ceh;
+        }
+
+        public List<CreatedExchangeLines> CreateExchangeOrderLines(CreatedExchangeOrder eo)
+        {
+            List<CreatedExchangeLines> cel = new List<CreatedExchangeLines>();
+
+            string itemNo = string.Empty;
+            string description = string.Empty;
+            int quantity = 0;
+            double price = 0;
+            double lineAmount = 0;
+
+            if (eo.SalesLine != null)
+            {
+                for (int sl = 0; sl < eo.SalesLine.Length; sl++)
+                {
+                    int.TryParse(eo.SalesLine[sl].Qty, out quantity);
+                    if (quantity > 0)
+                    {
+                        itemNo = eo.SalesLine[sl].ItemNo;
+                        description = eo.SalesLine[sl].Description;
+
+                        double.TryParse(eo.SalesLine[sl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
+                        lineAmount = quantity * price;
+
+                        cel.Add(new CreatedExchangeLines(itemNo, description, quantity, price, lineAmount));
+                    }
+
+                    itemNo = string.Empty;
+                    description = string.Empty;
+                    quantity = 0;
+                    price = 0;
+                    lineAmount = 0;
+                }
+            }
+
+            return cel;
+        }
+
         public string DeleteRMA(string rmaNo)
         {
             return webService.DeleteRMA(rmaNo);
@@ -124,6 +215,11 @@ namespace ExcelDesign.Class_Objects
         public void IssueReturnLabel(string rmaNo, string email)
         {
             webService.IssueReturnLabel(rmaNo, email);
+        }
+
+        public void UpdateUserPassword(string currentUser, string newPassword)
+        {
+            webService.UpdateUserPassword(currentUser, newPassword);
         }
     }
 }

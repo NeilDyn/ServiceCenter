@@ -190,7 +190,6 @@ namespace ExcelDesign.Forms
             {
                 HttpContext.Current.Session["Error"] = e.Message;
                 HttpContext.Current.Response.Redirect("ErrorForm.aspx");
-                return e.Message;
             }
 
             return "1";
@@ -207,7 +206,39 @@ namespace ExcelDesign.Forms
             {
                 HttpContext.Current.Session["Error"] = e.Message;
                 HttpContext.Current.Response.Redirect("ErrorForm.aspx");
-                return e.Message;
+            }
+
+            return "1";
+        }
+
+        [WebMethod]
+        public static string CreateExchange(string rmaNo)
+        {
+            try
+            {
+                return StaticService.CreateExchange(rmaNo);
+            }
+            catch (Exception e)
+            {
+                HttpContext.Current.Session["Error"] = e.Message;
+                HttpContext.Current.Response.Redirect("ErrorForm.aspx");
+            }
+
+            return "1";
+        }
+
+        [WebMethod]
+        public static string UpdateUserPassword(string currentUser, string newPassword)
+        {
+            try
+            {
+                StaticService.UpdateUserPassword(currentUser, newPassword);
+                HttpContext.Current.Response.Redirect("ServiceCenter.aspx");
+            }
+            catch (Exception e)
+            {
+                HttpContext.Current.Session["Error"] = e.Message;
+                HttpContext.Current.Response.Redirect("ErrorForm.aspx");
             }
 
             return "1";

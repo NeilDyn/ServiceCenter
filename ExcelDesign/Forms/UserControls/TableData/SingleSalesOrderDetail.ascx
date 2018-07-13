@@ -69,7 +69,7 @@
 </script>
 
 <asp:Table ID="tblSingleSalesOrderDetail" runat="server" Height="100%" Width="100%">
-    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
+    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >
         <asp:TableCell />
         <asp:TableCell Text="Order Status:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcOrderStatus" />
@@ -79,7 +79,7 @@
             <br />
         </asp:TableCell>
     </asp:TableRow>
-    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
+    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >
         <asp:TableCell />
         <asp:TableCell Text="Order Date:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcOrderDate" />
@@ -88,7 +88,7 @@
         <asp:TableCell Text="Warranty" Font-Bold="true" HorizontalAlign="Center" ColumnSpan="2" />
         <asp:TableCell />
     </asp:TableRow>
-    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
+    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >
         <asp:TableCell />
         <asp:TableCell Text="Sales Order No:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcSalesOrderNo" />
@@ -98,10 +98,10 @@
         <asp:TableCell runat="server" ID="tcStatus" />
         <asp:TableCell />
     </asp:TableRow>
-    <asp:TableRow runat="server" ID="expandShipments" TableSection="TableBody" HorizontalAlign="Justify">
+    <asp:TableRow runat="server" ID="expandShipments" TableSection="TableBody" HorizontalAlign="Justify" >
         <asp:TableCell><br /></asp:TableCell>
     </asp:TableRow>
-    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
+    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >
         <asp:TableCell />
         <asp:TableCell Text="Channel Name:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcChannelName" />
@@ -111,10 +111,10 @@
         <asp:TableCell runat="server" ID="tcPolicy" />
         <asp:TableCell />
     </asp:TableRow>
-    <asp:TableRow runat="server" ID="expandPackages" TableSection="TableBody" HorizontalAlign="Justify">
+    <asp:TableRow runat="server" ID="expandPackages" TableSection="TableBody" HorizontalAlign="Justify" >
         <asp:TableCell><br /></asp:TableCell>
     </asp:TableRow>
-    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
+    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >
         <asp:TableCell />
         <asp:TableCell Text="Zendesk Ticket #:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcZendeskTicketNo">
@@ -126,14 +126,14 @@
         <asp:TableCell runat="server" ID="tcDaysRemaining" />
         <asp:TableCell />
     </asp:TableRow>
-    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
+    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >
         <asp:TableCell />
         <asp:TableCell Text="Zendesk Ticket(s):" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcZendeskTickets" />
         <asp:TableCell Text="Tracking #:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcTrackingNo" />
     </asp:TableRow>
-    <asp:TableRow runat="server" ID="expandSerialNos" TableSection="TableBody" HorizontalAlign="Justify">
+    <asp:TableRow runat="server" ID="expandSerialNos" TableSection="TableBody" HorizontalAlign="Justify" >
         <asp:TableCell><br /></asp:TableCell>
     </asp:TableRow>
     <asp:TableRow>
@@ -142,7 +142,7 @@
     <asp:TableRow>
         <asp:TableCell ColumnSpan="8">
             <asp:Table runat="server" ID="tblOrderDetailLines" Height="100%" Width="100%">
-                <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
+                <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1" >
                     <asp:TableHeaderCell Text="Item No." HorizontalAlign="Left"/>
                     <asp:TableHeaderCell Text="Description" HorizontalAlign="Left" Width="30%"/>
                     <asp:TableHeaderCell Text="Qty" />

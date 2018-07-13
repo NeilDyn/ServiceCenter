@@ -89,11 +89,14 @@
     <Content Include="css\mainpage.css" />
     <Content Include="css\ReturnInstructions.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Forms\AdminControl.aspx" />
     <Content Include="Forms\ErrorForm.aspx" />
+    <Content Include="Forms\FunctionForms\CreatedExchange.aspx" />
     <Content Include="Forms\FunctionForms\CreatedRMA.aspx" />
     <Content Include="Forms\FunctionForms\CreateReturn.aspx" />
     <Content Include="Forms\FunctionForms\RMAPDFForm.aspx" />
     <Content Include="Forms\LoginPage.aspx" />
+    <Content Include="Forms\UserControl.aspx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetail.ascx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetailHeader.ascx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoHeader.ascx" />
@@ -123,6 +126,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class Objects\CreatedExchange\CreatedExchangeHeader.cs" />
+    <Compile Include="Class Objects\CreatedExchange\CreatedExchangeLines.cs" />
     <Compile Include="Class Objects\CreatedReturn\CreatedReturnHeader.cs" />
     <Compile Include="Class Objects\CreatedReturn\CreatedReturnLines.cs" />
     <Compile Include="Class Objects\Documents\RMAInstructionsPDF.cs" />
@@ -156,12 +161,26 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AdminControl.aspx.cs">
+      <DependentUpon>AdminControl.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminControl.aspx.designer.cs">
+      <DependentUpon>AdminControl.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ErrorForm.aspx.cs">
       <DependentUpon>ErrorForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Forms\ErrorForm.aspx.designer.cs">
       <DependentUpon>ErrorForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\CreatedExchange.aspx.cs">
+      <DependentUpon>CreatedExchange.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\CreatedExchange.aspx.designer.cs">
+      <DependentUpon>CreatedExchange.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\FunctionForms\CreatedRMA.aspx.cs">
       <DependentUpon>CreatedRMA.aspx</DependentUpon>
@@ -190,6 +209,13 @@
     </Compile>
     <Compile Include="Forms\LoginPage.aspx.designer.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControl.aspx.cs">
+      <DependentUpon>UserControl.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControl.aspx.designer.cs">
+      <DependentUpon>UserControl.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserControls\CustomerInfo\CustomerInfoDetail.ascx.cs">
       <DependentUpon>CustomerInfoDetail.ascx</DependentUpon>
@@ -389,6 +415,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Web References\ServiceFunctions\CreatedExchangeOrder.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\ServiceFunctions\Functions.wsdl" />
     <None Include="Web References\ServiceFunctions\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>

@@ -1335,6 +1335,7 @@ namespace ExcelDesign.Class_Objects
                         {
                             if (extendedSalesHeaderSSHNo == currResults.SalesShipmentHeader[exs].No)
                             {
+                                no = rmaNo;
                                 externalDocumentNo = extDocNo;
                                 receiptLines = ReturnSalesLineReceiptLines(rmaNo);
 

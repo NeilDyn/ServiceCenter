@@ -309,7 +309,6 @@ namespace ExcelDesign.Forms.UserControls.TableData
                             blankRow.ID = "showMoreReturnLines_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString() + "_" + moreLineCount.ToString();
                             this.tblReturnDetailLines.Rows.Add(blankRow);
                         }
-
                     }
                 }
             }

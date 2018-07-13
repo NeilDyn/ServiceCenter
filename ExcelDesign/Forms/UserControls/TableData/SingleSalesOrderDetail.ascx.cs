@@ -326,6 +326,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
                             moreTableRow.Attributes.CssStyle.Add("border-collapse", "collapse");
                             moreTableRow.ID = "showMoreOrderLines_" + CustID.ToString() + "_" + CountID.ToString() + "_" + lineCount.ToString() + "_" + moreLineCount.ToString();
+
                             this.tblOrderDetailLines.Rows.Add(moreTableRow);
                         }
 

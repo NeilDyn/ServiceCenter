@@ -70,6 +70,18 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcChannelName.ToolTip = Sh.ChannelName;
             TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
 
+            if(Sh.RMANo != string.Empty)
+            {
+                this.tcRMANoTitle.Visible = true;
+                this.tcRMANo.Visible = true;
+                this.tcRMANo.Text = Sh.RMANo;
+            }
+            else
+            {
+                this.tcRMANo.Visible = false;
+                this.tcRMANoTitle.Visible = false;
+            }
+
             OrderNo = Sh.SalesOrderNo;
             DocNo = Sh.ExternalDocumentNo;
 
@@ -80,8 +92,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 shipmentMethod = Sh.ShipmentHeaderObject[0].ShippingAgentCode;
                 shipmentMethod += " " + Sh.ShipmentHeaderObject[0].ShippingAgentService;
 
-                this.tcShipmentsTotal.Text = "<a href='javascript:expandShipments" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Sh.ShipmentHeaderObject.Count.ToString() + "</a>";
-                this.tcShipmentsTotal.ID = "tcShipmentsTotal_" + CustID.ToString() + "_" + CountID.ToString();
+                
                 this.tcShipMethod.Text = shipmentMethod;
                 this.tcShipMethod.ToolTip = shipmentMethod;
 
@@ -108,7 +119,11 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 }
             }
 
+            this.tcShipmentsTotal.Text = "<a href='javascript:expandShipments" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Sh.ShipmentHeaderObject.Count.ToString() + "</a>";
+            this.tcShipmentsTotal.ID = "tcShipmentsTotal_" + CustID.ToString() + "_" + CountID.ToString();
+
             this.tcPackagesCount.Text = "<a href='javascript:expandPackages" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Sh.PostedPackageObject.Count.ToString() + "</a>";
+            this.tcPackagesCount.ID = "tcPackagesTotal" + CustID.ToString() + "_" + CountID.ToString();
 
             if (Sh.WarrantyProp != null)
             {

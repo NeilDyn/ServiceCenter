@@ -20,7 +20,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (orderNo) {
-                    alert("New order created through exchange: " + orderNo);
+                    alert("New order created through exchange: " + orderNo.d);
                 },
                 error: function (xhr, status, text) {
                     console.log(xhr.status);
@@ -28,6 +28,7 @@
                     console.log(xhr.responseText);
                 },
             });
+        });
 
             $("[id$=btnIssueRefund<%= this.CustID %>_<%= this.CountID %>]").click(function () {
                 alert("Hi, return <%= this.Rh.RMANo %> can be refunded.");
@@ -69,6 +70,7 @@
                             console.log(xhr.status);
                             console.log(xhr.text);
                             console.log(xhr.responseText);
+                            window.location = res.d;
                         },
                     });
                 }

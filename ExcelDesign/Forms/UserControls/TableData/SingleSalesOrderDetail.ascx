@@ -132,6 +132,8 @@
         <asp:TableCell runat="server" ID="tcZendeskTickets" />
         <asp:TableCell Text="Tracking #:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcTrackingNo" />
+        <asp:TableCell Text="RMA #:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" ID="tcRMANoTitle"/>
+        <asp:TableCell runat="server" ID="tcRMANo" ForeColor="Red"/>
     </asp:TableRow>
     <asp:TableRow runat="server" ID="expandSerialNos" TableSection="TableBody" HorizontalAlign="Justify" >
         <asp:TableCell><br /></asp:TableCell>

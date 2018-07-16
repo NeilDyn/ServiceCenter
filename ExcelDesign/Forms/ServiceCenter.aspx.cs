@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.Script.Services;
 using System.Web.Security;
 using System.Web.Services;
 using System.Web.UI;
@@ -189,7 +190,6 @@ namespace ExcelDesign.Forms
             catch (Exception e)
             {
                 HttpContext.Current.Session["Error"] = e.Message;
-                HttpContext.Current.Response.Redirect("ErrorForm.aspx");
             }
 
             return "1";
@@ -201,47 +201,50 @@ namespace ExcelDesign.Forms
             try
             {
                 StaticService.IssueReturnLabel(rmaNo, email);
+                return "1";
             }
             catch (Exception e)
             {
                 HttpContext.Current.Session["Error"] = e.Message;
-                HttpContext.Current.Response.Redirect("ErrorForm.aspx");
+                return "~/Forms/ErrorForm.aspx";
             }
-
-            return "1";
         }
 
         [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public static string CreateExchange(string rmaNo)
         {
             try
             {
-                return StaticService.CreateExchange(rmaNo);
+                string createdOrderNo = string.Empty;
+
+                createdOrderNo = StaticService.CreateExchange(rmaNo);
+
+                return createdOrderNo;
             }
             catch (Exception e)
             {
                 HttpContext.Current.Session["Error"] = e.Message;
-                HttpContext.Current.Response.Redirect("ErrorForm.aspx");
+                return e.Message;
             }
-
-            return "1";
         }
 
         [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public static string UpdateUserPassword(string currentUser, string newPassword)
         {
             try
             {
-                StaticService.UpdateUserPassword(currentUser, newPassword);
-                HttpContext.Current.Response.Redirect("ServiceCenter.aspx");
+                //StaticService.UpdateUserPassword(currentUser, newPassword);
+                throw new Exception("TESTA");
             }
             catch (Exception e)
             {
                 HttpContext.Current.Session["Error"] = e.Message;
-                HttpContext.Current.Response.Redirect("ErrorForm.aspx");
+                HttpContext.Current.Response.StatusCode = 400;
             }
 
             return "1";
-        }
+        }       
     }
 }

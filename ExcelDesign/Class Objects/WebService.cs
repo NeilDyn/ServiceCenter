@@ -115,7 +115,9 @@ namespace ExcelDesign.Class_Objects
         {
             CreatedExchangeOrder eo = new CreatedExchangeOrder();
 
-            functions.CreateExchangeOrder(rmaNo, ref eo);
+            string test = functions.CreateExchangeOrder(rmaNo, ref eo);
+
+            test = test;
 
             return eo;
         }

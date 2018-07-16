@@ -233,7 +233,7 @@ namespace ExcelDesign.Class_Objects
                             }
                         }
 
-                        shipHeader.Add(new ShipmentHeader(no, externalDocumentNo, shippingDate, shippingAgentService, shippingAgentCode, shipLine, sellToCustomerNo, returnLine, rmaNo));
+                        shipHeader.Add(new ShipmentHeader(no, externalDocumentNo, shippingDate, shippingAgentService, shippingAgentCode, shipLine, sellToCustomerNo, returnLine, rmaNo, false));
 
                         no = string.Empty;
                         externalDocumentNo = string.Empty;
@@ -244,6 +244,25 @@ namespace ExcelDesign.Class_Objects
                         shipLine = new List<ShipmentLine>();
                         returnLine = new List<ReceiptLine>();
                         rmaNo = new List<string>();
+                    }
+                }
+            }
+            else
+            {
+                if(currResults.SalesHeader != null)
+                {
+                    for (int sh = 0; sh < currResults.SalesHeader.Length; sh++)
+                    {
+                        if (currResults.SalesHeader[sh].No == orderNo)
+                        {
+                            no = currResults.SalesHeader[sh].No;
+                            externalDocumentNo = currResults.SalesHeader[sh].ExtDocNo;
+                            shippingDate = currResults.SalesHeader[sh].DocDate;
+
+                            shipLine = ReturnShipmentLines(no);
+                            //sellToCustomerNo = currResults.SalesHeader[sh].s;
+                            //returnLine = GetShipmentReturnLines(no);
+                        }
                     }
                 }
             }
@@ -677,6 +696,7 @@ namespace ExcelDesign.Class_Objects
             string status = string.Empty;
             string policy = string.Empty;
             string daysRemaining = string.Empty;
+            string rmaNo = string.Empty;
 
             bool rmaExists = false;
 
@@ -727,7 +747,7 @@ namespace ExcelDesign.Class_Objects
                                     }
                                 }
 
-                                salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty, rmaExists));
+                                salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty, rmaExists, rmaNo));
 
                                 insertedOrderNumbers.Add(orderNo);
 
@@ -744,6 +764,7 @@ namespace ExcelDesign.Class_Objects
                                 policy = string.Empty;
                                 daysRemaining = string.Empty;
                                 rmaExists = false;
+                                rmaNo = string.Empty;
                             }
                         }
                     }
@@ -765,6 +786,7 @@ namespace ExcelDesign.Class_Objects
                             channelName = currResults.SalesHeader[so].SellToCustomerName;
                             externalDocumentNo = currResults.SalesHeader[so].ExtDocNo;
                             shipHeader = ReturnShipmentHeader(orderNo);
+                            rmaNo = currResults.SalesHeader[so].RMANo;
 
                             foreach (ShipmentHeader sh in shipHeader)
                             {
@@ -817,7 +839,7 @@ namespace ExcelDesign.Class_Objects
                                 }
                             }
 
-                            salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty, rmaExists));
+                            salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty, rmaExists, rmaNo));
 
                             insertedOrderNumbers.Add(orderNo);
 
@@ -834,6 +856,7 @@ namespace ExcelDesign.Class_Objects
                             policy = string.Empty;
                             daysRemaining = string.Empty;
                             rmaExists = false;
+                            rmaNo = string.Empty;
                         }
                     }
                 }
@@ -883,7 +906,7 @@ namespace ExcelDesign.Class_Objects
                                 }
                             }
 
-                            salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty, rmaExists));
+                            salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty, rmaExists, rmaNo));
 
                             insertedOrderNumbers.Add(orderNo);
 
@@ -900,6 +923,7 @@ namespace ExcelDesign.Class_Objects
                             policy = string.Empty;
                             daysRemaining = string.Empty;
                             rmaExists = false;
+                            rmaNo = string.Empty;
                         }
                     }
                 }
@@ -991,7 +1015,7 @@ namespace ExcelDesign.Class_Objects
                             shipToCountry = currResults.SalesHeader[c].ShipToCountry;
                             salesHeaders = GetSalesOrders(shipToName, shipToAddress1);
                             returnHeaders.AddRange(GetReturnOrders(shipToName, shipToAddress1, ref readRMA));
-                            returnHeaders = GetReturnOrdersFromSalesHeader(salesHeaders, ref readRMA);
+                            returnHeaders.AddRange(GetReturnOrdersFromSalesHeader(salesHeaders, ref readRMA));
 
                             returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
                             customerNames.Add(shipToName);
@@ -1031,7 +1055,7 @@ namespace ExcelDesign.Class_Objects
                         shipToCountry = currResults.SalesShipmentHeader[c].ShipToCountry;
                         salesHeaders = GetSalesOrders(shipToName, shipToAddress1);
                         returnHeaders.AddRange(GetReturnOrdersFromSalesHeader(salesHeaders, ref readRMA));
-                        returnHeaders = GetReturnOrdersFromShipmentHeader(salesHeaders, ref readRMA);                      
+                        returnHeaders.AddRange(GetReturnOrdersFromShipmentHeader(salesHeaders, ref readRMA));                      
 
                         returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
                         customerNames.Add(shipToName);

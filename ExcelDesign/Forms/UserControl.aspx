@@ -27,9 +27,10 @@
                             alert("Password successfully updated!");
                         },
                         error: function (xhr, status, text) {
-                            console.log(xhr.status);
-                            console.log(xhr.text);
-                            console.log(xhr.responseText);
+                            //console.log(xhr.status);
+                            //console.log(xhr.text);
+                            //console.log(xhr.responseText);
+                            alert("test");
                         },
                     });
                 } else {

@@ -16,6 +16,7 @@ namespace ExcelDesign.Class_Objects
         public string No { get; set; }
         public string SellToCustomerNo { get; set; }
         public List<string> RMANo { get; set; }
+        public bool GeneratedFromSalesHeader { get; set; }
 
         public ShipmentHeader()
         {
@@ -23,7 +24,7 @@ namespace ExcelDesign.Class_Objects
         }
 
         public ShipmentHeader(string noP, string externalDocumentNoP, string shippingDateP, string shippingAgentServiceP, string shippingAgentCodeP,
-            List<ShipmentLine> shipmentLinesP, string sellToCustomerNoP, List<ReceiptLine> returnLinesP, List<string> rmaNoP)
+            List<ShipmentLine> shipmentLinesP, string sellToCustomerNoP, List<ReceiptLine> returnLinesP, List<string> rmaNoP, bool generatedFromSalesHeaderP)
         {
             this.No = noP;
             this.ExternalDocumentNo = externalDocumentNoP;
@@ -34,6 +35,7 @@ namespace ExcelDesign.Class_Objects
             this.SellToCustomerNo = sellToCustomerNoP;
             this.ReturnLines = returnLinesP;
             this.RMANo = rmaNoP;
+            this.GeneratedFromSalesHeader = generatedFromSalesHeaderP;
         }
     }
 }

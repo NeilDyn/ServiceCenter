@@ -44,6 +44,7 @@
           <element minOccurs="1" maxOccurs="1" name="ShipToState" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
           <element minOccurs="1" maxOccurs="1" name="UPSRetLabelCreated" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="RMANo" type="string" />
           <element minOccurs="0" maxOccurs="unbounded" name="Warranty2" type="tns:Warranty2" />
         </sequence>
       </complexType>
@@ -363,6 +364,9 @@
           <element minOccurs="1" maxOccurs="1" name="ShipToZip" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToState" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShippingAgent" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShippingService" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="RMANo" type="string" />
           <element minOccurs="0" maxOccurs="unbounded" name="Warranty2" type="tns:Warranty2" />
         </sequence>
       </complexType>
@@ -589,6 +593,18 @@
           <sequence />
         </complexType>
       </element>
+      <element name="Test">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="Test_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
     </schema>
   </types>
   <message name="LogIn">
@@ -651,6 +667,12 @@
   <message name="SetDebug_Result">
     <part name="parameters" element="tns:SetDebug_Result" />
   </message>
+  <message name="Test">
+    <part name="parameters" element="tns:Test" />
+  </message>
+  <message name="Test_Result">
+    <part name="parameters" element="tns:Test_Result" />
+  </message>
   <portType name="Functions_Port">
     <operation name="LogIn">
       <input name="LogIn" message="tns:LogIn" />
@@ -691,6 +713,10 @@
     <operation name="SetDebug">
       <input name="SetDebug" message="tns:SetDebug" />
       <output name="SetDebug_Result" message="tns:SetDebug_Result" />
+    </operation>
+    <operation name="Test">
+      <input name="Test" message="tns:Test" />
+      <output name="Test_Result" message="tns:Test_Result" />
     </operation>
   </portType>
   <binding name="Functions_Binding" type="tns:Functions_Port">
@@ -782,6 +808,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="SetDebug_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Test">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:Test" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Test">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Test_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

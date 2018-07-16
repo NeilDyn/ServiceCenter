@@ -175,6 +175,24 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         protected global::System.Web.UI.WebControls.TableCell tcTrackingNo;
         
         /// <summary>
+        /// tcRMANoTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcRMANoTitle;
+        
+        /// <summary>
+        /// tcRMANo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcRMANo;
+        
+        /// <summary>
         /// expandSerialNos control.
         /// </summary>
         /// <remarks>

@@ -49,6 +49,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private System.Threading.SendOrPostCallback SetDebugOperationCompleted;
         
+        private System.Threading.SendOrPostCallback TestOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -116,6 +118,9 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         public event SetDebugCompletedEventHandler SetDebugCompleted;
+        
+        /// <remarks/>
+        public event TestCompletedEventHandler TestCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:LogIn", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="LogIn_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -446,6 +451,34 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.SetDebugCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.SetDebugCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:Test", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="Test_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string Test() {
+            object[] results = this.Invoke("Test", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void TestAsync() {
+            this.TestAsync(null);
+        }
+        
+        /// <remarks/>
+        public void TestAsync(object userState) {
+            if ((this.TestOperationCompleted == null)) {
+                this.TestOperationCompleted = new System.Threading.SendOrPostCallback(this.OnTestOperationCompleted);
+            }
+            this.InvokeAsync("Test", new object[0], this.TestOperationCompleted, userState);
+        }
+        
+        private void OnTestOperationCompleted(object arg) {
+            if ((this.TestCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.TestCompleted(this, new TestCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1216,9 +1249,16 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string shipToCountryField;
         
+        private string shippingAgentField;
+        
+        private string shippingServiceField;
+        
+        private string rMANo1Field;
+        
         private Warranty21[] warranty2Field;
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
         public string DocType {
             get {
                 return this.docTypeField;
@@ -1229,6 +1269,7 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
         public string No {
             get {
                 return this.noField;
@@ -1239,6 +1280,7 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
         public string ExtDocNo {
             get {
                 return this.extDocNoField;
@@ -1249,6 +1291,7 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
         public string DocDate {
             get {
                 return this.docDateField;
@@ -1259,6 +1302,7 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
         public string RMANo {
             get {
                 return this.rMANoField;
@@ -1269,6 +1313,7 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
         public string ReturnTrackingNo {
             get {
                 return this.returnTrackingNoField;
@@ -1279,6 +1324,7 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
         public string SellToCustomerName {
             get {
                 return this.sellToCustomerNameField;
@@ -1289,6 +1335,7 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
         public string ShipToName {
             get {
                 return this.shipToNameField;
@@ -1299,6 +1346,7 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
         public string ShipToAddress {
             get {
                 return this.shipToAddressField;
@@ -1309,6 +1357,7 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
         public string ShipToAddress2 {
             get {
                 return this.shipToAddress2Field;
@@ -1319,6 +1368,7 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
         public string ShipToContact {
             get {
                 return this.shipToContactField;
@@ -1329,6 +1379,7 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
         public string ShipToCity {
             get {
                 return this.shipToCityField;
@@ -1339,6 +1390,7 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
         public string ShipToZip {
             get {
                 return this.shipToZipField;
@@ -1349,6 +1401,7 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
         public string ShipToState {
             get {
                 return this.shipToStateField;
@@ -1359,6 +1412,7 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
         public string ShipToCountry {
             get {
                 return this.shipToCountryField;
@@ -1369,7 +1423,40 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Warranty2")]
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
+        public string ShippingAgent {
+            get {
+                return this.shippingAgentField;
+            }
+            set {
+                this.shippingAgentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
+        public string ShippingService {
+            get {
+                return this.shippingServiceField;
+            }
+            set {
+                this.shippingServiceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("RMANo", Order=17)]
+        public string RMANo1 {
+            get {
+                return this.rMANo1Field;
+            }
+            set {
+                this.rMANo1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Warranty2", Order=18)]
         public Warranty21[] Warranty2 {
             get {
                 return this.warranty2Field;
@@ -4068,6 +4155,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string uPSRetLabelCreatedField;
         
+        private string rMANoField;
+        
         private Warranty2[] warranty2Field;
         
         /// <remarks/>
@@ -4217,6 +4306,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.uPSRetLabelCreatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RMANo {
+            get {
+                return this.rMANoField;
+            }
+            set {
+                this.rMANoField = value;
             }
         }
         
@@ -4691,6 +4790,32 @@ namespace ExcelDesign.ServiceFunctions {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void SetDebugCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void TestCompletedEventHandler(object sender, TestCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class TestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal TestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
 }
 
 #pragma warning restore 1591

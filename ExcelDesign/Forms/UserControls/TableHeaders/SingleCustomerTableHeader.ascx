@@ -30,8 +30,12 @@
                 data: JSON.stringify({ custID: custData }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: function () {
-                    __doPostBack('[id$=btnReload_<%= this.Count %>', '');
+                success: function (returned) {
+                    if (returned.d == "success") {
+                        __doPostBack('[id$=btnReload_<%= this.Count %>', '');
+                    } else {
+                        alert(returned.d);
+                    }
                 },
                 error: function (xhr, status, text) {
                     console.log(xhr.status);

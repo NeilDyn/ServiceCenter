@@ -40,7 +40,8 @@ namespace ExcelDesign.Forms
                 cbxCreateReturnLabel.Checked = u.CreateReturnLabel;
                 cbxAdmin.Checked = u.Admin;
                 cbxDeveloper.Checked = u.Developer;
-                tcLastPasswordUpdate.Text = u.LastPasswordUpdate;
+                tcLastPasswordUpdate.Text = u.PasswordLastUpdated;
+                tcPasswordExpiryDate.Text = u.PasswordExpiryDate;
             }
             catch (Exception e)
             {

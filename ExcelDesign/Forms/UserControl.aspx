@@ -23,14 +23,17 @@
                         data: JSON.stringify({ currentUser: userID, newPassword: password }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        success: function (orderNo) {
-                            alert("Password successfully updated!");
+                        success: function (error) {
+                            if (error.d.indexOf("Error") == -1) {
+                                alert("Password successfully updated!");
+                            } else {
+                                alert(error.d);
+                            }
                         },
                         error: function (xhr, status, text) {
-                            //console.log(xhr.status);
-                            //console.log(xhr.text);
-                            //console.log(xhr.responseText);
-                            alert("test");
+                            console.log(xhr.status);
+                            console.log(xhr.text);
+                            console.log(xhr.responseText);
                         },
                     });
                 } else {
@@ -52,6 +55,7 @@
                 <asp:TableHeaderCell Text="Admin" />
                 <asp:TableHeaderCell Text="Developer" />
                 <asp:TableHeaderCell Text="Last Password Update" />
+                <asp:TableHeaderCell Text="Password Expiry Date" />
             </asp:TableHeaderRow>
             <asp:TableRow>
                 <asp:TableCell ID="tcUserID" />
@@ -60,12 +64,13 @@
                 </asp:TableCell><asp:TableCell ID="tcCreateRMA" Width="10%" HorizontalAlign="Center">
                     <asp:CheckBox ID="cbxCreateRMA" runat="server" Enabled="false" />
                 </asp:TableCell><asp:TableCell ID="tcCreateReturnLabel" Width="10%" HorizontalAlign="Center">
-                    <asp:CheckBox ID="cbxCreateReturnLabel" runat="server" Enabled="false"/>
+                    <asp:CheckBox ID="cbxCreateReturnLabel" runat="server" Enabled="false" />
                 </asp:TableCell><asp:TableCell ID="tcAdmin" Width="10%" HorizontalAlign="Center">
                     <asp:CheckBox ID="cbxAdmin" runat="server" Enabled="false" />
                 </asp:TableCell><asp:TableCell ID="tcDeveloper" Width="10%" HorizontalAlign="Center">
                     <asp:CheckBox ID="cbxDeveloper" runat="server" Enabled="false" />
                 </asp:TableCell><asp:TableCell ID="tcLastPasswordUpdate" Width="10%" />
+                <asp:TableCell ID="tcPasswordExpiryDate" Width="10%" />
             </asp:TableRow>
         </asp:Table>
         <br />

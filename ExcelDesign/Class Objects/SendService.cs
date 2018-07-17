@@ -145,9 +145,10 @@ namespace ExcelDesign.Class_Objects
                 orderNo = eo.SalesHeader[0].No;
                 externalDocumentNo = eo.SalesHeader[0].ExtDocNo;
                 orderDate = eo.SalesHeader[0].DocDate;
-                channelName = eo.SalesHeader[0].ShipToContact;
-                //shipMethod = eo.SalesHeader[0].Sh
-                rmaNo = eo.SalesHeader[0].RMANo;
+                channelName = eo.SalesHeader[0].SellToCustomerName;
+                shipMethod = eo.SalesHeader[0].ShippingAgent;
+                shipMethod += " " + eo.SalesHeader[0].ShippingService;
+                rmaNo = eo.SalesHeader[0].RMANo1;
                 lines = CreateExchangeOrderLines(eo);
 
                 ceh.OrderNo = orderNo;

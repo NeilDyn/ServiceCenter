@@ -32,6 +32,7 @@ namespace ExcelDesign.Forms
             }
             catch (Exception ex)
             {
+                Session["SessionID"] = null;
                 Session["ActiveUser"] = null;
                 Session["Error"] = ex.Message;
                 Response.Redirect("ErrorForm.aspx");

@@ -10,6 +10,10 @@
           <element minOccurs="1" maxOccurs="1" name="Admin" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Developer" type="string" />
           <element minOccurs="1" maxOccurs="1" name="SessionID" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Password" type="string" />
+          <element minOccurs="1" maxOccurs="1" default="0" name="SessionTimeout" type="int" />
+          <element minOccurs="1" maxOccurs="1" name="PasswordExpiryDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="PasswordLastUpdated" type="string" />
         </sequence>
       </complexType>
       <complexType name="UserSetup" mixed="true">

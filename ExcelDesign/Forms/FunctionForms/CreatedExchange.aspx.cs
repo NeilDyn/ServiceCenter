@@ -28,6 +28,7 @@ namespace ExcelDesign.Forms.FunctionForms
                     tcChannelName.Text = CEH.ChannelName;
                     tcShipMethod.Text = CEH.ShipMethod;
                     tcRmaNo.Text = CEH.RMANo;
+                    tcOrderDate.Text = CEH.OrderDate;
 
                     PopulateLines();
                 }

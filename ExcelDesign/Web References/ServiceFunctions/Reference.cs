@@ -556,6 +556,18 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string sessionIDField;
         
+        private string passwordField;
+        
+        private int sessionTimeoutField;
+        
+        private string passwordExpiryDateField;
+        
+        private string passwordLastUpdatedField;
+        
+        public User() {
+            this.sessionTimeoutField = 0;
+        }
+        
         /// <remarks/>
         public string UserID {
             get {
@@ -613,6 +625,46 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.sessionIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                this.passwordField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int SessionTimeout {
+            get {
+                return this.sessionTimeoutField;
+            }
+            set {
+                this.sessionTimeoutField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PasswordExpiryDate {
+            get {
+                return this.passwordExpiryDateField;
+            }
+            set {
+                this.passwordExpiryDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PasswordLastUpdated {
+            get {
+                return this.passwordLastUpdatedField;
+            }
+            set {
+                this.passwordLastUpdatedField = value;
             }
         }
     }

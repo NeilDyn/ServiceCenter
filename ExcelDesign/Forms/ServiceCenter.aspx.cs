@@ -181,6 +181,7 @@ namespace ExcelDesign.Forms
         }
 
         [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public static string SetActiveCustomer(int custID)
         {
             try
@@ -189,44 +190,44 @@ namespace ExcelDesign.Forms
             }
             catch (Exception e)
             {
-                HttpContext.Current.Session["Error"] = e.Message;
+                return e.Message;
             }
 
-            return "1";
+            return "success";
         }
 
         [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public static string IssueReturnLabel(string rmaNo, string email)
         {
             try
             {
                 StaticService.IssueReturnLabel(rmaNo, email);
-                return "1";
             }
             catch (Exception e)
             {
-                HttpContext.Current.Session["Error"] = e.Message;
-                return "~/Forms/ErrorForm.aspx";
+                return "Error - " + e.Message;
             }
+
+            return "success";
         }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public static string CreateExchange(string rmaNo)
         {
+            string createdOrderNo = string.Empty;
+
             try
-            {
-                string createdOrderNo = string.Empty;
-
+            {           
                 createdOrderNo = StaticService.CreateExchange(rmaNo);
-
-                return createdOrderNo;
             }
             catch (Exception e)
             {
-                HttpContext.Current.Session["Error"] = e.Message;
-                return e.Message;
+                return "Error - " + e.Message;
             }
+
+            return createdOrderNo;
         }
 
         [WebMethod]
@@ -235,16 +236,14 @@ namespace ExcelDesign.Forms
         {
             try
             {
-                //StaticService.UpdateUserPassword(currentUser, newPassword);
-                throw new Exception("TESTA");
+                StaticService.UpdateUserPassword(currentUser, newPassword);
             }
             catch (Exception e)
             {
-                HttpContext.Current.Session["Error"] = e.Message;
-                HttpContext.Current.Response.StatusCode = 400;
+                return "Error - " + e.Message;
             }
 
-            return "1";
+            return "success";
         }       
     }
 }

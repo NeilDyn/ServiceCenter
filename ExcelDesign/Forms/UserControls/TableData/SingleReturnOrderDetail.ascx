@@ -20,7 +20,19 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (orderNo) {
-                    alert("New order created through exchange: " + orderNo.d);
+                    if (orderNo.d.indexOf("Error") == -1) {
+                        alert("New order created through exchange: " + orderNo.d);
+
+                        var width = 1500;
+                        var height = 500;
+                        var left = (screen.width - width) + 500;
+                        var top = (screen.height - height) * 0.5;
+                        window.open("FunctionForms/CreatedExchange.aspx",
+                            null,
+                            "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                    } else {
+                        alert(orderNo.d);
+                    }
                 },
                 error: function (xhr, status, text) {
                     console.log(xhr.status);
@@ -30,75 +42,79 @@
             });
         });
 
-            $("[id$=btnIssueRefund<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-                alert("Hi, return <%= this.Rh.RMANo %> can be refunded.");
-            });
-
-            $("[id$=btnPrintRMAInstructions<%= this.CustID%>_<%= this.CountID %>]").click(function () {
-                window.open("FunctionForms/RMAPDFForm.aspx?RMANo=<%= this.Rh.RMANo %>", "_blank");
-            });
-
-            $("[id$=btnUpdateRMA<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-
-                var width = 1500;
-                var height = 500;
-                var left = (screen.width - width) + 500;
-                var top = (screen.height - height) * 0.5;
-                window.open("FunctionForms/CreateReturn.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>",
-                    null,
-                    "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
-            });
-
-            $("[id$=btnIssueReturnLabel<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-                var rmaNo = "<%= this.Rh.RMANo %>";
-                var emailIn = prompt("Please enter a valid email address:");
-
-                if (emailIn == null || emailIn == "") {
-                    alert("Invalid email address entered.")
-                }
-                else {
-                    $.ajax({
-                        type: "POST",
-                        url: "ServiceCenter.aspx/IssueReturnLabel",
-                        data: JSON.stringify({ rmaNo: rmaNo, email: emailIn }),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function () {
-                            alert("Return Label Created for Return: " + rmaNo)
-                        },
-                        error: function (xhr, status, text) {
-                            console.log(xhr.status);
-                            console.log(xhr.text);
-                            console.log(xhr.responseText);
-                            window.location = res.d;
-                        },
-                    });
-                }
-            });
+        $("[id$=btnIssueRefund<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+            alert("Hi, return <%= this.Rh.RMANo %> can be refunded.");
         });
 
-        function expandMoreReturnLines<%= this.CustID %><%= this.CountID %>(lineID) {
-            if ($("a#expandMoreClickReturnLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text() == "Show More") {
-            $("a#expandMoreClickReturnLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text("Show Less");
-        }
-        else {
-            $("a#expandMoreClickReturnLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text("Show More");
-        }
+        $("[id$=btnPrintRMAInstructions<%= this.CustID%>_<%= this.CountID %>]").click(function () {
+            window.open("FunctionForms/RMAPDFForm.aspx?RMANo=<%= this.Rh.RMANo %>", "_blank");
+        });
 
-        $("[id*=showMoreReturnLines_<%= this.CustID %>_<%= this.CountID %>_" + lineID + "]").toggle();
-        };
+        $("[id$=btnUpdateRMA<%= this.CustID %>_<%= this.CountID %>]").click(function () {
 
-        function expandReceipts<%=this.CustID %><%= this.CountID %>() {
-            $("[id$=expandReceipts_<%= this.CustID %>_<%= this.CountID %>]").toggle();
-        };
+            var width = 1500;
+            var height = 500;
+            var left = (screen.width - width) + 500;
+            var top = (screen.height - height) * 0.5;
+            window.open("FunctionForms/CreateReturn.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>",
+                null,
+                "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+        });
+
+        $("[id$=btnIssueReturnLabel<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+            var rmaNo = "<%= this.Rh.RMANo %>";
+            var emailIn = prompt("Please enter a valid email address:");
+
+            if (emailIn == null || emailIn == "") {
+                alert("Invalid email address entered.")
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: "ServiceCenter.aspx/IssueReturnLabel",
+                    data: JSON.stringify({ rmaNo: rmaNo, email: emailIn }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (error) {
+                        if (error.d.indexOf("Error") == -1) {
+                            alert("Return Label Created for Return: " + rmaNo)
+                        } else {
+                            alert(error.d)
+                        }
+                    },
+                    error: function (xhr, status, text) {
+                        console.log(xhr.status);
+                        console.log(xhr.text);
+                        console.log(xhr.responseText);
+                        window.location = res.d;
+                    },
+                });
+            }
+        });
+    });
+
+    function expandMoreReturnLines<%= this.CustID %><%= this.CountID %>(lineID) {
+        if ($("a#expandMoreClickReturnLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text() == "Show More") {
+                $("a#expandMoreClickReturnLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text("Show Less");
+            }
+            else {
+                $("a#expandMoreClickReturnLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text("Show More");
+            }
+
+            $("[id*=showMoreReturnLines_<%= this.CustID %>_<%= this.CountID %>_" + lineID + "]").toggle();
+    };
+
+    function expandReceipts<%=this.CustID %><%= this.CountID %>() {
+        $("[id$=expandReceipts_<%= this.CustID %>_<%= this.CountID %>]").toggle();
+    };
 
 
-        function expandReceives<%=this.CustID %><%= this.CountID %>() {
-            $("[id$=expandReceives_<%= this.CustID %>_<%= this.CountID %>]").toggle();
-        };
+    function expandReceives<%=this.CustID %><%= this.CountID %>() {
+        $("[id$=expandReceives_<%= this.CustID %>_<%= this.CountID %>]").toggle();
+    };
 </script>
 <asp:Table ID="tblSingleReturnOrderDetail" runat="server" Height="100%" Width="100%">
-    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >
+    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
         <asp:TableCell Text="Return Status:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcReturnStatus" />
@@ -108,7 +124,7 @@
             <br />
         </asp:TableCell>
     </asp:TableRow>
-    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >
+    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
         <asp:TableCell Text="Date Created:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcDateCreated" />
@@ -117,7 +133,7 @@
         <asp:TableCell Text="Return Tracking #:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcReturnTrackingNo" />
     </asp:TableRow>
-    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >
+    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
         <asp:TableCell Text="Channel Name:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcChannelName" />
@@ -126,10 +142,10 @@
         <asp:TableCell Text="Order Date:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcOrderDate" />
     </asp:TableRow>
-    <asp:TableRow runat="server" ID="expandReceipts" TableSection="TableBody" HorizontalAlign="Justify" >
+    <asp:TableRow runat="server" ID="expandReceipts" TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell><br /></asp:TableCell>
     </asp:TableRow>
-    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >
+    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
         <asp:TableCell Text="Zendesk Ticket #:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcZendeskTicketNo">
@@ -140,10 +156,10 @@
         <asp:TableCell Text="Email:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcEmail" />
     </asp:TableRow>
-    <asp:TableRow runat="server" ID="expandReceives" TableSection="TableBody" HorizontalAlign="Justify" >
+    <asp:TableRow runat="server" ID="expandReceives" TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell><br /></asp:TableCell>
     </asp:TableRow>
-    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >
+    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
         <asp:TableCell Text="Zendesk Ticket(s):" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcZendeskTickets" />
@@ -156,7 +172,7 @@
     <asp:TableRow>
         <asp:TableCell ColumnSpan="8">
             <asp:Table runat="server" ID="tblReturnDetailLines" Height="100%" Width="100%">
-                <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1" >
+                <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
                     <asp:TableHeaderCell Text="Item No." HorizontalAlign="Left" />
                     <asp:TableHeaderCell Text="Description" HorizontalAlign="Left" Width="30%" />
                     <asp:TableHeaderCell Text="Qty" />

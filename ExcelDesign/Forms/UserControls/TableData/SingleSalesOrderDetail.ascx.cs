@@ -87,18 +87,29 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             if (Sh.ShipmentHeaderObject.Count > 0)
             {
-                this.tcShipmentDate.Text = Sh.ShipmentHeaderObject[0].ShippingDate;
-                this.tcShipmentDate.ToolTip = Sh.ShipmentHeaderObject[0].ShippingDate;
-                shipmentMethod = Sh.ShipmentHeaderObject[0].ShippingAgentCode;
-                shipmentMethod += " " + Sh.ShipmentHeaderObject[0].ShippingAgentService;
+                if(!Sh.ShipmentHeaderObject[0].GeneratedFromSalesHeader)
+                {
+                    this.tcShipmentDate.Text = Sh.ShipmentHeaderObject[0].ShippingDate;
+                    this.tcShipmentDate.ToolTip = Sh.ShipmentHeaderObject[0].ShippingDate;
+                    shipmentMethod = Sh.ShipmentHeaderObject[0].ShippingAgentCode;
+                    shipmentMethod += " " + Sh.ShipmentHeaderObject[0].ShippingAgentService;
 
-                
-                this.tcShipMethod.Text = shipmentMethod;
-                this.tcShipMethod.ToolTip = shipmentMethod;
 
-                Enum.TryParse(Sh.ShipmentHeaderObject[0].ShippingAgentCode, out trackType);
+                    this.tcShipMethod.Text = shipmentMethod;
+                    this.tcShipMethod.ToolTip = shipmentMethod;
 
-                PopulateShipmentLines();
+                    Enum.TryParse(Sh.ShipmentHeaderObject[0].ShippingAgentCode, out trackType);
+
+                    this.tcShipmentsTotal.Text = "<a href='javascript:expandShipments" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Sh.ShipmentHeaderObject.Count.ToString() + "</a>";
+                    this.tcShipmentsTotal.ID = "tcShipmentsTotal_" + CustID.ToString() + "_" + CountID.ToString();
+
+                    PopulateShipmentLines();
+                }
+                else
+                {
+                    this.tcShipmentsTotal.Text = "<a href='javascript:expandShipments" + CustID.ToString() + "" + CountID.ToString() + "()'>0</a>";
+                    this.tcShipmentsTotal.ID = "tcShipmentsTotal_" + CustID.ToString() + "_" + CountID.ToString();
+                }
             }
 
             if (Sh.PostedPackageObject.Count > 0)
@@ -117,10 +128,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                     this.tcTrackingNo.Text = SetTrackingNo(trackType, trackNo);
                     this.tcTrackingNo.ToolTip = trackNo;
                 }
-            }
-
-            this.tcShipmentsTotal.Text = "<a href='javascript:expandShipments" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Sh.ShipmentHeaderObject.Count.ToString() + "</a>";
-            this.tcShipmentsTotal.ID = "tcShipmentsTotal_" + CustID.ToString() + "_" + CountID.ToString();
+            }      
 
             this.tcPackagesCount.Text = "<a href='javascript:expandPackages" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Sh.PostedPackageObject.Count.ToString() + "</a>";
             this.tcPackagesCount.ID = "tcPackagesTotal" + CustID.ToString() + "_" + CountID.ToString();

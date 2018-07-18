@@ -1,52 +1,90 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ServiceCenter.aspx.cs" Inherits="ExcelDesign.Forms.ServiceCenter" %>
+
 <%@ Register Src="~/Forms/UserControls/SingleControls/MultipleCustomers.ascx" TagName="MultipleCustomers" TagPrefix="mc" %>
 <%@ Register Src="~/Forms/UserControls/MainTables/CustomerInfoTable.ascx" TagName="CustomerInfoTable" TagPrefix="tib" %>
 
 <head runat="server">
     <title>Customer Service Center</title>
     <link href="../css/mainpage.css" rel="stylesheet" type="text/css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/themes/ui-lightness/jquery-ui.css" type="text/css" />
     <script>
-        var sess_interval = 60000;
-        var sess_minutes = 20000;
-        var sess_warningMinutes = 10000;
-        var sess_intervalID;
-        var sess_lastActivity;
-        var interval;
+        $("id$=btnExtendSessionTime").click(function() {
+            ResetTimers();
+        });
 
-        var interval = setInterval('checkSession()', sess_interval);
+        var warningTimer;
+        var timeoutTimer;
 
-        function checkSession() {
-            sess_minutes--;
+        //Start the timers
+        function StartTimers() {
+            warningTimer = setTimeout("IdleWarning()", 60000);
+            timeoutTimer = setTimeout("IdleTimeout()", <%= this.SessionTime %> * 60000);
+        };
 
-            if (sess_minutes == sess_warningMinutes) {
-                var confirmActive = confirm("Warning, your session will expire in 1 minute. Do you want to continue working?", "Session is about to expire");
+        //Reset the timers
+        function ResetTimers() {
+            clearTimeout(warningTimer);
+            clearTimeout(timeoutTimer);
+            StartTimers();
+            $("#timeout").dialog('close');
+            return false;
+        };
 
-                if (confirmActive) {
-                    sess_minutes = 20000;
-                    alert("Session extended");
-                } else {
-                    alert("Session timeout");
-                }
-            }
-        }
+        //Show idle timeout warning dialog
+        function IdleWarning() {
+            $("#timeout").dialog({
+                title: "Session about to expire",
+                modal: true
+            });
+        };
+
+        function IdleTimeout() {
+            $.ajax({
+                type: "POST",
+                url: "ServiceCenter.aspx/SessionCompleted",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    alert(response.d);
+                    window.location = "LoginPage.aspx";
+                },
+                error: function (xhr, status, text) {
+                    console.log(xhr.status);
+                    console.log(xhr.text);
+                    console.log(xhr.responseText);
+                },
+            });
+        };
     </script>
 </head>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<body>
-    <form id="frmOrderDetails" runat="server">        
+<body onload="StartTimers();">
+    <form id="frmOrderDetails" runat="server">
+        <div id="timeout" style="display: none">
+            <h1>Session is about to expire</h1>
+            <p>Warning, your session will expire in 1 minute. Do you want to continue working?</p>
+            <asp:Button ID="btnExtendSessionTime" Text="Yes" runat="server" OnClientClick="ResetTimers()" />
+        </div>
+        <header style="float: right" runat="server">
+            <asp:Button ID="BtnControlPanel" runat="server" Text="Control Panel" OnClick="BtnControlPanel_Click" />
+            <asp:Button ID="BtnAdminPanel" runat="server" Text="Admin Panel" OnClick="BtnAdminPanel_Click" />
+            <asp:Button ID="BtnLogout" runat="server" Text="Logout" OnClick="BtnLogout_Click" />
+            <br />
+        </header>
         <div id="ServiceCenterHeader">
             <asp:Image ID="imgLogo" runat="server" ImageUrl="~/images/Logo.png" />
-            <asp:Label ID="lblCustomerServicePortal" runat="server" style="margin-left: 200px;" Text="Customer Service Portal" ForeColor="#0099FF" Font-Bold="True" Font-Size="XX-Large" CssClass="HeaderLabel"/>        
+            <asp:Label ID="lblCustomerServicePortal" runat="server" Style="margin-left: 200px;" Text="Customer Service Portal" ForeColor="#0099FF" Font-Bold="True" Font-Size="XX-Large" CssClass="HeaderLabel" />
         </div>
-        <hr class="HeaderLine"/>
-        
-        <div class="SearchArea" id="SearchArea" style="margin-top: 20px;">        
-            <asp:Label ID="Label1" runat="server" Text="Search" ForeColor="#0099FF" Font-Bold="True"/>
-            <asp:TextBox ID="txtSearchBox" runat="server" Width="700px" BorderColor="Black" BorderWidth="2px" style="margin-left: 35px" />
-            <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" style="margin-left: 30px" Text="Search" />
-            <asp:Label ID="Label2" runat="server" Text="Search Options:" ForeColor="#0099FF" Font-Bold="True" style="margin-left: 30px" />
-            <asp:DropDownList ID="DdlSearchOptions" runat="server" style="margin-left: 35px" Width="260px">
+        <hr class="HeaderLine" />
+
+        <div class="SearchArea" id="SearchArea" style="margin-top: 20px;">
+            <asp:Label ID="Label1" runat="server" Text="Search" ForeColor="#0099FF" Font-Bold="True" />
+            <asp:TextBox ID="txtSearchBox" runat="server" Width="700px" BorderColor="Black" BorderWidth="2px" Style="margin-left: 35px" />
+            <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Style="margin-left: 30px" Text="Search" />
+            <asp:Label ID="Label2" runat="server" Text="Search Options:" ForeColor="#0099FF" Font-Bold="True" Style="margin-left: 30px" />
+            <asp:DropDownList ID="DdlSearchOptions" runat="server" Style="margin-left: 35px" Width="260px">
                 <asp:ListItem Value="Default (Exludes Ship-to Filters)"></asp:ListItem>
                 <asp:ListItem Value="Search All"></asp:ListItem>
                 <asp:ListItem Value="PO Number"></asp:ListItem>
@@ -56,8 +94,8 @@
                 <asp:ListItem Value="Ship-to Address"></asp:ListItem>
                 <asp:ListItem Value="RMA-No"></asp:ListItem>
             </asp:DropDownList>
-        </div>      
-        <br />   
+        </div>
+        <br />
     </form>
 </body>
 </html>

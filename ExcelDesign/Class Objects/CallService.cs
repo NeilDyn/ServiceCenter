@@ -884,8 +884,8 @@ namespace ExcelDesign.Class_Objects
                                     if ((currResults.SalesLine[sl].DocNo == orderNo) && (currResults.SalesLine[sl].Type == "Item"))
                                     {
                                         totalCounter++;
-                                        int.TryParse(currResults.SalesLine[sl].QtyToReceive, out int qtyToRec);
-                                        if (qtyToRec > 0)
+                                        int.TryParse(currResults.SalesLine[sl].QtyShipped, out int qtyShipped);
+                                        if (qtyShipped > 0)
                                         {
                                             statusCounter++;
                                         }
@@ -893,12 +893,12 @@ namespace ExcelDesign.Class_Objects
                                 }
 
                                 if (statusCounter == totalCounter)
-                                {
-                                    orderStatus = "OrderCreated";
+                                {                                   
+                                    orderStatus = "Shipped";
                                 }
                                 else if (statusCounter == 0)
                                 {
-                                    orderStatus = "Shipped";
+                                    orderStatus = "OrderCreated";
                                 }
                                 else
                                 {

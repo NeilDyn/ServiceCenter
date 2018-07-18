@@ -22,6 +22,7 @@ namespace ExcelDesign.Forms
     public partial class ServiceCenter : System.Web.UI.Page
     {
         protected CallService cs = new CallService();
+        public int SessionTime;
 
         // User Controls
         protected static Control multipleCustomers;
@@ -45,6 +46,20 @@ namespace ExcelDesign.Forms
             if (!this.Page.User.Identity.IsAuthenticated || Session["ActiveUser"] == null)
             {
                 FormsAuthentication.RedirectToLoginPage();
+            }
+            else
+            {
+                User u = (User)Session["ActiveUser"];
+                SessionTime = u.SessionTimeout;
+
+                if(u.Admin)
+                {
+                    BtnAdminPanel.Visible = true;
+                }
+                else
+                {
+                    BtnAdminPanel.Visible = false;
+                }
             }
 
             if (IsPostBack)
@@ -244,6 +259,32 @@ namespace ExcelDesign.Forms
             }
 
             return "success";
-        }       
+        }
+
+        protected void BtnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            FormsAuthentication.SignOut();
+            FormsAuthentication.RedirectToLoginPage();
+        }
+
+        protected void BtnAdminPanel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AdminControl.aspx");
+        }
+
+        protected void BtnControlPanel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("UserControl.aspx");
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static string SessionCompleted()
+        {
+            HttpContext.Current.Session.Clear();
+            FormsAuthentication.SignOut();
+            return "You session has expired. You will now be redirected to the login page.";
+        }
     }
 }

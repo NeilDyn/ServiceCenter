@@ -4,7 +4,9 @@
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/SalesOrderLines/SingleSalesOrderTrackingNos.ascx" TagName="SingleSalesOrderTrackingNos" TagPrefix="ssotn" %>
 
 <link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/themes/ui-lightness/jquery-ui.css" type="text/css" />
 <script type="text/javascript">
     $(document).ready(function () {
         $("[id$=expandShipments_<%= this.CustID %>_<%= this.CountID %>]").hide();
@@ -23,6 +25,7 @@
         $("[id$=btnCreateReturn_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
             if ("<%= this.tcStatus.Text.ToUpper() %>" == "OPEN")
             {
+                if ("<%= this.tcOrderStatus.Text.ToUpper() %>" == "SHIPPED") {
                     var width = 1500;
                     var height = 500;
                     var left = (screen.width - width) + 500;
@@ -30,6 +33,9 @@
                     window.open("FunctionForms/CreateReturn.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
                         null,
                         "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                } else {
+                    alert("Order <%= this.OrderNo %> has no shipped items and cannot be returned.");
+                }
             }
             else
             {

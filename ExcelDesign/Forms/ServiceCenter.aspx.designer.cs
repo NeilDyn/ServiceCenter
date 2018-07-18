@@ -22,6 +22,42 @@ namespace ExcelDesign.Forms {
         protected global::System.Web.UI.HtmlControls.HtmlForm frmOrderDetails;
         
         /// <summary>
+        /// btnExtendSessionTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnExtendSessionTime;
+        
+        /// <summary>
+        /// BtnControlPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnControlPanel;
+        
+        /// <summary>
+        /// BtnAdminPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnAdminPanel;
+        
+        /// <summary>
+        /// BtnLogout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnLogout;
+        
+        /// <summary>
         /// imgLogo control.
         /// </summary>
         /// <remarks>

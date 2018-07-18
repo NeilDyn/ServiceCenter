@@ -2,6 +2,9 @@
 <%@ Register Src="~/Forms/UserControls/MainTables/SalesOrderHeaderTable.ascx" TagName="SalesOrderHeaderTable" TagPrefix="soht"%>
 
 <link href="../../../../css/mainpage.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/themes/ui-lightness/jquery-ui.css" type="text/css" />
 
 <asp:Table ID="tblSingleCustomerDetail" runat="server" Height="100%" Width="100%">
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >

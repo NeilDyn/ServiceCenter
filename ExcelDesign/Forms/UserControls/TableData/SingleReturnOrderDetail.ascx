@@ -3,7 +3,9 @@
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/ReturnOrderLines/SingleReturnOrderPackages.ascx" TagName="SingleReturnOrderPackages" TagPrefix="srop" %>
 
 <link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/themes/ui-lightness/jquery-ui.css" type="text/css" />
 <script type="text/javascript">
     $(document).ready(function () {
         $("[id$=expandReceipts_<%= this.CustID %>_<%= this.CountID %>]").hide();
@@ -86,7 +88,6 @@
                         console.log(xhr.status);
                         console.log(xhr.text);
                         console.log(xhr.responseText);
-                        window.location = res.d;
                     },
                 });
             }

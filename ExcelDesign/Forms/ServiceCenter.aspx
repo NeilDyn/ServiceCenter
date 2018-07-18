@@ -19,7 +19,7 @@
 
         //Start the timers
         function StartTimers() {
-            warningTimer = setTimeout("IdleWarning()", 60000);
+            warningTimer = setTimeout("IdleWarning()", (<%= this.SessionTime %> * 60000) - 60000);
             timeoutTimer = setTimeout("IdleTimeout()", <%= this.SessionTime %> * 60000);
         };
 

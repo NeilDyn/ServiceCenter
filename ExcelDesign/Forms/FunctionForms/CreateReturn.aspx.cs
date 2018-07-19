@@ -80,199 +80,206 @@ namespace ExcelDesign.Forms.FunctionForms
 
         protected void LoadCreateReturnLines()
         {
-            TableRow lineRow = new TableRow();
-
-            Sh = (List<SalesHeader>)Session["SalesHeaders"];
-
-            List<ReturnReason> rrList = (List<ReturnReason>)Session["ReturnReasons"];
-
-            int lineCount = 0;
-            string filterNo = string.Empty;
-
-            if (createdOrderNo != null)
+            try
             {
-                filterNo = createdOrderNo;
-            }
-            else
-            {
-                filterNo = tcNo.Text;
-            }
+                TableRow lineRow = new TableRow();
 
-            foreach (SalesHeader head in Sh)
-            {
-                foreach (ShipmentHeader header in head.ShipmentHeaderObject)
+                Sh = (List<SalesHeader>)Session["SalesHeaders"];
+
+                List<ReturnReason> rrList = (List<ReturnReason>)Session["ReturnReasons"];
+
+                int lineCount = 0;
+                string filterNo = string.Empty;
+
+                if (createdOrderNo != null)
                 {
-                    if (head.SalesOrderNo == filterNo)
+                    filterNo = createdOrderNo;
+                }
+                else
+                {
+                    filterNo = tcNo.Text;
+                }
+
+                foreach (SalesHeader head in Sh)
+                {
+                    foreach (ShipmentHeader header in head.ShipmentHeaderObject)
                     {
-                        foreach (ShipmentLine line in header.ShipmentLines)
+                        if (head.SalesOrderNo == filterNo)
                         {
-                            int removeqty = 0;
-                            foreach (ReceiptLine returnLine in header.ReturnLines)
+                            foreach (ShipmentLine line in header.ShipmentLines)
                             {
-                                if (line.ItemNo == returnLine.ItemNo)
+                                int removeqty = 0;
+                                foreach (ReceiptLine returnLine in header.ReturnLines)
                                 {
-                                    removeqty += returnLine.Quantity;
-                                }
-                            }
-
-                            if (line.Quantity - removeqty > 0 && line.Type.ToUpper() == "ITEM")
-                            {
-                                lineCount++;
-                                anyLines = true;
-
-                                TableRow singleRow = new TableRow();
-
-                                TableCell itemNo = new TableCell();
-                                TableCell desc = new TableCell();
-                                TableCell qty = new TableCell();
-                                TableCell actionQty = new TableCell();
-                                TableCell returnReasonCode = new TableCell();
-
-                                DropDownList ddlReturnReasonCode = new DropDownList
-                                {
-                                    DataValueField = "Description",
-                                    DataSource = rrList,
-                                    ID = "ddlReturnReasonCode_" + lineCount.ToString()
-                                };
-
-                                TextBox actionQtyInsert = new TextBox
-                                {
-                                    ID = "actionQtyInsert_" + lineCount.ToString(),
-                                    Text = (line.Quantity - removeqty).ToString(),
-                                Width = new Unit("15%")
-                                };
-
-                                ddlReturnReasonCode.DataBind();
-
-                                itemNo.ID = "itemNo_" + lineCount.ToString();
-                                qty.ID = "itemQuanity_" + lineCount.ToString();
-                                desc.ID = "desc1_" + lineCount.ToString();
-                                actionQty.ID = "actionQty_" + lineCount.ToString();
-                                returnReasonCode.ID = "returnReasonCode_" + lineCount.ToString();
-
-                                itemNo.Text = line.ItemNo;
-                                desc.Text = line.Description;
-                                qty.Text = (line.Quantity - removeqty).ToString();
-                                actionQty.Controls.Add(actionQtyInsert);
-                                returnReasonCode.Controls.Add(ddlReturnReasonCode);
-
-                                qty.HorizontalAlign = HorizontalAlign.Center;
-                                actionQty.HorizontalAlign = HorizontalAlign.Center;
-
-                                singleRow.ID = "returnOrderLineRow_" + lineCount.ToString();
-
-                                singleRow.Cells.Add(itemNo);
-                                singleRow.Cells.Add(desc);
-                                singleRow.Cells.Add(qty);
-                                singleRow.Cells.Add(actionQty);
-                                singleRow.Cells.Add(returnReasonCode);
-
-                                if (lineCount % 2 == 0)
-                                {
-                                    singleRow.BackColor = Color.White;
-                                }
-                                else
-                                {
-                                    singleRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
-                                }
-
-                                singleRow.Attributes.CssStyle.Add("border-collapse", "collapse");
-                                tblCreateReturnOrderTableDetails.Rows.Add(singleRow);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        foreach (string rmaLine in header.RMANo)
-                        {
-                            if (rmaLine == filterNo)
-                            {
-                                foreach (ShipmentLine line in header.ShipmentLines)
-                                {
-                                    int removeqty = 0;
-                                    foreach (ReceiptLine returnLine in header.ReturnLines)
+                                    if (line.ItemNo == returnLine.ItemNo)
                                     {
-                                        if (line.ItemNo == returnLine.ItemNo)
-                                        {
-                                            removeqty += returnLine.Quantity;
-                                        }
+                                        removeqty += returnLine.Quantity;
+                                    }
+                                }
+
+                                if (line.Quantity - removeqty > 0 && line.Type.ToUpper() == "ITEM")
+                                {
+                                    lineCount++;
+                                    anyLines = true;
+
+                                    TableRow singleRow = new TableRow();
+
+                                    TableCell itemNo = new TableCell();
+                                    TableCell desc = new TableCell();
+                                    TableCell qty = new TableCell();
+                                    TableCell actionQty = new TableCell();
+                                    TableCell returnReasonCode = new TableCell();
+
+                                    DropDownList ddlReturnReasonCode = new DropDownList
+                                    {
+                                        DataValueField = "Description",
+                                        DataSource = rrList,
+                                        ID = "ddlReturnReasonCode_" + lineCount.ToString()
+                                    };
+
+                                    TextBox actionQtyInsert = new TextBox
+                                    {
+                                        ID = "actionQtyInsert_" + lineCount.ToString(),
+                                        Text = (line.Quantity - removeqty).ToString(),
+                                        Width = new Unit("15%")
+                                    };
+
+                                    ddlReturnReasonCode.DataBind();
+
+                                    itemNo.ID = "itemNo_" + lineCount.ToString();
+                                    qty.ID = "itemQuanity_" + lineCount.ToString();
+                                    desc.ID = "desc1_" + lineCount.ToString();
+                                    actionQty.ID = "actionQty_" + lineCount.ToString();
+                                    returnReasonCode.ID = "returnReasonCode_" + lineCount.ToString();
+
+                                    itemNo.Text = line.ItemNo;
+                                    desc.Text = line.Description;
+                                    qty.Text = (line.Quantity - removeqty).ToString();
+                                    actionQty.Controls.Add(actionQtyInsert);
+                                    returnReasonCode.Controls.Add(ddlReturnReasonCode);
+
+                                    qty.HorizontalAlign = HorizontalAlign.Center;
+                                    actionQty.HorizontalAlign = HorizontalAlign.Center;
+
+                                    singleRow.ID = "returnOrderLineRow_" + lineCount.ToString();
+
+                                    singleRow.Cells.Add(itemNo);
+                                    singleRow.Cells.Add(desc);
+                                    singleRow.Cells.Add(qty);
+                                    singleRow.Cells.Add(actionQty);
+                                    singleRow.Cells.Add(returnReasonCode);
+
+                                    if (lineCount % 2 == 0)
+                                    {
+                                        singleRow.BackColor = Color.White;
+                                    }
+                                    else
+                                    {
+                                        singleRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
                                     }
 
-                                    if (line.Quantity - removeqty > 0 && line.Type.ToUpper() == "ITEM")
+                                    singleRow.Attributes.CssStyle.Add("border-collapse", "collapse");
+                                    tblCreateReturnOrderTableDetails.Rows.Add(singleRow);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            foreach (string rmaLine in header.RMANo)
+                            {
+                                if (rmaLine == filterNo)
+                                {
+                                    foreach (ShipmentLine line in header.ShipmentLines)
                                     {
-                                        lineCount++;
-                                        anyLines = true;
-
-                                        TableRow singleRow = new TableRow();
-
-                                        TableCell itemNo = new TableCell();
-                                        TableCell desc = new TableCell();
-                                        TableCell qty = new TableCell();
-                                        TableCell actionQty = new TableCell();
-                                        TableCell returnReasonCode = new TableCell();
-
-                                        DropDownList ddlReturnReasonCode = new DropDownList
+                                        int removeqty = 0;
+                                        foreach (ReceiptLine returnLine in header.ReturnLines)
                                         {
-                                            DataValueField = "Description",
-                                            DataSource = rrList,
-                                            ID = "ddlReturnReasonCode_" + lineCount.ToString()
-                                        };
-
-                                        TextBox actionQtyInsert = new TextBox
-                                        {
-                                            ID = "actionQtyInsert_" + lineCount.ToString(),
-                                            Text = (line.Quantity - removeqty).ToString(),
-                                            Width = new Unit("15%")
-                                        };
-
-                                        ddlReturnReasonCode.DataBind();
-
-                                        itemNo.ID = "itemNo_" + lineCount.ToString();
-                                        qty.ID = "itemQuanity_" + lineCount.ToString();
-                                        desc.ID = "desc2_" + lineCount.ToString();
-                                        actionQty.ID = "actionQty_" + lineCount.ToString();
-                                        returnReasonCode.ID = "returnReasonCode_" + lineCount.ToString();
-
-                                        itemNo.Text = line.ItemNo;
-                                        desc.Text = line.Description;
-                                        qty.Text = (line.Quantity - removeqty).ToString();
-                                        actionQty.Controls.Add(actionQtyInsert);
-                                        returnReasonCode.Controls.Add(ddlReturnReasonCode);
-
-                                        qty.HorizontalAlign = HorizontalAlign.Center;
-                                        actionQty.HorizontalAlign = HorizontalAlign.Center;
-
-                                        singleRow.ID = "returnOrderLineRow_" + lineCount.ToString();
-
-                                        singleRow.Cells.Add(itemNo);
-                                        singleRow.Cells.Add(desc);
-                                        singleRow.Cells.Add(qty);
-                                        singleRow.Cells.Add(actionQty);
-                                        singleRow.Cells.Add(returnReasonCode);
-
-                                        if (lineCount % 2 == 0)
-                                        {
-                                            singleRow.BackColor = Color.White;
-                                        }
-                                        else
-                                        {
-                                            singleRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                                            if (line.ItemNo == returnLine.ItemNo)
+                                            {
+                                                removeqty += returnLine.Quantity;
+                                            }
                                         }
 
-                                        singleRow.Attributes.CssStyle.Add("border-collapse", "collapse");
-                                        tblCreateReturnOrderTableDetails.Rows.Add(singleRow);
+                                        if (line.Quantity - removeqty > 0 && line.Type.ToUpper() == "ITEM")
+                                        {
+                                            lineCount++;
+                                            anyLines = true;
+
+                                            TableRow singleRow = new TableRow();
+
+                                            TableCell itemNo = new TableCell();
+                                            TableCell desc = new TableCell();
+                                            TableCell qty = new TableCell();
+                                            TableCell actionQty = new TableCell();
+                                            TableCell returnReasonCode = new TableCell();
+
+                                            DropDownList ddlReturnReasonCode = new DropDownList
+                                            {
+                                                DataValueField = "Description",
+                                                DataSource = rrList,
+                                                ID = "ddlReturnReasonCode_" + lineCount.ToString()
+                                            };
+
+                                            TextBox actionQtyInsert = new TextBox
+                                            {
+                                                ID = "actionQtyInsert_" + lineCount.ToString(),
+                                                Text = (line.Quantity - removeqty).ToString(),
+                                                Width = new Unit("15%")
+                                            };
+
+                                            ddlReturnReasonCode.DataBind();
+
+                                            itemNo.ID = "itemNo_" + lineCount.ToString();
+                                            qty.ID = "itemQuanity_" + lineCount.ToString();
+                                            desc.ID = "desc2_" + lineCount.ToString();
+                                            actionQty.ID = "actionQty_" + lineCount.ToString();
+                                            returnReasonCode.ID = "returnReasonCode_" + lineCount.ToString();
+
+                                            itemNo.Text = line.ItemNo;
+                                            desc.Text = line.Description;
+                                            qty.Text = (line.Quantity - removeqty).ToString();
+                                            actionQty.Controls.Add(actionQtyInsert);
+                                            returnReasonCode.Controls.Add(ddlReturnReasonCode);
+
+                                            qty.HorizontalAlign = HorizontalAlign.Center;
+                                            actionQty.HorizontalAlign = HorizontalAlign.Center;
+
+                                            singleRow.ID = "returnOrderLineRow_" + lineCount.ToString();
+
+                                            singleRow.Cells.Add(itemNo);
+                                            singleRow.Cells.Add(desc);
+                                            singleRow.Cells.Add(qty);
+                                            singleRow.Cells.Add(actionQty);
+                                            singleRow.Cells.Add(returnReasonCode);
+
+                                            if (lineCount % 2 == 0)
+                                            {
+                                                singleRow.BackColor = Color.White;
+                                            }
+                                            else
+                                            {
+                                                singleRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                                            }
+
+                                            singleRow.Attributes.CssStyle.Add("border-collapse", "collapse");
+                                            tblCreateReturnOrderTableDetails.Rows.Add(singleRow);
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            if(!anyLines)
+                if (!anyLines)
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "noLines", "alert('There are no items available to return.');", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "noLinesClose", "parent.window.close();", true);
+                }
+            }
+            catch (Exception ex)
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "noLines", "alert('There are no items available to return.');", true);
-                ClientScript.RegisterStartupScript(this.GetType(), "noLinesClose", "parent.window.close();", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "exceptionAlert", "alert('" + ex.Message +"');", true);
             }
         }
 
@@ -397,7 +404,12 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception ex)
             {
-                Response.Write(ex.Message);
+                ClientScript.RegisterStartupScript(this.GetType(), "errorAlert", "alert('" + ex.Message +"');", true);
+                
+                if(ex.Message.ToLower().Contains("session"))
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "closeErrorAlert", "parent.window.close();", true);
+                }
             }
         }
 

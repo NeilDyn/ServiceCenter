@@ -42,53 +42,60 @@ namespace ExcelDesign.Forms.FunctionForms
 
         protected void PopulateLines()
         {
-            int lineCount = 0;
-
-            foreach (CreatedExchangeLines line in CEH.ExchangeLines)
+            try
             {
-                TableRow singleRow = new TableRow();
+                int lineCount = 0;
 
-                TableCell itemNo = new TableCell();
-                TableCell desc = new TableCell();
-                TableCell qty = new TableCell();
-                TableCell price = new TableCell();
-                TableCell lineAmount = new TableCell();
-
-                itemNo.ID = "itemNoR_" + lineCount.ToString();
-                qty.ID = "itemQuanityR_" + lineCount.ToString();
-                desc.ID = "descR_" + lineCount.ToString();
-                price.ID = "priceR_" + lineCount.ToString();
-                lineAmount.ID = "lineAmountR_" + lineCount.ToString();
-
-                itemNo.Text = line.ItemNo;
-                desc.Text = line.Description;
-                qty.Text = line.Quantity.ToString();
-                price.Text = "$     " + line.Price.ToGBString();
-                lineAmount.Text = "$    " + line.LineAmount.ToGBString();
-
-                qty.HorizontalAlign = HorizontalAlign.Center;
-                price.HorizontalAlign = HorizontalAlign.Right;
-                lineAmount.HorizontalAlign = HorizontalAlign.Right;
-
-                singleRow.ID = "CreatedReturnOrderLineRow_" + lineCount.ToString();
-
-                singleRow.Cells.Add(itemNo);
-                singleRow.Cells.Add(desc);
-                singleRow.Cells.Add(qty);
-                singleRow.Cells.Add(price);
-                singleRow.Cells.Add(lineAmount);
-
-                if (lineCount % 2 == 0)
+                foreach (CreatedExchangeLines line in CEH.ExchangeLines)
                 {
-                    singleRow.BackColor = Color.White;
-                }
-                else
-                {
-                    singleRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
-                }
+                    TableRow singleRow = new TableRow();
 
-                singleRow.Attributes.CssStyle.Add("border-collapse", "collapse");
-                TblReturnHeaderLines.Rows.Add(singleRow);
+                    TableCell itemNo = new TableCell();
+                    TableCell desc = new TableCell();
+                    TableCell qty = new TableCell();
+                    TableCell price = new TableCell();
+                    TableCell lineAmount = new TableCell();
+
+                    itemNo.ID = "itemNoR_" + lineCount.ToString();
+                    qty.ID = "itemQuanityR_" + lineCount.ToString();
+                    desc.ID = "descR_" + lineCount.ToString();
+                    price.ID = "priceR_" + lineCount.ToString();
+                    lineAmount.ID = "lineAmountR_" + lineCount.ToString();
+
+                    itemNo.Text = line.ItemNo;
+                    desc.Text = line.Description;
+                    qty.Text = line.Quantity.ToString();
+                    price.Text = "$     " + line.Price.ToGBString();
+                    lineAmount.Text = "$    " + line.LineAmount.ToGBString();
+
+                    qty.HorizontalAlign = HorizontalAlign.Center;
+                    price.HorizontalAlign = HorizontalAlign.Right;
+                    lineAmount.HorizontalAlign = HorizontalAlign.Right;
+
+                    singleRow.ID = "CreatedReturnOrderLineRow_" + lineCount.ToString();
+
+                    singleRow.Cells.Add(itemNo);
+                    singleRow.Cells.Add(desc);
+                    singleRow.Cells.Add(qty);
+                    singleRow.Cells.Add(price);
+                    singleRow.Cells.Add(lineAmount);
+
+                    if (lineCount % 2 == 0)
+                    {
+                        singleRow.BackColor = Color.White;
+                    }
+                    else
+                    {
+                        singleRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                    }
+
+                    singleRow.Attributes.CssStyle.Add("border-collapse", "collapse");
+                    TblReturnHeaderLines.Rows.Add(singleRow);
+                }
+            }
+            catch (Exception ex)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alertError", "alert('" + ex.Message + "');", true);
             }
         }
     }

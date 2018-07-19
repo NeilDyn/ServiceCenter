@@ -444,6 +444,32 @@
       <element name="ReturnOrder" type="tns:ReturnOrder" />
     </schema>
     <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="IsValidSession">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="IsValidSession_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ResetSession">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userID" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ResetSession_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
       <element name="LogIn">
         <complexType>
           <sequence>
@@ -466,6 +492,7 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="userID" type="string" />
             <element minOccurs="1" maxOccurs="1" name="password" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -507,6 +534,7 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
             <element xmlns:q5="urn:microsoft-dynamics-nav/xmlports/x50005" minOccurs="1" maxOccurs="1" name="exchangeOrder" type="q5:CreatedExchangeOrder" />
+            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -533,6 +561,7 @@
             <element minOccurs="1" maxOccurs="1" name="lineDetails" type="string" />
             <element xmlns:q7="urn:microsoft-dynamics-nav/xmlports/x50002" minOccurs="1" maxOccurs="1" name="createdReturn" type="q7:ReturnOrder" />
             <element minOccurs="1" maxOccurs="1" name="updateRMA" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -548,6 +577,7 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="rmaNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -562,6 +592,7 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="test" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -577,6 +608,7 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="rMANo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="emailAddress" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -611,6 +643,18 @@
       </element>
     </schema>
   </types>
+  <message name="IsValidSession">
+    <part name="parameters" element="tns:IsValidSession" />
+  </message>
+  <message name="IsValidSession_Result">
+    <part name="parameters" element="tns:IsValidSession_Result" />
+  </message>
+  <message name="ResetSession">
+    <part name="parameters" element="tns:ResetSession" />
+  </message>
+  <message name="ResetSession_Result">
+    <part name="parameters" element="tns:ResetSession_Result" />
+  </message>
   <message name="LogIn">
     <part name="parameters" element="tns:LogIn" />
   </message>
@@ -678,6 +722,14 @@
     <part name="parameters" element="tns:Test_Result" />
   </message>
   <portType name="Functions_Port">
+    <operation name="IsValidSession">
+      <input name="IsValidSession" message="tns:IsValidSession" />
+      <output name="IsValidSession_Result" message="tns:IsValidSession_Result" />
+    </operation>
+    <operation name="ResetSession">
+      <input name="ResetSession" message="tns:ResetSession" />
+      <output name="ResetSession_Result" message="tns:ResetSession_Result" />
+    </operation>
     <operation name="LogIn">
       <input name="LogIn" message="tns:LogIn" />
       <output name="LogIn_Result" message="tns:LogIn_Result" />
@@ -725,6 +777,24 @@
   </portType>
   <binding name="Functions_Binding" type="tns:Functions_Port">
     <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="IsValidSession">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:IsValidSession" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="IsValidSession">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="IsValidSession_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ResetSession">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:ResetSession" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ResetSession">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ResetSession_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="LogIn">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:LogIn" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="LogIn">

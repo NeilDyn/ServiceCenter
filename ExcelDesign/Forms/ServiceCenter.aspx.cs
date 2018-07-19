@@ -21,23 +21,31 @@ namespace ExcelDesign.Forms
 {
     public partial class ServiceCenter : System.Web.UI.Page
     {
+        #region Global
+
         protected CallService cs = new CallService();
         public int SessionTime;
+        protected List<Customer> customers = new List<Customer>();
 
-        // User Controls
+        #endregion
+
+        #region Controls
+
         protected static Control multipleCustomers;
         protected Control salesOrderHeader;
         protected Control salesOrderDetail;
         protected Control salesReturnOrderHeader;
         protected Control salesReturnOrderDetails;
         protected Control customerInfo;
-
         protected static Control customerInfoTable;
+        #endregion    
 
-        protected List<Customer> customers = new List<Customer>();
+        #region SendService
 
         protected SendService nonStaticService = new SendService();
         protected static SendService StaticService = new SendService();
+
+        #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -52,7 +60,7 @@ namespace ExcelDesign.Forms
                 User u = (User)Session["ActiveUser"];
                 SessionTime = u.SessionTimeout;
 
-                if(u.Admin)
+                if (u.Admin)
                 {
                     BtnAdminPanel.Visible = true;
                 }
@@ -81,26 +89,7 @@ namespace ExcelDesign.Forms
             }
         }
 
-        protected void btnSearch_Click(object sender, EventArgs e)
-        {
-            if (Session["SessionID"] != null)
-            {
-                User activeUser = new User();
-
-                if (Session["ActiveUser"] != null)
-                {
-                    activeUser = (User)Session["ActiveUser"];
-                }
-
-                Session["ActiveUser"] = activeUser;
-                RetrieveData();
-            }
-            else
-            {
-                Session.Clear();
-                FormsAuthentication.RedirectToLoginPage();
-            }
-        }
+        #region Functions
 
         protected void RetrieveData()
         {
@@ -195,6 +184,10 @@ namespace ExcelDesign.Forms
             StaticService.CustomerList = customers;
         }
 
+        #endregion
+
+        #region AjaxWebMethods
+
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public static string SetActiveCustomer(int custID)
@@ -234,7 +227,7 @@ namespace ExcelDesign.Forms
             string createdOrderNo = string.Empty;
 
             try
-            {           
+            {
                 createdOrderNo = StaticService.CreateExchange(rmaNo);
             }
             catch (Exception e)
@@ -261,6 +254,50 @@ namespace ExcelDesign.Forms
             return "success";
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static string SessionCompleted()
+        {
+            try
+            {
+                User u = (User)HttpContext.Current.Session["ActiveUser"];
+                StaticService.ResetSession(u.UserID);
+                HttpContext.Current.Session["ActiveUser"] = null;
+                FormsAuthentication.SignOut();
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+
+            return "You session has expired. You will now be redirected to the login page.";
+        }
+
+        #endregion
+
+        #region Buttons
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (Session["SessionID"] != null)
+            {
+                User activeUser = new User();
+
+                if (Session["ActiveUser"] != null)
+                {
+                    activeUser = (User)Session["ActiveUser"];
+                }
+
+                Session["ActiveUser"] = activeUser;
+                RetrieveData();
+            }
+            else
+            {
+                Session.Clear();
+                FormsAuthentication.RedirectToLoginPage();
+            }
+        }
+
         protected void BtnLogout_Click(object sender, EventArgs e)
         {
             Session.Clear();
@@ -278,13 +315,6 @@ namespace ExcelDesign.Forms
             Response.Redirect("UserControl.aspx");
         }
 
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static string SessionCompleted()
-        {
-            HttpContext.Current.Session.Clear();
-            FormsAuthentication.SignOut();
-            return "You session has expired. You will now be redirected to the login page.";
-        }
+        #endregion
     }
 }

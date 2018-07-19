@@ -29,6 +29,10 @@ namespace ExcelDesign.ServiceFunctions {
     [System.Web.Services.WebServiceBindingAttribute(Name="Functions_Binding", Namespace="urn:microsoft-dynamics-schemas/codeunit/Functions")]
     public partial class Functions : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
+        private System.Threading.SendOrPostCallback IsValidSessionOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ResetSessionOperationCompleted;
+        
         private System.Threading.SendOrPostCallback LogInOperationCompleted;
         
         private System.Threading.SendOrPostCallback UpdateUserPasswordOperationCompleted;
@@ -90,6 +94,12 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        public event IsValidSessionCompletedEventHandler IsValidSessionCompleted;
+        
+        /// <remarks/>
+        public event ResetSessionCompletedEventHandler ResetSessionCompleted;
+        
+        /// <remarks/>
         public event LogInCompletedEventHandler LogInCompleted;
         
         /// <remarks/>
@@ -121,6 +131,64 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         public event TestCompletedEventHandler TestCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:IsValidSession", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="IsValidSession_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public bool IsValidSession(string sessionID) {
+            object[] results = this.Invoke("IsValidSession", new object[] {
+                        sessionID});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void IsValidSessionAsync(string sessionID) {
+            this.IsValidSessionAsync(sessionID, null);
+        }
+        
+        /// <remarks/>
+        public void IsValidSessionAsync(string sessionID, object userState) {
+            if ((this.IsValidSessionOperationCompleted == null)) {
+                this.IsValidSessionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIsValidSessionOperationCompleted);
+            }
+            this.InvokeAsync("IsValidSession", new object[] {
+                        sessionID}, this.IsValidSessionOperationCompleted, userState);
+        }
+        
+        private void OnIsValidSessionOperationCompleted(object arg) {
+            if ((this.IsValidSessionCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.IsValidSessionCompleted(this, new IsValidSessionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:ResetSession", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="ResetSession_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void ResetSession(string userID) {
+            this.Invoke("ResetSession", new object[] {
+                        userID});
+        }
+        
+        /// <remarks/>
+        public void ResetSessionAsync(string userID) {
+            this.ResetSessionAsync(userID, null);
+        }
+        
+        /// <remarks/>
+        public void ResetSessionAsync(string userID, object userState) {
+            if ((this.ResetSessionOperationCompleted == null)) {
+                this.ResetSessionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnResetSessionOperationCompleted);
+            }
+            this.InvokeAsync("ResetSession", new object[] {
+                        userID}, this.ResetSessionOperationCompleted, userState);
+        }
+        
+        private void OnResetSessionOperationCompleted(object arg) {
+            if ((this.ResetSessionCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ResetSessionCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:LogIn", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="LogIn_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -159,25 +227,27 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:UpdateUserPassword", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="UpdateUserPassword_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void UpdateUserPassword(string userID, string password) {
+        public void UpdateUserPassword(string userID, string password, string sessionID) {
             this.Invoke("UpdateUserPassword", new object[] {
                         userID,
-                        password});
+                        password,
+                        sessionID});
         }
         
         /// <remarks/>
-        public void UpdateUserPasswordAsync(string userID, string password) {
-            this.UpdateUserPasswordAsync(userID, password, null);
+        public void UpdateUserPasswordAsync(string userID, string password, string sessionID) {
+            this.UpdateUserPasswordAsync(userID, password, sessionID, null);
         }
         
         /// <remarks/>
-        public void UpdateUserPasswordAsync(string userID, string password, object userState) {
+        public void UpdateUserPasswordAsync(string userID, string password, string sessionID, object userState) {
             if ((this.UpdateUserPasswordOperationCompleted == null)) {
                 this.UpdateUserPasswordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateUserPasswordOperationCompleted);
             }
             this.InvokeAsync("UpdateUserPassword", new object[] {
                         userID,
-                        password}, this.UpdateUserPasswordOperationCompleted, userState);
+                        password,
+                        sessionID}, this.UpdateUserPasswordOperationCompleted, userState);
         }
         
         private void OnUpdateUserPasswordOperationCompleted(object arg) {
@@ -253,27 +323,29 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CreateExchangeOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CreateExchangeOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string CreateExchangeOrder(string orderNo, ref CreatedExchangeOrder exchangeOrder) {
+        public string CreateExchangeOrder(string orderNo, ref CreatedExchangeOrder exchangeOrder, string sessionID) {
             object[] results = this.Invoke("CreateExchangeOrder", new object[] {
                         orderNo,
-                        exchangeOrder});
+                        exchangeOrder,
+                        sessionID});
             exchangeOrder = ((CreatedExchangeOrder)(results[1]));
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void CreateExchangeOrderAsync(string orderNo, CreatedExchangeOrder exchangeOrder) {
-            this.CreateExchangeOrderAsync(orderNo, exchangeOrder, null);
+        public void CreateExchangeOrderAsync(string orderNo, CreatedExchangeOrder exchangeOrder, string sessionID) {
+            this.CreateExchangeOrderAsync(orderNo, exchangeOrder, sessionID, null);
         }
         
         /// <remarks/>
-        public void CreateExchangeOrderAsync(string orderNo, CreatedExchangeOrder exchangeOrder, object userState) {
+        public void CreateExchangeOrderAsync(string orderNo, CreatedExchangeOrder exchangeOrder, string sessionID, object userState) {
             if ((this.CreateExchangeOrderOperationCompleted == null)) {
                 this.CreateExchangeOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateExchangeOrderOperationCompleted);
             }
             this.InvokeAsync("CreateExchangeOrder", new object[] {
                         orderNo,
-                        exchangeOrder}, this.CreateExchangeOrderOperationCompleted, userState);
+                        exchangeOrder,
+                        sessionID}, this.CreateExchangeOrderOperationCompleted, userState);
         }
         
         private void OnCreateExchangeOrderOperationCompleted(object arg) {
@@ -286,7 +358,7 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CreateReturnOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CreateReturnOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string CreateReturnOrder(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ref ReturnOrder createdReturn, bool updateRMA) {
+        public string CreateReturnOrder(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ref ReturnOrder createdReturn, bool updateRMA, string sessionID) {
             object[] results = this.Invoke("CreateReturnOrder", new object[] {
                         orderNo,
                         extDocNo,
@@ -299,18 +371,19 @@ namespace ExcelDesign.ServiceFunctions {
                         emailAddress,
                         lineDetails,
                         createdReturn,
-                        updateRMA});
+                        updateRMA,
+                        sessionID});
             createdReturn = ((ReturnOrder)(results[1]));
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn, bool updateRMA) {
-            this.CreateReturnOrderAsync(orderNo, extDocNo, returnReasonCode, _DefectOpts, notes, includeResourceLines, printRmaInstructions, createUPSReturnLabel, emailAddress, lineDetails, createdReturn, updateRMA, null);
+        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn, bool updateRMA, string sessionID) {
+            this.CreateReturnOrderAsync(orderNo, extDocNo, returnReasonCode, _DefectOpts, notes, includeResourceLines, printRmaInstructions, createUPSReturnLabel, emailAddress, lineDetails, createdReturn, updateRMA, sessionID, null);
         }
         
         /// <remarks/>
-        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn, bool updateRMA, object userState) {
+        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn, bool updateRMA, string sessionID, object userState) {
             if ((this.CreateReturnOrderOperationCompleted == null)) {
                 this.CreateReturnOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateReturnOrderOperationCompleted);
             }
@@ -326,7 +399,8 @@ namespace ExcelDesign.ServiceFunctions {
                         emailAddress,
                         lineDetails,
                         createdReturn,
-                        updateRMA}, this.CreateReturnOrderOperationCompleted, userState);
+                        updateRMA,
+                        sessionID}, this.CreateReturnOrderOperationCompleted, userState);
         }
         
         private void OnCreateReturnOrderOperationCompleted(object arg) {
@@ -339,24 +413,26 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:DeleteReturnOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="DeleteReturnOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string DeleteReturnOrder(string rmaNo) {
+        public string DeleteReturnOrder(string rmaNo, string sessionID) {
             object[] results = this.Invoke("DeleteReturnOrder", new object[] {
-                        rmaNo});
+                        rmaNo,
+                        sessionID});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void DeleteReturnOrderAsync(string rmaNo) {
-            this.DeleteReturnOrderAsync(rmaNo, null);
+        public void DeleteReturnOrderAsync(string rmaNo, string sessionID) {
+            this.DeleteReturnOrderAsync(rmaNo, sessionID, null);
         }
         
         /// <remarks/>
-        public void DeleteReturnOrderAsync(string rmaNo, object userState) {
+        public void DeleteReturnOrderAsync(string rmaNo, string sessionID, object userState) {
             if ((this.DeleteReturnOrderOperationCompleted == null)) {
                 this.DeleteReturnOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDeleteReturnOrderOperationCompleted);
             }
             this.InvokeAsync("DeleteReturnOrder", new object[] {
-                        rmaNo}, this.DeleteReturnOrderOperationCompleted, userState);
+                        rmaNo,
+                        sessionID}, this.DeleteReturnOrderOperationCompleted, userState);
         }
         
         private void OnDeleteReturnOrderOperationCompleted(object arg) {
@@ -369,24 +445,26 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CancelOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CancelOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string CancelOrder(bool test) {
+        public string CancelOrder(bool test, string sessionID) {
             object[] results = this.Invoke("CancelOrder", new object[] {
-                        test});
+                        test,
+                        sessionID});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void CancelOrderAsync(bool test) {
-            this.CancelOrderAsync(test, null);
+        public void CancelOrderAsync(bool test, string sessionID) {
+            this.CancelOrderAsync(test, sessionID, null);
         }
         
         /// <remarks/>
-        public void CancelOrderAsync(bool test, object userState) {
+        public void CancelOrderAsync(bool test, string sessionID, object userState) {
             if ((this.CancelOrderOperationCompleted == null)) {
                 this.CancelOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCancelOrderOperationCompleted);
             }
             this.InvokeAsync("CancelOrder", new object[] {
-                        test}, this.CancelOrderOperationCompleted, userState);
+                        test,
+                        sessionID}, this.CancelOrderOperationCompleted, userState);
         }
         
         private void OnCancelOrderOperationCompleted(object arg) {
@@ -398,25 +476,27 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:IssueReturnLabel", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="IssueReturnLabel_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void IssueReturnLabel(string rMANo, string emailAddress) {
+        public void IssueReturnLabel(string rMANo, string emailAddress, string sessionID) {
             this.Invoke("IssueReturnLabel", new object[] {
                         rMANo,
-                        emailAddress});
+                        emailAddress,
+                        sessionID});
         }
         
         /// <remarks/>
-        public void IssueReturnLabelAsync(string rMANo, string emailAddress) {
-            this.IssueReturnLabelAsync(rMANo, emailAddress, null);
+        public void IssueReturnLabelAsync(string rMANo, string emailAddress, string sessionID) {
+            this.IssueReturnLabelAsync(rMANo, emailAddress, sessionID, null);
         }
         
         /// <remarks/>
-        public void IssueReturnLabelAsync(string rMANo, string emailAddress, object userState) {
+        public void IssueReturnLabelAsync(string rMANo, string emailAddress, string sessionID, object userState) {
             if ((this.IssueReturnLabelOperationCompleted == null)) {
                 this.IssueReturnLabelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIssueReturnLabelOperationCompleted);
             }
             this.InvokeAsync("IssueReturnLabel", new object[] {
                         rMANo,
-                        emailAddress}, this.IssueReturnLabelOperationCompleted, userState);
+                        emailAddress,
+                        sessionID}, this.IssueReturnLabelOperationCompleted, userState);
         }
         
         private void OnIssueReturnLabelOperationCompleted(object arg) {
@@ -4638,6 +4718,36 @@ namespace ExcelDesign.ServiceFunctions {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void IsValidSessionCompletedEventHandler(object sender, IsValidSessionCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class IsValidSessionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal IsValidSessionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void ResetSessionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]

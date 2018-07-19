@@ -65,66 +65,85 @@ namespace ExcelDesign.Forms.FunctionForms
 
         protected void PopulateLines()
         {
-            int lineCount = 0;
-
-            foreach (CreatedReturnLines line in CRH.CreatedReturnLines)
+            try
             {
-                lineCount++;
+                int lineCount = 0;
 
-                TableRow singleRow = new TableRow();
-
-                TableCell itemNo = new TableCell();
-                TableCell desc = new TableCell();
-                TableCell qty = new TableCell();
-                TableCell price = new TableCell();
-                TableCell lineAmount = new TableCell();
-
-                itemNo.ID = "itemNoR_" + lineCount.ToString();
-                qty.ID = "itemQuanityR_" + lineCount.ToString();
-                desc.ID = "descR_" + lineCount.ToString();
-                price.ID = "priceR_" + lineCount.ToString();
-                lineAmount.ID = "lineAmountR_" + lineCount.ToString();
-
-                itemNo.Text = line.ItemNo;
-                desc.Text = line.Description;
-                qty.Text = line.Quantity.ToString();
-                price.Text = "$     " + line.Price.ToGBString();
-                lineAmount.Text = "$    " + line.LineAmount.ToGBString();
-
-                qty.HorizontalAlign = HorizontalAlign.Center;
-                price.HorizontalAlign = HorizontalAlign.Right;
-                lineAmount.HorizontalAlign = HorizontalAlign.Right;
-
-                singleRow.ID = "CreatedReturnOrderLineRow_" + lineCount.ToString();
-
-                singleRow.Cells.Add(itemNo);
-                singleRow.Cells.Add(desc);
-                singleRow.Cells.Add(qty);
-                singleRow.Cells.Add(price);
-                singleRow.Cells.Add(lineAmount);
-
-                if (lineCount % 2 == 0)
+                foreach (CreatedReturnLines line in CRH.CreatedReturnLines)
                 {
-                    singleRow.BackColor = Color.White;
-                }
-                else
-                {
-                    singleRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
-                }
+                    lineCount++;
 
-                singleRow.Attributes.CssStyle.Add("border-collapse", "collapse");
-                TblReturnHeaderLines.Rows.Add(singleRow);
+                    TableRow singleRow = new TableRow();
+
+                    TableCell itemNo = new TableCell();
+                    TableCell desc = new TableCell();
+                    TableCell qty = new TableCell();
+                    TableCell price = new TableCell();
+                    TableCell lineAmount = new TableCell();
+
+                    itemNo.ID = "itemNoR_" + lineCount.ToString();
+                    qty.ID = "itemQuanityR_" + lineCount.ToString();
+                    desc.ID = "descR_" + lineCount.ToString();
+                    price.ID = "priceR_" + lineCount.ToString();
+                    lineAmount.ID = "lineAmountR_" + lineCount.ToString();
+
+                    itemNo.Text = line.ItemNo;
+                    desc.Text = line.Description;
+                    qty.Text = line.Quantity.ToString();
+                    price.Text = "$     " + line.Price.ToGBString();
+                    lineAmount.Text = "$    " + line.LineAmount.ToGBString();
+
+                    qty.HorizontalAlign = HorizontalAlign.Center;
+                    price.HorizontalAlign = HorizontalAlign.Right;
+                    lineAmount.HorizontalAlign = HorizontalAlign.Right;
+
+                    singleRow.ID = "CreatedReturnOrderLineRow_" + lineCount.ToString();
+
+                    singleRow.Cells.Add(itemNo);
+                    singleRow.Cells.Add(desc);
+                    singleRow.Cells.Add(qty);
+                    singleRow.Cells.Add(price);
+                    singleRow.Cells.Add(lineAmount);
+
+                    if (lineCount % 2 == 0)
+                    {
+                        singleRow.BackColor = Color.White;
+                    }
+                    else
+                    {
+                        singleRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                    }
+
+                    singleRow.Attributes.CssStyle.Add("border-collapse", "collapse");
+                    TblReturnHeaderLines.Rows.Add(singleRow);
+                }
+            }
+            catch (Exception ex)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alertError", "alert('" + ex.Message + "');", true);
             }
         }
 
         protected void BtnCancelRMA_Click(object sender, EventArgs e)
         {
-            SendService ss = new SendService();
+            try
+            {
+                SendService ss = new SendService();
 
-            string delete = ss.DeleteRMA(CRH.RMANo);
+                string delete = ss.DeleteRMA(CRH.RMANo);
 
-            ClientScript.RegisterStartupScript(this.GetType(), "deletedRMA", "alert('" + delete + "');", true);
-            ClientScript.RegisterStartupScript(this.GetType(), "closeRMA", "parent.window.close();", true); 
+                ClientScript.RegisterStartupScript(this.GetType(), "deletedRMA", "alert('" + delete + "');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "closeRMA", "parent.window.close();", true);
+            }
+            catch (Exception ex)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alertError", "alert('" + ex.Message + "');", true);
+                
+                if(ex.Message.ToLower().Contains("session"))
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "closeRMA", "parent.window.close();", true);
+                }
+            }
         }
 
         protected void BtnUpdateRMA_Click(object sender, EventArgs e)

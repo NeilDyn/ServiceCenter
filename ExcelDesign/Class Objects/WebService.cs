@@ -77,7 +77,15 @@ namespace ExcelDesign.Class_Objects
 
         protected string SessionID()
         {
-            return "testSesh";
+            if (HttpContext.Current.Session["ActiveUser"] != null)
+            {
+                User u = (User)HttpContext.Current.Session["ActiveUser"];
+                return u.SessionID;
+            }
+            else
+            {
+                return "{A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0}";
+            }
         }
 
         public ReturnOrder CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, int defect, string notes,
@@ -85,14 +93,14 @@ namespace ExcelDesign.Class_Objects
         {
             ReturnOrder returnRMA = new ReturnOrder();
 
-            functions.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, defect, notes, createLabel, printRMA, includeResource, email, lineValues, ref returnRMA, update);
+            functions.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, defect, notes, createLabel, printRMA, includeResource, email, lineValues, ref returnRMA, update, SessionID());
 
             return returnRMA;
         }
 
         public string DeleteRMA(string rmaNo)
         {
-            return functions.DeleteReturnOrder(rmaNo);
+            return functions.DeleteReturnOrder(rmaNo, SessionID());
         }
 
         public User UserLogin(string userName, string password)
@@ -108,21 +116,26 @@ namespace ExcelDesign.Class_Objects
 
         public void IssueReturnLabel(string rmaNo, string email)
         {
-            functions.IssueReturnLabel(rmaNo, email);
+            functions.IssueReturnLabel(rmaNo, email, SessionID());
         }
 
         public CreatedExchangeOrder CreateExchange(string rmaNo)
         {
             CreatedExchangeOrder eo = new CreatedExchangeOrder();
 
-            string test = functions.CreateExchangeOrder(rmaNo, ref eo);
+            string test = functions.CreateExchangeOrder(rmaNo, ref eo, SessionID());
 
             return eo;
         }
 
         public void UpdateUserPassword(string currentUser, string password)
         {
-            functions.UpdateUserPassword(currentUser, password);
+            functions.UpdateUserPassword(currentUser, password, SessionID());
+        }
+
+        public void ResetSession(string userID)
+        {
+            functions.ResetSession(userID);
         }
     }
 }

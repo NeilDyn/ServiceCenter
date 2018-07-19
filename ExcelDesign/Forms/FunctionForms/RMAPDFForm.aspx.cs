@@ -15,18 +15,26 @@ namespace ExcelDesign.Forms.FunctionForms
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string rmaNo = Convert.ToString(Request.QueryString["RMANo"]);
+            try
+            {
+                string rmaNo = Convert.ToString(Request.QueryString["RMANo"]);
 
-            Title = rmaNo + ".pdf";
-            RMAInstructionsPDF createPDF = new RMAInstructionsPDF();
-            MemStream = createPDF.CreatePDF(rmaNo);
+                Title = rmaNo + ".pdf";
+                RMAInstructionsPDF createPDF = new RMAInstructionsPDF();
+                MemStream = createPDF.CreatePDF(rmaNo);
 
-            Response.Clear();
-            Response.ContentType = "application/pdf";
-            Response.OutputStream.Write(MemStream.GetBuffer(), 0, MemStream.GetBuffer().Length);
-            Response.OutputStream.Flush();
-            Response.OutputStream.Close();
-            Response.End();
+                Response.Clear();
+                Response.ContentType = "application/pdf";
+                Response.OutputStream.Write(MemStream.GetBuffer(), 0, MemStream.GetBuffer().Length);
+                Response.OutputStream.Flush();
+                Response.OutputStream.Close();
+                Response.End();
+            }
+            catch (Exception ex)
+            {
+                Session["Error"] = ex.Message;
+                Response.Redirect("ErrorForm.aspx");
+            }
         }
     }
 }

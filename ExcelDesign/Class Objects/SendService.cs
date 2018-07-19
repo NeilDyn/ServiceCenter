@@ -222,5 +222,10 @@ namespace ExcelDesign.Class_Objects
         {
             webService.UpdateUserPassword(currentUser, newPassword);
         }
+
+        public void ResetSession(string userID)
+        {
+            webService.ResetSession(userID);
+        }
     }
 }

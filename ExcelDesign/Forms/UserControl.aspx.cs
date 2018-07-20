@@ -38,6 +38,7 @@ namespace ExcelDesign.Forms
                 txtPassword.Text = u.Password;
                 cbxCreateRMA.Checked = u.CreateRMA;
                 cbxCreateReturnLabel.Checked = u.CreateReturnLabel;
+                cbxCreateExchangeOrder.Checked = u.CreateExchange;
                 cbxAdmin.Checked = u.Admin;
                 cbxDeveloper.Checked = u.Developer;
                 tcLastPasswordUpdate.Text = u.PasswordLastUpdated;

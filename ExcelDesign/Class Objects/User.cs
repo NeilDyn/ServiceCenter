@@ -13,6 +13,7 @@ namespace ExcelDesign.Class_Objects
         public string SessionID { get; set; }
         public bool CreateRMA { get; set; }
         public bool CreateReturnLabel { get; set; }
+        public bool CreateExchange { get; set; }
         public bool Admin { get; set; }
         public bool Developer { get; set; }
         public string PasswordLastUpdated { get; set; }
@@ -27,6 +28,7 @@ namespace ExcelDesign.Class_Objects
 
             CreateRMA = us.User[0].CreateRMA.ToUpper() == "YES" ? true : false;
             CreateReturnLabel = us.User[0].CreateRetLabel.ToUpper() == "YES" ? true : false;
+            CreateExchange = us.User[0].CreateExchange.ToUpper() == "YES" ? true : false;
             Admin = us.User[0].Admin.ToUpper() == "YES" ? true : false;
             Developer = us.User[0].Developer.ToUpper() == "YES" ? true : false;
 

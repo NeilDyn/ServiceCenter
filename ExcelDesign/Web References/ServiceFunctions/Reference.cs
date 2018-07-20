@@ -55,6 +55,10 @@ namespace ExcelDesign.ServiceFunctions {
         
         private System.Threading.SendOrPostCallback TestOperationCompleted;
         
+        private System.Threading.SendOrPostCallback a47a47a45a62_Monitoring_User_ActionsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WriteToLogFileOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -133,12 +137,18 @@ namespace ExcelDesign.ServiceFunctions {
         public event TestCompletedEventHandler TestCompleted;
         
         /// <remarks/>
+        public event a47a47a45a62_Monitoring_User_ActionsCompletedEventHandler a47a47a45a62_Monitoring_User_ActionsCompleted;
+        
+        /// <remarks/>
+        public event WriteToLogFileCompletedEventHandler WriteToLogFileCompleted;
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:IsValidSession", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="IsValidSession_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public bool IsValidSession(string sessionID) {
+        public string IsValidSession(string sessionID) {
             object[] results = this.Invoke("IsValidSession", new object[] {
                         sessionID});
-            return ((bool)(results[0]));
+            return ((string)(results[0]));
         }
         
         /// <remarks/>
@@ -563,6 +573,69 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:a47a47a45a62_Monitoring_User_Ac" +
+            "tions", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="a47a47a45a62_Monitoring_User_Actions_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void a47a47a45a62_Monitoring_User_Actions() {
+            this.Invoke("a47a47a45a62_Monitoring_User_Actions", new object[0]);
+        }
+        
+        /// <remarks/>
+        public void a47a47a45a62_Monitoring_User_ActionsAsync() {
+            this.a47a47a45a62_Monitoring_User_ActionsAsync(null);
+        }
+        
+        /// <remarks/>
+        public void a47a47a45a62_Monitoring_User_ActionsAsync(object userState) {
+            if ((this.a47a47a45a62_Monitoring_User_ActionsOperationCompleted == null)) {
+                this.a47a47a45a62_Monitoring_User_ActionsOperationCompleted = new System.Threading.SendOrPostCallback(this.Ona47a47a45a62_Monitoring_User_ActionsOperationCompleted);
+            }
+            this.InvokeAsync("a47a47a45a62_Monitoring_User_Actions", new object[0], this.a47a47a45a62_Monitoring_User_ActionsOperationCompleted, userState);
+        }
+        
+        private void Ona47a47a45a62_Monitoring_User_ActionsOperationCompleted(object arg) {
+            if ((this.a47a47a45a62_Monitoring_User_ActionsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.a47a47a45a62_Monitoring_User_ActionsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:WriteToLogFile", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="WriteToLogFile_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void WriteToLogFile(string userID, string sessionID, int _UserAction, string orderNo, string rMANo) {
+            this.Invoke("WriteToLogFile", new object[] {
+                        userID,
+                        sessionID,
+                        _UserAction,
+                        orderNo,
+                        rMANo});
+        }
+        
+        /// <remarks/>
+        public void WriteToLogFileAsync(string userID, string sessionID, int _UserAction, string orderNo, string rMANo) {
+            this.WriteToLogFileAsync(userID, sessionID, _UserAction, orderNo, rMANo, null);
+        }
+        
+        /// <remarks/>
+        public void WriteToLogFileAsync(string userID, string sessionID, int _UserAction, string orderNo, string rMANo, object userState) {
+            if ((this.WriteToLogFileOperationCompleted == null)) {
+                this.WriteToLogFileOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWriteToLogFileOperationCompleted);
+            }
+            this.InvokeAsync("WriteToLogFile", new object[] {
+                        userID,
+                        sessionID,
+                        _UserAction,
+                        orderNo,
+                        rMANo}, this.WriteToLogFileOperationCompleted, userState);
+        }
+        
+        private void OnWriteToLogFileOperationCompleted(object arg) {
+            if ((this.WriteToLogFileCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WriteToLogFileCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -643,6 +716,8 @@ namespace ExcelDesign.ServiceFunctions {
         private string passwordExpiryDateField;
         
         private string passwordLastUpdatedField;
+        
+        private string createExchangeField;
         
         public User() {
             this.sessionTimeoutField = 0;
@@ -745,6 +820,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.passwordLastUpdatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreateExchange {
+            get {
+                return this.createExchangeField;
+            }
+            set {
+                this.createExchangeField = value;
             }
         }
     }
@@ -4737,10 +4822,10 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
-        public bool Result {
+        public string Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
+                return ((string)(this.results[0]));
             }
         }
     }
@@ -4978,6 +5063,14 @@ namespace ExcelDesign.ServiceFunctions {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void a47a47a45a62_Monitoring_User_ActionsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void WriteToLogFileCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

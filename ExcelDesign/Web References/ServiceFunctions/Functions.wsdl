@@ -14,6 +14,7 @@
           <element minOccurs="1" maxOccurs="1" default="0" name="SessionTimeout" type="int" />
           <element minOccurs="1" maxOccurs="1" name="PasswordExpiryDate" type="string" />
           <element minOccurs="1" maxOccurs="1" name="PasswordLastUpdated" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CreateExchange" type="string" />
         </sequence>
       </complexType>
       <complexType name="UserSetup" mixed="true">
@@ -454,7 +455,7 @@
       <element name="IsValidSession_Result">
         <complexType>
           <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -641,6 +642,32 @@
           </sequence>
         </complexType>
       </element>
+      <element name="a47a47a45a62_Monitoring_User_Actions">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="a47a47a45a62_Monitoring_User_Actions_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="WriteToLogFile">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="userID" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="_UserAction" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="rMANo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="WriteToLogFile_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
     </schema>
   </types>
   <message name="IsValidSession">
@@ -721,6 +748,18 @@
   <message name="Test_Result">
     <part name="parameters" element="tns:Test_Result" />
   </message>
+  <message name="a47a47a45a62_Monitoring_User_Actions">
+    <part name="parameters" element="tns:a47a47a45a62_Monitoring_User_Actions" />
+  </message>
+  <message name="a47a47a45a62_Monitoring_User_Actions_Result">
+    <part name="parameters" element="tns:a47a47a45a62_Monitoring_User_Actions_Result" />
+  </message>
+  <message name="WriteToLogFile">
+    <part name="parameters" element="tns:WriteToLogFile" />
+  </message>
+  <message name="WriteToLogFile_Result">
+    <part name="parameters" element="tns:WriteToLogFile_Result" />
+  </message>
   <portType name="Functions_Port">
     <operation name="IsValidSession">
       <input name="IsValidSession" message="tns:IsValidSession" />
@@ -773,6 +812,14 @@
     <operation name="Test">
       <input name="Test" message="tns:Test" />
       <output name="Test_Result" message="tns:Test_Result" />
+    </operation>
+    <operation name="a47a47a45a62_Monitoring_User_Actions">
+      <input name="a47a47a45a62_Monitoring_User_Actions" message="tns:a47a47a45a62_Monitoring_User_Actions" />
+      <output name="a47a47a45a62_Monitoring_User_Actions_Result" message="tns:a47a47a45a62_Monitoring_User_Actions_Result" />
+    </operation>
+    <operation name="WriteToLogFile">
+      <input name="WriteToLogFile" message="tns:WriteToLogFile" />
+      <output name="WriteToLogFile_Result" message="tns:WriteToLogFile_Result" />
     </operation>
   </portType>
   <binding name="Functions_Binding" type="tns:Functions_Port">
@@ -891,6 +938,24 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="Test_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="a47a47a45a62_Monitoring_User_Actions">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:a47a47a45a62_Monitoring_User_Actions" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="a47a47a45a62_Monitoring_User_Actions">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="a47a47a45a62_Monitoring_User_Actions_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="WriteToLogFile">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:WriteToLogFile" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="WriteToLogFile">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="WriteToLogFile_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

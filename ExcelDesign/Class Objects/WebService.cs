@@ -43,14 +43,14 @@ namespace ExcelDesign.Class_Objects
             string domain = ConfigurationManager.AppSettings["webServiceDomain"].ToString();
 
             string baseURL = string.Empty;
-            //string mode = Convert.ToString(HttpContext.Current.Session["DevelopmentState"]);
 
-            string mode = null;
-            if ((mode != null) && (mode == "Production Mode"))
+            string mode = ConfigurationManager.AppSettings["mode"].ToString(); ;
+
+            if ((mode != null) && (mode == "Production"))
             {
-                baseURL = "http://jeg-svr2:7047/production/WS/JEG_SONS,%20Inc/";
+                baseURL = "http://jeg-psql1:7047/DynamicsNAV/WS/JEG_SONS,%20Inc/";
             }
-            else
+            else if(((mode != null) && (mode == "Development")))
             {
                 baseURL = "http://jeg-svr2.jeg.local:7058/DynamicsNAV/WS/JEG_SONS,%20Inc/";
             }

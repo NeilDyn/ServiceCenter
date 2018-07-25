@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using ExcelDesign.Class_Objects;
 using ExcelDesign.Class_Objects.CreatedReturn;
 using ExcelDesign.Class_Objects.FunctionData;
+using System.Net.Mail;
 
 namespace ExcelDesign.Forms.FunctionForms
 {
@@ -347,7 +348,7 @@ namespace ExcelDesign.Forms.FunctionForms
 
                             string lineValidMessage = string.Empty;
 
-                            if ((rowCount > 1 && controlCount == 2 && actionQty > 0))
+                            if ((rowCount > 1 && controlCount == 2 && actionQty != 0))
                             {
                                 lineValidMessage = ValidateLine(itemNo, qtyLine, actionQty, reasonCode);
 
@@ -393,12 +394,12 @@ namespace ExcelDesign.Forms.FunctionForms
                     }
                     else
                     {
-                        Response.Write(lineError);
+                        ClientScript.RegisterStartupScript(this.GetType(), "lineError", "alert('" + lineError + "');", true);
                     }
                 }
                 else
                 {
-                    Response.Write(validateMsg);
+                    ClientScript.RegisterStartupScript(this.GetType(), "validateMsg", "alert('" + validateMsg + "');", true);
                 }
 
             }
@@ -429,17 +430,17 @@ namespace ExcelDesign.Forms.FunctionForms
                         }
                         else
                         {
-                            return "Please select a valid return reason for Item: '" + itemNoP + "'";
+                            return "Please select a valid return reason for Item: " + itemNoP;
                         }
                     }
                     else
                     {
-                        return "Cannot return more quantity than exists on order for Item: '" + itemNoP + "'";
+                        return "Cannot return more quantity than exists on order for Item: " + itemNoP;
                     }
                 }
                 else
                 {
-                    return "Cannot return negative quantity for Item: '" + itemNoP + "'";
+                    return "Cannot return negative quantity for Item: " + itemNoP;
                 }
             }
             catch (Exception lineEx)
@@ -458,13 +459,29 @@ namespace ExcelDesign.Forms.FunctionForms
                 {
                     if (createLabel)
                     {
-                        if (!String.IsNullOrWhiteSpace(email))
+                        User activeUser = (User)Session["ActiveUser"];
+
+                        if (activeUser.CreateReturnLabel)
                         {
-                            return valid;
+                            if (!String.IsNullOrWhiteSpace(email))
+                            {
+                                if (IsValidEmail(email))
+                                {
+                                    return valid;
+                                }
+                                else
+                                {
+                                    return "Invalid email address entered.";
+                                }
+                            }
+                            else
+                            {
+                                return "Updated email is required for creating a return label.";
+                            }
                         }
                         else
                         {
-                            return "Updated email is required for creating a return label.";
+                            return "You do not have the required permission to issue a return label.";
                         }
                     }
                     else
@@ -480,6 +497,19 @@ namespace ExcelDesign.Forms.FunctionForms
             catch (Exception e)
             {
                 return e.Message;
+            }
+        }
+
+        protected bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new MailAddress(email);
+                return addr.Address == email;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
     }

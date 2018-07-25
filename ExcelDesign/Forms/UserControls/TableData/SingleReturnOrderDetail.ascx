@@ -3,9 +3,9 @@
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/ReturnOrderLines/SingleReturnOrderPackages.ascx" TagName="SingleReturnOrderPackages" TagPrefix="srop" %>
 
 <link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/themes/ui-lightness/jquery-ui.css" type="text/css" />
+<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/themes/ui-lightness/jquery-ui.css" type="text/css" />
 <script type="text/javascript">
     $(document).ready(function () {
         $("[id$=expandReceipts_<%= this.CustID %>_<%= this.CountID %>]").hide();
@@ -13,35 +13,39 @@
         $("[id*=showMoreReturnLines_<%= this.CustID %>_<%= this.CountID %>]").hide();
 
         $("[id$=btnCreateExchange<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            var rmaNo = "<%= this.Rh.RMANo %>";
+            if ("<%= this.CanExchange %>" == "true") {
+                var rmaNo = "<%= this.Rh.RMANo %>";
 
-            $.ajax({
-                type: "POST",
-                url: "ServiceCenter.aspx/CreateExchange",
-                data: JSON.stringify({ rmaNo: rmaNo }),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (orderNo) {
-                    if (orderNo.d.indexOf("Error") == -1) {
-                        alert("New order created through exchange: " + orderNo.d);
+                $.ajax({
+                    type: "POST",
+                    url: "ServiceCenter.aspx/CreateExchange",
+                    data: JSON.stringify({ rmaNo: rmaNo }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (orderNo) {
+                        if (orderNo.d.indexOf("Error") == -1) {
+                            alert("New order created through exchange: " + orderNo.d);
 
-                        var width = 1500;
-                        var height = 500;
-                        var left = (screen.width - width) + 500;
-                        var top = (screen.height - height) * 0.5;
-                        window.open("FunctionForms/CreatedExchange.aspx",
-                            null,
-                            "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
-                    } else {
-                        alert(orderNo.d);
-                    }
-                },
-                error: function (xhr, status, text) {
-                    console.log(xhr.status);
-                    console.log(xhr.text);
-                    console.log(xhr.responseText);
-                },
-            });
+                            var width = 1500;
+                            var height = 500;
+                            var left = (screen.width - width) + 500;
+                            var top = (screen.height - height) * 0.5;
+                            window.open("FunctionForms/CreatedExchange.aspx",
+                                null,
+                                "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                        } else {
+                            alert(orderNo.d);
+                        }
+                    },
+                    error: function (xhr, status, text) {
+                        console.log(xhr.status);
+                        console.log(xhr.text);
+                        console.log(xhr.responseText);
+                    },
+                });
+            } else {
+                alert("You do not have the required permission to create an exchange order.");
+            }
         });
 
         $("[id$=btnIssueRefund<%= this.CustID %>_<%= this.CountID %>]").click(function () {
@@ -53,56 +57,71 @@
         });
 
         $("[id$=btnUpdateRMA<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-
-            var width = 1500;
-            var height = 500;
-            var left = (screen.width - width) + 500;
-            var top = (screen.height - height) * 0.5;
-            window.open("FunctionForms/CreateReturn.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>",
-                null,
-                "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+            if ("<%= this.CanReturn %>" == "true") {
+                var width = 1500;
+                var height = 500;
+                var left = (screen.width - width) + 500;
+                var top = (screen.height - height) * 0.5;
+                window.open("FunctionForms/CreateReturn.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>",
+                    null,
+                    "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+            } else {
+                alert("You do not have the required permission to update a return order.");
+            }
         });
 
         $("[id$=btnIssueReturnLabel<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            var rmaNo = "<%= this.Rh.RMANo %>";
-            var emailIn = prompt("Please enter a valid email address:");
+            if ("<%= this.UPSLabelCreated %>" == "false") {
+                if ("<%= this.CanIssueLabel %>" == "true") {
+                    var rmaNo = "<%= this.Rh.RMANo %>";
+                    var emailIn = prompt("Please enter a valid email address:");
 
-            if (emailIn == null || emailIn == "") {
-                alert("Invalid email address entered.")
-            }
-            else {
-                $.ajax({
-                    type: "POST",
-                    url: "ServiceCenter.aspx/IssueReturnLabel",
-                    data: JSON.stringify({ rmaNo: rmaNo, email: emailIn }),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (error) {
-                        if (error.d.indexOf("Error") == -1) {
-                            alert("Return Label Created for Return: " + rmaNo)
+                    if (emailIn == null || emailIn == "") {
+                        alert("Invalid email address entered.");
+                    }
+                    else {
+                        if (validateEmail(emailIn)) {
+                            $.ajax({
+                                type: "POST",
+                                url: "ServiceCenter.aspx/IssueReturnLabel",
+                                data: JSON.stringify({ rmaNo: rmaNo, email: emailIn }),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (error) {
+                                    if (error.d.indexOf("Error") == -1) {
+                                        alert("Return Label Created for Return: " + rmaNo);
+                                    } else {
+                                        alert(error.d);
+                                    }
+                                },
+                                error: function (xhr, status, text) {
+                                    console.log(xhr.status);
+                                    console.log(xhr.text);
+                                    console.log(xhr.responseText);
+                                },
+                            });
                         } else {
-                            alert(error.d)
+                            alert("Invalid email address entered.")
                         }
-                    },
-                    error: function (xhr, status, text) {
-                        console.log(xhr.status);
-                        console.log(xhr.text);
-                        console.log(xhr.responseText);
-                    },
-                });
+                    }
+                } else {
+                    alert("You do not have the required permission to issue a return label.");
+                }
+            } else {
+                alert("UPS Return Label has already been created.");
             }
         });
     });
 
     function expandMoreReturnLines<%= this.CustID %><%= this.CountID %>(lineID) {
         if ($("a#expandMoreClickReturnLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text() == "Show More") {
-                $("a#expandMoreClickReturnLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text("Show Less");
-            }
-            else {
-                $("a#expandMoreClickReturnLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text("Show More");
-            }
+            $("a#expandMoreClickReturnLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text("Show Less");
+        }
+        else {
+            $("a#expandMoreClickReturnLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text("Show More");
+        }
 
-            $("[id*=showMoreReturnLines_<%= this.CustID %>_<%= this.CountID %>_" + lineID + "]").toggle();
+        $("[id*=showMoreReturnLines_<%= this.CustID %>_<%= this.CountID %>_" + lineID + "]").toggle();
     };
 
     function expandReceipts<%=this.CustID %><%= this.CountID %>() {
@@ -113,6 +132,14 @@
     function expandReceives<%=this.CustID %><%= this.CountID %>() {
         $("[id$=expandReceives_<%= this.CustID %>_<%= this.CountID %>]").toggle();
     };
+
+    JavaScript
+
+    function validateEmail(email) {
+        var re = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+        return re.test(email);
+    };
+
 </script>
 <asp:Table ID="tblSingleReturnOrderDetail" runat="server" Height="100%" Width="100%">
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">

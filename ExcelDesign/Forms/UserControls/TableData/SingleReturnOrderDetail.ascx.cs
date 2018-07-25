@@ -20,6 +20,11 @@ namespace ExcelDesign.Forms.UserControls.TableData
         public string RMANo { get; set; }
         public string DocNo { get; set; }
 
+        public string CanExchange { get; set; }
+        public string CanReturn { get; set; }
+        public string CanIssueLabel { get; set; }
+        public string UPSLabelCreated { get; set; }
+
         protected TableRow buttonRow = new TableRow();
 
         protected TableCell createExchangeCell = new TableCell();
@@ -45,7 +50,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(CustomerCount == 1)
+            if (CustomerCount == 1)
             {
                 CreateButtons();
             }
@@ -53,29 +58,27 @@ namespace ExcelDesign.Forms.UserControls.TableData
             LoadData();
             PopulateLines();
 
-            if(tcUPSReturnLabelCreated.Text.ToUpper() == "YES")
+            UPSLabelCreated = tcUPSReturnLabelCreated.Text.ToUpper() == "YES" ? "true" : "false";
+
+            User activeUser = (User)Session["ActiveUser"];
+
+            if (activeUser.Admin)
             {
-                btnIssueReturnLabel.Visible = false;
+                CanExchange = "true";
+                CanReturn = "true";
+                CanIssueLabel = "true";
+            }
+            else if (activeUser.Developer)
+            {
+                CanExchange = "true";
+                CanReturn = "true";
+                CanIssueLabel = "true";
             }
             else
             {
-                User activeUser = (User)Session["ActiveUser"];
-
-                if (!activeUser.Admin && !activeUser.Developer)
-                {
-                    if (!activeUser.CreateReturnLabel)
-                    {
-                        btnIssueReturnLabel.Visible = false;
-                    }
-                    else
-                    {
-                        btnIssueReturnLabel.Visible = true;
-                    }
-                }
-                else
-                {
-                    btnIssueReturnLabel.Visible = true;
-                }
+                CanReturn = activeUser.CreateReturnLabel ? "true" : "false";
+                CanExchange = activeUser.CreateExchange ? "true" : "false";
+                CanIssueLabel = activeUser.CreateReturnLabel ? "true" : "false";
             }
         }
 
@@ -106,7 +109,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
         {
             this.tcReturnStatus.Text = Rh.ReturnStatus;
             this.tcDateCreated.Text = Rh.DateCreated;
-            this.tcChannelName.Text = Rh.ChannelName;            
+            this.tcChannelName.Text = Rh.ChannelName;
             this.tcOrderDate.Text = Rh.OrderDate;
             this.tcEmail.Text = Rh.Email;
 
@@ -115,8 +118,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcChannelName.ToolTip = Rh.ChannelName;
             this.tcOrderDate.ToolTip = Rh.OrderDate;
             this.tcEmail.ToolTip = Rh.Email;
-            
-            if(Rh.ReturnLabelCreated)
+
+            if (Rh.ReturnLabelCreated)
             {
                 this.tcUPSReturnLabelCreated.Text = "Yes";
             }
@@ -131,7 +134,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             DocNo = Rh.ExternalDocumentNo;
 
             if (Rh.PostedReceiveObj.Count > 0)
-            {           
+            {
                 PopulateReceiveLines();
             }
 
@@ -164,7 +167,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             double total = 0;
             TableRow totalRow = new TableRow();
             TableCell totalString = new TableCell();
-            TableCell totalCell = new TableCell();          
+            TableCell totalCell = new TableCell();
 
             int lineCount = 0;
 
@@ -345,7 +348,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             breakRow.Cells.Add(breakCell);
             this.tblReturnDetailLines.Rows.Add(breakRow);
 
-            if(CustomerCount == 1)
+            if (CustomerCount == 1)
             {
                 createExchangeCell.Controls.Add(btnCreateExchange);
                 issueRefundCell.Controls.Add(btnIssueRefund);
@@ -363,7 +366,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 buttonRow.Cells.Add(printRMAInstructions);
 
                 this.tblReturnDetailLines.Rows.Add(buttonRow);
-            }           
+            }
         }
 
         protected void PopulateReceiveLines()

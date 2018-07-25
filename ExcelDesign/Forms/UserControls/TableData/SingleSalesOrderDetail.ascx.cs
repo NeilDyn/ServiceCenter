@@ -20,6 +20,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
         public string OrderNo { get; set; }
         public string DocNo { get; set; }
 
+        public string CanReturn { get; set; }
+
         protected TableRow buttonRow = new TableRow();
         protected TableCell cancelOrderCell = new TableCell();
         protected TableCell partRequestCell = new TableCell();
@@ -52,6 +54,21 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             PopulateDetail();
             PopulateLines();
+
+            User activeUser = (User)Session["ActiveUser"];
+
+            if(activeUser.Admin)
+            {
+                CanReturn = "true";
+            }
+            else if(activeUser.Developer)
+            {
+                CanReturn = "true";
+            }
+            else
+            {
+                CanReturn = activeUser.CreateRMA ? "true" : "false";
+            }
         }
 
         protected void PopulateDetail()

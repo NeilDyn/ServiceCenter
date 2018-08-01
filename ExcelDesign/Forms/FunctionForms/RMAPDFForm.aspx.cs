@@ -33,7 +33,7 @@ namespace ExcelDesign.Forms.FunctionForms
             catch (Exception ex)
             {
                 Session["Error"] = ex.Message;
-                Response.Redirect("ErrorForm.aspx");
+                Response.Redirect("../ErrorForm.aspx");
             }
         }
     }

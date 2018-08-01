@@ -49,7 +49,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
         {
             if (CustomerCount == 1)
             {
-                CreateButtons();             
+                CreateButtons();
             }
 
             PopulateDetail();
@@ -57,11 +57,11 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             User activeUser = (User)Session["ActiveUser"];
 
-            if(activeUser.Admin)
+            if (activeUser.Admin)
             {
                 CanReturn = "true";
             }
-            else if(activeUser.Developer)
+            else if (activeUser.Developer)
             {
                 CanReturn = "true";
             }
@@ -87,7 +87,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcChannelName.ToolTip = Sh.ChannelName;
             TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
 
-            if(Sh.IsExchangeOrder)
+            if (Sh.IsExchangeOrder)
             {
                 this.tcIsExchangeOrder.Text = "Yes";
             }
@@ -96,7 +96,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 this.tcIsExchangeOrder.Text = "No";
             }
 
-            if(Sh.RMANo != string.Empty)
+            if (Sh.RMANo != string.Empty)
             {
                 this.tcRMANoTitle.Visible = true;
                 this.tcRMANo.Visible = true;
@@ -113,18 +113,18 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             if (Sh.ShipmentHeaderObject.Count > 0)
             {
-                if(!Sh.ShipmentHeaderObject[CustomerCount - 1].GeneratedFromSalesHeader)
+                if (!Sh.ShipmentHeaderObject[0].GeneratedFromSalesHeader)
                 {
-                    this.tcShipmentDate.Text = Sh.ShipmentHeaderObject[CustomerCount - 1].ShippingDate;
-                    this.tcShipmentDate.ToolTip = Sh.ShipmentHeaderObject[CustomerCount - 1].ShippingDate;
-                    shipmentMethod = Sh.ShipmentHeaderObject[CustomerCount - 1].ShippingAgentCode;
-                    shipmentMethod += " " + Sh.ShipmentHeaderObject[CustomerCount - 1].ShippingAgentService;
+                    this.tcShipmentDate.Text = Sh.ShipmentHeaderObject[0].ShippingDate;
+                    this.tcShipmentDate.ToolTip = Sh.ShipmentHeaderObject[0].ShippingDate;
+                    shipmentMethod = Sh.ShipmentHeaderObject[0].ShippingAgentCode;
+                    shipmentMethod += " " + Sh.ShipmentHeaderObject[0].ShippingAgentService;
 
 
                     this.tcShipMethod.Text = shipmentMethod;
                     this.tcShipMethod.ToolTip = shipmentMethod;
 
-                    Enum.TryParse(Sh.ShipmentHeaderObject[CustomerCount - 1].ShippingAgentCode, out trackType);
+                    Enum.TryParse(Sh.ShipmentHeaderObject[0].ShippingAgentCode, out trackType);
 
                     this.tcShipmentsTotal.Text = "<a href='javascript:expandShipments" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Sh.ShipmentHeaderObject.Count.ToString() + "</a>";
                     this.tcShipmentsTotal.ID = "tcShipmentsTotal_" + CustID.ToString() + "_" + CountID.ToString();
@@ -150,11 +150,11 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 }
                 else
                 {
-                    string trackNo = Sh.PostedPackageObject[CustomerCount - 1].TrackingNo;
+                    string trackNo = Sh.PostedPackageObject[0].TrackingNo;
                     this.tcTrackingNo.Text = SetTrackingNo(trackType, trackNo);
                     this.tcTrackingNo.ToolTip = trackNo;
                 }
-            }      
+            }
 
             this.tcPackagesCount.Text = "<a href='javascript:expandPackages" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Sh.PostedPackageObject.Count.ToString() + "</a>";
             this.tcPackagesCount.ID = "tcPackagesTotal" + CustID.ToString() + "_" + CountID.ToString();

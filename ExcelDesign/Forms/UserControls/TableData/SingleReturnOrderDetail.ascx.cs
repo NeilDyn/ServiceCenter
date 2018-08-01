@@ -142,12 +142,12 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             if (Rh.ReceiptHeaderObj.Count > 0)
             {
-                if (!Rh.ReceiptHeaderObj[CustomerCount - 1].PopulatedFromShipmentHeader)
+                if (!Rh.ReceiptHeaderObj[0].PopulatedFromShipmentHeader)
                 {
-                    Enum.TryParse(Rh.ReceiptHeaderObj[CustomerCount - 1].ShippingAgentCode, out trackType);
+                    Enum.TryParse(Rh.ReceiptHeaderObj[0].ShippingAgentCode, out trackType);
 
-                    this.tcReceiptDate.Text = Rh.ReceiptHeaderObj[CustomerCount - 1].ReceiptDate;
-                    this.tcReceiptDate.ToolTip = Rh.ReceiptHeaderObj[CustomerCount - 1].ReceiptDate;
+                    this.tcReceiptDate.Text = Rh.ReceiptHeaderObj[0].ReceiptDate;
+                    this.tcReceiptDate.ToolTip = Rh.ReceiptHeaderObj[0].ReceiptDate;
                     this.tcReceiptsTotal.Text = "<a href='javascript:expandReceipts" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Rh.ReceiptHeaderObj.Count.ToString() + "</a>";
                     PopulateReceiptLines();
                 }

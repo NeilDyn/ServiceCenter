@@ -48,11 +48,6 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             {
                 this.SalesOrderSequence.Text = "Exchange Order For " + Header.RMANo;
             }
-            //if (Header.RMANo != string.Empty)
-            //{
-            //    this.SalesOrderSequence.Text = "Exchange Order For " + Header.RMANo;
-            //}
-
 
             PopulateHeader();
         }

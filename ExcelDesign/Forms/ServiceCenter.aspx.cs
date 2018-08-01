@@ -59,14 +59,15 @@ namespace ExcelDesign.Forms
             {
                 User u = (User)Session["ActiveUser"];
                 SessionTime = u.SessionTimeout;
+                currentUser.InnerText =  "Welcome " + u.UserID + "!";
 
                 if (u.Admin)
                 {
-                    BtnAdminPanel.Visible = true;
+                    adminPanel.Visible = true;
                 }
                 else
                 {
-                    BtnAdminPanel.Visible = false;
+                    adminPanel.Visible = false;
                 }
             }
 
@@ -100,7 +101,7 @@ namespace ExcelDesign.Forms
 
             if (searchValue != null && !string.IsNullOrWhiteSpace(searchValue))
             {
-                searchOption = DdlSearchOptions.SelectedValue.Replace(" ", "").Replace("-", "");
+                searchOption = DdlSearchOptions.SelectedValue.Replace(" ", "").Replace("-", "").Replace(".", "");
                 searchOption = searchOption.Replace("(ExludesShiptoFilters)", "");
                 Enum.TryParse(searchOption, out so);
 
@@ -114,7 +115,7 @@ namespace ExcelDesign.Forms
                         searchSelection = 1;
                         break;
 
-                    case SearchOptions.PONumber:
+                    case SearchOptions.ExternalDocumentNo:
                         searchSelection = 2;
                         break;
 
@@ -220,23 +221,23 @@ namespace ExcelDesign.Forms
             return "success";
         }
 
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static string CreateExchange(string rmaNo)
-        {
-            string createdOrderNo = string.Empty;
+        //[WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        //public static string CreateExchange(string rmaNo)
+        //{
+        //    string createdOrderNo = string.Empty;
 
-            try
-            {
-                createdOrderNo = StaticService.CreateExchange(rmaNo);
-            }
-            catch (Exception e)
-            {
-                return "Error - " + e.Message;
-            }
+        //    try
+        //    {
+        //        createdOrderNo = StaticService.CreateExchange(rmaNo);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return "Error - " + e.Message;
+        //    }
 
-            return createdOrderNo;
-        }
+        //    return createdOrderNo;
+        //}
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -251,7 +252,7 @@ namespace ExcelDesign.Forms
                 return "Error - " + e.Message;
             }
 
-            return "success";
+            return "Success";
         }
 
         [WebMethod]
@@ -271,6 +272,23 @@ namespace ExcelDesign.Forms
             }
 
             return "You session has expired. You will now be redirected to the login page.";
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static string UserLogout()
+        {
+            try
+            {
+                HttpContext.Current.Session.Clear();
+                FormsAuthentication.SignOut();
+            }
+            catch(Exception ex)
+            {
+                return "Error - " + ex.Message;
+            }
+
+            return "Success";
         }
 
         #endregion
@@ -296,23 +314,6 @@ namespace ExcelDesign.Forms
                 Session.Clear();
                 FormsAuthentication.RedirectToLoginPage();
             }
-        }
-
-        protected void BtnLogout_Click(object sender, EventArgs e)
-        {
-            Session.Clear();
-            FormsAuthentication.SignOut();
-            FormsAuthentication.RedirectToLoginPage();
-        }
-
-        protected void BtnAdminPanel_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("AdminControl.aspx");
-        }
-
-        protected void BtnControlPanel_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("UserControl.aspx");
         }
 
         #endregion

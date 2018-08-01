@@ -7,108 +7,117 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExcelDesign.Forms {
+namespace ExcelDesign.Forms.FunctionForms {
     
     
-    public partial class ServiceCenter {
+    public partial class CreateExchange {
         
         /// <summary>
-        /// frmOrderDetails control.
+        /// frmCreateExchange control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm frmOrderDetails;
+        protected global::System.Web.UI.HtmlControls.HtmlForm frmCreateExchange;
         
         /// <summary>
-        /// btnExtendSessionTime control.
+        /// tblExhangeInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExtendSessionTime;
+        protected global::System.Web.UI.WebControls.Table tblExhangeInfo;
         
         /// <summary>
-        /// adminPanel control.
+        /// rmaTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl adminPanel;
+        protected global::System.Web.UI.WebControls.TableHeaderCell rmaTitle;
         
         /// <summary>
-        /// currentUser control.
+        /// tcRMANo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl currentUser;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcRMANo;
         
         /// <summary>
-        /// imgLogo control.
+        /// tcDocNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgLogo;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcDocNo;
         
         /// <summary>
-        /// lblCustomerServicePortal control.
+        /// tblCreateReturnOrderTableDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCustomerServicePortal;
+        protected global::System.Web.UI.WebControls.Table tblCreateReturnOrderTableDetails;
         
         /// <summary>
-        /// lblSearch control.
+        /// HeaderItem control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSearch;
+        protected global::System.Web.UI.WebControls.TableHeaderCell HeaderItem;
         
         /// <summary>
-        /// txtSearchBox control.
+        /// HeaderDesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearchBox;
+        protected global::System.Web.UI.WebControls.TableHeaderCell HeaderDesc;
         
         /// <summary>
-        /// btnSearch control.
+        /// HeaderQty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch;
+        protected global::System.Web.UI.WebControls.TableHeaderCell HeaderQty;
         
         /// <summary>
-        /// lblSearchOptions control.
+        /// HeaderActionQty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSearchOptions;
+        protected global::System.Web.UI.WebControls.TableHeaderCell HeaderActionQty;
         
         /// <summary>
-        /// DdlSearchOptions control.
+        /// BtnCancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DdlSearchOptions;
+        protected global::System.Web.UI.WebControls.Button BtnCancel;
+        
+        /// <summary>
+        /// BtnCreateExchange control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCreateExchange;
     }
 }

@@ -333,29 +333,33 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CreateExchangeOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CreateExchangeOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string CreateExchangeOrder(string orderNo, ref CreatedExchangeOrder exchangeOrder, string sessionID) {
+        public string CreateExchangeOrder(string orderNo, ref CreatedExchangeOrder exchangeOrder, string externalDocumentNo, string sessionID, string lineDetails) {
             object[] results = this.Invoke("CreateExchangeOrder", new object[] {
                         orderNo,
                         exchangeOrder,
-                        sessionID});
+                        externalDocumentNo,
+                        sessionID,
+                        lineDetails});
             exchangeOrder = ((CreatedExchangeOrder)(results[1]));
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void CreateExchangeOrderAsync(string orderNo, CreatedExchangeOrder exchangeOrder, string sessionID) {
-            this.CreateExchangeOrderAsync(orderNo, exchangeOrder, sessionID, null);
+        public void CreateExchangeOrderAsync(string orderNo, CreatedExchangeOrder exchangeOrder, string externalDocumentNo, string sessionID, string lineDetails) {
+            this.CreateExchangeOrderAsync(orderNo, exchangeOrder, externalDocumentNo, sessionID, lineDetails, null);
         }
         
         /// <remarks/>
-        public void CreateExchangeOrderAsync(string orderNo, CreatedExchangeOrder exchangeOrder, string sessionID, object userState) {
+        public void CreateExchangeOrderAsync(string orderNo, CreatedExchangeOrder exchangeOrder, string externalDocumentNo, string sessionID, string lineDetails, object userState) {
             if ((this.CreateExchangeOrderOperationCompleted == null)) {
                 this.CreateExchangeOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateExchangeOrderOperationCompleted);
             }
             this.InvokeAsync("CreateExchangeOrder", new object[] {
                         orderNo,
                         exchangeOrder,
-                        sessionID}, this.CreateExchangeOrderOperationCompleted, userState);
+                        externalDocumentNo,
+                        sessionID,
+                        lineDetails}, this.CreateExchangeOrderOperationCompleted, userState);
         }
         
         private void OnCreateExchangeOrderOperationCompleted(object arg) {
@@ -368,12 +372,11 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CreateReturnOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CreateReturnOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string CreateReturnOrder(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ref ReturnOrder createdReturn, bool updateRMA, string sessionID) {
+        public string CreateReturnOrder(string orderNo, string extDocNo, string returnReasonCode, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ref ReturnOrder createdReturn, bool updateRMA, string sessionID) {
             object[] results = this.Invoke("CreateReturnOrder", new object[] {
                         orderNo,
                         extDocNo,
                         returnReasonCode,
-                        _DefectOpts,
                         notes,
                         includeResourceLines,
                         printRmaInstructions,
@@ -388,12 +391,12 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
-        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn, bool updateRMA, string sessionID) {
-            this.CreateReturnOrderAsync(orderNo, extDocNo, returnReasonCode, _DefectOpts, notes, includeResourceLines, printRmaInstructions, createUPSReturnLabel, emailAddress, lineDetails, createdReturn, updateRMA, sessionID, null);
+        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn, bool updateRMA, string sessionID) {
+            this.CreateReturnOrderAsync(orderNo, extDocNo, returnReasonCode, notes, includeResourceLines, printRmaInstructions, createUPSReturnLabel, emailAddress, lineDetails, createdReturn, updateRMA, sessionID, null);
         }
         
         /// <remarks/>
-        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, int _DefectOpts, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn, bool updateRMA, string sessionID, object userState) {
+        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn, bool updateRMA, string sessionID, object userState) {
             if ((this.CreateReturnOrderOperationCompleted == null)) {
                 this.CreateReturnOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateReturnOrderOperationCompleted);
             }
@@ -401,7 +404,6 @@ namespace ExcelDesign.ServiceFunctions {
                         orderNo,
                         extDocNo,
                         returnReasonCode,
-                        _DefectOpts,
                         notes,
                         includeResourceLines,
                         printRmaInstructions,
@@ -601,22 +603,23 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:WriteToLogFile", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="WriteToLogFile_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void WriteToLogFile(string userID, string sessionID, int _UserAction, string orderNo, string rMANo) {
+        public void WriteToLogFile(string userID, string sessionID, int _UserAction, string orderNo, string rMANo, bool createUPSLabel) {
             this.Invoke("WriteToLogFile", new object[] {
                         userID,
                         sessionID,
                         _UserAction,
                         orderNo,
-                        rMANo});
+                        rMANo,
+                        createUPSLabel});
         }
         
         /// <remarks/>
-        public void WriteToLogFileAsync(string userID, string sessionID, int _UserAction, string orderNo, string rMANo) {
-            this.WriteToLogFileAsync(userID, sessionID, _UserAction, orderNo, rMANo, null);
+        public void WriteToLogFileAsync(string userID, string sessionID, int _UserAction, string orderNo, string rMANo, bool createUPSLabel) {
+            this.WriteToLogFileAsync(userID, sessionID, _UserAction, orderNo, rMANo, createUPSLabel, null);
         }
         
         /// <remarks/>
-        public void WriteToLogFileAsync(string userID, string sessionID, int _UserAction, string orderNo, string rMANo, object userState) {
+        public void WriteToLogFileAsync(string userID, string sessionID, int _UserAction, string orderNo, string rMANo, bool createUPSLabel, object userState) {
             if ((this.WriteToLogFileOperationCompleted == null)) {
                 this.WriteToLogFileOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWriteToLogFileOperationCompleted);
             }
@@ -625,7 +628,8 @@ namespace ExcelDesign.ServiceFunctions {
                         sessionID,
                         _UserAction,
                         orderNo,
-                        rMANo}, this.WriteToLogFileOperationCompleted, userState);
+                        rMANo,
+                        createUPSLabel}, this.WriteToLogFileOperationCompleted, userState);
         }
         
         private void OnWriteToLogFileOperationCompleted(object arg) {
@@ -2156,6 +2160,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string descriptionField;
         
+        private string categoryField;
+        
         /// <remarks/>
         public string ReasonCode {
             get {
@@ -2175,6 +2181,16 @@ namespace ExcelDesign.ServiceFunctions {
                 this.descriptionField = value;
             }
         }
+        
+        /// <remarks/>
+        public string Category {
+            get {
+                return this.categoryField;
+            }
+            set {
+                this.categoryField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -2190,6 +2206,8 @@ namespace ExcelDesign.ServiceFunctions {
         private string sSHNoField;
         
         private string emailField;
+        
+        private string isExchangeOrderField;
         
         /// <remarks/>
         public string RMANo {
@@ -2218,6 +2236,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string IsExchangeOrder {
+            get {
+                return this.isExchangeOrderField;
+            }
+            set {
+                this.isExchangeOrderField = value;
             }
         }
     }
@@ -4182,6 +4210,10 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string dateCreatedField;
         
+        private string rEQReturnActionField;
+        
+        private string qtyExchangedField;
+        
         /// <remarks/>
         public string DocNo {
             get {
@@ -4269,6 +4301,26 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.dateCreatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string REQReturnAction {
+            get {
+                return this.rEQReturnActionField;
+            }
+            set {
+                this.rEQReturnActionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string QtyExchanged {
+            get {
+                return this.qtyExchangedField;
+            }
+            set {
+                this.qtyExchangedField = value;
             }
         }
     }

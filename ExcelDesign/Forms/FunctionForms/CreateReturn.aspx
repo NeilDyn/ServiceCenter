@@ -39,39 +39,34 @@
 <body>
     <form id="frmCreateReturnOrder" runat="server">
         <asp:Table ID="tblRMAInfo" runat="server" Height="100%" Width="100%">
-            <asp:TableRow>
+            <asp:TableHeaderRow HorizontalAlign="Left">
                 <asp:TableHeaderCell Text="Order No:" ID="noTitle" ForeColor="#0099FF" Font-Bold="true" Font-Size="Large"/>
                 <asp:TableHeaderCell ID="tcNo" runat="server" />
-            </asp:TableRow>
-            <asp:TableRow>
+            </asp:TableHeaderRow>
+            <asp:TableHeaderRow HorizontalAlign="Left">
                 <asp:TableHeaderCell Text="External Document No:" ForeColor="#0099FF" Font-Bold="true" Font-Size="Large"/>
                 <asp:TableHeaderCell ID="tcDocNo" runat="server" />
-            </asp:TableRow>
+            </asp:TableHeaderRow>
+            <asp:TableHeaderRow>
+                <asp:TableHeaderCell>
+                    <br />
+                </asp:TableHeaderCell>
+            </asp:TableHeaderRow>           
             <asp:TableRow>
                 <asp:TableCell>
                     <br />
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
-                <asp:TableCell Text="Return Reason: " ForeColor="#0099FF" Font-Bold="true" Style="text-align:right; padding-right:30px"/>
-                <asp:TableCell>
-                    <asp:DropDownList ID="ddlDefectOptions" runat="server" Width="50%" />
-                </asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow>
-                <asp:TableCell>
-                    <br />
-                </asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow>
-                <asp:TableCell ColumnSpan="5">
+                <asp:TableCell ColumnSpan="6">
                     <asp:Table runat="server" ID="tblCreateReturnOrderTableDetails" Height="100%" Width="100%">
                         <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
                             <asp:TableHeaderCell Text="Item No." HorizontalAlign="Left" ID="HeaderItem" />
                             <asp:TableHeaderCell Text="Description" HorizontalAlign="Left" Width="30%" ID="HeaderDesc" />
                             <asp:TableHeaderCell Text="Qty" ID="HeaderQty" />
-                            <asp:TableHeaderCell Text="Action Qty." ID="HeaderActionQty" Width="15%" />
+                            <asp:TableHeaderCell Text="Action Qty." ID="HeaderActionQty" Width="8%" />
                             <asp:TableHeaderCell Text="Return Reason Code" HorizontalAlign="Left" ID="HeaderReturnReasonCode" />
+                            <asp:TableHeaderCell Text="REQ Return Action" HorizontalAlign="Left" ID="HeaderReturnAction" />
                         </asp:TableHeaderRow>
                     </asp:Table>
                 </asp:TableCell>
@@ -114,9 +109,7 @@
             <asp:TableFooterRow HorizontalAlign="Right">
                 <asp:TableHeaderCell />
                 <asp:TableHeaderCell HorizontalAlign="Right">
-                    <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClientClick="CloseWindow();" />
-                </asp:TableHeaderCell>
-                <asp:TableHeaderCell HorizontalAlign="Right">
+                    <asp:Button ID="Button1" runat="server" Text="Cancel" OnClientClick="CloseWindow();" />
                     <asp:Button ID="btnCreateRMA" runat="server" Text="Create RMA" OnClick="BtnCreateRMA_Click" />
                 </asp:TableHeaderCell>
             </asp:TableFooterRow>

@@ -10,7 +10,7 @@ namespace ExcelDesign.Class_Objects.Enums
         Preset = -1,
         Default = 0,
         SearchAll = 1,
-        PONumber = 2,
+        ExternalDocumentNo = 2,
         TrackingNo = 3,
         IMEI = 4,
         ShiptoName = 5,

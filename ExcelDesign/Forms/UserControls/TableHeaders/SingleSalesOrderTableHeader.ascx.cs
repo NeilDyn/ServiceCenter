@@ -34,7 +34,7 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
 
             if(SalesOrderCount == 1)
             {
-                this.btnExpandCurrentOrder.Visible = false;
+                this.btnExpandCurrentOrder.Visible = false;              
                 this.SalesOrderSequence.Text = "Order";
             }
             else
@@ -43,7 +43,17 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
                 this.SalesOrderSequence.Text = "Order " + HeadCount.ToString();
                 this.btnExpandCurrentOrder.ID = "btnExpandCurrentOrder_" + CustID.ToString() + "_" + HeadCount.ToString();
             }
-            
+
+            if (Header.IsExchangeOrder)
+            {
+                this.SalesOrderSequence.Text = "Exchange Order For " + Header.RMANo;
+            }
+            //if (Header.RMANo != string.Empty)
+            //{
+            //    this.SalesOrderSequence.Text = "Exchange Order For " + Header.RMANo;
+            //}
+
+
             PopulateHeader();
         }
 

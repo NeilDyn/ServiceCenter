@@ -26,13 +26,13 @@ namespace ExcelDesign.Class_Objects
             webService = new WebService();
         }
 
-        public CreatedReturnHeader CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, int defect, string notes,
+        public CreatedReturnHeader CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, string notes,
             bool includeResource, bool printRMA, bool createLabel, string email, string lineValues, bool update)
         {
             ReturnOrder returnRMA = new ReturnOrder();
             CreatedReturnHeader cth = new CreatedReturnHeader();
 
-            returnRMA = webService.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, defect, notes, createLabel, printRMA, includeResource, email, lineValues, update);
+            returnRMA = webService.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, notes, createLabel, printRMA, includeResource, email, lineValues, update);
 
             cth = CreateReturnRMA(returnRMA);
 
@@ -117,19 +117,18 @@ namespace ExcelDesign.Class_Objects
             return ctl;
         }
 
-        public string CreateExchange(string rmaNo)
+        public CreatedExchangeHeader CreateExchangeOrder(string rmaNo, string externalDocumentNo, string lineValues)
         {
-            CreatedExchangeOrder eo = new CreatedExchangeOrder();
+            CreatedExchangeOrder ceo = new CreatedExchangeOrder();
             CreatedExchangeHeader ceh = new CreatedExchangeHeader();
 
-            eo = webService.CreateExchange(rmaNo);
+            ceo = webService.CreateExchange(rmaNo, externalDocumentNo, lineValues);
 
-            ceh = CreateExchangeOrder(eo);
-            HttpContext.Current.Session["CreatedExchange"] = ceh;
-            return ceh.OrderNo;
+            ceh = CreateExchange(ceo);
+            return ceh;
         }
 
-        public CreatedExchangeHeader CreateExchangeOrder(CreatedExchangeOrder eo)
+        public CreatedExchangeHeader CreateExchange(CreatedExchangeOrder eo)
         {
             CreatedExchangeHeader ceh = new CreatedExchangeHeader();
             string orderNo = string.Empty;

@@ -6,10 +6,11 @@
 <head runat="server">
     <title>User Control</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="icon" type="image/ico" href="../images/icon.ico" />
     <script type="text/javascript">
         function UpdatePassword() {
             var userID = "<%= this.tcUserID.Text %>";
-            var password = "<%= this.txtPassword.Text %>";
+            var password = prompt("Please enter a new password.");
 
             if (password.trim() == null || password.trim() == "") {
                 alert("Please insert a valid password");
@@ -61,7 +62,6 @@
             <asp:TableRow>
                 <asp:TableCell ID="tcUserID" />
                 <asp:TableCell ID="tcPassword" HorizontalAlign="Center">
-                    <asp:TextBox ID="txtPassword" runat="server" Width="90%" />
                 </asp:TableCell><asp:TableCell ID="tcCreateRMA" Width="10%" HorizontalAlign="Center">
                     <asp:CheckBox ID="cbxCreateRMA" runat="server" Enabled="false" />
                 </asp:TableCell><asp:TableCell ID="tcCreateReturnLabel" Width="10%" HorizontalAlign="Center">

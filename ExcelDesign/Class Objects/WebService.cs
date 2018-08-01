@@ -88,12 +88,12 @@ namespace ExcelDesign.Class_Objects
             }
         }
 
-        public ReturnOrder CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, int defect, string notes,
+        public ReturnOrder CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, string notes,
             bool includeResource, bool printRMA, bool createLabel, string email, string lineValues, bool update)
         {
             ReturnOrder returnRMA = new ReturnOrder();
 
-            functions.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, defect, notes, createLabel, printRMA, includeResource, email, lineValues, ref returnRMA, update, SessionID());
+            functions.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, notes, createLabel, printRMA, includeResource, email, lineValues, ref returnRMA, update, SessionID());
 
             return returnRMA;
         }
@@ -119,11 +119,11 @@ namespace ExcelDesign.Class_Objects
             functions.IssueReturnLabel(rmaNo, email, SessionID());
         }
 
-        public CreatedExchangeOrder CreateExchange(string rmaNo)
+        public CreatedExchangeOrder CreateExchange(string rmaNo, string externalDocNo, string lineValues)
         {
             CreatedExchangeOrder eo = new CreatedExchangeOrder();
 
-            string test = functions.CreateExchangeOrder(rmaNo, ref eo, SessionID());
+            functions.CreateExchangeOrder(rmaNo, ref eo, externalDocNo, SessionID(), lineValues);
 
             return eo;
         }

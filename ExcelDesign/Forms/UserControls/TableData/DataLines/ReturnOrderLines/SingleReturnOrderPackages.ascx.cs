@@ -33,6 +33,7 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
             };
 
             breakRow.Cells.Add(breakCell);
+            this.tblReturnPackageLines.Rows.Add(breakRow);
 
             foreach (PostedReceive postedReceive in PostedReceive)
             {

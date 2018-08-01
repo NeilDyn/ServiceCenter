@@ -87,6 +87,15 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcChannelName.ToolTip = Sh.ChannelName;
             TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
 
+            if(Sh.IsExchangeOrder)
+            {
+                this.tcIsExchangeOrder.Text = "Yes";
+            }
+            else
+            {
+                this.tcIsExchangeOrder.Text = "No";
+            }
+
             if(Sh.RMANo != string.Empty)
             {
                 this.tcRMANoTitle.Visible = true;
@@ -104,18 +113,18 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             if (Sh.ShipmentHeaderObject.Count > 0)
             {
-                if(!Sh.ShipmentHeaderObject[0].GeneratedFromSalesHeader)
+                if(!Sh.ShipmentHeaderObject[CustomerCount - 1].GeneratedFromSalesHeader)
                 {
-                    this.tcShipmentDate.Text = Sh.ShipmentHeaderObject[0].ShippingDate;
-                    this.tcShipmentDate.ToolTip = Sh.ShipmentHeaderObject[0].ShippingDate;
-                    shipmentMethod = Sh.ShipmentHeaderObject[0].ShippingAgentCode;
-                    shipmentMethod += " " + Sh.ShipmentHeaderObject[0].ShippingAgentService;
+                    this.tcShipmentDate.Text = Sh.ShipmentHeaderObject[CustomerCount - 1].ShippingDate;
+                    this.tcShipmentDate.ToolTip = Sh.ShipmentHeaderObject[CustomerCount - 1].ShippingDate;
+                    shipmentMethod = Sh.ShipmentHeaderObject[CustomerCount - 1].ShippingAgentCode;
+                    shipmentMethod += " " + Sh.ShipmentHeaderObject[CustomerCount - 1].ShippingAgentService;
 
 
                     this.tcShipMethod.Text = shipmentMethod;
                     this.tcShipMethod.ToolTip = shipmentMethod;
 
-                    Enum.TryParse(Sh.ShipmentHeaderObject[0].ShippingAgentCode, out trackType);
+                    Enum.TryParse(Sh.ShipmentHeaderObject[CustomerCount - 1].ShippingAgentCode, out trackType);
 
                     this.tcShipmentsTotal.Text = "<a href='javascript:expandShipments" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Sh.ShipmentHeaderObject.Count.ToString() + "</a>";
                     this.tcShipmentsTotal.ID = "tcShipmentsTotal_" + CustID.ToString() + "_" + CountID.ToString();
@@ -141,7 +150,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 }
                 else
                 {
-                    string trackNo = Sh.PostedPackageObject[0].TrackingNo;
+                    string trackNo = Sh.PostedPackageObject[CustomerCount - 1].TrackingNo;
                     this.tcTrackingNo.Text = SetTrackingNo(trackType, trackNo);
                     this.tcTrackingNo.ToolTip = trackNo;
                 }

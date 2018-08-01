@@ -19,7 +19,6 @@ namespace ExcelDesign.Forms.FunctionForms
         protected string no;
         protected string docNo;
         protected string notes;
-        protected int defect;
         protected string email;
 
         protected bool resources;
@@ -36,12 +35,7 @@ namespace ExcelDesign.Forms.FunctionForms
         {
             if (!IsPostBack)
             {
-                List<Defects> doList = (List<Defects>)Session["Defects"];
                 List<ReturnReason> rrList = (List<ReturnReason>)Session["ReturnReasons"];
-
-                ddlDefectOptions.DataValueField = "Option";
-                ddlDefectOptions.DataSource = doList;
-                ddlDefectOptions.DataBind();
 
                 tcNo.Text = Convert.ToString(Request.QueryString["No"]);
                 tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
@@ -60,13 +54,13 @@ namespace ExcelDesign.Forms.FunctionForms
                     btnCreateRMA.Text = "Create RMA";
                 }
 
-                if(Session["ActiveUser"] != null)
+                if (Session["ActiveUser"] != null)
                 {
                     User activeUser = (User)Session["ActiveUser"];
 
-                    if(!activeUser.Admin && !activeUser.Developer)
+                    if (!activeUser.Admin && !activeUser.Developer)
                     {
-                        if(!activeUser.CreateReturnLabel)
+                        if (!activeUser.CreateReturnLabel)
                         {
                             cbxCreateLable.Visible = false;
                             lblCreateLable.Visible = false;
@@ -88,6 +82,13 @@ namespace ExcelDesign.Forms.FunctionForms
                 Sh = (List<SalesHeader>)Session["SalesHeaders"];
 
                 List<ReturnReason> rrList = (List<ReturnReason>)Session["ReturnReasons"];
+
+                List<string> reqList = new List<string>
+                {
+                    "",
+                    "Exchange",
+                    "Refund"
+                };
 
                 int lineCount = 0;
                 string filterNo = string.Empty;
@@ -130,12 +131,19 @@ namespace ExcelDesign.Forms.FunctionForms
                                     TableCell qty = new TableCell();
                                     TableCell actionQty = new TableCell();
                                     TableCell returnReasonCode = new TableCell();
+                                    TableCell reqReturnAction = new TableCell();
 
                                     DropDownList ddlReturnReasonCode = new DropDownList
                                     {
-                                        DataValueField = "Description",
+                                        DataValueField = "Display",
                                         DataSource = rrList,
                                         ID = "ddlReturnReasonCode_" + lineCount.ToString()
+                                    };
+
+                                    DropDownList ddlREQReturnAction = new DropDownList
+                                    {
+                                        DataSource = reqList,
+                                        ID = "ddlREQReturnAction_" + lineCount.ToString()
                                     };
 
                                     TextBox actionQtyInsert = new TextBox
@@ -146,18 +154,21 @@ namespace ExcelDesign.Forms.FunctionForms
                                     };
 
                                     ddlReturnReasonCode.DataBind();
+                                    ddlREQReturnAction.DataBind();
 
                                     itemNo.ID = "itemNo_" + lineCount.ToString();
                                     qty.ID = "itemQuanity_" + lineCount.ToString();
-                                    desc.ID = "desc1_" + lineCount.ToString();
+                                    desc.ID = "desc_" + lineCount.ToString();
                                     actionQty.ID = "actionQty_" + lineCount.ToString();
                                     returnReasonCode.ID = "returnReasonCode_" + lineCount.ToString();
+                                    reqReturnAction.ID = "reqReturnReason_" + lineCount.ToString();
 
                                     itemNo.Text = line.ItemNo;
                                     desc.Text = line.Description;
                                     qty.Text = (line.Quantity - removeqty).ToString();
                                     actionQty.Controls.Add(actionQtyInsert);
                                     returnReasonCode.Controls.Add(ddlReturnReasonCode);
+                                    reqReturnAction.Controls.Add(ddlREQReturnAction);
 
                                     qty.HorizontalAlign = HorizontalAlign.Center;
                                     actionQty.HorizontalAlign = HorizontalAlign.Center;
@@ -169,6 +180,7 @@ namespace ExcelDesign.Forms.FunctionForms
                                     singleRow.Cells.Add(qty);
                                     singleRow.Cells.Add(actionQty);
                                     singleRow.Cells.Add(returnReasonCode);
+                                    singleRow.Cells.Add(reqReturnAction);
 
                                     if (lineCount % 2 == 0)
                                     {
@@ -280,7 +292,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception ex)
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "exceptionAlert", "alert('" + ex.Message +"');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "exceptionAlert", "alert('" + ex.Message + "');", true);
             }
         }
 
@@ -294,7 +306,6 @@ namespace ExcelDesign.Forms.FunctionForms
                 no = tcNo.Text;
                 docNo = tcDocNo.Text;
                 notes = txtNotes.Text;
-                defect = ddlDefectOptions.SelectedIndex;
                 resources = cbxResources.Checked;
                 printRMA = cbxPrintRMA.Checked;
                 createLabel = cbxCreateLable.Checked;
@@ -314,6 +325,7 @@ namespace ExcelDesign.Forms.FunctionForms
                         int qtyLine = 0;
                         int actionQty = 0;
                         string reasonCode = string.Empty;
+                        int reqReturnAction = -1;
 
                         controlCount = 0;
 
@@ -342,21 +354,30 @@ namespace ExcelDesign.Forms.FunctionForms
                                 if (c.GetType() == typeof(DropDownList))
                                 {
                                     int index = ((DropDownList)c).SelectedIndex;
-                                    reasonCode = ((List<ReturnReason>)Session["ReturnReasons"])[index].ReasonCode;
+
+                                    if (c.ID.Contains("ddlReturnReasonCode"))
+                                    {
+                                        reasonCode = ((List<ReturnReason>)Session["ReturnReasons"])[index].ReasonCode;
+                                    }
+                                    else if (c.ID.Contains("ddlREQReturnAction"))
+                                    {
+                                        reqReturnAction = index;
+                                    }
                                 }
                             }
 
                             string lineValidMessage = string.Empty;
 
-                            if ((rowCount > 1 && controlCount == 2 && actionQty != 0))
+                            if ((rowCount > 1 && controlCount == 3 && actionQty != 0))
                             {
-                                lineValidMessage = ValidateLine(itemNo, qtyLine, actionQty, reasonCode);
+                                lineValidMessage = ValidateLine(itemNo, qtyLine, actionQty, reasonCode, reqReturnAction);
 
                                 if (lineValidMessage == "Valid Line Input")
                                 {
-                                    lineBuild.AppendLine(itemNo).Append(":");
+                                    lineBuild.Append(itemNo).Append(":");
                                     lineBuild.Append(actionQty).Append(":");
-                                    lineBuild.Append(reasonCode).Append(",");
+                                    lineBuild.Append(reasonCode).Append(":");
+                                    lineBuild.Append(reqReturnAction).Append(",");
                                 }
                                 else
                                 {
@@ -387,7 +408,7 @@ namespace ExcelDesign.Forms.FunctionForms
                             update = false;
                         }
 
-                        crh = ss.CreateReturnOrder(no, docNo, string.Empty, defect, notes, resources, printRMA, createLabel, email, lineValues, update);
+                        crh = ss.CreateReturnOrder(no, docNo, string.Empty, notes, resources, printRMA, createLabel, email, lineValues, update);
                         Session["CreatedRMA"] = crh;
                         ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + "');", true);
                         ClientScript.RegisterStartupScript(this.GetType(), "openCreatedRMA", "OpenCreatedRMA();", true);
@@ -405,16 +426,16 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception ex)
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "errorAlert", "alert('" + ex.Message +"');", true);
-                
-                if(ex.Message.ToLower().Contains("session"))
+                ClientScript.RegisterStartupScript(this.GetType(), "errorAlert", "alert('" + ex.Message + "');", true);
+
+                if (ex.Message.ToLower().Contains("session"))
                 {
                     ClientScript.RegisterStartupScript(this.GetType(), "closeErrorAlert", "parent.window.close();", true);
                 }
             }
         }
 
-        protected string ValidateLine(string itemNoP, int qtyLineP, int actionQtyP, string reasonCodeP)
+        protected string ValidateLine(string itemNoP, int qtyLineP, int actionQtyP, string reasonCodeP, int reqReturnActionP)
         {
             string valid = "Valid Line Input";
 
@@ -426,7 +447,14 @@ namespace ExcelDesign.Forms.FunctionForms
                     {
                         if (!String.IsNullOrWhiteSpace(reasonCodeP) || !String.IsNullOrEmpty(reasonCodeP))
                         {
-                            return valid;
+                            if (reqReturnActionP > 0)
+                            {
+                                return valid;
+                            }
+                            else
+                            {
+                                return "Please select a valid Return Action for Item: " + itemNoP;
+                            }
                         }
                         else
                         {
@@ -455,62 +483,55 @@ namespace ExcelDesign.Forms.FunctionForms
 
             try
             {
-                if (defect > 0)
+                if (createLabel)
                 {
-                    if (createLabel)
-                    {
-                        User activeUser = (User)Session["ActiveUser"];
+                    User activeUser = (User)Session["ActiveUser"];
 
-                        if (activeUser.CreateReturnLabel)
+                    if (activeUser.CreateReturnLabel)
+                    {
+                        if (!String.IsNullOrWhiteSpace(email))
                         {
-                            if (!String.IsNullOrWhiteSpace(email))
+                            if (IsValidEmail(email))
                             {
-                                if (IsValidEmail(email))
-                                {
-                                    return valid;
-                                }
-                                else
-                                {
-                                    return "Invalid email address entered.";
-                                }
+                                return valid;
                             }
                             else
                             {
-                                return "Updated email is required for creating a return label.";
+                                return "Invalid email address entered.";
                             }
                         }
                         else
                         {
-                            return "You do not have the required permission to issue a return label.";
+                            return "Updated email is required for creating a return label.";
                         }
                     }
                     else
                     {
-                        return valid;
+                        return "You do not have the required permission to issue a return label.";
                     }
                 }
                 else
                 {
-                    return "Please select a valid defect option.";
+                    return valid;
                 }
             }
             catch (Exception e)
             {
                 return e.Message;
             }
-        }
+}
 
-        protected bool IsValidEmail(string email)
-        {
-            try
-            {
-                var addr = new MailAddress(email);
-                return addr.Address == email;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+protected bool IsValidEmail(string email)
+{
+    try
+    {
+        var addr = new MailAddress(email);
+        return addr.Address == email;
+    }
+    catch (Exception)
+    {
+        return false;
+    }
+}
     }
 }

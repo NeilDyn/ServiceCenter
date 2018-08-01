@@ -33,6 +33,7 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
             };
 
             breakRow.Cells.Add(breakCell);
+            this.tblSalesPackageLines.Rows.Add(breakRow);
 
             foreach (PostedPackage postedPack in PostedPackage)
             {

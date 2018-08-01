@@ -57,6 +57,10 @@
                 },
             });
         };
+
+        function SubmitFeedback() {
+            window.open("https://docs.google.com/forms/d/e/1FAIpQLSfr07VbYNgq2yuyrRVCJUFtbssytAX563c7ZQBht_xZNx4EKg/viewform", "_blank");
+        };
     </script>
 </head>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -68,8 +72,9 @@
             <asp:Button ID="btnExtendSessionTime" Text="Yes" runat="server" OnClientClick="ResetTimers()" />
         </div>
         <header style="float: right" runat="server">
-            <asp:Button ID="BtnControlPanel" runat="server" Text="Control Panel" OnClick="BtnControlPanel_Click" />
+            <asp:Button ID="BtnSubmitFeedback" runat="server" Text="Submit Feedback" OnClientClick="SubmitFeedback(); return false;" />
             <asp:Button ID="BtnAdminPanel" runat="server" Text="Admin Panel" OnClick="BtnAdminPanel_Click" />
+            <asp:Button ID="BtnControlPanel" runat="server" Text="Control Panel" OnClick="BtnControlPanel_Click" />
             <asp:Button ID="BtnLogout" runat="server" Text="Logout" OnClick="BtnLogout_Click" />
             <br />
         </header>

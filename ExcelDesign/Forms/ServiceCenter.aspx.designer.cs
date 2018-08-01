@@ -31,13 +31,13 @@ namespace ExcelDesign.Forms {
         protected global::System.Web.UI.WebControls.Button btnExtendSessionTime;
         
         /// <summary>
-        /// BtnControlPanel control.
+        /// BtnSubmitFeedback control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnControlPanel;
+        protected global::System.Web.UI.WebControls.Button BtnSubmitFeedback;
         
         /// <summary>
         /// BtnAdminPanel control.
@@ -47,6 +47,15 @@ namespace ExcelDesign.Forms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnAdminPanel;
+        
+        /// <summary>
+        /// BtnControlPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnControlPanel;
         
         /// <summary>
         /// BtnLogout control.

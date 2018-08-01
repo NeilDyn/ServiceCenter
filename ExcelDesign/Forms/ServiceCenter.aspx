@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ServiceCenter.aspx.cs" Inherits="ExcelDesign.Forms.ServiceCenter" %>
 
 <%@ Register Src="~/Forms/UserControls/SingleControls/MultipleCustomers.ascx" TagName="MultipleCustomers" TagPrefix="mc" %>
@@ -68,7 +69,11 @@
                 dataType: "json",
                 success: function (error) {
                     if (error.d.indexOf("Error") == -1) {
-                        location.replace("LoginPage.aspx");
+                        if (location.href.includes("Forms")) {
+                            location.replace("LoginPage.aspx");
+                        } else {
+                            location.replace("Forms/LoginPage.aspx");
+                        }
                     } else {
                         alert(error.d);
                     }
@@ -82,11 +87,20 @@
         };
 
         function OpenUserControlPanel() {
-            location.replace("UserControl.aspx");
+            if (location.href.includes("Forms")) {
+                location.replace("UserControl.aspx");
+            } else {
+                location.replace("Forms/UserControl.aspx");
+            }
+
         };
 
         function OpenAdminControlPanel() {
-            location.replace("AdminControl.aspx");
+            if (location.href.includes("Forms")) {
+                location.replace("AdminControl.aspx");
+            } else {
+                location.replace("Forms/AdminControl.aspx");
+            }
         }
 
         function SubmitFeedback() {
@@ -103,7 +117,7 @@
             <p>Warning, your session will expire in 1 minute. Do you want to continue working?</p>
             <asp:Button ID="btnExtendSessionTime" Text="Yes" runat="server" OnClientClick="ResetTimers()" />
         </div>
-        <div runat="server" class="HeaderNavbar">          
+        <div runat="server" class="HeaderNavbar">
             <ul>
                 <li><a href="#" class="disableLink"></a></li>
                 <li><a href="javascript:UserLogout()">Logout</a></li>
@@ -112,7 +126,7 @@
                 <li><a href="javascript:SubmitFeedback()">Submit Feedback</a></li>
                 <li runat="server" id="currentUser" style="padding: 0 20px"></li>
                 <li style="padding: 0 20px">v1.2</li>
-            </ul>           
+            </ul>
         </div>
         <div id="ServiceCenterHeader">
             <asp:Image ID="imgLogo" runat="server" ImageUrl="~/images/Logo.png" />

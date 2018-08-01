@@ -161,7 +161,15 @@ namespace ExcelDesign.Forms
                 catch (Exception ex)
                 {
                     Session["Error"] = ex.Message;
-                    Response.Redirect("ErrorForm.aspx");
+                    
+                    if(Request.Url.AbsoluteUri.Contains("Forms"))
+                    {
+                        Response.Redirect("ErrorForm.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("Forms/ErrorForm.aspx");
+                    }
                 }
             }
         }

@@ -68,7 +68,7 @@
                 dataType: "json",
                 success: function (error) {
                     if (error.d.indexOf("Error") == -1) {
-                        location.href = "LoginPage.aspx";
+                        location.replace("LoginPage.aspx");
                     } else {
                         alert(error.d);
                     }
@@ -82,11 +82,11 @@
         };
 
         function OpenUserControlPanel() {
-            location.href = "UserControl.aspx";
+            location.replace("UserControl.aspx");
         };
 
         function OpenAdminControlPanel() {
-            location.href = "AdminControl.aspx";
+            location.replace("AdminControl.aspx");
         }
 
         function SubmitFeedback() {

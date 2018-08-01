@@ -125,7 +125,9 @@
     <Content Include="Forms\UserControls\TableHeaders\SingleSalesOrderTableHeader.ascx" />
     <Content Include="images\Logo.png" />
     <Content Include="images\icon.ico" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class Objects\CreatedExchange\CreatedExchangeHeader.cs" />

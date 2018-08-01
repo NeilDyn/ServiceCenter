@@ -37,6 +37,15 @@ namespace ExcelDesign.Forms.UserControls.MainTables
                 this.btnExpandReturn.ID = "btnExpandReturn_" + CustID.ToString();
             }
 
+            if (CustomerCount == 1)
+            {
+                Session["ReturnHeaders"] = ReturnHeaderList;
+            }
+            else
+            {
+                Session["ReturnHeaders"] = null;
+            }
+
             PopulateData();
         }
 

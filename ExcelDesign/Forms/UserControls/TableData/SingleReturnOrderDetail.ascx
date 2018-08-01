@@ -14,35 +14,13 @@
 
         $("[id$=btnCreateExchange<%= this.CustID %>_<%= this.CountID %>]").click(function () {
             if ("<%= this.CanExchange %>" == "true") {
-                var rmaNo = "<%= this.Rh.RMANo %>";
-
-                $.ajax({
-                    type: "POST",
-                    url: "ServiceCenter.aspx/CreateExchange",
-                    data: JSON.stringify({ rmaNo: rmaNo }),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (orderNo) {
-                        if (orderNo.d.indexOf("Error") == -1) {
-                            alert("New order created through exchange: " + orderNo.d);
-
-                            var width = 1500;
-                            var height = 500;
-                            var left = (screen.width - width) + 500;
-                            var top = (screen.height - height) * 0.5;
-                            window.open("FunctionForms/CreatedExchange.aspx",
-                                null,
-                                "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
-                        } else {
-                            alert(orderNo.d);
-                        }
-                    },
-                    error: function (xhr, status, text) {
-                        console.log(xhr.status);
-                        console.log(xhr.text);
-                        console.log(xhr.responseText);
-                    },
-                });
+                var width = 1500;
+                var height = 500;
+                var left = (screen.width - width) + 500;
+                var top = (screen.height - height) * 0.5;
+                window.open("FunctionForms/CreateExchange.aspx?RMANo=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>",
+                    null,
+                    "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");                                  
             } else {
                 alert("You do not have the required permission to create an exchange order.");
             }
@@ -171,7 +149,6 @@
         <asp:TableCell runat="server" ID="tcOrderDate" />
     </asp:TableRow>
     <asp:TableRow runat="server" ID="expandReceipts" TableSection="TableBody" HorizontalAlign="Justify">
-        <asp:TableCell><br /></asp:TableCell>
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
@@ -185,7 +162,6 @@
         <asp:TableCell runat="server" ID="tcEmail" />
     </asp:TableRow>
     <asp:TableRow runat="server" ID="expandReceives" TableSection="TableBody" HorizontalAlign="Justify">
-        <asp:TableCell><br /></asp:TableCell>
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />

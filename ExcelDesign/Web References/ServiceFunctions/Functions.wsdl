@@ -64,6 +64,8 @@
           <element minOccurs="1" maxOccurs="1" name="QtyShipped" type="string" />
           <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
           <element minOccurs="1" maxOccurs="1" name="DateCreated" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="REQReturnAction" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="QtyExchanged" type="string" />
         </sequence>
       </complexType>
       <complexType name="Warranty3" mixed="true">
@@ -278,12 +280,14 @@
           <element minOccurs="1" maxOccurs="1" name="RMANo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="SSHNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Email" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="IsExchangeOrder" type="string" />
         </sequence>
       </complexType>
       <complexType name="ReturnReasonCode">
         <sequence>
           <element minOccurs="1" maxOccurs="1" name="ReasonCode" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Category" type="string" />
         </sequence>
       </complexType>
       <complexType name="DefectOptions" mixed="true">
@@ -535,7 +539,9 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
             <element xmlns:q5="urn:microsoft-dynamics-nav/xmlports/x50005" minOccurs="1" maxOccurs="1" name="exchangeOrder" type="q5:CreatedExchangeOrder" />
+            <element minOccurs="1" maxOccurs="1" name="externalDocumentNo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lineDetails" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -553,7 +559,6 @@
             <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="extDocNo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="returnReasonCode" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="_DefectOpts" type="int" />
             <element minOccurs="1" maxOccurs="1" name="notes" type="string" />
             <element minOccurs="1" maxOccurs="1" name="includeResourceLines" type="boolean" />
             <element minOccurs="1" maxOccurs="1" name="printRmaInstructions" type="boolean" />
@@ -660,6 +665,7 @@
             <element minOccurs="1" maxOccurs="1" name="_UserAction" type="int" />
             <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="rMANo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="createUPSLabel" type="boolean" />
           </sequence>
         </complexType>
       </element>

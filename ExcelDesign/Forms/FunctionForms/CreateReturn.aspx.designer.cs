@@ -58,15 +58,6 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.TableHeaderCell tcDocNo;
         
         /// <summary>
-        /// ddlDefectOptions control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDefectOptions;
-        
-        /// <summary>
         /// tblCreateReturnOrderTableDetails control.
         /// </summary>
         /// <remarks>
@@ -119,6 +110,15 @@ namespace ExcelDesign.Forms.FunctionForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableHeaderCell HeaderReturnReasonCode;
+        
+        /// <summary>
+        /// HeaderReturnAction control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell HeaderReturnAction;
         
         /// <summary>
         /// txtNotes control.
@@ -175,13 +175,13 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.CheckBox cbxCreateLable;
         
         /// <summary>
-        /// btnCancel control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
         /// btnCreateRMA control.

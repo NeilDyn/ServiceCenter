@@ -79,6 +79,8 @@
         <asp:TableCell />
         <asp:TableCell Text="Order Status:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcOrderStatus" />
+        <asp:TableCell Text="Is Exchange Order:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
+        <asp:TableCell runat="server" ID="tcIsExchangeOrder" />
     </asp:TableRow>
     <asp:TableRow>
         <asp:TableCell>
@@ -105,7 +107,6 @@
         <asp:TableCell />
     </asp:TableRow>
     <asp:TableRow runat="server" ID="expandShipments" TableSection="TableBody" HorizontalAlign="Justify">
-        <asp:TableCell><br /></asp:TableCell>
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
@@ -115,10 +116,8 @@
         <asp:TableCell runat="server" ID="tcPackagesCount" />
         <asp:TableCell Text="Policy:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcPolicy" />
-        <asp:TableCell />
     </asp:TableRow>
     <asp:TableRow runat="server" ID="expandPackages" TableSection="TableBody" HorizontalAlign="Justify">
-        <asp:TableCell><br /></asp:TableCell>
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
@@ -130,7 +129,6 @@
         <asp:TableCell runat="server" ID="tcShipMethod" />
         <asp:TableCell Text="Days Remaining:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcDaysRemaining" />
-        <asp:TableCell />
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />

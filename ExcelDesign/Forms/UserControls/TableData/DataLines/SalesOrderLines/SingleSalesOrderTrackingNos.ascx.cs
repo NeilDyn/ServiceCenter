@@ -32,6 +32,7 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
             };
 
             breakRow.Cells.Add(breakCell);
+            this.tblPackageLines.Rows.Add(breakRow);
 
             int lineCount = 0;
 

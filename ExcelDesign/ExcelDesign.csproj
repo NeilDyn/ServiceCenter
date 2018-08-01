@@ -93,6 +93,7 @@
     <Content Include="Forms\ErrorForm.aspx" />
     <Content Include="Forms\FunctionForms\CreatedExchange.aspx" />
     <Content Include="Forms\FunctionForms\CreatedRMA.aspx" />
+    <Content Include="Forms\FunctionForms\CreateExchange.aspx" />
     <Content Include="Forms\FunctionForms\CreateReturn.aspx" />
     <Content Include="Forms\FunctionForms\RMAPDFForm.aspx" />
     <Content Include="Forms\LoginPage.aspx" />
@@ -123,6 +124,7 @@
     <Content Include="Forms\UserControls\TableHeaders\SingleCustomerTableHeader.ascx" />
     <Content Include="Forms\UserControls\TableHeaders\SingleSalesOrderTableHeader.ascx" />
     <Content Include="images\Logo.png" />
+    <Content Include="images\icon.ico" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -137,7 +139,6 @@
     <Compile Include="Class Objects\Customer.cs" />
     <Compile Include="Class Objects\Enums\SearchOptions.cs" />
     <Compile Include="Class Objects\Enums\TrackingTypeEnum.cs" />
-    <Compile Include="Class Objects\FunctionData\Defects.cs" />
     <Compile Include="Class Objects\FunctionData\ReturnReason.cs" />
     <Compile Include="Class Objects\PostedPackage.cs" />
     <Compile Include="Class Objects\PostedPackageLine.cs" />
@@ -188,6 +189,13 @@
     </Compile>
     <Compile Include="Forms\FunctionForms\CreatedRMA.aspx.designer.cs">
       <DependentUpon>CreatedRMA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\CreateExchange.aspx.cs">
+      <DependentUpon>CreateExchange.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\CreateExchange.aspx.designer.cs">
+      <DependentUpon>CreateExchange.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\FunctionForms\CreateReturn.aspx.cs">
       <DependentUpon>CreateReturn.aspx</DependentUpon>

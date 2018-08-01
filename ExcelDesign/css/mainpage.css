@@ -1,6 +1,6 @@
 ﻿.SearchArea {
-     text-align: center;
-     vertical-align:middle;
+    text-align: center;
+    vertical-align: middle;
 }
 
 form {
@@ -16,29 +16,72 @@ td {
     /*overflow: hidden;*/
 }
 
+.HeaderNavbar {
+    overflow: hidden;
+    font-weight: bold;
+    color: white;
+    background-color: #507CD1;
+    height: 30px;
+    position: fixed;
+}
+
+    .HeaderNavbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: #507CD1;
+    }
+
+.HeaderNavbar li {
+    float: right;
+    height:30px;
+    line-height:30px;
+    border-right: 2px solid whitesmoke;
+}
+
+.HeaderNavbar a {
+    display: block;
+    color: white;
+    padding: 0 20px;
+    text-decoration: none;
+}
+
+    .HeaderNavbar li a:hover {
+        background-color: #8da9e1;
+        text-decoration: none;
+    }
+
+.disableLink {
+    pointer-events: none;
+    cursor: default;
+}
+
 .SearchArea.DropDownList {
     border-color: black;
     border-width: 2px;
 }
 
 .SearchArea.Textbox {
-     border-color: black;
-     border-width: 2px;
+    border-color: black;
+    border-width: 2px;
 }
 
-.MultipleCustomersFound{
-    background-color:lightcoral;
-    font-size:larger;
-    font-weight:bolder;
-    vertical-align:middle;
-    text-align:center;
-    margin-left:300px;
-    margin-right:300px;
+.MultipleCustomersFound {
+    background-color: lightcoral;
+    font-size: larger;
+    font-weight: bolder;
+    vertical-align: middle;
+    text-align: center;
+    margin-left: 300px;
+    margin-right: 300px;
 }
 
-.InfoTable{
-    margin-left:100px;
-    margin-right:100px;
+.InfoTable {
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
 .HeaderLine {
@@ -69,13 +112,13 @@ td {
     background-color: #333; /* Modern Browsers */
 }
 
-.HeaderLabel.Label{
-    margin:auto;
+.HeaderLabel.Label {
+    margin: auto;
     text-align: right;
     color: #0094ff;
     font-size: xx-large;
     font-weight: bold;
-    vertical-align:middle
+    vertical-align: middle
 }
 
 .DetailHeaders {
@@ -85,21 +128,21 @@ td {
 }
 
 
-.SectionBreak{
+.SectionBreak {
     border-style: none;
     border-color: inherit;
     border-width: medium;
-    margin-right:100px;
+    margin-right: 100px;
     height: 2px;
     /* Set the hr color */
     color: #333; /* old IE */
     background-color: #333;
 }
 
-.CustomerInfo{
-    margin-left:100px;
-    display:block;
-    margin-right:100px;
+.CustomerInfo {
+    margin-left: 100px;
+    display: block;
+    margin-right: 100px;
 }
 
 .CustomerInfoHeader {
@@ -108,21 +151,21 @@ td {
     margin-right: 100px;
 }
 
-.OrderInfoHeader{
+.OrderInfoHeader {
     margin-left: 100px;
-    display:block;
+    display: block;
     margin-right: 100px;
 }
 
-.ReturnInfoHeader{
+.ReturnInfoHeader {
     margin-left: 100px;
-    display:block;
+    display: block;
     margin-right: 100px;
 }
 
-.OrderDetail{
+.OrderDetail {
     margin-left: 100px;
-    display:block;
+    display: block;
     margin-right: 100px;
 }
 
@@ -132,121 +175,121 @@ td {
     margin-right: 100px;
 }
 
-.detailedCustomerCaption{
+.detailedCustomerCaption {
     margin-left: 100px;
-    display:inline-block;
-    text-align:right;
-    padding:5px 5px 5px 5px;
+    display: inline-block;
+    text-align: right;
+    padding: 5px 5px 5px 5px;
     font-weight: bold;
-    float:left;
+    float: left;
 }
 
-.detailedCustomerInfo{
-    float:left;
-    display:inline-block;
-    text-align:left;
-    padding:5px 5px 5px 5px;
+.detailedCustomerInfo {
+    float: left;
+    display: inline-block;
+    text-align: left;
+    padding: 5px 5px 5px 5px;
 }
 
 .detailedCustomerCaptionCon {
-    display:inline-block;
-    text-align:right;
-    padding:5px 5px 5px 5px;
+    display: inline-block;
+    text-align: right;
+    padding: 5px 5px 5px 5px;
     font-weight: bold;
-    float:left;
+    float: left;
     margin-top: 75px;
 }
 
 .detailedCustomerInfoCon {
     margin-top: 75px;
-    float:left;
-    display:inline-block;
-    text-align:left;
-    padding:5px 5px 5px 5px;
+    float: left;
+    display: inline-block;
+    text-align: left;
+    padding: 5px 5px 5px 5px;
 }
 
 
-.detailedOrderCaption{
+.detailedOrderCaption {
     margin-left: 68px;
-    display:inline-block;
-    text-align:right;
-    padding:5px 5px 5px 5px;
+    display: inline-block;
+    text-align: right;
+    padding: 5px 5px 5px 5px;
     font-weight: bold;
-    float:left;
+    float: left;
 }
 
-.detailedReturnCaption{
+.detailedReturnCaption {
     margin-left: 100px;
-    display:inline-block;
-    text-align:right;
-    padding:5px 5px 5px 5px;
+    display: inline-block;
+    text-align: right;
+    padding: 5px 5px 5px 5px;
     font-weight: bold;
-    float:left;
+    float: left;
 }
 
-.detailedOrderInfo{
-    float:left;
-    display:inline-block;
-    text-align:left;
-    padding:5px 5px 5px 5px;
+.detailedOrderInfo {
+    float: left;
+    display: inline-block;
+    text-align: left;
+    padding: 5px 5px 5px 5px;
 }
 
-.detailedReturnInfo{
-    float:left;
-    display:inline-block;
-    text-align:left;
-    padding:5px 5px 5px 5px;
+.detailedReturnInfo {
+    float: left;
+    display: inline-block;
+    text-align: left;
+    padding: 5px 5px 5px 5px;
 }
 
 .detailedOrderCaptionCon {
-    display:inline-block;
-    text-align:right;
-    padding:5px 5px 5px 5px;
+    display: inline-block;
+    text-align: right;
+    padding: 5px 5px 5px 5px;
     font-weight: bold;
-    float:left;
+    float: left;
     margin-top: 38px;
 }
 
 .returnOrderCaptionCon {
-    display:inline-block;
-    text-align:right;
-    padding:5px 5px 5px 5px;
+    display: inline-block;
+    text-align: right;
+    padding: 5px 5px 5px 5px;
     font-weight: bold;
-    float:left;
+    float: left;
     margin-top: 38px;
 }
 
 .returnOrderCaptionCon2 {
-    display:inline-block;
-    text-align:right;
-    padding:5px 5px 5px 5px;
+    display: inline-block;
+    text-align: right;
+    padding: 5px 5px 5px 5px;
     font-weight: bold;
-    float:left;
+    float: left;
     margin-top: 38px;
 }
 
 .detailedOrderInfoCon {
     margin-top: 38px;
-    float:left;
-    display:inline;
-    text-align:left;
-    padding:5px 5px 5px 5px;
+    float: left;
+    display: inline;
+    text-align: left;
+    padding: 5px 5px 5px 5px;
 }
 
 .returnOrderInfoCon {
     margin-top: 38px;
-    float:left;
-    display:inline;
-    text-align:left;
-    padding:5px 5px 5px 5px;
+    float: left;
+    display: inline;
+    text-align: left;
+    padding: 5px 5px 5px 5px;
 }
 
 .returnOrderInfoCon2 {
     margin-top: 38px;
-    float:left;
-    display:inline;
-    text-align:left;
-    padding:5px 5px 5px 5px;
+    float: left;
+    display: inline;
+    text-align: left;
+    padding: 5px 5px 5px 5px;
 }
 
 .Options li {

@@ -30,6 +30,7 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
             };
 
             breakRow.Cells.Add(breakCell);
+            this.tblShipmentLines.Rows.Add(breakRow);
 
             foreach (ShipmentHeader sh in ShipmentHeaders)
             {

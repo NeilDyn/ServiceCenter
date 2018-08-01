@@ -35,7 +35,7 @@ namespace ExcelDesign.Forms
             try
             {
                 tcUserID.Text = u.UserID;
-                txtPassword.Text = u.Password;
+                tcPassword.Text = u.Password;
                 cbxCreateRMA.Checked = u.CreateRMA;
                 cbxCreateReturnLabel.Checked = u.CreateReturnLabel;
                 cbxCreateExchangeOrder.Checked = u.CreateExchange;

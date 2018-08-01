@@ -29,6 +29,7 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
             };
 
             breakRow.Cells.Add(breakCell);
+            this.tblReceiptLines.Rows.Add(breakRow);
 
             foreach (ReceiptHeader rh in ReceiptHeaders)
             {

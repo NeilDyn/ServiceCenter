@@ -4,6 +4,7 @@ using ExcelDesign.ServiceFunctions;
 using System.Globalization;
 using ExcelDesign.Class_Objects.FunctionData;
 using System.Web;
+using System;
 
 namespace ExcelDesign.Class_Objects
 {
@@ -412,7 +413,7 @@ namespace ExcelDesign.Class_Objects
             return shipLine;
         }
 
-        private List<ReceiptLine> ReturnReceiptLines(string no)
+        private List<ReceiptLine> ReturnReceiptLines(string no, string returnOrderNo)
         {
             List<ReceiptLine> receiptLine = new List<ReceiptLine>();
 
@@ -422,6 +423,8 @@ namespace ExcelDesign.Class_Objects
             int quantityReceived = 0;
             double price = 0;
             double lineAmount = 0;
+            int quantityExchanged = 0;
+            string reqReturnAction = string.Empty;
             List<string> insertedItems = new List<string>();
 
             if (currResults.ReturnReceiptLine != null)
@@ -458,7 +461,19 @@ namespace ExcelDesign.Class_Objects
                                 }
                             }
 
-                            receiptLine.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount));
+                            if(currResults.SalesLine != null)
+                            {
+                                for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
+                                {
+                                    if ((currResults.SalesLine[sl].DocNo == returnOrderNo) && (currResults.SalesLine[sl].ItemNo == itemNo))
+                                    {
+                                        quantityExchanged = (int) Convert.ToDouble(currResults.SalesLine[sl].QtyExchanged, CultureInfo.InvariantCulture.NumberFormat);
+                                        reqReturnAction = currResults.SalesLine[sl].REQReturnAction;
+                                    }
+                                }
+                            }
+
+                            receiptLine.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, reqReturnAction));
                             insertedItems.Add(itemNo);
                         }
 
@@ -468,6 +483,8 @@ namespace ExcelDesign.Class_Objects
                         quantityReceived = 0;
                         price = 0;
                         lineAmount = 0;
+                        quantityExchanged = 0;
+                        reqReturnAction = string.Empty;
                     }
                 }
             }
@@ -495,7 +512,7 @@ namespace ExcelDesign.Class_Objects
                         no = currResults.ReturnReceiptHeader[rh].No;
                         externalDocumentNo = currResults.ReturnReceiptHeader[rh].ExtDocNo;
                         receiptDate = currResults.ReturnReceiptHeader[rh].ReceiveDate;
-                        receiptLines = ReturnReceiptLines(no);
+                        receiptLines = ReturnReceiptLines(no, returnOrderNo);
                         shippingAgentCode = currResults.ReturnReceiptHeader[rh].ShippingAgent;
 
                         receiptHead.Add(new ReceiptHeader(no, externalDocumentNo, receiptDate, receiptLines, shippingAgentCode, false));
@@ -777,6 +794,7 @@ namespace ExcelDesign.Class_Objects
             string rmaNo = string.Empty;
 
             bool rmaExists = false;
+            bool isExchangeOrder = false;
 
             List<string> insertedOrderNumbers = new List<string>();
 
@@ -821,11 +839,15 @@ namespace ExcelDesign.Class_Objects
                                             {
                                                 rmaExists = true;
                                             }
+                                            if (currResults.ExtendedSalesHeader[ex].RMANo == sh.No)
+                                            {
+                                                isExchangeOrder = currResults.ExtendedSalesHeader[ex].IsExchangeOrder == "Yes" ? true : false;
+                                            }
                                         }
                                     }
                                 }
 
-                                salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty, rmaExists, rmaNo));
+                                salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty, rmaExists, rmaNo, isExchangeOrder));
 
                                 insertedOrderNumbers.Add(orderNo);
 
@@ -843,6 +865,7 @@ namespace ExcelDesign.Class_Objects
                                 daysRemaining = string.Empty;
                                 rmaExists = false;
                                 rmaNo = string.Empty;
+                                isExchangeOrder = false;
                             }
                         }
                     }
@@ -893,7 +916,7 @@ namespace ExcelDesign.Class_Objects
                                 }
 
                                 if (statusCounter == totalCounter)
-                                {                                   
+                                {
                                     orderStatus = "Shipped";
                                 }
                                 else if (statusCounter == 0)
@@ -914,13 +937,17 @@ namespace ExcelDesign.Class_Objects
                                         {
                                             if (currResults.ExtendedSalesHeader[ex].SSHNo == sh.No)
                                             {
-                                                rmaExists = true;
+                                                rmaExists = true;                                               
+                                            }
+                                            if(currResults.ExtendedSalesHeader[ex].RMANo == sh.No)
+                                            {
+                                                isExchangeOrder = currResults.ExtendedSalesHeader[ex].IsExchangeOrder == "Yes" ? true : false;
                                             }
                                         }
                                     }
                                 }
 
-                                salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty, rmaExists, rmaNo));
+                                salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty, rmaExists, rmaNo, isExchangeOrder));
 
                                 insertedOrderNumbers.Add(orderNo);
 
@@ -938,12 +965,13 @@ namespace ExcelDesign.Class_Objects
                                 daysRemaining = string.Empty;
                                 rmaExists = false;
                                 rmaNo = string.Empty;
+                                isExchangeOrder = false;
                             }
                         }
                     }
                 }
-               // if (salesHead.Count > 0)
-                 //   return salesHead;
+                // if (salesHead.Count > 0)
+                //   return salesHead;
             }
 
             if (currResults.SalesShipmentHeader != null)
@@ -984,11 +1012,15 @@ namespace ExcelDesign.Class_Objects
                                         {
                                             rmaExists = true;
                                         }
+                                        if (currResults.ExtendedSalesHeader[ex].RMANo == sh.No)
+                                        {
+                                            isExchangeOrder = currResults.ExtendedSalesHeader[ex].IsExchangeOrder == "Yes" ? true : false;
+                                        }
                                     }
                                 }
                             }
 
-                            salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty, rmaExists, rmaNo));
+                            salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty, rmaExists, rmaNo, isExchangeOrder));
 
                             insertedOrderNumbers.Add(orderNo);
 
@@ -1006,6 +1038,7 @@ namespace ExcelDesign.Class_Objects
                             daysRemaining = string.Empty;
                             rmaExists = false;
                             rmaNo = string.Empty;
+                            isExchangeOrder = false;
                         }
                     }
                 }
@@ -1500,6 +1533,7 @@ namespace ExcelDesign.Class_Objects
             int quantityReceived = 0;
             double price = 0;
             double lineAmount = 0;
+            int quantityExchanged = 0;
 
             if (currResults.SalesShipmentLine != null)
             {
@@ -1513,8 +1547,9 @@ namespace ExcelDesign.Class_Objects
                         double.TryParse(currResults.SalesShipmentLine[rl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
                         quantityReceived = 0;
+                        quantityExchanged = 0;
 
-                        receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount));
+                        receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, string.Empty));
                     }
                 }
             }
@@ -1532,6 +1567,7 @@ namespace ExcelDesign.Class_Objects
             int quantityReceived = 0;
             double price = 0;
             double lineAmount = 0;
+            int quantityExchanged = 0;
 
             if (currResults.SalesLine != null)
             {
@@ -1545,8 +1581,9 @@ namespace ExcelDesign.Class_Objects
                         double.TryParse(currResults.SalesLine[slr].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
                         quantityReceived = 0;
+                        quantityExchanged = 0;
 
-                        receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount));
+                        receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, string.Empty));
                     }
                 }
             }
@@ -1566,6 +1603,8 @@ namespace ExcelDesign.Class_Objects
             double price = 0;
             double lineAmount = 0;
             List<string> insertedItems = new List<string>();
+            int quantityExchanged = 0;
+            string reqReturnAction = string.Empty;
 
             List<string> rmaNo = new List<string>();
 
@@ -1596,8 +1635,9 @@ namespace ExcelDesign.Class_Objects
                                 double.TryParse(currResults.SalesLine[slr].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                                 lineAmount = quantity * price;
                                 quantityReceived = 0;
+                                quantityExchanged = 0;
 
-                                receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount));
+                                receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, string.Empty));
                                 insertedItems.Add(itemNo);
                             }
                         }
@@ -1640,7 +1680,16 @@ namespace ExcelDesign.Class_Objects
                                         }
                                     }
 
-                                    receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount));
+                                    for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
+                                    {
+                                        if ((currResults.SalesLine[sl].DocNo == rmaLine) && (currResults.SalesLine[sl].ItemNo == itemNo))
+                                        {
+                                            int.TryParse(currResults.SalesLine[sl].QtyExchanged, out quantityExchanged);
+                                            reqReturnAction = currResults.SalesLine[sl].REQReturnAction;
+                                        }
+                                    }
+
+                                    receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, reqReturnAction));
                                     insertedItems.Add(itemNo);
                                 }
 
@@ -1650,6 +1699,7 @@ namespace ExcelDesign.Class_Objects
                                 quantityReceived = 0;
                                 price = 0;
                                 lineAmount = 0;
+                                quantityExchanged = 0;
                             }
                         }
                     }
@@ -1663,46 +1713,12 @@ namespace ExcelDesign.Class_Objects
         {
             List<ReturnReason> rrList = new List<ReturnReason>();
 
-            List<Defects> doList = new List<Defects>
-            {
-                new Defects(currResults.DefectOptions[0].Blank[0]),
-                new Defects(currResults.DefectOptions[0].NoLongerWanted[0]),
-                new Defects(currResults.DefectOptions[0].PWrongNetwork[0]),
-                new Defects(currResults.DefectOptions[0].NotAsExpected[0]),
-                new Defects(currResults.DefectOptions[0].ShippingBoxChrushed[0]),
-                new Defects(currResults.DefectOptions[0].PhoneBoxChrushed[0]),
-                new Defects(currResults.DefectOptions[0].PackageWet[0]),
-                new Defects(currResults.DefectOptions[0].UnresponsiveLCD[0]),
-                new Defects(currResults.DefectOptions[0].DoesNotCharge[0]),
-                new Defects(currResults.DefectOptions[0].BadKeypad[0]),
-                new Defects(currResults.DefectOptions[0].BadMicEarpieceSpeaker[0]),
-                new Defects(currResults.DefectOptions[0].NoPower[0]),
-                new Defects(currResults.DefectOptions[0].NoWIfi[0]),
-                new Defects(currResults.DefectOptions[0].NoSignal[0]),
-                new Defects(currResults.DefectOptions[0].ResetsItself[0]),
-                new Defects(currResults.DefectOptions[0].BadCamera[0]),
-                new Defects(currResults.DefectOptions[0].CallsDropped[0]),
-                new Defects(currResults.DefectOptions[0].DoesNotReadSIM[0]),
-                new Defects(currResults.DefectOptions[0].DoesNotReadSD[0]),
-                new Defects(currResults.DefectOptions[0].PhoneIsLocked[0]),
-                new Defects(currResults.DefectOptions[0].WrongBandsListed[0]),
-                new Defects(currResults.DefectOptions[0].WrongColorModel[0]),
-                new Defects(currResults.DefectOptions[0].CantSetupMMS[0]),
-                new Defects(currResults.DefectOptions[0].NotInEnglish[0]),
-                new Defects(currResults.DefectOptions[0].USedCustomerInfo[0]),
-                new Defects(currResults.DefectOptions[0].UsedCallTimer[0]),
-                new Defects(currResults.DefectOptions[0].UsedAccessories[0]),
-                new Defects(currResults.DefectOptions[0].UsedScratehcesDentsDings[0]),
-                new Defects(currResults.DefectOptions[0].BoxNotSealed[0]),
-                new Defects(currResults.DefectOptions[0].Software[0]),
-            };
-
             for (int i = 0; i < currResults.ReturnReasonCode.Length; i++)
             {
-                rrList.Add(new ReturnReason(currResults.ReturnReasonCode[i].ReasonCode, currResults.ReturnReasonCode[i].Description));
+                rrList.Add(new ReturnReason(currResults.ReturnReasonCode[i].ReasonCode, currResults.ReturnReasonCode[i].Description,
+                    currResults.ReturnReasonCode[i].Category));
             }
 
-            HttpContext.Current.Session["Defects"] = doList;
             HttpContext.Current.Session["ReturnReasons"] = rrList;
         }
     }

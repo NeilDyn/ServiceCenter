@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -27,13 +28,16 @@ namespace ExcelDesign.Forms.FunctionForms
                 Response.ContentType = "application/pdf";
                 Response.OutputStream.Write(MemStream.GetBuffer(), 0, MemStream.GetBuffer().Length);
                 Response.OutputStream.Flush();
-                Response.OutputStream.Close();
-                Response.End();
+                Response.OutputStream.Close();                
             }
             catch (Exception ex)
             {
                 Session["Error"] = ex.Message;
                 Response.Redirect("../ErrorForm.aspx");
+            }
+            finally
+            {
+                Response.End();
             }
         }
     }

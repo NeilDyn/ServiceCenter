@@ -140,6 +140,7 @@
     <Compile Include="Class Objects\CallService.cs" />
     <Compile Include="Class Objects\Customer.cs" />
     <Compile Include="Class Objects\Enums\SearchOptions.cs" />
+    <Compile Include="Class Objects\Enums\SellToCustomers.cs" />
     <Compile Include="Class Objects\Enums\TrackingTypeEnum.cs" />
     <Compile Include="Class Objects\FunctionData\ReturnReason.cs" />
     <Compile Include="Class Objects\PostedPackage.cs" />

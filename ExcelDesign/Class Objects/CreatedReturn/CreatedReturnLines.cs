@@ -12,14 +12,19 @@ namespace ExcelDesign.Class_Objects.CreatedReturn
         public int Quantity { get; set; }
         public double Price { get; set; }
         public double LineAmount { get; set; }
+        public string REQReturnAction { get; set; }
+        public string ReturnReason { get; set; }
 
-        public CreatedReturnLines(string itemNoP, string descriptionP, int quantityP, double priceP, double lineAmountP)
+        public CreatedReturnLines(string itemNoP, string descriptionP, int quantityP, double priceP, double lineAmountP,
+                                    string reqReturnActionP, string returnReasonP)
         {
             ItemNo = itemNoP;
             Description = descriptionP;
             Quantity = quantityP;
             Price = priceP;
             LineAmount = lineAmountP;
+            REQReturnAction = reqReturnActionP;
+            ReturnReason = returnReasonP;
         }
 
         public CreatedReturnLines()

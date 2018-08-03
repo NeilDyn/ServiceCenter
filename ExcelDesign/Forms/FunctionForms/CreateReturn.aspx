@@ -109,7 +109,8 @@
             <asp:TableFooterRow HorizontalAlign="Right">
                 <asp:TableHeaderCell />
                 <asp:TableHeaderCell HorizontalAlign="Right">
-                    <asp:Button ID="Button1" runat="server" Text="Cancel" OnClientClick="CloseWindow();" />
+                    <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClientClick="CloseWindow();" />
+                    <asp:Button ID="btnCancelRMA" runat="server" Text="Cancel RMA" OnClick="BtnCancelRMA_Click" />
                     <asp:Button ID="btnCreateRMA" runat="server" Text="Create RMA" OnClick="BtnCreateRMA_Click" />
                 </asp:TableHeaderCell>
             </asp:TableFooterRow>

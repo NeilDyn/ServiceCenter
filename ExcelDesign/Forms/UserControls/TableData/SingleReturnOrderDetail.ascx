@@ -20,7 +20,7 @@
                 var top = (screen.height - height) * 0.5;
                 window.open("FunctionForms/CreateExchange.aspx?RMANo=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>",
                     null,
-                    "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");                                  
+                    "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
             } else {
                 alert("You do not have the required permission to create an exchange order.");
             }
@@ -36,13 +36,17 @@
 
         $("[id$=btnUpdateRMA<%= this.CustID %>_<%= this.CountID %>]").click(function () {
             if ("<%= this.CanReturn %>" == "true") {
-                var width = 1500;
-                var height = 500;
-                var left = (screen.width - width) + 500;
-                var top = (screen.height - height) * 0.5;
-                window.open("FunctionForms/CreateReturn.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>",
-                    null,
-                    "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                if ("<%= this.tcReturnStatus.Text%>" == "Open") {
+                    var width = 1500;
+                    var height = 500;
+                    var left = (screen.width - width) + 500;
+                    var top = (screen.height - height) * 0.5;
+                    window.open("FunctionForms/CreateReturn.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>",
+                        null,
+                        "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                } else {
+                    alert("Return Order <%= this.RMANo %> has already been fully received and cannot be updated.");
+                }
             } else {
                 alert("You do not have the required permission to update a return order.");
             }
@@ -51,36 +55,40 @@
         $("[id$=btnIssueReturnLabel<%= this.CustID %>_<%= this.CountID %>]").click(function () {
             if ("<%= this.UPSLabelCreated %>" == "false") {
                 if ("<%= this.CanIssueLabel %>" == "true") {
-                    var rmaNo = "<%= this.Rh.RMANo %>";
-                    var emailIn = prompt("Please enter a valid email address:");
+                    if ("<%= this.tcReturnStatus %>" == "Open") {
+                        var rmaNo = "<%= this.Rh.RMANo %>";
+                        var emailIn = prompt("Please enter a valid email address:");
 
-                    if (emailIn == null || emailIn == "") {
-                        alert("Invalid email address entered.");
-                    }
-                    else {
-                        if (validateEmail(emailIn)) {
-                            $.ajax({
-                                type: "POST",
-                                url: "ServiceCenter.aspx/IssueReturnLabel",
-                                data: JSON.stringify({ rmaNo: rmaNo, email: emailIn }),
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                success: function (error) {
-                                    if (error.d.indexOf("Error") == -1) {
-                                        alert("Return Label Created for Return: " + rmaNo);
-                                    } else {
-                                        alert(error.d);
-                                    }
-                                },
-                                error: function (xhr, status, text) {
-                                    console.log(xhr.status);
-                                    console.log(xhr.text);
-                                    console.log(xhr.responseText);
-                                },
-                            });
-                        } else {
-                            alert("Invalid email address entered.")
+                        if (emailIn == null || emailIn == "") {
+                            alert("Invalid email address entered.");
                         }
+                        else {
+                            if (validateEmail(emailIn)) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "ServiceCenter.aspx/IssueReturnLabel",
+                                    data: JSON.stringify({ rmaNo: rmaNo, email: emailIn }),
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    success: function (error) {
+                                        if (error.d.indexOf("Error") == -1) {
+                                            alert("Return Label Created for Return: " + rmaNo);
+                                        } else {
+                                            alert(error.d);
+                                        }
+                                    },
+                                    error: function (xhr, status, text) {
+                                        console.log(xhr.status);
+                                        console.log(xhr.text);
+                                        console.log(xhr.responseText);
+                                    },
+                                });
+                            } else {
+                                alert("Invalid email address entered.")
+                            }
+                        }
+                    } else {
+                        alert("Only Return Orders that have an 'OPEN' return status can be issued Return Labels.");
                     }
                 } else {
                     alert("You do not have the required permission to issue a return label.");
@@ -124,6 +132,8 @@
         <asp:TableCell />
         <asp:TableCell Text="Return Status:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcReturnStatus" />
+        <asp:TableCell Text="Exchange Created:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
+        <asp:TableCell runat="server" ID="tcExchangeCreated" />
     </asp:TableRow>
     <asp:TableRow>
         <asp:TableCell>
@@ -169,6 +179,8 @@
         <asp:TableCell runat="server" ID="tcZendeskTickets" />
         <asp:TableCell Text="UPS Return Label Created:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcUPSReturnLabelCreated" />
+        <asp:TableCell Text="Exchange Order No:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
+        <asp:TableCell runat="server" ID="tcExchangeOrderNo" />
     </asp:TableRow>
     <asp:TableRow>
         <asp:TableCell />

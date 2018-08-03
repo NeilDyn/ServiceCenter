@@ -40,6 +40,7 @@
           <element minOccurs="1" maxOccurs="1" name="DocDate" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ReturnTrackingNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="SellToCustomerName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="SellToCustomerNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToAddress2" type="string" />
@@ -66,6 +67,7 @@
           <element minOccurs="1" maxOccurs="1" name="DateCreated" type="string" />
           <element minOccurs="1" maxOccurs="1" name="REQReturnAction" type="string" />
           <element minOccurs="1" maxOccurs="1" name="QtyExchanged" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ReturnReason" type="string" />
         </sequence>
       </complexType>
       <complexType name="Warranty3" mixed="true">
@@ -83,6 +85,7 @@
           <element minOccurs="1" maxOccurs="1" name="OrderDate" type="string" />
           <element minOccurs="1" maxOccurs="1" name="OrderNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="SellToCustomerNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="SellToCustomerName" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToAddress2" type="string" />
@@ -438,6 +441,8 @@
           <element minOccurs="1" maxOccurs="1" name="QtyShipped" type="string" />
           <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
           <element minOccurs="1" maxOccurs="1" name="DateCreated" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="REQReturnAction" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ReturnReasonCode" type="string" />
         </sequence>
       </complexType>
       <complexType name="ReturnOrder" mixed="true">

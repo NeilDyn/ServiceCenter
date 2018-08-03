@@ -1,5 +1,6 @@
 ﻿using ExcelDesign.Class_Objects.CreatedExchange;
 using ExcelDesign.Class_Objects.CreatedReturn;
+using ExcelDesign.Class_Objects.FunctionData;
 using ExcelDesign.ServiceFunctions;
 using System;
 using System.Collections.Generic;
@@ -57,7 +58,6 @@ namespace ExcelDesign.Class_Objects
                 dateCreated = ro.SalesHeader[0].DocDate;
                 channelName = ro.SalesHeader[0].SellToCustomerName;
                 returnTrackingNo = ro.SalesHeader[0].ReturnTrackingNo;
-                //orderDate = ro.SalesHeader[0]
                 ctl = CreateReturnOrderLines(ro);
 
                 crh.RMANo = rmaNo;
@@ -89,8 +89,12 @@ namespace ExcelDesign.Class_Objects
             int quantity = 0;
             double price = 0;
             double lineAmount = 0;
+            string reqReturnAction = string.Empty;
+            string returnReason = string.Empty;
 
-            if(ro.SalesLine != null)
+            List<ReturnReason> rrList = (List<ReturnReason>)HttpContext.Current.Session["ReturnReasons"];
+
+            if (ro.SalesLine != null)
             {
                 for (int sl = 0; sl < ro.SalesLine.Length; sl++)
                 {
@@ -99,11 +103,20 @@ namespace ExcelDesign.Class_Objects
                     {
                         itemNo = ro.SalesLine[sl].ItemNo;
                         description = ro.SalesLine[sl].Description;
+                        reqReturnAction = ro.SalesLine[sl].REQReturnAction;
+
+                        foreach (ReturnReason rr in rrList)
+                        {
+                            if(rr.ReasonCode == ro.SalesLine[sl].ReturnReasonCode)
+                            {
+                                returnReason = rr.Display;
+                            }
+                        }
 
                         double.TryParse(ro.SalesLine[sl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
 
-                        ctl.Add(new CreatedReturnLines(itemNo, description, quantity, price, lineAmount));
+                        ctl.Add(new CreatedReturnLines(itemNo, description, quantity, price, lineAmount, reqReturnAction, returnReason));
                     }
 
                     itemNo = string.Empty;
@@ -137,6 +150,14 @@ namespace ExcelDesign.Class_Objects
             string channelName = string.Empty;
             string shipMethod = string.Empty;
             string rmaNo = string.Empty;
+            string shipToName = string.Empty;
+            string shipToAddress1 = string.Empty;
+            string shipToAddress2 = string.Empty;
+            string shipToContact = string.Empty;
+            string shipToCity = string.Empty;
+            string shipToZip = string.Empty;
+            string shipToState = string.Empty;
+            string shipToCountry = string.Empty;
             List<CreatedExchangeLines> lines = new List<CreatedExchangeLines>();
 
             if(eo.SalesHeader != null)
@@ -149,6 +170,14 @@ namespace ExcelDesign.Class_Objects
                 shipMethod += " " + eo.SalesHeader[0].ShippingService;
                 rmaNo = eo.SalesHeader[0].RMANo1;
                 lines = CreateExchangeOrderLines(eo);
+                shipToName = eo.SalesHeader[0].ShipToName;
+                shipToAddress1 = eo.SalesHeader[0].ShipToAddress;
+                shipToAddress2 = eo.SalesHeader[0].ShipToAddress2;
+                shipToContact = eo.SalesHeader[0].ShipToContact;
+                shipToCity = eo.SalesHeader[0].ShipToCity;
+                shipToZip = eo.SalesHeader[0].ShipToZip;
+                shipToState = eo.SalesHeader[0].ShipToState;
+                shipToCountry = eo.SalesHeader[0].ShipToCountry;
 
                 ceh.OrderNo = orderNo;
                 ceh.ExternalDocumentNo = externalDocumentNo;
@@ -157,6 +186,14 @@ namespace ExcelDesign.Class_Objects
                 ceh.ShipMethod = shipMethod;
                 ceh.RMANo = rmaNo;
                 ceh.ExchangeLines = lines;
+                ceh.ShipToName = shipToName;
+                ceh.ShipToAddress1 = shipToAddress1;
+                ceh.ShipToAddress2 = shipToAddress2;
+                ceh.ShipToContact = shipToContact;
+                ceh.ShipToCity = shipToCity;
+                ceh.ShipToZip = shipToZip;
+                ceh.ShipToState = shipToState;
+                ceh.ShipToCountry = shipToCountry;
 
                 orderNo = string.Empty;
                 externalDocumentNo = string.Empty;
@@ -164,6 +201,13 @@ namespace ExcelDesign.Class_Objects
                 channelName = string.Empty;
                 shipMethod = string.Empty;
                 rmaNo = string.Empty;
+                shipToAddress1 = string.Empty;
+                shipToAddress2 = string.Empty;
+                shipToContact = string.Empty;
+                shipToCity = string.Empty;
+                shipToZip = string.Empty;
+                shipToState = string.Empty;
+                shipToCountry = string.Empty;
                 lines = new List<CreatedExchangeLines>();
             }
 

@@ -47,11 +47,13 @@ namespace ExcelDesign.Forms.FunctionForms
                 {
                     noTitle.Text = "RMA No:";
                     btnCreateRMA.Text = "Update RMA";
+                    btnCancelRMA.Visible = true;
                 }
                 else
                 {
                     noTitle.Text = "Order No:";
                     btnCreateRMA.Text = "Create RMA";
+                    btnCancelRMA.Visible = false;
                 }
 
                 if (Session["ActiveUser"] != null)
@@ -204,16 +206,19 @@ namespace ExcelDesign.Forms.FunctionForms
                                 {
                                     foreach (ShipmentLine line in header.ShipmentLines)
                                     {
-                                        int removeqty = 0;
+                                        string req = string.Empty;
+                                        string rr = string.Empty;
+
                                         foreach (ReceiptLine returnLine in header.ReturnLines)
                                         {
                                             if (line.ItemNo == returnLine.ItemNo)
                                             {
-                                                removeqty += returnLine.Quantity;
+                                                req = returnLine.REQReturnAction;
+                                                rr = returnLine.ReturnReasonCode;
                                             }
                                         }
 
-                                        if (line.Quantity - removeqty > 0 && line.Type.ToUpper() == "ITEM")
+                                        if (line.Type.ToUpper() == "ITEM")
                                         {
                                             lineCount++;
                                             anyLines = true;
@@ -225,34 +230,60 @@ namespace ExcelDesign.Forms.FunctionForms
                                             TableCell qty = new TableCell();
                                             TableCell actionQty = new TableCell();
                                             TableCell returnReasonCode = new TableCell();
+                                            TableCell reqReturnAction = new TableCell();
 
                                             DropDownList ddlReturnReasonCode = new DropDownList
                                             {
-                                                DataValueField = "Description",
+                                                DataValueField = "Display",
                                                 DataSource = rrList,
                                                 ID = "ddlReturnReasonCode_" + lineCount.ToString()
+                                            };
+
+                                            DropDownList ddlREQReturnAction = new DropDownList
+                                            {
+                                                DataSource = reqList,
+                                                ID = "ddlREQReturnAction_" + lineCount.ToString()
                                             };
 
                                             TextBox actionQtyInsert = new TextBox
                                             {
                                                 ID = "actionQtyInsert_" + lineCount.ToString(),
-                                                Text = (line.Quantity - removeqty).ToString(),
+                                                Text = (line.Quantity).ToString(),
                                                 Width = new Unit("15%")
                                             };
 
                                             ddlReturnReasonCode.DataBind();
+                                            ddlREQReturnAction.DataBind();
 
                                             itemNo.ID = "itemNo_" + lineCount.ToString();
                                             qty.ID = "itemQuanity_" + lineCount.ToString();
                                             desc.ID = "desc2_" + lineCount.ToString();
                                             actionQty.ID = "actionQty_" + lineCount.ToString();
                                             returnReasonCode.ID = "returnReasonCode_" + lineCount.ToString();
+                                            reqReturnAction.ID = "reqReturnAction_" + lineCount.ToString();
+
+                                            if (rr != string.Empty)
+                                            {
+                                                foreach (ReturnReason rrr in rrList)
+                                                {
+                                                    if (rrr.ReasonCode == rr)
+                                                    {
+                                                        ddlReturnReasonCode.SelectedValue = rrr.Display;
+                                                    }
+                                                }
+                                            }
+
+                                            if (req != string.Empty)
+                                            {
+                                                ddlREQReturnAction.SelectedValue = req;
+                                            }
 
                                             itemNo.Text = line.ItemNo;
                                             desc.Text = line.Description;
-                                            qty.Text = (line.Quantity - removeqty).ToString();
+                                            qty.Text = (line.Quantity).ToString();
                                             actionQty.Controls.Add(actionQtyInsert);
                                             returnReasonCode.Controls.Add(ddlReturnReasonCode);
+                                            reqReturnAction.Controls.Add(ddlREQReturnAction);
 
                                             qty.HorizontalAlign = HorizontalAlign.Center;
                                             actionQty.HorizontalAlign = HorizontalAlign.Center;
@@ -264,6 +295,7 @@ namespace ExcelDesign.Forms.FunctionForms
                                             singleRow.Cells.Add(qty);
                                             singleRow.Cells.Add(actionQty);
                                             singleRow.Cells.Add(returnReasonCode);
+                                            singleRow.Cells.Add(reqReturnAction);
 
                                             if (lineCount % 2 == 0)
                                             {
@@ -435,6 +467,28 @@ namespace ExcelDesign.Forms.FunctionForms
             }
         }
 
+        protected void BtnCancelRMA_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SendService ss = new SendService();
+
+                string delete = ss.DeleteRMA(tcNo.Text);
+
+                ClientScript.RegisterStartupScript(this.GetType(), "deletedRMA", "alert('" + delete + "');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "closeRMA", "parent.window.close();", true);
+            }
+            catch (Exception ex)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alertError", "alert('" + ex.Message + "');", true);
+
+                if (ex.Message.ToLower().Contains("session"))
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "closeRMA", "parent.window.close();", true);
+                }
+            }
+        }
+
         protected string ValidateLine(string itemNoP, int qtyLineP, int actionQtyP, string reasonCodeP, int reqReturnActionP)
         {
             string valid = "Valid Line Input";
@@ -519,19 +573,19 @@ namespace ExcelDesign.Forms.FunctionForms
             {
                 return e.Message;
             }
-}
+        }
 
-protected bool IsValidEmail(string email)
-{
-    try
-    {
-        var addr = new MailAddress(email);
-        return addr.Address == email;
-    }
-    catch (Exception)
-    {
-        return false;
-    }
-}
+        protected bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new MailAddress(email);
+                return addr.Address == email;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

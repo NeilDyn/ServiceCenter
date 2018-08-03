@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -60,6 +61,7 @@ namespace ExcelDesign.Forms
                 User u = (User)Session["ActiveUser"];
                 SessionTime = u.SessionTimeout;
                 currentUser.InnerText =  "Welcome " + u.UserID + "!";
+                applicationType.InnerText = ConfigurationManager.AppSettings["mode"].ToString();
 
                 if (u.Admin)
                 {

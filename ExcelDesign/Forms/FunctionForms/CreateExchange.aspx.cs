@@ -168,7 +168,7 @@ namespace ExcelDesign.Forms.FunctionForms
 
                         string lineValidMessage = string.Empty;
 
-                        if((rowCount > 1 && controlCount == 1 && actionQty != 0))
+                        if((rowCount > 1 && controlCount == 1))
                         {
                             lineValidMessage = ValidateLine(itemNo, qtyReceivedLine, actionQty);
 

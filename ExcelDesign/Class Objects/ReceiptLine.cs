@@ -15,6 +15,7 @@ namespace ExcelDesign.Class_Objects
         public double LineAmount { get; set; }
         public int QuantityExchanged { get; set; }
         public string REQReturnAction { get; set; }
+        public string ReturnReasonCode { get; set; }
 
         public ReceiptLine()
         {
@@ -22,7 +23,7 @@ namespace ExcelDesign.Class_Objects
         }
 
         public ReceiptLine(string itemNoP, string descriptionP, int quantityP, int quantityReceivedP, double priceP, double lineAmountP, int quantityExchangedP,
-                            string reqReturnActionP)
+                            string reqReturnActionP, string returnReasonCodeP)
         {
             this.ItemNo = itemNoP;
             this.Description = descriptionP;
@@ -32,6 +33,7 @@ namespace ExcelDesign.Class_Objects
             this.LineAmount = lineAmountP;
             this.QuantityExchanged = quantityExchangedP;
             this.REQReturnAction = reqReturnActionP;
+            this.ReturnReasonCode = returnReasonCodeP;
         }
     }
 }

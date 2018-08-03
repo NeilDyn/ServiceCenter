@@ -85,7 +85,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcOrderDate.ToolTip = Sh.OrderDate;
             this.tcSalesOrderNo.ToolTip = Sh.SalesOrderNo;
             this.tcChannelName.ToolTip = Sh.ChannelName;
-            TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
+            TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;         
 
             if (Sh.IsExchangeOrder)
             {
@@ -106,7 +106,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             {
                 this.tcRMANo.Visible = false;
                 this.tcRMANoTitle.Visible = false;
-            }
+            }         
 
             OrderNo = Sh.SalesOrderNo;
             DocNo = Sh.ExternalDocumentNo;

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ExcelDesign.Class_Objects;
+using ExcelDesign.Class_Objects.Enums;
 using ExcelDesign.Forms.UserControls.TableData;
 
 namespace ExcelDesign.Forms.UserControls.TableHeaders
@@ -29,8 +30,10 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            this.thcExternalDocumentNo.Text = Header.ExternalDocumentNo;
+            SellToCustomers sellToCust = SellToCustomers.Invalid;
+            Enum.TryParse(Header.SellToCustomerNo, out sellToCust);
+
+            this.thcExternalDocumentNo.Text = SetExternalDocumentNo(sellToCust, Header.ExternalDocumentNo);
 
             if(SalesOrderCount == 1)
             {
@@ -50,6 +53,24 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             }
 
             PopulateHeader();
+        }
+
+        protected string SetExternalDocumentNo(SellToCustomers customerNo, string externalDocumentNo)
+        {
+            string textString = string.Empty;
+
+            switch (customerNo)
+            {
+                case SellToCustomers.AMZMKT001:
+                    textString = "<a href='https://sellercentral.amazon.com/hz/orders/details?_encoding=UTF8&orderId=" + externalDocumentNo + "' target = '_blank'>" + externalDocumentNo + "</a>";
+                    break;
+
+                default:
+                    textString = externalDocumentNo;
+                    break;
+            }
+
+            return textString;
         }
 
         public void PopulateHeader()

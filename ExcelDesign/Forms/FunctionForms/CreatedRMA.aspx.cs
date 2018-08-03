@@ -80,18 +80,24 @@ namespace ExcelDesign.Forms.FunctionForms
                     TableCell qty = new TableCell();
                     TableCell price = new TableCell();
                     TableCell lineAmount = new TableCell();
+                    TableCell returnReason = new TableCell();
+                    TableCell reqReturnAction = new TableCell();
 
                     itemNo.ID = "itemNoR_" + lineCount.ToString();
                     qty.ID = "itemQuanityR_" + lineCount.ToString();
                     desc.ID = "descR_" + lineCount.ToString();
                     price.ID = "priceR_" + lineCount.ToString();
                     lineAmount.ID = "lineAmountR_" + lineCount.ToString();
+                    returnReason.ID = "returnReasonR_" + lineCount.ToString();
+                    reqReturnAction.ID = "reqReturnActionR_" + lineCount.ToString();
 
                     itemNo.Text = line.ItemNo;
                     desc.Text = line.Description;
                     qty.Text = line.Quantity.ToString();
                     price.Text = "$     " + line.Price.ToGBString();
                     lineAmount.Text = "$    " + line.LineAmount.ToGBString();
+                    returnReason.Text = line.ReturnReason;
+                    reqReturnAction.Text = line.REQReturnAction;
 
                     qty.HorizontalAlign = HorizontalAlign.Center;
                     price.HorizontalAlign = HorizontalAlign.Right;
@@ -104,6 +110,8 @@ namespace ExcelDesign.Forms.FunctionForms
                     singleRow.Cells.Add(qty);
                     singleRow.Cells.Add(price);
                     singleRow.Cells.Add(lineAmount);
+                    singleRow.Cells.Add(returnReason);
+                    singleRow.Cells.Add(reqReturnAction);
 
                     if (lineCount % 2 == 0)
                     {

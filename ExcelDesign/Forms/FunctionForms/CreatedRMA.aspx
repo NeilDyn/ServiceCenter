@@ -71,6 +71,8 @@
                 <asp:TableHeaderCell Text="Quantity" />
                 <asp:TableHeaderCell Text="Price" HorizontalAlign="Left" />
                 <asp:TableHeaderCell Text="Line Amount" HorizontalAlign="Left" />
+                <asp:TableHeaderCell Text="Return Reason" HorizontalAlign="Left" />
+                <asp:TableHeaderCell Text="REQ Return Action" HorizontalAlign="Left" />
             </asp:TableHeaderRow>
         </asp:Table>
         <br />

@@ -31,6 +31,15 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         protected global::System.Web.UI.WebControls.TableCell tcReturnStatus;
         
         /// <summary>
+        /// tcExchangeCreated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcExchangeCreated;
+        
+        /// <summary>
         /// tcDateCreated control.
         /// </summary>
         /// <remarks>
@@ -155,6 +164,15 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableCell tcUPSReturnLabelCreated;
+        
+        /// <summary>
+        /// tcExchangeOrderNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcExchangeOrderNo;
         
         /// <summary>
         /// tblReturnDetailLines control.

@@ -30,6 +30,15 @@ namespace ExcelDesign.Forms.FunctionForms
                     tcRmaNo.Text = CEH.RMANo;
                     tcOrderDate.Text = CEH.OrderDate;
 
+                    tcShipToName.Text = CEH.ShipToName;
+                    tcShipToContact.Text = CEH.ShipToContact;
+                    tcShipToAddress1.Text = CEH.ShipToAddress1;
+                    tcShipToAddress2.Text = CEH.ShipToAddress2;
+                    tcShipToCity.Text = CEH.ShipToCity;
+                    tcShipToState.Text = CEH.ShipToState;
+                    tcShipToZip.Text = CEH.ShipToZip;
+                    tcShipToCountry.Text = CEH.ShipToCountry;
+
                     PopulateLines();
                 }
                 catch (Exception ex)

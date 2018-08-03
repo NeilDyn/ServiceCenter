@@ -119,14 +119,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcOrderDate.ToolTip = Rh.OrderDate;
             this.tcEmail.ToolTip = Rh.Email;
 
-            if (Rh.ReturnLabelCreated)
-            {
-                this.tcUPSReturnLabelCreated.Text = "Yes";
-            }
-            else
-            {
-                this.tcUPSReturnLabelCreated.Text = "No";
-            }
+            this.tcUPSReturnLabelCreated.Text = Rh.ReturnLabelCreated == true ? "Yes" : "No";
+            this.tcExchangeCreated.Text = Rh.ExchangeCreated == true ? "Yes" : "No";
 
             TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
 
@@ -160,6 +154,12 @@ namespace ExcelDesign.Forms.UserControls.TableData
             string trackNo = Rh.ReturnTrackingNo;
             this.tcReturnTrackingNo.Text = SetTrackingNo(trackType, trackNo);
             this.tcReturnTrackingNo.ToolTip = trackNo;
+
+            if (Rh.ExchangeCreated)
+            {
+                this.tcExchangeOrderNo.Text = Rh.ExchangeOrderNo.Count > 1 ? "Multiple" : Rh.ExchangeOrderNo[0];
+            }
+
         }
 
         protected void PopulateLines()

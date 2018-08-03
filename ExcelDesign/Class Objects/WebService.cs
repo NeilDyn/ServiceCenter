@@ -44,7 +44,7 @@ namespace ExcelDesign.Class_Objects
 
             string baseURL = string.Empty;
 
-            string mode = ConfigurationManager.AppSettings["mode"].ToString(); ;
+            string mode = ConfigurationManager.AppSettings["mode"].ToString();
 
             if ((mode != null) && (mode == "Production"))
             {

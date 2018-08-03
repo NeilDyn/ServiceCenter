@@ -864,6 +864,10 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string dateCreatedField;
         
+        private string rEQReturnActionField;
+        
+        private string returnReasonCodeField;
+        
         /// <remarks/>
         public string DocNo {
             get {
@@ -951,6 +955,26 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.dateCreatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string REQReturnAction {
+            get {
+                return this.rEQReturnActionField;
+            }
+            set {
+                this.rEQReturnActionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ReturnReasonCode {
+            get {
+                return this.returnReasonCodeField;
+            }
+            set {
+                this.returnReasonCodeField = value;
             }
         }
     }
@@ -3990,6 +4014,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string sellToCustomerNoField;
         
+        private string sellToCustomerNameField;
+        
         private string shipToNameField;
         
         private string shipToAddressField;
@@ -4069,6 +4095,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.sellToCustomerNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SellToCustomerName {
+            get {
+                return this.sellToCustomerNameField;
+            }
+            set {
+                this.sellToCustomerNameField = value;
             }
         }
         
@@ -4214,6 +4250,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string qtyExchangedField;
         
+        private string returnReasonField;
+        
         /// <remarks/>
         public string DocNo {
             get {
@@ -4323,6 +4361,16 @@ namespace ExcelDesign.ServiceFunctions {
                 this.qtyExchangedField = value;
             }
         }
+        
+        /// <remarks/>
+        public string ReturnReason {
+            get {
+                return this.returnReasonField;
+            }
+            set {
+                this.returnReasonField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -4406,6 +4454,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string sellToCustomerNameField;
         
+        private string sellToCustomerNoField;
+        
         private string shipToNameField;
         
         private string shipToAddressField;
@@ -4485,6 +4535,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.sellToCustomerNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SellToCustomerNo {
+            get {
+                return this.sellToCustomerNoField;
+            }
+            set {
+                this.sellToCustomerNoField = value;
             }
         }
         

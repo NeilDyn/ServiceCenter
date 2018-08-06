@@ -125,7 +125,7 @@
                 <li runat="server" id="adminPanel"><a href="javascript:OpenAdminControlPanel()">Admin Panel</a></li>
                 <li><a href="javascript:SubmitFeedback()">Submit Feedback</a></li>
                 <li runat="server" id="currentUser" style="padding: 0 20px"></li>
-                <li style="padding: 0 20px">v2.1</li>
+                <li style="padding: 0 20px">v2.2</li>
                 <li runat="server" id="applicationType" style="padding: 0 20px"></li>
             </ul>
         </div>

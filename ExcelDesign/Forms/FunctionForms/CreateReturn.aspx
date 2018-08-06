@@ -101,9 +101,15 @@
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
-                <asp:TableCell ID="lblCreateLable" Text="Create Return Label: " ForeColor="#0099FF" Font-Bold="true" Style="text-align:right; padding-right:30px"/>
+                <asp:TableCell ID="lblCreateLabel" Text="Create Return Label: " ForeColor="#0099FF" Font-Bold="true" Style="text-align:right; padding-right:30px"/>
                 <asp:TableCell>
-                    <asp:CheckBox ID="cbxCreateLable" runat="server" />
+                    <asp:CheckBox ID="cbxCreateLabel" runat="server" />
+                </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow>
+                <asp:TableCell ID="lblInsertTrackingNo" Text="Return Tracking No: " ForeColor="#0099FF" Font-Bold="true" Style="text-align:right; padding-right:30px"/>
+                <asp:TableCell ID="tcInsertTrackingNo">
+                    <asp:TextBox ID="txtInsertTrackingNo" runat="server" Width="50%"/>
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableFooterRow HorizontalAlign="Right">

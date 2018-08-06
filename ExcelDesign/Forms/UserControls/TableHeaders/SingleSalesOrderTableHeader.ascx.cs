@@ -65,6 +65,10 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
                     textString = "<a href='https://sellercentral.amazon.com/hz/orders/details?_encoding=UTF8&orderId=" + externalDocumentNo + "' target = '_blank'>" + externalDocumentNo + "</a>";
                     break;
 
+                case SellToCustomers.Invalid:
+                    textString = externalDocumentNo;
+                    break;
+
                 default:
                     textString = externalDocumentNo;
                     break;

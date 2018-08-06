@@ -37,7 +37,12 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcState.Text = Cust.State;
             this.tcCountry.Text = Cust.Country;
             
-            PopulateData();        
+            PopulateData();
+
+            if(CustomerCount == 1)
+            {
+                Session["SelectedCustomer"] = Cust;
+            }
         }
 
         public void PopulateData()

@@ -688,7 +688,7 @@ namespace ExcelDesign.Class_Objects
                                     }
                                     else if (statusCounter == 0)
                                     {
-                                        returnStatus = "Released";
+                                        returnStatus = "Received";
                                     }
                                     else
                                     {
@@ -762,7 +762,7 @@ namespace ExcelDesign.Class_Objects
                                 externalDocumentNo = currResults.ReturnReceiptHeader[so].ExtDocNo;
                                 sellToCustomerNo = currResults.ReturnReceiptHeader[so].SellToCustomerNo;
 
-                                returnStatus = "Released";
+                                returnStatus = "Received";
 
                                 if (currResults.ExtendedSalesHeader != null)
                                 {
@@ -1359,7 +1359,7 @@ namespace ExcelDesign.Class_Objects
                                         }
                                         else if (statusCounter == 0)
                                         {
-                                            returnStatus = "Released";
+                                            returnStatus = "Received";
                                         }
                                         else
                                         {
@@ -1464,7 +1464,7 @@ namespace ExcelDesign.Class_Objects
                                         externalDocumentNo = currResults.ReturnReceiptHeader[so].ExtDocNo;
                                         sellToCustomerNo = currResults.ReturnReceiptHeader[so].SellToCustomerNo;
 
-                                        returnStatus = "Released";
+                                        returnStatus = "Received";
 
                                         if (currResults.ExtendedSalesHeader != null)
                                         {
@@ -1590,6 +1590,8 @@ namespace ExcelDesign.Class_Objects
             double price = 0;
             double lineAmount = 0;
             int quantityExchanged = 0;
+            string reqReturnAction = string.Empty;
+            string returnReason = string.Empty;
 
             if (currResults.SalesShipmentLine != null)
             {
@@ -1624,6 +1626,8 @@ namespace ExcelDesign.Class_Objects
             double price = 0;
             double lineAmount = 0;
             int quantityExchanged = 0;
+            string reqReturnAction = string.Empty;
+            string returnReason = string.Empty;
 
             if (currResults.SalesLine != null)
             {
@@ -1639,7 +1643,20 @@ namespace ExcelDesign.Class_Objects
                         quantityReceived = 0;
                         quantityExchanged = 0;
 
-                        receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, string.Empty, string.Empty));
+                        reqReturnAction = currResults.SalesLine[slr].REQReturnAction;
+                        returnReason = currResults.SalesLine[slr].ReturnReason;
+
+                        receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, reqReturnAction, returnReason));
+
+                        itemNo = string.Empty;
+                        description = string.Empty;
+                        quantity = 0;
+                        quantityReceived = 0;
+                        price = 0;
+                        lineAmount = 0;
+                        quantityExchanged = 0;
+                        reqReturnAction = string.Empty;
+                        returnReason = string.Empty;
                     }
                 }
             }

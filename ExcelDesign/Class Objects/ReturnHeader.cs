@@ -20,7 +20,7 @@ namespace ExcelDesign.Class_Objects
         public bool ReturnLabelCreated { get; set; }
         public bool ExchangeCreated { get; set; }
         public List<string> ExchangeOrderNo { get; set; }
-        string SellToCustomerNo { get; set; }
+        public string SellToCustomerNo { get; set; }
 
         public ReturnHeader()
         {

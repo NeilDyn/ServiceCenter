@@ -7,7 +7,7 @@ namespace ExcelDesign.Class_Objects.Enums
 {
     public enum TrackingTypeEnum
     {
-        Invalid = -1,
+        Invalid = 0,
         FEDEX = 1,
         UPS = 2,
         UPSRT = 3,

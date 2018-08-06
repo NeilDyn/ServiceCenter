@@ -20,6 +20,7 @@ namespace ExcelDesign.Forms.FunctionForms
         protected string docNo;
         protected string notes;
         protected string email;
+        protected string returnTrackingNo;
 
         protected bool resources;
         protected bool printRMA;
@@ -27,6 +28,7 @@ namespace ExcelDesign.Forms.FunctionForms
         protected bool update;
 
         protected string updateRma = string.Empty;
+        protected string existingTrackingNo = string.Empty;
         protected bool anyLines = false;
 
         protected string createdOrderNo;
@@ -40,6 +42,7 @@ namespace ExcelDesign.Forms.FunctionForms
                 tcNo.Text = Convert.ToString(Request.QueryString["No"]);
                 tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
                 updateRma = Convert.ToString(Request.QueryString["CreateOrUpdate"]);
+                existingTrackingNo = Convert.ToString(Request.QueryString["ReturnTrackingNo"]);
 
                 createdOrderNo = Convert.ToString(Request.QueryString["CreatedOrderNo"]);
 
@@ -48,13 +51,29 @@ namespace ExcelDesign.Forms.FunctionForms
                     noTitle.Text = "RMA No:";
                     btnCreateRMA.Text = "Update RMA";
                     btnCancelRMA.Visible = true;
+
+                    lblInsertTrackingNo.Visible = true;
+                    txtInsertTrackingNo.Visible = true;
+
+                    if (existingTrackingNo != string.Empty)
+                    {
+                        txtInsertTrackingNo.Text = existingTrackingNo;
+                        txtInsertTrackingNo.Enabled = false;
+                    }
+                    else
+                    {
+                        txtInsertTrackingNo.Enabled = true;
+                    }
                 }
                 else
                 {
                     noTitle.Text = "Order No:";
                     btnCreateRMA.Text = "Create RMA";
                     btnCancelRMA.Visible = false;
-                }
+
+                    lblInsertTrackingNo.Visible = false;
+                    txtInsertTrackingNo.Visible = false;
+                }              
 
                 if (Session["ActiveUser"] != null)
                 {
@@ -64,8 +83,8 @@ namespace ExcelDesign.Forms.FunctionForms
                     {
                         if (!activeUser.CreateReturnLabel)
                         {
-                            cbxCreateLable.Visible = false;
-                            lblCreateLable.Visible = false;
+                            cbxCreateLabel.Visible = false;
+                            lblCreateLabel.Visible = false;
                         }
                     }
                 }
@@ -340,8 +359,9 @@ namespace ExcelDesign.Forms.FunctionForms
                 notes = txtNotes.Text;
                 resources = cbxResources.Checked;
                 printRMA = cbxPrintRMA.Checked;
-                createLabel = cbxCreateLable.Checked;
+                createLabel = cbxCreateLabel.Checked;
                 email = txtCustEmail.Text;
+                returnTrackingNo = txtInsertTrackingNo.Text;
 
                 string validateMsg = ValidateInput();
                 bool allValidLines = true;
@@ -440,7 +460,7 @@ namespace ExcelDesign.Forms.FunctionForms
                             update = false;
                         }
 
-                        crh = ss.CreateReturnOrder(no, docNo, string.Empty, notes, resources, printRMA, createLabel, email, lineValues, update);
+                        crh = ss.CreateReturnOrder(no, docNo, string.Empty, notes, resources, printRMA, createLabel, email, lineValues, update, returnTrackingNo);
                         Session["CreatedRMA"] = crh;
                         ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + "');", true);
                         ClientScript.RegisterStartupScript(this.GetType(), "openCreatedRMA", "OpenCreatedRMA();", true);
@@ -539,34 +559,55 @@ namespace ExcelDesign.Forms.FunctionForms
             {
                 if (createLabel)
                 {
-                    User activeUser = (User)Session["ActiveUser"];
-
-                    if (activeUser.CreateReturnLabel)
+                    if (returnTrackingNo == string.Empty)
                     {
-                        if (!String.IsNullOrWhiteSpace(email))
+                        User activeUser = (User)Session["ActiveUser"];
+
+                        if (activeUser.CreateReturnLabel || activeUser.Developer || activeUser.Admin)
                         {
-                            if (IsValidEmail(email))
+                            if (!String.IsNullOrWhiteSpace(email))
                             {
-                                return valid;
+                                if (IsValidEmail(email))
+                                {
+                                    return valid;
+                                }
+                                else
+                                {
+                                    return "Invalid email address entered.";
+                                }
                             }
                             else
                             {
-                                return "Invalid email address entered.";
+                                return "Updated email is required for creating a return label.";
                             }
                         }
                         else
                         {
-                            return "Updated email is required for creating a return label.";
+                            return "You do not have the required permission to issue a return label.";
                         }
                     }
                     else
                     {
-                        return "You do not have the required permission to issue a return label.";
+                        return "You cannot create a UPS Return Label and insert a Return Tracking Number.";
                     }
                 }
                 else
                 {
-                    return valid;
+                    if (!String.IsNullOrWhiteSpace(returnTrackingNo) || !String.IsNullOrEmpty(returnTrackingNo))
+                    {
+                        if (returnTrackingNo.Length < 41)
+                        {
+                            return valid;
+                        }
+                        else
+                        {
+                            return "Maximum length for a Return Tracking No is 40.";
+                        }
+                    }
+                    else
+                    {
+                        return valid;
+                    }
                 }
             }
             catch (Exception e)

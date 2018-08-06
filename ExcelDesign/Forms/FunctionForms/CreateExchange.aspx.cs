@@ -14,6 +14,7 @@ namespace ExcelDesign.Forms.FunctionForms
     public partial class CreateExchange : System.Web.UI.Page
     {
         protected List<ReturnHeader> Rh;
+        protected Customer cust;
         protected string rmaNo;
         protected string docNo;
 
@@ -25,6 +26,16 @@ namespace ExcelDesign.Forms.FunctionForms
             {
                 tcRMANo.Text = Convert.ToString(Request.QueryString["RMANo"]);
                 tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
+                cust = (Customer)Session["SelectedCustomer"];
+
+                tcShipToName.Text = cust.Name;
+                tcShipToAddress1.Text = cust.Address1;
+                tcShipToAddress2.Text = cust.Address2;
+                tcShipToCity.Text = cust.City;
+                tcShipToContact.Text = cust.ShipToContact;
+                tcShipToState.Text = cust.State;
+                tcShipToZip.Text = cust.Zip;
+                tcShipToCountry.Text = cust.Country;
             }
 
             LoadCreateExchangeLines();

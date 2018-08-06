@@ -157,22 +157,49 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.CheckBox cbxPrintRMA;
         
         /// <summary>
-        /// lblCreateLable control.
+        /// lblCreateLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell lblCreateLable;
+        protected global::System.Web.UI.WebControls.TableCell lblCreateLabel;
         
         /// <summary>
-        /// cbxCreateLable control.
+        /// cbxCreateLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbxCreateLable;
+        protected global::System.Web.UI.WebControls.CheckBox cbxCreateLabel;
+        
+        /// <summary>
+        /// lblInsertTrackingNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell lblInsertTrackingNo;
+        
+        /// <summary>
+        /// tcInsertTrackingNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcInsertTrackingNo;
+        
+        /// <summary>
+        /// txtInsertTrackingNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtInsertTrackingNo;
         
         /// <summary>
         /// btnCancel control.

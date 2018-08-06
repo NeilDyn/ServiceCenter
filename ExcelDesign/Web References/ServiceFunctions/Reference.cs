@@ -372,7 +372,7 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CreateReturnOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CreateReturnOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string CreateReturnOrder(string orderNo, string extDocNo, string returnReasonCode, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ref ReturnOrder createdReturn, bool updateRMA, string sessionID) {
+        public string CreateReturnOrder(string orderNo, string extDocNo, string returnReasonCode, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ref ReturnOrder createdReturn, bool updateRMA, string sessionID, string returnTrackNo) {
             object[] results = this.Invoke("CreateReturnOrder", new object[] {
                         orderNo,
                         extDocNo,
@@ -385,18 +385,19 @@ namespace ExcelDesign.ServiceFunctions {
                         lineDetails,
                         createdReturn,
                         updateRMA,
-                        sessionID});
+                        sessionID,
+                        returnTrackNo});
             createdReturn = ((ReturnOrder)(results[1]));
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn, bool updateRMA, string sessionID) {
-            this.CreateReturnOrderAsync(orderNo, extDocNo, returnReasonCode, notes, includeResourceLines, printRmaInstructions, createUPSReturnLabel, emailAddress, lineDetails, createdReturn, updateRMA, sessionID, null);
+        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn, bool updateRMA, string sessionID, string returnTrackNo) {
+            this.CreateReturnOrderAsync(orderNo, extDocNo, returnReasonCode, notes, includeResourceLines, printRmaInstructions, createUPSReturnLabel, emailAddress, lineDetails, createdReturn, updateRMA, sessionID, returnTrackNo, null);
         }
         
         /// <remarks/>
-        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn, bool updateRMA, string sessionID, object userState) {
+        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn, bool updateRMA, string sessionID, string returnTrackNo, object userState) {
             if ((this.CreateReturnOrderOperationCompleted == null)) {
                 this.CreateReturnOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateReturnOrderOperationCompleted);
             }
@@ -412,7 +413,8 @@ namespace ExcelDesign.ServiceFunctions {
                         lineDetails,
                         createdReturn,
                         updateRMA,
-                        sessionID}, this.CreateReturnOrderOperationCompleted, userState);
+                        sessionID,
+                        returnTrackNo}, this.CreateReturnOrderOperationCompleted, userState);
         }
         
         private void OnCreateReturnOrderOperationCompleted(object arg) {

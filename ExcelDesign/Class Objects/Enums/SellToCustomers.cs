@@ -7,8 +7,8 @@ namespace ExcelDesign.Class_Objects.Enums
 {
     public enum SellToCustomers
     {
-        Invalid = -1,
-        AMZMKT001 = 0,
-        SHOPHQ = 1
+        Invalid = 0,
+        AMZMKT001 = 1,
+        SHOPHQ = 2
     }
 }

@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ExcelDesign.Class_Objects;
 using ExcelDesign.Class_Objects.Enums;
+using ExcelDesign.Class_Objects.FunctionData;
 using ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines;
 
 namespace ExcelDesign.Forms.UserControls.TableData
@@ -120,7 +121,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcEmail.ToolTip = Rh.Email;
 
             this.tcUPSReturnLabelCreated.Text = Rh.ReturnLabelCreated == true ? "Yes" : "No";
-            this.tcExchangeCreated.Text = Rh.ExchangeCreated == true ? "Yes" : "No";
+            this.tcExchangeStatus.Text = Rh.ExchangeCreated == true ? "Yes" : "No";
 
             TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
 
@@ -168,6 +169,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             TableRow totalRow = new TableRow();
             TableCell totalString = new TableCell();
             TableCell totalCell = new TableCell();
+            List<ReturnReason> rrList = (List<ReturnReason>)Session["ReturnReasons"];
 
             int lineCount = 0;
 
@@ -192,6 +194,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         TableCell price = new TableCell();
                         TableCell lineAmount = new TableCell();
                         TableCell serialNo = new TableCell();
+                        TableCell returnReason = new TableCell();
+                        TableCell reqReturnAction = new TableCell();
                         TableCell moreSerial = new TableCell();
 
                         itemNoS = line.ItemNo;
@@ -204,6 +208,16 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         total += line.LineAmount;
                         price.Text = "$      " + line.Price.ToGBString();
                         lineAmount.Text = "$      " + line.LineAmount.ToGBString();
+
+                        foreach (ReturnReason rr in rrList)
+                        {
+                            if(line.ReturnReasonCode == rr.ReasonCode)
+                            {
+                                returnReason.Text = rr.Display;
+                            }
+                        }
+                        
+                        reqReturnAction.Text = line.REQReturnAction;
 
                         qty.HorizontalAlign = HorizontalAlign.Center;
                         qtyReceived.HorizontalAlign = HorizontalAlign.Center;
@@ -249,6 +263,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         lineRow.Cells.Add(price);
                         lineRow.Cells.Add(lineAmount);
                         lineRow.Cells.Add(serialNo);
+                        lineRow.Cells.Add(returnReason);
+                        lineRow.Cells.Add(reqReturnAction);
                         lineRow.Cells.Add(moreSerial);
 
                         if (lineCount % 2 == 0)

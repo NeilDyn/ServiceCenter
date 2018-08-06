@@ -573,6 +573,7 @@
             <element xmlns:q7="urn:microsoft-dynamics-nav/xmlports/x50002" minOccurs="1" maxOccurs="1" name="createdReturn" type="q7:ReturnOrder" />
             <element minOccurs="1" maxOccurs="1" name="updateRMA" type="boolean" />
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="returnTrackNo" type="string" />
           </sequence>
         </complexType>
       </element>

@@ -41,7 +41,7 @@
                     var height = 500;
                     var left = (screen.width - width) + 500;
                     var top = (screen.height - height) * 0.5;
-                    window.open("FunctionForms/CreateReturn.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>",
+                    window.open("FunctionForms/CreateReturn.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>&ReturnTrackingNo=<%= this.Rh.ReturnTrackingNo %>",
                         null,
                         "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
                 } else {
@@ -55,7 +55,7 @@
         $("[id$=btnIssueReturnLabel<%= this.CustID %>_<%= this.CountID %>]").click(function () {
             if ("<%= this.UPSLabelCreated %>" == "false") {
                 if ("<%= this.CanIssueLabel %>" == "true") {
-                    if ("<%= this.tcReturnStatus %>" == "Open") {
+                    if ("<%= this.tcReturnStatus.Text %>" == "Open") {
                         var rmaNo = "<%= this.Rh.RMANo %>";
                         var emailIn = prompt("Please enter a valid email address:");
 
@@ -132,8 +132,8 @@
         <asp:TableCell />
         <asp:TableCell Text="Return Status:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcReturnStatus" />
-        <asp:TableCell Text="Exchange Created:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
-        <asp:TableCell runat="server" ID="tcExchangeCreated" />
+        <asp:TableCell Text="Exchange Status:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
+        <asp:TableCell runat="server" ID="tcExchangeStatus" />
     </asp:TableRow>
     <asp:TableRow>
         <asp:TableCell>
@@ -186,7 +186,7 @@
         <asp:TableCell />
     </asp:TableRow>
     <asp:TableRow>
-        <asp:TableCell ColumnSpan="8">
+        <asp:TableCell ColumnSpan="10">
             <asp:Table runat="server" ID="tblReturnDetailLines" Height="100%" Width="100%">
                 <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
                     <asp:TableHeaderCell Text="Item No." HorizontalAlign="Left" />
@@ -194,12 +194,14 @@
                     <asp:TableHeaderCell Text="Qty" />
                     <asp:TableHeaderCell Text="Qty Received" />
                     <asp:TableHeaderCell Text="Price" HorizontalAlign="Left" />
-                    <asp:TableHeaderCell Text="Line Amt" HorizontalAlign="Left" />
+                    <asp:TableHeaderCell Text="Line Amt" HorizontalAlign="Left" />                  
                     <asp:TableHeaderCell Text="Serial #" />
-                    <asp:TableHeaderCell Text="" Width="15%" />
+                    <asp:TableHeaderCell Text="Return Reason"/>
+                    <asp:TableHeaderCell Text="REQ Return Action"/>
+                    <asp:TableHeaderCell Text="" />                  
                 </asp:TableHeaderRow>
                 <asp:TableHeaderRow>
-                    <asp:TableHeaderCell ColumnSpan="8">
+                    <asp:TableHeaderCell ColumnSpan="10">
                         <hr class="HeaderLine"/>
                     </asp:TableHeaderCell>
                 </asp:TableHeaderRow>

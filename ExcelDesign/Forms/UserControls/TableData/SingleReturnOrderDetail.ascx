@@ -12,6 +12,8 @@
         $("[id$=expandReceives_<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id*=showMoreReturnLines_<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id*=multipleExchangeRow_<%= this.CustID %>_<%= this.CountID %>]").hide();
+        var updateRMAWin;
+        var createExchangeWin;
 
         $("[id$=btnCreateExchange<%= this.CustID %>_<%= this.CountID %>]").click(function () {
             if ("<%= this.CanExchange %>" == "true") {
@@ -19,19 +21,24 @@
                 var height = 500;
                 var left = (screen.width - width) + 500;
                 var top = (screen.height - height) * 0.5;
-                var win = window.open("FunctionForms/CreateExchange.aspx?RMANo=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>",
-                    null,
-                    "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
 
-                function checkIfWinClosed(intervalID) {
-                            if (win.closed) {
-                                __doPostBack('[id$=btnReload', '');
-                                clearInterval(intervalID);
-                            }
+                if (typeof (createExchangeWin) == 'undefined' || createExchangeWin.closed) {
+                    createExchangeWin = window.open("FunctionForms/CreateExchange.aspx?RMANo=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>",
+                        null,
+                        "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+
+                    function checkIfWinClosed(intervalID) {
+                        if (createExchangeWin.closed) {
+                            __doPostBack('[id$=btnReload', '');
+                            clearInterval(intervalID);
                         }
-                        var interval = setInterval(function () {
-                            checkIfWinClosed(interval);
-                        }, 1000);
+                    }
+                    var interval = setInterval(function () {
+                        checkIfWinClosed(interval);
+                    }, 1000);
+                } else {
+                    alert('Please close the current active Create Exchange Order dialog window before trying to open a new instance.');
+                }
             } else {
                 alert("You do not have the required permission to create an exchange order.");
             }
@@ -52,12 +59,14 @@
                     var height = 500;
                     var left = (screen.width - width) + 500;
                     var top = (screen.height - height) * 0.5;
-                    var win = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>&ReturnTrackingNo=<%= this.Rh.ReturnTrackingNo %>",
-                        null,
-                        "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
 
-                    function checkIfWinClosed(intervalID) {
-                            if (win.closed) {
+                    if (typeof (updateRMAWin) == 'undefined' || updateRMAWin.closed) {
+                        updateRMAWin = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>&ReturnTrackingNo=<%= this.Rh.ReturnTrackingNo %>",
+                            null,
+                            "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+
+                        function checkIfWinClosed(intervalID) {
+                            if (updateRMAWin.closed) {
                                 __doPostBack('[id$=btnReload', '');
                                 clearInterval(intervalID);
                             }
@@ -65,6 +74,9 @@
                         var interval = setInterval(function () {
                             checkIfWinClosed(interval);
                         }, 1000);
+                    } else {
+                        alert('Please close the current active Update RMA dialog window before trying to open a new instance.');
+                    }
                 } else {
                     alert("Return Order <%= this.RMANo %> has already been fully received and cannot be updated.");
                 }

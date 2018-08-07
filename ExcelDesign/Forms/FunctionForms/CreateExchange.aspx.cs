@@ -22,7 +22,9 @@ namespace ExcelDesign.Forms.FunctionForms
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            Session["UserInteraction"] = true;
+
+            if (!IsPostBack)
             {
                 tcRMANo.Text = Convert.ToString(Request.QueryString["RMANo"]);
                 tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);

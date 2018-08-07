@@ -35,6 +35,8 @@ namespace ExcelDesign.Forms.FunctionForms
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["UserInteraction"] = true;
+
             if (!IsPostBack)
             {
                 List<ReturnReason> rrList = (List<ReturnReason>)Session["ReturnReasons"];

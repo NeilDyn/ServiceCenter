@@ -13,6 +13,7 @@
         $("[id$=expandSerialNos_<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id$=expandPackages_<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id*=showMoreOrderLines_<%= this.CustID %>_<%= this.CountID %>]").hide();
+        var createReturnWindow;
 
         $("[id$=btnCancelOrder_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
             alert("Hi, order <%= this.Sh.SalesOrderNo %> be Cancelled.");
@@ -30,19 +31,24 @@
                         var height = 500;
                         var left = (screen.width - width) + 500;
                         var top = (screen.height - height) * 0.5;
-                        var win = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
-                            null,
-                            "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
 
-                        function checkIfWinClosed(intervalID) {
-                            if (win.closed) {
-                                __doPostBack('[id$=btnReload', '');
-                                clearInterval(intervalID);
+                        if (typeof (createReturnWindow) == 'undefined' || createReturnWindow.closed) {   
+                            createReturnWindow = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
+                                null,
+                                "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+
+                            function checkIfWinClosed(intervalID) {
+                                if (createReturnWindow.closed) {
+                                    __doPostBack('[id$=btnReload', '');
+                                    clearInterval(intervalID);
+                                }
                             }
+                            var interval = setInterval(function () {
+                                checkIfWinClosed(interval);
+                            }, 1000);
+                        } else {
+                            alert('Please close the current active Create Return Order dialog window before trying to open a new instance.');
                         }
-                        var interval = setInterval(function () {
-                            checkIfWinClosed(interval);
-                        }, 1000);
                     } else {
                         alert("Order <%= this.OrderNo %> has no shipped items and cannot be returned.");
                     }

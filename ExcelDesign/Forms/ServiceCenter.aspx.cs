@@ -78,8 +78,10 @@ namespace ExcelDesign.Forms
 
             if (IsPostBack)
             {
-                if (Session["SearchValue"] != null && Session["SearchSelection"] != null)
+                if (Session["SearchValue"] != null && Session["SearchSelection"] != null && Session["UserInteraction"] != null)
                 {
+                    Session["UserInteraction"] = null;
+                    
                     if (Session["NoUserInteraction"] == null)
                     {
                         Session["NoUserInteraction"] = null;
@@ -260,6 +262,7 @@ namespace ExcelDesign.Forms
             {
                 StaticService.IssueReturnLabel(rmaNo, email);
                 HttpContext.Current.Session["NoUserInteraction"] = true;
+                HttpContext.Current.Session["UserInteraction"] = true;
             }
             catch (Exception e)
             {
@@ -337,6 +340,8 @@ namespace ExcelDesign.Forms
                 }
 
                 Session["ActiveUser"] = activeUser;
+                Session["SearchValue"] = null;
+                Session["SearchSelection"] = null;
                 RetrieveData();
             }
             else

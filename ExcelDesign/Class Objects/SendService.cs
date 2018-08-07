@@ -33,8 +33,8 @@ namespace ExcelDesign.Class_Objects
             ReturnOrder returnRMA = new ReturnOrder();
             CreatedReturnHeader cth = new CreatedReturnHeader();
 
-            returnRMA = webService.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, notes, createLabel, printRMA,
-                includeResource, email, lineValues, update, returnTrackingNo);
+            returnRMA = webService.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, notes, includeResource, printRMA,
+                createLabel, email, lineValues, update, returnTrackingNo);
 
             cth = CreateReturnRMA(returnRMA);
 

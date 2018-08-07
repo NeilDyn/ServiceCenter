@@ -117,7 +117,7 @@
             <p>Warning, your session will expire in 1 minute. Do you want to continue working?</p>
             <asp:Button ID="btnExtendSessionTime" Text="Yes" runat="server" OnClientClick="ResetTimers()" />
         </div>
-        <div runat="server" class="HeaderNavbar">
+        <div runat="server" class="HeaderNavbar" style="margin-left:0">
             <ul>
                 <li><a href="#" class="disableLink"></a></li>
                 <li><a href="javascript:UserLogout()">Logout</a></li>
@@ -125,10 +125,11 @@
                 <li runat="server" id="adminPanel"><a href="javascript:OpenAdminControlPanel()">Admin Panel</a></li>
                 <li><a href="javascript:SubmitFeedback()">Submit Feedback</a></li>
                 <li runat="server" id="currentUser" style="padding: 0 20px"></li>
-                <li style="padding: 0 20px">v2.2</li>
+                <li style="padding: 0 20px">v3.1</li>
                 <li runat="server" id="applicationType" style="padding: 0 20px"></li>
             </ul>
         </div>
+        <br />
         <div id="ServiceCenterHeader">
             <asp:Image ID="imgLogo" runat="server" ImageUrl="~/images/Logo.png" />
             <asp:Label ID="lblCustomerServicePortal" runat="server" Style="margin-left: 200px;" Text="Customer Service Portal" ForeColor="#0099FF" Font-Bold="True" Font-Size="XX-Large" CssClass="HeaderLabel" />

@@ -22,6 +22,9 @@ namespace ExcelDesign.Forms.FunctionForms
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["RMAInteraction"] = true;
+            Session["RestartFromUserInteraction"] = true;
+
             string printRMA = string.Empty;
 
             if (Session["CreatedRMA"] != null)

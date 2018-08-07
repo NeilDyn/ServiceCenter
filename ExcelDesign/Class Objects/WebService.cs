@@ -93,7 +93,7 @@ namespace ExcelDesign.Class_Objects
         {
             ReturnOrder returnRMA = new ReturnOrder();
 
-            functions.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, notes, createLabel, printRMA, includeResource,
+            functions.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, notes, includeResource, printRMA, createLabel,
                 email, lineValues, ref returnRMA, update, SessionID(), returnTrackingNo);
 
             return returnRMA;

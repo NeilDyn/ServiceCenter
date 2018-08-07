@@ -58,23 +58,52 @@ namespace ExcelDesign.Forms
             }
             else
             {
-                User u = (User)Session["ActiveUser"];
-                SessionTime = u.SessionTimeout;
-                currentUser.InnerText =  "Welcome " + u.UserID + "!";
-                applicationType.InnerText = ConfigurationManager.AppSettings["mode"].ToString();
+                if (Session["ActiveUser"] != null)
+                {
+                    User u = (User)Session["ActiveUser"];
+                    SessionTime = u.SessionTimeout; // Initiates user session timer
+                    currentUser.InnerText = "Welcome " + u.UserID + "!";
+                    applicationType.InnerText = ConfigurationManager.AppSettings["mode"].ToString(); // Displays the current database the portal is connected to
 
-                if (u.Admin)
-                {
-                    adminPanel.Visible = true;
-                }
-                else
-                {
-                    adminPanel.Visible = false;
+                    if (u.Admin)
+                    {
+                        adminPanel.Visible = true;
+                    }
+                    else
+                    {
+                        adminPanel.Visible = false;
+                    }
                 }
             }
 
             if (IsPostBack)
             {
+                if (Session["SearchValue"] != null && Session["SearchSelection"] != null)
+                {
+                    if (Session["NoUserInteraction"] == null)
+                    {
+                        Session["NoUserInteraction"] = null;
+                        customerInfo = new Control();
+                        salesOrderHeader = new Control();
+                        salesOrderDetail = new Control();
+                        salesReturnOrderHeader = new Control();
+                        salesReturnOrderDetails = new Control();
+
+                        if(Session["CustomerList"] != null)
+                        {
+                            customers = (List<Customer>)Session["CustomerList"];
+                        }
+                        PopulateData();
+                    }
+                    else
+                    {
+                        Session["NoUserInteraction"] = null;
+                        string searchValue = Convert.ToString(Session["SearchValue"]);
+                        int searchSelection = Convert.ToInt32(Session["SearchSelection"]);
+                        ConnectToService(searchValue, searchSelection);
+                    }
+                }
+
                 if (Session["ActiveCustomer"] != null)
                 {
                     customers = new List<Customer>
@@ -150,35 +179,43 @@ namespace ExcelDesign.Forms
                         break;
                 }
 
-                try
+                Session["SearchValue"] = searchValue;
+                Session["SearchSelection"] = searchSelection;
+                ConnectToService(searchValue, searchSelection);
+            }
+        }
+
+        protected void ConnectToService(string searchValue, int searchSelection)
+        {
+            try
+            {
+                cs.OpenService(searchValue, searchSelection);
+                customerInfo = new Control();
+                salesOrderHeader = new Control();
+                salesOrderDetail = new Control();
+                salesReturnOrderHeader = new Control();
+                salesReturnOrderDetails = new Control();
+                customers = cs.GetCustomerInfo();
+                Session["CustomerList"] = customers;
+                PopulateData();
+            }
+            catch (Exception ex)
+            {
+                Session["Error"] = ex.Message;
+
+                if (Request.Url.AbsoluteUri.Contains("Forms"))
                 {
-                    cs.OpenService(searchValue, searchSelection);
-                    customerInfo = new Control();
-                    salesOrderHeader = new Control();
-                    salesOrderDetail = new Control();
-                    salesReturnOrderHeader = new Control();
-                    salesReturnOrderDetails = new Control();
-                    PopulateData();
+                    Response.Redirect("ErrorForm.aspx");
                 }
-                catch (Exception ex)
+                else
                 {
-                    Session["Error"] = ex.Message;
-                    
-                    if(Request.Url.AbsoluteUri.Contains("Forms"))
-                    {
-                        Response.Redirect("ErrorForm.aspx");
-                    }
-                    else
-                    {
-                        Response.Redirect("Forms/ErrorForm.aspx");
-                    }
+                    Response.Redirect("Forms/ErrorForm.aspx");
                 }
             }
         }
 
         protected void PopulateData()
-        {
-            List<Customer> customers = cs.GetCustomerInfo();
+        {         
             if (customers.Count > 1)
             {
                 multipleCustomers = LoadControl("UserControls/SingleControls/MultipleCustomers.ascx");
@@ -222,6 +259,7 @@ namespace ExcelDesign.Forms
             try
             {
                 StaticService.IssueReturnLabel(rmaNo, email);
+                HttpContext.Current.Session["NoUserInteraction"] = true;
             }
             catch (Exception e)
             {
@@ -229,25 +267,7 @@ namespace ExcelDesign.Forms
             }
 
             return "success";
-        }
-
-        //[WebMethod]
-        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        //public static string CreateExchange(string rmaNo)
-        //{
-        //    string createdOrderNo = string.Empty;
-
-        //    try
-        //    {
-        //        createdOrderNo = StaticService.CreateExchange(rmaNo);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return "Error - " + e.Message;
-        //    }
-
-        //    return createdOrderNo;
-        //}
+        }     
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -293,7 +313,7 @@ namespace ExcelDesign.Forms
                 HttpContext.Current.Session.Clear();
                 FormsAuthentication.SignOut();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return "Error - " + ex.Message;
             }

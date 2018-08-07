@@ -51,6 +51,7 @@
           <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
           <element minOccurs="1" maxOccurs="1" name="UPSRetLabelCreated" type="string" />
           <element minOccurs="1" maxOccurs="1" name="RMANo" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="ExchangeOrderNos" type="string" />
           <element minOccurs="0" maxOccurs="unbounded" name="Warranty2" type="tns:Warranty2" />
         </sequence>
       </complexType>

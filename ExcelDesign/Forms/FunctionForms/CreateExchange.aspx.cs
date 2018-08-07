@@ -210,7 +210,8 @@ namespace ExcelDesign.Forms.FunctionForms
                     SendService ss = new SendService();
 
                     ceh = ss.CreateExchangeOrder(rmaNo, docNo, lineValues);
-                    HttpContext.Current.Session["CreatedExchange"] = ceh;
+                    Session["CreatedExchange"] = ceh;
+                    Session["NoUserInteraction"] = true;
                     ClientScript.RegisterStartupScript(this.GetType(), "returnOrderNo", "alert('" + ceh.OrderNo + "');", true);
                     ClientScript.RegisterStartupScript(this.GetType(), "openCreatedRMA", "OpenCreateExchange();", true);
                 }

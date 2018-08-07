@@ -13,8 +13,8 @@
 
         function CloseWindow() {
             var c = window.confirm("Are you sure you wish to close this window?");
-            if (c == true) {
-                parent.window.close();
+            if (c == true) { 
+                parent.window.close();               
             };
         };
 

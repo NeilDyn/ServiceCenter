@@ -655,7 +655,20 @@ namespace ExcelDesign.Class_Objects
                                     if(currResults.SalesHeader[so].RMANo != "")
                                     {
                                         exchangeCreated = true;
-                                        exchangeOrderNo.Add(currResults.SalesHeader[so].RMANo);
+                                        
+                                        if(currResults.SalesHeader[so].ExchangeOrderNos[0].Contains("|"))
+                                        {
+                                            string[] tempSplit = currResults.SalesHeader[so].ExchangeOrderNos[0].Split('|');
+
+                                            for (int i = 0; i < tempSplit.Length; i++)
+                                            {
+                                                exchangeOrderNo.Add(tempSplit[i]);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            exchangeOrderNo.Add(currResults.SalesHeader[so].ExchangeOrderNos[0]);
+                                        }
                                     }
 
                                     foreach (ReceiptHeader rh in receiptHeader)
@@ -1336,7 +1349,20 @@ namespace ExcelDesign.Class_Objects
                                         if (currResults.SalesHeader[so].RMANo != "")
                                         {
                                             exchangeCreated = true;
-                                            exchangeOrderNo.Add(currResults.SalesHeader[so].RMANo);
+
+                                            if (currResults.SalesHeader[so].ExchangeOrderNos[0].Contains("|"))
+                                            {
+                                                string[] tempSplit = currResults.SalesHeader[so].ExchangeOrderNos[0].Split('|');
+
+                                                for (int i = 0; i < tempSplit.Length; i++)
+                                                {
+                                                    exchangeOrderNo.Add(tempSplit[i]);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                exchangeOrderNo.Add(currResults.SalesHeader[so].ExchangeOrderNos[0]);
+                                            }
                                         }
 
                                         for (int sl = 0; sl < currResults.SalesLine.Length; sl++)

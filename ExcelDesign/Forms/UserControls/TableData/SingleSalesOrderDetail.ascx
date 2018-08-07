@@ -30,9 +30,19 @@
                         var height = 500;
                         var left = (screen.width - width) + 500;
                         var top = (screen.height - height) * 0.5;
-                        window.open("FunctionForms/CreateReturn.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
+                        var win = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
                             null,
                             "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+
+                        function checkIfWinClosed(intervalID) {
+                            if (win.closed) {
+                                __doPostBack('[id$=btnReload', '');
+                                clearInterval(intervalID);
+                            }
+                        }
+                        var interval = setInterval(function () {
+                            checkIfWinClosed(interval);
+                        }, 1000);
                     } else {
                         alert("Order <%= this.OrderNo %> has no shipped items and cannot be returned.");
                     }
@@ -155,7 +165,7 @@
                     <asp:TableHeaderCell Text="Qty Shipped" />
                     <asp:TableHeaderCell Text="Price" HorizontalAlign="Left" />
                     <asp:TableHeaderCell Text="Line Amt" HorizontalAlign="Left" />
-                    <asp:TableHeaderCell Text="Serial #" HorizontalAlign="Left" />
+                    <asp:TableHeaderCell Text="Serial #" HorizontalAlign="Center" />
                     <asp:TableHeaderCell Text="" />
                 </asp:TableHeaderRow>
                 <asp:TableHeaderRow>

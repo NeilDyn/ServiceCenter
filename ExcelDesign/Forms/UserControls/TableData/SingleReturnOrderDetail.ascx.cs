@@ -158,9 +158,44 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             if (Rh.ExchangeCreated)
             {
-                this.tcExchangeOrderNo.Text = Rh.ExchangeOrderNo.Count > 1 ? "Multiple" : Rh.ExchangeOrderNo[0];
+                if(Rh.ExchangeOrderNo.Count > 1)
+                {
+                    this.tcExchangeOrderNo.Text = "<a href='javascript:expandMultipleExchange" + CustID.ToString() + "" + CountID.ToString() + "()'>Multiple</a>";
+                    PopulateMultipleExchangeOrders();
+                }
+                else
+                {
+                    this.tcExchangeOrderNo.Text = Rh.ExchangeOrderNo[0];
+                }
             }
 
+        }
+
+        protected void PopulateMultipleExchangeOrders()
+        {
+            for (int i = 0; i < Rh.ExchangeOrderNo.Count; i++)
+            {
+                TableRow multipleExchangeRow = new TableRow
+                {
+                    ID = "multipleExchangeRow_" + CustID.ToString() + "_" + CountID.ToString() + "_" + i.ToString()
+                };
+
+                TableCell multipleExchangeCell = new TableCell
+                {
+                    Text = Rh.ExchangeOrderNo[i],
+                    ID = "multipleExchange_" + CustID.ToString() + "_" + CountID.ToString() + "_" + i.ToString()
+                };
+
+                multipleExchangeRow.Cells.Add(new TableCell());
+                multipleExchangeRow.Cells.Add(new TableCell());
+                multipleExchangeRow.Cells.Add(new TableCell());
+                multipleExchangeRow.Cells.Add(new TableCell());
+                multipleExchangeRow.Cells.Add(new TableCell());
+                multipleExchangeRow.Cells.Add(new TableCell());
+                multipleExchangeRow.Cells.Add(multipleExchangeCell);
+
+                tblSingleReturnOrderDetail.Rows.Add(multipleExchangeRow);
+            }          
         }
 
         protected void PopulateLines()
@@ -301,6 +336,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                             moreTableRow.Cells.Add(new TableCell());
                             moreTableRow.Cells.Add(moreSerialNo);
                             moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(new TableCell());
 
                             if (lineCount % 2 == 0)
                             {
@@ -372,6 +409,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 printRMAInstructions.Controls.Add(btnPrintRMAInstructions);
                 issueReturnLabel.Controls.Add(btnIssueReturnLabel);
 
+                buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());

@@ -11,6 +11,7 @@
         $("[id$=expandReceipts_<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id$=expandReceives_<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id*=showMoreReturnLines_<%= this.CustID %>_<%= this.CountID %>]").hide();
+        $("[id*=multipleExchangeRow_<%= this.CustID %>_<%= this.CountID %>]").hide();
 
         $("[id$=btnCreateExchange<%= this.CustID %>_<%= this.CountID %>]").click(function () {
             if ("<%= this.CanExchange %>" == "true") {
@@ -18,9 +19,19 @@
                 var height = 500;
                 var left = (screen.width - width) + 500;
                 var top = (screen.height - height) * 0.5;
-                window.open("FunctionForms/CreateExchange.aspx?RMANo=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>",
+                var win = window.open("FunctionForms/CreateExchange.aspx?RMANo=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>",
                     null,
                     "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+
+                function checkIfWinClosed(intervalID) {
+                            if (win.closed) {
+                                __doPostBack('[id$=btnReload', '');
+                                clearInterval(intervalID);
+                            }
+                        }
+                        var interval = setInterval(function () {
+                            checkIfWinClosed(interval);
+                        }, 1000);
             } else {
                 alert("You do not have the required permission to create an exchange order.");
             }
@@ -41,9 +52,19 @@
                     var height = 500;
                     var left = (screen.width - width) + 500;
                     var top = (screen.height - height) * 0.5;
-                    window.open("FunctionForms/CreateReturn.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>&ReturnTrackingNo=<%= this.Rh.ReturnTrackingNo %>",
+                    var win = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>&ReturnTrackingNo=<%= this.Rh.ReturnTrackingNo %>",
                         null,
                         "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+
+                    function checkIfWinClosed(intervalID) {
+                            if (win.closed) {
+                                __doPostBack('[id$=btnReload', '');
+                                clearInterval(intervalID);
+                            }
+                        }
+                        var interval = setInterval(function () {
+                            checkIfWinClosed(interval);
+                        }, 1000);
                 } else {
                     alert("Return Order <%= this.RMANo %> has already been fully received and cannot be updated.");
                 }
@@ -73,6 +94,7 @@
                                     success: function (error) {
                                         if (error.d.indexOf("Error") == -1) {
                                             alert("Return Label Created for Return: " + rmaNo);
+                                            __doPostBack('[id$=btnReload', '');
                                         } else {
                                             alert(error.d);
                                         }
@@ -119,7 +141,9 @@
         $("[id$=expandReceives_<%= this.CustID %>_<%= this.CountID %>]").toggle();
     };
 
-    JavaScript
+    function expandMultipleExchange<%=this.CustID %><%= this.CountID %>() {
+        $("[id*=multipleExchangeRow_<%= this.CustID %>_<%= this.CountID %>]").toggle();
+    };
 
     function validateEmail(email) {
         var re = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
@@ -179,7 +203,7 @@
         <asp:TableCell runat="server" ID="tcZendeskTickets" />
         <asp:TableCell Text="UPS Return Label Created:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcUPSReturnLabelCreated" />
-        <asp:TableCell Text="Exchange Order No:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
+        <asp:TableCell Text="Exchange Order No(s):" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcExchangeOrderNo" />
     </asp:TableRow>
     <asp:TableRow>

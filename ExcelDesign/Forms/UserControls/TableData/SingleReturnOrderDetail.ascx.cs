@@ -77,7 +77,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             }
             else
             {
-                CanReturn = activeUser.CreateReturnLabel ? "true" : "false";
+                CanReturn = activeUser.CreateRMA ? "true" : "false";
                 CanExchange = activeUser.CreateExchange ? "true" : "false";
                 CanIssueLabel = activeUser.CreateReturnLabel ? "true" : "false";
             }

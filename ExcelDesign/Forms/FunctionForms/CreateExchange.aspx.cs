@@ -45,6 +45,8 @@ namespace ExcelDesign.Forms.FunctionForms
 
         protected void LoadCreateExchangeLines()
         {
+            bool actionableLines = false;
+
             try
             {
                 TableRow lineRow = new TableRow();
@@ -64,7 +66,9 @@ namespace ExcelDesign.Forms.FunctionForms
                             {
                                 if(line.REQReturnAction == "Exchange")
                                 {
-                                    if(line.QuantityReceived - line.QuantityExchanged > 0)
+                                    actionableLines = true;
+
+                                    if((line.QuantityReceived - line.QuantityRefunded) - line.QuantityExchanged > 0)
                                     {
                                         lineCount++;
                                         anyLines = true;
@@ -121,9 +125,14 @@ namespace ExcelDesign.Forms.FunctionForms
                     }
                 }
 
-                if(!anyLines)
+                if(!actionableLines)
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "noLines", "alert('There are no items available to exchange.');", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "noActionableLines", "alert('There are no exchange items available.');", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "noLinesClose", "parent.window.close();", true);
+                } 
+                else if(!anyLines)
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "noLines", "alert('No action quantity available.');", true);
                     ClientScript.RegisterStartupScript(this.GetType(), "noLinesClose", "parent.window.close();", true);
                 }
             }

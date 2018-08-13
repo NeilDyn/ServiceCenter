@@ -23,7 +23,12 @@ namespace ExcelDesign.Class_Objects
         public User(UserSetup us)
         {
             UserID = us.User[0].UserID;
-            Password = us.User[0].Password;
+
+            for (int i = 0; i < us.User[0].Password.Length; i++)
+            {
+                Password += "*";
+            }
+
             SessionID = us.User[0].SessionID;
 
             CreateRMA = us.User[0].CreateRMA.ToUpper() == "YES" ? true : false;

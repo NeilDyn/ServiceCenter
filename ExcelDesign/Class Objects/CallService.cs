@@ -424,6 +424,7 @@ namespace ExcelDesign.Class_Objects
             double price = 0;
             double lineAmount = 0;
             int quantityExchanged = 0;
+            int quantityRefunded= 0;
             string reqReturnAction = string.Empty;
             string returnReason = string.Empty;
             List<string> insertedItems = new List<string>();
@@ -462,20 +463,47 @@ namespace ExcelDesign.Class_Objects
                                 }
                             }
 
-                            if(currResults.SalesLine != null)
+                            if (currResults.SalesLine != null)
                             {
                                 for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
                                 {
                                     if ((currResults.SalesLine[sl].DocNo == returnOrderNo) && (currResults.SalesLine[sl].ItemNo == itemNo))
                                     {
-                                        quantityExchanged = (int) Convert.ToDouble(currResults.SalesLine[sl].QtyExchanged, CultureInfo.InvariantCulture.NumberFormat);
+                                        quantityExchanged = (int)Convert.ToDouble(currResults.SalesLine[sl].QtyExchanged, CultureInfo.InvariantCulture.NumberFormat);
+                                        quantityRefunded = (int)Convert.ToDouble(currResults.SalesLine[sl].QtyRefunded, CultureInfo.InvariantCulture.NumberFormat);
                                         reqReturnAction = currResults.SalesLine[sl].REQReturnAction;
                                         returnReason = currResults.SalesLine[sl].ReturnReason;
                                     }
                                 }
                             }
+                            else
+                            {
+                                if(currResults.SalesCreditMemo != null)
+                                {
+                                    for (int scm = 0; scm < currResults.SalesCreditMemo.Length; scm++)
+                                    {
+                                        if (currResults.SalesCreditMemo[scm].ReturnOrderNo == returnOrderNo)
+                                        {
+                                            if (currResults.SalesCreditMemoLines != null)
+                                            {
+                                                returnReason = currResults.ReturnReceiptLine[rl].ReturnReasonCode;
+                                                reqReturnAction = currResults.ReturnReceiptLine[rl].REQReturnAction;
 
-                            receiptLine.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, reqReturnAction, returnReason));
+                                                for (int scml = 0; scml < currResults.SalesCreditMemoLines.Length; scml++)
+                                                {
+                                                    if ((currResults.SalesCreditMemoLines[scml].DocNo == currResults.SalesCreditMemo[scm].No) && (currResults.SalesCreditMemoLines[scml].ItemNo == itemNo))
+                                                    {
+                                                        quantityExchanged = (int)Convert.ToDouble(currResults.SalesCreditMemoLines[scml].QtyExchanged, CultureInfo.InvariantCulture.NumberFormat);
+                                                        quantityRefunded = (int)Convert.ToDouble(currResults.SalesCreditMemoLines[scml].QtyRefunded, CultureInfo.InvariantCulture.NumberFormat);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            receiptLine.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, quantityRefunded, reqReturnAction, returnReason));
                             insertedItems.Add(itemNo);
                         }
 
@@ -486,6 +514,7 @@ namespace ExcelDesign.Class_Objects
                         price = 0;
                         lineAmount = 0;
                         quantityExchanged = 0;
+                        quantityRefunded = 0;
                         reqReturnAction = string.Empty;
                         returnReason = string.Empty;
                     }
@@ -1616,6 +1645,7 @@ namespace ExcelDesign.Class_Objects
             double price = 0;
             double lineAmount = 0;
             int quantityExchanged = 0;
+            int quantityRefunded = 0;
             string reqReturnAction = string.Empty;
             string returnReason = string.Empty;
 
@@ -1632,8 +1662,9 @@ namespace ExcelDesign.Class_Objects
                         lineAmount = quantity * price;
                         quantityReceived = 0;
                         quantityExchanged = 0;
+                        quantityRefunded = 0;
 
-                        receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, string.Empty, string.Empty));
+                        receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, quantityRefunded, string.Empty, string.Empty));
                     }
                 }
             }
@@ -1652,6 +1683,7 @@ namespace ExcelDesign.Class_Objects
             double price = 0;
             double lineAmount = 0;
             int quantityExchanged = 0;
+            int quantityRefunded = 0;
             string reqReturnAction = string.Empty;
             string returnReason = string.Empty;
 
@@ -1668,11 +1700,12 @@ namespace ExcelDesign.Class_Objects
                         lineAmount = quantity * price;
                         quantityReceived = 0;
                         quantityExchanged = 0;
+                        quantityRefunded = 0;
 
                         reqReturnAction = currResults.SalesLine[slr].REQReturnAction;
                         returnReason = currResults.SalesLine[slr].ReturnReason;
 
-                        receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, reqReturnAction, returnReason));
+                        receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, quantityRefunded, reqReturnAction, returnReason));
 
                         itemNo = string.Empty;
                         description = string.Empty;
@@ -1681,6 +1714,7 @@ namespace ExcelDesign.Class_Objects
                         price = 0;
                         lineAmount = 0;
                         quantityExchanged = 0;
+                        quantityRefunded = 0;
                         reqReturnAction = string.Empty;
                         returnReason = string.Empty;
                     }
@@ -1703,6 +1737,7 @@ namespace ExcelDesign.Class_Objects
             double lineAmount = 0;
             List<string> insertedItems = new List<string>();
             int quantityExchanged = 0;
+            int quantityRefunded = 0;
             string reqReturnAction = string.Empty;
             string returnReason = string.Empty;
 
@@ -1736,47 +1771,7 @@ namespace ExcelDesign.Class_Objects
                                 lineAmount = quantity * price;
                                 quantityReceived = 0;
                                 quantityExchanged = 0;
-
-                                for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
-                                {
-                                    if ((currResults.SalesLine[sl].DocNo == rmaLine) && (currResults.SalesLine[sl].ItemNo == itemNo))
-                                    {
-                                        int.TryParse(currResults.SalesLine[sl].QtyExchanged, out quantityExchanged);
-                                        reqReturnAction = currResults.SalesLine[sl].REQReturnAction;
-                                        returnReason = currResults.SalesLine[sl].ReturnReason;
-                                    }
-                                }
-
-                                receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, reqReturnAction, returnReason));
-                                insertedItems.Add(itemNo);
-
-                                itemNo = string.Empty;
-                                description = string.Empty;
-                                quantity = 0;
-                                quantityReceived = 0;
-                                price = 0;
-                                lineAmount = 0;
-                                quantityExchanged = 0;
-                                reqReturnAction = string.Empty;
-                                returnReason = string.Empty;
-                            }
-                        }
-                    }
-                }
-
-                if (currResults.ReturnReceiptLine != null)
-                {
-                    for (int rl = 0; rl < currResults.ReturnReceiptLine.Length; rl++)
-                    {
-                        foreach (string rmaLine in rmaNo)
-                        {
-                            if (currResults.ReturnReceiptLine[rl].DocNo == rmaLine)
-                            {
-                                itemNo = currResults.ReturnReceiptLine[rl].ItemNo;
-                                description = currResults.ReturnReceiptLine[rl].Description;
-                                int.TryParse(currResults.ReturnReceiptLine[rl].Qty, out quantity);
-                                double.TryParse(currResults.ReturnReceiptLine[rl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
-                                lineAmount = quantity * price;
+                                quantityRefunded = 0;
 
                                 if (insertedItems.Any(item => item.Equals(itemNo)))
                                 {
@@ -1791,28 +1786,20 @@ namespace ExcelDesign.Class_Objects
                                 }
                                 else
                                 {
-                                    for (int rli = 0; rli < currResults.ReturnReceiptLine.Length; rli++)
-                                    {
-                                        if ((currResults.ReturnReceiptLine[rli].DocNo == no) && (currResults.ReturnReceiptLine[rli].ItemNo == itemNo))
-                                        {
-                                            int.TryParse(currResults.ReturnReceiptLine[rli].Qty, out int currQty);
-                                            quantityReceived += currQty;
-                                        }
-                                    }
-
                                     for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
                                     {
                                         if ((currResults.SalesLine[sl].DocNo == rmaLine) && (currResults.SalesLine[sl].ItemNo == itemNo))
                                         {
                                             int.TryParse(currResults.SalesLine[sl].QtyExchanged, out quantityExchanged);
+                                            int.TryParse(currResults.SalesLine[sl].QtyRefunded, out quantityRefunded);
                                             reqReturnAction = currResults.SalesLine[sl].REQReturnAction;
                                             returnReason = currResults.SalesLine[sl].ReturnReason;
                                         }
                                     }
-
-                                    receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, reqReturnAction, returnReason));
-                                    insertedItems.Add(itemNo);
                                 }
+
+                                receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, quantityRefunded, reqReturnAction, returnReason));
+                                insertedItems.Add(itemNo);
 
                                 itemNo = string.Empty;
                                 description = string.Empty;
@@ -1821,11 +1808,121 @@ namespace ExcelDesign.Class_Objects
                                 price = 0;
                                 lineAmount = 0;
                                 quantityExchanged = 0;
+                                quantityRefunded = 0;
                                 reqReturnAction = string.Empty;
                                 returnReason = string.Empty;
                             }
                         }
                     }
+                }
+
+                if(currResults.ReturnReceiptHeader != null)
+                {
+                    for (int rrh = 0; rrh < currResults.ReturnReceiptHeader.Length; rrh++)
+                    {
+                        if (currResults.ReturnReceiptLine != null)
+                        {
+                            for (int rl = 0; rl < currResults.ReturnReceiptLine.Length; rl++)
+                            {
+                                if(currResults.ReturnReceiptHeader[rrh].No == currResults.ReturnReceiptLine[rl].DocNo)
+                                {
+                                    foreach (string rmaLine in rmaNo)
+                                    {
+                                        if (currResults.ReturnReceiptHeader[rrh].ReturnOrderNo == rmaLine)
+                                        {
+                                            itemNo = currResults.ReturnReceiptLine[rl].ItemNo;
+                                            description = currResults.ReturnReceiptLine[rl].Description;
+                                            int.TryParse(currResults.ReturnReceiptLine[rl].Qty, out quantity);
+                                            double.TryParse(currResults.ReturnReceiptLine[rl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
+                                            lineAmount = quantity * price;
+
+                                            if (insertedItems.Any(item => item.Equals(itemNo)))
+                                            {
+                                                foreach (ReceiptLine existingItem in receiptLines)
+                                                {
+                                                    if (existingItem.ItemNo == itemNo)
+                                                    {
+                                                        existingItem.Quantity += quantity;
+                                                        existingItem.LineAmount = existingItem.Quantity * price;
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                for (int rli = 0; rli < currResults.ReturnReceiptLine.Length; rli++)
+                                                {
+                                                    if ((currResults.ReturnReceiptLine[rli].DocNo == no) && (currResults.ReturnReceiptLine[rli].ItemNo == itemNo))
+                                                    {
+                                                        int.TryParse(currResults.ReturnReceiptLine[rli].Qty, out int currQty);
+                                                        quantityReceived += currQty;
+                                                    }
+                                                }
+
+                                                if (currResults.SalesLine != null)
+                                                {
+                                                    for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
+                                                    {
+                                                        if ((currResults.SalesLine[sl].DocNo == rmaLine) && (currResults.SalesLine[sl].ItemNo == itemNo))
+                                                        {
+                                                            int.TryParse(currResults.SalesLine[sl].QtyExchanged, out quantityExchanged);
+                                                            int.TryParse(currResults.SalesLine[sl].QtyRefunded, out quantityRefunded);
+                                                            reqReturnAction = currResults.SalesLine[sl].REQReturnAction;
+                                                            returnReason = currResults.SalesLine[sl].ReturnReason;
+                                                        }
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if (currResults.SalesCreditMemo != null)
+                                                    {
+                                                        for (int scm = 0; scm < currResults.SalesCreditMemo.Length; scm++)
+                                                        {
+                                                            if (currResults.SalesCreditMemo[scm].ReturnOrderNo == rmaLine)
+                                                            {
+                                                                if (currResults.SalesCreditMemoLines != null)
+                                                                {
+                                                                    returnReason = currResults.ReturnReceiptLine[rl].ReturnReasonCode;
+                                                                    reqReturnAction = currResults.ReturnReceiptLine[rl].REQReturnAction;
+
+                                                                    for (int scml = 0; scml < currResults.SalesCreditMemoLines.Length; scml++)
+                                                                    {
+                                                                        if ((currResults.SalesCreditMemoLines[scml].DocNo == currResults.SalesCreditMemo[scm].No) && (currResults.SalesCreditMemoLines[scml].ItemNo == itemNo))
+                                                                        {
+                                                                            quantityExchanged = (int)Convert.ToDouble(currResults.SalesCreditMemoLines[scml].QtyExchanged, CultureInfo.InvariantCulture.NumberFormat);
+                                                                            quantityRefunded = (int)Convert.ToDouble(currResults.SalesCreditMemoLines[scml].QtyRefunded, CultureInfo.InvariantCulture.NumberFormat);
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, quantityRefunded, reqReturnAction, returnReason));
+                                                insertedItems.Add(itemNo);
+                                            }
+
+                                            itemNo = string.Empty;
+                                            description = string.Empty;
+                                            quantity = 0;
+                                            quantityReceived = 0;
+                                            price = 0;
+                                            lineAmount = 0;
+                                            quantityExchanged = 0;
+                                            quantityRefunded = 0;
+                                            reqReturnAction = string.Empty;
+                                            returnReason = string.Empty;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if(currResults.SalesCreditMemoLines != null)
+                {
+
                 }
             }
 

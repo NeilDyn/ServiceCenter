@@ -2584,6 +2584,12 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string unitPriceField;
         
+        private string qtyExchangedField;
+        
+        private string qtyRefundedField;
+        
+        private string rEQReturnActionField;
+        
         /// <remarks/>
         public string DocNo {
             get {
@@ -2643,6 +2649,36 @@ namespace ExcelDesign.ServiceFunctions {
                 this.unitPriceField = value;
             }
         }
+        
+        /// <remarks/>
+        public string QtyExchanged {
+            get {
+                return this.qtyExchangedField;
+            }
+            set {
+                this.qtyExchangedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string QtyRefunded {
+            get {
+                return this.qtyRefundedField;
+            }
+            set {
+                this.qtyRefundedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string REQReturnAction {
+            get {
+                return this.rEQReturnActionField;
+            }
+            set {
+                this.rEQReturnActionField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -2654,6 +2690,8 @@ namespace ExcelDesign.ServiceFunctions {
     public partial class SalesCreditMemo {
         
         private string noField;
+        
+        private string returnOrderNoField;
         
         private string extDocNoField;
         
@@ -2682,6 +2720,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.noField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ReturnOrderNo {
+            get {
+                return this.returnOrderNoField;
+            }
+            set {
+                this.returnOrderNoField = value;
             }
         }
         
@@ -3088,6 +3136,10 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string unitPriceField;
         
+        private string rEQReturnActionField;
+        
+        private string returnReasonCodeField;
+        
         /// <remarks/>
         public string DocNo {
             get {
@@ -3145,6 +3197,26 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.unitPriceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string REQReturnAction {
+            get {
+                return this.rEQReturnActionField;
+            }
+            set {
+                this.rEQReturnActionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ReturnReasonCode {
+            get {
+                return this.returnReasonCodeField;
+            }
+            set {
+                this.returnReasonCodeField = value;
             }
         }
     }
@@ -4252,6 +4324,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string qtyExchangedField;
         
+        private string qtyRefundedField;
+        
         private string returnReasonField;
         
         /// <remarks/>
@@ -4361,6 +4435,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.qtyExchangedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string QtyRefunded {
+            get {
+                return this.qtyRefundedField;
+            }
+            set {
+                this.qtyRefundedField = value;
             }
         }
         

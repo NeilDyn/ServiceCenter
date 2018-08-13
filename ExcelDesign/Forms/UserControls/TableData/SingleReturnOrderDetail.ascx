@@ -222,22 +222,24 @@
         <asp:TableCell />
     </asp:TableRow>
     <asp:TableRow>
-        <asp:TableCell ColumnSpan="10">
+        <asp:TableCell ColumnSpan="12">
             <asp:Table runat="server" ID="tblReturnDetailLines" Height="100%" Width="100%">
                 <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
                     <asp:TableHeaderCell Text="Item No." HorizontalAlign="Left" />
-                    <asp:TableHeaderCell Text="Description" HorizontalAlign="Left" Width="30%" />
+                    <asp:TableHeaderCell Text="Description" HorizontalAlign="Left" Width="25%" />
                     <asp:TableHeaderCell Text="Qty" />
                     <asp:TableHeaderCell Text="Qty Received" />
+                    <asp:TableHeaderCell Text="Qty Exchanged" />
+                    <asp:TableHeaderCell Text="Qty Refunded" />
                     <asp:TableHeaderCell Text="Price" HorizontalAlign="Left" />
-                    <asp:TableHeaderCell Text="Line Amt" HorizontalAlign="Left" />                  
+                    <asp:TableHeaderCell Text="Line Amt" HorizontalAlign="Left" />
+                    <asp:TableHeaderCell Text="Return Reason" />
+                    <asp:TableHeaderCell Text="REQ Return Action" />
                     <asp:TableHeaderCell Text="Serial #" />
-                    <asp:TableHeaderCell Text="Return Reason"/>
-                    <asp:TableHeaderCell Text="REQ Return Action"/>
-                    <asp:TableHeaderCell Text="" />                  
+                    <asp:TableHeaderCell Text="" />
                 </asp:TableHeaderRow>
                 <asp:TableHeaderRow>
-                    <asp:TableHeaderCell ColumnSpan="10">
+                    <asp:TableHeaderCell ColumnSpan="12">
                         <hr class="HeaderLine"/>
                     </asp:TableHeaderCell>
                 </asp:TableHeaderRow>

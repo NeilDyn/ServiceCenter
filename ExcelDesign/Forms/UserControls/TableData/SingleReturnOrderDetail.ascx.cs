@@ -121,7 +121,32 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcEmail.ToolTip = Rh.Email;
 
             this.tcUPSReturnLabelCreated.Text = Rh.ReturnLabelCreated == true ? "Yes" : "No";
-            this.tcExchangeStatus.Text = Rh.ExchangeCreated == true ? "Yes" : "No";
+
+            int exchangeCounter = 0;
+            int totalCounter = 0;
+
+            foreach (ReceiptHeader head in Rh.ReceiptHeaderObj)
+            {
+                foreach (ReceiptLine line in head.ReceiptLines)
+                {
+                    totalCounter += line.QuantityReceived;
+                    exchangeCounter += line.QuantityExchanged;
+                    totalCounter -= line.QuantityRefunded;
+                }
+            }
+
+            if(exchangeCounter == totalCounter)
+            {
+                this.tcExchangeStatus.Text = "Completed";
+            }
+            else if(exchangeCounter == 0)
+            {
+                this.tcExchangeStatus.Text = "No";
+            }
+            else
+            {
+                this.tcExchangeStatus.Text = "Partial Exchanged";
+            }
 
             TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
 
@@ -226,6 +251,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         TableCell desc = new TableCell();
                         TableCell qty = new TableCell();
                         TableCell qtyReceived = new TableCell();
+                        TableCell qtyExchanged = new TableCell();
+                        TableCell qtyRefunded = new TableCell();
                         TableCell price = new TableCell();
                         TableCell lineAmount = new TableCell();
                         TableCell serialNo = new TableCell();
@@ -240,6 +267,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         desc.ToolTip = line.Description;
                         qty.Text = line.Quantity.ToString();
                         qtyReceived.Text = line.QuantityReceived.ToString();
+                        qtyExchanged.Text = line.QuantityExchanged.ToString();
+                        qtyRefunded.Text = line.QuantityRefunded.ToString();
                         total += line.LineAmount;
                         price.Text = "$      " + line.Price.ToGBString();
                         lineAmount.Text = "$      " + line.LineAmount.ToGBString();
@@ -256,6 +285,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
                         qty.HorizontalAlign = HorizontalAlign.Center;
                         qtyReceived.HorizontalAlign = HorizontalAlign.Center;
+                        qtyExchanged.HorizontalAlign = HorizontalAlign.Center;
+                        qtyRefunded.HorizontalAlign = HorizontalAlign.Center;
                         price.HorizontalAlign = HorizontalAlign.Right;
                         lineAmount.HorizontalAlign = HorizontalAlign.Right;
 
@@ -295,11 +326,13 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         lineRow.Cells.Add(desc);
                         lineRow.Cells.Add(qty);
                         lineRow.Cells.Add(qtyReceived);
+                        lineRow.Cells.Add(qtyExchanged);
+                        lineRow.Cells.Add(qtyRefunded);
                         lineRow.Cells.Add(price);
                         lineRow.Cells.Add(lineAmount);
-                        lineRow.Cells.Add(serialNo);
                         lineRow.Cells.Add(returnReason);
                         lineRow.Cells.Add(reqReturnAction);
+                        lineRow.Cells.Add(serialNo);
                         lineRow.Cells.Add(moreSerial);
 
                         if (lineCount % 2 == 0)
@@ -333,11 +366,13 @@ namespace ExcelDesign.Forms.UserControls.TableData
                             moreTableRow.Cells.Add(new TableCell());
                             moreTableRow.Cells.Add(new TableCell());
                             moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(new TableCell());                           
+                            moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(new TableCell());
                             moreTableRow.Cells.Add(new TableCell());
                             moreTableRow.Cells.Add(moreSerialNo);
-                            moreTableRow.Cells.Add(new TableCell());
-                            moreTableRow.Cells.Add(new TableCell());
-                            moreTableRow.Cells.Add(new TableCell());
 
                             if (lineCount % 2 == 0)
                             {
@@ -388,8 +423,12 @@ namespace ExcelDesign.Forms.UserControls.TableData
             totalRow.Cells.Add(new TableCell());
             totalRow.Cells.Add(new TableCell());
             totalRow.Cells.Add(new TableCell());
+            totalRow.Cells.Add(new TableCell());
+            totalRow.Cells.Add(new TableCell());
             totalRow.Cells.Add(totalString);
             totalRow.Cells.Add(totalCell);
+            totalRow.Cells.Add(new TableCell());
+            totalRow.Cells.Add(new TableCell());
             totalRow.Cells.Add(new TableCell());
             totalRow.Cells.Add(new TableCell());
 

@@ -84,7 +84,8 @@ namespace ExcelDesign.Forms.FunctionForms
                                         {
                                             ID = "actionQtyInsert_" + lineCount.ToString(),
                                             Text = (line.QuantityReceived - line.QuantityExchanged).ToString(),
-                                            Width = new Unit("15%")
+                                            Width = new Unit("15%"),
+                                            CssClass = "inputBox"
                                         };
 
                                         itemNo.ID = "itemNo_" + lineCount.ToString();
@@ -110,10 +111,12 @@ namespace ExcelDesign.Forms.FunctionForms
                                         if(lineCount % 2 == 0)
                                         {
                                             singleRow.BackColor = Color.White;
+                                            actionQtyInsert.BackColor = Color.White;
                                         }
                                         else
                                         {
                                             singleRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                                            actionQtyInsert.BackColor = ColorTranslator.FromHtml("#EFF3FB");
                                         }
 
                                         singleRow.Attributes.CssStyle.Add("border-collapse", "collapse");

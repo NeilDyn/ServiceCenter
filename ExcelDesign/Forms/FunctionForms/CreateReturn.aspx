@@ -26,10 +26,10 @@
         };
 
         function OpenCreatedRMA() {
-            var width = 1000;
-            var height = 400;
-            var left = (screen.width - width) / 2;
-            var top = (screen.height - height) / 2;
+            var width = 1500;
+            var height = 500;
+            var left = (screen.width - width) + 500;
+            var top = (screen.height - height) * 0.5;
             window.open("CreatedRMA.aspx?PrintRMAInstructions=<%= this.printRMA %>&OrderNo=<%= this.tcNo.Text%>&ExternalDocumentNo=<%= this.tcDocNo.Text%>",
                 null,
                 "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
@@ -40,18 +40,18 @@
     <form id="frmCreateReturnOrder" runat="server">
         <asp:Table ID="tblRMAInfo" runat="server" Height="100%" Width="100%">
             <asp:TableHeaderRow HorizontalAlign="Left">
-                <asp:TableHeaderCell Text="Order No:" ID="noTitle" ForeColor="#0099FF" Font-Bold="true" Font-Size="Large"/>
+                <asp:TableHeaderCell Text="Order No:" ID="noTitle" ForeColor="#0099FF" Font-Bold="true" Font-Size="Large" />
                 <asp:TableHeaderCell ID="tcNo" runat="server" />
             </asp:TableHeaderRow>
             <asp:TableHeaderRow HorizontalAlign="Left">
-                <asp:TableHeaderCell Text="External Document No:" ForeColor="#0099FF" Font-Bold="true" Font-Size="Large"/>
+                <asp:TableHeaderCell Text="External Document No:" ForeColor="#0099FF" Font-Bold="true" Font-Size="Large" />
                 <asp:TableHeaderCell ID="tcDocNo" runat="server" />
             </asp:TableHeaderRow>
             <asp:TableHeaderRow>
                 <asp:TableHeaderCell>
                     <br />
                 </asp:TableHeaderCell>
-            </asp:TableHeaderRow>           
+            </asp:TableHeaderRow>
             <asp:TableRow>
                 <asp:TableCell>
                     <br />
@@ -77,39 +77,39 @@
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
-                <asp:TableCell Text="Notes: " ForeColor="#0099FF" Font-Bold="true" Style="text-align:right; padding-right:30px"/>
+                <asp:TableCell Text="Notes: " ForeColor="#0099FF" Font-Bold="true" Style="text-align: right; padding-right: 30px" />
                 <asp:TableCell Width="100%">
-                    <asp:TextBox ID="txtNotes" Width="100%" runat="server" TextMode="MultiLine" MaxLength="160"></asp:TextBox>
+                    <asp:TextBox ID="txtNotes" Width="100%" runat="server" TextMode="MultiLine" MaxLength="160" CssClass="inputBox" />
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
-                <asp:TableCell Text="Customer Email Address: " ForeColor="#0099FF" Font-Bold="true" Style="text-align:right; padding-right:30px"/>
+                <asp:TableCell Text="Customer Email Address: " ForeColor="#0099FF" Font-Bold="true" Style="text-align: right; padding-right: 30px" />
                 <asp:TableCell Width="100%">
-                    <asp:TextBox ID="txtCustEmail" Width="50%" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtCustEmail" Width="50%" runat="server" CssClass="inputBox" />
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
-                <asp:TableCell Text="Include Resource Lines: " Width="20%" ForeColor="#0099FF" Font-Bold="true" Style="text-align:right; padding-right:30px"/>
+                <asp:TableCell Text="Include Resource Lines: " Width="20%" ForeColor="#0099FF" Font-Bold="true" Style="text-align: right; padding-right: 30px" />
                 <asp:TableCell>
                     <asp:CheckBox ID="cbxResources" runat="server" />
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
-                <asp:TableCell Text="Print RMA Instructions: " ForeColor="#0099FF" Font-Bold="true" Style="text-align:right; padding-right:30px"/>
+                <asp:TableCell Text="Print RMA Instructions: " ForeColor="#0099FF" Font-Bold="true" Style="text-align: right; padding-right: 30px" />
                 <asp:TableCell>
                     <asp:CheckBox ID="cbxPrintRMA" runat="server" Checked="true" />
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
-                <asp:TableCell ID="lblCreateLabel" Text="Create Return Label: " ForeColor="#0099FF" Font-Bold="true" Style="text-align:right; padding-right:30px"/>
+                <asp:TableCell ID="lblCreateLabel" Text="Create Return Label: " ForeColor="#0099FF" Font-Bold="true" Style="text-align: right; padding-right: 30px" />
                 <asp:TableCell>
                     <asp:CheckBox ID="cbxCreateLabel" runat="server" />
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
-                <asp:TableCell ID="lblInsertTrackingNo" Text="Return Tracking No: " ForeColor="#0099FF" Font-Bold="true" Style="text-align:right; padding-right:30px"/>
+                <asp:TableCell ID="lblInsertTrackingNo" Text="Return Tracking No: " ForeColor="#0099FF" Font-Bold="true" Style="text-align: right; padding-right: 30px" />
                 <asp:TableCell ID="tcInsertTrackingNo">
-                    <asp:TextBox ID="txtInsertTrackingNo" runat="server" Width="50%"/>
+                    <asp:TextBox ID="txtInsertTrackingNo" runat="server" Width="50%" CssClass="inputBox" />
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableFooterRow HorizontalAlign="Right">

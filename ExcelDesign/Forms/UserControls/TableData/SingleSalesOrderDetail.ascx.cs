@@ -178,6 +178,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
                 this.tcPolicy.Text = Sh.WarrantyProp.Policy;
                 this.tcDaysRemaining.Text = Sh.WarrantyProp.DaysRemaining;
+                this.tcWarrantyType.Text = Sh.WarrantyProp.WarrantyType;
             }
         }
 

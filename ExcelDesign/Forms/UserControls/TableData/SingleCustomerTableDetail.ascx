@@ -38,7 +38,7 @@
         <asp:TableCell />
         <asp:TableCell Text="Zip:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcZip" style="text-align: left"/>
-        <asp:TableCell Text="County:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
+        <asp:TableCell Text="Country:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcCountry"/>
         <asp:TableCell />
         <asp:TableCell />

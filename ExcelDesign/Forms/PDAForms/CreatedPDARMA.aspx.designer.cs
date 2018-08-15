@@ -7,19 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExcelDesign.Forms.FunctionForms {
+namespace ExcelDesign.Forms.PDAForms {
     
     
-    public partial class CreatedExchange {
+    public partial class CreatedPDARMA {
         
         /// <summary>
-        /// frmCreatedExchange control.
+        /// frmCreatedPDRMADetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm frmCreatedExchange;
+        protected global::System.Web.UI.HtmlControls.HtmlForm frmCreatedPDRMADetails;
         
         /// <summary>
         /// tblHeaderDetails control.
@@ -31,22 +31,22 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.Table tblHeaderDetails;
         
         /// <summary>
-        /// tcOrderNo control.
+        /// tcRmaNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcOrderNo;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcRmaNo;
         
         /// <summary>
-        /// tcShipMethod control.
+        /// tcReturnTrackingNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipMethod;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcReturnTrackingNo;
         
         /// <summary>
         /// tcExternalDocNo control.
@@ -58,15 +58,6 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.TableHeaderCell tcExternalDocNo;
         
         /// <summary>
-        /// tcRmaNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcRmaNo;
-        
-        /// <summary>
         /// tcOrderDate control.
         /// </summary>
         /// <remarks>
@@ -74,6 +65,15 @@ namespace ExcelDesign.Forms.FunctionForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableHeaderCell tcOrderDate;
+        
+        /// <summary>
+        /// tcDateCreated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcDateCreated;
         
         /// <summary>
         /// tcChannelName control.
@@ -94,33 +94,6 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToName;
         
         /// <summary>
-        /// tcShipToAddress1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToAddress1;
-        
-        /// <summary>
-        /// tcShipToContact control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToContact;
-        
-        /// <summary>
-        /// tcShipToAddress2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToAddress2;
-        
-        /// <summary>
         /// tcShipToCity control.
         /// </summary>
         /// <remarks>
@@ -128,6 +101,15 @@ namespace ExcelDesign.Forms.FunctionForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToCity;
+        
+        /// <summary>
+        /// tcShipToAddress1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToAddress1;
         
         /// <summary>
         /// tcShipToState control.
@@ -139,22 +121,22 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToState;
         
         /// <summary>
-        /// tcShipToZip control.
+        /// tcShipToAddress2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToZip;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToAddress2;
         
         /// <summary>
-        /// tcShipToCountry control.
+        /// tcShipToCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToCountry;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToCode;
         
         /// <summary>
         /// TblReturnHeaderLines control.
@@ -173,5 +155,32 @@ namespace ExcelDesign.Forms.FunctionForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnClose;
+        
+        /// <summary>
+        /// BtnCancelRMA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCancelRMA;
+        
+        /// <summary>
+        /// BtnUpdateRMA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnUpdateRMA;
+        
+        /// <summary>
+        /// BtnPrintRMAInstructions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnPrintRMAInstructions;
     }
 }

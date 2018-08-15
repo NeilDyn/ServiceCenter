@@ -45,32 +45,32 @@
                 </asp:TableHeaderCell>
             </asp:TableHeaderRow>
             <asp:TableHeaderRow>
-                <asp:TableHeaderCell Text="Shipping Information:" HorizontalAlign="Left" Font-Underline="true" Font-Bold="true"/>
+                <asp:TableHeaderCell Text="Shipping Information:" HorizontalAlign="Left" Font-Underline="true" Font-Bold="true" />
             </asp:TableHeaderRow>
-                <asp:TableHeaderRow>
-                    <asp:TableHeaderCell Text="Ship-to Name:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF"/>
-                    <asp:TableHeaderCell runat="server" ID="tcShipToName" HorizontalAlign="Left" Style="text-align: left" />
-                    <asp:TableHeaderCell Text="Ship-to Address 1:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF"/>
-                    <asp:TableHeaderCell runat="server" ID="tcShipToAddress1" HorizontalAlign="Left" Style="text-align: left" />
-                </asp:TableHeaderRow>
             <asp:TableHeaderRow>
-                    <asp:TableHeaderCell Text="Ship-to Address 2:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF"/>
-                    <asp:TableHeaderCell runat="server" ID="tcShipToAddress2" HorizontalAlign="Left" Style="text-align: left" />
-                    <asp:TableHeaderCell Text="Ship-to Contact:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF"/>
-                    <asp:TableHeaderCell runat="server" ID="tcShipToContact" HorizontalAlign="Left" Style="text-align: left" />
-                </asp:TableHeaderRow>
+                <asp:TableHeaderCell Text="Ship-to Name:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
+                <asp:TableHeaderCell runat="server" ID="tcShipToName" HorizontalAlign="Left" Style="text-align: left" />                
+                <asp:TableHeaderCell Text="Ship-to Address 1:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
+                <asp:TableHeaderCell runat="server" ID="tcShipToAddress1" HorizontalAlign="Left" Style="text-align: left" />
+            </asp:TableHeaderRow>
             <asp:TableHeaderRow>
-                    <asp:TableHeaderCell Text="Ship-to City:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF"/>
-                    <asp:TableHeaderCell runat="server" ID="tcShipToCity" HorizontalAlign="Left" Style="text-align: left" />
-                    <asp:TableHeaderCell Text="Ship-to State:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF"/>
-                    <asp:TableHeaderCell runat="server" ID="tcShipToState" HorizontalAlign="Left" Style="text-align: left" />
-                </asp:TableHeaderRow>
+                <asp:TableHeaderCell Text="Ship-to Contact:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
+                <asp:TableHeaderCell runat="server" ID="tcShipToContact" HorizontalAlign="Left" Style="text-align: left" />
+                <asp:TableHeaderCell Text="Ship-to Address 2:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
+                <asp:TableHeaderCell runat="server" ID="tcShipToAddress2" HorizontalAlign="Left" Style="text-align: left" />
+            </asp:TableHeaderRow>
             <asp:TableHeaderRow>
-                    <asp:TableHeaderCell Text="Ship-to Zip:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF"/>
-                    <asp:TableHeaderCell runat="server" ID="tcShipToZip" HorizontalAlign="Left" Style="text-align: left" />
-                    <asp:TableHeaderCell Text="Ship-to Country:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF"/>
-                    <asp:TableHeaderCell runat="server" ID="tcShipToCountry" HorizontalAlign="Left" Style="text-align: left" />
-                </asp:TableHeaderRow>
+                <asp:TableHeaderCell Text="Ship-to City:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
+                <asp:TableHeaderCell runat="server" ID="tcShipToCity" HorizontalAlign="Left" Style="text-align: left" />
+                <asp:TableHeaderCell Text="Ship-to State:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
+                <asp:TableHeaderCell runat="server" ID="tcShipToState" HorizontalAlign="Left" Style="text-align: left" />
+            </asp:TableHeaderRow>
+            <asp:TableHeaderRow>
+                <asp:TableHeaderCell Text="Ship-to Zip:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
+                <asp:TableHeaderCell runat="server" ID="tcShipToZip" HorizontalAlign="Left" Style="text-align: left" />
+                <asp:TableHeaderCell Text="Ship-to Country:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
+                <asp:TableHeaderCell runat="server" ID="tcShipToCountry" HorizontalAlign="Left" Style="text-align: left" />
+            </asp:TableHeaderRow>
             <asp:TableRow>
                 <asp:TableCell ColumnSpan="4">
                     <asp:Table runat="server" ID="tblCreateReturnOrderTableDetails" Height="100%" Width="100%">
@@ -97,7 +97,7 @@
                     <asp:Button ID="BtnCreateExchange" runat="server" Text="Create Exchange" OnClick="BtnCreateExchange_Click" />
                 </asp:TableHeaderCell>
             </asp:TableFooterRow>
-        </asp:Table>     
+        </asp:Table>
     </form>
 </body>
 </html>

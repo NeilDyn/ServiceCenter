@@ -33,9 +33,13 @@
                         var top = (screen.height - height) * 0.5;
 
                         if (typeof (createReturnWindow) == 'undefined' || createReturnWindow.closed) {   
-                            createReturnWindow = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
-                                null,
-                                "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                            if ("<%= this.tcWarrantyType.Text %>" != "") {
+                                createReturnWindow = window.open("PDAForms/CreateRMA.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
+                                null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                            } else {
+                                createReturnWindow = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
+                                null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                            }
 
                             function checkIfWinClosed(intervalID) {
                                 if (createReturnWindow.closed) {
@@ -97,6 +101,8 @@
         <asp:TableCell runat="server" ID="tcOrderStatus" />
         <asp:TableCell Text="Is Exchange Order:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcIsExchangeOrder" />
+        <asp:TableCell Text="RMA #:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" ID="tcRMANoTitle" />
+        <asp:TableCell runat="server" ID="tcRMANo" ForeColor="Red" />
     </asp:TableRow>
     <asp:TableRow>
         <asp:TableCell>
@@ -139,7 +145,7 @@
         <asp:TableCell />
         <asp:TableCell Text="Zendesk Ticket #:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcZendeskTicketNo">
-            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtZendeskNo" runat="server"></asp:TextBox>
         </asp:TableCell>
         <asp:TableCell Text="Ship Method:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcShipMethod" />
@@ -152,8 +158,8 @@
         <asp:TableCell runat="server" ID="tcZendeskTickets" />
         <asp:TableCell Text="Tracking #:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcTrackingNo" />
-        <asp:TableCell Text="RMA #:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" ID="tcRMANoTitle" />
-        <asp:TableCell runat="server" ID="tcRMANo" ForeColor="Red" />
+        <asp:TableCell Text="Warranty Type:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
+        <asp:TableCell runat="server" ID="tcWarrantyType" />
     </asp:TableRow>
     <asp:TableRow runat="server" ID="expandSerialNos" TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell><br /></asp:TableCell>

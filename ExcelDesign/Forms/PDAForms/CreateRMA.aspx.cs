@@ -1,26 +1,34 @@
-﻿using System;
+﻿using ExcelDesign.Class_Objects;
+using ExcelDesign.Class_Objects.CreatedReturn;
+using ExcelDesign.Class_Objects.FunctionData;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ExcelDesign.Class_Objects;
-using ExcelDesign.Class_Objects.CreatedReturn;
-using ExcelDesign.Class_Objects.FunctionData;
-using System.Net.Mail;
 
-namespace ExcelDesign.Forms.FunctionForms
+namespace ExcelDesign.Forms.PDAForms
 {
-    public partial class CreateReturn : System.Web.UI.Page
+    public partial class CreateRMA : System.Web.UI.Page
     {
         protected List<SalesHeader> Sh;
+        protected Customer cust;
         protected string no;
         protected string docNo;
         protected string notes;
         protected string email;
         protected string returnTrackingNo;
+
+        protected string shipToName;
+        protected string shipToAddress1;
+        protected string shipToAddress2;
+        protected string shipToCity;
+        protected string shipToCode;
+        protected string shipToState;
 
         protected bool resources;
         protected bool printRMA;
@@ -47,6 +55,15 @@ namespace ExcelDesign.Forms.FunctionForms
                 existingTrackingNo = Convert.ToString(Request.QueryString["ReturnTrackingNo"]);
 
                 createdOrderNo = Convert.ToString(Request.QueryString["CreatedOrderNo"]);
+
+                cust = (Customer)Session["SelectedCustomer"];
+
+                txtShipToName.Text = cust.Name;
+                txtShipToAddress1.Text = cust.Address1;
+                txtShipToAddress2.Text = cust.Address2;
+                txtShipToCity.Text = cust.City;
+                txtShipToCode.Text = cust.Zip;
+                txtShipToState.Text = cust.State;
 
                 if (updateRma.ToUpper() == "TRUE")
                 {
@@ -75,7 +92,7 @@ namespace ExcelDesign.Forms.FunctionForms
 
                     lblInsertTrackingNo.Visible = false;
                     txtInsertTrackingNo.Visible = false;
-                }              
+                }
 
                 if (Session["ActiveUser"] != null)
                 {
@@ -374,6 +391,13 @@ namespace ExcelDesign.Forms.FunctionForms
 
             try
             {
+                shipToName = txtShipToName.Text;
+                shipToAddress1 = txtShipToAddress1.Text;
+                shipToAddress2 = txtShipToAddress2.Text;
+                shipToCity = txtShipToCity.Text;
+                shipToCode = txtShipToCode.Text;
+                shipToState = txtShipToState.Text;
+
                 no = tcNo.Text;
                 docNo = tcDocNo.Text;
                 notes = txtNotes.Text;
@@ -480,8 +504,8 @@ namespace ExcelDesign.Forms.FunctionForms
                             update = false;
                         }
 
-                        crh = ss.CreateReturnOrder(no, docNo, string.Empty, notes, resources, printRMA, createLabel, email, lineValues, update, returnTrackingNo, 
-                            string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
+                        crh = ss.CreateReturnOrder(no, docNo, string.Empty, notes, resources, printRMA, createLabel, email, lineValues, update, returnTrackingNo,
+                            shipToName, shipToAddress1, shipToAddress2, shipToCity, shipToState, shipToCode);
                         Session["CreatedRMA"] = crh;
                         Session["NoUserInteraction"] = true;
                         ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + "');", true);
@@ -579,58 +603,94 @@ namespace ExcelDesign.Forms.FunctionForms
 
             try
             {
-                if (createLabel)
+                if(!String.IsNullOrEmpty(shipToName) || !String.IsNullOrWhiteSpace(shipToName))
                 {
-                    if (returnTrackingNo == string.Empty)
+                    if (!String.IsNullOrEmpty(shipToAddress1) || !String.IsNullOrWhiteSpace(shipToAddress1))
                     {
-                        User activeUser = (User)Session["ActiveUser"];
-
-                        if (activeUser.CreateReturnLabel || activeUser.Developer || activeUser.Admin)
+                        if(!String.IsNullOrEmpty(shipToCity) || !String.IsNullOrWhiteSpace(shipToCity))
                         {
-                            if (!String.IsNullOrWhiteSpace(email))
+                            if(!String.IsNullOrEmpty(shipToCode) || !String.IsNullOrWhiteSpace(shipToCode))
                             {
-                                if (IsValidEmail(email))
+                                if(!String.IsNullOrEmpty(shipToState) || !String.IsNullOrWhiteSpace(shipToState))
                                 {
-                                    return valid;
+                                    if (createLabel)
+                                    {
+                                        if (returnTrackingNo == string.Empty)
+                                        {
+                                            User activeUser = (User)Session["ActiveUser"];
+
+                                            if (activeUser.CreateReturnLabel || activeUser.Developer || activeUser.Admin)
+                                            {
+                                                if (!String.IsNullOrWhiteSpace(email))
+                                                {
+                                                    if (IsValidEmail(email))
+                                                    {
+                                                        return valid;
+                                                    }
+                                                    else
+                                                    {
+                                                        return "Invalid email address entered.";
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    return "Updated email is required for creating a return label.";
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return "You do not have the required permission to issue a return label.";
+                                            }
+                                        }
+                                        else
+                                        {
+                                            return "You cannot create a UPS Return Label and insert a Return Tracking Number.";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (!String.IsNullOrWhiteSpace(returnTrackingNo) || !String.IsNullOrEmpty(returnTrackingNo))
+                                        {
+                                            if (returnTrackingNo.Length < 41)
+                                            {
+                                                return valid;
+                                            }
+                                            else
+                                            {
+                                                return "Maximum length for a Return Tracking No is 40.";
+                                            }
+                                        }
+                                        else
+                                        {
+                                            return valid;
+                                        }
+                                    }
                                 }
                                 else
                                 {
-                                    return "Invalid email address entered.";
+                                    return "Please insert a valid Ship to State.";
                                 }
                             }
                             else
                             {
-                                return "Updated email is required for creating a return label.";
+                                return "Please insert a valid Ship to Code.";
                             }
                         }
                         else
                         {
-                            return "You do not have the required permission to issue a return label.";
+                            return "Please insert a valid Ship to City.";
                         }
                     }
                     else
                     {
-                        return "You cannot create a UPS Return Label and insert a Return Tracking Number.";
+                        return "Please insert a valid Ship to Address 1.";
                     }
                 }
                 else
                 {
-                    if (!String.IsNullOrWhiteSpace(returnTrackingNo) || !String.IsNullOrEmpty(returnTrackingNo))
-                    {
-                        if (returnTrackingNo.Length < 41)
-                        {
-                            return valid;
-                        }
-                        else
-                        {
-                            return "Maximum length for a Return Tracking No is 40.";
-                        }
-                    }
-                    else
-                    {
-                        return valid;
-                    }
+                    return "Please insert a valid Ship to Name.";
                 }
+
             }
             catch (Exception e)
             {

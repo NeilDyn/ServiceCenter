@@ -862,6 +862,7 @@ namespace ExcelDesign.Class_Objects
             string status = string.Empty;
             string policy = string.Empty;
             string daysRemaining = string.Empty;
+            string warrantyType = string.Empty;
             string rmaNo = string.Empty;
 
             bool rmaExists = false;
@@ -900,7 +901,8 @@ namespace ExcelDesign.Class_Objects
                                 status = currResults.SOImportBuffer[so].Warranty[0].Status[0];
                                 policy = currResults.SOImportBuffer[so].Warranty[0].Policy[0]; ;
                                 daysRemaining = currResults.SOImportBuffer[so].Warranty[0].DaysRemaining[0];
-                                warranty = new Warranty(status, policy, daysRemaining);
+                                warrantyType = currResults.SOImportBuffer[so].Warranty[0].WarrantyType[0];
+                                warranty = new Warranty(status, policy, daysRemaining, warrantyType);
                                 sellToCustomerNo = currResults.SOImportBuffer[so].CustomerNo;
 
                                 if (currResults.ExtendedSalesHeader != null)
@@ -938,6 +940,7 @@ namespace ExcelDesign.Class_Objects
                                 status = string.Empty;
                                 policy = string.Empty;
                                 daysRemaining = string.Empty;
+                                warrantyType = string.Empty;
                                 rmaExists = false;
                                 rmaNo = string.Empty;
                                 isExchangeOrder = false;
@@ -976,7 +979,8 @@ namespace ExcelDesign.Class_Objects
                                 status = currResults.SalesHeader[so].Warranty2[0].Status2[0];
                                 policy = currResults.SalesHeader[so].Warranty2[0].Policy2[0]; ;
                                 daysRemaining = currResults.SalesHeader[so].Warranty2[0].DaysRemaining2[0];
-                                warranty = new Warranty(status, policy, daysRemaining);
+                                warrantyType = currResults.SalesHeader[so].Warranty2[0].WarrantyType2[0];
+                                warranty = new Warranty(status, policy, daysRemaining, warrantyType);
                                 sellToCustomerNo = currResults.SalesHeader[so].SellToCustomerNo;
 
                                 for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
@@ -1041,6 +1045,7 @@ namespace ExcelDesign.Class_Objects
                                 status = string.Empty;
                                 policy = string.Empty;
                                 daysRemaining = string.Empty;
+                                warrantyType = string.Empty;
                                 rmaExists = false;
                                 rmaNo = string.Empty;
                                 isExchangeOrder = false;
@@ -1076,7 +1081,8 @@ namespace ExcelDesign.Class_Objects
                             status = currResults.SalesShipmentHeader[so].Warranty3[0].Status3[0];
                             policy = currResults.SalesShipmentHeader[so].Warranty3[0].Policy3[0]; ;
                             daysRemaining = currResults.SalesShipmentHeader[so].Warranty3[0].DaysRemaining3[0];
-                            warranty = new Warranty(status, policy, daysRemaining);
+                            warrantyType = currResults.SalesShipmentHeader[so].Warranty3[0].WarrantyType3[0];
+                            warranty = new Warranty(status, policy, daysRemaining, warrantyType);
                             sellToCustomerNo = currResults.SalesShipmentHeader[so].SellToCustomerNo;
 
                             orderStatus = "Shipped";
@@ -1117,6 +1123,7 @@ namespace ExcelDesign.Class_Objects
                             status = string.Empty;
                             policy = string.Empty;
                             daysRemaining = string.Empty;
+                            warrantyType = string.Empty;
                             rmaExists = false;
                             rmaNo = string.Empty;
                             isExchangeOrder = false;

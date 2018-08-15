@@ -29,7 +29,6 @@ namespace ExcelDesign.Forms.UserControls.TableData
      
         protected void Page_Load(object sender, EventArgs e)
         {
-            //this.tcAddress1.Text = Cust.Address1;
             this.tcAddress2.Text = Cust.Address2;
             this.tcShiptoContact.Text = Cust.ShipToContact;
             this.tcCity.Text = Cust.City;

@@ -135,7 +135,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 }
             }
 
-            if(exchangeCounter == totalCounter)
+            if(exchangeCounter == totalCounter && exchangeCounter != 0)
             {
                 this.tcExchangeStatus.Text = "Completed";
             }
@@ -448,6 +448,9 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 printRMAInstructions.Controls.Add(btnPrintRMAInstructions);
                 issueReturnLabel.Controls.Add(btnIssueReturnLabel);
 
+                buttonRow.Cells.Add(new TableCell());
+                buttonRow.Cells.Add(new TableCell());
+                buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());

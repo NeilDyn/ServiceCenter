@@ -28,13 +28,15 @@ namespace ExcelDesign.Class_Objects
         }
 
         public CreatedReturnHeader CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, string notes,
-            bool includeResource, bool printRMA, bool createLabel, string email, string lineValues, bool update, string returnTrackingNo)
+            bool includeResource, bool printRMA, bool createLabel, string email, string lineValues, bool update, string returnTrackingNo,
+            string shipToName, string shipToAddress1, string shipToAddress2, string shipToCity, string shipToState, string shipToCode)
         {
             ReturnOrder returnRMA = new ReturnOrder();
             CreatedReturnHeader cth = new CreatedReturnHeader();
 
             returnRMA = webService.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, notes, includeResource, printRMA,
-                createLabel, email, lineValues, update, returnTrackingNo);
+                createLabel, email, lineValues, update, returnTrackingNo, shipToName, shipToAddress1, shipToAddress2,
+                shipToCity, shipToState, shipToCode);
 
             cth = CreateReturnRMA(returnRMA);
 
@@ -50,6 +52,13 @@ namespace ExcelDesign.Class_Objects
             string channelName = string.Empty;
             string returnTrackingNo = string.Empty;
             string orderDate = string.Empty;
+            string shipToName = string.Empty;
+            string shipToAddress1 = string.Empty;
+            string shipToAddress2 = string.Empty;
+            string shipToContact = string.Empty;
+            string shipToCity = string.Empty;
+            string shipToCode = string.Empty;
+            string shipToState = string.Empty;
             List<CreatedReturnLines> ctl = new List<CreatedReturnLines>();
 
             if (ro.SalesHeader != null)
@@ -59,6 +68,14 @@ namespace ExcelDesign.Class_Objects
                 dateCreated = ro.SalesHeader[0].DocDate;
                 channelName = ro.SalesHeader[0].SellToCustomerName;
                 returnTrackingNo = ro.SalesHeader[0].ReturnTrackingNo;
+                shipToName = ro.SalesHeader[0].ShipToName;
+                shipToAddress1 = ro.SalesHeader[0].ShipToAddress;
+                shipToAddress2 = ro.SalesHeader[0].ShipToAddress2;
+                shipToContact = ro.SalesHeader[0].ShipToContact;
+                shipToCity = ro.SalesHeader[0].ShipToCity;
+                shipToCode = ro.SalesHeader[0].ShipToZip;
+                shipToState = ro.SalesHeader[0].ShipToState;
+
                 ctl = CreateReturnOrderLines(ro);
 
                 crh.RMANo = rmaNo;
@@ -68,6 +85,13 @@ namespace ExcelDesign.Class_Objects
                 crh.ReturnTrackingNo = returnTrackingNo;
                 crh.OrderDate = orderDate;
                 crh.CreatedReturnLines = ctl;
+                crh.ShipToName = shipToName;
+                crh.ShipToAddress1 = shipToAddress1;
+                crh.ShipToAddress2 = shipToAddress2;
+                crh.ShipToContact = shipToContact;
+                crh.ShipToCity = shipToCity;
+                crh.ShipToCode = shipToCode;
+                crh.ShipToState = shipToState;
 
                 rmaNo = string.Empty;
                 externalDocumentNo = string.Empty;

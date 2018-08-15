@@ -97,6 +97,9 @@
     <Content Include="Forms\FunctionForms\CreateReturn.aspx" />
     <Content Include="Forms\FunctionForms\RMAPDFForm.aspx" />
     <Content Include="Forms\LoginPage.aspx" />
+    <Content Include="Forms\PDAForms\CreatedPDARMA.aspx" />
+    <Content Include="Forms\PDAForms\CreatePartRequest.aspx" />
+    <Content Include="Forms\PDAForms\CreateRMA.aspx" />
     <Content Include="Forms\UserControl.aspx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetail.ascx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetailHeader.ascx" />
@@ -220,6 +223,27 @@
     </Compile>
     <Compile Include="Forms\LoginPage.aspx.designer.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PDAForms\CreatedPDARMA.aspx.cs">
+      <DependentUpon>CreatedPDARMA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\PDAForms\CreatedPDARMA.aspx.designer.cs">
+      <DependentUpon>CreatedPDARMA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PDAForms\CreatePartRequest.aspx.cs">
+      <DependentUpon>CreatePartRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\PDAForms\CreatePartRequest.aspx.designer.cs">
+      <DependentUpon>CreatePartRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PDAForms\CreateRMA.aspx.cs">
+      <DependentUpon>CreateRMA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\PDAForms\CreateRMA.aspx.designer.cs">
+      <DependentUpon>CreateRMA.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserControl.aspx.cs">
       <DependentUpon>UserControl.aspx</DependentUpon>

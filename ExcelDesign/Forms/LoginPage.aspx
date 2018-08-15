@@ -25,7 +25,8 @@
                 <asp:TableCell Text="Password:" ForeColor="#0099FF" Font-Bold="true"/>
                 <asp:TableCell>
                     <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" />
-                </asp:TableCell><asp:TableCell>
+                </asp:TableCell>
+                <asp:TableCell>
                     <asp:RequiredFieldValidator ErrorMessage="Required" ForeColor="Red" ControlToValidate="txtPassword" runat="server" />
                 </asp:TableCell>
             </asp:TableRow>          

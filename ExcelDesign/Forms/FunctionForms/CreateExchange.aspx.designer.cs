@@ -76,15 +76,6 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToAddress1;
         
         /// <summary>
-        /// tcShipToAddress2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToAddress2;
-        
-        /// <summary>
         /// tcShipToContact control.
         /// </summary>
         /// <remarks>
@@ -92,6 +83,15 @@ namespace ExcelDesign.Forms.FunctionForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToContact;
+        
+        /// <summary>
+        /// tcShipToAddress2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToAddress2;
         
         /// <summary>
         /// tcShipToCity control.

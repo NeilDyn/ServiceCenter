@@ -15,6 +15,8 @@ namespace ExcelDesign.Forms.PDAForms
 {
     public partial class CreateRMA : System.Web.UI.Page
     {
+   
+
         protected List<SalesHeader> Sh;
         protected Customer cust;
         protected string no;
@@ -58,12 +60,12 @@ namespace ExcelDesign.Forms.PDAForms
 
                 cust = (Customer)Session["SelectedCustomer"];
 
-                txtShipToName.Text = cust.Name;
-                txtShipToAddress1.Text = cust.Address1;
-                txtShipToAddress2.Text = cust.Address2;
-                txtShipToCity.Text = cust.City;
-                txtShipToCode.Text = cust.Zip;
-                txtShipToState.Text = cust.State;
+                //txtShipToName.Text = cust.Name;
+                //txtShipToAddress1.Text = cust.Address1;
+                //txtShipToAddress2.Text = cust.Address2;
+                //txtShipToCity.Text = cust.City;
+                //txtShipToCode.Text = cust.Zip;
+                //txtShipToState.Text = cust.State;
 
                 if (updateRma.ToUpper() == "TRUE")
                 {
@@ -127,7 +129,7 @@ namespace ExcelDesign.Forms.PDAForms
                 {
                     "",
                     "Exchange",
-                    "Refund"
+                    ""
                 };
 
                 int lineCount = 0;
@@ -191,8 +193,8 @@ namespace ExcelDesign.Forms.PDAForms
                                     TextBox actionQtyInsert = new TextBox
                                     {
                                         ID = "actionQtyInsert_" + lineCount.ToString(),
-                                        Text = (line.Quantity - removeqty).ToString(),
-                                        Width = new Unit("15%"),
+                                        Text = "1"/**(line.Quantity - removeqty).ToString()*/,
+                                        Width = new Unit("20" + "%"),
                                         CssClass = "inputBox"
                                     };
 
@@ -211,8 +213,8 @@ namespace ExcelDesign.Forms.PDAForms
                                     qty.Text = (line.Quantity - removeqty).ToString();
                                     actionQty.Controls.Add(actionQtyInsert);
                                     returnReasonCode.Controls.Add(ddlReturnReasonCode);
+                                    ddlREQReturnAction.SelectedIndex = 1;
                                     reqReturnAction.Controls.Add(ddlREQReturnAction);
-
                                     qty.HorizontalAlign = HorizontalAlign.Center;
                                     actionQty.HorizontalAlign = HorizontalAlign.Center;
 
@@ -416,6 +418,7 @@ namespace ExcelDesign.Forms.PDAForms
                 {
                     foreach (TableRow row in tblCreateReturnOrderTableDetails.Rows)
                     {
+
                         rowCount++;
                         string itemNo = string.Empty;
                         int qtyLine = 0;

@@ -22,7 +22,9 @@ namespace ExcelDesign.Forms.UserControls.TableData
         public string DocNo { get; set; }
 
         public string CanExchange { get; set; }
+        public string CanExchangePDA { get; set; }
         public string CanReturn { get; set; }
+        public string CanReturnPDA { get; set; }
         public string CanIssueLabel { get; set; }
         public string UPSLabelCreated { get; set; }
 
@@ -71,18 +73,24 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 CanExchange = "true";
                 CanReturn = "true";
                 CanIssueLabel = "true";
+                CanReturnPDA = "true";
+                CanExchangePDA = "true";
             }
             else if (activeUser.Developer)
             {
                 CanExchange = "true";
                 CanReturn = "true";
                 CanIssueLabel = "true";
+                CanReturnPDA = "true";
+                CanExchangePDA = "true";
             }
             else
             {
                 CanReturn = activeUser.CreateRMA ? "true" : "false";
                 CanExchange = activeUser.CreateExchange ? "true" : "false";
                 CanIssueLabel = activeUser.CreateReturnLabel ? "true" : "false";
+                CanReturnPDA = activeUser.CreatePDARMA ? "true" : "false";
+                CanExchangePDA = activeUser.CreatePDAExchange ? "true" : "false";
             }
         }
 

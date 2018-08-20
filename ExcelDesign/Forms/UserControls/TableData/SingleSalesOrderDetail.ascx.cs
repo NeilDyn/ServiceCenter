@@ -21,6 +21,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
         public string DocNo { get; set; }
 
         public string CanReturn { get; set; }
+        public string CanReturnPDA { get; set; }
 
         protected TableRow buttonRow = new TableRow();
         protected TableCell cancelOrderCell = new TableCell();
@@ -63,14 +64,17 @@ namespace ExcelDesign.Forms.UserControls.TableData
             if (activeUser.Admin)
             {
                 CanReturn = "true";
+                CanReturnPDA = "true";
             }
             else if (activeUser.Developer)
             {
                 CanReturn = "true";
+                CanReturnPDA = "true";
             }
             else
             {
                 CanReturn = activeUser.CreateRMA ? "true" : "false";
+                CanReturnPDA = activeUser.CreatePDARMA ? "true" : "false";
             }
         }
 

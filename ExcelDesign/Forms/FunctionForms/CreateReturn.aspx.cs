@@ -500,7 +500,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception ex)
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "errorAlert", "alert('" + ex.Message + "');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "errorAlert", "alert('" + ex.Message.Replace("'", "\"") + "');", true);
 
                 if (ex.Message.ToLower().Contains("session"))
                 {

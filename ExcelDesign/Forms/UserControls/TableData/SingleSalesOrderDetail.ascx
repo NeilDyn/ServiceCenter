@@ -26,7 +26,7 @@
         });
 
         $("[id$=btnCreateReturn_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            if ("<%= this.CanReturn %>" == "true") {
+            {
                 if ("<%= this.tcStatus.Text.ToUpper() %>" == "OPEN") {
                     if ("<%= this.tcOrderStatus.Text.ToUpper() %>" == "SHIPPED") {
                         var width = 1500;
@@ -36,11 +36,19 @@
 
                         if (typeof (createReturnWindow) == 'undefined' || createReturnWindow.closed) {
                             if ("<%= this.Sh.WarrantyProp.IsPDA %>" == "YES") {
-                                createReturnWindow = window.open("PDAForms/CreateRMA.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
-                                    null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                                if ("<%= this.CanReturnPDA %>" == "true") {
+                                    createReturnWindow = window.open("PDAForms/CreateRMA.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
+                                        null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                                } else {
+                                    alert("You do not have the required permission to create a PDA Replacement Return Order.");
+                                }
                             } else {
-                                createReturnWindow = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
-                                    null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                                if ("<%= this.CanReturn %>" == "true") {
+                                    createReturnWindow = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
+                                        null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                                } else {
+                                    alert("You do not have the required permission to create a Return Order.");
+                                }
                             }
 
                             function checkIfWinClosed(intervalID) {
@@ -62,8 +70,6 @@
                 else {
                     alert("Warranty status is not OPEN for current order: <%= this.OrderNo %>.");
                 }
-            } else {
-                alert("You do not have the required permission to create a Return Order.");
             }
         });
 
@@ -174,7 +180,7 @@
         <asp:TableCell />
         <asp:TableCell Text="Comments:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server">
-            <asp:ImageButton ID="imgOrderComments" runat="server" ImageUrl="~/images/sketch.png" Width="25"/>
+            <asp:ImageButton ID="imgOrderComments" runat="server" ImageUrl="~/images/sketch.png" Width="25" />
         </asp:TableCell>
     </asp:TableRow>
     <asp:TableRow runat="server" ID="expandOrderComments" TableSection="TableBody" HorizontalAlign="Justify">

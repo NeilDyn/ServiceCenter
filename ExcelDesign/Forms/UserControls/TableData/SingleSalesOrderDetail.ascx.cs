@@ -36,14 +36,17 @@ namespace ExcelDesign.Forms.UserControls.TableData
         protected TableCell shipmentCell;
         protected TableCell packageCell;
         protected TableCell trackingCell;
+        protected TableCell commentCell;
 
         protected Control singleSalesOrderShipmentLines;
         protected Control singleSalesOrderPackageLines;
         protected Control singleSalesOrderTrackingLines;
+        protected Control singelSalesOrderCommentLines;
 
         protected const string singleSalesOrderShipmentLinesPath = "DataLines/SalesOrderLines/SingleSalesOrderShipments.ascx";
         protected const string singleSalesOrderPackageLinesPath = "DataLines/SalesOrderLines/SingleSalesOrderPackages.ascx";
         protected const string singleSalesOrderTrackingLinesPath = "DataLines/SalesOrderLines/SingleSalesOrderTrackingNos.ascx";
+        protected const string singleSalesOrderCommentLinesPath = "DataLines/SalesOrderLines/SingleSalesOrderComments.ascx";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -179,6 +182,22 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 this.tcPolicy.Text = Sh.WarrantyProp.Policy;
                 this.tcDaysRemaining.Text = Sh.WarrantyProp.DaysRemaining;
                 this.tcWarrantyType.Text = Sh.WarrantyProp.WarrantyType;
+
+                if(Sh.WarrantyProp.IsPDA == "YES")
+                {
+                    this.tcPDAStamp.Text = "PDA Replacement Warranty Program";
+                    this.tcPDAStamp.BackColor = Color.LawnGreen;
+                    this.tcPDAStamp.HorizontalAlign = HorizontalAlign.Center;
+                    this.tcPDAStamp.Font.Bold = true;
+                }
+            }
+
+            this.imgOrderComments.ID = "imgOrderComments_" + CustID.ToString() + "_" + CountID.ToString();
+
+            if (Sh.OrderComments != null)
+            {
+                PopulateCommentLines();
+                imgOrderComments.OnClientClick = "return expandOrderComments" + CustID.ToString() + CountID.ToString() + "()";
             }
         }
 
@@ -491,6 +510,21 @@ namespace ExcelDesign.Forms.UserControls.TableData
             trackingCell.Width = new Unit("100%");
             this.expandSerialNos.Cells.Add(trackingCell);
             this.expandSerialNos.ID = "expandSerialNos_" + CustID.ToString() + "_" + CountID.ToString();
+        }
+
+        protected void PopulateCommentLines()
+        {
+            commentCell = new TableCell();
+            singelSalesOrderCommentLines = LoadControl(singleSalesOrderCommentLinesPath);
+            ((SingleSalesOrderComments)singelSalesOrderCommentLines).CommentLines = Sh.OrderComments;
+            ((SingleSalesOrderComments)singelSalesOrderCommentLines).PopulateData();
+
+            commentCell.Controls.Add(singelSalesOrderCommentLines);
+            commentCell.ColumnSpan = 8;
+            commentCell.Height = new Unit("100%");
+            commentCell.Width = new Unit("50%");
+            this.expandOrderComments.Cells.Add(commentCell);
+            this.expandOrderComments.ID = "expandOrderComments_" + CustID.ToString() + "_" + CountID.ToString();
         }
     }
 }

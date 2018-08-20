@@ -67,13 +67,13 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToName;
         
         /// <summary>
-        /// tcShipToAddress1 control.
+        /// tcShipToCity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToAddress1;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToCity;
         
         /// <summary>
         /// tcShipToContact control.
@@ -85,22 +85,22 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToContact;
         
         /// <summary>
-        /// tcShipToAddress2 control.
+        /// tcShipToZip control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToAddress2;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToZip;
         
         /// <summary>
-        /// tcShipToCity control.
+        /// tcShipToAddress1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToCity;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToAddress1;
         
         /// <summary>
         /// tcShipToState control.
@@ -112,13 +112,13 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToState;
         
         /// <summary>
-        /// tcShipToZip control.
+        /// tcShipToAddress2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToZip;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToAddress2;
         
         /// <summary>
         /// tcShipToCountry control.

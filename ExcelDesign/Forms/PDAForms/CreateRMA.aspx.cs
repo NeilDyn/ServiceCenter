@@ -24,6 +24,7 @@ namespace ExcelDesign.Forms.PDAForms
         protected string notes;
         protected string email;
         protected string returnTrackingNo;
+        protected string imeiNo;
 
         protected string shipToName;
         protected string shipToAddress1;
@@ -55,17 +56,11 @@ namespace ExcelDesign.Forms.PDAForms
                 tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
                 updateRma = Convert.ToString(Request.QueryString["CreateOrUpdate"]);
                 existingTrackingNo = Convert.ToString(Request.QueryString["ReturnTrackingNo"]);
+                tcIMEINo.Text = Convert.ToString(Session["SearchValue"]);
 
                 createdOrderNo = Convert.ToString(Request.QueryString["CreatedOrderNo"]);
 
-                cust = (Customer)Session["SelectedCustomer"];
-
-                //txtShipToName.Text = cust.Name;
-                //txtShipToAddress1.Text = cust.Address1;
-                //txtShipToAddress2.Text = cust.Address2;
-                //txtShipToCity.Text = cust.City;
-                //txtShipToCode.Text = cust.Zip;
-                //txtShipToState.Text = cust.State;
+                cust = (Customer)Session["SelectedCustomer"];              
 
                 if (updateRma.ToUpper() == "TRUE")
                 {
@@ -75,6 +70,20 @@ namespace ExcelDesign.Forms.PDAForms
 
                     lblInsertTrackingNo.Visible = true;
                     txtInsertTrackingNo.Visible = true;
+
+                    txtShipToName.Text = cust.Name;
+                    txtShipToAddress1.Text = cust.Address1;
+                    txtShipToAddress2.Text = cust.Address2;
+                    txtShipToCity.Text = cust.City;
+                    txtShipToCode.Text = cust.Zip;
+                    txtShipToState.Text = cust.State;
+
+                    txtShipToName.Enabled = false;
+                    txtShipToAddress1.Enabled = false;
+                    txtShipToAddress2.Enabled = false;
+                    txtShipToCity.Enabled = false;
+                    txtShipToCode.Enabled = false;
+                    txtShipToState.Enabled = false;
 
                     if (existingTrackingNo != string.Empty)
                     {
@@ -129,7 +138,6 @@ namespace ExcelDesign.Forms.PDAForms
                 {
                     "",
                     "Exchange",
-                    ""
                 };
 
                 int lineCount = 0;
@@ -194,7 +202,7 @@ namespace ExcelDesign.Forms.PDAForms
                                     {
                                         ID = "actionQtyInsert_" + lineCount.ToString(),
                                         Text = "1"/**(line.Quantity - removeqty).ToString()*/,
-                                        Width = new Unit("20" + "%"),
+                                        Width = new Unit("20%"),
                                         CssClass = "inputBox"
                                     };
 
@@ -300,7 +308,7 @@ namespace ExcelDesign.Forms.PDAForms
                                             {
                                                 ID = "actionQtyInsert_" + lineCount.ToString(),
                                                 Text = (line.Quantity).ToString(),
-                                                Width = new Unit("15%"),
+                                                Width = new Unit("20%"),
                                                 CssClass = "inputBox"
                                             };
 
@@ -336,6 +344,7 @@ namespace ExcelDesign.Forms.PDAForms
                                             actionQty.Controls.Add(actionQtyInsert);
                                             returnReasonCode.Controls.Add(ddlReturnReasonCode);
                                             reqReturnAction.Controls.Add(ddlREQReturnAction);
+                                            ddlREQReturnAction.SelectedIndex = 1;
 
                                             qty.HorizontalAlign = HorizontalAlign.Center;
                                             actionQty.HorizontalAlign = HorizontalAlign.Center;
@@ -408,6 +417,7 @@ namespace ExcelDesign.Forms.PDAForms
                 createLabel = cbxCreateLabel.Checked;
                 email = txtCustEmail.Text;
                 returnTrackingNo = txtInsertTrackingNo.Text;
+                imeiNo = tcIMEINo.Text;
 
                 string validateMsg = ValidateInput();
                 bool allValidLines = true;
@@ -508,7 +518,7 @@ namespace ExcelDesign.Forms.PDAForms
                         }
 
                         crh = ss.CreateReturnOrder(no, docNo, string.Empty, notes, resources, printRMA, createLabel, email, lineValues, update, returnTrackingNo,
-                            shipToName, shipToAddress1, shipToAddress2, shipToCity, shipToState, shipToCode);
+                            shipToName, shipToAddress1, shipToAddress2, shipToCity, shipToState, shipToCode, imeiNo);
                         Session["CreatedRMA"] = crh;
                         Session["NoUserInteraction"] = true;
                         ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + "');", true);

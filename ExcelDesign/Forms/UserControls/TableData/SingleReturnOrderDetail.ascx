@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SingleReturnOrderDetail.ascx.cs" Inherits="ExcelDesign.Forms.UserControls.TableData.SingleReturnOrderDetail" %>
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/ReturnOrderLines/SingleReturnOrderReceipts.ascx" TagName="SingleReturnOrderReceipts" TagPrefix="sror" %>
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/ReturnOrderLines/SingleReturnOrderPackages.ascx" TagName="SingleReturnOrderPackages" TagPrefix="srop" %>
+<%@ Register Src="~/Forms/UserControls/TableData/DataLines/ReturnOrderLines/SingleReturnOrderComments.ascx" TagName="SingleReturnOrderComments" TagPrefix="sroc" %>
 
 <link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
@@ -12,6 +13,7 @@
         $("[id$=expandReceives_<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id*=showMoreReturnLines_<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id*=multipleExchangeRow_<%= this.CustID %>_<%= this.CountID %>]").hide();
+        $("[id$=expandReturnComments_<%= this.CustID %>_<%= this.CountID %>]").hide();
         var updateRMAWin;
         var createExchangeWin;
 
@@ -157,6 +159,11 @@
         $("[id*=multipleExchangeRow_<%= this.CustID %>_<%= this.CountID %>]").toggle();
     };
 
+    function expandReturnComments<%=this.CustID %><%= this.CountID %>() {
+        $("[id*=expandReturnComments_<%= this.CustID %>_<%= this.CountID %>]").toggle();
+        return false;
+    };
+
     function validateEmail(email) {
         var re = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
         return re.test(email);
@@ -217,6 +224,15 @@
         <asp:TableCell runat="server" ID="tcUPSReturnLabelCreated" />
         <asp:TableCell Text="Exchange Order No(s):" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcExchangeOrderNo" />
+    </asp:TableRow>
+    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
+        <asp:TableCell />
+        <asp:TableCell Text="Comments:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
+        <asp:TableCell>
+            <asp:ImageButton ID="imgReturnComments" runat="server" ImageUrl="~/images/sketch.png" Width="25"/>
+        </asp:TableCell>
+    </asp:TableRow>
+    <asp:TableRow runat="server" ID="expandReturnComments" TableSection="TableBody" HorizontalAlign="Justify">
     </asp:TableRow>
     <asp:TableRow>
         <asp:TableCell />

@@ -39,6 +39,7 @@ namespace ExcelDesign.Forms.PDAForms
                     tcChannelName.Text = CRH.ChannelName;
                     tcReturnTrackingNo.Text = CRH.ReturnTrackingNo;
                     tcOrderDate.Text = CRH.OrderDate;
+                    tcIMEINo.Text = CRH.IMEINo;
 
                     tcShipToName.Text = CRH.ShipToName;
                     tcShipToAddress1.Text = CRH.ShipToAddress1;

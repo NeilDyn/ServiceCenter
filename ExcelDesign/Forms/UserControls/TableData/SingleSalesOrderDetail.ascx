@@ -2,6 +2,7 @@
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/SalesOrderLines/SingleSalesOrderShipments.ascx" TagName="SingleSalesOrderShipments" TagPrefix="ssos" %>
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/SalesOrderLines/SingleSalesOrderPackages.ascx" TagName="SingleSalesOrderPackages" TagPrefix="ssop" %>
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/SalesOrderLines/SingleSalesOrderTrackingNos.ascx" TagName="SingleSalesOrderTrackingNos" TagPrefix="ssotn" %>
+<%@ Register Src="~/Forms/UserControls/TableData/DataLines/SalesOrderLines/SingleSalesOrderComments.ascx" TagName="SingleSalesOrderComments" TagPrefix="ssoc" %>
 
 <link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
@@ -12,6 +13,7 @@
         $("[id$=expandShipments_<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id$=expandSerialNos_<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id$=expandPackages_<%= this.CustID %>_<%= this.CountID %>]").hide();
+        $("[id$=expandOrderComments_<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id*=showMoreOrderLines_<%= this.CustID %>_<%= this.CountID %>]").hide();
         var createReturnWindow;
 
@@ -32,13 +34,13 @@
                         var left = (screen.width - width) + 500;
                         var top = (screen.height - height) * 0.5;
 
-                        if (typeof (createReturnWindow) == 'undefined' || createReturnWindow.closed) {   
-                            if ("<%= this.tcWarrantyType.Text %>" != "") {
+                        if (typeof (createReturnWindow) == 'undefined' || createReturnWindow.closed) {
+                            if ("<%= this.Sh.WarrantyProp.IsPDA %>" == "YES") {
                                 createReturnWindow = window.open("PDAForms/CreateRMA.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
-                                null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                                    null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
                             } else {
                                 createReturnWindow = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
-                                null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                                    null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
                             }
 
                             function checkIfWinClosed(intervalID) {
@@ -91,6 +93,11 @@
 
     function expandPackages<%=this.CustID %><%= this.CountID %>() {
         $("[id$=expandPackages_<%= this.CustID %>_<%= this.CountID %>]").toggle();
+    };
+
+    function expandOrderComments<%=this.CustID %><%= this.CountID %>() {
+        $("[id$=expandOrderComments_<%= this.CustID %>_<%= this.CountID %>]").toggle();
+        return false;
     };
 </script>
 
@@ -162,10 +169,19 @@
         <asp:TableCell runat="server" ID="tcWarrantyType" />
     </asp:TableRow>
     <asp:TableRow runat="server" ID="expandSerialNos" TableSection="TableBody" HorizontalAlign="Justify">
-        <asp:TableCell><br /></asp:TableCell>
+    </asp:TableRow>
+    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
+        <asp:TableCell />
+        <asp:TableCell Text="Comments:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
+        <asp:TableCell runat="server">
+            <asp:ImageButton ID="imgOrderComments" runat="server" ImageUrl="~/images/sketch.png" Width="25"/>
+        </asp:TableCell>
+    </asp:TableRow>
+    <asp:TableRow runat="server" ID="expandOrderComments" TableSection="TableBody" HorizontalAlign="Justify">
     </asp:TableRow>
     <asp:TableRow>
-        <asp:TableCell />
+        <asp:TableCell runat="server" ID="tcPDAStamp" ColumnSpan="8"> 
+        </asp:TableCell>
     </asp:TableRow>
     <asp:TableRow>
         <asp:TableCell ColumnSpan="8">

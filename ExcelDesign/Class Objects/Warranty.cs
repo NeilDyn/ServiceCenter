@@ -11,17 +11,19 @@ namespace ExcelDesign.Class_Objects
         public string Policy { get; set; }
         public string DaysRemaining { get; set; }
         public string WarrantyType { get; set; }
+        public string IsPDA { get; set; }
 
         public Warranty()
         {
 
         }
-        public Warranty(string pStatus, string pPolicy, string pDaysRemaining, string pWarrantyType)
+        public Warranty(string pStatus, string pPolicy, string pDaysRemaining, string pWarrantyType, string pIsPDA)
         {
             Status = pStatus;
             Policy = pPolicy;
             DaysRemaining = pDaysRemaining;
             WarrantyType = pWarrantyType;
+            IsPDA = pIsPDA;
         }    
     }
 }

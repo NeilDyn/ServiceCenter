@@ -103,6 +103,42 @@ namespace ExcelDesign.Forms {
         protected global::System.Web.UI.WebControls.CheckBox cbxCreateExchangeOrder;
         
         /// <summary>
+        /// tcCreatePDARMA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcCreatePDARMA;
+        
+        /// <summary>
+        /// cbxCreatePDARMA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbxCreatePDARMA;
+        
+        /// <summary>
+        /// tcCreatePDAExchange control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcCreatePDAExchange;
+        
+        /// <summary>
+        /// cbxCreatePDAExchange control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbxCreatePDAExchange;
+        
+        /// <summary>
         /// tcAdmin control.
         /// </summary>
         /// <remarks>

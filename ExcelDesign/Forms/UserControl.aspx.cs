@@ -43,6 +43,8 @@ namespace ExcelDesign.Forms
                 cbxDeveloper.Checked = u.Developer;
                 tcLastPasswordUpdate.Text = u.PasswordLastUpdated;
                 tcPasswordExpiryDate.Text = u.PasswordExpiryDate;
+                cbxCreatePDARMA.Checked = u.CreatePDARMA;
+                cbxCreatePDAExchange.Checked = u.CreatePDAExchange;
             }
             catch (Exception e)
             {

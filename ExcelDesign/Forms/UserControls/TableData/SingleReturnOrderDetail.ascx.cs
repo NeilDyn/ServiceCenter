@@ -36,6 +36,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
         protected TableCell receiptCell;
         protected TableCell receiveCell;
+        protected TableCell commentCell;
 
         protected Button btnCreateExchange = new Button();
         protected Button btnIssueRefund = new Button();
@@ -45,9 +46,11 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
         protected Control singleReturnOrderReceiptLines;
         protected Control singleReturnOrderReceiveLines;
+        protected Control singelReturnOrderCommentLines;
 
         protected const string singleReturnOrderReceiptLinesPath = "DataLines/ReturnOrderLines/SingleReturnOrderReceipts.ascx";
         protected const string singleReturnOrderReceiveLinesPath = "DataLines/ReturnOrderLines/SingleReturnOrderPackages.ascx";
+        protected const string singleReturnOrderCommentLinesPath = "DataLines/ReturnOrderLines/SingleReturnOrderComments.ascx";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -135,11 +138,11 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 }
             }
 
-            if(exchangeCounter == totalCounter && exchangeCounter != 0)
+            if (exchangeCounter == totalCounter && exchangeCounter != 0)
             {
                 this.tcExchangeStatus.Text = "Completed";
             }
-            else if(exchangeCounter == 0)
+            else if (exchangeCounter == 0)
             {
                 this.tcExchangeStatus.Text = "No";
             }
@@ -183,7 +186,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
             if (Rh.ExchangeCreated)
             {
-                if(Rh.ExchangeOrderNo.Count > 1)
+                if (Rh.ExchangeOrderNo.Count > 1)
                 {
                     this.tcExchangeOrderNo.Text = "<a href='javascript:expandMultipleExchange" + CustID.ToString() + "" + CountID.ToString() + "()'>Multiple</a>";
                     PopulateMultipleExchangeOrders();
@@ -194,6 +197,13 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 }
             }
 
+            this.imgReturnComments.ID = "imgReturnComments_" + CustID.ToString() + "_" + CountID.ToString();
+            
+            if(Rh.ReturnComments != null)
+            {
+                PopulateCommentLines();
+                imgReturnComments.OnClientClick = "return expandReturnComments" + CustID.ToString() + CountID.ToString() + "()";
+            }
         }
 
         protected void PopulateMultipleExchangeOrders()
@@ -220,7 +230,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 multipleExchangeRow.Cells.Add(multipleExchangeCell);
 
                 tblSingleReturnOrderDetail.Rows.Add(multipleExchangeRow);
-            }          
+            }
         }
 
         protected void PopulateLines()
@@ -275,12 +285,12 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
                         foreach (ReturnReason rr in rrList)
                         {
-                            if(line.ReturnReasonCode == rr.ReasonCode)
+                            if (line.ReturnReasonCode == rr.ReasonCode)
                             {
                                 returnReason.Text = rr.Display;
                             }
                         }
-                        
+
                         reqReturnAction.Text = line.REQReturnAction;
 
                         qty.HorizontalAlign = HorizontalAlign.Center;
@@ -366,7 +376,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                             moreTableRow.Cells.Add(new TableCell());
                             moreTableRow.Cells.Add(new TableCell());
                             moreTableRow.Cells.Add(new TableCell());
-                            moreTableRow.Cells.Add(new TableCell());                           
+                            moreTableRow.Cells.Add(new TableCell());
                             moreTableRow.Cells.Add(new TableCell());
                             moreTableRow.Cells.Add(new TableCell());
                             moreTableRow.Cells.Add(new TableCell());
@@ -531,6 +541,26 @@ namespace ExcelDesign.Forms.UserControls.TableData
             }
 
             return textString;
+        }
+
+        protected void PopulateCommentLines()
+        {
+            commentCell = new TableCell();
+            singelReturnOrderCommentLines = LoadControl(singleReturnOrderCommentLinesPath);
+            ((SingleReturnOrderComments)singelReturnOrderCommentLines).CommentLines = Rh.ReturnComments;
+            ((SingleReturnOrderComments)singelReturnOrderCommentLines).PopulateData();
+
+            commentCell.Controls.Add(singelReturnOrderCommentLines);
+            commentCell.ColumnSpan = 8;
+            commentCell.Height = new Unit("100%");
+            commentCell.Width = new Unit("50%");
+            this.expandReturnComments.Cells.Add(commentCell);
+            this.expandReturnComments.ID = "expandReturnComments_" + CustID.ToString() + "_" + CountID.ToString();
+        }
+
+        protected void imgComments_Click(object sender, ImageClickEventArgs e)
+        {
+
         }
     }
 }

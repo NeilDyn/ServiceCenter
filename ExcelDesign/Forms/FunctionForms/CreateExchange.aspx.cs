@@ -227,7 +227,7 @@ namespace ExcelDesign.Forms.FunctionForms
                     Session["CreatedExchange"] = ceh;
                     Session["NoUserInteraction"] = true;
                     ClientScript.RegisterStartupScript(this.GetType(), "returnOrderNo", "alert('" + ceh.OrderNo + "');", true);
-                    ClientScript.RegisterStartupScript(this.GetType(), "openCreatedRMA", "OpenCreateExchange();", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "openCreatedExchange", "OpenCreateExchange();", true);
                 }
                 else
                 {
@@ -236,7 +236,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception ex)
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "errorAlert", "alert('" + ex.Message + "');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "errorAlert", "alert('" + ex.Message.Replace("'", "\"") + "');", true);
 
                 if (ex.Message.ToLower().Contains("session"))
                 {

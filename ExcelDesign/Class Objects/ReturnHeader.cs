@@ -21,6 +21,7 @@ namespace ExcelDesign.Class_Objects
         public bool ExchangeCreated { get; set; }
         public List<string> ExchangeOrderNo { get; set; }
         public string SellToCustomerNo { get; set; }
+        public List<Comment> ReturnComments { get; set; }
 
         public ReturnHeader()
         {
@@ -29,7 +30,7 @@ namespace ExcelDesign.Class_Objects
 
         public ReturnHeader(string returnStatusP, string dateCreatedP, string channelNameP, List<ReceiptHeader> receiptHeaderObjP,
                  List<PostedReceive> postedReceiveObjP, string returnTrackingNoP, string orderDateP, string rmaNoP, string externalDocumentNoP, string emailP,
-                 bool returnLabelCreatedP, bool exchangeCreatedP, List<string> exchangeOrderNoP, string sellToCustomerNoP)
+                 bool returnLabelCreatedP, bool exchangeCreatedP, List<string> exchangeOrderNoP, string sellToCustomerNoP, List<Comment> comments)
         {
             this.ReturnStatus = returnStatusP;
             this.DateCreated = dateCreatedP;
@@ -45,6 +46,7 @@ namespace ExcelDesign.Class_Objects
             this.ExchangeCreated = exchangeCreatedP;
             this.ExchangeOrderNo = exchangeOrderNoP;
             this.SellToCustomerNo = sellToCustomerNoP;
+            this.ReturnComments = comments;
         }
     }
 }

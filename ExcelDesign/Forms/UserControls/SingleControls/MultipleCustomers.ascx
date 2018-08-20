@@ -3,5 +3,5 @@
 <link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 
 <div id="MultipleCustomersFound" class="MultipleCustomersFound" runat="server">
-    <asp:Label ID="Label2" runat="server" Text="!MULTIPLE CUSTOMERS FOUND!" />
+    <asp:Label ID="Label2" runat="server" Text="!MULTIPLE CUSTOMERS FOUND!" Font-Bold="true"/>
 </div>

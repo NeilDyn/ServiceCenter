@@ -13,6 +13,7 @@ namespace ExcelDesign.Class_Objects.CreatedReturn
         public string ChannelName { get; set; }
         public string ReturnTrackingNo { get; set; }
         public string OrderDate { get; set; }
+        public string IMEINo { get; set; }
         public string ShipToName { get; set; }
         public string ShipToAddress1 { get; set; }
         public string ShipToAddress2 { get; set; }
@@ -24,7 +25,7 @@ namespace ExcelDesign.Class_Objects.CreatedReturn
 
         public CreatedReturnHeader(string rmaNoP, string externalDocNoP, string dateCreatedP, string channelNameP, string returnTrackingNoP, string orderDateP,
                                    List<CreatedReturnLines> createdReturnLinesP, string shipToNameP, string shipToAddress1P, string shipToAddress2P, string shipToContactP, 
-                                   string shipToCityP, string shipToZipP, string shipToStateP)
+                                   string shipToCityP, string shipToZipP, string shipToStateP, string imeiNoP)
         {
             RMANo = rmaNoP;
             ExternalDocumentNo = externalDocNoP;
@@ -32,6 +33,7 @@ namespace ExcelDesign.Class_Objects.CreatedReturn
             ChannelName = channelNameP;
             ReturnTrackingNo = returnTrackingNoP;
             OrderDate = orderDateP;
+            IMEINo = imeiNoP;
             CreatedReturnLines = createdReturnLinesP;
             ShipToName = shipToNameP;
             ShipToAddress1 = shipToAddress1P;

@@ -114,8 +114,10 @@
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnDetailHeader.ascx" />
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnHeader.ascx" />
     <Content Include="Forms\UserControls\SingleControls\MultipleCustomers.ascx" />
+    <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderComments.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderPackages.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderReceipts.ascx" />
+    <Content Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderComments.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderPackages.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderShipments.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderTrackingNos.ascx" />
@@ -128,11 +130,13 @@
     <Content Include="Forms\UserControls\TableHeaders\SingleSalesOrderTableHeader.ascx" />
     <Content Include="images\Logo.png" />
     <Content Include="images\icon.ico" />
+    <Content Include="images\sketch.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class Objects\Comment.cs" />
     <Compile Include="Class Objects\CreatedExchange\CreatedExchangeHeader.cs" />
     <Compile Include="Class Objects\CreatedExchange\CreatedExchangeLines.cs" />
     <Compile Include="Class Objects\CreatedReturn\CreatedReturnHeader.cs" />
@@ -343,6 +347,13 @@
     <Compile Include="Forms\UserControls\SingleControls\MultipleCustomers.ascx.designer.cs">
       <DependentUpon>MultipleCustomers.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderComments.ascx.cs">
+      <DependentUpon>SingleReturnOrderComments.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderComments.ascx.designer.cs">
+      <DependentUpon>SingleReturnOrderComments.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderPackages.ascx.cs">
       <DependentUpon>SingleReturnOrderPackages.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -356,6 +367,13 @@
     </Compile>
     <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderReceipts.ascx.designer.cs">
       <DependentUpon>SingleReturnOrderReceipts.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderComments.ascx.cs">
+      <DependentUpon>SingleSalesOrderComments.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderComments.ascx.designer.cs">
+      <DependentUpon>SingleSalesOrderComments.ascx</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderPackages.ascx.cs">
       <DependentUpon>SingleSalesOrderPackages.ascx</DependentUpon>

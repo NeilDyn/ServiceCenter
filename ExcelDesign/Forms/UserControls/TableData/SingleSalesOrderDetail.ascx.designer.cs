@@ -220,6 +220,33 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         protected global::System.Web.UI.WebControls.TableRow expandSerialNos;
         
         /// <summary>
+        /// imgOrderComments control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgOrderComments;
+        
+        /// <summary>
+        /// expandOrderComments control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableRow expandOrderComments;
+        
+        /// <summary>
+        /// tcPDAStamp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcPDAStamp;
+        
+        /// <summary>
         /// tblOrderDetailLines control.
         /// </summary>
         /// <remarks>

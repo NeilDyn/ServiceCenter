@@ -13,5 +13,10 @@ namespace ExcelDesign.Forms.PDAForms
         {
 
         }
+
+        protected void btnCreatePartRequest_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -56,6 +56,8 @@
                 <asp:TableHeaderRow>
                     <asp:TableHeaderCell Text="Date Created:" Style="text-align: left" HorizontalAlign="right" ForeColor="#0099FF" />
                     <asp:TableHeaderCell runat="server" ID="tcDateCreated" HorizontalAlign="Left" Style="text-align: left" />
+                    <asp:TableHeaderCell Text="IMEI No:" Style="text-align: left" HorizontalAlign="right" ForeColor="#0099FF" />
+                    <asp:TableHeaderCell ID="tcIMEINo" runat="server" HorizontalAlign="Left" Style="text-align: left" />
                 </asp:TableHeaderRow>
                 <asp:TableHeaderRow>
                     <asp:TableHeaderCell Text="Channel Name:" Style="text-align: left" HorizontalAlign="right" ForeColor="#0099FF" />

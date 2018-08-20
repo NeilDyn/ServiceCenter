@@ -108,15 +108,6 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                     tr.Cells.Add(serialNo);
                     tr.Cells.Add(carrier);
                     tr.Cells.Add(trackingNo);
-                    if (lineCount % 2 == 0)
-                    {
-                        tr.BackColor = Color.White;
-                    }
-                    else
-                    {
-                        tr.BackColor = ColorTranslator.FromHtml("#EFF3FB");
-                    }
-
 
                     if (lineCount % 2 == 0)
                     {

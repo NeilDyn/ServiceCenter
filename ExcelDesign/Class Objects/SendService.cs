@@ -29,14 +29,14 @@ namespace ExcelDesign.Class_Objects
 
         public CreatedReturnHeader CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, string notes,
             bool includeResource, bool printRMA, bool createLabel, string email, string lineValues, bool update, string returnTrackingNo,
-            string shipToName, string shipToAddress1, string shipToAddress2, string shipToCity, string shipToState, string shipToCode)
+            string shipToName, string shipToAddress1, string shipToAddress2, string shipToCity, string shipToState, string shipToCode, string imeiNo)
         {
             ReturnOrder returnRMA = new ReturnOrder();
             CreatedReturnHeader cth = new CreatedReturnHeader();
 
             returnRMA = webService.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, notes, includeResource, printRMA,
                 createLabel, email, lineValues, update, returnTrackingNo, shipToName, shipToAddress1, shipToAddress2,
-                shipToCity, shipToState, shipToCode);
+                shipToCity, shipToState, shipToCode, imeiNo);
 
             cth = CreateReturnRMA(returnRMA);
 
@@ -52,6 +52,7 @@ namespace ExcelDesign.Class_Objects
             string channelName = string.Empty;
             string returnTrackingNo = string.Empty;
             string orderDate = string.Empty;
+            string imeiNo = string.Empty;
             string shipToName = string.Empty;
             string shipToAddress1 = string.Empty;
             string shipToAddress2 = string.Empty;
@@ -75,6 +76,7 @@ namespace ExcelDesign.Class_Objects
                 shipToCity = ro.SalesHeader[0].ShipToCity;
                 shipToCode = ro.SalesHeader[0].ShipToZip;
                 shipToState = ro.SalesHeader[0].ShipToState;
+                imeiNo = ro.SalesHeader[0].IMEI;
 
                 ctl = CreateReturnOrderLines(ro);
 
@@ -92,6 +94,7 @@ namespace ExcelDesign.Class_Objects
                 crh.ShipToCity = shipToCity;
                 crh.ShipToCode = shipToCode;
                 crh.ShipToState = shipToState;
+                crh.IMEINo = imeiNo;
 
                 rmaNo = string.Empty;
                 externalDocumentNo = string.Empty;
@@ -99,6 +102,14 @@ namespace ExcelDesign.Class_Objects
                 channelName = string.Empty;
                 returnTrackingNo = string.Empty;
                 orderDate = string.Empty;
+                imeiNo = string.Empty;
+                shipToName = string.Empty;
+                shipToAddress1 = string.Empty;
+                shipToAddress2 = string.Empty;
+                shipToContact = string.Empty;
+                shipToCity = string.Empty;
+                shipToCode = string.Empty;
+                shipToState = string.Empty;
                 ctl = new List<CreatedReturnLines>();
             }
 

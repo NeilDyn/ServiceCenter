@@ -18,6 +18,7 @@ namespace ExcelDesign.Class_Objects
         public string RMANo { get; set; }
         public bool IsExchangeOrder { get; set; }
         public string SellToCustomerNo { get; set; }
+        public List<Comment> OrderComments { get; set; }
 
         public SalesHeader()
         {
@@ -26,7 +27,7 @@ namespace ExcelDesign.Class_Objects
 
         public SalesHeader(string orderStatusP, string orderDateP, string salesOrderNoP, string channelNameP, List<ShipmentHeader> shipmentHeaderObjectP,
             List<PostedPackage> postedPackageObjectP, string externalDocumentNoP, Warranty _warrantyP, bool rmaExistsP, string rmaNoP, bool isExchangeOrderP,
-            string sellToCustomerNoP)
+            string sellToCustomerNoP, List<Comment> orderCommentsP)
         {
             this.OrderStatus = orderStatusP;
             this.OrderDate = orderDateP;
@@ -39,6 +40,7 @@ namespace ExcelDesign.Class_Objects
             this.RMANo = rmaNoP;
             this.IsExchangeOrder = isExchangeOrderP;
             this.SellToCustomerNo = sellToCustomerNoP;
+            this.OrderComments = orderCommentsP;
         }
     }
 }

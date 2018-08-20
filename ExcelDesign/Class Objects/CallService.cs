@@ -580,6 +580,7 @@ namespace ExcelDesign.Class_Objects
             bool exchangeCreated = false;
             List<string> exchangeOrderNo = new List<string>();
             string sellToCustomerNo = string.Empty;
+            List<Comment> commentLines = new List<Comment>();
 
             List<string> insertedReturnNumbners = new List<string>();
 
@@ -632,8 +633,9 @@ namespace ExcelDesign.Class_Objects
                                         }
                                     }
 
+                                    commentLines = GetSalesLineComments(rmaNo);
                                     returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo,
-                                        orderDate, rmaNo, externalDocumentNo, email, false, exchangeCreated, exchangeOrderNo, sellToCustomerNo));
+                                        orderDate, rmaNo, externalDocumentNo, email, false, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines));
                                     insertedReturnNumbners.Add(rmaNo);
                                     readRMA.Add(rmaNo);
 
@@ -651,6 +653,7 @@ namespace ExcelDesign.Class_Objects
                                     exchangeCreated = false;
                                     exchangeOrderNo = new List<string>();
                                     sellToCustomerNo = string.Empty;
+                                    commentLines = new List<Comment>();
 
                                     totalCounter = 0;
                                     statusCounter = 0;
@@ -748,8 +751,9 @@ namespace ExcelDesign.Class_Objects
                                         }
                                     }
 
+                                    commentLines = GetSalesLineComments(rmaNo);
                                     returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
-                                        rmaNo, externalDocumentNo, email, returnLabelCreated, exchangeCreated, exchangeOrderNo, sellToCustomerNo));
+                                        rmaNo, externalDocumentNo, email, returnLabelCreated, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines));
                                     insertedReturnNumbners.Add(rmaNo);
                                     readRMA.Add(rmaNo);
 
@@ -767,6 +771,7 @@ namespace ExcelDesign.Class_Objects
                                     exchangeCreated = false;
                                     exchangeOrderNo = new List<string>();
                                     sellToCustomerNo = string.Empty;
+                                    commentLines = new List<Comment>();
 
                                     totalCounter = 0;
                                     statusCounter = 0;
@@ -817,8 +822,9 @@ namespace ExcelDesign.Class_Objects
                                     }
                                 }
 
+                                commentLines = GetSalesLineComments(rmaNo);
                                 returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
-                                    rmaNo, externalDocumentNo, email, false, exchangeCreated, exchangeOrderNo, sellToCustomerNo));
+                                    rmaNo, externalDocumentNo, email, false, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines));
                                 insertedReturnNumbners.Add(rmaNo);
                                 readRMA.Add(rmaNo);
 
@@ -834,6 +840,7 @@ namespace ExcelDesign.Class_Objects
                                 email = string.Empty;
                                 exchangeCreated = false;
                                 exchangeOrderNo = new List<string>();
+                                commentLines = new List<Comment>();
 
                                 totalCounter = 0;
                                 statusCounter = 0;
@@ -863,7 +870,9 @@ namespace ExcelDesign.Class_Objects
             string policy = string.Empty;
             string daysRemaining = string.Empty;
             string warrantyType = string.Empty;
+            string isPDA = string.Empty;
             string rmaNo = string.Empty;
+            List<Comment> commentLines = new List<Comment>();
 
             bool rmaExists = false;
             bool isExchangeOrder = false;
@@ -902,7 +911,8 @@ namespace ExcelDesign.Class_Objects
                                 policy = currResults.SOImportBuffer[so].Warranty[0].Policy[0]; ;
                                 daysRemaining = currResults.SOImportBuffer[so].Warranty[0].DaysRemaining[0];
                                 warrantyType = currResults.SOImportBuffer[so].Warranty[0].WarrantyType[0];
-                                warranty = new Warranty(status, policy, daysRemaining, warrantyType);
+                                isPDA = currResults.SOImportBuffer[so].Warranty[0].IsPDAWarranty[0].ToUpper();
+                                warranty = new Warranty(status, policy, daysRemaining, warrantyType, isPDA);
                                 sellToCustomerNo = currResults.SOImportBuffer[so].CustomerNo;
 
                                 if (currResults.ExtendedSalesHeader != null)
@@ -923,8 +933,9 @@ namespace ExcelDesign.Class_Objects
                                     }
                                 }
 
+                                commentLines = GetSalesLineComments(orderNo);
                                 salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo,
-                                    warranty, rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo));
+                                    warranty, rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines));
 
                                 insertedOrderNumbers.Add(orderNo);
 
@@ -936,11 +947,13 @@ namespace ExcelDesign.Class_Objects
                                 postPackage = new List<PostedPackage>();
                                 externalDocumentNo = string.Empty;
                                 warranty = new Warranty();
+                                commentLines = new List<Comment>();
 
                                 status = string.Empty;
                                 policy = string.Empty;
                                 daysRemaining = string.Empty;
                                 warrantyType = string.Empty;
+                                isPDA = string.Empty;
                                 rmaExists = false;
                                 rmaNo = string.Empty;
                                 isExchangeOrder = false;
@@ -980,7 +993,8 @@ namespace ExcelDesign.Class_Objects
                                 policy = currResults.SalesHeader[so].Warranty2[0].Policy2[0]; ;
                                 daysRemaining = currResults.SalesHeader[so].Warranty2[0].DaysRemaining2[0];
                                 warrantyType = currResults.SalesHeader[so].Warranty2[0].WarrantyType2[0];
-                                warranty = new Warranty(status, policy, daysRemaining, warrantyType);
+                                isPDA = currResults.SalesHeader[so].Warranty2[0].IsPDAWarranty2[0].ToUpper();
+                                warranty = new Warranty(status, policy, daysRemaining, warrantyType, isPDA);
                                 sellToCustomerNo = currResults.SalesHeader[so].SellToCustomerNo;
 
                                 for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
@@ -1028,8 +1042,9 @@ namespace ExcelDesign.Class_Objects
                                     }
                                 }
 
+                                commentLines = GetSalesLineComments(orderNo);
                                 salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty,
-                                    rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo));
+                                    rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines));
 
                                 insertedOrderNumbers.Add(orderNo);
 
@@ -1041,11 +1056,13 @@ namespace ExcelDesign.Class_Objects
                                 postPackage = new List<PostedPackage>();
                                 externalDocumentNo = string.Empty;
                                 warranty = new Warranty();
+                                commentLines = new List<Comment>();
 
                                 status = string.Empty;
                                 policy = string.Empty;
                                 daysRemaining = string.Empty;
                                 warrantyType = string.Empty;
+                                isPDA = string.Empty;
                                 rmaExists = false;
                                 rmaNo = string.Empty;
                                 isExchangeOrder = false;
@@ -1082,7 +1099,8 @@ namespace ExcelDesign.Class_Objects
                             policy = currResults.SalesShipmentHeader[so].Warranty3[0].Policy3[0]; ;
                             daysRemaining = currResults.SalesShipmentHeader[so].Warranty3[0].DaysRemaining3[0];
                             warrantyType = currResults.SalesShipmentHeader[so].Warranty3[0].WarrantyType3[0];
-                            warranty = new Warranty(status, policy, daysRemaining, warrantyType);
+                            isPDA = currResults.SalesShipmentHeader[so].Warranty3[0].IsPDAWarranty3[0].ToUpper(); ;
+                            warranty = new Warranty(status, policy, daysRemaining, warrantyType, isPDA);
                             sellToCustomerNo = currResults.SalesShipmentHeader[so].SellToCustomerNo;
 
                             orderStatus = "Shipped";
@@ -1106,8 +1124,9 @@ namespace ExcelDesign.Class_Objects
                                 }
                             }
 
+                            commentLines = GetSalesLineComments(orderNo);
                             salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty,
-                                rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo));
+                                rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines));
 
                             insertedOrderNumbers.Add(orderNo);
 
@@ -1119,11 +1138,13 @@ namespace ExcelDesign.Class_Objects
                             postPackage = new List<PostedPackage>();
                             externalDocumentNo = string.Empty;
                             warranty = new Warranty();
+                            commentLines = new List<Comment>();
 
                             status = string.Empty;
                             policy = string.Empty;
                             daysRemaining = string.Empty;
                             warrantyType = string.Empty;
+                            isPDA = string.Empty;
                             rmaExists = false;
                             rmaNo = string.Empty;
                             isExchangeOrder = false;
@@ -1339,6 +1360,7 @@ namespace ExcelDesign.Class_Objects
             bool exchangeCreated = false;
             List<string> exchangeOrderNo = new List<string>();
             string sellToCustomerNo = string.Empty;
+            List<Comment> commentLines = new List<Comment>();
 
             List<string> insertedReturnNumbners = new List<string>();
 
@@ -1439,8 +1461,9 @@ namespace ExcelDesign.Class_Objects
                                             }
                                         }
 
+                                        commentLines = GetSalesLineComments(rmaNo);
                                         returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
-                                            rmaNo, externalDocumentNo, email, returnLabelCreated, exchangeCreated, exchangeOrderNo, sellToCustomerNo));
+                                            rmaNo, externalDocumentNo, email, returnLabelCreated, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines));
                                         insertedReturnNumbners.Add(rmaNo);
                                         readRMA.Add(rmaNo);
 
@@ -1457,6 +1480,7 @@ namespace ExcelDesign.Class_Objects
                                         returnLabelCreated = false;
                                         exchangeCreated = false;
                                         exchangeOrderNo = new List<string>();
+                                        commentLines = new List<Comment>();
 
                                         totalCounter = 0;
                                         statusCounter = 0;
@@ -1486,6 +1510,7 @@ namespace ExcelDesign.Class_Objects
             string externalDocumentNo = string.Empty;
             string email = string.Empty;
             string sellToCustomerNo = string.Empty;
+            List<Comment> commentLines = new List<Comment>();
 
             List<string> insertedReturnNumbners = new List<string>();
 
@@ -1539,8 +1564,9 @@ namespace ExcelDesign.Class_Objects
                                             }
                                         }
 
+                                        commentLines = GetSalesLineComments(rmaNo);
                                         returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
-                                            rmaNo, externalDocumentNo, email, false, false, new List<string>(), sellToCustomerNo));
+                                            rmaNo, externalDocumentNo, email, false, false, new List<string>(), sellToCustomerNo, commentLines));
                                         insertedReturnNumbners.Add(rmaNo);
                                         readRMA.Add(rmaNo);
 
@@ -1554,6 +1580,7 @@ namespace ExcelDesign.Class_Objects
                                         rmaNo = string.Empty;
                                         externalDocumentNo = string.Empty;
                                         email = string.Empty;
+                                        commentLines = new List<Comment>();
                                     }
                                 }
                             }
@@ -1934,6 +1961,34 @@ namespace ExcelDesign.Class_Objects
             }
 
             return receiptLines;
+        }
+
+        private List<Comment> GetSalesLineComments(string docNo)
+        {
+            List<Comment> lineComments = new List<Comment>();
+            string date = string.Empty;
+            string comment = string.Empty;
+
+            if(currResults.SalesCommentLine != null)
+            {
+                for (int scl = 0; scl < currResults.SalesCommentLine.Length; scl++)
+                {
+                    if(currResults.SalesCommentLine[scl].DocNo == docNo)
+                    {
+                        if(currResults.SalesCommentLine[scl].Comment != "")
+                        {
+                            date = currResults.SalesCommentLine[scl].Date;
+                            comment = currResults.SalesCommentLine[scl].Comment;
+                            lineComments.Add(new Comment(date, comment));
+
+                            date = string.Empty;
+                            comment = string.Empty;
+                        }
+                    }
+                }
+            }
+
+            return lineComments;
         }
 
         private void SetFunctionData()

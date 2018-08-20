@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>PDA - Create Return Order</title>
+    <%Server.ScriptTimeout = 300; %>
     <link href="../../css/mainpage.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         function CloseWindow() {

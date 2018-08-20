@@ -38,6 +38,7 @@
     </script>
 </head>
 <body>
+    <%Server.ScriptTimeout = 300; %>
     <form id="frmCreatedPDRMADetails" runat="server">
         <div>
             <asp:Table ID="tblHeaderDetails" runat="server" Width="80%" Height="100%">

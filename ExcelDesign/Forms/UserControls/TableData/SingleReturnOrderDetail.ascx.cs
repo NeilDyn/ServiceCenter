@@ -124,12 +124,14 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcChannelName.Text = Rh.ChannelName;
             this.tcOrderDate.Text = Rh.OrderDate;
             this.tcEmail.Text = Rh.Email;
+            this.tcIMEINo.Text = Rh.IMEINo;
 
             this.tcReturnStatus.ToolTip = Rh.ReturnStatus;
             this.tcDateCreated.ToolTip = Rh.DateCreated;
             this.tcChannelName.ToolTip = Rh.ChannelName;
             this.tcOrderDate.ToolTip = Rh.OrderDate;
             this.tcEmail.ToolTip = Rh.Email;
+            this.tcIMEINo.ToolTip = Rh.IMEINo;
 
             this.tcUPSReturnLabelCreated.Text = Rh.ReturnLabelCreated == true ? "Yes" : "No";
 

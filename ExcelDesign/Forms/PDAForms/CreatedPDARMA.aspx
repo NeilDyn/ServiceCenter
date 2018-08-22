@@ -19,7 +19,7 @@
         };
 
         function OpenPDF() {
-            window.open("RMAPDFForm.aspx?RMANo=<%= this.CRH.RMANo %>", "_blank");
+            window.open("../FunctionForms/RMAPDFForm.aspx?RMANo=<%= this.CRH.RMANo %>", "_blank");
         };
 
         function UpdateRMA() {

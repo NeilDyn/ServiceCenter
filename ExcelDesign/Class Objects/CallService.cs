@@ -581,6 +581,16 @@ namespace ExcelDesign.Class_Objects
             List<string> exchangeOrderNo = new List<string>();
             string sellToCustomerNo = string.Empty;
             List<Comment> commentLines = new List<Comment>();
+            string imeiNo = string.Empty;
+
+            string shipToName = string.Empty;
+            string shipToAddress1 = string.Empty;
+            string shipToAddress2 = string.Empty;
+            string shipToContact = string.Empty;
+            string shipToCity = string.Empty;
+            string shipToCode = string.Empty;
+            string shipToState = string.Empty;
+            string shipToCountry = string.Empty;
 
             List<string> insertedReturnNumbners = new List<string>();
 
@@ -633,9 +643,19 @@ namespace ExcelDesign.Class_Objects
                                         }
                                     }
 
+                                    shipToName = currResults.SalesHeader[so].ShipToName;
+                                    shipToAddress1 = currResults.SalesHeader[so].ShipToAddress;
+                                    shipToAddress2 = currResults.SalesHeader[so].ShipToAddress2;
+                                    shipToContact = currResults.SalesHeader[so].ShipToContact;
+                                    shipToCity = currResults.SalesHeader[so].ShipToCity;
+                                    shipToCode = currResults.SalesHeader[so].ShipToZip;
+                                    shipToState = currResults.SalesHeader[so].ShipToState;
+                                    shipToCountry = currResults.SalesHeader[so].ShipToCountry;
+
                                     commentLines = GetSalesLineComments(rmaNo);
                                     returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo,
-                                        orderDate, rmaNo, externalDocumentNo, email, false, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines));
+                                        orderDate, rmaNo, externalDocumentNo, email, false, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines, imeiNo,
+                                        shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
                                     insertedReturnNumbners.Add(rmaNo);
                                     readRMA.Add(rmaNo);
 
@@ -654,6 +674,16 @@ namespace ExcelDesign.Class_Objects
                                     exchangeOrderNo = new List<string>();
                                     sellToCustomerNo = string.Empty;
                                     commentLines = new List<Comment>();
+                                    imeiNo = string.Empty;
+
+                                    shipToName = string.Empty;
+                                    shipToAddress1 = string.Empty;
+                                    shipToAddress2 = string.Empty;
+                                    shipToContact = string.Empty;
+                                    shipToCity = string.Empty;
+                                    shipToCode = string.Empty;
+                                    shipToState = string.Empty;
+                                    shipToCountry = string.Empty;
 
                                     totalCounter = 0;
                                     statusCounter = 0;
@@ -712,6 +742,7 @@ namespace ExcelDesign.Class_Objects
                                     orderDate = currResults.SalesHeader[so].DocDate;
                                     externalDocumentNo = currResults.SalesHeader[so].ExtDocNo;
                                     sellToCustomerNo = currResults.SalesHeader[so].SellToCustomerNo;
+                                    imeiNo = currResults.SalesHeader[so].IMEI;
 
                                     for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
                                     {
@@ -751,9 +782,19 @@ namespace ExcelDesign.Class_Objects
                                         }
                                     }
 
+                                    shipToName = currResults.SalesHeader[so].ShipToName;
+                                    shipToAddress1 = currResults.SalesHeader[so].ShipToAddress;
+                                    shipToAddress2 = currResults.SalesHeader[so].ShipToAddress2;
+                                    shipToContact = currResults.SalesHeader[so].ShipToContact;
+                                    shipToCity = currResults.SalesHeader[so].ShipToCity;
+                                    shipToCode = currResults.SalesHeader[so].ShipToZip;
+                                    shipToState = currResults.SalesHeader[so].ShipToState;
+                                    shipToCountry = currResults.SalesHeader[so].ShipToCountry;
+
                                     commentLines = GetSalesLineComments(rmaNo);
                                     returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
-                                        rmaNo, externalDocumentNo, email, returnLabelCreated, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines));
+                                        rmaNo, externalDocumentNo, email, returnLabelCreated, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines, imeiNo,
+                                        shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
                                     insertedReturnNumbners.Add(rmaNo);
                                     readRMA.Add(rmaNo);
 
@@ -772,6 +813,16 @@ namespace ExcelDesign.Class_Objects
                                     exchangeOrderNo = new List<string>();
                                     sellToCustomerNo = string.Empty;
                                     commentLines = new List<Comment>();
+                                    imeiNo = string.Empty;
+
+                                    shipToName = string.Empty;
+                                    shipToAddress1 = string.Empty;
+                                    shipToAddress2 = string.Empty;
+                                    shipToContact = string.Empty;
+                                    shipToCity = string.Empty;
+                                    shipToCode = string.Empty;
+                                    shipToState = string.Empty;
+                                    shipToCountry = string.Empty;
 
                                     totalCounter = 0;
                                     statusCounter = 0;
@@ -822,9 +873,19 @@ namespace ExcelDesign.Class_Objects
                                     }
                                 }
 
+                                shipToName = currResults.SalesHeader[so].ShipToName;
+                                shipToAddress1 = currResults.SalesHeader[so].ShipToAddress;
+                                shipToAddress2 = currResults.SalesHeader[so].ShipToAddress2;
+                                shipToContact = currResults.SalesHeader[so].ShipToContact;
+                                shipToCity = currResults.SalesHeader[so].ShipToCity;
+                                shipToCode = currResults.SalesHeader[so].ShipToZip;
+                                shipToState = currResults.SalesHeader[so].ShipToState;
+                                shipToCountry = currResults.SalesHeader[so].ShipToCountry;
+
                                 commentLines = GetSalesLineComments(rmaNo);
                                 returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
-                                    rmaNo, externalDocumentNo, email, false, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines));
+                                    rmaNo, externalDocumentNo, email, false, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines, imeiNo,
+                                        shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
                                 insertedReturnNumbners.Add(rmaNo);
                                 readRMA.Add(rmaNo);
 
@@ -841,6 +902,16 @@ namespace ExcelDesign.Class_Objects
                                 exchangeCreated = false;
                                 exchangeOrderNo = new List<string>();
                                 commentLines = new List<Comment>();
+                                imeiNo = string.Empty;
+
+                                shipToName = string.Empty;
+                                shipToAddress1 = string.Empty;
+                                shipToAddress2 = string.Empty;
+                                shipToContact = string.Empty;
+                                shipToCity = string.Empty;
+                                shipToCode = string.Empty;
+                                shipToState = string.Empty;
+                                shipToCountry = string.Empty;
 
                                 totalCounter = 0;
                                 statusCounter = 0;
@@ -1361,6 +1432,16 @@ namespace ExcelDesign.Class_Objects
             List<string> exchangeOrderNo = new List<string>();
             string sellToCustomerNo = string.Empty;
             List<Comment> commentLines = new List<Comment>();
+            string imeiNo = string.Empty;
+
+            string shipToName = string.Empty;
+            string shipToAddress1 = string.Empty;
+            string shipToAddress2 = string.Empty;
+            string shipToContact = string.Empty;
+            string shipToCity = string.Empty;
+            string shipToCode = string.Empty;
+            string shipToState = string.Empty;
+            string shipToCountry = string.Empty;
 
             List<string> insertedReturnNumbners = new List<string>();
 
@@ -1403,6 +1484,7 @@ namespace ExcelDesign.Class_Objects
 
                                         returnLabelCreated = currResults.SalesHeader[so].UPSRetLabelCreated.ToUpper() == "YES" ? true : false;
                                         sellToCustomerNo = currResults.SalesHeader[so].SellToCustomerNo;
+                                        imeiNo = currResults.SalesHeader[so].IMEI;
 
                                         if (currResults.SalesHeader[so].RMANo != "")
                                         {
@@ -1423,16 +1505,19 @@ namespace ExcelDesign.Class_Objects
                                             }
                                         }
 
-                                        for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
+                                        if(currResults.SalesLine != null)
                                         {
-                                            if ((currResults.SalesLine[sl].DocNo == rmaNo) && (currResults.SalesLine[sl].Type == "Item"))
+                                            for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
                                             {
-                                                totalCounter++;
-                                                dateCreated = currResults.SalesLine[sl].DateCreated;
-                                                int.TryParse(currResults.SalesLine[sl].QtyToReceive, out int qtyToRec);
-                                                if (qtyToRec > 0)
+                                                if ((currResults.SalesLine[sl].DocNo == rmaNo) && (currResults.SalesLine[sl].Type == "Item"))
                                                 {
-                                                    statusCounter++;
+                                                    totalCounter++;
+                                                    dateCreated = currResults.SalesLine[sl].DateCreated;
+                                                    int.TryParse(currResults.SalesLine[sl].QtyToReceive, out int qtyToRec);
+                                                    if (qtyToRec > 0)
+                                                    {
+                                                        statusCounter++;
+                                                    }
                                                 }
                                             }
                                         }
@@ -1461,9 +1546,19 @@ namespace ExcelDesign.Class_Objects
                                             }
                                         }
 
+                                        shipToName = currResults.SalesHeader[so].ShipToName;
+                                        shipToAddress1 = currResults.SalesHeader[so].ShipToAddress;
+                                        shipToAddress2 = currResults.SalesHeader[so].ShipToAddress2;
+                                        shipToContact = currResults.SalesHeader[so].ShipToContact;
+                                        shipToCity = currResults.SalesHeader[so].ShipToCity;
+                                        shipToCode = currResults.SalesHeader[so].ShipToZip;
+                                        shipToState = currResults.SalesHeader[so].ShipToState;
+                                        shipToCountry = currResults.SalesHeader[so].ShipToCountry;
+
                                         commentLines = GetSalesLineComments(rmaNo);
                                         returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
-                                            rmaNo, externalDocumentNo, email, returnLabelCreated, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines));
+                                            rmaNo, externalDocumentNo, email, returnLabelCreated, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines, imeiNo,
+                                        shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
                                         insertedReturnNumbners.Add(rmaNo);
                                         readRMA.Add(rmaNo);
 
@@ -1481,6 +1576,16 @@ namespace ExcelDesign.Class_Objects
                                         exchangeCreated = false;
                                         exchangeOrderNo = new List<string>();
                                         commentLines = new List<Comment>();
+                                        imeiNo = string.Empty;
+
+                                        shipToName = string.Empty;
+                                        shipToAddress1 = string.Empty;
+                                        shipToAddress2 = string.Empty;
+                                        shipToContact = string.Empty;
+                                        shipToCity = string.Empty;
+                                        shipToCode = string.Empty;
+                                        shipToState = string.Empty;
+                                        shipToCountry = string.Empty;
 
                                         totalCounter = 0;
                                         statusCounter = 0;
@@ -1511,6 +1616,16 @@ namespace ExcelDesign.Class_Objects
             string email = string.Empty;
             string sellToCustomerNo = string.Empty;
             List<Comment> commentLines = new List<Comment>();
+            string imeiNo = string.Empty;
+
+            string shipToName = string.Empty;
+            string shipToAddress1 = string.Empty;
+            string shipToAddress2 = string.Empty;
+            string shipToContact = string.Empty;
+            string shipToCity = string.Empty;
+            string shipToCode = string.Empty;
+            string shipToState = string.Empty;
+            string shipToCountry = string.Empty;
 
             List<string> insertedReturnNumbners = new List<string>();
 
@@ -1564,9 +1679,19 @@ namespace ExcelDesign.Class_Objects
                                             }
                                         }
 
+                                        shipToName = currResults.SalesHeader[so].ShipToName;
+                                        shipToAddress1 = currResults.SalesHeader[so].ShipToAddress;
+                                        shipToAddress2 = currResults.SalesHeader[so].ShipToAddress2;
+                                        shipToContact = currResults.SalesHeader[so].ShipToContact;
+                                        shipToCity = currResults.SalesHeader[so].ShipToCity;
+                                        shipToCode = currResults.SalesHeader[so].ShipToZip;
+                                        shipToState = currResults.SalesHeader[so].ShipToState;
+                                        shipToCountry = currResults.SalesHeader[so].ShipToCountry;
+
                                         commentLines = GetSalesLineComments(rmaNo);
                                         returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
-                                            rmaNo, externalDocumentNo, email, false, false, new List<string>(), sellToCustomerNo, commentLines));
+                                            rmaNo, externalDocumentNo, email, false, false, new List<string>(), sellToCustomerNo, commentLines, imeiNo,
+                                        shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
                                         insertedReturnNumbners.Add(rmaNo);
                                         readRMA.Add(rmaNo);
 
@@ -1581,6 +1706,16 @@ namespace ExcelDesign.Class_Objects
                                         externalDocumentNo = string.Empty;
                                         email = string.Empty;
                                         commentLines = new List<Comment>();
+                                        imeiNo = string.Empty;
+
+                                        shipToName = string.Empty;
+                                        shipToAddress1 = string.Empty;
+                                        shipToAddress2 = string.Empty;
+                                        shipToContact = string.Empty;
+                                        shipToCity = string.Empty;
+                                        shipToCode = string.Empty;
+                                        shipToState = string.Empty;
+                                        shipToCountry = string.Empty;
                                     }
                                 }
                             }

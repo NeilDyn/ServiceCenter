@@ -29,14 +29,13 @@ namespace ExcelDesign.Class_Objects
 
         public CreatedReturnHeader CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, string notes,
             bool includeResource, bool printRMA, bool createLabel, string email, string lineValues, bool update, string returnTrackingNo,
-            string shipToName, string shipToAddress1, string shipToAddress2, string shipToCity, string shipToState, string shipToCode, string imeiNo)
+            string shippingDetails, string imeiNo)
         {
             ReturnOrder returnRMA = new ReturnOrder();
             CreatedReturnHeader cth = new CreatedReturnHeader();
 
             returnRMA = webService.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, notes, includeResource, printRMA,
-                createLabel, email, lineValues, update, returnTrackingNo, shipToName, shipToAddress1, shipToAddress2,
-                shipToCity, shipToState, shipToCode, imeiNo);
+                createLabel, email, lineValues, update, returnTrackingNo, shippingDetails, imeiNo);
 
             cth = CreateReturnRMA(returnRMA);
 

@@ -15,10 +15,8 @@ namespace ExcelDesign.Forms.PDAForms
 {
     public partial class CreateRMA : System.Web.UI.Page
     {
-   
-
         protected List<SalesHeader> Sh;
-        protected Customer cust;
+        protected List<ReturnHeader> Rh;
         protected string no;
         protected string docNo;
         protected string notes;
@@ -60,7 +58,7 @@ namespace ExcelDesign.Forms.PDAForms
 
                 createdOrderNo = Convert.ToString(Request.QueryString["CreatedOrderNo"]);
 
-                cust = (Customer)Session["SelectedCustomer"];              
+                Rh = (List<ReturnHeader>)Session["ReturnHeaders"];              
 
                 if (updateRma.ToUpper() == "TRUE")
                 {
@@ -71,12 +69,12 @@ namespace ExcelDesign.Forms.PDAForms
                     lblInsertTrackingNo.Visible = true;
                     txtInsertTrackingNo.Visible = true;
 
-                    txtShipToName.Text = cust.Name;
-                    txtShipToAddress1.Text = cust.Address1;
-                    txtShipToAddress2.Text = cust.Address2;
-                    txtShipToCity.Text = cust.City;
-                    txtShipToCode.Text = cust.Zip;
-                    txtShipToState.Text = cust.State;
+                    txtShipToName.Text = Rh[0].ShipToName;
+                    txtShipToAddress1.Text = Rh[0].ShipToAddress1;
+                    txtShipToAddress2.Text = Rh[0].ShipToAddress2;
+                    txtShipToCity.Text = Rh[0].ShipToCity;
+                    txtShipToCode.Text = Rh[0].ShipToCode;
+                    txtShipToState.Text = Rh[0].ShipToState;
 
                     txtShipToName.Enabled = false;
                     txtShipToAddress1.Enabled = false;
@@ -307,7 +305,7 @@ namespace ExcelDesign.Forms.PDAForms
                                             TextBox actionQtyInsert = new TextBox
                                             {
                                                 ID = "actionQtyInsert_" + lineCount.ToString(),
-                                                Text = (line.Quantity).ToString(),
+                                                Text = "1",
                                                 Width = new Unit("20%"),
                                                 CssClass = "inputBox"
                                             };
@@ -398,6 +396,7 @@ namespace ExcelDesign.Forms.PDAForms
         protected void BtnCreateRMA_Click(object sender, EventArgs e)
         {
             StringBuilder lineBuild = new StringBuilder();
+            StringBuilder shippingBuild = new StringBuilder();
             string lineError = "";
 
             try
@@ -517,8 +516,17 @@ namespace ExcelDesign.Forms.PDAForms
                             update = false;
                         }
 
+                        shippingBuild.Append(shipToName).Append(":");
+                        shippingBuild.Append(shipToAddress1).Append(":");
+                        shippingBuild.Append(shipToAddress2).Append(":");
+                        shippingBuild.Append(shipToCity).Append(":");
+                        shippingBuild.Append(shipToCode).Append(":");
+                        shippingBuild.Append(shipToState);
+
+                        string shippingDetails = shippingBuild.ToString();
+
                         crh = ss.CreateReturnOrder(no, docNo, string.Empty, notes, resources, printRMA, createLabel, email, lineValues, update, returnTrackingNo,
-                            shipToName, shipToAddress1, shipToAddress2, shipToCity, shipToState, shipToCode, imeiNo);
+                            shippingDetails, imeiNo);
                         Session["CreatedRMA"] = crh;
                         Session["NoUserInteraction"] = true;
                         ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + "');", true);

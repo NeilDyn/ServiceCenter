@@ -55,42 +55,50 @@
         });
 
         $("[id$=btnUpdateRMA<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            if ("<%= this.CanReturn %>" == "true") {
-                if ("<%= this.tcReturnStatus.Text%>" == "Open") {
-                    var width = 1500;
-                    var height = 500;
-                    var left = (screen.width - width) + 500;
-                    var top = (screen.height - height) * 0.5;
+            if ("<%= this.tcReturnStatus.Text%>" == "Open") {
+                var width = 1500;
+                var height = 500;
+                var left = (screen.width - width) + 500;
+                var top = (screen.height - height) * 0.5;
 
-                    if (typeof (updateRMAWin) == 'undefined' || updateRMAWin.closed) {
-                        updateRMAWin = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>&ReturnTrackingNo=<%= this.Rh.ReturnTrackingNo %>",
-                            null,
-                            "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
-
-                        function checkIfWinClosed(intervalID) {
-                            if (updateRMAWin.closed) {
-                                __doPostBack('[id$=btnReload', '');
-                                clearInterval(intervalID);
-                            }
+                if (typeof (updateRMAWin) == 'undefined' || updateRMAWin.closed) {
+                    if ("<%= this.tcIMEINo.Text %>" != null) {
+                        if ("<%= this.CanReturnPDA%>" == "true") {
+                            updateRMAWin = window.open("PDAForms/CreateRMA.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>&ReturnTrackingNo=<%= this.Rh.ReturnTrackingNo %>",
+                                null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                        } else {
+                            alert("You do not have the required permission to update a PDA Replacement Return Order");
                         }
-                        var interval = setInterval(function () {
-                            checkIfWinClosed(interval);
-                        }, 1000);
                     } else {
-                        alert('Please close the current active Update RMA dialog window before trying to open a new instance.');
+                        if ("<%= this.CanReturn %>" == "true") {
+                            updateRMAWin = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>&ReturnTrackingNo=<%= this.Rh.ReturnTrackingNo %>",
+                                null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                        } else {
+                            alert("You do not have the required permission to update a return order.");
+                        }
                     }
+
+                    function checkIfWinClosed(intervalID) {
+                        if (updateRMAWin.closed) {
+                            __doPostBack('[id$=btnReload', '');
+                            clearInterval(intervalID);
+                        }
+                    }
+                    var interval = setInterval(function () {
+                        checkIfWinClosed(interval);
+                    }, 1000);
                 } else {
-                    alert("Return Order <%= this.RMANo %> has already been fully received and cannot be updated.");
+                    alert('Please close the current active Update RMA dialog window before trying to open a new instance.');
                 }
             } else {
-                alert("You do not have the required permission to update a return order.");
+                alert("Return Order <%= this.RMANo %> has already been fully received and cannot be updated.");
             }
         });
 
         $("[id$=btnIssueReturnLabel<%= this.CustID %>_<%= this.CountID %>]").click(function () {
             if ("<%= this.UPSLabelCreated %>" == "false") {
-                if ("<%= this.CanIssueLabel %>" == "true") {
-                    if ("<%= this.tcReturnStatus.Text %>" == "Open") {
+            if ("<%= this.CanIssueLabel %>" == "true") {
+                if ("<%= this.tcReturnStatus.Text %>" == "Open") {
                         var rmaNo = "<%= this.Rh.RMANo %>";
                         var emailIn = prompt("Please enter a valid email address:");
 
@@ -229,8 +237,10 @@
         <asp:TableCell />
         <asp:TableCell Text="Comments:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell>
-            <asp:ImageButton ID="imgReturnComments" runat="server" ImageUrl="~/images/sketch.png" Width="25"/>
+            <asp:ImageButton ID="imgReturnComments" runat="server" ImageUrl="~/images/sketch.png" Width="25" />
         </asp:TableCell>
+        <asp:TableCell Text="IMEI No:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
+        <asp:TableCell runat="server" ID="tcIMEINo" />
     </asp:TableRow>
     <asp:TableRow runat="server" ID="expandReturnComments" TableSection="TableBody" HorizontalAlign="Justify">
     </asp:TableRow>

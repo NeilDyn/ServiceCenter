@@ -194,6 +194,11 @@ namespace ExcelDesign.Forms.UserControls.TableData
                     this.tcPDAStamp.HorizontalAlign = HorizontalAlign.Center;
                     this.tcPDAStamp.Font.Bold = true;
                 }
+                else
+                {
+                    this.tcPDAStamp.Text = string.Empty;
+                    this.tcPDAStamp.BackColor = Color.White;
+                }
             }
 
             this.imgOrderComments.ID = "imgOrderComments_" + CustID.ToString() + "_" + CountID.ToString();

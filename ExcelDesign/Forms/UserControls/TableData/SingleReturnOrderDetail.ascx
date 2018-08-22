@@ -18,44 +18,54 @@
         var createExchangeWin;
 
         $("[id$=btnCreateExchange<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            if ("<%= this.CanExchange %>" == "true") {
-                var width = 1500;
-                var height = 500;
-                var left = (screen.width - width) + 500;
-                var top = (screen.height - height) * 0.5;
+            var width = 1500;
+            var height = 500;
+            var left = (screen.width - width) + 500;
+            var top = (screen.height - height) * 0.5;
 
-                if (typeof (createExchangeWin) == 'undefined' || createExchangeWin.closed) {
-                    createExchangeWin = window.open("FunctionForms/CreateExchange.aspx?RMANo=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>",
-                        null,
-                        "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
-
-                    function checkIfWinClosed(intervalID) {
-                        if (createExchangeWin.closed) {
-                            __doPostBack('[id$=btnReload', '');
-                            clearInterval(intervalID);
+            if (typeof (createExchangeWin) == 'undefined' || createExchangeWin.closed) {
+                if ("<%= this.tcIMEINo.Text %>" != null) {
+                        if ("<%= this.CanExchangePDA %>" == "true") {
+                            createExchangeWin = window.open("FunctionForms/CreateExchange.aspx?RMANo=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>",
+                                null,
+                                "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                        } else {
+                            alert("You do not have the required permission to create a PDA Exchange Order.");
                         }
+                    } else {
+                        if ("<%= this.CanExchange %>" == "true") {
+                            createExchangeWin = window.open("FunctionForms/CreateExchange.aspx?RMANo=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>",
+                            null,
+                            "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                    } else {
+                        alert("You do not have the required permission to create an Exchange Order.");
                     }
-                    var interval = setInterval(function () {
-                        checkIfWinClosed(interval);
-                    }, 1000);
-                } else {
-                    alert('Please close the current active Create Exchange Order dialog window before trying to open a new instance.');
                 }
+
+                function checkIfWinClosed(intervalID) {
+                    if (createExchangeWin.closed) {
+                        __doPostBack('[id$=btnReload', '');
+                        clearInterval(intervalID);
+                    }
+                }
+                var interval = setInterval(function () {
+                    checkIfWinClosed(interval);
+                }, 1000);
             } else {
-                alert("You do not have the required permission to create an exchange order.");
+                alert('Please close the current active Create Exchange Order dialog window before trying to open a new instance.');
             }
         });
 
-        $("[id$=btnIssueRefund<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            alert("Hi, return <%= this.Rh.RMANo %> can be refunded.");
-        });
+    $("[id$=btnIssueRefund<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+        alert("Hi, return <%= this.Rh.RMANo %> can be refunded.");
+    });
 
-        $("[id$=btnPrintRMAInstructions<%= this.CustID%>_<%= this.CountID %>]").click(function () {
-            window.open("FunctionForms/RMAPDFForm.aspx?RMANo=<%= this.Rh.RMANo %>", "_blank");
-        });
+    $("[id$=btnPrintRMAInstructions<%= this.CustID%>_<%= this.CountID %>]").click(function () {
+        window.open("FunctionForms/RMAPDFForm.aspx?RMANo=<%= this.Rh.RMANo %>", "_blank");
+    });
 
-        $("[id$=btnUpdateRMA<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            if ("<%= this.tcReturnStatus.Text%>" == "Open") {
+    $("[id$=btnUpdateRMA<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+        if ("<%= this.tcReturnStatus.Text%>" == "Open") {
                 var width = 1500;
                 var height = 500;
                 var left = (screen.width - width) + 500;
@@ -92,55 +102,55 @@
                 }
             } else {
                 alert("Return Order <%= this.RMANo %> has already been fully received and cannot be updated.");
-            }
-        });
+        }
+    });
 
-        $("[id$=btnIssueReturnLabel<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            if ("<%= this.UPSLabelCreated %>" == "false") {
-            if ("<%= this.CanIssueLabel %>" == "true") {
-                if ("<%= this.tcReturnStatus.Text %>" == "Open") {
-                        var rmaNo = "<%= this.Rh.RMANo %>";
-                        var emailIn = prompt("Please enter a valid email address:");
+    $("[id$=btnIssueReturnLabel<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+        if ("<%= this.UPSLabelCreated %>" == "false") {
+                if ("<%= this.CanIssueLabel %>" == "true") {
+                    if ("<%= this.tcReturnStatus.Text %>" == "Open") {
+                    var rmaNo = "<%= this.Rh.RMANo %>";
+                    var emailIn = prompt("Please enter a valid email address:");
 
-                        if (emailIn == null || emailIn == "") {
-                            alert("Invalid email address entered.");
+                    if (emailIn == null || emailIn == "") {
+                        alert("Invalid email address entered.");
+                    }
+                    else {
+                        if (validateEmail(emailIn)) {
+                            $.ajax({
+                                type: "POST",
+                                url: "ServiceCenter.aspx/IssueReturnLabel",
+                                data: JSON.stringify({ rmaNo: rmaNo, email: emailIn }),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (error) {
+                                    if (error.d.indexOf("Error") == -1) {
+                                        alert("Return Label Created for Return: " + rmaNo);
+                                        __doPostBack('[id$=btnReload', '');
+                                    } else {
+                                        alert(error.d);
+                                    }
+                                },
+                                error: function (xhr, status, text) {
+                                    console.log(xhr.status);
+                                    console.log(xhr.text);
+                                    console.log(xhr.responseText);
+                                },
+                            });
+                        } else {
+                            alert("Invalid email address entered.")
                         }
-                        else {
-                            if (validateEmail(emailIn)) {
-                                $.ajax({
-                                    type: "POST",
-                                    url: "ServiceCenter.aspx/IssueReturnLabel",
-                                    data: JSON.stringify({ rmaNo: rmaNo, email: emailIn }),
-                                    contentType: "application/json; charset=utf-8",
-                                    dataType: "json",
-                                    success: function (error) {
-                                        if (error.d.indexOf("Error") == -1) {
-                                            alert("Return Label Created for Return: " + rmaNo);
-                                            __doPostBack('[id$=btnReload', '');
-                                        } else {
-                                            alert(error.d);
-                                        }
-                                    },
-                                    error: function (xhr, status, text) {
-                                        console.log(xhr.status);
-                                        console.log(xhr.text);
-                                        console.log(xhr.responseText);
-                                    },
-                                });
-                            } else {
-                                alert("Invalid email address entered.")
-                            }
-                        }
-                    } else {
-                        alert("Only Return Orders that have an 'OPEN' return status can be issued Return Labels.");
                     }
                 } else {
-                    alert("You do not have the required permission to issue a return label.");
+                    alert("Only Return Orders that have an 'OPEN' return status can be issued Return Labels.");
                 }
             } else {
-                alert("UPS Return Label has already been created.");
+                alert("You do not have the required permission to issue a return label.");
             }
-        });
+        } else {
+            alert("UPS Return Label has already been created.");
+        }
+    });
     });
 
     function expandMoreReturnLines<%= this.CustID %><%= this.CountID %>(lineID) {

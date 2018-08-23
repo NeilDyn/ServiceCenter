@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -17,6 +18,7 @@ namespace ExcelDesign.Forms.PDAForms
     {
         protected List<SalesHeader> Sh;
         protected List<ReturnHeader> Rh;
+        public Customer cust;
         protected string no;
         protected string docNo;
         protected string notes;
@@ -42,6 +44,8 @@ namespace ExcelDesign.Forms.PDAForms
 
         protected string createdOrderNo;
 
+        protected Thread worker;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["UserInteraction"] = true;
@@ -54,11 +58,13 @@ namespace ExcelDesign.Forms.PDAForms
                 tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
                 updateRma = Convert.ToString(Request.QueryString["CreateOrUpdate"]);
                 existingTrackingNo = Convert.ToString(Request.QueryString["ReturnTrackingNo"]);
-                tcIMEINo.Text = Convert.ToString(Session["SearchValue"]);
+                //tcIMEINo.Text = Convert.ToString(Session["SearchValue"]);
+                cust = (Customer)Session["SelectedCustomer"];
+                Sh = (List<SalesHeader>)Session["SalesHeaders"];
 
                 createdOrderNo = Convert.ToString(Request.QueryString["CreatedOrderNo"]);
 
-                Rh = (List<ReturnHeader>)Session["ReturnHeaders"];              
+                Rh = (List<ReturnHeader>)Session["ReturnHeaders"];
 
                 if (updateRma.ToUpper() == "TRUE")
                 {
@@ -69,12 +75,37 @@ namespace ExcelDesign.Forms.PDAForms
                     lblInsertTrackingNo.Visible = true;
                     txtInsertTrackingNo.Visible = true;
 
-                    txtShipToName.Text = Rh[0].ShipToName;
-                    txtShipToAddress1.Text = Rh[0].ShipToAddress1;
-                    txtShipToAddress2.Text = Rh[0].ShipToAddress2;
-                    txtShipToCity.Text = Rh[0].ShipToCity;
-                    txtShipToCode.Text = Rh[0].ShipToCode;
-                    txtShipToState.Text = Rh[0].ShipToState;
+                    foreach (ReturnHeader rhItem in Rh)
+                    {
+                        foreach (SalesHeader head in Sh)
+                        {
+                            foreach (ShipmentHeader header in head.ShipmentHeaderObject)
+                            {
+                                foreach (ShipmentLine line in header.ShipmentLines)
+                                {
+                                    foreach (PostedPackage package in head.PostedPackageObject)
+                                    {
+                                        foreach (PostedPackageLine packageLine in package.PostedPackageLines)
+                                        {
+                                            if (packageLine.ItemNo == line.ItemNo && package.PostedSourceID == header.No)
+                                            {
+                                                if (rhItem.IMEINo == packageLine.SerialNo)
+                                                {
+                                                    tcIMEINo.Text = rhItem.IMEINo;
+                                                    txtShipToName.Text = rhItem.ShipToName;
+                                                    txtShipToAddress1.Text = rhItem.ShipToAddress1;
+                                                    txtShipToAddress2.Text = rhItem.ShipToAddress2;
+                                                    txtShipToCity.Text = rhItem.ShipToCity;
+                                                    txtShipToCode.Text = rhItem.ShipToCode;
+                                                    txtShipToState.Text = rhItem.ShipToState;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
 
                     txtShipToName.Enabled = false;
                     txtShipToAddress1.Enabled = false;
@@ -101,6 +132,37 @@ namespace ExcelDesign.Forms.PDAForms
 
                     lblInsertTrackingNo.Visible = false;
                     txtInsertTrackingNo.Visible = false;
+
+                    if (Rh != null)
+                    {
+                        foreach (ReturnHeader itemRh in Rh)
+                        {
+                            foreach (SalesHeader head in Sh)
+                            {
+                                foreach (ShipmentHeader header in head.ShipmentHeaderObject)
+                                {
+                                    foreach (ShipmentLine line in header.ShipmentLines)
+                                    {
+                                        foreach (PostedPackage package in head.PostedPackageObject)
+                                        {
+                                            foreach (PostedPackageLine packageLine in package.PostedPackageLines)
+                                            {
+                                                if (packageLine.ItemNo == line.ItemNo && package.PostedSourceID == header.No)
+                                                {
+                                                    if (itemRh.IMEINo == packageLine.SerialNo)
+                                                    {
+                                                        tcIMEINo.Text = itemRh.IMEINo;
+                                                        ClientScript.RegisterStartupScript(this.GetType(), "imeiExists", "alert('There is already an open RMA for " + Rh[0].IMEINo + "');", true);
+                                                        ClientScript.RegisterStartupScript(this.GetType(), "imeiExistsClose", "parent.window.close();", true);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
 
                 if (Session["ActiveUser"] != null)
@@ -527,6 +589,24 @@ namespace ExcelDesign.Forms.PDAForms
 
                         crh = ss.CreateReturnOrder(no, docNo, string.Empty, notes, resources, printRMA, createLabel, email, lineValues, update, returnTrackingNo,
                             shippingDetails, imeiNo);
+
+                        if (createLabel)
+                        {
+                            string sessionID = string.Empty;
+                            if (Session["ActiveUser"] != null)
+                            {
+                                User u = (User)Session["ActiveUser"];
+                                sessionID = u.SessionID;
+                            }
+                            else
+                            {
+                                sessionID = "{A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0}";
+                            }
+
+                            worker = new Thread(() => ss.IssueReturnLabel(crh.RMANo, email, sessionID));
+                            worker.Start();
+                        }
+
                         Session["CreatedRMA"] = crh;
                         Session["NoUserInteraction"] = true;
                         ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + "');", true);
@@ -624,15 +704,15 @@ namespace ExcelDesign.Forms.PDAForms
 
             try
             {
-                if(!String.IsNullOrEmpty(shipToName) || !String.IsNullOrWhiteSpace(shipToName))
+                if (!String.IsNullOrEmpty(shipToName) || !String.IsNullOrWhiteSpace(shipToName))
                 {
                     if (!String.IsNullOrEmpty(shipToAddress1) || !String.IsNullOrWhiteSpace(shipToAddress1))
                     {
-                        if(!String.IsNullOrEmpty(shipToCity) || !String.IsNullOrWhiteSpace(shipToCity))
+                        if (!String.IsNullOrEmpty(shipToCity) || !String.IsNullOrWhiteSpace(shipToCity))
                         {
-                            if(!String.IsNullOrEmpty(shipToCode) || !String.IsNullOrWhiteSpace(shipToCode))
+                            if (!String.IsNullOrEmpty(shipToCode) || !String.IsNullOrWhiteSpace(shipToCode))
                             {
-                                if(!String.IsNullOrEmpty(shipToState) || !String.IsNullOrWhiteSpace(shipToState))
+                                if (!String.IsNullOrEmpty(shipToState) || !String.IsNullOrWhiteSpace(shipToState))
                                 {
                                     if (createLabel)
                                     {

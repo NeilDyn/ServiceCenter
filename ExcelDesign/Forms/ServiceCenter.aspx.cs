@@ -4,6 +4,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Web;
 using System.Web.Script.Services;
 using System.Web.Security;
@@ -24,9 +25,13 @@ namespace ExcelDesign.Forms
     {
         #region Global
 
+        protected const string version = "v4.4";
+
         protected CallService cs = new CallService();
         public int SessionTime;
         protected List<Customer> customers = new List<Customer>();
+
+        protected static Thread worker;
 
         #endregion
 
@@ -58,6 +63,8 @@ namespace ExcelDesign.Forms
             }
             else
             {
+                versionList.InnerText = version;
+
                 if (Session["ActiveUser"] != null)
                 {
                     User u = (User)Session["ActiveUser"];
@@ -81,7 +88,7 @@ namespace ExcelDesign.Forms
                 if (Session["SearchValue"] != null && Session["SearchSelection"] != null && Session["UserInteraction"] != null)
                 {
                     Session["UserInteraction"] = null;
-                    
+
                     if (Session["NoUserInteraction"] == null)
                     {
                         Session["NoUserInteraction"] = null;
@@ -91,7 +98,7 @@ namespace ExcelDesign.Forms
                         salesReturnOrderHeader = new Control();
                         salesReturnOrderDetails = new Control();
 
-                        if(Session["CustomerList"] != null)
+                        if (Session["CustomerList"] != null)
                         {
                             customers = (List<Customer>)Session["CustomerList"];
                         }
@@ -217,7 +224,7 @@ namespace ExcelDesign.Forms
         }
 
         protected void PopulateData()
-        {         
+        {
             if (customers.Count > 1)
             {
                 multipleCustomers = LoadControl("UserControls/SingleControls/MultipleCustomers.ascx");
@@ -260,7 +267,20 @@ namespace ExcelDesign.Forms
         {
             try
             {
-                StaticService.IssueReturnLabel(rmaNo, email);
+                string sessionID = string.Empty;
+                if (HttpContext.Current.Session["ActiveUser"] != null)
+                {
+                    User u = (User)HttpContext.Current.Session["ActiveUser"];
+                    sessionID = u.SessionID;
+                }
+                else
+                {
+                    sessionID = "{A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0}";
+                }
+
+                worker = new Thread(() => StaticService.IssueReturnLabel(rmaNo, email, sessionID));
+                worker.Start();
+
                 HttpContext.Current.Session["NoUserInteraction"] = true;
                 HttpContext.Current.Session["UserInteraction"] = true;
             }
@@ -270,7 +290,7 @@ namespace ExcelDesign.Forms
             }
 
             return "success";
-        }     
+        }
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]

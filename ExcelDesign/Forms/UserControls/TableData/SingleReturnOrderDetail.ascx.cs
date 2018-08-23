@@ -208,11 +208,21 @@ namespace ExcelDesign.Forms.UserControls.TableData
             }
 
             this.imgReturnComments.ID = "imgReturnComments_" + CustID.ToString() + "_" + CountID.ToString();
-            
-            if(Rh.ReturnComments != null)
+
+            lblReturnComment.ID = "lblReturnComment_" + CustID.ToString() + "_" + CountID.ToString();
+
+            if(Rh.ReturnComments.Count > 0)
             {
+                lblReturnComment.Visible = true;
+                imgReturnComments.Visible = true;
+
                 PopulateCommentLines();
                 imgReturnComments.OnClientClick = "return expandReturnComments" + CustID.ToString() + CountID.ToString() + "()";
+            }
+            else
+            {
+                lblReturnComment.Visible = false;
+                imgReturnComments.Visible = false;
             }
         }
 

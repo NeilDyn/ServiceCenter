@@ -178,7 +178,7 @@
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
-        <asp:TableCell Text="Comments:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
+        <asp:TableCell ID="lblOrderComment" Text="Comments:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server">
             <asp:ImageButton ID="imgOrderComments" runat="server" ImageUrl="~/images/sketch.png" Width="25" />
         </asp:TableCell>

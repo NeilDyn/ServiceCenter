@@ -202,11 +202,20 @@ namespace ExcelDesign.Forms.UserControls.TableData
             }
 
             this.imgOrderComments.ID = "imgOrderComments_" + CustID.ToString() + "_" + CountID.ToString();
+            lblOrderComment.ID = "lblOrderComment_" + CustID.ToString() + "_" + CountID.ToString();
 
-            if (Sh.OrderComments != null)
+            if (Sh.OrderComments.Count > 0)
             {
+                lblOrderComment.Visible = true;
+                imgOrderComments.Visible = true;
+
                 PopulateCommentLines();
                 imgOrderComments.OnClientClick = "return expandOrderComments" + CustID.ToString() + CountID.ToString() + "()";
+            }
+            else
+            {
+                lblOrderComment.Visible = false;
+                imgOrderComments.Visible = false;
             }
         }
 

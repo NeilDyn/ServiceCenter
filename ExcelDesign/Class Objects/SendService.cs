@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace ExcelDesign.Class_Objects
@@ -291,9 +292,9 @@ namespace ExcelDesign.Class_Objects
             return webService.DeleteRMA(rmaNo);
         }
 
-        public void IssueReturnLabel(string rmaNo, string email)
+        public string IssueReturnLabel(string rmaNo, string email, string sessionID)
         {
-            webService.IssueReturnLabel(rmaNo, email);
+            return webService.IssueReturnLabel(rmaNo, email, sessionID);
         }
 
         public void UpdateUserPassword(string currentUser, string newPassword)

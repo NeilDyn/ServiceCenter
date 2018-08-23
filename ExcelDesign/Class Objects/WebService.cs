@@ -58,6 +58,7 @@ namespace ExcelDesign.Class_Objects
             credentials = new NetworkCredential(username, password, domain);
             functions.Url = baseURL + functionsURL;
             functions.Credentials = credentials;
+            functions.Timeout = 300000;
         }
 
         public SearchResults FindOrder(string searchNo, int searchOption)

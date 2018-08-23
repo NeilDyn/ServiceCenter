@@ -739,7 +739,7 @@ namespace ExcelDesign.Class_Objects
                                     }
 
                                     returnTrackingNo = currResults.SalesHeader[so].ReturnTrackingNo;
-                                    orderDate = currResults.SalesHeader[so].DocDate;
+                                    orderDate = currResults.SalesHeader[so].OrderDate;
                                     externalDocumentNo = currResults.SalesHeader[so].ExtDocNo;
                                     sellToCustomerNo = currResults.SalesHeader[so].SellToCustomerNo;
                                     imeiNo = currResults.SalesHeader[so].IMEI;
@@ -1679,14 +1679,14 @@ namespace ExcelDesign.Class_Objects
                                             }
                                         }
 
-                                        shipToName = currResults.SalesHeader[so].ShipToName;
-                                        shipToAddress1 = currResults.SalesHeader[so].ShipToAddress;
-                                        shipToAddress2 = currResults.SalesHeader[so].ShipToAddress2;
-                                        shipToContact = currResults.SalesHeader[so].ShipToContact;
-                                        shipToCity = currResults.SalesHeader[so].ShipToCity;
-                                        shipToCode = currResults.SalesHeader[so].ShipToZip;
-                                        shipToState = currResults.SalesHeader[so].ShipToState;
-                                        shipToCountry = currResults.SalesHeader[so].ShipToCountry;
+                                        shipToName = currResults.ReturnReceiptHeader[so].ShipToName;
+                                        shipToAddress1 = currResults.ReturnReceiptHeader[so].ShipToAddress;
+                                        shipToAddress2 = currResults.ReturnReceiptHeader[so].ShipToAddress2;
+                                        shipToContact = currResults.ReturnReceiptHeader[so].ShipToContact;
+                                        shipToCity = currResults.ReturnReceiptHeader[so].ShipToCity;
+                                        shipToCode = currResults.ReturnReceiptHeader[so].ShipToZip;
+                                        shipToState = currResults.ReturnReceiptHeader[so].ShipToState;
+                                        shipToCountry = currResults.ReturnReceiptHeader[so].ShipToCountry;
 
                                         commentLines = GetSalesLineComments(rmaNo);
                                         returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,

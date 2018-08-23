@@ -72,7 +72,7 @@
                 var top = (screen.height - height) * 0.5;
 
                 if (typeof (updateRMAWin) == 'undefined' || updateRMAWin.closed) {
-                    if ("<%= this.tcIMEINo.Text %>" != null) {
+                    if ("<%= this.tcIMEINo.Text %>" != "") {
                         if ("<%= this.CanReturnPDA%>" == "true") {
                             updateRMAWin = window.open("PDAForms/CreateRMA.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>&ReturnTrackingNo=<%= this.Rh.ReturnTrackingNo %>",
                                 null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
@@ -245,7 +245,7 @@
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
-        <asp:TableCell Text="Comments:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
+        <asp:TableCell ID="lblReturnComment" Text="Comments:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell>
             <asp:ImageButton ID="imgReturnComments" runat="server" ImageUrl="~/images/sketch.png" Width="25" />
         </asp:TableCell>

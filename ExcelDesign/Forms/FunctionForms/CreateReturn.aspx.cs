@@ -10,6 +10,8 @@ using ExcelDesign.Class_Objects;
 using ExcelDesign.Class_Objects.CreatedReturn;
 using ExcelDesign.Class_Objects.FunctionData;
 using System.Net.Mail;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace ExcelDesign.Forms.FunctionForms
 {
@@ -32,6 +34,8 @@ namespace ExcelDesign.Forms.FunctionForms
         protected bool anyLines = false;
 
         protected string createdOrderNo;
+
+        protected Thread worker;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -482,6 +486,24 @@ namespace ExcelDesign.Forms.FunctionForms
 
                         crh = ss.CreateReturnOrder(no, docNo, string.Empty, notes, resources, printRMA, createLabel, email, lineValues, update, returnTrackingNo, 
                             string.Empty, string.Empty);
+                        
+                        if(createLabel)
+                        {
+                            string sessionID = string.Empty;
+                            if (Session["ActiveUser"] != null)
+                            {
+                                User u = (User)Session["ActiveUser"];
+                                sessionID = u.SessionID;
+                            }
+                            else
+                            {
+                                sessionID = "{A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0}";
+                            }
+
+                            worker = new Thread(() => ss.IssueReturnLabel(crh.RMANo, email, sessionID));
+                            worker.Start();
+                        }
+
                         Session["CreatedRMA"] = crh;
                         Session["NoUserInteraction"] = true;
                         ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + "');", true);
@@ -516,6 +538,7 @@ namespace ExcelDesign.Forms.FunctionForms
                 SendService ss = new SendService();
 
                 string delete = ss.DeleteRMA(tcNo.Text);
+                Session["NoUserInteraction"] = true;
 
                 ClientScript.RegisterStartupScript(this.GetType(), "deletedRMA", "alert('" + delete + "');", true);
                 ClientScript.RegisterStartupScript(this.GetType(), "closeRMA", "parent.window.close();", true);

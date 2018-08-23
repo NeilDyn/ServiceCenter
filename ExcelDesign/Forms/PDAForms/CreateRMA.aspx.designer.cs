@@ -121,6 +121,15 @@ namespace ExcelDesign.Forms.PDAForms {
         protected global::System.Web.UI.WebControls.TextBox txtShipToCode;
         
         /// <summary>
+        /// cbxDefaultShipping control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbxDefaultShipping;
+        
+        /// <summary>
         /// tblCreateReturnOrderTableDetails control.
         /// </summary>
         /// <remarks>

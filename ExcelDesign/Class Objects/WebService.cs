@@ -8,6 +8,7 @@ using ExcelDesign.ServiceFunctions;
 using System.Net;
 using ExcelDesign.Class_Objects.Enums;
 using System.Configuration;
+using System.Threading.Tasks;
 
 namespace ExcelDesign.Class_Objects
 {
@@ -117,9 +118,9 @@ namespace ExcelDesign.Class_Objects
             return login;
         }
 
-        public void IssueReturnLabel(string rmaNo, string email)
+        public string IssueReturnLabel(string rmaNo, string email, string sessionID)
         {
-            functions.IssueReturnLabel(rmaNo, email, SessionID());
+            return functions.IssueReturnLabel(rmaNo, email, sessionID);
         }
 
         public CreatedExchangeOrder CreateExchange(string rmaNo, string externalDocNo, string lineValues)

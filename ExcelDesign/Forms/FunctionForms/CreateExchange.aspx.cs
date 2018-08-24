@@ -19,6 +19,7 @@ namespace ExcelDesign.Forms.FunctionForms
         protected string docNo;
 
         protected bool anyLines = false;
+        protected bool imeiExists = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,18 +32,23 @@ namespace ExcelDesign.Forms.FunctionForms
                 Rh = (List<ReturnHeader>)Session["ReturnHeaders"];
                 cust = (Customer)Session["SelectedCustomer"];
 
-                if(Rh[0].IMEINo != string.Empty)
+                foreach (ReturnHeader head in Rh)
                 {
-                    tcShipToName.Text = Rh[0].ShipToName;
-                    tcShipToAddress1.Text = Rh[0].ShipToAddress1;
-                    tcShipToAddress2.Text = Rh[0].ShipToAddress2;
-                    tcShipToCity.Text = Rh[0].ShipToCity;
-                    tcShipToContact.Text = Rh[0].ShipToContact;
-                    tcShipToState.Text = Rh[0].ShipToState;
-                    tcShipToZip.Text = Rh[0].ShipToCode;
-                    tcShipToCountry.Text = Rh[0].ShipToCountry;
+                    if(head.RMANo == tcRMANo.Text && head.IMEINo != "")
+                    {
+                        imeiExists = true;
+                        tcShipToName.Text = head.ShipToName;
+                        tcShipToAddress1.Text = head.ShipToAddress1;
+                        tcShipToAddress2.Text = head.ShipToAddress2;
+                        tcShipToCity.Text = head.ShipToCity;
+                        tcShipToContact.Text = head.ShipToContact;
+                        tcShipToState.Text = head.ShipToState;
+                        tcShipToZip.Text = head.ShipToCode;
+                        tcShipToCountry.Text = head.ShipToCountry;
+                    }
                 }
-                else
+
+                if(!imeiExists)
                 {
                     tcShipToName.Text = cust.Name;
                     tcShipToAddress1.Text = cust.Address1;

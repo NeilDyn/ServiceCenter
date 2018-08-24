@@ -58,7 +58,6 @@ namespace ExcelDesign.Forms.PDAForms
                 tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
                 updateRma = Convert.ToString(Request.QueryString["CreateOrUpdate"]);
                 existingTrackingNo = Convert.ToString(Request.QueryString["ReturnTrackingNo"]);
-                //tcIMEINo.Text = Convert.ToString(Session["SearchValue"]);
                 cust = (Customer)Session["SelectedCustomer"];
                 Sh = (List<SalesHeader>)Session["SalesHeaders"];
 
@@ -75,29 +74,35 @@ namespace ExcelDesign.Forms.PDAForms
                     lblInsertTrackingNo.Visible = true;
                     txtInsertTrackingNo.Visible = true;
 
-                    foreach (ReturnHeader rhItem in Rh)
+                    lblDefaultShipping.Visible = false;
+                    cbxDefaultShipping.Visible = false;
+
+                    if (Rh != null)
                     {
-                        foreach (SalesHeader head in Sh)
+                        foreach (ReturnHeader rhItem in Rh)
                         {
-                            foreach (ShipmentHeader header in head.ShipmentHeaderObject)
+                            foreach (SalesHeader head in Sh)
                             {
-                                foreach (ShipmentLine line in header.ShipmentLines)
+                                foreach (ShipmentHeader header in head.ShipmentHeaderObject)
                                 {
-                                    foreach (PostedPackage package in head.PostedPackageObject)
+                                    foreach (ShipmentLine line in header.ShipmentLines)
                                     {
-                                        foreach (PostedPackageLine packageLine in package.PostedPackageLines)
+                                        foreach (PostedPackage package in head.PostedPackageObject)
                                         {
-                                            if (packageLine.ItemNo == line.ItemNo && package.PostedSourceID == header.No)
+                                            foreach (PostedPackageLine packageLine in package.PostedPackageLines)
                                             {
-                                                if (rhItem.IMEINo == packageLine.SerialNo)
+                                                if (packageLine.ItemNo == line.ItemNo && package.PostedSourceID == header.No)
                                                 {
-                                                    tcIMEINo.Text = rhItem.IMEINo;
-                                                    txtShipToName.Text = rhItem.ShipToName;
-                                                    txtShipToAddress1.Text = rhItem.ShipToAddress1;
-                                                    txtShipToAddress2.Text = rhItem.ShipToAddress2;
-                                                    txtShipToCity.Text = rhItem.ShipToCity;
-                                                    txtShipToCode.Text = rhItem.ShipToCode;
-                                                    txtShipToState.Text = rhItem.ShipToState;
+                                                    if (rhItem.IMEINo == packageLine.SerialNo)
+                                                    {
+                                                        tcIMEINo.Text = rhItem.IMEINo;
+                                                        txtShipToName.Text = rhItem.ShipToName;
+                                                        txtShipToAddress1.Text = rhItem.ShipToAddress1;
+                                                        txtShipToAddress2.Text = rhItem.ShipToAddress2;
+                                                        txtShipToCity.Text = rhItem.ShipToCity;
+                                                        txtShipToCode.Text = rhItem.ShipToCode;
+                                                        txtShipToState.Text = rhItem.ShipToState;
+                                                    }
                                                 }
                                             }
                                         }
@@ -133,6 +138,9 @@ namespace ExcelDesign.Forms.PDAForms
                     lblInsertTrackingNo.Visible = false;
                     txtInsertTrackingNo.Visible = false;
 
+                    lblDefaultShipping.Visible = true;
+                    cbxDefaultShipping.Visible = true;
+
                     if (Rh != null)
                     {
                         foreach (ReturnHeader itemRh in Rh)
@@ -161,6 +169,28 @@ namespace ExcelDesign.Forms.PDAForms
                                     }
                                 }
                             }
+                        }                      
+                    }
+                    else if(Sh != null)
+                    {
+                        foreach (SalesHeader head in Sh)
+                        {
+                            foreach (ShipmentHeader header in head.ShipmentHeaderObject)
+                            {
+                                foreach (ShipmentLine line in header.ShipmentLines)
+                                {
+                                    foreach (PostedPackage package in head.PostedPackageObject)
+                                    {
+                                        foreach (PostedPackageLine packageLine in package.PostedPackageLines)
+                                        {
+                                            if (packageLine.ItemNo == line.ItemNo && package.PostedSourceID == header.No)
+                                            {
+                                                tcIMEINo.Text = packageLine.SerialNo;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -180,6 +210,7 @@ namespace ExcelDesign.Forms.PDAForms
                 }
             }
 
+            cust = (Customer)Session["SelectedCustomer"];
             createdOrderNo = Convert.ToString(Request.QueryString["CreatedOrderNo"]);
             LoadCreateReturnLines();
         }
@@ -603,13 +634,31 @@ namespace ExcelDesign.Forms.PDAForms
                                 sessionID = "{A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0}";
                             }
 
-                            worker = new Thread(() => ss.IssueReturnLabel(crh.RMANo, email, sessionID));
-                            worker.Start();
+                            worker = new Thread(() =>
+                            {
+                                try
+                                {
+                                    ss.IssueReturnLabel(crh.RMANo, email, sessionID);
+                                }
+                                catch (Exception workerE)
+                                {
+                                    ClientScript.RegisterStartupScript(this.GetType(), "labelError", "alert('" + workerE.Message.Replace("'", "\"") + "');", true);
+                                }
+                            });
                         }
 
                         Session["CreatedRMA"] = crh;
                         Session["NoUserInteraction"] = true;
-                        ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + "');", true);
+
+                        if (!createLabel)
+                        {
+                            ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + "');", true);
+                        }
+                        else
+                        {
+                            ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + ", Return Label will be emailed in 1 hour');", true);
+                        }
+
                         ClientScript.RegisterStartupScript(this.GetType(), "openCreatedRMA", "OpenCreatedRMA();", true);
                     }
                     else

@@ -500,13 +500,31 @@ namespace ExcelDesign.Forms.FunctionForms
                                 sessionID = "{A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0}";
                             }
 
-                            worker = new Thread(() => ss.IssueReturnLabel(crh.RMANo, email, sessionID));
-                            worker.Start();
+                            worker = new Thread(() =>
+                            {
+                                try
+                                {
+                                    ss.IssueReturnLabel(crh.RMANo, email, sessionID);
+                                }
+                                catch (Exception workerE)
+                                {
+                                    ClientScript.RegisterStartupScript(this.GetType(), "labelError", "alert('" + workerE.Message.Replace("'", "\"") + "');", true);
+                                }
+                            });
                         }
 
                         Session["CreatedRMA"] = crh;
                         Session["NoUserInteraction"] = true;
-                        ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + "');", true);
+                        
+                        if(!createLabel)
+                        {
+                            ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + "');", true);
+                        }
+                        else
+                        {
+                            ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + ", Return Label will be emailed in 1 hour');", true);
+                        }
+
                         ClientScript.RegisterStartupScript(this.GetType(), "openCreatedRMA", "OpenCreatedRMA();", true);
                     }
                     else

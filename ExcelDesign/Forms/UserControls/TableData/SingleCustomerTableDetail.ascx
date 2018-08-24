@@ -29,8 +29,8 @@
         <asp:TableCell runat="server" ID="tcCity"/>
         <asp:TableCell Text="State:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcState"/>
-        <asp:TableCell />
-        <asp:TableCell />
+        <asp:TableCell Text="whitespace" ForeColor="White"/>
+        <asp:TableCell Text="whitespace" ForeColor="White"/>
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >
         <asp:TableCell />
@@ -40,7 +40,7 @@
         <asp:TableCell runat="server" ID="tcZip" style="text-align: left"/>
         <asp:TableCell Text="Country:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcCountry"/>
-        <asp:TableCell />
-        <asp:TableCell />
+        <asp:TableCell Text="whitespace" ForeColor="White"/>
+        <asp:TableCell Text="whitespace" ForeColor="White"/>
     </asp:TableRow>
 </asp:Table>

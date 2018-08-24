@@ -25,7 +25,7 @@ namespace ExcelDesign.Forms
     {
         #region Global
 
-        protected const string version = "v4.4";
+        protected const string version = "v4.5";
 
         protected CallService cs = new CallService();
         public int SessionTime;
@@ -278,7 +278,18 @@ namespace ExcelDesign.Forms
                     sessionID = "{A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0}";
                 }
 
-                worker = new Thread(() => StaticService.IssueReturnLabel(rmaNo, email, sessionID));
+                worker = new Thread(() =>
+                {
+                    try
+                    {
+                        StaticService.IssueReturnLabel(rmaNo, email, sessionID);
+                    }
+                    catch (Exception workerE)
+                    {
+                        //return "Error - " + workerE.Message;
+                    }
+                });
+
                 worker.Start();
 
                 HttpContext.Current.Session["NoUserInteraction"] = true;

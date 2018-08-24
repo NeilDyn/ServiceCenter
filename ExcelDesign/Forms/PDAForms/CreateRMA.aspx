@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateRMA.aspx.cs" Inherits="ExcelDesign.Forms.PDAForms.CreateRMA" Async="true"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateRMA.aspx.cs" Inherits="ExcelDesign.Forms.PDAForms.CreateRMA" Async="true" %>
 
 <!DOCTYPE html>
 
@@ -7,7 +7,28 @@
     <title>PDA - Create Return Order</title>
     <%Server.ScriptTimeout = 300; %>
     <link href="../../css/mainpage.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
     <script type="text/javascript">
+        $(document).ready(function () {
+            $("[id$=cbxDefaultShipping]").change(function () {
+                if (this.checked) {
+
+                    $("[id$=txtShipToName").val("<%= this.cust.Name%>");
+                    $("[id$=txtShipToCity").val("<%= this.cust.City%>");
+                    $("[id$=txtShipToAddress1").val("<%= this.cust.Address1%>");
+                    $("[id$=txtShipToState").val("<%= this.cust.State%>");
+                    $("[id$=txtShipToAddress2").val("<%= this.cust.Address2%>");
+                    $("[id$=txtShipToCode").val("<%= this.cust.Zip%>");
+                } else {
+                    $("[id$=txtShipToName").val("");
+                    $("[id$=txtShipToCity").val("");
+                    $("[id$=txtShipToAddress1").val("");
+                    $("[id$=txtShipToState").val("");
+                    $("[id$=txtShipToAddress2").val("");
+                    $("[id$=txtShipToCode").val("");
+                }
+            });
+        });
         function CloseWindow() {
             var c;
 
@@ -94,9 +115,9 @@
                 </asp:TableHeaderCell>
             </asp:TableHeaderRow>
             <asp:TableHeaderRow>
-                <asp:TableHeaderCell Text="Use Default Shipping Information:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
+                <asp:TableHeaderCell ID="lblDefaultShipping" Text="Use Default Shipping Information:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
                 <asp:TableHeaderCell runat="server" HorizontalAlign="Left" Style="text-align: left">
-                    <asp:CheckBox ID="cbxDefaultShipping" runat="server" OnCheckedChanged="cbxDefaultShipping_CheckedChanged"/>
+                    <asp:CheckBox ID="cbxDefaultShipping" runat="server" />
                 </asp:TableHeaderCell>
             </asp:TableHeaderRow>
             <asp:TableHeaderRow>

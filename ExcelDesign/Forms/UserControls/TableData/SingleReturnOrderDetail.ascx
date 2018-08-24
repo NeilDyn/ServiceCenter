@@ -25,16 +25,16 @@
 
             if (typeof (createExchangeWin) == 'undefined' || createExchangeWin.closed) {
                 if ("<%= this.tcIMEINo.Text %>" != null) {
-                        if ("<%= this.CanExchangePDA %>" == "true") {
-                            createExchangeWin = window.open("FunctionForms/CreateExchange.aspx?RMANo=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>",
-                                null,
-                                "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
-                        } else {
-                            alert("You do not have the required permission to create a PDA Exchange Order.");
-                        }
+                    if ("<%= this.CanExchangePDA %>" == "true") {
+                        createExchangeWin = window.open("FunctionForms/CreateExchange.aspx?RMANo=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>",
+                            null,
+                            "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
                     } else {
-                        if ("<%= this.CanExchange %>" == "true") {
-                            createExchangeWin = window.open("FunctionForms/CreateExchange.aspx?RMANo=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>",
+                        alert("You do not have the required permission to create a PDA Exchange Order.");
+                    }
+                } else {
+                    if ("<%= this.CanExchange %>" == "true") {
+                        createExchangeWin = window.open("FunctionForms/CreateExchange.aspx?RMANo=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>",
                             null,
                             "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
                     } else {
@@ -56,23 +56,23 @@
             }
         });
 
-    $("[id$=btnIssueRefund<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-        alert("Hi, return <%= this.Rh.RMANo %> can be refunded.");
-    });
+        $("[id$=btnIssueRefund<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+            alert("Hi, return <%= this.Rh.RMANo %> can be refunded.");
+        });
 
-    $("[id$=btnPrintRMAInstructions<%= this.CustID%>_<%= this.CountID %>]").click(function () {
-        window.open("FunctionForms/RMAPDFForm.aspx?RMANo=<%= this.Rh.RMANo %>", "_blank");
-    });
+        $("[id$=btnPrintRMAInstructions<%= this.CustID%>_<%= this.CountID %>]").click(function () {
+            window.open("FunctionForms/RMAPDFForm.aspx?RMANo=<%= this.Rh.RMANo %>", "_blank");
+        });
 
-    $("[id$=btnUpdateRMA<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-        if ("<%= this.tcReturnStatus.Text%>" == "Open") {
-                var width = 1500;
-                var height = 500;
-                var left = (screen.width - width) + 500;
-                var top = (screen.height - height) * 0.5;
+        $("[id$=btnUpdateRMA<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+            if ("<%= this.tcReturnStatus.Text%>" == "Open") {
+            var width = 1500;
+            var height = 500;
+            var left = (screen.width - width) + 500;
+            var top = (screen.height - height) * 0.5;
 
-                if (typeof (updateRMAWin) == 'undefined' || updateRMAWin.closed) {
-                    if ("<%= this.tcIMEINo.Text %>" != "") {
+            if (typeof (updateRMAWin) == 'undefined' || updateRMAWin.closed) {
+                if ("<%= this.tcIMEINo.Text %>" != "") {
                         if ("<%= this.CanReturnPDA%>" == "true") {
                             updateRMAWin = window.open("PDAForms/CreateRMA.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>&ReturnTrackingNo=<%= this.Rh.ReturnTrackingNo %>",
                                 null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
@@ -82,75 +82,75 @@
                     } else {
                         if ("<%= this.CanReturn %>" == "true") {
                             updateRMAWin = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>&ReturnTrackingNo=<%= this.Rh.ReturnTrackingNo %>",
-                                null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
-                        } else {
-                            alert("You do not have the required permission to update a return order.");
-                        }
+                            null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                    } else {
+                        alert("You do not have the required permission to update a return order.");
                     }
-
-                    function checkIfWinClosed(intervalID) {
-                        if (updateRMAWin.closed) {
-                            __doPostBack('[id$=btnReload', '');
-                            clearInterval(intervalID);
-                        }
-                    }
-                    var interval = setInterval(function () {
-                        checkIfWinClosed(interval);
-                    }, 1000);
-                } else {
-                    alert('Please close the current active Update RMA dialog window before trying to open a new instance.');
                 }
-            } else {
-                alert("Return Order <%= this.RMANo %> has already been fully received and cannot be updated.");
-        }
-    });
 
-    $("[id$=btnIssueReturnLabel<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-        if ("<%= this.UPSLabelCreated %>" == "false") {
-                if ("<%= this.CanIssueLabel %>" == "true") {
-                    if ("<%= this.tcReturnStatus.Text %>" == "Open") {
-                    var rmaNo = "<%= this.Rh.RMANo %>";
-                    var emailIn = prompt("Please enter a valid email address:");
-
-                    if (emailIn == null || emailIn == "") {
-                        alert("Invalid email address entered.");
+                function checkIfWinClosed(intervalID) {
+                    if (updateRMAWin.closed) {
+                        __doPostBack('[id$=btnReload', '');
+                        clearInterval(intervalID);
                     }
-                    else {
-                        if (validateEmail(emailIn)) {
-                            $.ajax({
-                                type: "POST",
-                                url: "ServiceCenter.aspx/IssueReturnLabel",
-                                data: JSON.stringify({ rmaNo: rmaNo, email: emailIn }),
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                success: function (error) {
-                                    if (error.d.indexOf("Error") == -1) {
-                                        alert("Return Label Created for Return: " + rmaNo);
-                                        __doPostBack('[id$=btnReload', '');
-                                    } else {
-                                        alert(error.d);
-                                    }
-                                },
-                                error: function (xhr, status, text) {
-                                    console.log(xhr.status);
-                                    console.log(xhr.text);
-                                    console.log(xhr.responseText);
-                                },
-                            });
-                        } else {
-                            alert("Invalid email address entered.")
-                        }
-                    }
-                } else {
-                    alert("Only Return Orders that have an 'OPEN' return status can be issued Return Labels.");
                 }
+                var interval = setInterval(function () {
+                    checkIfWinClosed(interval);
+                }, 1000);
             } else {
-                alert("You do not have the required permission to issue a return label.");
+                alert('Please close the current active Update RMA dialog window before trying to open a new instance.');
             }
         } else {
-            alert("UPS Return Label has already been created.");
-        }
-    });
+            alert("Return Order <%= this.RMANo %> has already been fully received and cannot be updated.");
+            }
+        });
+
+        $("[id$=btnIssueReturnLabel<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+            if ("<%= this.UPSLabelCreated %>" == "false") {
+            if ("<%= this.CanIssueLabel %>" == "true") {
+                if ("<%= this.tcReturnStatus.Text %>" == "Open") {
+                        var rmaNo = "<%= this.Rh.RMANo %>";
+                        var emailIn = prompt("Please enter a valid email address:");
+
+                        if (emailIn == null || emailIn == "") {
+                            alert("Invalid email address entered.");
+                        }
+                        else {
+                            if (validateEmail(emailIn)) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "ServiceCenter.aspx/IssueReturnLabel",
+                                    data: JSON.stringify({ rmaNo: rmaNo, email: emailIn }),
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    success: function (error) {
+                                        if (error.d.indexOf("Error") == -1) {
+                                            alert("Return Label Created for Return: " + rmaNo + " and will be emailed in 1 hour");
+                                            __doPostBack('[id$=btnReload', '');
+                                        } else {
+                                            alert(error.d);
+                                        }
+                                    },
+                                    error: function (xhr, status, text) {
+                                        console.log(xhr.status);
+                                        console.log(xhr.text);
+                                        console.log(xhr.responseText);
+                                    },
+                                });
+                            } else {
+                                alert("Invalid email address entered.")
+                            }
+                        }
+                    } else {
+                        alert("Only Return Orders that have an 'OPEN' return status can be issued Return Labels.");
+                    }
+                } else {
+                    alert("You do not have the required permission to issue a return label.");
+                }
+            } else {
+                alert("UPS Return Label has already been created.");
+            }
+        });
     });
 
     function expandMoreReturnLines<%= this.CustID %><%= this.CountID %>(lineID) {
@@ -203,7 +203,7 @@
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
-        <asp:TableCell Text="Date Created:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
+        <asp:TableCell Text="Date Created:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" Font/>
         <asp:TableCell runat="server" ID="tcDateCreated" />
         <asp:TableCell Text="Receipt Date:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcReceiptDate" />

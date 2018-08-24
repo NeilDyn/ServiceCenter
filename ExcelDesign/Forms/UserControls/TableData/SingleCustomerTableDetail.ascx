@@ -18,8 +18,8 @@
         <asp:TableCell />
         <asp:TableCell />
         <asp:TableCell />
-        <asp:TableCell Text="Ship to Contact:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
-        <asp:TableCell runat="server" ID="tcShiptoContact"/>
+        <asp:TableCell Text="Zip:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
+        <asp:TableCell runat="server" ID="tcZip" style="text-align: left"/>
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >
         <asp:TableCell />
@@ -35,9 +35,9 @@
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >
         <asp:TableCell />
         <asp:TableCell />
-        <asp:TableCell />
-        <asp:TableCell Text="Zip:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
-        <asp:TableCell runat="server" ID="tcZip" style="text-align: left"/>
+        <asp:TableCell />   
+        <asp:TableCell Text="Ship to Contact:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
+        <asp:TableCell runat="server" ID="tcShiptoContact"/>
         <asp:TableCell Text="Country:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcCountry"/>
         <asp:TableCell Text="whitespace" ForeColor="White"/>

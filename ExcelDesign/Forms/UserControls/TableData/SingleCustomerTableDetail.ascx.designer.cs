@@ -31,13 +31,13 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         protected global::System.Web.UI.WebControls.TableCell tcAddress2;
         
         /// <summary>
-        /// tcShiptoContact control.
+        /// tcZip control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcShiptoContact;
+        protected global::System.Web.UI.WebControls.TableCell tcZip;
         
         /// <summary>
         /// tcCity control.
@@ -58,13 +58,13 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         protected global::System.Web.UI.WebControls.TableCell tcState;
         
         /// <summary>
-        /// tcZip control.
+        /// tcShiptoContact control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcZip;
+        protected global::System.Web.UI.WebControls.TableCell tcShiptoContact;
         
         /// <summary>
         /// tcCountry control.

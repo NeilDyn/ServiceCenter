@@ -80,6 +80,32 @@
                 </asp:TableHeaderCell>
             </asp:TableHeaderRow>
             <asp:TableHeaderRow>
+                <asp:TableHeaderCell Text="Original Shipping Information:" HorizontalAlign="Left" Font-Underline="true" Font-Bold="true" />
+            </asp:TableHeaderRow>
+            <asp:TableHeaderRow>
+                <asp:TableHeaderCell Text="Ship to Name:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
+                <asp:TableHeaderCell ID="tcShipToName" runat="server" HorizontalAlign="Left" Style="text-align: left"/>
+                <asp:TableHeaderCell Text="Ship to City:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
+                <asp:TableHeaderCell ID="tcShipToCity" runat="server" HorizontalAlign="Left" Style="text-align: left"/>
+            </asp:TableHeaderRow>
+            <asp:TableHeaderRow>
+                <asp:TableHeaderCell Text="Ship to Address 1:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
+                <asp:TableHeaderCell ID="tcShipToAddress1" runat="server" HorizontalAlign="Left" Style="text-align: left"/>
+                <asp:TableHeaderCell Text="Ship to State:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
+                <asp:TableHeaderCell ID="tcShipToState" runat="server" HorizontalAlign="Left" Style="text-align: left"/>
+            </asp:TableHeaderRow>
+            <asp:TableHeaderRow>
+                <asp:TableHeaderCell Text="Ship to Address 2:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
+                <asp:TableHeaderCell ID="tcShipToAddress2" runat="server" HorizontalAlign="Left" Style="text-align: left" />
+                <asp:TableHeaderCell Text="Ship to Code:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
+                <asp:TableHeaderCell ID="tcShipToCode" runat="server" HorizontalAlign="Left" Style="text-align: left" />
+            </asp:TableHeaderRow>
+            <asp:TableHeaderRow>
+                <asp:TableHeaderCell>
+                    <br />
+                </asp:TableHeaderCell>
+            </asp:TableHeaderRow>
+            <asp:TableHeaderRow>
                 <asp:TableHeaderCell Text="Shipping Information:" HorizontalAlign="Left" Font-Underline="true" Font-Bold="true" />
             </asp:TableHeaderRow>
             <asp:TableHeaderRow>
@@ -112,6 +138,11 @@
                 <asp:TableHeaderCell runat="server" HorizontalAlign="Left" Style="text-align: left">
                     <asp:TextBox ID="txtShipToCode" runat="server" CssClass="inputBox" />
                     &nbsp<asp:RequiredFieldValidator ErrorMessage="Required" ForeColor="Red" ControlToValidate="txtShipToCode" runat="server" />
+                </asp:TableHeaderCell>
+            </asp:TableHeaderRow>
+            <asp:TableHeaderRow>
+                <asp:TableHeaderCell>
+                    <br />
                 </asp:TableHeaderCell>
             </asp:TableHeaderRow>
             <asp:TableHeaderRow>

@@ -65,6 +65,16 @@ namespace ExcelDesign.Forms.PDAForms
 
                 Rh = (List<ReturnHeader>)Session["ReturnHeaders"];
 
+                if (cust != null)
+                {
+                    tcShipToName.Text = cust.Name;
+                    tcShipToAddress1.Text = cust.Address1;
+                    tcShipToAddress2.Text = cust.Address2;
+                    tcShipToState.Text = cust.State;
+                    tcShipToCity.Text = cust.City;
+                    tcShipToCode.Text = cust.Zip;
+                }
+
                 if (updateRma.ToUpper() == "TRUE")
                 {
                     noTitle.Text = "RMA No:";
@@ -169,9 +179,10 @@ namespace ExcelDesign.Forms.PDAForms
                                     }
                                 }
                             }
-                        }                      
+                        }
                     }
-                    else if(Sh != null)
+
+                    if (Sh != null && tcIMEINo.Text == "")
                     {
                         foreach (SalesHeader head in Sh)
                         {
@@ -645,6 +656,8 @@ namespace ExcelDesign.Forms.PDAForms
                                     ClientScript.RegisterStartupScript(this.GetType(), "labelError", "alert('" + workerE.Message.Replace("'", "\"") + "');", true);
                                 }
                             });
+
+                            worker.Start();
                         }
 
                         Session["CreatedRMA"] = crh;
@@ -763,38 +776,45 @@ namespace ExcelDesign.Forms.PDAForms
                             {
                                 if (!String.IsNullOrEmpty(shipToState) || !String.IsNullOrWhiteSpace(shipToState))
                                 {
-                                    if (createLabel)
+                                    if (shipToState.Length <= 2)
                                     {
-                                        if (returnTrackingNo == string.Empty)
+                                        if (createLabel)
                                         {
-                                            User activeUser = (User)Session["ActiveUser"];
-
-                                            if (activeUser.CreateReturnLabel || activeUser.Developer || activeUser.Admin)
+                                            if (returnTrackingNo == string.Empty)
                                             {
-                                                if (!String.IsNullOrWhiteSpace(email))
+                                                User activeUser = (User)Session["ActiveUser"];
+
+                                                if (activeUser.CreateReturnLabel || activeUser.Developer || activeUser.Admin)
                                                 {
-                                                    if (IsValidEmail(email))
+                                                    if (!String.IsNullOrWhiteSpace(email))
                                                     {
-                                                        return valid;
+                                                        if (IsValidEmail(email))
+                                                        {
+                                                            return valid;
+                                                        }
+                                                        else
+                                                        {
+                                                            return "Invalid email address entered.";
+                                                        }
                                                     }
                                                     else
                                                     {
-                                                        return "Invalid email address entered.";
+                                                        return "Updated email is required for creating a return label.";
                                                     }
                                                 }
                                                 else
                                                 {
-                                                    return "Updated email is required for creating a return label.";
+                                                    return "You do not have the required permission to issue a return label.";
                                                 }
                                             }
                                             else
                                             {
-                                                return "You do not have the required permission to issue a return label.";
+                                                return "You cannot create a UPS Return Label and insert a Return Tracking Number.";
                                             }
                                         }
                                         else
                                         {
-                                            return "You cannot create a UPS Return Label and insert a Return Tracking Number.";
+                                            return "Ship To State should be a maximum of 2 characters.";
                                         }
                                     }
                                     else
@@ -840,7 +860,6 @@ namespace ExcelDesign.Forms.PDAForms
                 {
                     return "Please insert a valid Ship to Name.";
                 }
-
             }
             catch (Exception e)
             {

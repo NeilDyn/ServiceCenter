@@ -511,6 +511,8 @@ namespace ExcelDesign.Forms.FunctionForms
                                     ClientScript.RegisterStartupScript(this.GetType(), "labelError", "alert('" + workerE.Message.Replace("'", "\"") + "');", true);
                                 }
                             });
+
+                            worker.Start();
                         }
 
                         Session["CreatedRMA"] = crh;

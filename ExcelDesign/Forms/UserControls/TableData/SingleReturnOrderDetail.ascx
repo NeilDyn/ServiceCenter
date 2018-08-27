@@ -125,7 +125,7 @@
                                     dataType: "json",
                                     success: function (error) {
                                         if (error.d.indexOf("Error") == -1) {
-                                            alert("Return Label Created for Return: " + rmaNo + " and will be emailed in 1 hour");
+                                            alert("Return Label Created for Return: " + rmaNo + " and is being processed and will be emailed within 1-2 hours");
                                             __doPostBack('[id$=btnReload', '');
                                         } else {
                                             alert(error.d);

@@ -669,7 +669,7 @@ namespace ExcelDesign.Forms.PDAForms
                         }
                         else
                         {
-                            ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + ", Return Label will be emailed in 1 hour');", true);
+                            ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + ", Return label is being processed and will be emailed within 1-2 hours');", true);
                         }
 
                         ClientScript.RegisterStartupScript(this.GetType(), "openCreatedRMA", "OpenCreatedRMA();", true);

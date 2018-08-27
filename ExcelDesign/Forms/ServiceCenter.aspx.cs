@@ -25,7 +25,7 @@ namespace ExcelDesign.Forms
     {
         #region Global
 
-        protected const string version = "v4.6";
+        protected const string version = "v4.7";
 
         protected CallService cs = new CallService();
         public int SessionTime;

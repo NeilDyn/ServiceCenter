@@ -24,7 +24,7 @@
             var top = (screen.height - height) * 0.5;
 
             if (typeof (createExchangeWin) == 'undefined' || createExchangeWin.closed) {
-                if ("<%= this.tcIMEINo.Text %>" != null) {
+                if ("<%= this.tcIMEINo.Text %>" != "") {
                     if ("<%= this.CanExchangePDA %>" == "true") {
                         createExchangeWin = window.open("FunctionForms/CreateExchange.aspx?RMANo=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>",
                             null,

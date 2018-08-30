@@ -118,9 +118,9 @@ namespace ExcelDesign.Class_Objects
             return login;
         }
 
-        public string IssueReturnLabel(string rmaNo, string email, string sessionID)
+        public void IssueReturnLabel(string rmaNo, string email, string sessionID)
         {
-            return functions.IssueReturnLabel(rmaNo, email, sessionID);
+            functions.IssueReturnLabel(rmaNo, email, sessionID);
         }
 
         public CreatedExchangeOrder CreateExchange(string rmaNo, string externalDocNo, string lineValues)

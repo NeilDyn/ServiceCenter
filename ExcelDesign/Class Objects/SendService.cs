@@ -292,9 +292,9 @@ namespace ExcelDesign.Class_Objects
             return webService.DeleteRMA(rmaNo);
         }
 
-        public string IssueReturnLabel(string rmaNo, string email, string sessionID)
+        public void IssueReturnLabel(string rmaNo, string email, string sessionID)
         {
-            return webService.IssueReturnLabel(rmaNo, email, sessionID);
+            webService.IssueReturnLabel(rmaNo, email, sessionID);
         }
 
         public void UpdateUserPassword(string currentUser, string newPassword)

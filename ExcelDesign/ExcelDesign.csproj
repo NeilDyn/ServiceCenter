@@ -473,6 +473,9 @@
     <Content Include="Web References\ServiceFunctions\CreatedExchangeOrder.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Web References\ServiceFunctions\CreatedPartialRequest.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\ServiceFunctions\Functions.wsdl" />
     <None Include="Web References\ServiceFunctions\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>

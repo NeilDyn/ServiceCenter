@@ -54,8 +54,10 @@
                 <asp:TableHeaderCell Text="Create RMA" />
                 <asp:TableHeaderCell Text="Create Return Label" />
                 <asp:TableHeaderCell Text="Create Exchange Order" />
+                <asp:TableHeaderCell Text="Create Partial Request" />
                 <asp:TableHeaderCell Text="Create PDA Replacement RMA" />
                 <asp:TableHeaderCell Text="Create PDA Replacement Exchange" />
+                <asp:TableHeaderCell Text="Create PDA Partial Request" />
                 <asp:TableHeaderCell Text="Admin" />
                 <asp:TableHeaderCell Text="Developer" />
                 <asp:TableHeaderCell Text="Last Password Update" />
@@ -64,21 +66,35 @@
             <asp:TableRow>
                 <asp:TableCell ID="tcUserID" />
                 <asp:TableCell ID="tcPassword" HorizontalAlign="Center">
-                </asp:TableCell><asp:TableCell ID="tcCreateRMA" Width="10%" HorizontalAlign="Center">
+                </asp:TableCell>
+                <asp:TableCell ID="tcCreateRMA" Width="10%" HorizontalAlign="Center">
                     <asp:CheckBox ID="cbxCreateRMA" runat="server" Enabled="false" />
-                </asp:TableCell><asp:TableCell ID="tcCreateReturnLabel" Width="10%" HorizontalAlign="Center">
+                </asp:TableCell>
+                <asp:TableCell ID="tcCreateReturnLabel" Width="10%" HorizontalAlign="Center">
                     <asp:CheckBox ID="cbxCreateReturnLabel" runat="server" Enabled="false" />
-                </asp:TableCell><asp:TableCell ID="tcCreateExchangeOrder" Width="10%" HorizontalAlign="Center">
+                </asp:TableCell>
+                <asp:TableCell ID="tcCreateExchangeOrder" Width="10%" HorizontalAlign="Center">
                     <asp:CheckBox ID="cbxCreateExchangeOrder" runat="server" Enabled="false" />
-                </asp:TableCell><asp:TableCell ID="tcCreatePDARMA" Width="10%" HorizontalAlign="Center">
+                </asp:TableCell>
+                <asp:TableCell ID="tcCreatePartialRequest" Width="10%" HorizontalAlign="Center">
+                    <asp:CheckBox ID="cbxCreatePartialRequest" runat="server" Enabled="false" />
+                </asp:TableCell>
+                <asp:TableCell ID="tcCreatePDARMA" Width="10%" HorizontalAlign="Center">
                     <asp:CheckBox ID="cbxCreatePDARMA" runat="server" Enabled="false" />
-                </asp:TableCell><asp:TableCell ID="tcCreatePDAExchange" Width="10%" HorizontalAlign="Center">
+                </asp:TableCell>
+                <asp:TableCell ID="tcCreatePDAExchange" Width="10%" HorizontalAlign="Center">
                     <asp:CheckBox ID="cbxCreatePDAExchange" runat="server" Enabled="false" />
-                </asp:TableCell><asp:TableCell ID="tcAdmin" Width="10%" HorizontalAlign="Center">
+                </asp:TableCell>
+                <asp:TableCell ID="tcCreatePDAPartRequest" Width="10%" HorizontalAlign="Center">
+                    <asp:CheckBox ID="cbxCreatePDAPartRequest" runat="server" Enabled="false" />
+                </asp:TableCell>
+                <asp:TableCell ID="tcAdmin" Width="10%" HorizontalAlign="Center">
                     <asp:CheckBox ID="cbxAdmin" runat="server" Enabled="false" />
-                </asp:TableCell><asp:TableCell ID="tcDeveloper" Width="10%" HorizontalAlign="Center">
+                </asp:TableCell>
+                <asp:TableCell ID="tcDeveloper" Width="10%" HorizontalAlign="Center">
                     <asp:CheckBox ID="cbxDeveloper" runat="server" Enabled="false" />
-                </asp:TableCell><asp:TableCell ID="tcLastPasswordUpdate" Width="10%" />
+                </asp:TableCell>
+                <asp:TableCell ID="tcLastPasswordUpdate" Width="10%" />
                 <asp:TableCell ID="tcPasswordExpiryDate" Width="10%" />
             </asp:TableRow>
         </asp:Table>

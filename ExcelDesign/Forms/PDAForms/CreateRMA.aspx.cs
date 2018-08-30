@@ -288,7 +288,7 @@ namespace ExcelDesign.Forms.PDAForms
                                     DropDownList ddlReturnReasonCode = new DropDownList
                                     {
                                         DataValueField = "Display",
-                                        DataSource = rrList,
+                                        DataSource = rrList.Where(x => x.Category != "Part Request"),
                                         ID = "ddlReturnReasonCode_" + lineCount.ToString(),
                                         CssClass = "inputBox"
                                     };
@@ -300,19 +300,19 @@ namespace ExcelDesign.Forms.PDAForms
                                         CssClass = "inputBox"
                                     };
 
-                                    TextBox actionQtyInsert = new TextBox
-                                    {
-                                        ID = "actionQtyInsert_" + lineCount.ToString(),
-                                        Text = "1"/**(line.Quantity - removeqty).ToString()*/,
-                                        Width = new Unit("20%"),
-                                        CssClass = "inputBox"
-                                    };
+                                    //TextBox actionQtyInsert = new TextBox
+                                    //{
+                                    //    ID = "actionQtyInsert_" + lineCount.ToString(),
+                                    //    Text = "1"/**(line.Quantity - removeqty).ToString()*/,
+                                    //    Width = new Unit("20%"),
+                                    //    CssClass = "inputBox"
+                                    //};
 
                                     ddlReturnReasonCode.DataBind();
                                     ddlREQReturnAction.DataBind();
 
                                     itemNo.ID = "itemNo_" + lineCount.ToString();
-                                    qty.ID = "itemQuanity_" + lineCount.ToString();
+                                    qty.ID = "itemQuantity_" + lineCount.ToString();
                                     desc.ID = "desc_" + lineCount.ToString();
                                     actionQty.ID = "actionQty_" + lineCount.ToString();
                                     returnReasonCode.ID = "returnReasonCode_" + lineCount.ToString();
@@ -320,8 +320,8 @@ namespace ExcelDesign.Forms.PDAForms
 
                                     itemNo.Text = line.ItemNo;
                                     desc.Text = line.Description;
-                                    qty.Text = (line.Quantity - removeqty).ToString();
-                                    actionQty.Controls.Add(actionQtyInsert);
+                                    qty.Text = "1";
+                                    actionQty.Text = "1"; // Can only return one IMEI on PDA Replacement
                                     returnReasonCode.Controls.Add(ddlReturnReasonCode);
                                     ddlREQReturnAction.SelectedIndex = 1;
                                     reqReturnAction.Controls.Add(ddlREQReturnAction);
@@ -340,14 +340,14 @@ namespace ExcelDesign.Forms.PDAForms
                                     if (lineCount % 2 == 0)
                                     {
                                         singleRow.BackColor = Color.White;
-                                        actionQtyInsert.BackColor = Color.White;
+                                        actionQty.BackColor = Color.White;
                                         ddlREQReturnAction.BackColor = Color.White;
                                         ddlReturnReasonCode.BackColor = Color.White;
                                     }
                                     else
                                     {
                                         singleRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
-                                        actionQtyInsert.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                                        actionQty.BackColor = ColorTranslator.FromHtml("#EFF3FB");
                                         ddlREQReturnAction.BackColor = ColorTranslator.FromHtml("#EFF3FB");
                                         ddlReturnReasonCode.BackColor = ColorTranslator.FromHtml("#EFF3FB");
                                     }
@@ -394,7 +394,7 @@ namespace ExcelDesign.Forms.PDAForms
                                             DropDownList ddlReturnReasonCode = new DropDownList
                                             {
                                                 DataValueField = "Display",
-                                                DataSource = rrList,
+                                                DataSource = rrList.Where(x => x.Category != "Part Request"),
                                                 ID = "ddlReturnReasonCode_" + lineCount.ToString(),
                                                 CssClass = "inputBox"
                                             };
@@ -406,19 +406,19 @@ namespace ExcelDesign.Forms.PDAForms
                                                 CssClass = "inputBox"
                                             };
 
-                                            TextBox actionQtyInsert = new TextBox
-                                            {
-                                                ID = "actionQtyInsert_" + lineCount.ToString(),
-                                                Text = "1",
-                                                Width = new Unit("20%"),
-                                                CssClass = "inputBox"
-                                            };
+                                            //TextBox actionQtyInsert = new TextBox
+                                            //{
+                                            //    ID = "actionQtyInsert_" + lineCount.ToString(),
+                                            //    Text = "1",
+                                            //    Width = new Unit("20%"),
+                                            //    CssClass = "inputBox"
+                                            //};
 
                                             ddlReturnReasonCode.DataBind();
                                             ddlREQReturnAction.DataBind();
 
                                             itemNo.ID = "itemNo_" + lineCount.ToString();
-                                            qty.ID = "itemQuanity_" + lineCount.ToString();
+                                            qty.ID = "itemQuantity_" + lineCount.ToString();
                                             desc.ID = "desc2_" + lineCount.ToString();
                                             actionQty.ID = "actionQty_" + lineCount.ToString();
                                             returnReasonCode.ID = "returnReasonCode_" + lineCount.ToString();
@@ -442,8 +442,8 @@ namespace ExcelDesign.Forms.PDAForms
 
                                             itemNo.Text = line.ItemNo;
                                             desc.Text = line.Description;
-                                            qty.Text = (line.Quantity).ToString();
-                                            actionQty.Controls.Add(actionQtyInsert);
+                                            qty.Text = "1";
+                                            actionQty.Text = "1"; // Can only return one IMEI on PDA Replacement
                                             returnReasonCode.Controls.Add(ddlReturnReasonCode);
                                             reqReturnAction.Controls.Add(ddlREQReturnAction);
                                             ddlREQReturnAction.SelectedIndex = 1;
@@ -463,14 +463,14 @@ namespace ExcelDesign.Forms.PDAForms
                                             if (lineCount % 2 == 0)
                                             {
                                                 singleRow.BackColor = Color.White;
-                                                actionQtyInsert.BackColor = Color.White;
+                                                actionQty.BackColor = Color.White;
                                                 ddlREQReturnAction.BackColor = Color.White;
                                                 ddlReturnReasonCode.BackColor = Color.White;
                                             }
                                             else
                                             {
                                                 singleRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
-                                                actionQtyInsert.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                                                actionQty.BackColor = ColorTranslator.FromHtml("#EFF3FB");
                                                 ddlREQReturnAction.BackColor = ColorTranslator.FromHtml("#EFF3FB");
                                                 ddlReturnReasonCode.BackColor = ColorTranslator.FromHtml("#EFF3FB");
                                             }
@@ -548,20 +548,25 @@ namespace ExcelDesign.Forms.PDAForms
                                 itemNo = cell.Text.ToString();
                             }
 
-                            if (cell.ID.Contains("itemQuanity_"))
+                            if (cell.ID.Contains("itemQuantity_"))
                             {
                                 int.TryParse(cell.Text.ToString(), out qtyLine);
+                            }
+
+                            if (cell.ID.Contains("actionQty_"))
+                            {
+                                int.TryParse(cell.Text.ToString(), out actionQty);
                             }
 
                             foreach (Control c in cell.Controls)
                             {
                                 controlCount++;
 
-                                if (c.GetType() == typeof(TextBox))
-                                {
-                                    string value = ((TextBox)c).Text;
-                                    int.TryParse(value, out actionQty);
-                                }
+                                //if (c.GetType() == typeof(TextBox))
+                                //{
+                                //    string value = ((TextBox)c).Text;
+                                //    int.TryParse(value, out actionQty);
+                                //}
 
                                 if (c.GetType() == typeof(DropDownList))
                                 {
@@ -580,7 +585,7 @@ namespace ExcelDesign.Forms.PDAForms
 
                             string lineValidMessage = string.Empty;
 
-                            if ((rowCount > 1 && controlCount == 3 && actionQty != 0))
+                            if ((rowCount > 1 && controlCount == 2 && actionQty != 0))
                             {
                                 lineValidMessage = ValidateLine(itemNo, qtyLine, actionQty, reasonCode, reqReturnAction);
 
@@ -814,27 +819,28 @@ namespace ExcelDesign.Forms.PDAForms
                                         }
                                         else
                                         {
-                                            return "Ship To State should be a maximum of 2 characters.";
+                                            if (!String.IsNullOrWhiteSpace(returnTrackingNo) || !String.IsNullOrEmpty(returnTrackingNo))
+                                            {
+                                                if (returnTrackingNo.Length < 41)
+                                                {
+                                                    return valid;
+                                                }
+                                                else
+                                                {
+                                                    return "Maximum length for a Return Tracking No is 40.";
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return valid;
+                                            }
                                         }
                                     }
                                     else
                                     {
-                                        if (!String.IsNullOrWhiteSpace(returnTrackingNo) || !String.IsNullOrEmpty(returnTrackingNo))
-                                        {
-                                            if (returnTrackingNo.Length < 41)
-                                            {
-                                                return valid;
-                                            }
-                                            else
-                                            {
-                                                return "Maximum length for a Return Tracking No is 40.";
-                                            }
-                                        }
-                                        else
-                                        {
-                                            return valid;
-                                        }
+                                        return "Ship To State should be a maximum of 2 characters.";
                                     }
+                                    
                                 }
                                 else
                                 {

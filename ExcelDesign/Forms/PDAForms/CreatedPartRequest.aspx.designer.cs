@@ -7,171 +7,171 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExcelDesign.Forms.UserControls.TableHeaders {
+namespace ExcelDesign.Forms.PDAForms {
     
     
-    public partial class SingleCustomerTableHeader {
+    public partial class CreatedPartRequest {
         
         /// <summary>
-        /// tblSingleCustomerTableHeader control.
+        /// frmCreatedPDAPartRequestDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        public global::System.Web.UI.WebControls.Table tblSingleCustomerTableHeader;
+        protected global::System.Web.UI.HtmlControls.HtmlForm frmCreatedPDAPartRequestDetails;
         
         /// <summary>
-        /// customerColumns control.
+        /// tblHeaderDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderRow customerColumns;
+        protected global::System.Web.UI.WebControls.Table tblHeaderDetails;
         
         /// <summary>
-        /// ExpandCurrentCustomer control.
+        /// tcQuoteNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell ExpandCurrentCustomer;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcQuoteNo;
         
         /// <summary>
-        /// btnExpload control.
+        /// tcShipMethod control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExpload;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipMethod;
         
         /// <summary>
-        /// CustomerSequence control.
+        /// tcExternalDocNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell CustomerSequence;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcExternalDocNo;
         
         /// <summary>
-        /// thcCustomerName control.
+        /// tcOriginalOrderNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell thcCustomerName;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcOriginalOrderNo;
         
         /// <summary>
-        /// tcAddress1 control.
+        /// tcQuoteDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcAddress1;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcQuoteDate;
         
         /// <summary>
-        /// lblSelectActive control.
+        /// tcChannelName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell lblSelectActive;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcChannelName;
         
         /// <summary>
-        /// btnSelectCustomer control.
+        /// tcShipToName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSelectCustomer;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToName;
         
         /// <summary>
-        /// trInfo1 control.
+        /// tcShipToAddress1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderRow trInfo1;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToAddress1;
         
         /// <summary>
-        /// tcAddress2 control.
+        /// tcShipToContact control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcAddress2;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToContact;
         
         /// <summary>
-        /// tcZip control.
+        /// tcShipToAddress2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcZip;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToAddress2;
         
         /// <summary>
-        /// trInfo2 control.
+        /// tcShipToCity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderRow trInfo2;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToCity;
         
         /// <summary>
-        /// tcCity control.
+        /// tcShipToState control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcCity;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToState;
         
         /// <summary>
-        /// tcState control.
+        /// tcShipToZip control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcState;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToZip;
         
         /// <summary>
-        /// trInfo3 control.
+        /// tcShipToCountry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderRow trInfo3;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToCountry;
         
         /// <summary>
-        /// tcShiptoContact control.
+        /// TblReturnHeaderLines control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShiptoContact;
+        protected global::System.Web.UI.WebControls.Table TblReturnHeaderLines;
         
         /// <summary>
-        /// tcCountry control.
+        /// BtnClose control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcCountry;
+        protected global::System.Web.UI.WebControls.Button BtnClose;
     }
 }

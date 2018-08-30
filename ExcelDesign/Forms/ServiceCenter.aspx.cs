@@ -25,7 +25,7 @@ namespace ExcelDesign.Forms
     {
         #region Global
 
-        protected const string version = "v4.7";
+        protected const string version = "v5.1";
 
         protected CallService cs = new CallService();
         public int SessionTime;
@@ -92,6 +92,7 @@ namespace ExcelDesign.Forms
                     if (Session["NoUserInteraction"] == null)
                     {
                         Session["NoUserInteraction"] = null;
+                        customerInfoTable = new Control();
                         customerInfo = new Control();
                         salesOrderHeader = new Control();
                         salesOrderDetail = new Control();

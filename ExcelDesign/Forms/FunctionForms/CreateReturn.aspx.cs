@@ -163,7 +163,7 @@ namespace ExcelDesign.Forms.FunctionForms
                                     DropDownList ddlReturnReasonCode = new DropDownList
                                     {
                                         DataValueField = "Display",
-                                        DataSource = rrList,
+                                        DataSource = rrList.Where(x => x.Category != "Part Request"),
                                         ID = "ddlReturnReasonCode_" + lineCount.ToString(),
                                         CssClass = "inputBox"
                                     };

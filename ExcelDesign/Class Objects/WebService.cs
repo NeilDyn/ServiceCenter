@@ -90,6 +90,16 @@ namespace ExcelDesign.Class_Objects
             }
         }
 
+        public CreatedPartialRequest CreatePartRequest(string orderNo, string externalDocumentNo, string lineDetails, string notes,
+            string shippingDetails, string email)
+        {
+            CreatedPartialRequest returnPartReq = new CreatedPartialRequest();
+
+            functions.CreatePartRequest(orderNo, externalDocumentNo, ref returnPartReq, SessionID(), lineDetails, notes, shippingDetails, email);
+
+            return returnPartReq;
+        }
+
         public ReturnOrder CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, string notes,
             bool includeResource, bool printRMA, bool createLabel, string email, string lineValues, bool update, string returnTrackingNo,
             string shippingDetails, string imeiNo)
@@ -118,9 +128,9 @@ namespace ExcelDesign.Class_Objects
             return login;
         }
 
-        public string IssueReturnLabel(string rmaNo, string email, string sessionID)
+        public void IssueReturnLabel(string rmaNo, string email, string sessionID)
         {
-            return functions.IssueReturnLabel(rmaNo, email, sessionID);
+            functions.IssueReturnLabelAsync(rmaNo, email, sessionID);
         }
 
         public CreatedExchangeOrder CreateExchange(string rmaNo, string externalDocNo, string lineValues)

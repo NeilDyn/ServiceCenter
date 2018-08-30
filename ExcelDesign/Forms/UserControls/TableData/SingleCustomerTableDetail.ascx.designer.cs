@@ -20,59 +20,5 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         public global::System.Web.UI.WebControls.Table tblSingleCustomerDetail;
-        
-        /// <summary>
-        /// tcAddress2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcAddress2;
-        
-        /// <summary>
-        /// tcZip control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcZip;
-        
-        /// <summary>
-        /// tcCity control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcCity;
-        
-        /// <summary>
-        /// tcState control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcState;
-        
-        /// <summary>
-        /// tcShiptoContact control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcShiptoContact;
-        
-        /// <summary>
-        /// tcCountry control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcCountry;
     }
 }

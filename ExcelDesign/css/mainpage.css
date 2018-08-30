@@ -3,20 +3,6 @@
     vertical-align: middle;
 }
 
-.ReturnButtonGroup button {
-    font-family: Calibri;
-}
-
-.ReturnButtonGroup button:not(:last-child) {
-    border-right: none;
-}
-
-.ReturnButtonGroup::after{
-    content: "";
-    clear: both;
-    display: table;
-}
-
 .inputBox {
     border: 0;
     border-bottom: solid 1px #507CD1;

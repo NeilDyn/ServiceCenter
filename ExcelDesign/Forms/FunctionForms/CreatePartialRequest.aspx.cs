@@ -11,24 +11,16 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace ExcelDesign.Forms.PDAForms
+namespace ExcelDesign.Forms.FunctionForms
 {
-    public partial class CreatePartRequest : System.Web.UI.Page
+    public partial class CreatePartialRequest : System.Web.UI.Page
     {
         protected List<SalesHeader> Sh;
-        public Customer cust;
 
         protected string no;
         protected string externalDocumentNo;
         protected string notes;
         protected string email;
-
-        protected string shipToName;
-        protected string shipToAddress1;
-        protected string shipToAddress2;
-        protected string shipToCity;
-        protected string shipToCode;
-        protected string shipToState;
 
         protected bool anyLines = false;
 
@@ -40,21 +32,9 @@ namespace ExcelDesign.Forms.PDAForms
             {
                 tcNo.Text = Convert.ToString(Request.QueryString["No"]);
                 tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
-                cust = (Customer)Session["SelectedCustomer"];
                 Sh = (List<SalesHeader>)Session["SalesHeaders"];
-
-                if (cust != null)
-                {
-                    tcShipToName.Text = cust.Name;
-                    tcShipToAddress1.Text = cust.Address1;
-                    tcShipToAddress2.Text = cust.Address2;
-                    tcShipToState.Text = cust.State;
-                    tcShipToCity.Text = cust.City;
-                    tcShipToCode.Text = cust.Zip;
-                }
             }
 
-            cust = (Customer)Session["SelectedCustomer"];
             LoadPartRequestLines();
         }
 
@@ -198,13 +178,6 @@ namespace ExcelDesign.Forms.PDAForms
 
             try
             {
-                shipToName = txtShipToName.Text;
-                shipToAddress1 = txtShipToAddress1.Text;
-                shipToAddress2 = txtShipToAddress2.Text;
-                shipToCity = txtShipToCity.Text;
-                shipToCode = txtShipToCode.Text;
-                shipToState = txtShipToState.Text;
-
                 no = tcNo.Text;
                 externalDocumentNo = tcDocNo.Text;
                 notes = txtNotes.Text;
@@ -306,16 +279,7 @@ namespace ExcelDesign.Forms.PDAForms
 
                         SendService ss = new SendService();
 
-                        shippingBuild.Append(shipToName).Append(":");
-                        shippingBuild.Append(shipToAddress1).Append(":");
-                        shippingBuild.Append(shipToAddress2).Append(":");
-                        shippingBuild.Append(shipToCity).Append(":");
-                        shippingBuild.Append(shipToCode).Append(":");
-                        shippingBuild.Append(shipToState);
-
-                        string shippingDetails = shippingBuild.ToString();
-
-                        cprh = ss.CreatePartialRequest(no, externalDocumentNo, lineValues, notes, shippingDetails, email);
+                        cprh = ss.CreatePartialRequest(no, externalDocumentNo, lineValues, notes, "", email);
 
                         Session["CreatedPartRequest"] = cprh;
                         Session["NoUserInteraction"] = true;
@@ -392,63 +356,22 @@ namespace ExcelDesign.Forms.PDAForms
 
             try
             {
-                if (!String.IsNullOrEmpty(shipToName) || !String.IsNullOrWhiteSpace(shipToName))
+                if (!String.IsNullOrEmpty(email) || !String.IsNullOrWhiteSpace(email))
                 {
-                    if (!String.IsNullOrEmpty(shipToAddress1) || !String.IsNullOrWhiteSpace(shipToAddress1))
+                    if (IsValidEmail(email))
                     {
-                        if (!String.IsNullOrEmpty(shipToCity) || !String.IsNullOrWhiteSpace(shipToCity))
-                        {
-                            if (!String.IsNullOrEmpty(shipToCode) || !String.IsNullOrWhiteSpace(shipToCode))
-                            {
-                                if (!String.IsNullOrEmpty(shipToState) || !String.IsNullOrWhiteSpace(shipToState))
-                                {
-                                    if (shipToState.Length <= 2)
-                                    {
-                                        if (!String.IsNullOrEmpty(email) || !String.IsNullOrWhiteSpace(email))
-                                        {
-                                            if (IsValidEmail(email))
-                                            {
-                                                return valid;
-                                            }
-                                            else
-                                            {
-                                                return "Invalid email address entered.";
-                                            }
-                                        }
-                                        else
-                                        {
-                                            return valid;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        return "Ship To State should be a maximum of 2 characters.";
-                                    }
-                                }
-                                else
-                                {
-                                    return "Please insert a valid Ship to State.";
-                                }
-                            }
-                            else
-                            {
-                                return "Please insert a valid Ship to Code.";
-                            }
-                        }
-                        else
-                        {
-                            return "Please insert a valid Ship to City.";
-                        }
+                        return valid;
                     }
                     else
                     {
-                        return "Please insert a valid Ship to Address 1.";
+                        return "Invalid email address entered.";
                     }
                 }
                 else
                 {
-                    return "Please insert a valid Ship to Name.";
+                    return valid;
                 }
+
             }
             catch (Exception e)
             {

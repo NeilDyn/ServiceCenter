@@ -51,10 +51,10 @@
                             __doPostBack('[id$=btnReload', '');
                             clearInterval(intervalID);
                         }
+                    }
                         var interval2 = setInterval(function () {
                             checkIfWinClosed2(interval);
                         }, 1000);
-                    }
 
                 } else {
                     alert('Please close the current active Part Request dialog window before trying to open a new instance.');

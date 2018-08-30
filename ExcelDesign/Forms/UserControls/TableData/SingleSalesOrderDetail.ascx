@@ -30,7 +30,7 @@
                 var top = (screen.height - height) * 0.5;
 
                 if (typeof (partRequestWindow) == 'undefined' || partRequestWindow.closed) {
-                    if ("<%= this.Sh.WarrantyProp.IsPDA %>") {
+                    if ("<%= this.Sh.WarrantyProp.IsPDA %>" == "YES") {
                         if ("<%= this.CanCreatePDAPartRequest%>" == "true") {
                             partRequestWindow = window.open("PDAForms/CreatePartRequest.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>",
                                 null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
@@ -46,15 +46,15 @@
                         }
                     }
 
-                    function checkIfWinClosed2(intervalID) {
+                    function checkIfWinClosed(intervalID) {
                         if (partRequestWindow.closed) {
                             __doPostBack('[id$=btnReload', '');
                             clearInterval(intervalID);
                         }
-                        var interval2 = setInterval(function () {
-                            checkIfWinClosed2(interval);
-                        }, 1000);
                     }
+                    var interval = setInterval(function () {
+                        checkIfWinClosed(interval);
+                    }, 1000);
 
                 } else {
                     alert('Please close the current active Part Request dialog window before trying to open a new instance.');

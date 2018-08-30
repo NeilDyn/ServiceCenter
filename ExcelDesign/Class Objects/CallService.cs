@@ -602,7 +602,7 @@ namespace ExcelDesign.Class_Objects
                 {
                     if (currResults.SOImportBuffer[so].OrderType == "Credit Memo")
                     {
-                        if (currResults.SOImportBuffer[so].ShipToName == custName && currResults.SOImportBuffer[so].ShipToAddress == shipAddress)
+                        if (currResults.SOImportBuffer[so].ShipToName.ToUpper() == custName && currResults.SOImportBuffer[so].ShipToAddress.ToUpper() == shipAddress)
                         {
                             rmaNo = currResults.SOImportBuffer[so].SalesOrderNo;
 
@@ -700,7 +700,7 @@ namespace ExcelDesign.Class_Objects
                 {
                     if (currResults.SalesHeader[so].DocType == "Return Order")
                     {
-                        if (currResults.SalesHeader[so].ShipToName == custName && currResults.SalesHeader[so].ShipToAddress == shipAddress)
+                        if (currResults.SalesHeader[so].ShipToName.ToUpper() == custName && currResults.SalesHeader[so].ShipToAddress.ToUpper() == shipAddress)
                         {
                             rmaNo = currResults.SalesHeader[so].No;
 
@@ -838,7 +838,7 @@ namespace ExcelDesign.Class_Objects
             {
                 for (int so = 0; so < currResults.ReturnReceiptHeader.Length; so++)
                 {
-                    if (currResults.ReturnReceiptHeader[so].ShipToName == custName && currResults.ReturnReceiptHeader[so].ShipToAddress == shipAddress)
+                    if (currResults.ReturnReceiptHeader[so].ShipToName.ToUpper() == custName && currResults.ReturnReceiptHeader[so].ShipToAddress.ToUpper() == shipAddress)
                     {
                         rmaNo = currResults.ReturnReceiptHeader[so].ReturnOrderNo;
 
@@ -960,7 +960,7 @@ namespace ExcelDesign.Class_Objects
                 {
                     if (currResults.SOImportBuffer[so].OrderType == "Sales Order")
                     {
-                        if (currResults.SOImportBuffer[so].ShipToName == custName && currResults.SOImportBuffer[so].ShipToAddress == shipAddress)
+                        if (currResults.SOImportBuffer[so].ShipToName.ToUpper() == custName && currResults.SOImportBuffer[so].ShipToAddress.ToUpper() == shipAddress)
                         {
                             orderNo = currResults.SOImportBuffer[so].SalesOrderNo;
 
@@ -982,7 +982,7 @@ namespace ExcelDesign.Class_Objects
                                 daysRemaining = currResults.SOImportBuffer[so].Warranty[0].DaysRemaining[0];
                                 warrantyType = currResults.SOImportBuffer[so].Warranty[0].WarrantyType[0];
                                 isPDA = currResults.SOImportBuffer[so].Warranty[0].IsPDAWarranty[0].ToUpper();
-                                warranty = new Warranty(status, policy, daysRemaining, warrantyType, isPDA);
+                                warranty = new Warranty(status, policy, int.Parse(daysRemaining), warrantyType, isPDA);
                                 sellToCustomerNo = currResults.SOImportBuffer[so].CustomerNo;
 
                                 if (currResults.ExtendedSalesHeader != null)
@@ -1044,7 +1044,7 @@ namespace ExcelDesign.Class_Objects
                 {
                     if (currResults.SalesHeader[so].DocType == "Order" || currResults.SalesHeader[so].DocType == "Quote")
                     {
-                        if (currResults.SalesHeader[so].ShipToName == custName && currResults.SalesHeader[so].ShipToAddress == shipAddress)
+                        if (currResults.SalesHeader[so].ShipToName.ToUpper() == custName && currResults.SalesHeader[so].ShipToAddress.ToUpper() == shipAddress)
                         {
                             orderNo = currResults.SalesHeader[so].No;
 
@@ -1066,7 +1066,7 @@ namespace ExcelDesign.Class_Objects
                                 daysRemaining = currResults.SalesHeader[so].Warranty2[0].DaysRemaining2[0];
                                 warrantyType = currResults.SalesHeader[so].Warranty2[0].WarrantyType2[0];
                                 isPDA = currResults.SalesHeader[so].Warranty2[0].IsPDAWarranty2[0].ToUpper();
-                                warranty = new Warranty(status, policy, daysRemaining, warrantyType, isPDA);
+                                warranty = new Warranty(status, policy, int.Parse(daysRemaining), warrantyType, isPDA);
                                 sellToCustomerNo = currResults.SalesHeader[so].SellToCustomerNo;
                                 int totalCounter = 0;
 
@@ -1160,7 +1160,7 @@ namespace ExcelDesign.Class_Objects
             {
                 for (int so = 0; so < currResults.SalesShipmentHeader.Length; so++)
                 {
-                    if (currResults.SalesShipmentHeader[so].ShipToName == custName && currResults.SalesShipmentHeader[so].ShipToAddress == shipAddress)
+                    if (currResults.SalesShipmentHeader[so].ShipToName.ToUpper() == custName && currResults.SalesShipmentHeader[so].ShipToAddress.ToUpper() == shipAddress)
                     {
                         orderNo = currResults.SalesShipmentHeader[so].OrderNo;
 
@@ -1181,7 +1181,7 @@ namespace ExcelDesign.Class_Objects
                             daysRemaining = currResults.SalesShipmentHeader[so].Warranty3[0].DaysRemaining3[0];
                             warrantyType = currResults.SalesShipmentHeader[so].Warranty3[0].WarrantyType3[0];
                             isPDA = currResults.SalesShipmentHeader[so].Warranty3[0].IsPDAWarranty3[0].ToUpper(); ;
-                            warranty = new Warranty(status, policy, daysRemaining, warrantyType, isPDA);
+                            warranty = new Warranty(status, policy, int.Parse(daysRemaining), warrantyType, isPDA);
                             sellToCustomerNo = currResults.SalesShipmentHeader[so].SellToCustomerNo;
 
                             orderStatus = "Shipped";
@@ -1267,8 +1267,8 @@ namespace ExcelDesign.Class_Objects
             {
                 for (int c = 0; c < currResults.SOImportBuffer.Length; c++)
                 {
-                    shipToName = currResults.SOImportBuffer[c].ShipToName;
-                    shipToAddress1 = currResults.SOImportBuffer[c].ShipToAddress;
+                    shipToName = currResults.SOImportBuffer[c].ShipToName.ToUpper();
+                    shipToAddress1 = currResults.SOImportBuffer[c].ShipToAddress.ToUpper();
 
                     if (!customerNames.Any(order => order.Equals(shipToName)) ||
                         !shipAddresses.Any(address => address.Equals(shipToAddress1)))
@@ -1307,8 +1307,8 @@ namespace ExcelDesign.Class_Objects
             {
                 for (int c = 0; c < currResults.SalesHeader.Length; c++)
                 {
-                    shipToName = currResults.SalesHeader[c].ShipToName;
-                    shipToAddress1 = currResults.SalesHeader[c].ShipToAddress;
+                    shipToName = currResults.SalesHeader[c].ShipToName.ToUpper();
+                    shipToAddress1 = currResults.SalesHeader[c].ShipToAddress.ToUpper();
 
                     if (currResults.SalesHeader[c].DocType == "Order")
                     {
@@ -1349,8 +1349,8 @@ namespace ExcelDesign.Class_Objects
             {
                 for (int c = 0; c < currResults.SalesShipmentHeader.Length; c++)
                 {
-                    shipToName = currResults.SalesShipmentHeader[c].ShipToName;
-                    shipToAddress1 = currResults.SalesShipmentHeader[c].ShipToAddress;
+                    shipToName = currResults.SalesShipmentHeader[c].ShipToName.ToUpper();
+                    shipToAddress1 = currResults.SalesShipmentHeader[c].ShipToAddress.ToUpper();
 
                     if (!customerNames.Any(order => order.Equals(shipToName)) ||
                         !shipAddresses.Any(address => address.Equals(shipToAddress1)))

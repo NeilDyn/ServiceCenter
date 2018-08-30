@@ -47,7 +47,7 @@ namespace ExcelDesign.Forms.UserControls
             {
                 this.tcSetPolicy.Text = sh.WarrantyProp.Policy;
                 this.tcSetStatus.Text = sh.WarrantyProp.Status;
-                this.tcSetDays.Text = sh.WarrantyProp.DaysRemaining;
+                this.tcSetDays.Text = sh.WarrantyProp.DaysRemaining.ToString();
 
                 if (sh.WarrantyProp.Status.ToUpper() == "OPEN")
                 {

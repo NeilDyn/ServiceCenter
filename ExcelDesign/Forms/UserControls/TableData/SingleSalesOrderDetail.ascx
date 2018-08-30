@@ -23,45 +23,49 @@
         });
 
         $("[id$=btnPartRequest_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            if ("<%= this.tcOrderStatus.Text.ToUpper() %>" == "SHIPPED") {
-                var width = 1500;
-                var height = 500;
-                var left = (screen.height - width) + 500;
-                var top = (screen.height - height) * 0.5;
+            if ("<%= this.tcStatus.Text.ToUpper() %>" == "OPEN" || <%= this.Sh.WarrantyProp.DaysRemaining %> > -15) {
+                if ("<%= this.tcOrderStatus.Text.ToUpper() %>" == "SHIPPED") {
+                    var width = 1500;
+                    var height = 800;
+                    var left = (screen.height - width) + 1500;
+                    var top = (screen.height - height);
 
-                if (typeof (partRequestWindow) == 'undefined' || partRequestWindow.closed) {
-                    if ("<%= this.Sh.WarrantyProp.IsPDA %>" == "YES") {
-                        if ("<%= this.CanCreatePDAPartRequest%>" == "true") {
-                            partRequestWindow = window.open("PDAForms/CreatePartRequest.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>",
-                                null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                    if (typeof (partRequestWindow) == 'undefined' || partRequestWindow.closed) {
+                        if ("<%= this.Sh.WarrantyProp.IsPDA %>" == "YES") {
+                            if ("<%= this.CanCreatePDAPartRequest%>" == "true") {
+                                partRequestWindow = window.open("PDAForms/CreatePartRequest.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>",
+                                    null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                            } else {
+                                alert("You do not have the required permission to create a PDA Part Request.");
+                            }
                         } else {
-                            alert("You do not have the required permission to create a PDA Partial Request.");
+                            if ("<%= this.CanCreatePartRequest%>" == "true") {
+                                partRequestWindow = window.open("FunctionForms/CreatePartialRequest.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>",
+                                    null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                            } else {
+                                alert("You do not have the required permission to create a Part Request.");
+                            }
                         }
+
+                        function checkIfWinClosed(intervalID) {
+                            if (partRequestWindow.closed) {
+                                __doPostBack('[id$=btnReload', '');
+                                clearInterval(intervalID);
+                            }
+                        }
+                        var interval = setInterval(function () {
+                            checkIfWinClosed(interval);
+                        }, 1000);
+
                     } else {
-                        if ("<%= this.CanCreatePartRequest%>" == "true") {
-                            partRequestWindow = window.open("FunctionForms/CreatePartialRequest.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>",
-                                null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
-                        } else {
-                            alert("You do not have the required permission to create a Partial Request.");
-                        }
+                        alert('Please close the current active Part Request dialog window before trying to open a new instance.');
                     }
-
-                    function checkIfWinClosed(intervalID) {
-                        if (partRequestWindow.closed) {
-                            __doPostBack('[id$=btnReload', '');
-                            clearInterval(intervalID);
-                        }
-                    }
-                    var interval = setInterval(function () {
-                        checkIfWinClosed(interval);
-                    }, 1000);
 
                 } else {
-                    alert('Please close the current active Part Request dialog window before trying to open a new instance.');
+                    alert("Order <%= this.OrderNo %> has not been shipped and cannot be Part Requested.");
                 }
-
             } else {
-                alert("Order <%= this.OrderNo %> has not been shipped and cannot be Part Returned.");
+                alert("Order <%= this.OrderNo %> is out of warranty range.");
             }
         });
 
@@ -69,9 +73,9 @@
             if ("<%= this.tcStatus.Text.ToUpper() %>" == "OPEN") {
                 if ("<%= this.tcOrderStatus.Text.ToUpper() %>" == "SHIPPED") {
                     var width = 1500;
-                    var height = 500;
-                    var left = (screen.width - width) + 500;
-                    var top = (screen.height - height) * 0.5;
+                    var height = 800;
+                    var left = (screen.width - width) + 1500;
+                    var top = (screen.height - height);
 
                     if (typeof (createReturnWindow) == 'undefined' || createReturnWindow.closed) {
                         if ("<%= this.Sh.WarrantyProp.IsPDA %>" == "YES") {
@@ -161,7 +165,7 @@
         <asp:TableCell />
         <asp:TableCell Text="Is Part Request:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcIsPartRequest" />
-        <asp:TableCell Text="Order No:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" ID="tcOrderNoTitle" />
+        <asp:TableCell Text="Original Order No:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" ID="tcOrderNoTitle" />
         <asp:TableCell runat="server" ID="tcOriginalOrderNo" />
     </asp:TableRow>
     <asp:TableRow>
@@ -180,7 +184,7 @@
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
-        <asp:TableCell Text="Sales Order No:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
+        <asp:TableCell Text="Sales Order No:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" ID="lblOrderLabelNo"/>
         <asp:TableCell runat="server" ID="tcSalesOrderNo" />
         <asp:TableCell Text="Shipments:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcShipmentsTotal" />

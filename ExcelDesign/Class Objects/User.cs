@@ -14,10 +14,10 @@ namespace ExcelDesign.Class_Objects
         public bool CreateRMA { get; set; }
         public bool CreateReturnLabel { get; set; }
         public bool CreateExchange { get; set; }
-        public bool CreatePartialRequest { get; set; }
+        public bool CreatePartRequest { get; set; }
         public bool CreatePDARMA { get; set; }
         public bool CreatePDAExchange { get; set; }
-        public bool CreatePDAPartialRequest { get; set; }
+        public bool CreatePDAPartRequest { get; set; }
         public bool Admin { get; set; }
         public bool Developer { get; set; }
         public string PasswordLastUpdated { get; set; }
@@ -40,8 +40,8 @@ namespace ExcelDesign.Class_Objects
             CreateExchange = us.User[0].CreateExchange.ToUpper() == "YES" ? true : false;
             CreatePDARMA = us.User[0].CreatePDARma.ToUpper() == "YES" ? true : false;
             CreatePDAExchange = us.User[0].CreatePDAExchange.ToUpper() == "YES" ? true : false;
-            CreatePartialRequest = us.User[0].CreatePartialRequest.ToUpper() == "YES" ? true : false;
-            CreatePDAPartialRequest = us.User[0].CreatePDAPartiaRequest.ToUpper() == "YES" ? true : false;
+            CreatePartRequest = us.User[0].CreatePartRequest.ToUpper() == "YES" ? true : false;
+            CreatePDAPartRequest = us.User[0].CreatePDAPartRequest.ToUpper() == "YES" ? true : false;
             Admin = us.User[0].Admin.ToUpper() == "YES" ? true : false;
             Developer = us.User[0].Developer.ToUpper() == "YES" ? true : false;
 

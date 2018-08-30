@@ -81,8 +81,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
             {
                 CanReturn = activeUser.CreateRMA ? "true" : "false";
                 CanReturnPDA = activeUser.CreatePDARMA ? "true" : "false";
-                CanCreatePartRequest = activeUser.CreatePartialRequest ? "true" : "false";
-                CanCreatePDAPartRequest = activeUser.CreatePDAPartialRequest ? "true" : "false";
+                CanCreatePartRequest = activeUser.CreatePartRequest ? "true" : "false";
+                CanCreatePDAPartRequest = activeUser.CreatePDAPartRequest ? "true" : "false";
             }
         }
 
@@ -127,6 +127,20 @@ namespace ExcelDesign.Forms.UserControls.TableData
             {
                 this.tcOrderNoTitle.Visible = false;
                 this.tcOriginalOrderNo.Visible = false;
+            }
+
+            if(Sh.IsPartRequest)
+            {
+                if(Sh.SalesOrderNo.ToUpper().Contains("SQ"))
+                {
+                    this.tcOrderStatus.Text = "Pending Approval";
+                    this.lblOrderLabelNo.Text = "Quote No:";
+                }
+                else
+                {
+                    this.tcOrderStatus.Text = "Approved";
+                    this.lblOrderLabelNo.Text = "Sales Order No:";
+                }
             }
 
             OrderNo = Sh.SalesOrderNo;
@@ -198,7 +212,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 }
 
                 this.tcPolicy.Text = Sh.WarrantyProp.Policy;
-                this.tcDaysRemaining.Text = Sh.WarrantyProp.DaysRemaining;
+                this.tcDaysRemaining.Text = Sh.WarrantyProp.DaysRemaining.ToString();
                 this.tcWarrantyType.Text = Sh.WarrantyProp.WarrantyType;
 
                 if(Sh.WarrantyProp.IsPDA == "YES")

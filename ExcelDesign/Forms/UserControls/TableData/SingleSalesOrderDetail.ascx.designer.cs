@@ -103,6 +103,15 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         protected global::System.Web.UI.WebControls.TableCell tcShipmentDate;
         
         /// <summary>
+        /// lblOrderLabelNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell lblOrderLabelNo;
+        
+        /// <summary>
         /// tcSalesOrderNo control.
         /// </summary>
         /// <remarks>

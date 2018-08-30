@@ -45,8 +45,8 @@ namespace ExcelDesign.Forms
                 tcPasswordExpiryDate.Text = u.PasswordExpiryDate;
                 cbxCreatePDARMA.Checked = u.CreatePDARMA;
                 cbxCreatePDAExchange.Checked = u.CreatePDAExchange;
-                cbxCreatePartialRequest.Checked = u.CreatePartialRequest;
-                cbxCreatePDAPartRequest.Checked = u.CreatePDAPartialRequest;
+                cbxCreatePartialRequest.Checked = u.CreatePartRequest;
+                cbxCreatePDAPartRequest.Checked = u.CreatePDAPartRequest;
             }
             catch (Exception e)
             {

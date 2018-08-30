@@ -9,7 +9,7 @@ namespace ExcelDesign.Class_Objects
     {
         public string Status { get; set; }
         public string Policy { get; set; }
-        public string DaysRemaining { get; set; }
+        public int DaysRemaining { get; set; }
         public string WarrantyType { get; set; }
         public string IsPDA { get; set; }
 
@@ -17,7 +17,7 @@ namespace ExcelDesign.Class_Objects
         {
 
         }
-        public Warranty(string pStatus, string pPolicy, string pDaysRemaining, string pWarrantyType, string pIsPDA)
+        public Warranty(string pStatus, string pPolicy, int pDaysRemaining, string pWarrantyType, string pIsPDA)
         {
             Status = pStatus;
             Policy = pPolicy;

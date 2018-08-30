@@ -44,6 +44,17 @@ namespace ExcelDesign.Forms.UserControls.TableHeaders
             this.thcCustomerName.Text = SingleCustomer.Name;
             this.tcAddress1.Text = SingleCustomer.Address1;
 
+            this.tcAddress2.Text = SingleCustomer.Address2;
+            this.tcShiptoContact.Text = SingleCustomer.ShipToContact;
+            this.tcCity.Text = SingleCustomer.City;
+            this.tcZip.Text = SingleCustomer.Zip;
+            this.tcState.Text = SingleCustomer.State;
+            this.tcCountry.Text = SingleCustomer.Country;
+
+            this.trInfo1.ID = "trInfo1_" + Count.ToString();
+            this.trInfo2.ID = "trInfo2_" + Count.ToString();
+            this.trInfo3.ID = "trInfo3_" + Count.ToString();
+
             this.ID = "customerHeader_" + Count.ToString();
 
             LoadData();

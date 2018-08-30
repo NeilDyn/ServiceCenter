@@ -92,11 +92,14 @@
     <Content Include="Forms\AdminControl.aspx" />
     <Content Include="Forms\ErrorForm.aspx" />
     <Content Include="Forms\FunctionForms\CreatedExchange.aspx" />
+    <Content Include="Forms\FunctionForms\CreatedPartialRequest.aspx" />
     <Content Include="Forms\FunctionForms\CreatedRMA.aspx" />
     <Content Include="Forms\FunctionForms\CreateExchange.aspx" />
+    <Content Include="Forms\FunctionForms\CreatePartialRequest.aspx" />
     <Content Include="Forms\FunctionForms\CreateReturn.aspx" />
     <Content Include="Forms\FunctionForms\RMAPDFForm.aspx" />
     <Content Include="Forms\LoginPage.aspx" />
+    <Content Include="Forms\PDAForms\CreatedPartRequest.aspx" />
     <Content Include="Forms\PDAForms\CreatedPDARMA.aspx" />
     <Content Include="Forms\PDAForms\CreatePartRequest.aspx" />
     <Content Include="Forms\PDAForms\CreateRMA.aspx" />
@@ -139,6 +142,8 @@
     <Compile Include="Class Objects\Comment.cs" />
     <Compile Include="Class Objects\CreatedExchange\CreatedExchangeHeader.cs" />
     <Compile Include="Class Objects\CreatedExchange\CreatedExchangeLines.cs" />
+    <Compile Include="Class Objects\CreatedPartRequest\CreatedPartRequestHeader.cs" />
+    <Compile Include="Class Objects\CreatedPartRequest\CreatedPartRequestLines.cs" />
     <Compile Include="Class Objects\CreatedReturn\CreatedReturnHeader.cs" />
     <Compile Include="Class Objects\CreatedReturn\CreatedReturnLines.cs" />
     <Compile Include="Class Objects\Documents\RMAInstructionsPDF.cs" />
@@ -149,6 +154,7 @@
     <Compile Include="Class Objects\Enums\SearchOptions.cs" />
     <Compile Include="Class Objects\Enums\SellToCustomers.cs" />
     <Compile Include="Class Objects\Enums\TrackingTypeEnum.cs" />
+    <Compile Include="Class Objects\FunctionData\PartRequestOptions.cs" />
     <Compile Include="Class Objects\FunctionData\ReturnReason.cs" />
     <Compile Include="Class Objects\PostedPackage.cs" />
     <Compile Include="Class Objects\PostedPackageLine.cs" />
@@ -193,6 +199,13 @@
     <Compile Include="Forms\FunctionForms\CreatedExchange.aspx.designer.cs">
       <DependentUpon>CreatedExchange.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FunctionForms\CreatedPartialRequest.aspx.cs">
+      <DependentUpon>CreatedPartialRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\CreatedPartialRequest.aspx.designer.cs">
+      <DependentUpon>CreatedPartialRequest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FunctionForms\CreatedRMA.aspx.cs">
       <DependentUpon>CreatedRMA.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -206,6 +219,13 @@
     </Compile>
     <Compile Include="Forms\FunctionForms\CreateExchange.aspx.designer.cs">
       <DependentUpon>CreateExchange.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\CreatePartialRequest.aspx.cs">
+      <DependentUpon>CreatePartialRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\CreatePartialRequest.aspx.designer.cs">
+      <DependentUpon>CreatePartialRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\FunctionForms\CreateReturn.aspx.cs">
       <DependentUpon>CreateReturn.aspx</DependentUpon>
@@ -227,6 +247,13 @@
     </Compile>
     <Compile Include="Forms\LoginPage.aspx.designer.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PDAForms\CreatedPartRequest.aspx.cs">
+      <DependentUpon>CreatedPartRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\PDAForms\CreatedPartRequest.aspx.designer.cs">
+      <DependentUpon>CreatedPartRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\PDAForms\CreatedPDARMA.aspx.cs">
       <DependentUpon>CreatedPDARMA.aspx</DependentUpon>

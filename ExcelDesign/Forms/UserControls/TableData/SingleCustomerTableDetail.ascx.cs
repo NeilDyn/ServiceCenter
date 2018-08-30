@@ -29,12 +29,12 @@ namespace ExcelDesign.Forms.UserControls.TableData
      
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.tcAddress2.Text = Cust.Address2;
-            this.tcShiptoContact.Text = Cust.ShipToContact;
-            this.tcCity.Text = Cust.City;
-            this.tcZip.Text = Cust.Zip;
-            this.tcState.Text = Cust.State;
-            this.tcCountry.Text = Cust.Country;
+            //this.tcAddress2.Text = Cust.Address2;
+            //this.tcShiptoContact.Text = Cust.ShipToContact;
+            //this.tcCity.Text = Cust.City;
+            //this.tcZip.Text = Cust.Zip;
+            //this.tcState.Text = Cust.State;
+            //this.tcCountry.Text = Cust.Country;
             
             PopulateData();
 

@@ -17,6 +17,8 @@
           <element minOccurs="1" maxOccurs="1" name="PasswordExpiryDate" type="string" />
           <element minOccurs="1" maxOccurs="1" name="PasswordLastUpdated" type="string" />
           <element minOccurs="1" maxOccurs="1" name="CreateExchange" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CreatePartialRequest" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CreatePDAPartiaRequest" type="string" />
         </sequence>
       </complexType>
       <complexType name="UserSetup" mixed="true">
@@ -380,58 +382,6 @@
       </complexType>
       <element name="SearchResults" type="tns:SearchResults" />
     </schema>
-    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50014" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50014" xmlns="http://www.w3.org/2001/XMLSchema">
-      <complexType name="Warranty2" mixed="true">
-        <sequence>
-          <element minOccurs="0" maxOccurs="unbounded" name="Status2" type="string" />
-          <element minOccurs="0" maxOccurs="unbounded" name="Policy2" type="string" />
-          <element minOccurs="0" maxOccurs="unbounded" name="DaysRemaining2" type="string" />
-        </sequence>
-      </complexType>
-      <complexType name="SalesHeader">
-        <sequence>
-          <element minOccurs="1" maxOccurs="1" name="DocType" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="No" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="ExtDocNo" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="DocDate" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="RMANo" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="ReturnTrackingNo" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="SellToCustomerName" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="ShipToAddress2" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="ShipToContact" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="ShipToCity" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="ShipToZip" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="ShipToState" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="ShippingAgent" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="ShippingService" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="RMANo" type="string" />
-          <element minOccurs="0" maxOccurs="unbounded" name="Warranty2" type="tns:Warranty2" />
-        </sequence>
-      </complexType>
-      <complexType name="SalesLine">
-        <sequence>
-          <element minOccurs="1" maxOccurs="1" name="DocNo" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="QtyToReceive" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="QtyShipped" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="DateCreated" type="string" />
-        </sequence>
-      </complexType>
-      <complexType name="CreatedExchangeOrder" mixed="true">
-        <sequence>
-          <element minOccurs="0" maxOccurs="unbounded" name="SalesHeader" type="tns:SalesHeader" />
-          <element minOccurs="0" maxOccurs="unbounded" name="SalesLine" type="tns:SalesLine" />
-        </sequence>
-      </complexType>
-      <element name="CreatedExchangeOrder" type="tns:CreatedExchangeOrder" />
-    </schema>
     <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50015" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50015" xmlns="http://www.w3.org/2001/XMLSchema">
       <complexType name="Warranty4" mixed="true">
         <sequence>
@@ -493,6 +443,58 @@
         </sequence>
       </complexType>
       <element name="CreatedPartialRequest" type="tns:CreatedPartialRequest" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50014" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50014" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Warranty2" mixed="true">
+        <sequence>
+          <element minOccurs="0" maxOccurs="unbounded" name="Status2" type="string" />
+          <element minOccurs="0" maxOccurs="unbounded" name="Policy2" type="string" />
+          <element minOccurs="0" maxOccurs="unbounded" name="DaysRemaining2" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="SalesHeader">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="DocType" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="No" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ExtDocNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="DocDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="RMANo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ReturnTrackingNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="SellToCustomerName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToAddress2" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToContact" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCity" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToZip" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToState" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShippingAgent" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShippingService" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="RMANo" type="string" />
+          <element minOccurs="0" maxOccurs="unbounded" name="Warranty2" type="tns:Warranty2" />
+        </sequence>
+      </complexType>
+      <complexType name="SalesLine">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="DocNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="QtyToReceive" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="QtyShipped" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="DateCreated" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="CreatedExchangeOrder" mixed="true">
+        <sequence>
+          <element minOccurs="0" maxOccurs="unbounded" name="SalesHeader" type="tns:SalesHeader" />
+          <element minOccurs="0" maxOccurs="unbounded" name="SalesLine" type="tns:SalesLine" />
+        </sequence>
+      </complexType>
+      <element name="CreatedExchangeOrder" type="tns:CreatedExchangeOrder" />
     </schema>
     <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50002" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50002" xmlns="http://www.w3.org/2001/XMLSchema">
       <complexType name="Warranty2" mixed="true">
@@ -593,6 +595,28 @@
           <sequence />
         </complexType>
       </element>
+      <element name="CreatePartRequest">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="externalDocumentNo" type="string" />
+            <element xmlns:q5="urn:microsoft-dynamics-nav/xmlports/x50015" minOccurs="1" maxOccurs="1" name="createdPartReq" type="q5:CreatedPartialRequest" />
+            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lineDetails" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="notes" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="shipToDetails" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="emailAddress" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CreatePartRequest_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+            <element xmlns:q6="urn:microsoft-dynamics-nav/xmlports/x50015" minOccurs="1" maxOccurs="1" name="createdPartReq" type="q6:CreatedPartialRequest" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="IsValidSession">
         <complexType>
           <sequence>
@@ -645,7 +669,7 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
-            <element xmlns:q5="urn:microsoft-dynamics-nav/xmlports/x50014" minOccurs="1" maxOccurs="1" name="exchangeOrder" type="q5:CreatedExchangeOrder" />
+            <element xmlns:q7="urn:microsoft-dynamics-nav/xmlports/x50014" minOccurs="1" maxOccurs="1" name="exchangeOrder" type="q7:CreatedExchangeOrder" />
             <element minOccurs="1" maxOccurs="1" name="externalDocumentNo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
             <element minOccurs="1" maxOccurs="1" name="lineDetails" type="string" />
@@ -656,29 +680,7 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-            <element xmlns:q6="urn:microsoft-dynamics-nav/xmlports/x50014" minOccurs="1" maxOccurs="1" name="exchangeOrder" type="q6:CreatedExchangeOrder" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="CreatePartRequest">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="externalDocumentNo" type="string" />
-            <element xmlns:q7="urn:microsoft-dynamics-nav/xmlports/x50015" minOccurs="1" maxOccurs="1" name="createdPartReq" type="q7:CreatedPartialRequest" />
-            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="lineDetails" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="notes" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="shipToDetails" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="emailAddress" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="CreatePartRequest_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-            <element xmlns:q8="urn:microsoft-dynamics-nav/xmlports/x50015" minOccurs="1" maxOccurs="1" name="createdPartReq" type="q8:CreatedPartialRequest" />
+            <element xmlns:q8="urn:microsoft-dynamics-nav/xmlports/x50014" minOccurs="1" maxOccurs="1" name="exchangeOrder" type="q8:CreatedExchangeOrder" />
           </sequence>
         </complexType>
       </element>
@@ -819,7 +821,10 @@
       </element>
       <element name="UpdateComment">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="quoteNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="comment" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="UpdateComment_Result">
@@ -829,7 +834,10 @@
       </element>
       <element name="UpdateComment1">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="quoteNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="comment1" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="UpdateComment1_Result">
@@ -839,7 +847,10 @@
       </element>
       <element name="UpdateCommentUser">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="quoteNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="custSvcUser" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="UpdateCommentUser_Result">
@@ -849,7 +860,12 @@
       </element>
       <element name="UpdateCommentPartReq">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="quoteNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="itemNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="returnReasonCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="partReqOption" type="string" />
+          </sequence>
         </complexType>
       </element>
       <element name="UpdateCommentPartReq_Result">
@@ -876,6 +892,12 @@
   </message>
   <message name="ResetSession_Result">
     <part name="parameters" element="tns:ResetSession_Result" />
+  </message>
+  <message name="CreatePartRequest">
+    <part name="parameters" element="tns:CreatePartRequest" />
+  </message>
+  <message name="CreatePartRequest_Result">
+    <part name="parameters" element="tns:CreatePartRequest_Result" />
   </message>
   <message name="IsValidSession">
     <part name="parameters" element="tns:IsValidSession" />
@@ -906,12 +928,6 @@
   </message>
   <message name="CreateExchangeOrder_Result">
     <part name="parameters" element="tns:CreateExchangeOrder_Result" />
-  </message>
-  <message name="CreatePartRequest">
-    <part name="parameters" element="tns:CreatePartRequest" />
-  </message>
-  <message name="CreatePartRequest_Result">
-    <part name="parameters" element="tns:CreatePartRequest_Result" />
   </message>
   <message name="CreateReturnOrder">
     <part name="parameters" element="tns:CreateReturnOrder" />
@@ -1004,6 +1020,10 @@
       <input name="ResetSession" message="tns:ResetSession" />
       <output name="ResetSession_Result" message="tns:ResetSession_Result" />
     </operation>
+    <operation name="CreatePartRequest">
+      <input name="CreatePartRequest" message="tns:CreatePartRequest" />
+      <output name="CreatePartRequest_Result" message="tns:CreatePartRequest_Result" />
+    </operation>
     <operation name="IsValidSession">
       <input name="IsValidSession" message="tns:IsValidSession" />
       <output name="IsValidSession_Result" message="tns:IsValidSession_Result" />
@@ -1023,10 +1043,6 @@
     <operation name="CreateExchangeOrder">
       <input name="CreateExchangeOrder" message="tns:CreateExchangeOrder" />
       <output name="CreateExchangeOrder_Result" message="tns:CreateExchangeOrder_Result" />
-    </operation>
-    <operation name="CreatePartRequest">
-      <input name="CreatePartRequest" message="tns:CreatePartRequest" />
-      <output name="CreatePartRequest_Result" message="tns:CreatePartRequest_Result" />
     </operation>
     <operation name="CreateReturnOrder">
       <input name="CreateReturnOrder" message="tns:CreateReturnOrder" />
@@ -1110,6 +1126,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
+    <operation name="CreatePartRequest">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:CreatePartRequest" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CreatePartRequest">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CreatePartRequest_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="IsValidSession">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:IsValidSession" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="IsValidSession">
@@ -1152,15 +1177,6 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="CreateExchangeOrder_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="CreatePartRequest">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:CreatePartRequest" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="CreatePartRequest">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="CreatePartRequest_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

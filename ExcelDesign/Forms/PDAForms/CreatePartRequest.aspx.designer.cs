@@ -58,6 +58,60 @@ namespace ExcelDesign.Forms.PDAForms {
         protected global::System.Web.UI.WebControls.TableHeaderCell tcDocNo;
         
         /// <summary>
+        /// tcShipToName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToName;
+        
+        /// <summary>
+        /// tcShipToCity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToCity;
+        
+        /// <summary>
+        /// tcShipToAddress1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToAddress1;
+        
+        /// <summary>
+        /// tcShipToState control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToState;
+        
+        /// <summary>
+        /// tcShipToAddress2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToAddress2;
+        
+        /// <summary>
+        /// tcShipToCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipToCode;
+        
+        /// <summary>
         /// txtShipToName control.
         /// </summary>
         /// <remarks>
@@ -112,6 +166,24 @@ namespace ExcelDesign.Forms.PDAForms {
         protected global::System.Web.UI.WebControls.TextBox txtShipToCode;
         
         /// <summary>
+        /// lblDefaultShipping control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell lblDefaultShipping;
+        
+        /// <summary>
+        /// cbxDefaultShipping control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbxDefaultShipping;
+        
+        /// <summary>
         /// tblCreateReturnOrderTableDetails control.
         /// </summary>
         /// <remarks>
@@ -148,6 +220,15 @@ namespace ExcelDesign.Forms.PDAForms {
         protected global::System.Web.UI.WebControls.TableHeaderCell HeaderQty;
         
         /// <summary>
+        /// HeaderActionQty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell HeaderActionQty;
+        
+        /// <summary>
         /// HeaderPartRequest control.
         /// </summary>
         /// <remarks>
@@ -164,6 +245,15 @@ namespace ExcelDesign.Forms.PDAForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableHeaderCell HeaderReturnReasonCode;
+        
+        /// <summary>
+        /// HeaderCopyButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell HeaderCopyButton;
         
         /// <summary>
         /// txtNotes control.
@@ -209,6 +299,15 @@ namespace ExcelDesign.Forms.PDAForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtZendeskTicketNo;
+        
+        /// <summary>
+        /// btnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancel;
         
         /// <summary>
         /// btnCreatePartRequest control.

@@ -1,4 +1,5 @@
 ﻿using ExcelDesign.Class_Objects.CreatedExchange;
+using ExcelDesign.Class_Objects.CreatedPartRequest;
 using ExcelDesign.Class_Objects.CreatedReturn;
 using ExcelDesign.Class_Objects.FunctionData;
 using ExcelDesign.ServiceFunctions;
@@ -177,7 +178,7 @@ namespace ExcelDesign.Class_Objects
             return ceh;
         }
 
-        public CreatedExchangeHeader CreateExchange(CreatedExchangeOrder eo)
+        protected CreatedExchangeHeader CreateExchange(CreatedExchangeOrder eo)
         {
             CreatedExchangeHeader ceh = new CreatedExchangeHeader();
             string orderNo = string.Empty;
@@ -250,7 +251,7 @@ namespace ExcelDesign.Class_Objects
             return ceh;
         }
 
-        public List<CreatedExchangeLines> CreateExchangeOrderLines(CreatedExchangeOrder eo)
+        protected List<CreatedExchangeLines> CreateExchangeOrderLines(CreatedExchangeOrder eo)
         {
             List<CreatedExchangeLines> cel = new List<CreatedExchangeLines>();
 
@@ -285,6 +286,139 @@ namespace ExcelDesign.Class_Objects
             }
 
             return cel;
+        }
+
+        public CreatedPartRequestHeader CreatePartialRequest(string orderNo, string exernalDocumentNo, string lineDetails, string notes,
+            string shippingDetails, string email)
+        {
+            CreatedPartialRequest cpr = new CreatedPartialRequest();
+            CreatedPartRequestHeader cprh = new CreatedPartRequestHeader();
+
+            cpr = webService.CreatePartRequest(orderNo, exernalDocumentNo, lineDetails, notes, shippingDetails, email);
+
+            cprh = CreatePartialRequestHeader(cpr);
+            return cprh;
+        }
+
+        protected CreatedPartRequestHeader CreatePartialRequestHeader(CreatedPartialRequest cp)
+        {
+            CreatedPartRequestHeader cprh = new CreatedPartRequestHeader();
+            string quoteNo = string.Empty;
+            string externalDocumentNo = string.Empty;
+            string quoteDate = string.Empty;
+            string channelName = string.Empty;
+            string shipMethod = string.Empty;
+            string partReqOrderNo = string.Empty;
+            string shipToName = string.Empty;
+            string shipToAddress1 = string.Empty;
+            string shipToAddress2 = string.Empty;
+            string shipToContact = string.Empty;
+            string shipToCity = string.Empty;
+            string shipToZip = string.Empty;
+            string shipToState = string.Empty;
+            string shipToCountry = string.Empty;
+            List<CreatedPartRequestLines> lines = new List<CreatedPartRequestLines>();
+
+            if (cp.SalesHeader != null)
+            {
+                quoteNo = cp.SalesHeader[0].No;
+                externalDocumentNo = cp.SalesHeader[0].ExtDocNo;
+                quoteDate = cp.SalesHeader[0].DocDate;
+                channelName = cp.SalesHeader[0].SellToCustomerName;
+                shipMethod = cp.SalesHeader[0].ShippingAgent;
+                shipMethod += " " + cp.SalesHeader[0].ShippingService;
+                lines = CreatePartialRequestLines(cp);
+                shipToName = cp.SalesHeader[0].ShipToName;
+                shipToAddress1 = cp.SalesHeader[0].ShipToAddress;
+                shipToAddress2 = cp.SalesHeader[0].ShipToAddress2;
+                shipToContact = cp.SalesHeader[0].ShipToContact;
+                shipToCity = cp.SalesHeader[0].ShipToCity;
+                shipToZip = cp.SalesHeader[0].ShipToZip;
+                shipToState = cp.SalesHeader[0].ShipToState;
+                shipToCountry = cp.SalesHeader[0].ShipToCountry;
+
+                if(cp.ExtendedSalesHeader != null)
+                {
+                    for (int esh = 0; esh < cp.ExtendedSalesHeader.Length; esh++)
+                    {
+                        if(cp.ExtendedSalesHeader[esh].QuoteNo == quoteNo)
+                        {
+                            partReqOrderNo = cp.ExtendedSalesHeader[esh].PartRequestOrderNo;
+                        }
+                    }
+                }
+
+                cprh.QuoteNo = quoteNo;
+                cprh.ExternalDocumentNo = externalDocumentNo;
+                cprh.QuoteDate = quoteDate;
+                cprh.ChannelName = channelName;
+                cprh.ShipMethod = shipMethod;
+                cprh.PartRequestOrderNo = partReqOrderNo;
+                cprh.PartRequestLines = lines;
+                cprh.ShipToName = shipToName;
+                cprh.ShipToAddress1 = shipToAddress1;
+                cprh.ShipToAddress2 = shipToAddress2;
+                cprh.ShipToContact = shipToContact;
+                cprh.ShipToCity = shipToCity;
+                cprh.ShipToZip = shipToZip;
+                cprh.ShipToState = shipToState;
+                cprh.ShipToCountry = shipToCountry;
+
+                quoteNo = string.Empty;
+                externalDocumentNo = string.Empty;
+                quoteDate = string.Empty;
+                channelName = string.Empty;
+                shipMethod = string.Empty;
+                partReqOrderNo = string.Empty;
+                shipToAddress1 = string.Empty;
+                shipToAddress2 = string.Empty;
+                shipToContact = string.Empty;
+                shipToCity = string.Empty;
+                shipToZip = string.Empty;
+                shipToState = string.Empty;
+                shipToCountry = string.Empty;
+                lines = new List<CreatedPartRequestLines>();
+            }
+
+
+            return cprh;
+        }
+
+        protected List<CreatedPartRequestLines> CreatePartialRequestLines(CreatedPartialRequest cp)
+        {
+            List<CreatedPartRequestLines> cprl = new List<CreatedPartRequestLines>();
+
+            string itemNo = string.Empty;
+            string description = string.Empty;
+            int quantity = 0;
+            double price = 0;
+            double lineAmount = 0;
+
+            if (cp.SalesLine != null)
+            {
+                for (int sl = 0; sl < cp.SalesLine.Length; sl++)
+                {
+                    int.TryParse(cp.SalesLine[sl].Qty, out quantity);
+                    if (quantity > 0)
+                    {
+                        itemNo = cp.SalesLine[sl].ItemNo;
+                        description = cp.SalesLine[sl].Description;
+
+                        double.TryParse(cp.SalesLine[sl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
+                        lineAmount = quantity * price;
+
+                        cprl.Add(new CreatedPartRequestLines(itemNo, description, quantity, price, lineAmount));
+                    }
+
+                    itemNo = string.Empty;
+                    description = string.Empty;
+                    quantity = 0;
+                    price = 0;
+                    lineAmount = 0;
+                }
+            }
+
+            return cprl;
         }
 
         public string DeleteRMA(string rmaNo)

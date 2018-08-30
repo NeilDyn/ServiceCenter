@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/themes/ui-lightness/jquery-ui.css" type="text/css" />
 
 <asp:Table ID="tblSingleCustomerDetail" runat="server" Height="100%" Width="100%">
-    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >
+    <%--<asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >
         <asp:TableCell />
         <asp:TableCell />
         <asp:TableCell />
@@ -29,8 +29,6 @@
         <asp:TableCell runat="server" ID="tcCity"/>
         <asp:TableCell Text="State:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcState"/>
-        <asp:TableCell Text="whitespace" ForeColor="White"/>
-        <asp:TableCell Text="whitespace" ForeColor="White"/>
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify" >
         <asp:TableCell />
@@ -40,7 +38,5 @@
         <asp:TableCell runat="server" ID="tcShiptoContact"/>
         <asp:TableCell Text="Country:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableCell runat="server" ID="tcCountry"/>
-        <asp:TableCell Text="whitespace" ForeColor="White"/>
-        <asp:TableCell Text="whitespace" ForeColor="White"/>
-    </asp:TableRow>
+    </asp:TableRow>--%>
 </asp:Table>

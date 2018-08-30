@@ -22,6 +22,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
         public string CanReturn { get; set; }
         public string CanReturnPDA { get; set; }
+        public string CanCreatePartRequest { get; set; }
+        public string CanCreatePDAPartRequest { get; set; }
 
         protected TableRow buttonRow = new TableRow();
         protected TableCell cancelOrderCell = new TableCell();
@@ -65,16 +67,22 @@ namespace ExcelDesign.Forms.UserControls.TableData
             {
                 CanReturn = "true";
                 CanReturnPDA = "true";
+                CanCreatePartRequest = "true";
+                CanCreatePDAPartRequest = "true";
             }
             else if (activeUser.Developer)
             {
                 CanReturn = "true";
                 CanReturnPDA = "true";
+                CanCreatePartRequest = "true";
+                CanCreatePDAPartRequest = "true";
             }
             else
             {
                 CanReturn = activeUser.CreateRMA ? "true" : "false";
                 CanReturnPDA = activeUser.CreatePDARMA ? "true" : "false";
+                CanCreatePartRequest = activeUser.CreatePartialRequest ? "true" : "false";
+                CanCreatePDAPartRequest = activeUser.CreatePDAPartialRequest ? "true" : "false";
             }
         }
 
@@ -92,16 +100,10 @@ namespace ExcelDesign.Forms.UserControls.TableData
             this.tcOrderDate.ToolTip = Sh.OrderDate;
             this.tcSalesOrderNo.ToolTip = Sh.SalesOrderNo;
             this.tcChannelName.ToolTip = Sh.ChannelName;
-            TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;         
+            TrackingTypeEnum trackType = TrackingTypeEnum.Invalid;
 
-            if (Sh.IsExchangeOrder)
-            {
-                this.tcIsExchangeOrder.Text = "Yes";
-            }
-            else
-            {
-                this.tcIsExchangeOrder.Text = "No";
-            }
+            this.tcIsExchangeOrder.Text = Sh.IsExchangeOrder ? "Yes" : "No";
+            this.tcIsPartRequest.Text = Sh.IsPartRequest ? "Yes" : "No";
 
             if (Sh.RMANo != string.Empty)
             {
@@ -113,7 +115,19 @@ namespace ExcelDesign.Forms.UserControls.TableData
             {
                 this.tcRMANo.Visible = false;
                 this.tcRMANoTitle.Visible = false;
-            }         
+            }  
+            
+            if(Sh.QuoteOrderNo != string.Empty)
+            {
+                this.tcOrderNoTitle.Visible = true;
+                this.tcOriginalOrderNo.Visible = true;
+                this.tcOriginalOrderNo.Text = Sh.QuoteOrderNo;
+            }
+            else
+            {
+                this.tcOrderNoTitle.Visible = false;
+                this.tcOriginalOrderNo.Visible = false;
+            }
 
             OrderNo = Sh.SalesOrderNo;
             DocNo = Sh.ExternalDocumentNo;

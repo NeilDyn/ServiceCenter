@@ -1,5 +1,5 @@
 ﻿using ExcelDesign.Class_Objects;
-using ExcelDesign.Class_Objects.CreatedExchange;
+using ExcelDesign.Class_Objects.CreatedPartRequest;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,44 +8,45 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace ExcelDesign.Forms.FunctionForms
+namespace ExcelDesign.Forms.PDAForms
 {
-    public partial class CreatedExchange : System.Web.UI.Page
+    public partial class CreatedPartRequest : System.Web.UI.Page
     {
-        protected CreatedExchangeHeader CEH { get; set; }
+        protected CreatedPartRequestHeader CPRH { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["CreatedExchange"] != null)
+            Session["RestartFromUserInteraction"] = true;
+
+            if (Session["CreatedPartRequest"] != null)
             {
                 try
                 {
-                    CEH = (CreatedExchangeHeader)Session["CreatedExchange"];
-                    Title = "Order: " + CEH.OrderNo;
+                    CPRH = (CreatedPartRequestHeader)Session["CreatedPartRequest"];
+                    Title = "Quote: " + CPRH.QuoteNo;
 
-                    tcOrderNo.Text = CEH.OrderNo;
-                    tcExternalDocNo.Text = CEH.ExternalDocumentNo;
-                    tcChannelName.Text = CEH.ChannelName;
-                    tcShipMethod.Text = CEH.ShipMethod;
-                    tcRmaNo.Text = CEH.RMANo;
-                    tcOrderDate.Text = CEH.OrderDate;
+                    tcQuoteNo.Text = CPRH.QuoteNo;
+                    tcExternalDocNo.Text = CPRH.ExternalDocumentNo;
+                    tcChannelName.Text = CPRH.ChannelName;
+                    tcShipMethod.Text = CPRH.ShipMethod;
+                    tcOriginalOrderNo.Text = CPRH.PartRequestOrderNo;
+                    tcQuoteDate.Text = CPRH.QuoteDate;
 
-                    tcShipToName.Text = CEH.ShipToName;
-                    tcShipToContact.Text = CEH.ShipToContact;
-                    tcShipToAddress1.Text = CEH.ShipToAddress1;
-                    tcShipToAddress2.Text = CEH.ShipToAddress2;
-                    tcShipToCity.Text = CEH.ShipToCity;
-                    tcShipToState.Text = CEH.ShipToState;
-                    tcShipToZip.Text = CEH.ShipToZip;
-                    tcShipToCountry.Text = CEH.ShipToCountry;
+                    tcShipToName.Text = CPRH.ShipToName;
+                    tcShipToContact.Text = CPRH.ShipToContact;
+                    tcShipToAddress1.Text = CPRH.ShipToAddress1;
+                    tcShipToAddress2.Text = CPRH.ShipToAddress2;
+                    tcShipToCity.Text = CPRH.ShipToCity;
+                    tcShipToState.Text = CPRH.ShipToState;
+                    tcShipToZip.Text = CPRH.ShipToZip;
+                    tcShipToCountry.Text = CPRH.ShipToCountry;
 
                     PopulateLines();
                 }
                 catch (Exception ex)
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "errorinOrderExchange", "alert('" + ex.Message + "');", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "errorinPartReuqest", "alert('" + ex.Message + "');", true);
                 }
-
             }
         }
 
@@ -55,7 +56,7 @@ namespace ExcelDesign.Forms.FunctionForms
             {
                 int lineCount = 0;
 
-                foreach (CreatedExchangeLines line in CEH.ExchangeLines)
+                foreach (CreatedPartRequestLines line in CPRH.PartRequestLines)
                 {
                     TableRow singleRow = new TableRow();
 
@@ -81,7 +82,7 @@ namespace ExcelDesign.Forms.FunctionForms
                     price.HorizontalAlign = HorizontalAlign.Right;
                     lineAmount.HorizontalAlign = HorizontalAlign.Right;
 
-                    singleRow.ID = "CreatedExchangeOrderLineRow_" + lineCount.ToString();
+                    singleRow.ID = "CreatedPartRequestLineRow_" + lineCount.ToString();
 
                     singleRow.Cells.Add(itemNo);
                     singleRow.Cells.Add(desc);

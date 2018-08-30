@@ -259,7 +259,7 @@ namespace ExcelDesign.Class_Objects
             {
                 for (int sh = 0; sh < currResults.SalesHeader.Length; sh++)
                 {
-                    if (currResults.SalesHeader[sh].No == orderNo && currResults.SalesHeader[sh].DocType == "Order")
+                    if (currResults.SalesHeader[sh].No == orderNo && (currResults.SalesHeader[sh].DocType == "Order" || currResults.SalesHeader[sh].DocType == "Quote"))
                     {
                         no = currResults.SalesHeader[sh].No;
 
@@ -595,7 +595,6 @@ namespace ExcelDesign.Class_Objects
             List<string> insertedReturnNumbners = new List<string>();
 
             int statusCounter = 0;
-            int totalCounter = 0;
 
             if (currResults.SOImportBuffer != null)
             {
@@ -685,7 +684,6 @@ namespace ExcelDesign.Class_Objects
                                     shipToState = string.Empty;
                                     shipToCountry = string.Empty;
 
-                                    totalCounter = 0;
                                     statusCounter = 0;
                                 }
                             }
@@ -743,6 +741,7 @@ namespace ExcelDesign.Class_Objects
                                     externalDocumentNo = currResults.SalesHeader[so].ExtDocNo;
                                     sellToCustomerNo = currResults.SalesHeader[so].SellToCustomerNo;
                                     imeiNo = currResults.SalesHeader[so].IMEI;
+                                    int totalCounter = 0;
 
                                     for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
                                     {
@@ -913,7 +912,6 @@ namespace ExcelDesign.Class_Objects
                                 shipToState = string.Empty;
                                 shipToCountry = string.Empty;
 
-                                totalCounter = 0;
                                 statusCounter = 0;
                             }
                         }
@@ -947,13 +945,14 @@ namespace ExcelDesign.Class_Objects
 
             bool rmaExists = false;
             bool isExchangeOrder = false;
+            bool isPartRequest = false;
+            string quoteOrderNo = string.Empty;
 
             string sellToCustomerNo = string.Empty;
 
             List<string> insertedOrderNumbers = new List<string>();
 
-            int statusCounter = 0;
-            int totalCounter = 0;
+            int statusCounter = 0;           
 
             if (currResults.SOImportBuffer != null)
             {
@@ -1006,7 +1005,7 @@ namespace ExcelDesign.Class_Objects
 
                                 commentLines = GetSalesLineComments(orderNo);
                                 salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo,
-                                    warranty, rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines));
+                                    warranty, rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines, isPartRequest, quoteOrderNo));
 
                                 insertedOrderNumbers.Add(orderNo);
 
@@ -1028,7 +1027,9 @@ namespace ExcelDesign.Class_Objects
                                 rmaExists = false;
                                 rmaNo = string.Empty;
                                 isExchangeOrder = false;
+                                isPartRequest = false;
                                 sellToCustomerNo = string.Empty;
+                                quoteOrderNo = string.Empty;
                             }
                         }
                     }
@@ -1041,7 +1042,7 @@ namespace ExcelDesign.Class_Objects
             {
                 for (int so = 0; so < currResults.SalesHeader.Length; so++)
                 {
-                    if (currResults.SalesHeader[so].DocType == "Order")
+                    if (currResults.SalesHeader[so].DocType == "Order" || currResults.SalesHeader[so].DocType == "Quote")
                     {
                         if (currResults.SalesHeader[so].ShipToName == custName && currResults.SalesHeader[so].ShipToAddress == shipAddress)
                         {
@@ -1067,6 +1068,7 @@ namespace ExcelDesign.Class_Objects
                                 isPDA = currResults.SalesHeader[so].Warranty2[0].IsPDAWarranty2[0].ToUpper();
                                 warranty = new Warranty(status, policy, daysRemaining, warrantyType, isPDA);
                                 sellToCustomerNo = currResults.SalesHeader[so].SellToCustomerNo;
+                                int totalCounter = 0;
 
                                 for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
                                 {
@@ -1110,12 +1112,18 @@ namespace ExcelDesign.Class_Objects
                                                 isExchangeOrder = currResults.ExtendedSalesHeader[ex].IsExchangeOrder == "Yes" ? true : false;
                                             }
                                         }
+
+                                        if (orderNo == currResults.ExtendedSalesHeader[ex].RMANo && currResults.ExtendedSalesHeader[ex].IsPartRequest == "Yes")
+                                        {
+                                            isPartRequest = true;
+                                            quoteOrderNo = currResults.ExtendedSalesHeader[ex].PartRequestOrderNo;
+                                        }
                                     }
                                 }
 
                                 commentLines = GetSalesLineComments(orderNo);
                                 salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty,
-                                    rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines));
+                                    rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines, isPartRequest, quoteOrderNo));
 
                                 insertedOrderNumbers.Add(orderNo);
 
@@ -1137,7 +1145,9 @@ namespace ExcelDesign.Class_Objects
                                 rmaExists = false;
                                 rmaNo = string.Empty;
                                 isExchangeOrder = false;
+                                isPartRequest = false;
                                 sellToCustomerNo = string.Empty;
+                                quoteOrderNo = string.Empty;
                             }
                         }
                     }
@@ -1197,7 +1207,7 @@ namespace ExcelDesign.Class_Objects
 
                             commentLines = GetSalesLineComments(orderNo);
                             salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty,
-                                rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines));
+                                rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines, isPartRequest, quoteOrderNo));
 
                             insertedOrderNumbers.Add(orderNo);
 
@@ -1219,7 +1229,9 @@ namespace ExcelDesign.Class_Objects
                             rmaExists = false;
                             rmaNo = string.Empty;
                             isExchangeOrder = false;
+                            isPartRequest = false;
                             sellToCustomerNo = string.Empty;
+                            quoteOrderNo = string.Empty;
                         }
                     }
                 }
@@ -2129,14 +2141,29 @@ namespace ExcelDesign.Class_Objects
         private void SetFunctionData()
         {
             List<ReturnReason> rrList = new List<ReturnReason>();
+            List<PartRequestOptions> partReqOptions = new List<PartRequestOptions>();
 
-            for (int i = 0; i < currResults.ReturnReasonCode.Length; i++)
+            if(currResults.ReturnReasonCode != null)
             {
-                rrList.Add(new ReturnReason(currResults.ReturnReasonCode[i].ReasonCode, currResults.ReturnReasonCode[i].Description,
-                    currResults.ReturnReasonCode[i].Category));
+                for (int i = 0; i < currResults.ReturnReasonCode.Length; i++)
+                {
+                    rrList.Add(new ReturnReason(currResults.ReturnReasonCode[i].ReasonCode, currResults.ReturnReasonCode[i].Description,
+                        currResults.ReturnReasonCode[i].Category));
+                }
+            }
+
+            if(currResults.PartReqOption != null)
+            {
+                string[] split = currResults.PartReqOption[0].Split(',');
+
+                for (int i = 0; i < split.Length; i++)
+                {
+                    partReqOptions.Add(new PartRequestOptions(split[i]));
+                }
             }
 
             HttpContext.Current.Session["ReturnReasons"] = rrList;
+            HttpContext.Current.Session["PartRequestOptions"] = partReqOptions;
         }
     }
 }

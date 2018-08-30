@@ -8,10 +8,17 @@
     $(document).ready(function () {
         if (<%= this.CustomerCount %> > 1) {
             $("[id$=customerDetails_<%= this.Count %>]").hide();
+
+            $("[id$=trInfo1_<%= this.Count %>]").hide();
+            $("[id$=trInfo2_<%= this.Count %>]").hide();
+            $("[id$=trInfo3_<%= this.Count %>]").hide();
         }
 
         $("[id$=btnExpload_<%= this.Count %>]").click(function () {
             $("[id$=customerDetails_<%= this.Count %>]").toggle();
+            $("[id$=trInfo1_<%= this.Count %>]").toggle();
+            $("[id$=trInfo2_<%= this.Count %>]").toggle();
+            $("[id$=trInfo3_<%= this.Count %>]").toggle();
 
             if ($("[id$=btnExpload_<%= this.Count %>]").val() == "+") {
                 $("[id$=btnExpload_<%= this.Count %>]").val("-");
@@ -60,13 +67,48 @@
         <asp:TableHeaderCell Text="Address 1:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
         <asp:TableHeaderCell runat="server" ID="tcAddress1" HorizontalAlign="Left" Style="text-align: left"/>
         <asp:TableHeaderCell />
-        <asp:TableHeaderCell Text="whitespace" ForeColor="White"/>
-        <asp:TableHeaderCell Text="whitespace" ForeColor="White"/>
         <asp:TableHeaderCell />
         <asp:TableHeaderCell HorizontalAlign="Right" ID="lblSelectActive" Text="Select As Active:"/>
         <asp:TableHeaderCell HorizontalAlign="Right">
             <asp:Button ID="btnSelectCustomer" runat="server" Text="Set Active" OnClientClick="return false;" />
         </asp:TableHeaderCell>
+    </asp:TableHeaderRow>
+    <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify" ID="trInfo1">
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell Text="Address 2:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
+        <asp:TableHeaderCell runat="server" ID="tcAddress2" />
+        <asp:TableHeaderCell Text="Zip:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
+        <asp:TableHeaderCell runat="server" ID="tcZip" style="text-align: left"/>
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell />
+
+    </asp:TableHeaderRow>
+    <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify" Id="trInfo2">
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell Text="City:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
+        <asp:TableHeaderCell runat="server" ID="tcCity"/>
+        <asp:TableHeaderCell Text="State:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
+        <asp:TableHeaderCell runat="server" ID="tcState"/>
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell />
+    </asp:TableHeaderRow>
+    <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify" ID="trInfo3">
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell Text="Ship to Contact:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
+        <asp:TableHeaderCell runat="server" ID="tcShiptoContact"/>
+        <asp:TableHeaderCell Text="Country:" Font-Bold="true" HorizontalAlign="Left" style="text-align: right"/>
+        <asp:TableHeaderCell runat="server" ID="tcCountry"/>
+        <asp:TableHeaderCell />
+        <asp:TableHeaderCell />
     </asp:TableHeaderRow>
 </asp:Table>
 

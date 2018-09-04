@@ -313,7 +313,7 @@ namespace ExcelDesign.Class_Objects
                     {
                         itemNo = currResults.SalesLine[sl].ItemNo;
                         description = currResults.SalesLine[sl].Description;
-                        int.TryParse(currResults.SalesLine[sl].Qty, out quantity);
+                        int.TryParse(currResults.SalesLine[sl].Qty.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out quantity);
                         double.TryParse(currResults.SalesLine[sl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
                         type = currResults.SalesLine[sl].Type;
@@ -369,7 +369,7 @@ namespace ExcelDesign.Class_Objects
                     {
                         itemNo = currResults.SalesShipmentLine[sl].ItemNo;
                         description = currResults.SalesShipmentLine[sl].Description;
-                        int.TryParse(currResults.SalesShipmentLine[sl].Qty, out quantity);
+                        int.TryParse(currResults.SalesShipmentLine[sl].Qty.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out quantity);
                         double.TryParse(currResults.SalesShipmentLine[sl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
                         type = currResults.SalesShipmentLine[sl].Type;
@@ -391,7 +391,7 @@ namespace ExcelDesign.Class_Objects
                             {
                                 if ((currResults.SalesShipmentLine[sli].DocNo == no) && (currResults.SalesShipmentLine[sli].ItemNo == itemNo))
                                 {
-                                    int.TryParse(currResults.SalesShipmentLine[sli].Qty, out int currQty);
+                                    int.TryParse(currResults.SalesShipmentLine[sli].Qty.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out int currQty);
                                     quantityShipped += currQty;
                                 }
                             }
@@ -437,7 +437,7 @@ namespace ExcelDesign.Class_Objects
                     {
                         itemNo = currResults.ReturnReceiptLine[rl].ItemNo;
                         description = currResults.ReturnReceiptLine[rl].Description;
-                        int.TryParse(currResults.ReturnReceiptLine[rl].Qty, out quantity);
+                        int.TryParse(currResults.ReturnReceiptLine[rl].Qty.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out quantity);
                         double.TryParse(currResults.ReturnReceiptLine[rl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
 
@@ -1838,7 +1838,7 @@ namespace ExcelDesign.Class_Objects
                     {
                         itemNo = currResults.SalesShipmentLine[rl].ItemNo;
                         description = currResults.SalesShipmentLine[rl].Description;
-                        int.TryParse(currResults.SalesShipmentLine[rl].Qty, out quantity);
+                        int.TryParse(currResults.SalesShipmentLine[rl].Qty.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out quantity);
                         double.TryParse(currResults.SalesShipmentLine[rl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
                         quantityReceived = 0;
@@ -1876,7 +1876,7 @@ namespace ExcelDesign.Class_Objects
                     {
                         itemNo = currResults.SalesLine[slr].ItemNo;
                         description = currResults.SalesLine[slr].Description;
-                        int.TryParse(currResults.SalesLine[slr].Qty, out quantity);
+                        int.TryParse(currResults.SalesLine[slr].Qty.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out quantity);
                         double.TryParse(currResults.SalesLine[slr].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
                         quantityReceived = 0;
@@ -1947,7 +1947,7 @@ namespace ExcelDesign.Class_Objects
                             {
                                 itemNo = currResults.SalesLine[slr].ItemNo;
                                 description = currResults.SalesLine[slr].Description;
-                                int.TryParse(currResults.SalesLine[slr].Qty, out quantity);
+                                int.TryParse(currResults.SalesLine[slr].Qty.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out quantity);
                                 double.TryParse(currResults.SalesLine[slr].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                                 lineAmount = quantity * price;
                                 quantityReceived = 0;
@@ -2013,7 +2013,7 @@ namespace ExcelDesign.Class_Objects
                                         {
                                             itemNo = currResults.ReturnReceiptLine[rl].ItemNo;
                                             description = currResults.ReturnReceiptLine[rl].Description;
-                                            int.TryParse(currResults.ReturnReceiptLine[rl].Qty, out quantity);
+                                            int.TryParse(currResults.ReturnReceiptLine[rl].Qty.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out quantity);
                                             double.TryParse(currResults.ReturnReceiptLine[rl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                                             lineAmount = quantity * price;
 

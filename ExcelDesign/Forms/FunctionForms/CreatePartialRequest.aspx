@@ -32,6 +32,30 @@
                 null,
                 "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
         };
+
+        function CopyLine(lineID) {
+            var rowID = lineID;
+            $.ajax({
+                type: "POST",
+                url: "CreatePartialRequest.aspx/CopyLine",
+                data: JSON.stringify({ rowID: rowID }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (error) {
+                    if (error.d.indexOf("Error") == -1) {
+                        __doPostBack('[id$=btnReload', '');
+                    } else {
+                        alert(error.d);                    
+                    }
+                },
+                error: function (xhr, status, text) {
+                    console.log(xhr.status);
+                    console.log(xhr.text);
+                    console.log(xhr.responseText);
+                },
+            });  
+            return false;
+        };
     </script>
 </head>
 <body>
@@ -57,14 +81,14 @@
                             <asp:TableHeaderCell Text="Item No." HorizontalAlign="Left" ID="HeaderItem" />
                             <asp:TableHeaderCell Text="Description" HorizontalAlign="Left" Width="30%" ID="HeaderDesc" />
                             <asp:TableHeaderCell Text="Qty" ID="HeaderQty" />
-                            <asp:TableHeaderCell Text="Action Qty" ID="HeaderActionQty" Width="10%"/>
+                            <asp:TableHeaderCell Text="Action Qty" ID="HeaderActionQty" Width="10%" />
                             <asp:TableHeaderCell Text="Part Request" ID="HeaderPartRequest" Width="8%" />
                             <asp:TableHeaderCell Text="Reason" HorizontalAlign="Left" ID="HeaderReturnReasonCode" />
                             <asp:TableHeaderCell ID="HeaderCopyButton" />
                         </asp:TableHeaderRow>
                     </asp:Table>
                 </asp:TableCell>
-            </asp:TableRow>
+            </asp:TableRow>           
             <asp:TableRow>
                 <asp:TableCell>
                     <br />

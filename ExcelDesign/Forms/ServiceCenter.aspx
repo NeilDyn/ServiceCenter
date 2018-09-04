@@ -101,7 +101,15 @@
             } else {
                 location.replace("Forms/AdminControl.aspx");
             }
-        }
+        };
+
+        //function OpenStatisticsPanel() {
+        //    if (location.href.includes("Forms")) {
+        //        location.replace("AdminControl.aspx");
+        //    } else {
+        //        location.replace("Forms/Statistics.aspx");
+        //    }
+        //};
 
         function SubmitFeedback() {
             window.open("https://docs.google.com/forms/d/e/1FAIpQLSfr07VbYNgq2yuyrRVCJUFtbssytAX563c7ZQBht_xZNx4EKg/viewform", "_blank");
@@ -123,6 +131,7 @@
                 <li><a href="javascript:UserLogout()">Logout</a></li>
                 <li><a href="javascript:OpenUserControlPanel()">Control Panel</a></li>
                 <li runat="server" id="adminPanel"><a href="javascript:OpenAdminControlPanel()">Admin Panel</a></li>
+                <li runat="server" id="statisticsPanel"><a href="javascript:OpenStatisticsPanel()">Statistics</a></li>
                 <li><a href="javascript:SubmitFeedback()">Submit Feedback</a></li>
                 <li runat="server" id="currentUser" style="padding: 0 20px"></li>
                 <li style="padding: 0 20px" runat="server" id="versionList"/>

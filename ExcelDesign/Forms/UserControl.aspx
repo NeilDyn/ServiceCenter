@@ -54,10 +54,10 @@
                 <asp:TableHeaderCell Text="Create RMA" />
                 <asp:TableHeaderCell Text="Create Return Label" />
                 <asp:TableHeaderCell Text="Create Exchange Order" />
-                <asp:TableHeaderCell Text="Create Partial Request" />
+                <asp:TableHeaderCell Text="Create Part Request" />
                 <asp:TableHeaderCell Text="Create PDA Replacement RMA" />
                 <asp:TableHeaderCell Text="Create PDA Replacement Exchange" />
-                <asp:TableHeaderCell Text="Create PDA Partial Request" />
+                <asp:TableHeaderCell Text="Create PDA Part Request" />
                 <asp:TableHeaderCell Text="Admin" />
                 <asp:TableHeaderCell Text="Developer" />
                 <asp:TableHeaderCell Text="Last Password Update" />

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Web;
+using System.Web.Script.Services;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -26,13 +28,18 @@ namespace ExcelDesign.Forms.FunctionForms
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            ClientScript.GetPostBackEventReference(this, string.Empty);
+
             Session["UserInteraction"] = true;
 
             if (!IsPostBack)
             {
+                Session["CopyRowList"] = null;
+                Session["PartRequestTable"] = null;
+
                 tcNo.Text = Convert.ToString(Request.QueryString["No"]);
                 tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
-                Sh = (List<SalesHeader>)Session["SalesHeaders"];
+                Sh = (List<SalesHeader>)Session["SalesHeaders"];             
             }
 
             LoadPartRequestLines();
@@ -78,6 +85,7 @@ namespace ExcelDesign.Forms.FunctionForms
                                     {
                                         ID = "copyButton_" + lineCount.ToString(),
                                         Text = "Add Line",
+                                        OnClientClick = "return CopyLine(" + lineCount + ")"
                                     };
 
                                     DropDownList ddlPartRequest = new DropDownList
@@ -152,9 +160,22 @@ namespace ExcelDesign.Forms.FunctionForms
 
                                     singleRow.Attributes.CssStyle.Add("border-collapse", "collapse");
                                     tblCreateReturnOrderTableDetails.Rows.Add(singleRow);
+
+                                    Session["PartRequestTable"] = tblCreateReturnOrderTableDetails;
                                 }
                             }
                         }
+                    }
+                }
+
+                if (Session["CopyRowList"] != null)
+                {
+                    List<TableRow> copyList = (List<TableRow>)Session["CopyRowList"];
+
+                    foreach (TableRow copyRow in copyList)
+                    {
+                        tblCreateReturnOrderTableDetails.Rows.Add(copyRow);
+                        Session["PartRequestTable"] = tblCreateReturnOrderTableDetails;
                     }
                 }
 
@@ -284,6 +305,9 @@ namespace ExcelDesign.Forms.FunctionForms
                         Session["CreatedPartRequest"] = cprh;
                         Session["NoUserInteraction"] = true;
 
+                        Session["CopyRowTable"] = null;
+                        Session["PartRequestTable"] = null;
+
                         ClientScript.RegisterStartupScript(this.GetType(), "returnPartRequest", "alert('" + cprh.QuoteNo + "');", true);
                         ClientScript.RegisterStartupScript(this.GetType(), "openCreatedPartRequest", "OpenCreatedPartRequest();", true);
                     }
@@ -390,6 +414,63 @@ namespace ExcelDesign.Forms.FunctionForms
             {
                 return false;
             }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static string CopyLine(int rowID)
+        {
+            try
+            {
+                Table ogTable = new Table();
+                TableRow copyRow = new TableRow();
+
+                if (HttpContext.Current.Session["PartRequestTable"] != null)
+                {
+                    ogTable = (Table)HttpContext.Current.Session["PartRequestTable"];
+                    copyRow = ogTable.Rows[rowID];
+                    int newID = ogTable.Rows.Count;
+
+                    foreach (TableCell copyCell in copyRow.Cells)
+                    {
+                        copyCell.ID = copyCell.ID.Replace(rowID.ToString(), newID.ToString());
+
+                        foreach (Control copyControl in copyCell.Controls)
+                        {
+                            copyControl.ID = copyControl.ID.Replace(rowID.ToString(), newID.ToString());
+
+                            if (copyControl.GetType() == typeof(Button))
+                            {
+                                ((Button)copyControl).OnClientClick = ((Button)copyControl).OnClientClick.Replace(rowID.ToString(), newID.ToString());
+                                copyControl.Visible = false;
+                            }
+                        }
+                    }
+
+                    copyRow.ID = copyRow.ID.Replace(rowID.ToString(), newID.ToString());
+
+                    if (HttpContext.Current.Session["CopyRowList"] == null)
+                    {
+                        List<TableRow> copyListRow = new List<TableRow>();
+
+                        HttpContext.Current.Session["CopyRowList"] = copyListRow;
+                    }
+
+                    List<TableRow> sessionCopyList = (List<TableRow>)HttpContext.Current.Session["CopyRowList"];
+
+                    sessionCopyList.Add(copyRow);
+
+                    HttpContext.Current.Session["CopyRowList"] = sessionCopyList;
+
+                    return "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error - " + ex.Message;
+            }
+
+            return "Error";
         }
     }
 }

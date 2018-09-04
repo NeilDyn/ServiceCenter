@@ -103,6 +103,7 @@
     <Content Include="Forms\PDAForms\CreatedPDARMA.aspx" />
     <Content Include="Forms\PDAForms\CreatePartRequest.aspx" />
     <Content Include="Forms\PDAForms\CreateRMA.aspx" />
+    <Content Include="Forms\Statistics.aspx" />
     <Content Include="Forms\UserControl.aspx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetail.ascx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetailHeader.ascx" />
@@ -275,6 +276,13 @@
     </Compile>
     <Compile Include="Forms\PDAForms\CreateRMA.aspx.designer.cs">
       <DependentUpon>CreateRMA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Statistics.aspx.cs">
+      <DependentUpon>Statistics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\Statistics.aspx.designer.cs">
+      <DependentUpon>Statistics.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserControl.aspx.cs">
       <DependentUpon>UserControl.aspx</DependentUpon>

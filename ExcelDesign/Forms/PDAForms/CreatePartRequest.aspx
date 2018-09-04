@@ -53,6 +53,30 @@
                 null,
                 "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
         };
+
+        function CopyLine(lineID) {
+            var rowID = lineID;
+            $.ajax({
+                type: "POST",
+                url: "CreatePartRequest.aspx/CopyLine",
+                data: JSON.stringify({ rowID: rowID }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (error) {
+                    if (error.d.indexOf("Error") == -1) {
+                         __doPostBack('[id$=btnReload', '');
+                    } else {
+                        alert(error.d);                    
+                    }
+                },
+                error: function (xhr, status, text) {
+                    console.log(xhr.status);
+                    console.log(xhr.text);
+                    console.log(xhr.responseText);
+                },
+            });    
+            return false;
+        };
     </script>
 </head>
 <body>
@@ -153,7 +177,7 @@
             </asp:TableHeaderRow>
             <asp:TableRow>
                 <asp:TableCell ColumnSpan="5">
-                    <asp:Table runat="server" ID="tblCreateReturnOrderTableDetails" Height="100%" Width="100%">
+                    <asp:Table runat="server" ID="tblCreatePartRequestTableDetails" Height="100%" Width="100%">
                         <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
                             <asp:TableHeaderCell Text="Item No." HorizontalAlign="Left" ID="HeaderItem" />
                             <asp:TableHeaderCell Text="Description" HorizontalAlign="Left" Width="30%" ID="HeaderDesc" />

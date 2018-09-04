@@ -25,7 +25,7 @@ namespace ExcelDesign.Forms
     {
         #region Global
 
-        protected const string version = "v5.1";
+        protected const string version = "v5.2";
 
         protected CallService cs = new CallService();
         public int SessionTime;
@@ -75,10 +75,21 @@ namespace ExcelDesign.Forms
                     if (u.Admin)
                     {
                         adminPanel.Visible = true;
+                        statisticsPanel.Visible = true;
                     }
                     else
                     {
                         adminPanel.Visible = false;
+                        statisticsPanel.Visible = false;
+                    }
+
+                    if(u.Developer)
+                    {
+                        statisticsPanel.Visible = true;
+                    }
+                    else
+                    {
+                        statisticsPanel.Visible = false;
                     }
                 }
             }

@@ -23,9 +23,13 @@ namespace ExcelDesign.Forms
 {
     public partial class ServiceCenter : System.Web.UI.Page
     {
+        /* NJ 5 September 2018
+         * Updated with User Control Navigation bar.
+        */ 
+
         #region Global
 
-        protected const string version = "v5.2";
+        //protected const string version = "v5.2";
 
         protected CallService cs = new CallService();
         public int SessionTime;
@@ -63,34 +67,34 @@ namespace ExcelDesign.Forms
             }
             else
             {
-                versionList.InnerText = version;
+                //versionList.InnerText = version;
 
                 if (Session["ActiveUser"] != null)
                 {
                     User u = (User)Session["ActiveUser"];
                     SessionTime = u.SessionTimeout; // Initiates user session timer
-                    currentUser.InnerText = "Welcome " + u.UserID + "!";
-                    applicationType.InnerText = ConfigurationManager.AppSettings["mode"].ToString(); // Displays the current database the portal is connected to
+                    //currentUser.InnerText = "Welcome " + u.UserID + "!";
+                    //applicationType.InnerText = ConfigurationManager.AppSettings["mode"].ToString(); // Displays the current database the portal is connected to
 
-                    if (u.Admin)
-                    {
-                        adminPanel.Visible = true;
-                        statisticsPanel.Visible = true;
-                    }
-                    else
-                    {
-                        adminPanel.Visible = false;
-                        statisticsPanel.Visible = false;
-                    }
+                    //if (u.Admin)
+                    //{
+                    //    adminPanel.Visible = true;
+                    //    statisticsPanel.Visible = true;
+                    //}
+                    //else
+                    //{
+                    //    adminPanel.Visible = false;
+                    //    statisticsPanel.Visible = false;
+                    //}
 
-                    if(u.Developer)
-                    {
-                        statisticsPanel.Visible = true;
-                    }
-                    else
-                    {
-                        statisticsPanel.Visible = false;
-                    }
+                    //if (u.Developer)
+                    //{
+                    //    statisticsPanel.Visible = true;
+                    //}
+                    //else
+                    //{
+                    //    statisticsPanel.Visible = false;
+                    //}
                 }
             }
 

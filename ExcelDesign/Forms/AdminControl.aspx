@@ -2,6 +2,8 @@
 
 <!DOCTYPE html>
 
+<%@ Register Src="~/Headers/Navbar.ascx" TagName="AdminNavbar" TagPrefix="anav" %>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Admin Control</title>
@@ -9,6 +11,7 @@
 </head>
 <body>
     <form id="frmAdminControl" runat="server">
+        <anav:AdminNavbar ID="AdminNavar" runat="server" />
         <asp:RadioButtonList ID="rblModeSelection" runat="server">
             <asp:ListItem Value="Production Mode"></asp:ListItem>
             <asp:ListItem Value="Development Mode"></asp:ListItem>

@@ -151,5 +151,14 @@ namespace ExcelDesign.Class_Objects
         {
             functions.ResetSession(userID);
         }
+
+        public Statistics GetStatisticsInfo()
+        {
+            Statistics stats = new Statistics();
+
+            functions.GetStatistics(SessionID(), ref stats);
+
+            return stats;
+        }
     }
 }

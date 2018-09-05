@@ -31,49 +31,13 @@ namespace ExcelDesign.Forms {
         protected global::System.Web.UI.WebControls.Button btnExtendSessionTime;
         
         /// <summary>
-        /// adminPanel control.
+        /// MainNavbar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl adminPanel;
-        
-        /// <summary>
-        /// statisticsPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl statisticsPanel;
-        
-        /// <summary>
-        /// currentUser control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl currentUser;
-        
-        /// <summary>
-        /// versionList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl versionList;
-        
-        /// <summary>
-        /// applicationType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl applicationType;
+        protected global::ExcelDesign.Headers.Navbar MainNavbar;
         
         /// <summary>
         /// imgLogo control.

@@ -118,6 +118,12 @@
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnDetailHeader.ascx" />
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnHeader.ascx" />
     <Content Include="Forms\UserControls\SingleControls\MultipleCustomers.ascx" />
+    <Content Include="Forms\UserControls\StatisticsControls\PendingRefund.ascx" />
+    <Content Include="Forms\UserControls\StatisticsControls\PendingReplacements.ascx" />
+    <Content Include="Forms\UserControls\StatisticsControls\SalesLines\PendingSQApprovalLines.ascx" />
+    <Content Include="Forms\UserControls\StatisticsControls\SalesLines\RefundOlder72HoursLines.ascx" />
+    <Content Include="Forms\UserControls\StatisticsControls\SalesLines\ReplacementNoInvLines.ascx" />
+    <Content Include="Forms\UserControls\StatisticsControls\SalesLines\ReplacementOlder72HoursLines.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderComments.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderPackages.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderReceipts.ascx" />
@@ -132,6 +138,7 @@
     <Content Include="Forms\UserControls\MainTables\SalesOrderHeaderTable.ascx" />
     <Content Include="Forms\UserControls\TableHeaders\SingleCustomerTableHeader.ascx" />
     <Content Include="Forms\UserControls\TableHeaders\SingleSalesOrderTableHeader.ascx" />
+    <Content Include="Headers\Navbar.ascx" />
     <Content Include="images\Logo.png" />
     <Content Include="images\icon.ico" />
     <Content Include="images\sketch.png" />
@@ -168,6 +175,7 @@
     <Compile Include="Class Objects\SendService.cs" />
     <Compile Include="Class Objects\ShipmentHeader.cs" />
     <Compile Include="Class Objects\ShipmentLine.cs" />
+    <Compile Include="Class Objects\StatisticsSalesLine.cs" />
     <Compile Include="Class Objects\User.cs" />
     <Compile Include="Class Objects\Warranty.cs" />
     <Compile Include="Class Objects\WebService.cs" />
@@ -382,6 +390,48 @@
     <Compile Include="Forms\UserControls\SingleControls\MultipleCustomers.ascx.designer.cs">
       <DependentUpon>MultipleCustomers.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\PendingRefund.ascx.cs">
+      <DependentUpon>PendingRefund.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\PendingRefund.ascx.designer.cs">
+      <DependentUpon>PendingRefund.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\PendingReplacements.ascx.cs">
+      <DependentUpon>PendingReplacements.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\PendingReplacements.ascx.designer.cs">
+      <DependentUpon>PendingReplacements.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\PendingSQApprovalLines.ascx.cs">
+      <DependentUpon>PendingSQApprovalLines.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\PendingSQApprovalLines.ascx.designer.cs">
+      <DependentUpon>PendingSQApprovalLines.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\RefundOlder72HoursLines.ascx.cs">
+      <DependentUpon>RefundOlder72HoursLines.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\RefundOlder72HoursLines.ascx.designer.cs">
+      <DependentUpon>RefundOlder72HoursLines.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\ReplacementNoInvLines.ascx.cs">
+      <DependentUpon>ReplacementNoInvLines.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\ReplacementNoInvLines.ascx.designer.cs">
+      <DependentUpon>ReplacementNoInvLines.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\ReplacementOlder72HoursLines.ascx.cs">
+      <DependentUpon>ReplacementOlder72HoursLines.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\ReplacementOlder72HoursLines.ascx.designer.cs">
+      <DependentUpon>ReplacementOlder72HoursLines.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderComments.ascx.cs">
       <DependentUpon>SingleReturnOrderComments.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -480,6 +530,13 @@
     <Compile Include="Forms\UserControls\TableHeaders\SingleSalesOrderTableHeader.ascx.designer.cs">
       <DependentUpon>SingleSalesOrderTableHeader.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Headers\Navbar.ascx.cs">
+      <DependentUpon>Navbar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Headers\Navbar.ascx.designer.cs">
+      <DependentUpon>Navbar.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -523,6 +580,9 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\ServiceFunctions\UserSetup.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ServiceFunctions\Statistics.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">

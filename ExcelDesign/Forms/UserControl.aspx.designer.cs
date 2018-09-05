@@ -22,6 +22,15 @@ namespace ExcelDesign.Forms {
         protected global::System.Web.UI.HtmlControls.HtmlForm frmUserControl;
         
         /// <summary>
+        /// UserControlNavbar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ExcelDesign.Headers.Navbar UserControlNavbar;
+        
+        /// <summary>
         /// TblUserControl control.
         /// </summary>
         /// <remarks>
@@ -227,15 +236,6 @@ namespace ExcelDesign.Forms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableCell tcPasswordExpiryDate;
-        
-        /// <summary>
-        /// btnHomepage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnHomepage;
         
         /// <summary>
         /// BtnUpdatePassword control.

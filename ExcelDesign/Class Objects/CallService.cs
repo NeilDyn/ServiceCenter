@@ -2165,5 +2165,56 @@ namespace ExcelDesign.Class_Objects
             HttpContext.Current.Session["ReturnReasons"] = rrList;
             HttpContext.Current.Session["PartRequestOptions"] = partReqOptions;
         }
+
+        public List<StatisticsSalesLine> GetStatisticsInformation()
+        {
+            List<StatisticsSalesLine> statLines = new List<StatisticsSalesLine>();
+            Statistics stats = new Statistics();
+
+            stats = webService.GetStatisticsInfo();
+
+            string docType = string.Empty;
+            string docNo = string.Empty;
+            string itemNo = string.Empty;
+            int qty = 0;
+            string description = string.Empty;
+            string createdDate = string.Empty;
+            string reqReturnAction = string.Empty;
+            bool isNotInvtAvailable = false;
+            bool isOlderThan72Hours = false;
+            bool isPendingSQApproval = false;
+
+            if(stats.SalesLine != null)
+            {
+                for (int sl = 0; sl < stats.SalesLine.Length; sl++)
+                {
+                    docType = stats.SalesLine[sl].DocType;
+                    docNo = stats.SalesLine[sl].DocNo;
+                    itemNo = stats.SalesLine[sl].ItemNo;
+                    int.TryParse(stats.SalesLine[sl].Qty.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out qty);
+                    description = stats.SalesLine[sl].Description;
+                    createdDate = stats.SalesLine[sl].CreatedDate;
+                    reqReturnAction = stats.SalesLine[sl].ReqReturnAction;
+                    isNotInvtAvailable = stats.SalesLine[sl].IsNotInvtAvailable[0] == "Yes" ? true : false;
+                    isOlderThan72Hours = stats.SalesLine[sl].IsOlderThan72Hrs[0] == "Yes" ? true : false;
+                    isPendingSQApproval = stats.SalesLine[sl].IsPendingSQApproval[0] == "Yes" ? true : false;
+
+                    statLines.Add(new StatisticsSalesLine(docType, docNo, itemNo, qty, description, createdDate, reqReturnAction, isNotInvtAvailable, isOlderThan72Hours, isPendingSQApproval));
+
+                    docType = string.Empty;
+                    docNo = string.Empty;
+                    itemNo = string.Empty;
+                    qty = 0;
+                    description = string.Empty;
+                    createdDate = string.Empty;
+                    reqReturnAction = string.Empty;
+                    isNotInvtAvailable = false;
+                    isOlderThan72Hours = false;
+                    isPendingSQApproval = false;
+                }
+            }
+
+            return statLines;
+        }
     }
 }

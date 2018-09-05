@@ -2,6 +2,8 @@
 
 <!DOCTYPE html>
 
+<%@ Register Src="~/Headers/Navbar.ascx" TagName="UserControlNavbar" TagPrefix="ucnav" %>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>User Control</title>
@@ -47,6 +49,7 @@
 </head>
 <body>
     <form id="frmUserControl" runat="server">
+        <ucnav:UserControlNavbar ID="UserControlNavbar" runat="server" />
         <asp:Table ID="TblUserControl" runat="server" Height="100%" Width="100%" HorizontalAlign="Center">
             <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
                 <asp:TableHeaderCell Text="User ID" />
@@ -100,7 +103,6 @@
         </asp:Table>
         <br />
         <br />
-        <asp:Button ID="btnHomepage" runat="server" Text="Homepage" Style="float: right" OnClick="btnHomepage_Click" />
         <asp:Button ID="BtnUpdatePassword" runat="server" Text="Update Password" Style="float: right" OnClientClick="UpdatePassword()" />
     </form>
 </body>

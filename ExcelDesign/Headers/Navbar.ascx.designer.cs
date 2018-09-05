@@ -7,45 +7,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExcelDesign.Forms {
+namespace ExcelDesign.Headers {
     
     
-    public partial class AdminControl {
+    public partial class Navbar {
         
         /// <summary>
-        /// frmAdminControl control.
+        /// adminPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm frmAdminControl;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl adminPanel;
         
         /// <summary>
-        /// AdminNavar control.
+        /// statisticsPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ExcelDesign.Headers.Navbar AdminNavar;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl statisticsPanel;
         
         /// <summary>
-        /// rblModeSelection control.
+        /// currentUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblModeSelection;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl currentUser;
         
         /// <summary>
-        /// BtnSetMode control.
+        /// versionList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnSetMode;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl versionList;
+        
+        /// <summary>
+        /// applicationType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl applicationType;
     }
 }

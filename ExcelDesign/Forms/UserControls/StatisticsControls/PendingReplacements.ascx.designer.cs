@@ -7,45 +7,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExcelDesign.Forms {
+namespace ExcelDesign.Forms.UserControls.StatisticsControls {
     
     
-    public partial class AdminControl {
+    public partial class PendingReplacements {
         
         /// <summary>
-        /// frmAdminControl control.
+        /// tblPendingReplacements control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm frmAdminControl;
+        protected global::System.Web.UI.WebControls.Table tblPendingReplacements;
         
         /// <summary>
-        /// AdminNavar control.
+        /// tcReplacementNoInvAvail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ExcelDesign.Headers.Navbar AdminNavar;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcReplacementNoInvAvail;
         
         /// <summary>
-        /// rblModeSelection control.
+        /// expandReplacementNoInventory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblModeSelection;
+        protected global::System.Web.UI.WebControls.TableRow expandReplacementNoInventory;
         
         /// <summary>
-        /// BtnSetMode control.
+        /// tcReplacementOlderThan72Hours control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnSetMode;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcReplacementOlderThan72Hours;
+        
+        /// <summary>
+        /// expand72HoursReplacement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableRow expand72HoursReplacement;
     }
 }

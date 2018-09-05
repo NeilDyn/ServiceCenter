@@ -10,6 +10,10 @@ namespace ExcelDesign.Forms
 {
     public partial class AdminControl : System.Web.UI.Page
     {
+        /* NJ 5 September 2018
+         * Updated with User Control Navigation bar.
+        */
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!this.Page.User.Identity.IsAuthenticated || Session["ActiveUser"] == null)

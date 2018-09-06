@@ -42,16 +42,23 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
 
                 int invNotAvail = 0;
                 int olderThan72Hours = 0;
+                int olderThan48Hours = 0;
 
                 List<StatisticsSalesLine> olderThan72HoursList = new List<StatisticsSalesLine>();
+                List<StatisticsSalesLine> olderThan48HoursList = new List<StatisticsSalesLine>();
                 List<StatisticsSalesLine> invNotAvailList = new List<StatisticsSalesLine>();
 
                 foreach (StatisticsSalesLine line in ReplacementList)
-                {                  
-                    if(line.IsOlderThan72Hours)
+                {
+                    if (line.IsOlderThan72Hours)
                     {
                         olderThan72Hours++;
                         olderThan72HoursList.Add(line);
+                    }
+                    else if (line.IsOlderThan48Hours)
+                    {
+                        olderThan48Hours++;
+                        olderThan48HoursList.Add(line);
                     }
 
                     if (line.IsNotInvtAvailable)
@@ -78,6 +85,15 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                 else
                 {
                     tcReplacementNoInvAvail.Text = invNotAvail.ToString();
+                }
+
+                if (olderThan48Hours > 0)
+                {
+                    tcReplacementOlderThan48Hours.Text = olderThan48Hours.ToString();
+                }
+                else
+                {
+                    tcReplacementOlderThan48Hours.Text = olderThan48Hours.ToString();
                 }
 
                 PopulateNoInventoryLines(invNotAvailList);

@@ -15,9 +15,13 @@
     </script>
 <asp:Table ID="tblPendingRefunds" runat="server" Width="100%" Height="100%">
     <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify">
+        <asp:TableHeaderCell Text="Older than 48 hours" Font-Bold="false"/>
+        <asp:TableHeaderCell runat="server" ID="tcRefundOlder48Hours" />
+    </asp:TableHeaderRow>
+    <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableHeaderCell Text="Older than 72 hours" Font-Bold="false"/>
         <asp:TableHeaderCell runat="server" ID="tcRefundOlder72Hours" />
     </asp:TableHeaderRow>
     <asp:TableRow runat="server" ID="expandRefundOlder72Hours" TableSection="TableBody" HorizontalAlign="Justify">
-    </asp:TableRow>
+    </asp:TableRow>   
 </asp:Table>

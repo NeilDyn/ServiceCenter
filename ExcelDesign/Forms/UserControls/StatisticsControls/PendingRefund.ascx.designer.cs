@@ -22,6 +22,15 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls {
         protected global::System.Web.UI.WebControls.Table tblPendingRefunds;
         
         /// <summary>
+        /// tcRefundOlder48Hours control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcRefundOlder48Hours;
+        
+        /// <summary>
         /// tcRefundOlder72Hours control.
         /// </summary>
         /// <remarks>

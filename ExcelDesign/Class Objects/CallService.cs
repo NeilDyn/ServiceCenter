@@ -2179,10 +2179,13 @@ namespace ExcelDesign.Class_Objects
             int qty = 0;
             string description = string.Empty;
             string createdDate = string.Empty;
+            string customerNo = string.Empty;
             string reqReturnAction = string.Empty;
             bool isNotInvtAvailable = false;
             bool isOlderThan72Hours = false;
+            bool isOlderThan48Hours = false;
             bool isPendingSQApproval = false;
+            string status = string.Empty;
 
             if(stats.SalesLine != null)
             {
@@ -2195,11 +2198,54 @@ namespace ExcelDesign.Class_Objects
                     description = stats.SalesLine[sl].Description;
                     createdDate = stats.SalesLine[sl].CreatedDate;
                     reqReturnAction = stats.SalesLine[sl].ReqReturnAction;
+                    customerNo = stats.SalesLine[sl].CustomerNo;
                     isNotInvtAvailable = stats.SalesLine[sl].IsNotInvtAvailable[0] == "Yes" ? true : false;
                     isOlderThan72Hours = stats.SalesLine[sl].IsOlderThan72Hrs[0] == "Yes" ? true : false;
+                    isOlderThan48Hours = stats.SalesLine[sl].IsOlderThan48Hrs[0] == "Yes" ? true : false;
                     isPendingSQApproval = stats.SalesLine[sl].IsPendingSQApproval[0] == "Yes" ? true : false;
 
-                    statLines.Add(new StatisticsSalesLine(docType, docNo, itemNo, qty, description, createdDate, reqReturnAction, isNotInvtAvailable, isOlderThan72Hours, isPendingSQApproval));
+                    if (isNotInvtAvailable)
+                    {
+                        status = "No inventory";
+                    }
+
+                    if (isOlderThan72Hours)
+                    {
+                        if (status.Length == 0)
+                        {
+                            status = "Is older than 72 hours";
+                        }
+                        else
+                        {
+                            status += ", Is older than 72 hours";
+                        }
+                    }
+                    else if (isOlderThan48Hours)
+                    {
+                        if (status.Length == 0)
+                        {
+                            status = "Is older than 48 hours";
+                        }
+                        else
+                        {
+                            status += ", Is older than 48 hours";
+                        }
+                    }
+
+                    if (isPendingSQApproval)
+                    {
+                        if (status.Length == 0)
+                        {
+                            status = "Is pending SQ approval";
+                        }
+                        else
+                        {
+                            status += ", Is pending SQ Approval";
+                        }
+                    }
+
+                    statLines.Add(new StatisticsSalesLine(docType, docNo, itemNo, qty, description, createdDate, reqReturnAction, isNotInvtAvailable, isOlderThan72Hours,
+                        isPendingSQApproval, customerNo, isOlderThan48Hours, status));
 
                     docType = string.Empty;
                     docNo = string.Empty;
@@ -2208,9 +2254,12 @@ namespace ExcelDesign.Class_Objects
                     description = string.Empty;
                     createdDate = string.Empty;
                     reqReturnAction = string.Empty;
+                    customerNo = string.Empty;
                     isNotInvtAvailable = false;
                     isOlderThan72Hours = false;
+                    isOlderThan48Hours = false;
                     isPendingSQApproval = false;
+                    status = string.Empty;
                 }
             }
 

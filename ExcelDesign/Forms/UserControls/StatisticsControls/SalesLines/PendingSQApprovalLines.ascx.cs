@@ -29,25 +29,31 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLInes
 
                     TableRow tr = new TableRow();
 
+                    TableCell custNo = new TableCell();
                     TableCell docNo = new TableCell();
                     TableCell createdDate = new TableCell();
                     TableCell itemNo = new TableCell();
                     TableCell desc = new TableCell();
-                    TableCell qty = new TableCell();
+                    TableCell qty = new TableCell();                   
+                    TableCell status = new TableCell();
 
+                    custNo.Text = line.CustomerNumber;
                     docNo.Text = line.DocNo;
                     createdDate.Text = line.CreatedDate;
                     itemNo.Text = line.ItemNo;
                     desc.Text = line.Description;
                     qty.Text = line.Qty.ToString();
+                    status.Text = line.Status;
 
                     qty.HorizontalAlign = HorizontalAlign.Center;
 
+                    tr.Cells.Add(custNo);
                     tr.Cells.Add(docNo);
                     tr.Cells.Add(createdDate);
                     tr.Cells.Add(itemNo);
                     tr.Cells.Add(desc);
                     tr.Cells.Add(qty);
+                    tr.Cells.Add(status);
 
                     if (lineCount % 2 == 0)
                     {

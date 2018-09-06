@@ -1,5 +1,4 @@
 ﻿using ExcelDesign.Class_Objects;
-using ExcelDesign.Forms.UserControls.StatisticsControls.SalesLInes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +8,14 @@ using System.Web.UI.WebControls;
 
 namespace ExcelDesign.Forms.UserControls.StatisticsControls
 {
-    public partial class PendingRefund : System.Web.UI.UserControl
+    public partial class Pending_Unknown : System.Web.UI.UserControl
     {
-        public List<StatisticsSalesLine> RefundList { get; set; }
+        public List<StatisticsSalesLine> UnknownList { get; set; }
 
-        protected TableCell linesCell;
+        protected void Page_Load(object sender, EventArgs e)
+        {
 
-        protected Control linesControl;
-
-        protected const string linesPath = "SalesLines/RefundOlder72HoursLines.ascx";
+        }
 
         public void PopulateData()
         {
@@ -30,15 +28,17 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                 };
 
                 breakRow.Cells.Add(breakCell);
-                tblPendingRefunds.Rows.Add(breakRow);
+                tblPendingUnknown.Rows.Add(breakRow);
 
+                int invNotAvail = 0;
                 int olderThan72Hours = 0;
                 int olderThan48Hours = 0;
 
                 List<StatisticsSalesLine> olderThan72HoursList = new List<StatisticsSalesLine>();
                 List<StatisticsSalesLine> olderThan48HoursList = new List<StatisticsSalesLine>();
+                List<StatisticsSalesLine> invNotAvailList = new List<StatisticsSalesLine>();
 
-                foreach (StatisticsSalesLine line in RefundList)
+                foreach (StatisticsSalesLine line in UnknownList)
                 {
                     if (line.IsOlderThan72Hours)
                     {
@@ -50,27 +50,46 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                         olderThan48Hours++;
                         olderThan48HoursList.Add(line);
                     }
+
+                    if (line.IsNotInvtAvailable)
+                    {
+                        invNotAvail++;
+                        invNotAvailList.Add(line);
+                    }
+
                 }
 
                 if (olderThan72Hours > 0)
                 {
-                    tcRefundOlder72Hours.Text = "<a href='javascript:expandRefundOlderThan72Hours()'>" + olderThan72Hours.ToString() + "</a>";
+                    //tcUnknownOlderThan72Hours.Text = "<a href='javascript:expandUnknownOlderThan72Hours()'>" + olderThan72Hours.ToString() + "</a>";
+                    tcUnknownOlderThan72Hours.Text = olderThan72Hours.ToString();
                 }
                 else
                 {
-                    tcRefundOlder72Hours.Text = olderThan72Hours.ToString();
+                    tcUnknownOlderThan72Hours.Text = olderThan72Hours.ToString();
                 }
 
-                if(olderThan48Hours > 0)
+                if (invNotAvail > 0)
                 {
-                    tcRefundOlder48Hours.Text = olderThan48Hours.ToString();
+                    //tcUnknownNoInvAvail.Text = "<a href='javascript:expandInvNotAvailUnknown()'>" + invNotAvail.ToString() + "</a>";
+                    tcUnknownNoInvAvail.Text = invNotAvail.ToString();
                 }
                 else
                 {
-                    tcRefundOlder48Hours.Text = olderThan48Hours.ToString();
+                    tcUnknownNoInvAvail.Text = invNotAvail.ToString();
                 }
 
-                PopulateOlder72Hours(olderThan72HoursList);
+                if (olderThan48Hours > 0)
+                {
+                    tcUnknownOlderThan48Hours.Text = olderThan48Hours.ToString();
+                }
+                else
+                {
+                    tcUnknownOlderThan48Hours.Text = olderThan48Hours.ToString();
+                }
+
+                //PopulateNoInventoryLines(invNotAvailList);
+                //PopulateOlderThan72HoursLines(olderThan72HoursList);
             }
             catch (Exception ex)
             {
@@ -85,20 +104,6 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                     Response.Redirect("Forms/ErrorForm.aspx");
                 }
             }
-        }
-
-        protected void PopulateOlder72Hours(List<StatisticsSalesLine> olderThan72HoursList)
-        {
-            linesCell = new TableCell();
-            linesControl = LoadControl(linesPath);
-            ((RefundLines)linesControl).OlderThan72HoursList = olderThan72HoursList;
-            ((RefundLines)linesControl).PopulateData();
-
-            linesCell.Controls.Add(linesControl);
-            linesCell.ColumnSpan = 4;
-            linesCell.Height = new Unit("100%");
-            linesCell.Width = new Unit("100%");
-            expandRefundOlder72Hours.Cells.Add(linesCell);
         }
     }
 }

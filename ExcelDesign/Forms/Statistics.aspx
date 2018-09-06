@@ -3,7 +3,8 @@
 <%@ Register Src="~/Headers/Navbar.ascx" TagName="StatisticsNavbar" TagPrefix="statsnav" %>
 <%@ Register Src="~/Forms/UserControls/StatisticsControls/PendingReplacements.ascx" TagName="PendingReplacements" TagPrefix="prc" %>
 <%@ Register Src="~/Forms/UserControls/StatisticsControls/PendingRefund.ascx" TagName="PendingRefunds" TagPrefix="prd" %>
-<%@ Register Src="~/Forms/UserControls/StatisticsControls/SalesLInes/PendingSQApprovalLines.ascx" TagName="PendingSQLApprovalLines" TagPrefix="psqal" %>
+<%@ Register Src="~/Forms/UserControls/StatisticsControls/PendingUnknown.ascx" TagName="PendingUnknown" TagPrefix="pu" %>
+<%@ Register Src="~/Forms/UserControls/StatisticsControls/PendingSQApproval.ascx" TagName="PendingSQApproval" TagPrefix="psqa" %>
 
 <!DOCTYPE html>
 
@@ -17,7 +18,8 @@
         $(document).ready(function () {
             $("[id$=expandReplacementDetails]").hide();
             $("[id$=expandRefundDetails]").hide();
-            $("[id$=expandPendingSQApprovalDetails]").hide();           
+            $("[id$=expandPendingSQApproval]").hide();    
+            $("[id$=expandPendingUnknown]").hide();
         });
 
         function expandReplacements() {
@@ -29,7 +31,11 @@
         };
 
         function expandPendingSQQuotes() {
-            $("[id$=expandPendingSQApprovalDetails]").toggle();
+            $("[id$=expandPendingSQApproval]").toggle();
+        };
+
+        function expandPendingUnknown() {
+            $("[id$=expandPendingUnknown]").toggle();
         };
     </script>
 </head>
@@ -68,7 +74,7 @@
             <asp:TableRow runat="server" TableSection="TableBody" HorizontalAlign="Justify">
                 <asp:TableCell runat="server" ID="expandReplacementDetails" ColumnSpan="2" Width="50%" Height="100%">
                 </asp:TableCell>  
-                <asp:TableCell runat="server" ID="expandPendingSQApprovalDetails" ColumnSpan="2" Width="50%" Height="100%"/>
+                <asp:TableCell runat="server" ID="expandPendingSQApproval" ColumnSpan="2" Width="50%" Height="100%"/>
             </asp:TableRow>
             <asp:TableRow TableSection="TableBody" BackColor="#EFF3FB" HorizontalAlign="Justify">
                 <asp:TableCell Text="Pending Refund" Font-Bold="true"/>
@@ -76,6 +82,13 @@
             </asp:TableRow>
             <asp:TableRow runat="server" TableSection="TableBody" HorizontalAlign="Justify">
                 <asp:TableCell runat="server" ID="expandRefundDetails" ColumnSpan="2" Width="50%" Height="100%"/>
+            </asp:TableRow>
+            <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
+                <asp:TableCell Text="Pending Unknown" Font-Bold="true"/>
+                <asp:TableCell runat="server" ID="tcPendingUnknown" />
+            </asp:TableRow>
+            <asp:TableRow runat="server" TableSection="TableBody" HorizontalAlign="Justify">
+                <asp:TableCell runat="server" ID="expandPendingUnknown" ColumnSpan="2" Width="50%" Height="100%"/>
             </asp:TableRow>
         </asp:Table>
     </form>

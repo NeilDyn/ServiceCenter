@@ -67,13 +67,13 @@ namespace ExcelDesign.Forms {
         protected global::System.Web.UI.WebControls.TableCell expandReplacementDetails;
         
         /// <summary>
-        /// expandPendingSQApprovalDetails control.
+        /// expandPendingSQApproval control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell expandPendingSQApprovalDetails;
+        protected global::System.Web.UI.WebControls.TableCell expandPendingSQApproval;
         
         /// <summary>
         /// tcPendingRefunds control.
@@ -92,5 +92,23 @@ namespace ExcelDesign.Forms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableCell expandRefundDetails;
+        
+        /// <summary>
+        /// tcPendingUnknown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcPendingUnknown;
+        
+        /// <summary>
+        /// expandPendingUnknown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell expandPendingUnknown;
     }
 }

@@ -14,12 +14,15 @@ namespace ExcelDesign.Class_Objects
         public string Description { get; set; }
         public string CreatedDate { get; set; }
         public string REQReturnAction { get; set; }
+        public string CustomerNumber { get; set; }
+        public string Status { get; set; }
         public bool IsNotInvtAvailable { get; set; }
         public bool IsOlderThan72Hours { get; set; }
+        public bool IsOlderThan48Hours { get; set; }
         public bool IsPendingSQApproval { get; set; }
 
         public StatisticsSalesLine(string docTypeP, string docNoP, string itemNoP, int qtyP, string descriptionP, string createdDateP, string reqReturnActionP,
-            bool isNotInvAvailableP, bool isOlderThan72HoursP, bool isPendingSQApprovalP)
+            bool isNotInvAvailableP, bool isOlderThan72HoursP, bool isPendingSQApprovalP, string customerNoP, bool isOlderThan48HoursP, string statusP)
         {
             DocType = docTypeP;
             DocNo = docNoP;
@@ -31,6 +34,9 @@ namespace ExcelDesign.Class_Objects
             IsNotInvtAvailable = isNotInvAvailableP;
             IsOlderThan72Hours = isOlderThan72HoursP;
             IsPendingSQApproval = isPendingSQApprovalP;
+            CustomerNumber = customerNoP;
+            IsOlderThan48Hours = isOlderThan48HoursP;
+            Status = statusP;         
         }
 
         public StatisticsSalesLine()

@@ -10,60 +10,60 @@
 namespace ExcelDesign.Forms.UserControls.StatisticsControls {
     
     
-    public partial class PendingReplacements {
+    public partial class PendingSQApproval {
         
         /// <summary>
-        /// tblPendingReplacements control.
+        /// tblPendingSQApproval control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblPendingReplacements;
+        protected global::System.Web.UI.WebControls.Table tblPendingSQApproval;
         
         /// <summary>
-        /// tcReplacementNoInvAvail control.
+        /// tcSQNoInvAvail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcReplacementNoInvAvail;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcSQNoInvAvail;
         
         /// <summary>
-        /// expandReplacementNoInventory control.
+        /// expandSQNoInventory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableRow expandReplacementNoInventory;
+        protected global::System.Web.UI.WebControls.TableRow expandSQNoInventory;
         
         /// <summary>
-        /// tcReplacementOlderThan48Hours control.
+        /// tcSQOlderThan48Hours control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcReplacementOlderThan48Hours;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcSQOlderThan48Hours;
         
         /// <summary>
-        /// tcReplacementOlderThan72Hours control.
+        /// tcSQOlderThan72Hours control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcReplacementOlderThan72Hours;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcSQOlderThan72Hours;
         
         /// <summary>
-        /// expand72HoursReplacement control.
+        /// expand72HoursSQ control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableRow expand72HoursReplacement;
+        protected global::System.Web.UI.WebControls.TableRow expand72HoursSQ;
     }
 }

@@ -118,8 +118,10 @@
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnDetailHeader.ascx" />
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnHeader.ascx" />
     <Content Include="Forms\UserControls\SingleControls\MultipleCustomers.ascx" />
+    <Content Include="Forms\UserControls\StatisticsControls\PendingUnknown.ascx" />
     <Content Include="Forms\UserControls\StatisticsControls\PendingRefund.ascx" />
     <Content Include="Forms\UserControls\StatisticsControls\PendingReplacements.ascx" />
+    <Content Include="Forms\UserControls\StatisticsControls\PendingSQApproval.ascx" />
     <Content Include="Forms\UserControls\StatisticsControls\SalesLines\PendingSQApprovalLines.ascx" />
     <Content Include="Forms\UserControls\StatisticsControls\SalesLines\RefundOlder72HoursLines.ascx" />
     <Content Include="Forms\UserControls\StatisticsControls\SalesLines\ReplacementNoInvLines.ascx" />
@@ -390,6 +392,13 @@
     <Compile Include="Forms\UserControls\SingleControls\MultipleCustomers.ascx.designer.cs">
       <DependentUpon>MultipleCustomers.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\PendingUnknown.ascx.cs">
+      <DependentUpon>PendingUnknown.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\PendingUnknown.ascx.designer.cs">
+      <DependentUpon>PendingUnknown.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UserControls\StatisticsControls\PendingRefund.ascx.cs">
       <DependentUpon>PendingRefund.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -403,6 +412,13 @@
     </Compile>
     <Compile Include="Forms\UserControls\StatisticsControls\PendingReplacements.ascx.designer.cs">
       <DependentUpon>PendingReplacements.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\PendingSQApproval.ascx.cs">
+      <DependentUpon>PendingSQApproval.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\PendingSQApproval.ascx.designer.cs">
+      <DependentUpon>PendingSQApproval.ascx</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\PendingSQApprovalLines.ascx.cs">
       <DependentUpon>PendingSQApprovalLines.ascx</DependentUpon>

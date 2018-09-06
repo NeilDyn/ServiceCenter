@@ -22,11 +22,13 @@ namespace ExcelDesign.Forms
 
         protected Control replacementLinesControl;
         protected Control refundLinesControl;
+        protected Control unknownLinesControl;
         protected Control quoteLinesControl;
 
         protected const string replacementLinesPath = "UserControls/StatisticsControls/PendingReplacements.ascx";
         protected const string refundLinesPath = "UserControls/StatisticsControls/PendingRefund.ascx";
-        protected const string quoteLinesPath = "UserControls/StatisticsControls/SalesLines/PendingSQApprovalLines.ascx";
+        protected const string unknownLinesPath = "UserControls/StatisticsControls/PendingUnknown.ascx";
+        protected const string quoteLinesPath = "UserControls/StatisticsControls/PendingSQApproval.ascx";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -69,10 +71,12 @@ namespace ExcelDesign.Forms
             int pendingReplacement = 0;
             int pendingRefund = 0;
             int pendingSQApproval = 0;
+            int unknown = 0;
 
             List<StatisticsSalesLine> replacementList = new List<StatisticsSalesLine>();
             List<StatisticsSalesLine> refundList = new List<StatisticsSalesLine>();
             List<StatisticsSalesLine> quoteList = new List<StatisticsSalesLine>();
+            List<StatisticsSalesLine> unknownList = new List<StatisticsSalesLine>();
 
             try
             {
@@ -92,7 +96,13 @@ namespace ExcelDesign.Forms
                                 pendingRefund++;
                                 refundList.Add(line);
                             }
-                        break;
+
+                            if (line.REQReturnAction.ToUpper() == "")
+                            {
+                                unknown++;
+                                unknownList.Add(line);
+                            }
+                            break;
 
                         case "QUOTE":
                             pendingSQApproval++;
@@ -128,9 +138,19 @@ namespace ExcelDesign.Forms
                     tcPendingSQApproval.Text = pendingSQApproval.ToString();
                 }
 
+                if (unknown > 0)
+                {
+                    tcPendingUnknown.Text = "<a href='javascript:expandPendingUnknown()'>" + unknown.ToString() + "</a>";
+                }
+                else
+                {
+                    tcPendingUnknown.Text = unknown.ToString();
+                }
+
                 PopulateReplacementLines(replacementList);
                 PopulateRefundLines(refundList);
                 PopulatePendingSQ(quoteList);
+                PopulateUnknownLines(unknownList);
             }
             catch (Exception ex)
             {
@@ -165,13 +185,22 @@ namespace ExcelDesign.Forms
             expandRefundDetails.Controls.Add(refundLinesControl);
         }
 
+        protected void PopulateUnknownLines(List<StatisticsSalesLine> unknownLines)
+        {
+            unknownLinesControl = LoadControl(unknownLinesPath);
+            ((Pending_Unknown)unknownLinesControl).UnknownList = unknownLines;
+            ((Pending_Unknown)unknownLinesControl).PopulateData();
+
+            expandPendingUnknown.Controls.Add(unknownLinesControl);
+        }
+
         protected void PopulatePendingSQ(List<StatisticsSalesLine> quoteList)
         {
             quoteLinesControl = LoadControl(quoteLinesPath);
-            ((PendingSQApprovalLines)quoteLinesControl).PendingSQLApprovalList = quoteList;
-            ((PendingSQApprovalLines)quoteLinesControl).PopulateData();
+            ((PendingSQApproval)quoteLinesControl).SQList = quoteList;
+            ((PendingSQApproval)quoteLinesControl).PopulateData();
 
-            expandPendingSQApprovalDetails.Controls.Add(quoteLinesControl);
+            expandPendingSQApproval.Controls.Add(quoteLinesControl);
         }
     }
 }

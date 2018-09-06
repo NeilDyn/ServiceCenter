@@ -30,21 +30,10 @@ namespace ExcelDesign.Headers
                 if (u.Admin)
                 {
                     adminPanel.Visible = true;
-                    statisticsPanel.Visible = true;
                 }
                 else
                 {
                     adminPanel.Visible = false;
-                    statisticsPanel.Visible = false;
-                }
-
-                if (u.Developer)
-                {
-                    statisticsPanel.Visible = true;
-                }
-                else
-                {
-                    statisticsPanel.Visible = false;
                 }
             }
         }

@@ -22,6 +22,15 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls {
         protected global::System.Web.UI.WebControls.Table tblPendingReplacements;
         
         /// <summary>
+        /// tcAllReplacementsPending control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcAllReplacementsPending;
+        
+        /// <summary>
         /// tcReplacementNoInvAvail control.
         /// </summary>
         /// <remarks>
@@ -29,15 +38,6 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableHeaderCell tcReplacementNoInvAvail;
-        
-        /// <summary>
-        /// expandReplacementNoInventory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableRow expandReplacementNoInventory;
         
         /// <summary>
         /// tcReplacementOlderThan48Hours control.
@@ -56,14 +56,5 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableHeaderCell tcReplacementOlderThan72Hours;
-        
-        /// <summary>
-        /// expand72HoursReplacement control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableRow expand72HoursReplacement;
     }
 }

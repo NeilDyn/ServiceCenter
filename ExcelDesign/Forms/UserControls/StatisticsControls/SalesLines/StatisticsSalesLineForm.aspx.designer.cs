@@ -7,10 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLInes {
+namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines {
     
     
-    public partial class PendingSQApprovalLines {
+    public partial class StatisticsSalesLineForm {
+        
+        /// <summary>
+        /// frmStatisticsSalesLineDetail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm frmStatisticsSalesLineDetail;
         
         /// <summary>
         /// tblPendingSQApprovalLines control.

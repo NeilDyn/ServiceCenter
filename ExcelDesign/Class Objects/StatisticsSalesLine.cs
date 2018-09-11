@@ -9,6 +9,7 @@ namespace ExcelDesign.Class_Objects
     {
         public string DocType { get; set; }
         public string DocNo { get; set; }
+        public string ExternalDocumentNo { get; set; }
         public string ItemNo { get; set; }   
         public int Qty { get; set; }
         public string Description { get; set; }
@@ -21,11 +22,12 @@ namespace ExcelDesign.Class_Objects
         public bool IsOlderThan48Hours { get; set; }
         public bool IsPendingSQApproval { get; set; }
 
-        public StatisticsSalesLine(string docTypeP, string docNoP, string itemNoP, int qtyP, string descriptionP, string createdDateP, string reqReturnActionP,
+        public StatisticsSalesLine(string docTypeP, string docNoP, string externalDocumentNoP, string itemNoP, int qtyP, string descriptionP, string createdDateP, string reqReturnActionP,
             bool isNotInvAvailableP, bool isOlderThan72HoursP, bool isPendingSQApprovalP, string customerNoP, bool isOlderThan48HoursP, string statusP)
         {
             DocType = docTypeP;
             DocNo = docNoP;
+            ExternalDocumentNo = externalDocumentNoP;
             ItemNo = itemNoP;
             Qty = qtyP;
             Description = descriptionP;

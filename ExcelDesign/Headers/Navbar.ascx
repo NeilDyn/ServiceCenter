@@ -59,6 +59,14 @@
         }
     };
 
+    function OpenAbout() {
+        if (location.href.includes("Forms")) {
+            location.replace("AboutPage.aspx");
+        } else {
+            location.replace("Forms/AboutPage.aspx");
+        }
+    };
+
     function SubmitFeedback() {
         window.open("https://docs.google.com/forms/d/e/1FAIpQLSfr07VbYNgq2yuyrRVCJUFtbssytAX563c7ZQBht_xZNx4EKg/viewform", "_blank");
     };
@@ -68,6 +76,7 @@
     <ul>
         <li><a href="#" class="disableLink"></a></li>
         <li><a href="javascript:UserLogout()">Logout</a></li>
+        <li runat="server" id="aboutPage"><a href="javascript:OpenAbout()">About</a></li>
         <li><a href="javascript:Homepage()">Homepage</a></li>
         <li><a href="javascript:OpenUserControlPanel()">Control Panel</a></li>
         <li runat="server" id="adminPanel"><a href="javascript:OpenAdminControlPanel()">Admin Panel</a></li>

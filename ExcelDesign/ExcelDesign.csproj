@@ -89,6 +89,7 @@
     <Content Include="css\mainpage.css" />
     <Content Include="css\ReturnInstructions.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Forms\AboutPage.aspx" />
     <Content Include="Forms\AdminControl.aspx" />
     <Content Include="Forms\ErrorForm.aspx" />
     <Content Include="Forms\FunctionForms\CreatedExchange.aspx" />
@@ -122,11 +123,10 @@
     <Content Include="Forms\UserControls\StatisticsControls\PendingRefund.ascx" />
     <Content Include="Forms\UserControls\StatisticsControls\PendingReplacements.ascx" />
     <Content Include="Forms\UserControls\StatisticsControls\PendingSQApproval.ascx" />
-    <Content Include="Forms\UserControls\StatisticsControls\SalesLines\PendingSQApprovalLines.ascx" />
-    <Content Include="Forms\UserControls\StatisticsControls\SalesLines\RefundOlder72HoursLines.ascx" />
-    <Content Include="Forms\UserControls\StatisticsControls\SalesLines\ReplacementNoInvLines.ascx" />
-    <Content Include="Forms\UserControls\StatisticsControls\SalesLines\ReplacementOlder72HoursLines.ascx" />
+    <Content Include="Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx" />
+    <Content Include="Forms\UserControls\StatisticsControls\StatisticsUserControl.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderComments.ascx" />
+    <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderExchangeNos.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderPackages.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderReceipts.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderComments.ascx" />
@@ -166,6 +166,7 @@
     <Compile Include="Class Objects\Enums\TrackingTypeEnum.cs" />
     <Compile Include="Class Objects\FunctionData\PartRequestOptions.cs" />
     <Compile Include="Class Objects\FunctionData\ReturnReason.cs" />
+    <Compile Include="Class Objects\Information.cs" />
     <Compile Include="Class Objects\PostedPackage.cs" />
     <Compile Include="Class Objects\PostedPackageLine.cs" />
     <Compile Include="Class Objects\PostedReceive.cs" />
@@ -188,6 +189,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AboutPage.aspx.cs">
+      <DependentUpon>AboutPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\AboutPage.aspx.designer.cs">
+      <DependentUpon>AboutPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\AdminControl.aspx.cs">
       <DependentUpon>AdminControl.aspx</DependentUpon>
@@ -420,33 +428,19 @@
     <Compile Include="Forms\UserControls\StatisticsControls\PendingSQApproval.ascx.designer.cs">
       <DependentUpon>PendingSQApproval.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\PendingSQApprovalLines.ascx.cs">
-      <DependentUpon>PendingSQApprovalLines.ascx</DependentUpon>
+    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs">
+      <DependentUpon>StatisticsSalesLineForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\PendingSQApprovalLines.ascx.designer.cs">
-      <DependentUpon>PendingSQApprovalLines.ascx</DependentUpon>
+    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.designer.cs">
+      <DependentUpon>StatisticsSalesLineForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\RefundOlder72HoursLines.ascx.cs">
-      <DependentUpon>RefundOlder72HoursLines.ascx</DependentUpon>
+    <Compile Include="Forms\UserControls\StatisticsControls\StatisticsUserControl.ascx.cs">
+      <DependentUpon>StatisticsUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\RefundOlder72HoursLines.ascx.designer.cs">
-      <DependentUpon>RefundOlder72HoursLines.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\ReplacementNoInvLines.ascx.cs">
-      <DependentUpon>ReplacementNoInvLines.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\ReplacementNoInvLines.ascx.designer.cs">
-      <DependentUpon>ReplacementNoInvLines.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\ReplacementOlder72HoursLines.ascx.cs">
-      <DependentUpon>ReplacementOlder72HoursLines.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Forms\UserControls\StatisticsControls\SalesLines\ReplacementOlder72HoursLines.ascx.designer.cs">
-      <DependentUpon>ReplacementOlder72HoursLines.ascx</DependentUpon>
+    <Compile Include="Forms\UserControls\StatisticsControls\StatisticsUserControl.ascx.designer.cs">
+      <DependentUpon>StatisticsUserControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderComments.ascx.cs">
       <DependentUpon>SingleReturnOrderComments.ascx</DependentUpon>
@@ -454,6 +448,13 @@
     </Compile>
     <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderComments.ascx.designer.cs">
       <DependentUpon>SingleReturnOrderComments.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderExchangeNos.ascx.cs">
+      <DependentUpon>SingleReturnOrderExchangeNos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderExchangeNos.ascx.designer.cs">
+      <DependentUpon>SingleReturnOrderExchangeNos.ascx</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderPackages.ascx.cs">
       <DependentUpon>SingleReturnOrderPackages.ascx</DependentUpon>
@@ -553,6 +554,7 @@
     <Compile Include="Headers\Navbar.ascx.designer.cs">
       <DependentUpon>Navbar.ascx</DependentUpon>
     </Compile>
+    <Compile Include="HelperLibrary\ErrorLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -582,6 +584,9 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\ServiceFunctions\CreatedPartialRequest.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ServiceFunctions\AboutObjects.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\ServiceFunctions\Functions.wsdl" />
@@ -630,7 +635,9 @@
       <CachedSettingsPropName>ExcelDesign_ServiceFunctions_Functions</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Files\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

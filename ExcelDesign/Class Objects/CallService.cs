@@ -318,7 +318,7 @@ namespace ExcelDesign.Class_Objects
                         lineAmount = quantity * price;
                         type = currResults.SalesLine[sl].Type;
 
-                        if (insertedItems.Any(item => item.Equals(itemNo)))
+                        if (insertedItems.Any(item => item.Equals(itemNo)) && insertedItems.Any(desc => desc.Equals(description)))
                         {
                             foreach (ShipmentLine existingItem in shipLine)
                             {
@@ -333,6 +333,7 @@ namespace ExcelDesign.Class_Objects
                         {
                             shipLine.Add(new ShipmentLine(itemNo, description, quantity, quantityShipped, price, lineAmount, type));
                             insertedItems.Add(itemNo);
+                            insertedItems.Add(description);
                         }
 
                         itemNo = string.Empty;
@@ -374,7 +375,7 @@ namespace ExcelDesign.Class_Objects
                         lineAmount = quantity * price;
                         type = currResults.SalesShipmentLine[sl].Type;
 
-                        if (insertedItems.Any(item => item.Equals(itemNo)))
+                        if (insertedItems.Any(item => item.Equals(itemNo)) && insertedItems.Any(desc => desc.Equals(description)))
                         {
                             foreach (ShipmentLine existingItem in shipLine)
                             {
@@ -398,6 +399,7 @@ namespace ExcelDesign.Class_Objects
 
                             shipLine.Add(new ShipmentLine(itemNo, description, quantity, quantityShipped, price, lineAmount, type));
                             insertedItems.Add(itemNo);
+                            insertedItems.Add(description);
                         }
 
                         itemNo = string.Empty;
@@ -424,7 +426,7 @@ namespace ExcelDesign.Class_Objects
             double price = 0;
             double lineAmount = 0;
             int quantityExchanged = 0;
-            int quantityRefunded= 0;
+            int quantityRefunded = 0;
             string reqReturnAction = string.Empty;
             string returnReason = string.Empty;
             List<string> insertedItems = new List<string>();
@@ -478,7 +480,7 @@ namespace ExcelDesign.Class_Objects
                             }
                             else
                             {
-                                if(currResults.SalesCreditMemo != null)
+                                if (currResults.SalesCreditMemo != null)
                                 {
                                     for (int scm = 0; scm < currResults.SalesCreditMemo.Length; scm++)
                                     {
@@ -711,12 +713,12 @@ namespace ExcelDesign.Class_Objects
                                     receiptHeader = ReturnReceiptHeader(rmaNo);
                                     channelName = currResults.SalesHeader[so].SellToCustomerName;
                                     returnLabelCreated = currResults.SalesHeader[so].UPSRetLabelCreated.ToUpper() == "YES" ? true : false;
-                                    
-                                    if(currResults.SalesHeader[so].RMANo != "")
+
+                                    if (currResults.SalesHeader[so].RMANo != "")
                                     {
                                         exchangeCreated = true;
-                                        
-                                        if(currResults.SalesHeader[so].ExchangeOrderNos[0].Contains("|"))
+
+                                        if (currResults.SalesHeader[so].ExchangeOrderNos[0].Contains("|"))
                                         {
                                             string[] tempSplit = currResults.SalesHeader[so].ExchangeOrderNos[0].Split('|');
 
@@ -947,12 +949,13 @@ namespace ExcelDesign.Class_Objects
             bool isExchangeOrder = false;
             bool isPartRequest = false;
             string quoteOrderNo = string.Empty;
+            bool allowRefund = false;
 
             string sellToCustomerNo = string.Empty;
 
             List<string> insertedOrderNumbers = new List<string>();
 
-            int statusCounter = 0;           
+            int statusCounter = 0;
 
             if (currResults.SOImportBuffer != null)
             {
@@ -982,7 +985,8 @@ namespace ExcelDesign.Class_Objects
                                 daysRemaining = currResults.SOImportBuffer[so].Warranty[0].DaysRemaining[0];
                                 warrantyType = currResults.SOImportBuffer[so].Warranty[0].WarrantyType[0];
                                 isPDA = currResults.SOImportBuffer[so].Warranty[0].IsPDAWarranty[0].ToUpper();
-                                warranty = new Warranty(status, policy, int.Parse(daysRemaining), warrantyType, isPDA);
+                                allowRefund = currResults.SOImportBuffer[so].Warranty[0].RefundAllowed[0] == "Yes" ? true : false;
+                                warranty = new Warranty(status, policy, int.Parse(daysRemaining), warrantyType, isPDA, allowRefund);
                                 sellToCustomerNo = currResults.SOImportBuffer[so].CustomerNo;
 
                                 if (currResults.ExtendedSalesHeader != null)
@@ -1030,6 +1034,7 @@ namespace ExcelDesign.Class_Objects
                                 isPartRequest = false;
                                 sellToCustomerNo = string.Empty;
                                 quoteOrderNo = string.Empty;
+                                allowRefund = false;
                             }
                         }
                     }
@@ -1066,7 +1071,8 @@ namespace ExcelDesign.Class_Objects
                                 daysRemaining = currResults.SalesHeader[so].Warranty2[0].DaysRemaining2[0];
                                 warrantyType = currResults.SalesHeader[so].Warranty2[0].WarrantyType2[0];
                                 isPDA = currResults.SalesHeader[so].Warranty2[0].IsPDAWarranty2[0].ToUpper();
-                                warranty = new Warranty(status, policy, int.Parse(daysRemaining), warrantyType, isPDA);
+                                allowRefund = currResults.SalesHeader[so].Warranty2[0].RefundAllowed2[0] == "Yes" ? true : false;
+                                warranty = new Warranty(status, policy, int.Parse(daysRemaining), warrantyType, isPDA, allowRefund);
                                 sellToCustomerNo = currResults.SalesHeader[so].SellToCustomerNo;
                                 int totalCounter = 0;
 
@@ -1105,9 +1111,9 @@ namespace ExcelDesign.Class_Objects
                                         {
                                             if (currResults.ExtendedSalesHeader[ex].SSHNo == sh.No)
                                             {
-                                                rmaExists = true;                                               
+                                                rmaExists = true;
                                             }
-                                            if(currResults.ExtendedSalesHeader[ex].RMANo == sh.No)
+                                            if (currResults.ExtendedSalesHeader[ex].RMANo == sh.No)
                                             {
                                                 isExchangeOrder = currResults.ExtendedSalesHeader[ex].IsExchangeOrder == "Yes" ? true : false;
                                             }
@@ -1148,6 +1154,7 @@ namespace ExcelDesign.Class_Objects
                                 isPartRequest = false;
                                 sellToCustomerNo = string.Empty;
                                 quoteOrderNo = string.Empty;
+                                allowRefund = false;
                             }
                         }
                     }
@@ -1180,8 +1187,9 @@ namespace ExcelDesign.Class_Objects
                             policy = currResults.SalesShipmentHeader[so].Warranty3[0].Policy3[0]; ;
                             daysRemaining = currResults.SalesShipmentHeader[so].Warranty3[0].DaysRemaining3[0];
                             warrantyType = currResults.SalesShipmentHeader[so].Warranty3[0].WarrantyType3[0];
-                            isPDA = currResults.SalesShipmentHeader[so].Warranty3[0].IsPDAWarranty3[0].ToUpper(); ;
-                            warranty = new Warranty(status, policy, int.Parse(daysRemaining), warrantyType, isPDA);
+                            isPDA = currResults.SalesShipmentHeader[so].Warranty3[0].IsPDAWarranty3[0].ToUpper();
+                            allowRefund = currResults.SalesShipmentHeader[so].Warranty3[0].RefundAllowed3[0] == "Yes" ? true : false;
+                            warranty = new Warranty(status, policy, int.Parse(daysRemaining), warrantyType, isPDA, allowRefund);
                             sellToCustomerNo = currResults.SalesShipmentHeader[so].SellToCustomerNo;
 
                             orderStatus = "Shipped";
@@ -1232,6 +1240,7 @@ namespace ExcelDesign.Class_Objects
                             isPartRequest = false;
                             sellToCustomerNo = string.Empty;
                             quoteOrderNo = string.Empty;
+                            allowRefund = false;
                         }
                     }
                 }
@@ -1517,7 +1526,7 @@ namespace ExcelDesign.Class_Objects
                                             }
                                         }
 
-                                        if(currResults.SalesLine != null)
+                                        if (currResults.SalesLine != null)
                                         {
                                             for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
                                             {
@@ -1997,7 +2006,7 @@ namespace ExcelDesign.Class_Objects
                     }
                 }
 
-                if(currResults.ReturnReceiptHeader != null)
+                if (currResults.ReturnReceiptHeader != null)
                 {
                     for (int rrh = 0; rrh < currResults.ReturnReceiptHeader.Length; rrh++)
                     {
@@ -2005,7 +2014,7 @@ namespace ExcelDesign.Class_Objects
                         {
                             for (int rl = 0; rl < currResults.ReturnReceiptLine.Length; rl++)
                             {
-                                if(currResults.ReturnReceiptHeader[rrh].No == currResults.ReturnReceiptLine[rl].DocNo)
+                                if (currResults.ReturnReceiptHeader[rrh].No == currResults.ReturnReceiptLine[rl].DocNo)
                                 {
                                     foreach (string rmaLine in rmaNo)
                                     {
@@ -2101,7 +2110,7 @@ namespace ExcelDesign.Class_Objects
                     }
                 }
 
-                if(currResults.SalesCreditMemoLines != null)
+                if (currResults.SalesCreditMemoLines != null)
                 {
 
                 }
@@ -2116,13 +2125,13 @@ namespace ExcelDesign.Class_Objects
             string date = string.Empty;
             string comment = string.Empty;
 
-            if(currResults.SalesCommentLine != null)
+            if (currResults.SalesCommentLine != null)
             {
                 for (int scl = 0; scl < currResults.SalesCommentLine.Length; scl++)
                 {
-                    if(currResults.SalesCommentLine[scl].DocNo == docNo)
+                    if (currResults.SalesCommentLine[scl].DocNo == docNo)
                     {
-                        if(currResults.SalesCommentLine[scl].Comment != "")
+                        if (currResults.SalesCommentLine[scl].Comment != "")
                         {
                             date = currResults.SalesCommentLine[scl].Date;
                             comment = currResults.SalesCommentLine[scl].Comment;
@@ -2143,7 +2152,7 @@ namespace ExcelDesign.Class_Objects
             List<ReturnReason> rrList = new List<ReturnReason>();
             List<PartRequestOptions> partReqOptions = new List<PartRequestOptions>();
 
-            if(currResults.ReturnReasonCode != null)
+            if (currResults.ReturnReasonCode != null)
             {
                 for (int i = 0; i < currResults.ReturnReasonCode.Length; i++)
                 {
@@ -2152,7 +2161,7 @@ namespace ExcelDesign.Class_Objects
                 }
             }
 
-            if(currResults.PartReqOption != null)
+            if (currResults.PartReqOption != null)
             {
                 string[] split = currResults.PartReqOption[0].Split(',');
 
@@ -2175,6 +2184,7 @@ namespace ExcelDesign.Class_Objects
 
             string docType = string.Empty;
             string docNo = string.Empty;
+            string externalDocNo = string.Empty;
             string itemNo = string.Empty;
             int qty = 0;
             string description = string.Empty;
@@ -2187,12 +2197,13 @@ namespace ExcelDesign.Class_Objects
             bool isPendingSQApproval = false;
             string status = string.Empty;
 
-            if(stats.SalesLine != null)
+            if (stats.SalesLine != null)
             {
                 for (int sl = 0; sl < stats.SalesLine.Length; sl++)
                 {
                     docType = stats.SalesLine[sl].DocType;
                     docNo = stats.SalesLine[sl].DocNo;
+                    externalDocNo = stats.SalesLine[sl].ExternalDocumentNo[0];
                     itemNo = stats.SalesLine[sl].ItemNo;
                     int.TryParse(stats.SalesLine[sl].Qty.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out qty);
                     description = stats.SalesLine[sl].Description;
@@ -2244,11 +2255,12 @@ namespace ExcelDesign.Class_Objects
                         }
                     }
 
-                    statLines.Add(new StatisticsSalesLine(docType, docNo, itemNo, qty, description, createdDate, reqReturnAction, isNotInvtAvailable, isOlderThan72Hours,
+                    statLines.Add(new StatisticsSalesLine(docType, docNo, externalDocNo, itemNo, qty, description, createdDate, reqReturnAction, isNotInvtAvailable, isOlderThan72Hours,
                         isPendingSQApproval, customerNo, isOlderThan48Hours, status));
 
                     docType = string.Empty;
                     docNo = string.Empty;
+                    externalDocNo = string.Empty;
                     itemNo = string.Empty;
                     qty = 0;
                     description = string.Empty;
@@ -2264,6 +2276,48 @@ namespace ExcelDesign.Class_Objects
             }
 
             return statLines;
+        }
+
+        public List<Information> GetBuildInformation()
+        {
+            List<Information> buildInfo = new List<Information>();
+            AboutObjects ao = new AboutObjects();
+
+            int id = -1;
+            string name = string.Empty;
+            string versionList = string.Empty;
+            string type = string.Empty;
+            string date = string.Empty;
+            string time = string.Empty;
+            bool compiled = false;
+
+            ao = webService.GetObjectInfo();
+
+            if(ao.Object != null)
+            {
+                for (int obj = 0; obj < ao.Object.Length; obj++)
+                {
+                    id = ao.Object[obj].ID;
+                    name = ao.Object[obj].Name;
+                    versionList = ao.Object[obj].VersionList;
+                    type = ao.Object[obj].Type;
+                    date = ao.Object[obj].Date;
+                    time = ao.Object[obj].Time;
+                    compiled = ao.Object[obj].Compiled == "Yes" ? true : false;
+
+                    buildInfo.Add(new Information(id, name, type, date, time, versionList, compiled));
+
+                    id = -1;
+                    name = string.Empty;
+                    versionList = string.Empty;
+                    type = string.Empty;
+                    date = string.Empty;
+                    time = string.Empty;
+                    compiled = false;
+                }
+            }
+
+            return buildInfo;
         }
     }
 }

@@ -22,6 +22,15 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls {
         protected global::System.Web.UI.WebControls.Table tblPendingSQApproval;
         
         /// <summary>
+        /// tcAllSQPending control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcAllSQPending;
+        
+        /// <summary>
         /// tcSQNoInvAvail control.
         /// </summary>
         /// <remarks>
@@ -29,15 +38,6 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableHeaderCell tcSQNoInvAvail;
-        
-        /// <summary>
-        /// expandSQNoInventory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableRow expandSQNoInventory;
         
         /// <summary>
         /// tcSQOlderThan48Hours control.
@@ -56,14 +56,5 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableHeaderCell tcSQOlderThan72Hours;
-        
-        /// <summary>
-        /// expand72HoursSQ control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableRow expand72HoursSQ;
     }
 }

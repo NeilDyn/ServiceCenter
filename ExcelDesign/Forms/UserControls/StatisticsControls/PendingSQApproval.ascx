@@ -5,11 +5,13 @@
 
 <asp:Table ID="tblPendingSQApproval" runat="server" Width="100%" Height="100%">
     <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify">
+        <asp:TableHeaderCell Text="All Pending" Font-Bold="false" />
+        <asp:TableHeaderCell runat="server" ID="tcAllSQPending" />
+    </asp:TableHeaderRow>
+    <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify" BackColor="#EFF3FB">
         <asp:TableHeaderCell Text="No Inventory Avail." Font-Bold="false" />
         <asp:TableHeaderCell runat="server" ID="tcSQNoInvAvail" />
     </asp:TableHeaderRow>
-    <asp:TableRow runat="server" ID="expandSQNoInventory" TableSection="TableBody" HorizontalAlign="Justify">
-    </asp:TableRow>
     <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableHeaderCell Text="Older than 48 hours" Font-Bold="false"/>
         <asp:TableHeaderCell runat="server" ID="tcSQOlderThan48Hours" />
@@ -18,6 +20,4 @@
         <asp:TableHeaderCell Text="Older Than 72 hours" Font-Bold="false" />
         <asp:TableHeaderCell runat="server" ID="tcSQOlderThan72Hours" />
     </asp:TableHeaderRow>
-    <asp:TableRow runat="server" ID="expand72HoursSQ" TableSection="TableBody" HorizontalAlign="Justify">
-    </asp:TableRow>
 </asp:Table>

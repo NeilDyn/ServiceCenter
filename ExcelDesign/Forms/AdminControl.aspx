@@ -8,10 +8,10 @@
 <head runat="server">
     <title>Admin Control</title>
     <link rel="icon" type="image/ico" href="../images/icon.ico" />
+    <anav:AdminNavbar ID="AdminNavar" runat="server" />
 </head>
 <body>
-    <form id="frmAdminControl" runat="server">
-        <anav:AdminNavbar ID="AdminNavar" runat="server" />
+    <form id="frmAdminControl" runat="server">        
         <asp:RadioButtonList ID="rblModeSelection" runat="server">
             <asp:ListItem Value="Production Mode"></asp:ListItem>
             <asp:ListItem Value="Development Mode"></asp:ListItem>

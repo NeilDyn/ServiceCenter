@@ -13,15 +13,6 @@ namespace ExcelDesign.Forms {
     public partial class Statistics {
         
         /// <summary>
-        /// frmStatistics control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm frmStatistics;
-        
-        /// <summary>
         /// StatisticsNavbar control.
         /// </summary>
         /// <remarks>
@@ -29,6 +20,15 @@ namespace ExcelDesign.Forms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ExcelDesign.Headers.Navbar StatisticsNavbar;
+        
+        /// <summary>
+        /// frmStatistics control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm frmStatistics;
         
         /// <summary>
         /// tblStatistics control.

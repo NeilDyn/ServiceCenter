@@ -1,5 +1,4 @@
 ﻿using ExcelDesign.Class_Objects;
-using ExcelDesign.Forms.UserControls.StatisticsControls.SalesLInes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,9 +68,9 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
 
                 }
 
-                if(olderThan72Hours > 0)
+                if (olderThan72Hours > 0)
                 {
-                    tcReplacementOlderThan72Hours.Text = "<a href='javascript:expandReplacementsOlderThan72Hours()'>" + olderThan72Hours.ToString() + "</a>";
+                    tcReplacementOlderThan72Hours.Text = "<a href='javascript:OpenSalesLineWindow(\"Replacement\", \"72Hours\")'>" + olderThan72Hours.ToString() + "</a>";
                 }
                 else
                 {
@@ -80,7 +79,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
 
                 if (invNotAvail > 0)
                 {
-                    tcReplacementNoInvAvail.Text = "<a href='javascript:expandInvNotAvail()'>" + invNotAvail.ToString() + "</a>";
+                    tcReplacementNoInvAvail.Text = "<a href='javascript:OpenSalesLineWindow(\"Replacement\", \"NoInventory\")'>" + invNotAvail.ToString() + "</a>";
                 }
                 else
                 {
@@ -89,15 +88,21 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
 
                 if (olderThan48Hours > 0)
                 {
-                    tcReplacementOlderThan48Hours.Text = olderThan48Hours.ToString();
+                    tcReplacementOlderThan48Hours.Text = "<a href='javascript:OpenSalesLineWindow(\"Replacement\", \"48Hours\")'>" + olderThan48Hours.ToString() + "</a>";
                 }
                 else
                 {
                     tcReplacementOlderThan48Hours.Text = olderThan48Hours.ToString();
                 }
 
-                PopulateNoInventoryLines(invNotAvailList);
-                PopulateOlderThan72HoursLines(olderThan72HoursList);
+                if (ReplacementList.Count > 0)
+                {
+                    tcAllReplacementsPending.Text = "<a href='javascript:OpenSalesLineWindow(\"Replacement\", \"AllPending\")'>" + ReplacementList.Count.ToString() + "</a>";
+                }
+                else
+                {
+                    tcAllReplacementsPending.Text = ReplacementList.Count.ToString();
+                }
             }
             catch (Exception ex)
             {
@@ -112,34 +117,6 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                     Response.Redirect("Forms/ErrorForm.aspx");
                 }
             }
-        }
-
-        protected void PopulateNoInventoryLines(List<StatisticsSalesLine> noInvList)
-        {
-            invLinesCell = new TableCell();
-            invLinesControl = LoadControl(invLinesPath);
-            ((ReplacementNoInvLines)invLinesControl).NoInvReplacementList = noInvList;
-            ((ReplacementNoInvLines)invLinesControl).PopulateData();
-
-            invLinesCell.Controls.Add(invLinesControl);
-            invLinesCell.ColumnSpan = 4;
-            invLinesCell.Height = new Unit("100%");
-            invLinesCell.Width = new Unit("100%");
-            expandReplacementNoInventory.Cells.Add(invLinesCell);        
-        }
-
-        protected void PopulateOlderThan72HoursLines(List<StatisticsSalesLine> olderThan72HoursList)
-        {
-            older72HoursLinesCell = new TableCell();
-            older72HoursLinesControl = LoadControl(older72HoursLinesPath);
-            ((ReplacementOlder72HoursLines)older72HoursLinesControl).Older72HoursReplacementList = olderThan72HoursList;
-            ((ReplacementOlder72HoursLines)older72HoursLinesControl).PopulateData();
-
-            older72HoursLinesCell.Controls.Add(older72HoursLinesControl);
-            older72HoursLinesCell.ColumnSpan = 4;
-            older72HoursLinesCell.Height = new Unit("100%");
-            older72HoursLinesCell.Width = new Unit("100%");
-            expand72HoursReplacement.Cells.Add(older72HoursLinesCell);
         }
     }
 }

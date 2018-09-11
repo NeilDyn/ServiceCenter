@@ -2,6 +2,7 @@
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/ReturnOrderLines/SingleReturnOrderReceipts.ascx" TagName="SingleReturnOrderReceipts" TagPrefix="sror" %>
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/ReturnOrderLines/SingleReturnOrderPackages.ascx" TagName="SingleReturnOrderPackages" TagPrefix="srop" %>
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/ReturnOrderLines/SingleReturnOrderComments.ascx" TagName="SingleReturnOrderComments" TagPrefix="sroc" %>
+<%@ Register Src="~/Forms/UserControls/TableData/DataLines/ReturnOrderLines/SingleReturnOrderExchangeNos.ascx" TagName="SingleReturnOrderExchangeNos" TagPrefix="sroen" %>
 
 <link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
@@ -12,7 +13,7 @@
         $("[id$=expandReceipts_<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id$=expandReceives_<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id*=showMoreReturnLines_<%= this.CustID %>_<%= this.CountID %>]").hide();
-        $("[id*=multipleExchangeRow_<%= this.CustID %>_<%= this.CountID %>]").hide();
+        $("[id*=expandMultipleExchange<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id$=expandReturnComments_<%= this.CustID %>_<%= this.CountID %>]").hide();
         var updateRMAWin;
         var createExchangeWin;
@@ -174,7 +175,7 @@
     };
 
     function expandMultipleExchange<%=this.CustID %><%= this.CountID %>() {
-        $("[id*=multipleExchangeRow_<%= this.CustID %>_<%= this.CountID %>]").toggle();
+        $("[id*=expandMultipleExchange<%= this.CustID %>_<%= this.CountID %>]").toggle();
     };
 
     function expandReturnComments<%=this.CustID %><%= this.CountID %>() {
@@ -242,6 +243,8 @@
         <asp:TableCell runat="server" ID="tcUPSReturnLabelCreated" />
         <asp:TableCell Text="Exchange Order No(s):" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcExchangeOrderNo" />
+    </asp:TableRow>
+    <asp:TableRow runat="server" ID="expandMultipleExchange" TableSection="TableBody" HorizontalAlign="Justify">
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />

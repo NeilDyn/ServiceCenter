@@ -9,6 +9,7 @@
     <title>User Control</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="icon" type="image/ico" href="../images/icon.ico" />
+    <ucnav:UserControlNavbar ID="UserControlNavbar" runat="server" />
     <script type="text/javascript">
         function UpdatePassword() {
             var userID = "<%= this.tcUserID.Text %>";
@@ -48,8 +49,7 @@
     <link href="../css/mainpage.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <form id="frmUserControl" runat="server">
-        <ucnav:UserControlNavbar ID="UserControlNavbar" runat="server" />
+    <form id="frmUserControl" runat="server">       
         <asp:Table ID="TblUserControl" runat="server" Height="100%" Width="100%" HorizontalAlign="Center">
             <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
                 <asp:TableHeaderCell Text="User ID" />

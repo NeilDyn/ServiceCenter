@@ -15,7 +15,7 @@ namespace ExcelDesign.Headers
          * Created top navigation bar as it's own User Control to add to multiple pages and allow for easier and prettier navigation
         */
 
-        protected const string version = "v6.1";
+        protected const string version = "v6.2";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,6 +34,15 @@ namespace ExcelDesign.Headers
                 else
                 {
                     adminPanel.Visible = false;
+                }
+
+                if(u.Admin || u.Developer)
+                {
+                    aboutPage.Visible = true;
+                }
+                else
+                {
+                    aboutPage.Visible = false;
                 }
             }
         }

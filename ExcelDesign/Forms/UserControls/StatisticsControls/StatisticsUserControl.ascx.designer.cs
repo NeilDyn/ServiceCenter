@@ -7,108 +7,90 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExcelDesign.Forms {
+namespace ExcelDesign.Forms.UserControls.StatisticsControls {
     
     
-    public partial class ServiceCenter {
+    public partial class StatisticsUserControl {
         
         /// <summary>
-        /// MainNavbar control.
+        /// tblStatistics control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ExcelDesign.Headers.Navbar MainNavbar;
+        protected global::System.Web.UI.WebControls.Table tblStatistics;
         
         /// <summary>
-        /// frmOrderDetails control.
+        /// tcPendingReplacements control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm frmOrderDetails;
+        protected global::System.Web.UI.WebControls.TableCell tcPendingReplacements;
         
         /// <summary>
-        /// btnExtendSessionTime control.
+        /// tcPendingSQApproval control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExtendSessionTime;
+        protected global::System.Web.UI.WebControls.TableCell tcPendingSQApproval;
         
         /// <summary>
-        /// imgLogo control.
+        /// expandReplacementDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgLogo;
+        protected global::System.Web.UI.WebControls.TableCell expandReplacementDetails;
         
         /// <summary>
-        /// StatisticsUserControl control.
+        /// expandPendingSQApproval control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ExcelDesign.Forms.UserControls.StatisticsControls.StatisticsUserControl StatisticsUserControl;
+        protected global::System.Web.UI.WebControls.TableCell expandPendingSQApproval;
         
         /// <summary>
-        /// lblCustomerServicePortal control.
+        /// tcPendingRefunds control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCustomerServicePortal;
+        protected global::System.Web.UI.WebControls.TableCell tcPendingRefunds;
         
         /// <summary>
-        /// lblSearch control.
+        /// expandRefundDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSearch;
+        protected global::System.Web.UI.WebControls.TableCell expandRefundDetails;
         
         /// <summary>
-        /// txtSearchBox control.
+        /// tcPendingUnknown control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearchBox;
+        protected global::System.Web.UI.WebControls.TableCell tcPendingUnknown;
         
         /// <summary>
-        /// btnSearch control.
+        /// expandPendingUnknown control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch;
-        
-        /// <summary>
-        /// lblSearchOptions control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSearchOptions;
-        
-        /// <summary>
-        /// DdlSearchOptions control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DdlSearchOptions;
+        protected global::System.Web.UI.WebControls.TableCell expandPendingUnknown;
     }
 }

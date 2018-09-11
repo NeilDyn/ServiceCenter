@@ -22,6 +22,15 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls {
         protected global::System.Web.UI.WebControls.Table tblPendingUnknown;
         
         /// <summary>
+        /// tcAllUnknownPending control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcAllUnknownPending;
+        
+        /// <summary>
         /// tcUnknownNoInvAvail control.
         /// </summary>
         /// <remarks>
@@ -29,15 +38,6 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableHeaderCell tcUnknownNoInvAvail;
-        
-        /// <summary>
-        /// expandUnknownNoInventory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableRow expandUnknownNoInventory;
         
         /// <summary>
         /// tcUnknownOlderThan48Hours control.
@@ -56,14 +56,5 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableHeaderCell tcUnknownOlderThan72Hours;
-        
-        /// <summary>
-        /// expand72HoursUnknown control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableRow expand72HoursUnknown;
     }
 }

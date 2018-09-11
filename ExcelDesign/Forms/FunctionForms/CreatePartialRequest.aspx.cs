@@ -101,7 +101,7 @@ namespace ExcelDesign.Forms.FunctionForms
                                         DataValueField = "Display",
                                         ID = "ddlReason_" + lineCount.ToString(),
                                         CssClass = "inputBox",
-                                        DataSource = rrList.Where(x => x.Category == "Part Request")
+                                        DataSource = rrList.Where(x => x.Category == "Part Request" || x.Category == "")
                                     };
 
                                     TextBox actionQtyInsert = new TextBox

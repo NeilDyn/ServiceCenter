@@ -39,6 +39,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
         protected TableCell receiptCell;
         protected TableCell receiveCell;
         protected TableCell commentCell;
+        protected TableCell multipleExchangeOrderCell;
 
         protected Button btnCreateExchange = new Button();
         protected Button btnIssueRefund = new Button();
@@ -49,10 +50,12 @@ namespace ExcelDesign.Forms.UserControls.TableData
         protected Control singleReturnOrderReceiptLines;
         protected Control singleReturnOrderReceiveLines;
         protected Control singelReturnOrderCommentLines;
+        protected Control singelReturnOrderMultipleExchangeOrderLines;
 
         protected const string singleReturnOrderReceiptLinesPath = "DataLines/ReturnOrderLines/SingleReturnOrderReceipts.ascx";
         protected const string singleReturnOrderReceiveLinesPath = "DataLines/ReturnOrderLines/SingleReturnOrderPackages.ascx";
         protected const string singleReturnOrderCommentLinesPath = "DataLines/ReturnOrderLines/SingleReturnOrderComments.ascx";
+        protected const string singleReturnOrderMultipleExchangeOrderPath = "DataLines/ReturnOrderLines/SingleReturnOrderExchangeNos.ascx";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -199,7 +202,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 if (Rh.ExchangeOrderNo.Count > 1)
                 {
                     this.tcExchangeOrderNo.Text = "<a href='javascript:expandMultipleExchange" + CustID.ToString() + "" + CountID.ToString() + "()'>Multiple</a>";
-                    PopulateMultipleExchangeOrders();
+                    PopulateMultipleExchangeOrderNo();
                 }
                 else
                 {
@@ -223,33 +226,6 @@ namespace ExcelDesign.Forms.UserControls.TableData
             {
                 lblReturnComment.Visible = false;
                 imgReturnComments.Visible = false;
-            }
-        }
-
-        protected void PopulateMultipleExchangeOrders()
-        {
-            for (int i = 0; i < Rh.ExchangeOrderNo.Count; i++)
-            {
-                TableRow multipleExchangeRow = new TableRow
-                {
-                    ID = "multipleExchangeRow_" + CustID.ToString() + "_" + CountID.ToString() + "_" + i.ToString()
-                };
-
-                TableCell multipleExchangeCell = new TableCell
-                {
-                    Text = Rh.ExchangeOrderNo[i],
-                    ID = "multipleExchange_" + CustID.ToString() + "_" + CountID.ToString() + "_" + i.ToString()
-                };
-
-                multipleExchangeRow.Cells.Add(new TableCell());
-                multipleExchangeRow.Cells.Add(new TableCell());
-                multipleExchangeRow.Cells.Add(new TableCell());
-                multipleExchangeRow.Cells.Add(new TableCell());
-                multipleExchangeRow.Cells.Add(new TableCell());
-                multipleExchangeRow.Cells.Add(new TableCell());
-                multipleExchangeRow.Cells.Add(multipleExchangeCell);
-
-                tblSingleReturnOrderDetail.Rows.Add(multipleExchangeRow);
             }
         }
 
@@ -576,6 +552,34 @@ namespace ExcelDesign.Forms.UserControls.TableData
             commentCell.Width = new Unit("50%");
             this.expandReturnComments.Cells.Add(commentCell);
             this.expandReturnComments.ID = "expandReturnComments_" + CustID.ToString() + "_" + CountID.ToString();
+        }
+
+        protected void PopulateMultipleExchangeOrderNo()
+        {
+            List<string> exchangeOrderNos = new List<string>();
+
+            for (int i = 0; i < Rh.ExchangeOrderNo.Count; i++)
+            {
+                exchangeOrderNos.Add(Rh.ExchangeOrderNo[i]);
+            }
+
+            multipleExchangeOrderCell = new TableCell();
+            singelReturnOrderMultipleExchangeOrderLines = LoadControl(singleReturnOrderMultipleExchangeOrderPath);
+            ((SingleReturnOrderExhangeNos)singelReturnOrderMultipleExchangeOrderLines).ExchangeOrderNos = exchangeOrderNos;
+            ((SingleReturnOrderExhangeNos)singelReturnOrderMultipleExchangeOrderLines).PopulateLines();
+
+            multipleExchangeOrderCell.Controls.Add(singelReturnOrderMultipleExchangeOrderLines);
+            multipleExchangeOrderCell.ColumnSpan = 7;
+            multipleExchangeOrderCell.Height = new Unit("100%");
+            multipleExchangeOrderCell.Width = new Unit("50%");
+            this.expandMultipleExchange.Cells.Add(new TableCell());
+            this.expandMultipleExchange.Cells.Add(new TableCell());
+            this.expandMultipleExchange.Cells.Add(new TableCell());
+            this.expandMultipleExchange.Cells.Add(new TableCell());
+            this.expandMultipleExchange.Cells.Add(new TableCell());
+            this.expandMultipleExchange.Cells.Add(new TableCell());
+            this.expandMultipleExchange.Cells.Add(multipleExchangeOrderCell);
+            this.expandMultipleExchange.ID = "expandMultipleExchange" + CustID.ToString() + "_" + CountID.ToString();
         }
 
         protected void imgComments_Click(object sender, ImageClickEventArgs e)

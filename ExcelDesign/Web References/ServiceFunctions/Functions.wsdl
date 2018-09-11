@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/Functions" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50017" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50017" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Object">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" default="0" name="ID" type="int" />
+          <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Name" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="VersionList" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Date" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Time" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Compiled" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="AboutObjects" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Object" type="tns:Object" />
+        </sequence>
+      </complexType>
+      <element name="AboutObjects" type="tns:AboutObjects" />
+    </schema>
     <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50003" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50003" xmlns="http://www.w3.org/2001/XMLSchema">
       <complexType name="User">
         <sequence>
@@ -66,6 +85,7 @@
       </complexType>
       <complexType name="SalesLine">
         <sequence>
+          <element minOccurs="1" maxOccurs="1" name="DocType" type="string" />
           <element minOccurs="1" maxOccurs="1" name="DocNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Type" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
@@ -561,6 +581,7 @@
           <element minOccurs="1" maxOccurs="1" name="CreatedDate" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ReqReturnAction" type="string" />
           <element minOccurs="1" maxOccurs="1" name="CustomerNo" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="ExternalDocumentNo" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="IsNotInvtAvailable" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="IsOlderThan48Hrs" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="IsOlderThan72Hrs" type="string" />
@@ -575,6 +596,21 @@
       <element name="Statistics" type="tns:Statistics" />
     </schema>
     <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="PullAboutDetails">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
+            <element xmlns:q1="urn:microsoft-dynamics-nav/xmlports/x50017" minOccurs="1" maxOccurs="1" name="aboutObjects" type="q1:AboutObjects" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="PullAboutDetails_Result">
+        <complexType>
+          <sequence>
+            <element xmlns:q2="urn:microsoft-dynamics-nav/xmlports/x50017" minOccurs="1" maxOccurs="1" name="aboutObjects" type="q2:AboutObjects" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="IsValidSession">
         <complexType>
           <sequence>
@@ -606,7 +642,7 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="userID" type="string" />
             <element minOccurs="1" maxOccurs="1" name="password" type="string" />
-            <element xmlns:q1="urn:microsoft-dynamics-nav/xmlports/x50003" minOccurs="1" maxOccurs="1" name="webSvcUserSetup" type="q1:UserSetup" />
+            <element xmlns:q3="urn:microsoft-dynamics-nav/xmlports/x50003" minOccurs="1" maxOccurs="1" name="webSvcUserSetup" type="q3:UserSetup" />
           </sequence>
         </complexType>
       </element>
@@ -614,7 +650,7 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-            <element xmlns:q2="urn:microsoft-dynamics-nav/xmlports/x50003" minOccurs="1" maxOccurs="1" name="webSvcUserSetup" type="q2:UserSetup" />
+            <element xmlns:q4="urn:microsoft-dynamics-nav/xmlports/x50003" minOccurs="1" maxOccurs="1" name="webSvcUserSetup" type="q4:UserSetup" />
           </sequence>
         </complexType>
       </element>
@@ -637,7 +673,7 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
             <element minOccurs="1" maxOccurs="1" name="searchNo" type="string" />
-            <element xmlns:q3="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" minOccurs="1" maxOccurs="1" name="searchResults" type="q3:SearchResults" />
+            <element xmlns:q5="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" minOccurs="1" maxOccurs="1" name="searchResults" type="q5:SearchResults" />
             <element minOccurs="1" maxOccurs="1" name="_SearchOption" type="int" />
           </sequence>
         </complexType>
@@ -646,7 +682,7 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-            <element xmlns:q4="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" minOccurs="1" maxOccurs="1" name="searchResults" type="q4:SearchResults" />
+            <element xmlns:q6="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" minOccurs="1" maxOccurs="1" name="searchResults" type="q6:SearchResults" />
           </sequence>
         </complexType>
       </element>
@@ -674,7 +710,7 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
-            <element xmlns:q5="urn:microsoft-dynamics-nav/xmlports/x50014" minOccurs="1" maxOccurs="1" name="exchangeOrder" type="q5:CreatedExchangeOrder" />
+            <element xmlns:q7="urn:microsoft-dynamics-nav/xmlports/x50014" minOccurs="1" maxOccurs="1" name="exchangeOrder" type="q7:CreatedExchangeOrder" />
             <element minOccurs="1" maxOccurs="1" name="externalDocumentNo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
             <element minOccurs="1" maxOccurs="1" name="lineDetails" type="string" />
@@ -685,7 +721,7 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-            <element xmlns:q6="urn:microsoft-dynamics-nav/xmlports/x50014" minOccurs="1" maxOccurs="1" name="exchangeOrder" type="q6:CreatedExchangeOrder" />
+            <element xmlns:q8="urn:microsoft-dynamics-nav/xmlports/x50014" minOccurs="1" maxOccurs="1" name="exchangeOrder" type="q8:CreatedExchangeOrder" />
           </sequence>
         </complexType>
       </element>
@@ -694,7 +730,7 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="externalDocumentNo" type="string" />
-            <element xmlns:q7="urn:microsoft-dynamics-nav/xmlports/x50015" minOccurs="1" maxOccurs="1" name="createdPartReq" type="q7:CreatedPartialRequest" />
+            <element xmlns:q9="urn:microsoft-dynamics-nav/xmlports/x50015" minOccurs="1" maxOccurs="1" name="createdPartReq" type="q9:CreatedPartialRequest" />
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
             <element minOccurs="1" maxOccurs="1" name="lineDetails" type="string" />
             <element minOccurs="1" maxOccurs="1" name="notes" type="string" />
@@ -707,7 +743,7 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-            <element xmlns:q8="urn:microsoft-dynamics-nav/xmlports/x50015" minOccurs="1" maxOccurs="1" name="createdPartReq" type="q8:CreatedPartialRequest" />
+            <element xmlns:q10="urn:microsoft-dynamics-nav/xmlports/x50015" minOccurs="1" maxOccurs="1" name="createdPartReq" type="q10:CreatedPartialRequest" />
           </sequence>
         </complexType>
       </element>
@@ -723,7 +759,7 @@
             <element minOccurs="1" maxOccurs="1" name="createUPSReturnLabel" type="boolean" />
             <element minOccurs="1" maxOccurs="1" name="emailAddress" type="string" />
             <element minOccurs="1" maxOccurs="1" name="lineDetails" type="string" />
-            <element xmlns:q9="urn:microsoft-dynamics-nav/xmlports/x50002" minOccurs="1" maxOccurs="1" name="createdReturn" type="q9:ReturnOrder" />
+            <element xmlns:q11="urn:microsoft-dynamics-nav/xmlports/x50002" minOccurs="1" maxOccurs="1" name="createdReturn" type="q11:ReturnOrder" />
             <element minOccurs="1" maxOccurs="1" name="updateRMA" type="boolean" />
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
             <element minOccurs="1" maxOccurs="1" name="returnTrackNo" type="string" />
@@ -736,7 +772,7 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-            <element xmlns:q10="urn:microsoft-dynamics-nav/xmlports/x50002" minOccurs="1" maxOccurs="1" name="createdReturn" type="q10:ReturnOrder" />
+            <element xmlns:q12="urn:microsoft-dynamics-nav/xmlports/x50002" minOccurs="1" maxOccurs="1" name="createdReturn" type="q12:ReturnOrder" />
           </sequence>
         </complexType>
       </element>
@@ -788,14 +824,28 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
-            <element xmlns:q11="urn:microsoft-dynamics-nav/xmlports/x50016" minOccurs="1" maxOccurs="1" name="statistics" type="q11:Statistics" />
+            <element xmlns:q13="urn:microsoft-dynamics-nav/xmlports/x50016" minOccurs="1" maxOccurs="1" name="statistics" type="q13:Statistics" />
           </sequence>
         </complexType>
       </element>
       <element name="GetStatistics_Result">
         <complexType>
           <sequence>
-            <element xmlns:q12="urn:microsoft-dynamics-nav/xmlports/x50016" minOccurs="1" maxOccurs="1" name="statistics" type="q12:Statistics" />
+            <element xmlns:q14="urn:microsoft-dynamics-nav/xmlports/x50016" minOccurs="1" maxOccurs="1" name="statistics" type="q14:Statistics" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AllowCustomerStatsView">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="customerNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="AllowCustomerStatsView_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
           </sequence>
         </complexType>
       </element>
@@ -918,6 +968,12 @@
       </element>
     </schema>
   </types>
+  <message name="PullAboutDetails">
+    <part name="parameters" element="tns:PullAboutDetails" />
+  </message>
+  <message name="PullAboutDetails_Result">
+    <part name="parameters" element="tns:PullAboutDetails_Result" />
+  </message>
   <message name="IsValidSession">
     <part name="parameters" element="tns:IsValidSession" />
   </message>
@@ -1002,6 +1058,12 @@
   <message name="GetStatistics_Result">
     <part name="parameters" element="tns:GetStatistics_Result" />
   </message>
+  <message name="AllowCustomerStatsView">
+    <part name="parameters" element="tns:AllowCustomerStatsView" />
+  </message>
+  <message name="AllowCustomerStatsView_Result">
+    <part name="parameters" element="tns:AllowCustomerStatsView_Result" />
+  </message>
   <message name="SetDebug">
     <part name="parameters" element="tns:SetDebug" />
   </message>
@@ -1057,6 +1119,10 @@
     <part name="parameters" element="tns:UpdateCommentPartReq_Result" />
   </message>
   <portType name="Functions_Port">
+    <operation name="PullAboutDetails">
+      <input name="PullAboutDetails" message="tns:PullAboutDetails" />
+      <output name="PullAboutDetails_Result" message="tns:PullAboutDetails_Result" />
+    </operation>
     <operation name="IsValidSession">
       <input name="IsValidSession" message="tns:IsValidSession" />
       <output name="IsValidSession_Result" message="tns:IsValidSession_Result" />
@@ -1113,6 +1179,10 @@
       <input name="GetStatistics" message="tns:GetStatistics" />
       <output name="GetStatistics_Result" message="tns:GetStatistics_Result" />
     </operation>
+    <operation name="AllowCustomerStatsView">
+      <input name="AllowCustomerStatsView" message="tns:AllowCustomerStatsView" />
+      <output name="AllowCustomerStatsView_Result" message="tns:AllowCustomerStatsView_Result" />
+    </operation>
     <operation name="SetDebug">
       <input name="SetDebug" message="tns:SetDebug" />
       <output name="SetDebug_Result" message="tns:SetDebug_Result" />
@@ -1152,6 +1222,15 @@
   </portType>
   <binding name="Functions_Binding" type="tns:Functions_Port">
     <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="PullAboutDetails">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:PullAboutDetails" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="PullAboutDetails">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="PullAboutDetails_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="IsValidSession">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:IsValidSession" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="IsValidSession">
@@ -1275,6 +1354,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="GetStatistics_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="AllowCustomerStatsView">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:AllowCustomerStatsView" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="AllowCustomerStatsView">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="AllowCustomerStatsView_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

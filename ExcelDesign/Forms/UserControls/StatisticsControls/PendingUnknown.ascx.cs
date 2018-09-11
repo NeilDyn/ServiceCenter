@@ -34,35 +34,27 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                 int olderThan72Hours = 0;
                 int olderThan48Hours = 0;
 
-                List<StatisticsSalesLine> olderThan72HoursList = new List<StatisticsSalesLine>();
-                List<StatisticsSalesLine> olderThan48HoursList = new List<StatisticsSalesLine>();
-                List<StatisticsSalesLine> invNotAvailList = new List<StatisticsSalesLine>();
-
                 foreach (StatisticsSalesLine line in UnknownList)
                 {
                     if (line.IsOlderThan72Hours)
                     {
                         olderThan72Hours++;
-                        olderThan72HoursList.Add(line);
                     }
                     else if (line.IsOlderThan48Hours)
                     {
                         olderThan48Hours++;
-                        olderThan48HoursList.Add(line);
                     }
 
                     if (line.IsNotInvtAvailable)
                     {
                         invNotAvail++;
-                        invNotAvailList.Add(line);
                     }
 
                 }
 
                 if (olderThan72Hours > 0)
                 {
-                    //tcUnknownOlderThan72Hours.Text = "<a href='javascript:expandUnknownOlderThan72Hours()'>" + olderThan72Hours.ToString() + "</a>";
-                    tcUnknownOlderThan72Hours.Text = olderThan72Hours.ToString();
+                    tcUnknownOlderThan72Hours.Text = "<a href='javascript:OpenSalesLineWindow(\"Unknown\", \"72Hours\")'>" + olderThan72Hours.ToString() + "</a>";
                 }
                 else
                 {
@@ -71,8 +63,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
 
                 if (invNotAvail > 0)
                 {
-                    //tcUnknownNoInvAvail.Text = "<a href='javascript:expandInvNotAvailUnknown()'>" + invNotAvail.ToString() + "</a>";
-                    tcUnknownNoInvAvail.Text = invNotAvail.ToString();
+                    tcUnknownNoInvAvail.Text = "<a href='javascript:OpenSalesLineWindow(\"Unknown\", \"NoInventory\")'>" + invNotAvail.ToString() + "</a>";
                 }
                 else
                 {
@@ -81,15 +72,22 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
 
                 if (olderThan48Hours > 0)
                 {
-                    tcUnknownOlderThan48Hours.Text = olderThan48Hours.ToString();
+                    tcUnknownOlderThan48Hours.Text = "<a href='javascript:OpenSalesLineWindow(\"Unknown\", \"48Hours\")'>" + olderThan48Hours.ToString() + "</a>";
                 }
                 else
                 {
                     tcUnknownOlderThan48Hours.Text = olderThan48Hours.ToString();
                 }
 
-                //PopulateNoInventoryLines(invNotAvailList);
-                //PopulateOlderThan72HoursLines(olderThan72HoursList);
+                if(UnknownList.Count > 0)
+                {
+                    tcAllUnknownPending.Text = "<a href='javascript:OpenSalesLineWindow(\"Unknown\", \"AllPending\")'>" + UnknownList.Count.ToString() + "</a>";
+                }
+                else
+                {
+                    tcAllUnknownPending.Text = UnknownList.Count.ToString();
+                }
+
             }
             catch (Exception ex)
             {

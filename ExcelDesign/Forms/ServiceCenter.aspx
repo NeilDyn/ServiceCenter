@@ -2,6 +2,7 @@
 
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ServiceCenter.aspx.cs" Inherits="ExcelDesign.Forms.ServiceCenter" %>
 
+<%@ Register Src="~/Forms/UserControls/StatisticsControls/StatisticsUserControl.ascx" TagName="StatisticsUserControl" TagPrefix="suc" %>
 <%@ Register Src="~/Forms/UserControls/SingleControls/MultipleCustomers.ascx" TagName="MultipleCustomers" TagPrefix="mc" %>
 <%@ Register Src="~/Forms/UserControls/MainTables/CustomerInfoTable.ascx" TagName="CustomerInfoTable" TagPrefix="tib" %>
 <%@ Register Src="~/Headers/Navbar.ascx" TagName="MainNavbar" TagPrefix="mainnav" %>
@@ -13,6 +14,7 @@
     <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/themes/ui-lightness/jquery-ui.css" type="text/css" />
+    <mainnav:MainNavbar ID="MainNavbar" runat="server"/>
     <script>
         $("id$=btnExtendSessionTime").click(function () {
             ResetTimers();
@@ -61,61 +63,6 @@
                 },
             });
         };
-
-        //function UserLogout() {
-        //    $.ajax({
-        //        type: "POST",
-        //        url: "ServiceCenter.aspx/UserLogout",
-        //        contentType: "application/json; charset=utf-8",
-        //        dataType: "json",
-        //        success: function (error) {
-        //            if (error.d.indexOf("Error") == -1) {
-        //                if (location.href.includes("Forms")) {
-        //                    location.replace("LoginPage.aspx");
-        //                } else {
-        //                    location.replace("Forms/LoginPage.aspx");
-        //                }
-        //            } else {
-        //                alert(error.d);
-        //            }
-        //        },
-        //        error: function (xhr, status, text) {
-        //            console.log(xhr.status);
-        //            console.log(xhr.text);
-        //            console.log(xhr.responseText);
-        //        },
-        //    });
-        //};
-
-        //function OpenUserControlPanel() {
-        //    if (location.href.includes("Forms")) {
-        //        location.replace("UserControl.aspx");
-        //    } else {
-        //        location.replace("Forms/UserControl.aspx");
-        //    }
-
-        //};
-
-        //function OpenAdminControlPanel() {
-        //    if (location.href.includes("Forms")) {
-        //        location.replace("AdminControl.aspx");
-        //    } else {
-        //        location.replace("Forms/AdminControl.aspx");
-        //    }
-        //};
-
-        //function OpenStatisticsPanel() {
-        //    if (location.href.includes("Forms")) {
-        //        location.replace("Statistics.aspx");
-        //    } else {
-        //        location.replace("Forms/Statistics.aspx");
-        //    }
-        //};
-
-        //function SubmitFeedback() {
-        //    window.open("https://docs.google.com/forms/d/e/1FAIpQLSfr07VbYNgq2yuyrRVCJUFtbssytAX563c7ZQBht_xZNx4EKg/viewform", "_blank");
-        //};
-
     </script>
 </head>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -126,25 +73,11 @@
             <p>Warning, your session will expire in 1 minute. Do you want to continue working?</p>
             <asp:Button ID="btnExtendSessionTime" Text="Yes" runat="server" OnClientClick="ResetTimers()" />
         </div>
-        <%--<div runat="server" class="HeaderNavbar" style="margin-left:0">
-            <ul>
-                <li><a href="#" class="disableLink"></a></li>
-                <li><a href="javascript:UserLogout()">Logout</a></li>
-                <li><a href="javascript:OpenUserControlPanel()">Control Panel</a></li>
-                <li runat="server" id="adminPanel"><a href="javascript:OpenAdminControlPanel()">Admin Panel</a></li>
-                <li runat="server" id="statisticsPanel"><a href="javascript:OpenStatisticsPanel()">Statistics</a></li>
-                <li><a href="javascript:SubmitFeedback()">Submit Feedback</a></li>
-                <li runat="server" id="currentUser" style="padding: 0 20px"></li>
-                <li style="padding: 0 20px" runat="server" id="versionList"/>
-                <li runat="server" id="applicationType" style="padding: 0 20px"></li>
-            </ul>
-        </div>
-        <br />--%>
-        <mainnav:MainNavbar ID="MainNavbar" runat="server"/>
 
         <div id="ServiceCenterHeader">
             <asp:Image ID="imgLogo" runat="server" ImageUrl="~/images/Logo.png" />
-            <asp:Label ID="lblCustomerServicePortal" runat="server" Style="margin-left: 200px;" Text="Customer Service Portal" ForeColor="#0099FF" Font-Bold="True" Font-Size="XX-Large" CssClass="HeaderLabel" />
+            <suc:StatisticsUserControl ID="StatisticsUserControl" runat="server"/>
+            <asp:Label ID="lblCustomerServicePortal" runat="server" Style="margin-left: 200px;" Text="Customer Service Portal" ForeColor="#0099FF" Font-Bold="True" Font-Size="XX-Large" CssClass="HeaderLabel" />        
         </div>
         <hr class="HeaderLine" />
 

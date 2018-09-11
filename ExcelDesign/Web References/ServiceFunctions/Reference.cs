@@ -29,6 +29,8 @@ namespace ExcelDesign.ServiceFunctions {
     [System.Web.Services.WebServiceBindingAttribute(Name="Functions_Binding", Namespace="urn:microsoft-dynamics-schemas/codeunit/Functions")]
     public partial class Functions : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
+        private System.Threading.SendOrPostCallback PullAboutDetailsOperationCompleted;
+        
         private System.Threading.SendOrPostCallback IsValidSessionOperationCompleted;
         
         private System.Threading.SendOrPostCallback ResetSessionOperationCompleted;
@@ -56,6 +58,8 @@ namespace ExcelDesign.ServiceFunctions {
         private System.Threading.SendOrPostCallback IssueReturnLabelOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetStatisticsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback AllowCustomerStatsViewOperationCompleted;
         
         private System.Threading.SendOrPostCallback SetDebugOperationCompleted;
         
@@ -114,6 +118,9 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        public event PullAboutDetailsCompletedEventHandler PullAboutDetailsCompleted;
+        
+        /// <remarks/>
         public event IsValidSessionCompletedEventHandler IsValidSessionCompleted;
         
         /// <remarks/>
@@ -156,6 +163,9 @@ namespace ExcelDesign.ServiceFunctions {
         public event GetStatisticsCompletedEventHandler GetStatisticsCompleted;
         
         /// <remarks/>
+        public event AllowCustomerStatsViewCompletedEventHandler AllowCustomerStatsViewCompleted;
+        
+        /// <remarks/>
         public event SetDebugCompletedEventHandler SetDebugCompleted;
         
         /// <remarks/>
@@ -181,6 +191,37 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         public event UpdateCommentPartReqCompletedEventHandler UpdateCommentPartReqCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:PullAboutDetails", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="PullAboutDetails_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void PullAboutDetails(string sessionID, ref AboutObjects aboutObjects) {
+            object[] results = this.Invoke("PullAboutDetails", new object[] {
+                        sessionID,
+                        aboutObjects});
+            aboutObjects = ((AboutObjects)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void PullAboutDetailsAsync(string sessionID, AboutObjects aboutObjects) {
+            this.PullAboutDetailsAsync(sessionID, aboutObjects, null);
+        }
+        
+        /// <remarks/>
+        public void PullAboutDetailsAsync(string sessionID, AboutObjects aboutObjects, object userState) {
+            if ((this.PullAboutDetailsOperationCompleted == null)) {
+                this.PullAboutDetailsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnPullAboutDetailsOperationCompleted);
+            }
+            this.InvokeAsync("PullAboutDetails", new object[] {
+                        sessionID,
+                        aboutObjects}, this.PullAboutDetailsOperationCompleted, userState);
+        }
+        
+        private void OnPullAboutDetailsOperationCompleted(object arg) {
+            if ((this.PullAboutDetailsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.PullAboutDetailsCompleted(this, new PullAboutDetailsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:IsValidSession", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="IsValidSession_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -683,6 +724,36 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:AllowCustomerStatsView", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="AllowCustomerStatsView_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public bool AllowCustomerStatsView(string customerNo) {
+            object[] results = this.Invoke("AllowCustomerStatsView", new object[] {
+                        customerNo});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AllowCustomerStatsViewAsync(string customerNo) {
+            this.AllowCustomerStatsViewAsync(customerNo, null);
+        }
+        
+        /// <remarks/>
+        public void AllowCustomerStatsViewAsync(string customerNo, object userState) {
+            if ((this.AllowCustomerStatsViewOperationCompleted == null)) {
+                this.AllowCustomerStatsViewOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAllowCustomerStatsViewOperationCompleted);
+            }
+            this.InvokeAsync("AllowCustomerStatsView", new object[] {
+                        customerNo}, this.AllowCustomerStatsViewOperationCompleted, userState);
+        }
+        
+        private void OnAllowCustomerStatsViewOperationCompleted(object arg) {
+            if ((this.AllowCustomerStatsViewCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AllowCustomerStatsViewCompleted(this, new AllowCustomerStatsViewCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:SetDebug", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="SetDebug_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void SetDebug(bool debug) {
             this.Invoke("SetDebug", new object[] {
@@ -981,21 +1052,21 @@ namespace ExcelDesign.ServiceFunctions {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50003")]
-    public partial class UserSetup {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50017")]
+    public partial class AboutObjects {
         
-        private User[] userField;
+        private Object[] objectField;
         
         private string[] textField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("User")]
-        public User[] User {
+        [System.Xml.Serialization.XmlElementAttribute("Object")]
+        public Object[] Object {
             get {
-                return this.userField;
+                return this.objectField;
             }
             set {
-                this.userField = value;
+                this.objectField = value;
             }
         }
         
@@ -1016,190 +1087,94 @@ namespace ExcelDesign.ServiceFunctions {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50003")]
-    public partial class User {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50017")]
+    public partial class Object {
         
-        private string userIDField;
+        private int idField;
         
-        private string createRMAField;
+        private string typeField;
         
-        private string createRetLabelField;
+        private string nameField;
         
-        private string createPDARmaField;
+        private string versionListField;
         
-        private string createPDAExchangeField;
+        private string dateField;
         
-        private string adminField;
+        private string timeField;
         
-        private string developerField;
+        private string compiledField;
         
-        private string sessionIDField;
-        
-        private string passwordField;
-        
-        private int sessionTimeoutField;
-        
-        private string passwordExpiryDateField;
-        
-        private string passwordLastUpdatedField;
-        
-        private string createExchangeField;
-        
-        private string createPartRequestField;
-        
-        private string createPDAPartRequestField;
-        
-        public User() {
-            this.sessionTimeoutField = 0;
+        public Object() {
+            this.idField = 0;
         }
         
         /// <remarks/>
-        public string UserID {
+        public int ID {
             get {
-                return this.userIDField;
+                return this.idField;
             }
             set {
-                this.userIDField = value;
+                this.idField = value;
             }
         }
         
         /// <remarks/>
-        public string CreateRMA {
+        public string Type {
             get {
-                return this.createRMAField;
+                return this.typeField;
             }
             set {
-                this.createRMAField = value;
+                this.typeField = value;
             }
         }
         
         /// <remarks/>
-        public string CreateRetLabel {
+        public string Name {
             get {
-                return this.createRetLabelField;
+                return this.nameField;
             }
             set {
-                this.createRetLabelField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
-        public string CreatePDARma {
+        public string VersionList {
             get {
-                return this.createPDARmaField;
+                return this.versionListField;
             }
             set {
-                this.createPDARmaField = value;
+                this.versionListField = value;
             }
         }
         
         /// <remarks/>
-        public string CreatePDAExchange {
+        public string Date {
             get {
-                return this.createPDAExchangeField;
+                return this.dateField;
             }
             set {
-                this.createPDAExchangeField = value;
+                this.dateField = value;
             }
         }
         
         /// <remarks/>
-        public string Admin {
+        public string Time {
             get {
-                return this.adminField;
+                return this.timeField;
             }
             set {
-                this.adminField = value;
+                this.timeField = value;
             }
         }
         
         /// <remarks/>
-        public string Developer {
+        public string Compiled {
             get {
-                return this.developerField;
+                return this.compiledField;
             }
             set {
-                this.developerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SessionID {
-            get {
-                return this.sessionIDField;
-            }
-            set {
-                this.sessionIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Password {
-            get {
-                return this.passwordField;
-            }
-            set {
-                this.passwordField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int SessionTimeout {
-            get {
-                return this.sessionTimeoutField;
-            }
-            set {
-                this.sessionTimeoutField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PasswordExpiryDate {
-            get {
-                return this.passwordExpiryDateField;
-            }
-            set {
-                this.passwordExpiryDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PasswordLastUpdated {
-            get {
-                return this.passwordLastUpdatedField;
-            }
-            set {
-                this.passwordLastUpdatedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CreateExchange {
-            get {
-                return this.createExchangeField;
-            }
-            set {
-                this.createExchangeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CreatePartRequest {
-            get {
-                return this.createPartRequestField;
-            }
-            set {
-                this.createPartRequestField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CreatePDAPartRequest {
-            get {
-                return this.createPDAPartRequestField;
-            }
-            set {
-                this.createPDAPartRequestField = value;
+                this.compiledField = value;
             }
         }
     }
@@ -1227,6 +1202,8 @@ namespace ExcelDesign.ServiceFunctions {
         private string reqReturnActionField;
         
         private string customerNoField;
+        
+        private string[] externalDocumentNoField;
         
         private string[] isNotInvtAvailableField;
         
@@ -1313,6 +1290,17 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.customerNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ExternalDocumentNo")]
+        public string[] ExternalDocumentNo {
+            get {
+                return this.externalDocumentNoField;
+            }
+            set {
+                this.externalDocumentNoField = value;
             }
         }
         
@@ -5581,6 +5569,8 @@ namespace ExcelDesign.ServiceFunctions {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
     public partial class SalesLine {
         
+        private string docTypeField;
+        
         private string docNoField;
         
         private string typeField;
@@ -5606,6 +5596,16 @@ namespace ExcelDesign.ServiceFunctions {
         private string qtyRefundedField;
         
         private string returnReasonField;
+        
+        /// <remarks/>
+        public string DocType {
+            get {
+                return this.docTypeField;
+            }
+            set {
+                this.docTypeField = value;
+            }
+        }
         
         /// <remarks/>
         public string DocNo {
@@ -6384,6 +6384,260 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50003")]
+    public partial class User {
+        
+        private string userIDField;
+        
+        private string createRMAField;
+        
+        private string createRetLabelField;
+        
+        private string createPDARmaField;
+        
+        private string createPDAExchangeField;
+        
+        private string adminField;
+        
+        private string developerField;
+        
+        private string sessionIDField;
+        
+        private string passwordField;
+        
+        private int sessionTimeoutField;
+        
+        private string passwordExpiryDateField;
+        
+        private string passwordLastUpdatedField;
+        
+        private string createExchangeField;
+        
+        private string createPartRequestField;
+        
+        private string createPDAPartRequestField;
+        
+        public User() {
+            this.sessionTimeoutField = 0;
+        }
+        
+        /// <remarks/>
+        public string UserID {
+            get {
+                return this.userIDField;
+            }
+            set {
+                this.userIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreateRMA {
+            get {
+                return this.createRMAField;
+            }
+            set {
+                this.createRMAField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreateRetLabel {
+            get {
+                return this.createRetLabelField;
+            }
+            set {
+                this.createRetLabelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreatePDARma {
+            get {
+                return this.createPDARmaField;
+            }
+            set {
+                this.createPDARmaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreatePDAExchange {
+            get {
+                return this.createPDAExchangeField;
+            }
+            set {
+                this.createPDAExchangeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Admin {
+            get {
+                return this.adminField;
+            }
+            set {
+                this.adminField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Developer {
+            get {
+                return this.developerField;
+            }
+            set {
+                this.developerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SessionID {
+            get {
+                return this.sessionIDField;
+            }
+            set {
+                this.sessionIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                this.passwordField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int SessionTimeout {
+            get {
+                return this.sessionTimeoutField;
+            }
+            set {
+                this.sessionTimeoutField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PasswordExpiryDate {
+            get {
+                return this.passwordExpiryDateField;
+            }
+            set {
+                this.passwordExpiryDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PasswordLastUpdated {
+            get {
+                return this.passwordLastUpdatedField;
+            }
+            set {
+                this.passwordLastUpdatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreateExchange {
+            get {
+                return this.createExchangeField;
+            }
+            set {
+                this.createExchangeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreatePartRequest {
+            get {
+                return this.createPartRequestField;
+            }
+            set {
+                this.createPartRequestField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreatePDAPartRequest {
+            get {
+                return this.createPDAPartRequestField;
+            }
+            set {
+                this.createPDAPartRequestField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50003")]
+    public partial class UserSetup {
+        
+        private User[] userField;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("User")]
+        public User[] User {
+            get {
+                return this.userField;
+            }
+            set {
+                this.userField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void PullAboutDetailsCompletedEventHandler(object sender, PullAboutDetailsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class PullAboutDetailsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal PullAboutDetailsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public AboutObjects aboutObjects {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((AboutObjects)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void IsValidSessionCompletedEventHandler(object sender, IsValidSessionCompletedEventArgs e);
     
@@ -6673,6 +6927,32 @@ namespace ExcelDesign.ServiceFunctions {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Statistics)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void AllowCustomerStatsViewCompletedEventHandler(object sender, AllowCustomerStatsViewCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AllowCustomerStatsViewCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AllowCustomerStatsViewCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
             }
         }
     }

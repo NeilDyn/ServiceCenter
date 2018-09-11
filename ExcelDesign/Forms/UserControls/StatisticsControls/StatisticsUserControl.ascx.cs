@@ -1,5 +1,4 @@
 ﻿using ExcelDesign.Class_Objects;
-using ExcelDesign.Forms.UserControls.StatisticsControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +7,13 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace ExcelDesign.Forms
+namespace ExcelDesign.Forms.UserControls.StatisticsControls
 {
-    public partial class Statistics : System.Web.UI.Page
+    public partial class StatisticsUserControl : System.Web.UI.UserControl
     {
         /* NJ 3 September 2018
-         * Created statistics control panel
-        */
+        * Created statistics control panel
+       */
 
         protected CallService cs = new CallService();
         protected List<StatisticsSalesLine> statisticsInformation;
@@ -24,10 +23,10 @@ namespace ExcelDesign.Forms
         protected Control unknownLinesControl;
         protected Control quoteLinesControl;
 
-        protected const string replacementLinesPath = "UserControls/StatisticsControls/PendingReplacements.ascx";
-        protected const string refundLinesPath = "UserControls/StatisticsControls/PendingRefund.ascx";
-        protected const string unknownLinesPath = "UserControls/StatisticsControls/PendingUnknown.ascx";
-        protected const string quoteLinesPath = "UserControls/StatisticsControls/PendingSQApproval.ascx";
+        protected const string replacementLinesPath = "PendingReplacements.ascx";
+        protected const string refundLinesPath = "PendingRefund.ascx";
+        protected const string unknownLinesPath = "PendingUnknown.ascx";
+        protected const string quoteLinesPath = "PendingSQApproval.ascx";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,31 +35,28 @@ namespace ExcelDesign.Forms
                 FormsAuthentication.RedirectToLoginPage();
             }
 
-            if (!IsPostBack)
+            try
             {
-                try
-                {
-                    User activeUser = null;
+                User activeUser = null;
 
-                    if (Session["ActiveUser"] != null)
-                    {
-                        activeUser = (User)Session["ActiveUser"];
-                        statisticsInformation = cs.GetStatisticsInformation();
-                        PopulateLines();
-                    }
+                if (Session["ActiveUser"] != null)
+                {
+                    activeUser = (User)Session["ActiveUser"];
+                    statisticsInformation = cs.GetStatisticsInformation();
+                    PopulateLines();
                 }
-                catch (Exception ex)
-                {
-                    Session["Error"] = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                Session["Error"] = ex.Message;
 
-                    if (Request.Url.AbsoluteUri.Contains("Forms"))
-                    {
-                        Response.Redirect("ErrorForm.aspx");
-                    }
-                    else
-                    {
-                        Response.Redirect("Forms/ErrorForm.aspx");
-                    }
+                if (Request.Url.AbsoluteUri.Contains("Forms"))
+                {
+                    Response.Redirect("ErrorForm.aspx");
+                }
+                else
+                {
+                    Response.Redirect("Forms/ErrorForm.aspx");
                 }
             }
         }
@@ -81,16 +77,16 @@ namespace ExcelDesign.Forms
             {
                 foreach (StatisticsSalesLine line in statisticsInformation)
                 {
-                    switch(line.DocType.ToUpper())
+                    switch (line.DocType.ToUpper())
                     {
                         case "RETURN ORDER":
-                            if(line.REQReturnAction.ToUpper() == "EXCHANGE")
+                            if (line.REQReturnAction.ToUpper() == "EXCHANGE")
                             {
                                 pendingReplacement++;
                                 replacementList.Add(line);
                             }
 
-                            if(line.REQReturnAction.ToUpper() == "REFUND")
+                            if (line.REQReturnAction.ToUpper() == "REFUND")
                             {
                                 pendingRefund++;
                                 refundList.Add(line);
@@ -106,11 +102,11 @@ namespace ExcelDesign.Forms
                         case "QUOTE":
                             pendingSQApproval++;
                             quoteList.Add(line);
-                        break;
+                            break;
                     }
                 }
 
-                if(pendingReplacement > 0)
+                if (pendingReplacement > 0)
                 {
                     tcPendingReplacements.Text = "<a href='javascript:expandReplacements()'>" + pendingReplacement.ToString() + "</a>";
                 }
@@ -119,7 +115,7 @@ namespace ExcelDesign.Forms
                     tcPendingReplacements.Text = pendingReplacement.ToString();
                 }
 
-                if(pendingRefund > 0)
+                if (pendingRefund > 0)
                 {
                     tcPendingRefunds.Text = "<a href='javascript:expandRefunds()'>" + pendingRefund.ToString() + "</a>";
                 }

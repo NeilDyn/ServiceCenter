@@ -135,6 +135,8 @@ namespace ExcelDesign.Forms.FunctionForms
                     {
                         if (head.SalesOrderNo == filterNo)
                         {
+                            Session["AllowRefund"] = head.WarrantyProp.AllowRefund;
+
                             foreach (ShipmentLine line in header.ShipmentLines)
                             {
                                 int removeqty = 0;
@@ -236,6 +238,8 @@ namespace ExcelDesign.Forms.FunctionForms
                         {
                             foreach (string rmaLine in header.RMANo)
                             {
+                                Session["AllowRefund"] = head.WarrantyProp.AllowRefund;
+
                                 if (rmaLine == filterNo)
                                 {
                                     foreach (ShipmentLine line in header.ShipmentLines)
@@ -577,6 +581,7 @@ namespace ExcelDesign.Forms.FunctionForms
         protected string ValidateLine(string itemNoP, int qtyLineP, int actionQtyP, string reasonCodeP, int reqReturnActionP)
         {
             string valid = "Valid Line Input";
+            bool refundAllow = Convert.ToBoolean(Session["AllowRefund"]);
 
             try
             {
@@ -588,7 +593,14 @@ namespace ExcelDesign.Forms.FunctionForms
                         {
                             if (reqReturnActionP > 0)
                             {
-                                return valid;
+                                if(reqReturnActionP == 2 && !refundAllow)
+                                {
+                                    return "Refund warranty has expired for the policy of 30 Day Refund and 90 Exchange.";             
+                                }
+                                else
+                                {
+                                    return valid;
+                                }
                             }
                             else
                             {
@@ -600,7 +612,6 @@ namespace ExcelDesign.Forms.FunctionForms
                             return "Please select a valid return reason for Item: " + itemNoP;
                         }
                     }
-                    else
                     {
                         return "Cannot return more quantity than exists on order for Item: " + itemNoP;
                     }

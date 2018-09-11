@@ -10,42 +10,33 @@
 namespace ExcelDesign.Forms {
     
     
-    public partial class AdminControl {
+    public partial class AboutPage {
         
         /// <summary>
-        /// AdminNavar control.
+        /// AboutNavbar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ExcelDesign.Headers.Navbar AdminNavar;
+        protected global::ExcelDesign.Headers.Navbar AboutNavbar;
         
         /// <summary>
-        /// frmAdminControl control.
+        /// frmAboutPage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm frmAdminControl;
+        protected global::System.Web.UI.HtmlControls.HtmlForm frmAboutPage;
         
         /// <summary>
-        /// rblModeSelection control.
+        /// tblAboutObjects control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblModeSelection;
-        
-        /// <summary>
-        /// BtnSetMode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnSetMode;
+        protected global::System.Web.UI.WebControls.Table tblAboutObjects;
     }
 }

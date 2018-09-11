@@ -1,5 +1,4 @@
 ﻿using ExcelDesign.Class_Objects;
-using ExcelDesign.Forms.UserControls.StatisticsControls.SalesLInes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +11,6 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
     public partial class PendingRefund : System.Web.UI.UserControl
     {
         public List<StatisticsSalesLine> RefundList { get; set; }
-
-        protected TableCell linesCell;
-
-        protected Control linesControl;
-
-        protected const string linesPath = "SalesLines/RefundOlder72HoursLines.ascx";
 
         public void PopulateData()
         {
@@ -35,26 +28,21 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                 int olderThan72Hours = 0;
                 int olderThan48Hours = 0;
 
-                List<StatisticsSalesLine> olderThan72HoursList = new List<StatisticsSalesLine>();
-                List<StatisticsSalesLine> olderThan48HoursList = new List<StatisticsSalesLine>();
-
                 foreach (StatisticsSalesLine line in RefundList)
                 {
                     if (line.IsOlderThan72Hours)
                     {
                         olderThan72Hours++;
-                        olderThan72HoursList.Add(line);
                     }
                     else if (line.IsOlderThan48Hours)
                     {
                         olderThan48Hours++;
-                        olderThan48HoursList.Add(line);
                     }
                 }
 
                 if (olderThan72Hours > 0)
                 {
-                    tcRefundOlder72Hours.Text = "<a href='javascript:expandRefundOlderThan72Hours()'>" + olderThan72Hours.ToString() + "</a>";
+                    tcRefundOlder72Hours.Text = "<a href='javascript:OpenSalesLineWindow(\"Refund\", \"72Hours\")'>" + olderThan72Hours.ToString() + "</a>";
                 }
                 else
                 {
@@ -63,14 +51,22 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
 
                 if(olderThan48Hours > 0)
                 {
-                    tcRefundOlder48Hours.Text = olderThan48Hours.ToString();
+                    tcRefundOlder48Hours.Text = "<a href='javascript:OpenSalesLineWindow(\"Refund\", \"48Hours\")'>" + olderThan48Hours.ToString() + "</a>";
                 }
                 else
                 {
                     tcRefundOlder48Hours.Text = olderThan48Hours.ToString();
                 }
 
-                PopulateOlder72Hours(olderThan72HoursList);
+                if(RefundList.Count > 0)
+                {
+                   tcAllRefundsPending.Text = "<a href='javascript:OpenSalesLineWindow(\"Refund\", \"AllPending\")'>" + RefundList.Count.ToString() + "</a>";
+                }
+                else
+                {
+                    tcAllRefundsPending.Text = RefundList.Count.ToString();
+                }
+
             }
             catch (Exception ex)
             {
@@ -85,20 +81,6 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                     Response.Redirect("Forms/ErrorForm.aspx");
                 }
             }
-        }
-
-        protected void PopulateOlder72Hours(List<StatisticsSalesLine> olderThan72HoursList)
-        {
-            linesCell = new TableCell();
-            linesControl = LoadControl(linesPath);
-            ((RefundLines)linesControl).OlderThan72HoursList = olderThan72HoursList;
-            ((RefundLines)linesControl).PopulateData();
-
-            linesCell.Controls.Add(linesControl);
-            linesCell.ColumnSpan = 4;
-            linesCell.Height = new Unit("100%");
-            linesCell.Width = new Unit("100%");
-            expandRefundOlder72Hours.Cells.Add(linesCell);
         }
     }
 }

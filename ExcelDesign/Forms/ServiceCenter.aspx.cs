@@ -67,34 +67,10 @@ namespace ExcelDesign.Forms
             }
             else
             {
-                //versionList.InnerText = version;
-
                 if (Session["ActiveUser"] != null)
                 {
                     User u = (User)Session["ActiveUser"];
                     SessionTime = u.SessionTimeout; // Initiates user session timer
-                    //currentUser.InnerText = "Welcome " + u.UserID + "!";
-                    //applicationType.InnerText = ConfigurationManager.AppSettings["mode"].ToString(); // Displays the current database the portal is connected to
-
-                    //if (u.Admin)
-                    //{
-                    //    adminPanel.Visible = true;
-                    //    statisticsPanel.Visible = true;
-                    //}
-                    //else
-                    //{
-                    //    adminPanel.Visible = false;
-                    //    statisticsPanel.Visible = false;
-                    //}
-
-                    //if (u.Developer)
-                    //{
-                    //    statisticsPanel.Visible = true;
-                    //}
-                    //else
-                    //{
-                    //    statisticsPanel.Visible = false;
-                    //}
                 }
             }
 

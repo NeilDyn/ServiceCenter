@@ -160,5 +160,14 @@ namespace ExcelDesign.Class_Objects
 
             return stats;
         }
+
+        public AboutObjects GetObjectInfo()
+        {
+            AboutObjects ao = new AboutObjects();
+
+            functions.PullAboutDetails(SessionID(), ref ao);
+
+            return ao;
+        }
     }
 }

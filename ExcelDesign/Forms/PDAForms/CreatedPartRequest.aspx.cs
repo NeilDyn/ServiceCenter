@@ -14,13 +14,15 @@ namespace ExcelDesign.Forms.PDAForms
     {
         protected CreatedPartRequestHeader CPRH { get; set; }
 
+        protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(CreatedPartRequest));
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["RestartFromUserInteraction"] = true;
 
-            if (Session["CreatedPartRequest"] != null)
+            try
             {
-                try
+                if (Session["CreatedPartRequest"] != null)
                 {
                     CPRH = (CreatedPartRequestHeader)Session["CreatedPartRequest"];
                     Title = "Quote: " + CPRH.QuoteNo;
@@ -43,10 +45,11 @@ namespace ExcelDesign.Forms.PDAForms
 
                     PopulateLines();
                 }
-                catch (Exception ex)
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "errorinPartReuqest", "alert('" + ex.Message + "');", true);
-                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+                ClientScript.RegisterStartupScript(this.GetType(), "errorinPartReuqest", "alert('" + ex.Message + "');", true);
             }
         }
 
@@ -105,6 +108,7 @@ namespace ExcelDesign.Forms.PDAForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 ClientScript.RegisterStartupScript(this.GetType(), "alertError", "alert('" + ex.Message + "');", true);
             }
         }

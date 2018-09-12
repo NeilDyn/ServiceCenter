@@ -13,6 +13,8 @@ namespace ExcelDesign.Forms
     {
         protected CallService cs = new CallService();
 
+        protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(LoginPage));
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -32,10 +34,19 @@ namespace ExcelDesign.Forms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 Session["SessionID"] = null;
                 Session["ActiveUser"] = null;
                 Session["Error"] = ex.Message;
-                Response.Redirect("ErrorForm.aspx");
+
+                if (Request.Url.AbsoluteUri.Contains("Forms"))
+                {
+                    Response.Redirect("ErrorForm.aspx");
+                }
+                else
+                {
+                    Response.Redirect("Forms/ErrorForm.aspx");
+                }
             }
         }
     }

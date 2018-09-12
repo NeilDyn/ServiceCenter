@@ -29,6 +29,8 @@ namespace ExcelDesign.Forms
         protected const string unknownLinesPath = "UserControls/StatisticsControls/PendingUnknown.ascx";
         protected const string quoteLinesPath = "UserControls/StatisticsControls/PendingSQApproval.ascx";
 
+        protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(Statistics));
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!this.Page.User.Identity.IsAuthenticated || Session["ActiveUser"] == null)
@@ -51,6 +53,8 @@ namespace ExcelDesign.Forms
                 }
                 catch (Exception ex)
                 {
+                    Log.Error(ex.Message, ex);
+
                     Session["Error"] = ex.Message;
 
                     if (Request.Url.AbsoluteUri.Contains("Forms"))
@@ -155,6 +159,8 @@ namespace ExcelDesign.Forms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
+
                 Session["Error"] = ex.Message;
 
                 if (Request.Url.AbsoluteUri.Contains("Forms"))

@@ -19,10 +19,11 @@
                 <asp:TableHeaderCell Text="Item No" />
                 <asp:TableHeaderCell Text="Description" />
                 <asp:TableHeaderCell Text="Qty" />
+                <asp:TableHeaderCell Text="REQ Return Action" />
                 <asp:TableHeaderCell Text="Status" />
             </asp:TableHeaderRow>
             <asp:TableHeaderRow>
-                <asp:TableHeaderCell ColumnSpan="8">
+                <asp:TableHeaderCell ColumnSpan="9">
                 <hr class="HeaderLine" />
             </asp:TableHeaderCell>
         </asp:TableHeaderRow>

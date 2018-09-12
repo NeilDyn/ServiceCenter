@@ -142,6 +142,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                     TableCell itemNo = new TableCell();
                     TableCell desc = new TableCell();
                     TableCell qty = new TableCell();
+                    TableCell reqReturnAction = new TableCell();
                     TableCell status = new TableCell();
 
                     custNo.Text = line.CustomerNumber;
@@ -151,6 +152,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                     itemNo.Text = line.ItemNo;
                     desc.Text = line.Description;
                     qty.Text = line.Qty.ToString();
+                    reqReturnAction.Text = line.REQReturnAction;
                     status.Text = line.Status;
 
                     qty.HorizontalAlign = HorizontalAlign.Center;
@@ -162,6 +164,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                     tr.Cells.Add(itemNo);
                     tr.Cells.Add(desc);
                     tr.Cells.Add(qty);
+                    tr.Cells.Add(reqReturnAction);
                     tr.Cells.Add(status);
 
                     if (lineCount % 2 == 0)

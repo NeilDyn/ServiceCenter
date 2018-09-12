@@ -15,47 +15,57 @@ namespace ExcelDesign.Forms
         protected CallService cs = new CallService();
         protected List<Information> aboutInformation;
 
+        protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(AboutPage));
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.Page.User.Identity.IsAuthenticated || Session["ActiveUser"] == null)
+            try
             {
-                FormsAuthentication.RedirectToLoginPage();
-            }
-
-            if (!IsPostBack)
-            {
-                try
+                if (!this.Page.User.Identity.IsAuthenticated || Session["ActiveUser"] == null)
                 {
-                    User activeUser = null;
+                    FormsAuthentication.RedirectToLoginPage();
+                }
 
-                    if (Session["ActiveUser"] != null)
+                if (!IsPostBack)
+                {
+                    try
                     {
-                        activeUser = (User)Session["ActiveUser"];
+                        User activeUser = null;
 
-                        if (activeUser.Admin || activeUser.Developer)
+                        if (Session["ActiveUser"] != null)
                         {
-                            aboutInformation = cs.GetBuildInformation();
-                            PopulateLines();
+                            activeUser = (User)Session["ActiveUser"];
+
+                            if (activeUser.Admin || activeUser.Developer)
+                            {
+                                aboutInformation = cs.GetBuildInformation();
+                                PopulateLines();
+                            }
+                            else
+                            {
+                                FormsAuthentication.RedirectToLoginPage();
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Session["Error"] = ex.Message;
+
+                        if (Request.Url.AbsoluteUri.Contains("Forms"))
+                        {
+                            Response.Redirect("ErrorForm.aspx");
                         }
                         else
                         {
-                            FormsAuthentication.RedirectToLoginPage();
+                            Response.Redirect("Forms/ErrorForm.aspx");
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    Session["Error"] = ex.Message;
-
-                    if (Request.Url.AbsoluteUri.Contains("Forms"))
-                    {
-                        Response.Redirect("ErrorForm.aspx");
-                    }
-                    else
-                    {
-                        Response.Redirect("Forms/ErrorForm.aspx");
-                    }
-                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+                Response.Redirect("ErrorForm.aspx");
             }
         }
 
@@ -116,6 +126,8 @@ namespace ExcelDesign.Forms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
+
                 Session["Error"] = ex.Message;
 
                 if (Request.Url.AbsoluteUri.Contains("Forms"))

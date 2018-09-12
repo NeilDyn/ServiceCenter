@@ -26,23 +26,32 @@ namespace ExcelDesign.Forms.FunctionForms
 
         protected bool anyLines = false;
 
+        protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(CreatePartialRequest));
+
         protected void Page_Load(object sender, EventArgs e)
         {
             ClientScript.GetPostBackEventReference(this, string.Empty);
 
             Session["UserInteraction"] = true;
 
-            if (!IsPostBack)
+            try
             {
-                Session["CopyRowList"] = null;
-                Session["PartRequestTable"] = null;
+                if (!IsPostBack)
+                {
+                    Session["CopyRowList"] = null;
+                    Session["PartRequestTable"] = null;
 
-                tcNo.Text = Convert.ToString(Request.QueryString["No"]);
-                tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
-                Sh = (List<SalesHeader>)Session["SalesHeaders"];             
+                    tcNo.Text = Convert.ToString(Request.QueryString["No"]);
+                    tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
+                    Sh = (List<SalesHeader>)Session["SalesHeaders"];
+                }
+
+                LoadPartRequestLines();
             }
-
-            LoadPartRequestLines();
+            catch (Exception loadE)
+            {
+                Log.Error(loadE.Message, loadE);
+            }
         }
 
         protected void LoadPartRequestLines()
@@ -187,6 +196,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 ClientScript.RegisterStartupScript(this.GetType(), "exceptionAlert", "alert('" + ex.Message + "');", true);
             }
         }
@@ -323,6 +333,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 ClientScript.RegisterStartupScript(this.GetType(), "errorAlert", "alert('" + ex.Message.Replace("'", "\"") + "');", true);
 
                 if (ex.Message.ToLower().Contains("session"))
@@ -370,6 +381,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception lineEx)
             {
+                Log.Error(lineEx.Message, lineEx);
                 return lineEx.Message;
             }
         }
@@ -399,6 +411,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception e)
             {
+                Log.Error(e.Message, e);
                 return e.Message;
             }
         }
@@ -410,8 +423,9 @@ namespace ExcelDesign.Forms.FunctionForms
                 var addr = new MailAddress(email);
                 return addr.Address == email;
             }
-            catch (Exception)
+            catch (Exception mailE)
             {
+                Log.Error(mailE.Message, mailE);
                 return false;
             }
         }
@@ -467,6 +481,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 return "Error - " + ex.Message;
             }
 

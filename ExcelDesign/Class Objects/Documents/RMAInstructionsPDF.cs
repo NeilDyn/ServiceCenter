@@ -37,6 +37,8 @@ namespace ExcelDesign.Class_Objects.Documents
         protected PdfContentByte barcodeByte;
         protected PdfWriter writer;
 
+        protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(RMAInstructionsPDF));
+
         public MemoryStream CreatePDF(string rmaNo)
         {
             var doc = new Document();
@@ -185,14 +187,17 @@ to provide us with a pre-paid return label so we can ship the device back to you
                 }
                 catch (DocumentException dex)
                 {
+                    Log.Error(dex.Message, dex);
                     throw (dex);
                 }
                 catch (IOException ioex)
                 {
+                    Log.Error(ioex.Message, ioex);
                     throw (ioex);
                 }
                 catch (Exception ex)
                 {
+                    Log.Error(ex.Message, ex);
                     throw (ex);
                 }
                 finally

@@ -34,35 +34,44 @@ namespace ExcelDesign.Forms.PDAForms
 
         protected bool anyLines = false;
 
+        protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(CreatePartRequest));
+
         protected void Page_Load(object sender, EventArgs e)
         {
             ClientScript.GetPostBackEventReference(this, string.Empty);
 
             Session["UserInteraction"] = true;
 
-            if (!IsPostBack)
+            try
             {
-                Session["CopyRowList"] = null;
-                Session["PartRequestTable"] = null;
-
-                tcNo.Text = Convert.ToString(Request.QueryString["No"]);
-                tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
-                cust = (Customer)Session["SelectedCustomer"];
-                Sh = (List<SalesHeader>)Session["SalesHeaders"];
-
-                if (cust != null)
+                if (!IsPostBack)
                 {
-                    tcShipToName.Text = cust.Name;
-                    tcShipToAddress1.Text = cust.Address1;
-                    tcShipToAddress2.Text = cust.Address2;
-                    tcShipToState.Text = cust.State;
-                    tcShipToCity.Text = cust.City;
-                    tcShipToCode.Text = cust.Zip;
-                }
-            }
+                    Session["CopyRowList"] = null;
+                    Session["PartRequestTable"] = null;
 
-            cust = (Customer)Session["SelectedCustomer"];
-            LoadPartRequestLines();
+                    tcNo.Text = Convert.ToString(Request.QueryString["No"]);
+                    tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
+                    cust = (Customer)Session["SelectedCustomer"];
+                    Sh = (List<SalesHeader>)Session["SalesHeaders"];
+
+                    if (cust != null)
+                    {
+                        tcShipToName.Text = cust.Name;
+                        tcShipToAddress1.Text = cust.Address1;
+                        tcShipToAddress2.Text = cust.Address2;
+                        tcShipToState.Text = cust.State;
+                        tcShipToCity.Text = cust.City;
+                        tcShipToCode.Text = cust.Zip;
+                    }
+                }
+
+                cust = (Customer)Session["SelectedCustomer"];
+                LoadPartRequestLines();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+            }
         }
 
         protected void LoadPartRequestLines()
@@ -206,6 +215,7 @@ namespace ExcelDesign.Forms.PDAForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 ClientScript.RegisterStartupScript(this.GetType(), "exceptionAlert", "alert('" + ex.Message + "');", true);
             }
         }
@@ -358,6 +368,7 @@ namespace ExcelDesign.Forms.PDAForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 ClientScript.RegisterStartupScript(this.GetType(), "errorAlert", "alert('" + ex.Message.Replace("'", "\"") + "');", true);
 
                 if (ex.Message.ToLower().Contains("session"))
@@ -405,6 +416,7 @@ namespace ExcelDesign.Forms.PDAForms
             }
             catch (Exception lineEx)
             {
+                Log.Error(lineEx.Message, lineEx);
                 return lineEx.Message;
             }
         }
@@ -475,6 +487,7 @@ namespace ExcelDesign.Forms.PDAForms
             }
             catch (Exception e)
             {
+                Log.Error(e.Message, e);
                 return e.Message;
             }
         }
@@ -486,8 +499,9 @@ namespace ExcelDesign.Forms.PDAForms
                 var addr = new MailAddress(email);
                 return addr.Address == email;
             }
-            catch (Exception)
+            catch (Exception mailE)
             {
+                Log.Error(mailE.Message, mailE);
                 return false;
             }
         }
@@ -543,6 +557,7 @@ namespace ExcelDesign.Forms.PDAForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 return "Error - " + ex.Message;
             }
 

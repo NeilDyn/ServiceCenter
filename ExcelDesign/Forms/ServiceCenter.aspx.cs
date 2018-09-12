@@ -37,6 +37,8 @@ namespace ExcelDesign.Forms
 
         protected static Thread worker;
 
+        protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(ServiceCenter));
+
         #endregion
 
         #region Controls
@@ -61,63 +63,80 @@ namespace ExcelDesign.Forms
         {
             ClientScript.GetPostBackEventReference(this, string.Empty);
 
-            if (!this.Page.User.Identity.IsAuthenticated || Session["ActiveUser"] == null)
+            try
             {
-                FormsAuthentication.RedirectToLoginPage();
-            }
-            else
-            {
-                if (Session["ActiveUser"] != null)
+                if (!this.Page.User.Identity.IsAuthenticated || Session["ActiveUser"] == null)
                 {
-                    User u = (User)Session["ActiveUser"];
-                    SessionTime = u.SessionTimeout; // Initiates user session timer
+                    FormsAuthentication.RedirectToLoginPage();
                 }
-            }
-
-            if (IsPostBack)
-            {
-                if (Session["SearchValue"] != null && Session["SearchSelection"] != null && Session["UserInteraction"] != null)
+                else
                 {
-                    Session["UserInteraction"] = null;
-
-                    if (Session["NoUserInteraction"] == null)
+                    if (Session["ActiveUser"] != null)
                     {
-                        Session["NoUserInteraction"] = null;
-                        customerInfoTable = new Control();
-                        customerInfo = new Control();
-                        salesOrderHeader = new Control();
-                        salesOrderDetail = new Control();
-                        salesReturnOrderHeader = new Control();
-                        salesReturnOrderDetails = new Control();
+                        User u = (User)Session["ActiveUser"];
+                        SessionTime = u.SessionTimeout; // Initiates user session timer
+                    }
+                }
 
-                        if (Session["CustomerList"] != null)
+                if (IsPostBack)
+                {
+                    if (Session["SearchValue"] != null && Session["SearchSelection"] != null && Session["UserInteraction"] != null)
+                    {
+                        Session["UserInteraction"] = null;
+
+                        if (Session["NoUserInteraction"] == null)
                         {
-                            customers = (List<Customer>)Session["CustomerList"];
-                        }
-                        PopulateData();
-                    }
-                    else
-                    {
-                        Session["NoUserInteraction"] = null;
-                        string searchValue = Convert.ToString(Session["SearchValue"]);
-                        int searchSelection = Convert.ToInt32(Session["SearchSelection"]);
-                        ConnectToService(searchValue, searchSelection);
-                    }
-                }
+                            Session["NoUserInteraction"] = null;
+                            customerInfoTable = new Control();
+                            customerInfo = new Control();
+                            salesOrderHeader = new Control();
+                            salesOrderDetail = new Control();
+                            salesReturnOrderHeader = new Control();
+                            salesReturnOrderDetails = new Control();
 
-                if (Session["ActiveCustomer"] != null)
-                {
-                    customers = new List<Customer>
+                            if (Session["CustomerList"] != null)
+                            {
+                                customers = (List<Customer>)Session["CustomerList"];
+                            }
+                            PopulateData();
+                        }
+                        else
+                        {
+                            Session["NoUserInteraction"] = null;
+                            string searchValue = Convert.ToString(Session["SearchValue"]);
+                            int searchSelection = Convert.ToInt32(Session["SearchSelection"]);
+                            ConnectToService(searchValue, searchSelection);
+                        }
+                    }
+
+                    if (Session["ActiveCustomer"] != null)
+                    {
+                        customers = new List<Customer>
                     {
                         (Customer)Session["ActiveCustomer"]
                     };
 
-                    customerInfoTable = LoadControl("UserControls/MainTables/CustomerInfoTable.ascx");
-                    customerInfoTable.ID = "Customer_Info_Table";
-                    ((CustomerInfoTable)customerInfoTable).CustomerList = customers;
-                    ((CustomerInfoTable)customerInfoTable).CreateCustomerInfo();
-                    this.frmOrderDetails.Controls.Add(customerInfoTable);
-                    Session["ActiveCustomer"] = null;
+                        customerInfoTable = LoadControl("UserControls/MainTables/CustomerInfoTable.ascx");
+                        customerInfoTable.ID = "Customer_Info_Table";
+                        ((CustomerInfoTable)customerInfoTable).CustomerList = customers;
+                        ((CustomerInfoTable)customerInfoTable).CreateCustomerInfo();
+                        this.frmOrderDetails.Controls.Add(customerInfoTable);
+                        Session["ActiveCustomer"] = null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+                Session["Error"] = ex.Message;
+
+                if (Request.Url.AbsoluteUri.Contains("Forms"))
+                {
+                    Response.Redirect("ErrorForm.aspx");
+                }
+                else
+                {
+                    Response.Redirect("Forms/ErrorForm.aspx");
                 }
             }
         }
@@ -126,63 +145,83 @@ namespace ExcelDesign.Forms
 
         protected void RetrieveData()
         {
-            string searchValue = txtSearchBox.Text;
-            SearchOptions so = SearchOptions.Preset;
-            string searchOption = string.Empty;
-            int searchSelection = -2;
-
-            if (searchValue != null && !string.IsNullOrWhiteSpace(searchValue))
+            try
             {
-                searchOption = DdlSearchOptions.SelectedValue.Replace(" ", "").Replace("-", "").Replace(".", "");
-                searchOption = searchOption.Replace("(ExludesShiptoFilters)", "");
-                Enum.TryParse(searchOption, out so);
+                string searchValue = txtSearchBox.Text;
+                SearchOptions so = SearchOptions.Preset;
+                string searchOption = string.Empty;
+                int searchSelection = -2;
 
-                switch (so)
+                if (searchValue != null && !string.IsNullOrWhiteSpace(searchValue))
                 {
-                    case SearchOptions.Default:
-                        searchSelection = 0;
-                        break;
+                    searchOption = DdlSearchOptions.SelectedValue.Replace(" ", "").Replace("-", "").Replace(".", "");
+                    searchOption = searchOption.Replace("(ExludesShiptoFilters)", "");
+                    Enum.TryParse(searchOption, out so);
 
-                    case SearchOptions.SearchAll:
-                        searchSelection = 1;
-                        break;
+                    switch (so)
+                    {
+                        case SearchOptions.Default:
+                            searchSelection = 0;
+                            break;
 
-                    case SearchOptions.ExternalDocumentNo:
-                        searchSelection = 2;
-                        break;
+                        case SearchOptions.SearchAll:
+                            searchSelection = 1;
+                            break;
 
-                    case SearchOptions.TrackingNo:
-                        searchSelection = 3;
-                        break;
+                        case SearchOptions.ExternalDocumentNo:
+                            searchSelection = 2;
+                            break;
 
-                    case SearchOptions.IMEI:
-                        searchSelection = 4;
-                        break;
+                        case SearchOptions.TrackingNo:
+                            searchSelection = 3;
+                            break;
 
-                    case SearchOptions.ShiptoName:
-                        searchSelection = 5;
-                        break;
+                        case SearchOptions.IMEI:
+                            searchSelection = 4;
+                            break;
 
-                    case SearchOptions.ShiptoAddress:
-                        searchSelection = 6;
-                        break;
+                        case SearchOptions.ShiptoName:
+                            searchSelection = 5;
+                            break;
 
-                    case SearchOptions.RMANo:
-                        searchSelection = 7;
-                        break;
+                        case SearchOptions.ShiptoAddress:
+                            searchSelection = 6;
+                            break;
 
-                    case SearchOptions.Preset:
-                        searchSelection = 0;
-                        break;
+                        case SearchOptions.RMANo:
+                            searchSelection = 7;
+                            break;
 
-                    default:
-                        searchSelection = 0;
-                        break;
+                        case SearchOptions.Preset:
+                            searchSelection = 0;
+                            break;
+
+                        default:
+                            searchSelection = 0;
+                            break;
+                    }
+
+                    Session["SearchValue"] = searchValue;
+                    Session["SearchSelection"] = searchSelection;
+                    ConnectToService(searchValue, searchSelection);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (Session["Error"] == null)
+                {
+                    Log.Error(ex.Message, ex);
+                    Session["Error"] = ex.Message;
                 }
 
-                Session["SearchValue"] = searchValue;
-                Session["SearchSelection"] = searchSelection;
-                ConnectToService(searchValue, searchSelection);
+                if (Request.Url.AbsoluteUri.Contains("Forms"))
+                {
+                    Response.Redirect("ErrorForm.aspx");
+                }
+                else
+                {
+                    Response.Redirect("Forms/ErrorForm.aspx");
+                }
             }
         }
 
@@ -202,7 +241,11 @@ namespace ExcelDesign.Forms
             }
             catch (Exception ex)
             {
-                Session["Error"] = ex.Message;
+                if (Session["Error"] == null)
+                {
+                    Log.Error(ex.Message, ex);
+                    Session["Error"] = ex.Message;
+                }
 
                 if (Request.Url.AbsoluteUri.Contains("Forms"))
                 {
@@ -217,20 +260,40 @@ namespace ExcelDesign.Forms
 
         protected void PopulateData()
         {
-            if (customers.Count > 1)
+            try
             {
-                multipleCustomers = LoadControl("UserControls/SingleControls/MultipleCustomers.ascx");
-                this.frmOrderDetails.Controls.Add(multipleCustomers);
-                Session["MultipleCustomers"] = multipleCustomers;
+                if (customers.Count > 1)
+                {
+                    multipleCustomers = LoadControl("UserControls/SingleControls/MultipleCustomers.ascx");
+                    this.frmOrderDetails.Controls.Add(multipleCustomers);
+                    Session["MultipleCustomers"] = multipleCustomers;
+                }
+
+                customerInfoTable = LoadControl("UserControls/MainTables/CustomerInfoTable.ascx");
+                customerInfoTable.ID = "Customer_Info_Table";
+                ((CustomerInfoTable)customerInfoTable).CustomerList = customers;
+                ((CustomerInfoTable)customerInfoTable).CreateCustomerInfo();
+                this.frmOrderDetails.Controls.Add(customerInfoTable);
+
+                StaticService.CustomerList = customers;
             }
+            catch (Exception ex)
+            {
+                if (Session["Error"] == null)
+                {
+                    Log.Error(ex.Message, ex);
+                    Session["Error"] = ex.Message;
+                }
 
-            customerInfoTable = LoadControl("UserControls/MainTables/CustomerInfoTable.ascx");
-            customerInfoTable.ID = "Customer_Info_Table";
-            ((CustomerInfoTable)customerInfoTable).CustomerList = customers;
-            ((CustomerInfoTable)customerInfoTable).CreateCustomerInfo();
-            this.frmOrderDetails.Controls.Add(customerInfoTable);
-
-            StaticService.CustomerList = customers;
+                if (Request.Url.AbsoluteUri.Contains("Forms"))
+                {
+                    Response.Redirect("ErrorForm.aspx");
+                }
+                else
+                {
+                    Response.Redirect("Forms/ErrorForm.aspx");
+                }
+            }
         }
 
         #endregion
@@ -247,6 +310,7 @@ namespace ExcelDesign.Forms
             }
             catch (Exception e)
             {
+                Log.Error(e.Message, e);
                 return e.Message;
             }
 
@@ -278,7 +342,7 @@ namespace ExcelDesign.Forms
                     }
                     catch (Exception workerE)
                     {
-                        //return "Error - " + workerE.Message;
+                        Log.Error(workerE.Message, workerE);
                     }
                 });
 
@@ -305,6 +369,7 @@ namespace ExcelDesign.Forms
             }
             catch (Exception e)
             {
+                Log.Error(e.Message, e);
                 return "Error - " + e.Message;
             }
 
@@ -324,6 +389,7 @@ namespace ExcelDesign.Forms
             }
             catch (Exception e)
             {
+                Log.Error(e.Message, e);
                 return e.Message;
             }
 
@@ -341,6 +407,7 @@ namespace ExcelDesign.Forms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 return "Error - " + ex.Message;
             }
 

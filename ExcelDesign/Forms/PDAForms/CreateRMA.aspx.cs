@@ -46,72 +46,77 @@ namespace ExcelDesign.Forms.PDAForms
 
         protected Thread worker;
 
+        protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(CreateRMA));
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["UserInteraction"] = true;
 
-            if (!IsPostBack)
+            try
             {
-                List<ReturnReason> rrList = (List<ReturnReason>)Session["ReturnReasons"];
-
-                tcNo.Text = Convert.ToString(Request.QueryString["No"]);
-                tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
-                updateRma = Convert.ToString(Request.QueryString["CreateOrUpdate"]);
-                existingTrackingNo = Convert.ToString(Request.QueryString["ReturnTrackingNo"]);
-                cust = (Customer)Session["SelectedCustomer"];
-                Sh = (List<SalesHeader>)Session["SalesHeaders"];
-
-                createdOrderNo = Convert.ToString(Request.QueryString["CreatedOrderNo"]);
-
-                Rh = (List<ReturnHeader>)Session["ReturnHeaders"];
-
-                if (cust != null)
+                if (!IsPostBack)
                 {
-                    tcShipToName.Text = cust.Name;
-                    tcShipToAddress1.Text = cust.Address1;
-                    tcShipToAddress2.Text = cust.Address2;
-                    tcShipToState.Text = cust.State;
-                    tcShipToCity.Text = cust.City;
-                    tcShipToCode.Text = cust.Zip;
-                }
+                    List<ReturnReason> rrList = (List<ReturnReason>)Session["ReturnReasons"];
 
-                if (updateRma.ToUpper() == "TRUE")
-                {
-                    noTitle.Text = "RMA No:";
-                    btnCreateRMA.Text = "Update RMA";
-                    btnCancelRMA.Visible = true;
+                    tcNo.Text = Convert.ToString(Request.QueryString["No"]);
+                    tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
+                    updateRma = Convert.ToString(Request.QueryString["CreateOrUpdate"]);
+                    existingTrackingNo = Convert.ToString(Request.QueryString["ReturnTrackingNo"]);
+                    cust = (Customer)Session["SelectedCustomer"];
+                    Sh = (List<SalesHeader>)Session["SalesHeaders"];
 
-                    lblInsertTrackingNo.Visible = true;
-                    txtInsertTrackingNo.Visible = true;
+                    createdOrderNo = Convert.ToString(Request.QueryString["CreatedOrderNo"]);
 
-                    lblDefaultShipping.Visible = false;
-                    cbxDefaultShipping.Visible = false;
+                    Rh = (List<ReturnHeader>)Session["ReturnHeaders"];
 
-                    if (Rh != null)
+                    if (cust != null)
                     {
-                        foreach (ReturnHeader rhItem in Rh)
+                        tcShipToName.Text = cust.Name;
+                        tcShipToAddress1.Text = cust.Address1;
+                        tcShipToAddress2.Text = cust.Address2;
+                        tcShipToState.Text = cust.State;
+                        tcShipToCity.Text = cust.City;
+                        tcShipToCode.Text = cust.Zip;
+                    }
+
+                    if (updateRma.ToUpper() == "TRUE")
+                    {
+                        noTitle.Text = "RMA No:";
+                        btnCreateRMA.Text = "Update RMA";
+                        btnCancelRMA.Visible = true;
+
+                        lblInsertTrackingNo.Visible = true;
+                        txtInsertTrackingNo.Visible = true;
+
+                        lblDefaultShipping.Visible = false;
+                        cbxDefaultShipping.Visible = false;
+
+                        if (Rh != null)
                         {
-                            foreach (SalesHeader head in Sh)
+                            foreach (ReturnHeader rhItem in Rh)
                             {
-                                foreach (ShipmentHeader header in head.ShipmentHeaderObject)
+                                foreach (SalesHeader head in Sh)
                                 {
-                                    foreach (ShipmentLine line in header.ShipmentLines)
+                                    foreach (ShipmentHeader header in head.ShipmentHeaderObject)
                                     {
-                                        foreach (PostedPackage package in head.PostedPackageObject)
+                                        foreach (ShipmentLine line in header.ShipmentLines)
                                         {
-                                            foreach (PostedPackageLine packageLine in package.PostedPackageLines)
+                                            foreach (PostedPackage package in head.PostedPackageObject)
                                             {
-                                                if (packageLine.ItemNo == line.ItemNo && package.PostedSourceID == header.No)
+                                                foreach (PostedPackageLine packageLine in package.PostedPackageLines)
                                                 {
-                                                    if (rhItem.IMEINo == packageLine.SerialNo)
+                                                    if (packageLine.ItemNo == line.ItemNo && package.PostedSourceID == header.No)
                                                     {
-                                                        tcIMEINo.Text = rhItem.IMEINo;
-                                                        txtShipToName.Text = rhItem.ShipToName;
-                                                        txtShipToAddress1.Text = rhItem.ShipToAddress1;
-                                                        txtShipToAddress2.Text = rhItem.ShipToAddress2;
-                                                        txtShipToCity.Text = rhItem.ShipToCity;
-                                                        txtShipToCode.Text = rhItem.ShipToCode;
-                                                        txtShipToState.Text = rhItem.ShipToState;
+                                                        if (rhItem.IMEINo == packageLine.SerialNo)
+                                                        {
+                                                            tcIMEINo.Text = rhItem.IMEINo;
+                                                            txtShipToName.Text = rhItem.ShipToName;
+                                                            txtShipToAddress1.Text = rhItem.ShipToAddress1;
+                                                            txtShipToAddress2.Text = rhItem.ShipToAddress2;
+                                                            txtShipToCity.Text = rhItem.ShipToCity;
+                                                            txtShipToCode.Text = rhItem.ShipToCode;
+                                                            txtShipToState.Text = rhItem.ShipToState;
+                                                        }
                                                     }
                                                 }
                                             }
@@ -120,40 +125,68 @@ namespace ExcelDesign.Forms.PDAForms
                                 }
                             }
                         }
-                    }
 
-                    txtShipToName.Enabled = false;
-                    txtShipToAddress1.Enabled = false;
-                    txtShipToAddress2.Enabled = false;
-                    txtShipToCity.Enabled = false;
-                    txtShipToCode.Enabled = false;
-                    txtShipToState.Enabled = false;
+                        txtShipToName.Enabled = false;
+                        txtShipToAddress1.Enabled = false;
+                        txtShipToAddress2.Enabled = false;
+                        txtShipToCity.Enabled = false;
+                        txtShipToCode.Enabled = false;
+                        txtShipToState.Enabled = false;
 
-                    if (existingTrackingNo != string.Empty)
-                    {
-                        txtInsertTrackingNo.Text = existingTrackingNo;
-                        txtInsertTrackingNo.Enabled = false;
+                        if (existingTrackingNo != string.Empty)
+                        {
+                            txtInsertTrackingNo.Text = existingTrackingNo;
+                            txtInsertTrackingNo.Enabled = false;
+                        }
+                        else
+                        {
+                            txtInsertTrackingNo.Enabled = true;
+                        }
                     }
                     else
                     {
-                        txtInsertTrackingNo.Enabled = true;
-                    }
-                }
-                else
-                {
-                    noTitle.Text = "Order No:";
-                    btnCreateRMA.Text = "Create RMA";
-                    btnCancelRMA.Visible = false;
+                        noTitle.Text = "Order No:";
+                        btnCreateRMA.Text = "Create RMA";
+                        btnCancelRMA.Visible = false;
 
-                    lblInsertTrackingNo.Visible = false;
-                    txtInsertTrackingNo.Visible = false;
+                        lblInsertTrackingNo.Visible = false;
+                        txtInsertTrackingNo.Visible = false;
 
-                    lblDefaultShipping.Visible = true;
-                    cbxDefaultShipping.Visible = true;
+                        lblDefaultShipping.Visible = true;
+                        cbxDefaultShipping.Visible = true;
 
-                    if (Rh != null)
-                    {
-                        foreach (ReturnHeader itemRh in Rh)
+                        if (Rh != null)
+                        {
+                            foreach (ReturnHeader itemRh in Rh)
+                            {
+                                foreach (SalesHeader head in Sh)
+                                {
+                                    foreach (ShipmentHeader header in head.ShipmentHeaderObject)
+                                    {
+                                        foreach (ShipmentLine line in header.ShipmentLines)
+                                        {
+                                            foreach (PostedPackage package in head.PostedPackageObject)
+                                            {
+                                                foreach (PostedPackageLine packageLine in package.PostedPackageLines)
+                                                {
+                                                    if (packageLine.ItemNo == line.ItemNo && package.PostedSourceID == header.No)
+                                                    {
+                                                        if (itemRh.IMEINo == packageLine.SerialNo)
+                                                        {
+                                                            tcIMEINo.Text = itemRh.IMEINo;
+                                                            ClientScript.RegisterStartupScript(this.GetType(), "imeiExists", "alert('There is already an open RMA for " + Rh[0].IMEINo + "');", true);
+                                                            ClientScript.RegisterStartupScript(this.GetType(), "imeiExistsClose", "parent.window.close();", true);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        if (Sh != null && tcIMEINo.Text == "")
                         {
                             foreach (SalesHeader head in Sh)
                             {
@@ -167,12 +200,7 @@ namespace ExcelDesign.Forms.PDAForms
                                             {
                                                 if (packageLine.ItemNo == line.ItemNo && package.PostedSourceID == header.No)
                                                 {
-                                                    if (itemRh.IMEINo == packageLine.SerialNo)
-                                                    {
-                                                        tcIMEINo.Text = itemRh.IMEINo;
-                                                        ClientScript.RegisterStartupScript(this.GetType(), "imeiExists", "alert('There is already an open RMA for " + Rh[0].IMEINo + "');", true);
-                                                        ClientScript.RegisterStartupScript(this.GetType(), "imeiExistsClose", "parent.window.close();", true);
-                                                    }
+                                                    tcIMEINo.Text = packageLine.SerialNo;
                                                 }
                                             }
                                         }
@@ -182,48 +210,29 @@ namespace ExcelDesign.Forms.PDAForms
                         }
                     }
 
-                    if (Sh != null && tcIMEINo.Text == "")
+                    if (Session["ActiveUser"] != null)
                     {
-                        foreach (SalesHeader head in Sh)
+                        User activeUser = (User)Session["ActiveUser"];
+
+                        if (!activeUser.Admin && !activeUser.Developer)
                         {
-                            foreach (ShipmentHeader header in head.ShipmentHeaderObject)
+                            if (!activeUser.CreateReturnLabel)
                             {
-                                foreach (ShipmentLine line in header.ShipmentLines)
-                                {
-                                    foreach (PostedPackage package in head.PostedPackageObject)
-                                    {
-                                        foreach (PostedPackageLine packageLine in package.PostedPackageLines)
-                                        {
-                                            if (packageLine.ItemNo == line.ItemNo && package.PostedSourceID == header.No)
-                                            {
-                                                tcIMEINo.Text = packageLine.SerialNo;
-                                            }
-                                        }
-                                    }
-                                }
+                                cbxCreateLabel.Visible = false;
+                                lblCreateLabel.Visible = false;
                             }
                         }
                     }
                 }
 
-                if (Session["ActiveUser"] != null)
-                {
-                    User activeUser = (User)Session["ActiveUser"];
-
-                    if (!activeUser.Admin && !activeUser.Developer)
-                    {
-                        if (!activeUser.CreateReturnLabel)
-                        {
-                            cbxCreateLabel.Visible = false;
-                            lblCreateLabel.Visible = false;
-                        }
-                    }
-                }
+                cust = (Customer)Session["SelectedCustomer"];
+                createdOrderNo = Convert.ToString(Request.QueryString["CreatedOrderNo"]);
+                LoadCreateReturnLines();
             }
-
-            cust = (Customer)Session["SelectedCustomer"];
-            createdOrderNo = Convert.ToString(Request.QueryString["CreatedOrderNo"]);
-            LoadCreateReturnLines();
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+            }
         }
 
         protected void LoadCreateReturnLines()
@@ -493,6 +502,7 @@ namespace ExcelDesign.Forms.PDAForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 ClientScript.RegisterStartupScript(this.GetType(), "exceptionAlert", "alert('" + ex.Message + "');", true);
             }
         }
@@ -658,6 +668,7 @@ namespace ExcelDesign.Forms.PDAForms
                                 }
                                 catch (Exception workerE)
                                 {
+                                    Log.Error(workerE.Message, workerE);
                                     ClientScript.RegisterStartupScript(this.GetType(), "labelError", "alert('" + workerE.Message.Replace("'", "\"") + "');", true);
                                 }
                             });
@@ -692,6 +703,7 @@ namespace ExcelDesign.Forms.PDAForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 ClientScript.RegisterStartupScript(this.GetType(), "errorAlert", "alert('" + ex.Message.Replace("'", "\"") + "');", true);
 
                 if (ex.Message.ToLower().Contains("session"))
@@ -714,6 +726,7 @@ namespace ExcelDesign.Forms.PDAForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 ClientScript.RegisterStartupScript(this.GetType(), "alertError", "alert('" + ex.Message + "');", true);
 
                 if (ex.Message.ToLower().Contains("session"))
@@ -761,6 +774,7 @@ namespace ExcelDesign.Forms.PDAForms
             }
             catch (Exception lineEx)
             {
+                Log.Error(lineEx.Message, lineEx);
                 return lineEx.Message;
             }
         }
@@ -869,6 +883,7 @@ namespace ExcelDesign.Forms.PDAForms
             }
             catch (Exception e)
             {
+                Log.Error(e.Message, e);
                 return e.Message;
             }
         }
@@ -880,8 +895,9 @@ namespace ExcelDesign.Forms.PDAForms
                 var addr = new MailAddress(email);
                 return addr.Address == email;
             }
-            catch (Exception)
+            catch (Exception mailE)
             {
+                Log.Error(mailE.Message, mailE);
                 return false;
             }
         }

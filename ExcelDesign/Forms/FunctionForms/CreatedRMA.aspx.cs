@@ -20,6 +20,8 @@ namespace ExcelDesign.Forms.FunctionForms
         public string ExtDocNo { get; set; }
         public string Update { get; set; }
 
+        protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(CreatedRMA));
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["RMAInteraction"] = true;
@@ -27,9 +29,9 @@ namespace ExcelDesign.Forms.FunctionForms
 
             string printRMA = string.Empty;
 
-            if (Session["CreatedRMA"] != null)
+            try
             {
-                try
+                if (Session["CreatedRMA"] != null)
                 {
                     CRH = (CreatedReturnHeader)Session["CreatedRMA"];
                     Title = "Return: " + CRH.RMANo;
@@ -48,7 +50,7 @@ namespace ExcelDesign.Forms.FunctionForms
 
                     if (printRMA.ToUpper() == "TRUE")
                     {
-                        BtnPrintRMAInstructions.Visible = true;                 
+                        BtnPrintRMAInstructions.Visible = true;
                     }
                     else
                     {
@@ -59,11 +61,12 @@ namespace ExcelDesign.Forms.FunctionForms
                     ExtDocNo = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
                     Update = "True";
                 }
-                catch (Exception ex)
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "errorinOrderRMA", "alert('" + ex.Message + "');", true);
-                }
-            }           
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+                ClientScript.RegisterStartupScript(this.GetType(), "errorinOrderRMA", "alert('" + ex.Message + "');", true);
+            }
         }
 
         protected void PopulateLines()
@@ -131,6 +134,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 ClientScript.RegisterStartupScript(this.GetType(), "alertError", "alert('" + ex.Message + "');", true);
             }
         }
@@ -148,9 +152,10 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 ClientScript.RegisterStartupScript(this.GetType(), "alertError", "alert('" + ex.Message + "');", true);
-                
-                if(ex.Message.ToLower().Contains("session"))
+
+                if (ex.Message.ToLower().Contains("session"))
                 {
                     ClientScript.RegisterStartupScript(this.GetType(), "closeRMA", "parent.window.close();", true);
                 }

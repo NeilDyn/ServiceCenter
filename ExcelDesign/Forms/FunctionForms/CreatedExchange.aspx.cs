@@ -14,11 +14,13 @@ namespace ExcelDesign.Forms.FunctionForms
     {
         protected CreatedExchangeHeader CEH { get; set; }
 
+        protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(CreatedExchange));
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["CreatedExchange"] != null)
+            try
             {
-                try
+                if (Session["CreatedExchange"] != null)
                 {
                     CEH = (CreatedExchangeHeader)Session["CreatedExchange"];
                     Title = "Order: " + CEH.OrderNo;
@@ -41,12 +43,13 @@ namespace ExcelDesign.Forms.FunctionForms
 
                     PopulateLines();
                 }
-                catch (Exception ex)
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "errorinOrderExchange", "alert('" + ex.Message + "');", true);
-                }
-
             }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+                ClientScript.RegisterStartupScript(this.GetType(), "errorinOrderExchange", "alert('" + ex.Message + "');", true);
+            }
+
         }
 
         protected void PopulateLines()
@@ -104,6 +107,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 ClientScript.RegisterStartupScript(this.GetType(), "alertError", "alert('" + ex.Message + "');", true);
             }
         }

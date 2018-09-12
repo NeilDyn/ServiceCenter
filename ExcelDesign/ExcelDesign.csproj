@@ -43,6 +43,9 @@
     <Reference Include="iTextSharp, Version=4.1.6.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca">
       <HintPath>..\packages\iTextSharp-LGPL.4.1.6\lib\iTextSharp.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -140,6 +143,7 @@
     <Content Include="Forms\UserControls\MainTables\SalesOrderHeaderTable.ascx" />
     <Content Include="Forms\UserControls\TableHeaders\SingleCustomerTableHeader.ascx" />
     <Content Include="Forms\UserControls\TableHeaders\SingleSalesOrderTableHeader.ascx" />
+    <Content Include="Global.asax" />
     <Content Include="Headers\Navbar.ascx" />
     <Content Include="images\Logo.png" />
     <Content Include="images\icon.ico" />
@@ -547,6 +551,9 @@
     <Compile Include="Forms\UserControls\TableHeaders\SingleSalesOrderTableHeader.ascx.designer.cs">
       <DependentUpon>SingleSalesOrderTableHeader.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Headers\Navbar.ascx.cs">
       <DependentUpon>Navbar.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -554,7 +561,6 @@
     <Compile Include="Headers\Navbar.ascx.designer.cs">
       <DependentUpon>Navbar.ascx</DependentUpon>
     </Compile>
-    <Compile Include="HelperLibrary\ErrorLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -636,6 +642,7 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ErrorLogs\" />
     <Folder Include="Files\" />
   </ItemGroup>
   <PropertyGroup>

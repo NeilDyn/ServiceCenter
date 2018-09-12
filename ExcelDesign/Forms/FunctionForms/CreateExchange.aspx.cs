@@ -21,47 +21,56 @@ namespace ExcelDesign.Forms.FunctionForms
         protected bool anyLines = false;
         protected bool imeiExists = false;
 
+        protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(CreateExchange));
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["UserInteraction"] = true;
 
-            if (!IsPostBack)
+            try
             {
-                tcRMANo.Text = Convert.ToString(Request.QueryString["RMANo"]);
-                tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
-                Rh = (List<ReturnHeader>)Session["ReturnHeaders"];
-                cust = (Customer)Session["SelectedCustomer"];
-
-                foreach (ReturnHeader head in Rh)
+                if (!IsPostBack)
                 {
-                    if(head.RMANo == tcRMANo.Text && head.IMEINo != "")
+                    tcRMANo.Text = Convert.ToString(Request.QueryString["RMANo"]);
+                    tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
+                    Rh = (List<ReturnHeader>)Session["ReturnHeaders"];
+                    cust = (Customer)Session["SelectedCustomer"];
+
+                    foreach (ReturnHeader head in Rh)
                     {
-                        imeiExists = true;
-                        tcShipToName.Text = head.ShipToName;
-                        tcShipToAddress1.Text = head.ShipToAddress1;
-                        tcShipToAddress2.Text = head.ShipToAddress2;
-                        tcShipToCity.Text = head.ShipToCity;
-                        tcShipToContact.Text = head.ShipToContact;
-                        tcShipToState.Text = head.ShipToState;
-                        tcShipToZip.Text = head.ShipToCode;
-                        tcShipToCountry.Text = head.ShipToCountry;
+                        if (head.RMANo == tcRMANo.Text && head.IMEINo != "")
+                        {
+                            imeiExists = true;
+                            tcShipToName.Text = head.ShipToName;
+                            tcShipToAddress1.Text = head.ShipToAddress1;
+                            tcShipToAddress2.Text = head.ShipToAddress2;
+                            tcShipToCity.Text = head.ShipToCity;
+                            tcShipToContact.Text = head.ShipToContact;
+                            tcShipToState.Text = head.ShipToState;
+                            tcShipToZip.Text = head.ShipToCode;
+                            tcShipToCountry.Text = head.ShipToCountry;
+                        }
+                    }
+
+                    if (!imeiExists)
+                    {
+                        tcShipToName.Text = cust.Name;
+                        tcShipToAddress1.Text = cust.Address1;
+                        tcShipToAddress2.Text = cust.Address2;
+                        tcShipToCity.Text = cust.City;
+                        tcShipToContact.Text = cust.ShipToContact;
+                        tcShipToState.Text = cust.State;
+                        tcShipToZip.Text = cust.Zip;
+                        tcShipToCountry.Text = cust.Country;
                     }
                 }
 
-                if(!imeiExists)
-                {
-                    tcShipToName.Text = cust.Name;
-                    tcShipToAddress1.Text = cust.Address1;
-                    tcShipToAddress2.Text = cust.Address2;
-                    tcShipToCity.Text = cust.City;
-                    tcShipToContact.Text = cust.ShipToContact;
-                    tcShipToState.Text = cust.State;
-                    tcShipToZip.Text = cust.Zip;
-                    tcShipToCountry.Text = cust.Country;
-                }
+                LoadCreateExchangeLines();
             }
-
-            LoadCreateExchangeLines();
+            catch (Exception loadE)
+            {
+                Log.Error(loadE.Message, loadE);
+            }
         }
 
         protected void LoadCreateExchangeLines()
@@ -162,6 +171,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 ClientScript.RegisterStartupScript(this.GetType(), "exceptionAlert", "alert('" + ex.Message + "');", true);
             }
         }
@@ -257,6 +267,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 ClientScript.RegisterStartupScript(this.GetType(), "errorAlert", "alert('" + ex.Message.Replace("'", "\"") + "');", true);
 
                 if (ex.Message.ToLower().Contains("session"))
@@ -290,6 +301,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception lineEx)
             {
+                Log.Error(lineEx.Message, lineEx);
                 return lineEx.Message;
             }
         }

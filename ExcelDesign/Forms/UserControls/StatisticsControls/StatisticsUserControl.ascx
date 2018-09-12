@@ -60,14 +60,6 @@
     }
 </script>
 <asp:Table runat="server" ID="tblStatistics" Style="margin-left: 70%; margin-right: 100px;" Width="30%">
-    <asp:TableHeaderRow Font-Bold="true" HorizontalAlign="Justify" ForeColor="White" BackColor="#507CD1" Font-Size="X-Large">
-        <asp:TableHeaderCell Text="Actionable Items" ColumnSpan="4" />
-    </asp:TableHeaderRow>
-    <asp:TableHeaderRow>
-        <asp:TableHeaderCell ColumnSpan="4">
-                    <hr class="HeaderLine" />
-        </asp:TableHeaderCell>
-    </asp:TableHeaderRow>
     <asp:TableHeaderRow HorizontalAlign="Justify" ForeColor="White" BackColor="#507CD1" Font-Size="Larger" Font-Bold="true">
         <asp:TableHeaderCell Text="Returns" ColumnSpan="2" Width="50%" />
         <asp:TableHeaderCell Text="Part Requests" ColumnSpan="2" Width="50%" />

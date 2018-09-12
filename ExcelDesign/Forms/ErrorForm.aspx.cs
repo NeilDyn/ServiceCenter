@@ -15,6 +15,7 @@ namespace ExcelDesign.Forms
         protected void Page_Load(object sender, EventArgs e)
         {
             this.errorMessage.InnerText = Session["Error"].ToString();
-        }
+            Session["Error"] = null;
+        }          
     }
 }

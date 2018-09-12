@@ -15,21 +15,41 @@ namespace ExcelDesign.Forms
          * Updated with User Control Navigation bar.
         */
 
+        protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(UserControl));
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.Page.User.Identity.IsAuthenticated || Session["ActiveUser"] == null)
+            try
             {
-                FormsAuthentication.RedirectToLoginPage();
-            }
-
-            if (!IsPostBack)
-            {
-                User activeUser = null;
-
-                if (Session["ActiveUser"] != null)
+                if (!this.Page.User.Identity.IsAuthenticated || Session["ActiveUser"] == null)
                 {
-                    activeUser = (User)Session["ActiveUser"];
-                    PopulateSingleUser(activeUser);
+                    FormsAuthentication.RedirectToLoginPage();
+                }
+
+                if (!IsPostBack)
+                {
+                    User activeUser = null;
+
+                    if (Session["ActiveUser"] != null)
+                    {
+                        activeUser = (User)Session["ActiveUser"];
+                        PopulateSingleUser(activeUser);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+
+                Session["Error"] = ex.Message;
+
+                if (Request.Url.AbsoluteUri.Contains("Forms"))
+                {
+                    Response.Redirect("ErrorForm.aspx");
+                }
+                else
+                {
+                    Response.Redirect("Forms/ErrorForm.aspx");
                 }
             }
         }
@@ -52,10 +72,20 @@ namespace ExcelDesign.Forms
                 cbxCreatePartialRequest.Checked = u.CreatePartRequest;
                 cbxCreatePDAPartRequest.Checked = u.CreatePDAPartRequest;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Session["Error"] = e.Message;
-                Response.Redirect("ErrorForm.aspx");
+                Log.Error(ex.Message, ex);
+
+                Session["Error"] = ex.Message;
+
+                if (Request.Url.AbsoluteUri.Contains("Forms"))
+                {
+                    Response.Redirect("ErrorForm.aspx");
+                }
+                else
+                {
+                    Response.Redirect("Forms/ErrorForm.aspx");
+                }
             }
         }
     }

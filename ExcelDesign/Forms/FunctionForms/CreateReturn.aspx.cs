@@ -37,67 +37,76 @@ namespace ExcelDesign.Forms.FunctionForms
 
         protected Thread worker;
 
+        protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(CreateReturn));
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["UserInteraction"] = true;
 
-            if (!IsPostBack)
+            try
             {
-                List<ReturnReason> rrList = (List<ReturnReason>)Session["ReturnReasons"];
-
-                tcNo.Text = Convert.ToString(Request.QueryString["No"]);
-                tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
-                updateRma = Convert.ToString(Request.QueryString["CreateOrUpdate"]);
-                existingTrackingNo = Convert.ToString(Request.QueryString["ReturnTrackingNo"]);
-
-                createdOrderNo = Convert.ToString(Request.QueryString["CreatedOrderNo"]);
-
-                if (updateRma.ToUpper() == "TRUE")
+                if (!IsPostBack)
                 {
-                    noTitle.Text = "RMA No:";
-                    btnCreateRMA.Text = "Update RMA";
-                    btnCancelRMA.Visible = true;
+                    List<ReturnReason> rrList = (List<ReturnReason>)Session["ReturnReasons"];
 
-                    lblInsertTrackingNo.Visible = true;
-                    txtInsertTrackingNo.Visible = true;
+                    tcNo.Text = Convert.ToString(Request.QueryString["No"]);
+                    tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
+                    updateRma = Convert.ToString(Request.QueryString["CreateOrUpdate"]);
+                    existingTrackingNo = Convert.ToString(Request.QueryString["ReturnTrackingNo"]);
 
-                    if (existingTrackingNo != string.Empty)
+                    createdOrderNo = Convert.ToString(Request.QueryString["CreatedOrderNo"]);
+
+                    if (updateRma.ToUpper() == "TRUE")
                     {
-                        txtInsertTrackingNo.Text = existingTrackingNo;
-                        txtInsertTrackingNo.Enabled = false;
+                        noTitle.Text = "RMA No:";
+                        btnCreateRMA.Text = "Update RMA";
+                        btnCancelRMA.Visible = true;
+
+                        lblInsertTrackingNo.Visible = true;
+                        txtInsertTrackingNo.Visible = true;
+
+                        if (existingTrackingNo != string.Empty)
+                        {
+                            txtInsertTrackingNo.Text = existingTrackingNo;
+                            txtInsertTrackingNo.Enabled = false;
+                        }
+                        else
+                        {
+                            txtInsertTrackingNo.Enabled = true;
+                        }
                     }
                     else
                     {
-                        txtInsertTrackingNo.Enabled = true;
+                        noTitle.Text = "Order No:";
+                        btnCreateRMA.Text = "Create RMA";
+                        btnCancelRMA.Visible = false;
+
+                        lblInsertTrackingNo.Visible = false;
+                        txtInsertTrackingNo.Visible = false;
                     }
-                }
-                else
-                {
-                    noTitle.Text = "Order No:";
-                    btnCreateRMA.Text = "Create RMA";
-                    btnCancelRMA.Visible = false;
 
-                    lblInsertTrackingNo.Visible = false;
-                    txtInsertTrackingNo.Visible = false;
-                }              
-
-                if (Session["ActiveUser"] != null)
-                {
-                    User activeUser = (User)Session["ActiveUser"];
-
-                    if (!activeUser.Admin && !activeUser.Developer)
+                    if (Session["ActiveUser"] != null)
                     {
-                        if (!activeUser.CreateReturnLabel)
+                        User activeUser = (User)Session["ActiveUser"];
+
+                        if (!activeUser.Admin && !activeUser.Developer)
                         {
-                            cbxCreateLabel.Visible = false;
-                            lblCreateLabel.Visible = false;
+                            if (!activeUser.CreateReturnLabel)
+                            {
+                                cbxCreateLabel.Visible = false;
+                                lblCreateLabel.Visible = false;
+                            }
                         }
                     }
                 }
-            }
 
-            createdOrderNo = Convert.ToString(Request.QueryString["CreatedOrderNo"]);
-            LoadCreateReturnLines();
+                createdOrderNo = Convert.ToString(Request.QueryString["CreatedOrderNo"]);
+                LoadCreateReturnLines();
+            }
+            catch (Exception loadE)
+            {
+                Log.Error(loadE.Message, loadE);
+            }
         }
 
         protected void LoadCreateReturnLines()
@@ -371,6 +380,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 ClientScript.RegisterStartupScript(this.GetType(), "exceptionAlert", "alert('" + ex.Message + "');", true);
             }
         }
@@ -512,6 +522,7 @@ namespace ExcelDesign.Forms.FunctionForms
                                 }
                                 catch (Exception workerE)
                                 {
+                                    Log.Error(workerE.Message, workerE);
                                     ClientScript.RegisterStartupScript(this.GetType(), "labelError", "alert('" + workerE.Message.Replace("'", "\"") + "');", true);
                                 }
                             });
@@ -546,6 +557,8 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
+
                 ClientScript.RegisterStartupScript(this.GetType(), "errorAlert", "alert('" + ex.Message.Replace("'", "\"") + "');", true);
 
                 if (ex.Message.ToLower().Contains("session"))
@@ -569,6 +582,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception ex)
             {
+                Log.Error(ex.Message, ex);
                 ClientScript.RegisterStartupScript(this.GetType(), "alertError", "alert('" + ex.Message + "');", true);
 
                 if (ex.Message.ToLower().Contains("session"))
@@ -623,6 +637,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception lineEx)
             {
+                Log.Error(lineEx.Message, lineEx);
                 return lineEx.Message;
             }
         }
@@ -688,6 +703,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
             catch (Exception e)
             {
+                Log.Error(e.Message, e);
                 return e.Message;
             }
         }
@@ -699,8 +715,10 @@ namespace ExcelDesign.Forms.FunctionForms
                 var addr = new MailAddress(email);
                 return addr.Address == email;
             }
-            catch (Exception)
+            catch (Exception mailE)
             {
+                Log.Error(mailE.Message, mailE);
+
                 return false;
             }
         }

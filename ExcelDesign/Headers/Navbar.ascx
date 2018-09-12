@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Navbar.ascx.cs" Inherits="ExcelDesign.Headers.Navbar" %>
 
+<link href="../css/mainpage.css" rel="stylesheet" type="text/css" />
+
 <script type="text/javascript">
 
     function UserLogout() {

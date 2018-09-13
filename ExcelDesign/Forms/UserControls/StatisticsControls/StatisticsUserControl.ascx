@@ -41,8 +41,13 @@
         var top = (screen.height - height);
 
         if (typeof (partRequestWindow) == 'undefined' || partRequestWindow.closed) {
-            statisticsSalesLine = window.open("UserControls/StatisticsControls/SalesLines/StatisticsSalesLineForm.aspx?PendingList=" + pendingList + "&PendingType=" + pendingType,
+            if (window.location.href.indexOf("Forms") > -1) {
+                statisticsSalesLine = window.open("UserControls/StatisticsControls/SalesLines/StatisticsSalesLineForm.aspx?PendingList=" + pendingList + "&PendingType=" + pendingType,
+                    null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+            } else {
+                statisticsSalesLine = window.open("Forms/UserControls/StatisticsControls/SalesLines/StatisticsSalesLineForm.aspx?PendingList=" + pendingList + "&PendingType=" + pendingType,
                 null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+            }
 
             function checkIfWinClosed(intervalID) {
                 if (statisticsSalesLine.closed) {

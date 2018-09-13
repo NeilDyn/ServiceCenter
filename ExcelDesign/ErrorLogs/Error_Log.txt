@@ -105,3 +105,13 @@ System.Threading.ThreadAbortException: Thread was being aborted.
    at System.Web.HttpResponse.Redirect(String url)
    at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 254
    at ExcelDesign.Forms.ServiceCenter.RetrieveData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 206
+ERROR 2018-09-13 11:14:46,881 27600ms LoginPage              UserLogin          - The Microsoft Dynamics NAV Server cannot connect the Change Listener to SQL Server because of the following error: Cannot open database "Daily_Dev" requested by the login. The login failed.
+Login failed for user 'JEG\mswart'.
+System.Web.Services.Protocols.SoapException: The Microsoft Dynamics NAV Server cannot connect the Change Listener to SQL Server because of the following error: Cannot open database "Daily_Dev" requested by the login. The login failed.
+Login failed for user 'JEG\mswart'.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 288
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 124
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 23
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30

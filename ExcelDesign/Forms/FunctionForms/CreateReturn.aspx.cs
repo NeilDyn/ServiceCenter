@@ -18,6 +18,7 @@ namespace ExcelDesign.Forms.FunctionForms
     public partial class CreateReturn : System.Web.UI.Page
     {
         protected List<SalesHeader> Sh;
+        public Customer cust;
         protected string no;
         protected string docNo;
         protected string notes;
@@ -53,6 +54,17 @@ namespace ExcelDesign.Forms.FunctionForms
                     tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
                     updateRma = Convert.ToString(Request.QueryString["CreateOrUpdate"]);
                     existingTrackingNo = Convert.ToString(Request.QueryString["ReturnTrackingNo"]);
+                    cust = (Customer)Session["SelectedCustomer"];
+
+                    if (cust != null)
+                    {
+                        tcShipToName.Text = cust.Name;
+                        tcShipToAddress1.Text = cust.Address1;
+                        tcShipToAddress2.Text = cust.Address2;
+                        tcShipToState.Text = cust.State;
+                        tcShipToCity.Text = cust.City;
+                        tcShipToCode.Text = cust.Zip;
+                    }
 
                     createdOrderNo = Convert.ToString(Request.QueryString["CreatedOrderNo"]);
 

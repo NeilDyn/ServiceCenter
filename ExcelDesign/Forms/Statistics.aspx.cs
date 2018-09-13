@@ -100,7 +100,7 @@ namespace ExcelDesign.Forms
                                 refundList.Add(line);
                             }
 
-                            if (line.REQReturnAction.ToUpper() == "" && line.IsPendingSQApproval == false)
+                            if (line.REQReturnAction.ToUpper() == "UNKNOWN" && line.IsPendingSQApproval == false)
                             {
                                 unknown++;
                                 unknownList.Add(line);

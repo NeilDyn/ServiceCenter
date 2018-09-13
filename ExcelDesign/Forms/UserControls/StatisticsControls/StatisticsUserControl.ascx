@@ -64,7 +64,7 @@
         }
     }
 </script>
-<asp:Table runat="server" ID="tblStatistics" Style="margin-left: 70%; margin-right: 100px;" Width="30%">
+<asp:Table runat="server" ID="tblStatistics" Height="100%" Width="30%" HorizontalAlign="Right">
     <asp:TableHeaderRow HorizontalAlign="Justify" ForeColor="White" BackColor="#507CD1" Font-Size="Larger" Font-Bold="true">
         <asp:TableHeaderCell Text="Returns" ColumnSpan="2" Width="50%" />
         <asp:TableHeaderCell Text="Part Requests" ColumnSpan="2" Width="50%" />
@@ -84,8 +84,7 @@
         <asp:TableCell runat="server" ID="tcPendingSQApproval" />
     </asp:TableRow>
     <asp:TableRow runat="server" TableSection="TableBody" HorizontalAlign="Justify">
-        <asp:TableCell runat="server" ID="expandReplacementDetails" ColumnSpan="2" Width="50%" Height="100%">
-        </asp:TableCell>
+        <asp:TableCell runat="server" ID="expandReplacementDetails" ColumnSpan="2" Width="50%" Height="100%"/>
         <asp:TableCell runat="server" ID="expandPendingSQApproval" ColumnSpan="2" Width="50%" Height="100%" />
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" BackColor="#EFF3FB" HorizontalAlign="Justify">

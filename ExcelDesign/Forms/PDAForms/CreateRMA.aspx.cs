@@ -309,14 +309,6 @@ namespace ExcelDesign.Forms.PDAForms
                                         CssClass = "inputBox"
                                     };
 
-                                    //TextBox actionQtyInsert = new TextBox
-                                    //{
-                                    //    ID = "actionQtyInsert_" + lineCount.ToString(),
-                                    //    Text = "1"/**(line.Quantity - removeqty).ToString()*/,
-                                    //    Width = new Unit("20%"),
-                                    //    CssClass = "inputBox"
-                                    //};
-
                                     ddlReturnReasonCode.DataBind();
                                     ddlREQReturnAction.DataBind();
 

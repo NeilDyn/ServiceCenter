@@ -40,15 +40,6 @@ namespace ExcelDesign.Forms {
         protected global::System.Web.UI.WebControls.Button btnExtendSessionTime;
         
         /// <summary>
-        /// imgLogo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgLogo;
-        
-        /// <summary>
         /// StatisticsUserControl control.
         /// </summary>
         /// <remarks>
@@ -56,6 +47,15 @@ namespace ExcelDesign.Forms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ExcelDesign.Forms.UserControls.StatisticsControls.StatisticsUserControl StatisticsUserControl;
+        
+        /// <summary>
+        /// imgLogo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgLogo;
         
         /// <summary>
         /// lblCustomerServicePortal control.

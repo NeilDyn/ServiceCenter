@@ -1,4 +1,12 @@
-﻿.SearchArea {
+﻿#ServiceCenterHeader {
+    position: relative;
+}
+
+#StatisticsOnService {
+    position:absolute;
+}
+
+.SearchArea {
     text-align: center;
     vertical-align: middle;
 }
@@ -29,6 +37,7 @@ td {
     background-color: #507CD1;
     height: 30px;
     position: fixed;
+    font-family: Calibri;
 }
 
     .HeaderNavbar ul {

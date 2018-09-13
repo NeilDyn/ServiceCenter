@@ -75,10 +75,15 @@
         </div>
 
         <div id="ServiceCenterHeader">
-            <asp:Image ID="imgLogo" runat="server" ImageUrl="~/images/Logo.png" />
-            <suc:StatisticsUserControl ID="StatisticsUserControl" runat="server"/>
+            <div id="StatisticsOnService">
+                <suc:StatisticsUserControl ID="StatisticsUserControl" runat="server"/>
+            </div>
+            <asp:Image ID="imgLogo" runat="server" ImageUrl="~/images/Logo.png" />         
             <asp:Label ID="lblCustomerServicePortal" runat="server" Style="margin-left: 200px;" Text="Customer Service Portal" ForeColor="#0099FF" Font-Bold="True" Font-Size="XX-Large" CssClass="HeaderLabel" />        
         </div>
+
+        
+        
         <hr class="HeaderLine" />
 
         <div class="SearchArea" id="SearchArea" style="margin-top: 20px;">

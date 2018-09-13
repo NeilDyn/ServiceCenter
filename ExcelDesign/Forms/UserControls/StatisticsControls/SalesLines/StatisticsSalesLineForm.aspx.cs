@@ -60,7 +60,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
 
                     foreach (StatisticsSalesLine unknown in SalesLineList)
                     {
-                        if ((unknown.REQReturnAction.ToUpper() == "") && (!unknown.IsPendingSQApproval))
+                        if ((unknown.REQReturnAction.ToUpper() == "UNKNOWN") && (!unknown.IsPendingSQApproval))
                         {
                             pendingDisplayList.Add(unknown);
                         }
@@ -105,7 +105,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
 
                     foreach (StatisticsSalesLine twoDays in pendingDisplayList)
                     {
-                        if (twoDays.IsOlderThan48Hours)
+                        if (twoDays.IsOlderThan48Hours && !twoDays.IsOlderThan72Hours)
                         {
                             displayList.Add(twoDays);
                         }

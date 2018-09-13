@@ -36,20 +36,22 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
 
                 foreach (StatisticsSalesLine line in UnknownList)
                 {
-                    if (line.IsOlderThan72Hours)
+                    if (!line.IsPendingSQApproval)
                     {
-                        olderThan72Hours++;
-                    }
-                    else if (line.IsOlderThan48Hours)
-                    {
-                        olderThan48Hours++;
-                    }
+                        if (line.IsOlderThan72Hours)
+                        {
+                            olderThan72Hours++;
+                        }
+                        else if (line.IsOlderThan48Hours)
+                        {
+                            olderThan48Hours++;
+                        }
 
-                    if (line.IsNotInvtAvailable)
-                    {
-                        invNotAvail++;
+                        if (line.IsNotInvtAvailable)
+                        {
+                            invNotAvail++;
+                        }
                     }
-
                 }
 
                 if (olderThan72Hours > 0)

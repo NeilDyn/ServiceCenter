@@ -60,7 +60,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
 
                     foreach (StatisticsSalesLine unknown in SalesLineList)
                     {
-                        if (unknown.REQReturnAction.ToUpper() == "")
+                        if ((unknown.REQReturnAction.ToUpper() == "") && (!unknown.IsPendingSQApproval))
                         {
                             pendingDisplayList.Add(unknown);
                         }

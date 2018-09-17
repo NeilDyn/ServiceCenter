@@ -35,31 +35,28 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                 FormsAuthentication.RedirectToLoginPage();
             }
 
-            if(!IsPostBack)
+            try
             {
-                try
-                {
-                    User activeUser = null;
+                User activeUser = null;
 
-                    if (Session["ActiveUser"] != null)
-                    {
-                        activeUser = (User)Session["ActiveUser"];
-                        statisticsInformation = cs.GetStatisticsInformation();
-                        PopulateLines();
-                    }
+                if (Session["ActiveUser"] != null)
+                {
+                    activeUser = (User)Session["ActiveUser"];
+                    statisticsInformation = cs.GetStatisticsInformation();
+                    PopulateLines();
                 }
-                catch (Exception ex)
-                {
-                    Session["Error"] = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                Session["Error"] = ex.Message;
 
-                    if (Request.Url.AbsoluteUri.Contains("Forms"))
-                    {
-                        Response.Redirect("ErrorForm.aspx");
-                    }
-                    else
-                    {
-                        Response.Redirect("Forms/ErrorForm.aspx");
-                    }
+                if (Request.Url.AbsoluteUri.Contains("Forms"))
+                {
+                    Response.Redirect("ErrorForm.aspx");
+                }
+                else
+                {
+                    Response.Redirect("Forms/ErrorForm.aspx");
                 }
             }
         }

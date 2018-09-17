@@ -115,3 +115,47 @@ Login failed for user 'JEG\mswart'.
    at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 124
    at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 23
    at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-09-14 14:16:53,452 156388ms CreatePartialRequest   ePartRequest_Click - The maximum length for a string value is 60.
+System.Web.Services.Protocols.SoapException: The maximum length for a string value is 60.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.CreatePartRequest(String orderNo, String externalDocumentNo, CreatedPartialRequest& createdPartReq, String sessionID, String lineDetails, String notes, String shipToDetails, String emailAddress) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 483
+   at ExcelDesign.Class_Objects.WebService.CreatePartRequest(String orderNo, String externalDocumentNo, String lineDetails, String notes, String shippingDetails, String email) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 98
+   at ExcelDesign.Class_Objects.SendService.CreatePartialRequest(String orderNo, String exernalDocumentNo, String lineDetails, String notes, String shippingDetails, String email) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 297
+   at ExcelDesign.Forms.FunctionForms.CreatePartialRequest.btnCreatePartRequest_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\CreatePartialRequest.aspx.cs:line 313
+ERROR 2018-09-17 08:30:28,294 168333ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 288
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 124
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 23
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-09-17 08:30:49,865 189904ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 288
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 124
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 23
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-09-17 08:35:12,181 37272ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 288
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 124
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 23
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30

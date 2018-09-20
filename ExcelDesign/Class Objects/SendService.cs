@@ -440,5 +440,15 @@ namespace ExcelDesign.Class_Objects
         {
             webService.ResetSession(userID);
         }
+
+        public void IssueRefund(string rmaNo, string sessionID)
+        {
+            webService.IssueRefund(rmaNo, sessionID);
+        }
+
+        public void CancelOrder(string orderNo, string sessionID)
+        {
+            webService.CancelOrder(orderNo, sessionID);
+        }
     }
 }

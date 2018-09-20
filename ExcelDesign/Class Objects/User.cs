@@ -15,9 +15,13 @@ namespace ExcelDesign.Class_Objects
         public bool CreateReturnLabel { get; set; }
         public bool CreateExchange { get; set; }
         public bool CreatePartRequest { get; set; }
+        public bool CanIssueRefund { get; set; }
         public bool CreatePDARMA { get; set; }
         public bool CreatePDAExchange { get; set; }
         public bool CreatePDAPartRequest { get; set; }
+        public bool CanIssuePDARefund { get; set; }
+        public bool CanCancelOrder { get; set; }
+        public bool CanCancelPDAOrder { get; set; }
         public bool Admin { get; set; }
         public bool Developer { get; set; }
         public string PasswordLastUpdated { get; set; }
@@ -35,18 +39,29 @@ namespace ExcelDesign.Class_Objects
 
             SessionID = us.User[0].SessionID;
 
-            CreateRMA = us.User[0].CreateRMA.ToUpper() == "YES" ? true : false;
-            CreateReturnLabel = us.User[0].CreateRetLabel.ToUpper() == "YES" ? true : false;
-            CreateExchange = us.User[0].CreateExchange.ToUpper() == "YES" ? true : false;
+            CreateRMA = us.User[0].CreateRMA.ToUpper() == "YES" ? true : false;               
             CreatePDARMA = us.User[0].CreatePDARma.ToUpper() == "YES" ? true : false;
+
+            CreateReturnLabel = us.User[0].CreateRetLabel.ToUpper() == "YES" ? true : false;
+
+            CreateExchange = us.User[0].CreateExchange.ToUpper() == "YES" ? true : false;
             CreatePDAExchange = us.User[0].CreatePDAExchange.ToUpper() == "YES" ? true : false;
+            
             CreatePartRequest = us.User[0].CreatePartRequest.ToUpper() == "YES" ? true : false;
             CreatePDAPartRequest = us.User[0].CreatePDAPartRequest.ToUpper() == "YES" ? true : false;
+
+            //CanIssueRefund = us.User[0].IssueRefund.ToUpper() == "YES" ? true : false;
+            //CanIssuePDARefund = us.User[0].IssuePDARefund.ToUpper() == "YES" ? true : false;
+
+            //CanCancelOrder = us.User[0].CancelOrder.ToUpper() == "YES" ? true : false;
+            //CanCancelPDAOrder = us.User[0].CancelPDAOrder.ToUpper() == "YES" ? true : false;
+
             Admin = us.User[0].Admin.ToUpper() == "YES" ? true : false;
             Developer = us.User[0].Developer.ToUpper() == "YES" ? true : false;
 
             PasswordLastUpdated = us.User[0].PasswordLastUpdated;
             PasswordExpiryDate = us.User[0].PasswordExpiryDate;
+
             SessionTimeout = us.User[0].SessionTimeout;
         }
 

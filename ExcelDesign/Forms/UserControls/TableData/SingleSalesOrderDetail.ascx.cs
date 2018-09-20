@@ -24,6 +24,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
         public string CanReturnPDA { get; set; }
         public string CanCreatePartRequest { get; set; }
         public string CanCreatePDAPartRequest { get; set; }
+        public string CanCancelOrder { get; set; }
+        public string CanCancelPDAOrder { get; set; }
 
         protected TableRow buttonRow = new TableRow();
         protected TableCell cancelOrderCell = new TableCell();
@@ -69,6 +71,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 CanReturnPDA = "true";
                 CanCreatePartRequest = "true";
                 CanCreatePDAPartRequest = "true";
+                CanCancelOrder = "true";
+                CanCancelPDAOrder = "true";
             }
             else if (activeUser.Developer)
             {
@@ -76,6 +80,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 CanReturnPDA = "true";
                 CanCreatePartRequest = "true";
                 CanCreatePDAPartRequest = "true";
+                CanCancelOrder = "true";
+                CanCancelPDAOrder = "true";
             }
             else
             {
@@ -83,6 +89,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 CanReturnPDA = activeUser.CreatePDARMA ? "true" : "false";
                 CanCreatePartRequest = activeUser.CreatePartRequest ? "true" : "false";
                 CanCreatePDAPartRequest = activeUser.CreatePDAPartRequest ? "true" : "false";
+                CanCancelOrder = activeUser.CanCancelOrder ? "true" : "false";
+                CanCancelPDAOrder = activeUser.CanCancelPDAOrder ? "true" : "false";
             }
         }
 

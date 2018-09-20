@@ -26,6 +26,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
         public string CanReturn { get; set; }
         public string CanReturnPDA { get; set; }
         public string CanIssueLabel { get; set; }
+        public string CanRefund { get; set; }
+        public string CanRefundPDA { get; set; }
         public string UPSLabelCreated { get; set; }
 
         protected TableRow buttonRow = new TableRow();
@@ -78,6 +80,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 CanIssueLabel = "true";
                 CanReturnPDA = "true";
                 CanExchangePDA = "true";
+                CanRefund = "true";
+                CanRefundPDA = "true";
             }
             else if (activeUser.Developer)
             {
@@ -86,6 +90,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 CanIssueLabel = "true";
                 CanReturnPDA = "true";
                 CanExchangePDA = "true";
+                CanRefund = "true";
+                CanRefundPDA = "true";
             }
             else
             {
@@ -94,6 +100,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 CanIssueLabel = activeUser.CreateReturnLabel ? "true" : "false";
                 CanReturnPDA = activeUser.CreatePDARMA ? "true" : "false";
                 CanExchangePDA = activeUser.CreatePDAExchange ? "true" : "false";
+                CanRefund = activeUser.CanIssueRefund ? "true" : "false";
+                CanRefundPDA = activeUser.CanIssuePDARefund ? "true" : "false";
             }
         }
 

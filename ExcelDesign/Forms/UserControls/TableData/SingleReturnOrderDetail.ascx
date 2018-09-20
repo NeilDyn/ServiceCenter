@@ -58,8 +58,66 @@
         });
 
         $("[id$=btnIssueRefund<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            alert("Hi, return <%= this.Rh.RMANo %> can be refunded.");
-        });
+            if ("<%= this.tcReturnStatus.Text%>" == "Received" || "<%= this.tcReturnStatus.Text%>" == "Partial Received") {
+                if ("<%= this.tcIMEINo.Text %>" != "") {
+                    if ("<%= this.CanRefundPDA%>" == "true") {
+                        var rmaNo = "<%= this.Rh.RMANo %>";
+
+                        $.ajax({
+                            type: "POST",
+                            url: "ServiceCenter.aspx/IssueRefund",
+                            data: JSON.stringify({ rmaNo: rmaNo }),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (error) {
+                                if (error.d.indexOf("Error") == -1) {
+                                    alert("PDA Refund issued for Return: " + rmaNo);
+                                    __doPostBack('[id$=btnReload', '');
+                                } else {
+                                    alert(error.d);
+                                }
+                            },
+                            error: function (xhr, status, text) {
+                                console.log(xhr.status);
+                                console.log(xhr.text);
+                                console.log(xhr.responseText);
+                            },
+                        });
+                    } else {
+                        alert("You do not have the required permission to Issue a Refund");
+                    }
+                } else {
+                    if ("<%= this.CanRefund%>" == "true") {
+                        var rmaNo = "<%= this.Rh.RMANo %>";
+
+                        $.ajax({
+                            type: "POST",
+                            url: "ServiceCenter.aspx/IssueRefund",
+                            data: JSON.stringify({ rmaNo: rmaNo }),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (error) {
+                                if (error.d.indexOf("Error") == -1) {
+                                    alert("Refund issued for Return: " + rmaNo);
+                                    __doPostBack('[id$=btnReload', '');
+                                } else {
+                                    alert(error.d);
+                                }
+                            },
+                            error: function (xhr, status, text) {
+                                console.log(xhr.status);
+                                console.log(xhr.text);
+                                console.log(xhr.responseText);
+                            },
+                        });
+                    } else {
+                        alert("You do not have the required permission to Issue a PDA Refund");
+                    }
+                }
+            } else {
+                alert("Return Order <%= this.RMANo %> can only be refunded if Received or Partial Received.");
+                }
+            });
 
         $("[id$=btnPrintRMAInstructions<%= this.CustID%>_<%= this.CountID %>]").click(function () {
             window.open("FunctionForms/RMAPDFForm.aspx?RMANo=<%= this.Rh.RMANo %>", "_blank");
@@ -74,15 +132,15 @@
 
                 if (typeof (updateRMAWin) == 'undefined' || updateRMAWin.closed) {
                     if ("<%= this.tcIMEINo.Text %>" != "") {
-                    if ("<%= this.CanReturnPDA%>" == "true") {
-                        updateRMAWin = window.open("PDAForms/CreateRMA.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>&ReturnTrackingNo=<%= this.Rh.ReturnTrackingNo %>",
-                            null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                        if ("<%= this.CanReturnPDA%>" == "true") {
+                            updateRMAWin = window.open("PDAForms/CreateRMA.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>&ReturnTrackingNo=<%= this.Rh.ReturnTrackingNo %>",
+                                null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                        } else {
+                            alert("You do not have the required permission to update a PDA Replacement Return Order");
+                        }
                     } else {
-                        alert("You do not have the required permission to update a PDA Replacement Return Order");
-                    }
-                } else {
-                    if ("<%= this.CanReturn %>" == "true") {
-                        updateRMAWin = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>&ReturnTrackingNo=<%= this.Rh.ReturnTrackingNo %>",
+                        if ("<%= this.CanReturn %>" == "true") {
+                            updateRMAWin = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>&ReturnTrackingNo=<%= this.Rh.ReturnTrackingNo %>",
                                 null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
                         } else {
                             alert("You do not have the required permission to update a return order.");
@@ -110,7 +168,7 @@
             if ("<%= this.UPSLabelCreated %>" == "false") {
                 if ("<%= this.CanIssueLabel %>" == "true") {
                     if ("<%= this.tcReturnStatus.Text %>" == "Open") {
-                    var rmaNo = "<%= this.Rh.RMANo %>";
+                        var rmaNo = "<%= this.Rh.RMANo %>";
                         var emailIn = prompt("Please enter a valid email address:");
 
                         if (emailIn == null || emailIn == "") {
@@ -204,7 +262,7 @@
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
-        <asp:TableCell Text="Date Created:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" Font />
+        <asp:TableCell Text="Date Created:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcDateCreated" />
         <asp:TableCell Text="Receipt Date:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcReceiptDate" />

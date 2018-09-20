@@ -19,7 +19,65 @@
         var partRequestWindow;
 
         $("[id$=btnCancelOrder_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            alert("Hi, order <%= this.Sh.SalesOrderNo %> be Cancelled.");
+            if ("<%= this.tcStatus.Text.ToUpper()%>" == "Open") {
+                if ("<%= this.Sh.WarrantyProp.IsPDA %>" == "YES") {
+                    if ("<%= this.CanCancelPDAOrder%>" == "true") {
+                        var orderNo = "<%= this.OrderNo %>";
+
+                        $.ajax({
+                            type: "POST",
+                            url: "ServiceCenter.aspx/CancelOrder",
+                            data: JSON.stringify({ orderNo: orderNo }),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (error) {
+                                if (error.d.indexOf("Error") == -1) {
+                                    alert("Order " + rmaNo + " cancelled.");
+                                    __doPostBack('[id$=btnReload', '');
+                                } else {
+                                    alert(error.d);
+                                }
+                            },
+                            error: function (xhr, status, text) {
+                                console.log(xhr.status);
+                                console.log(xhr.text);
+                                console.log(xhr.responseText);
+                            },
+                        });
+                    } else {
+                        alert("You do not have the required permission to Cancel PDA Order");
+                    }
+                } else {
+                    if ("<%= this.CanCancelOrder%>" == "true") {
+                        var orderNo = "<%= this.OrderNo %>";
+
+                        $.ajax({
+                            type: "POST",
+                            url: "ServiceCenter.aspx/CancelOrder",
+                            data: JSON.stringify({ orderNo: orderNo }),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (error) {
+                                if (error.d.indexOf("Error") == -1) {
+                                    alert("Order " + rmaNo + " cancelled.");
+                                    __doPostBack('[id$=btnReload', '');
+                                } else {
+                                    alert(error.d);
+                                }
+                            },
+                            error: function (xhr, status, text) {
+                                console.log(xhr.status);
+                                console.log(xhr.text);
+                                console.log(xhr.responseText);
+                            },
+                        });
+                    } else {
+                        alert("You do not have the required permission to Cancel Order");
+                    }
+                }
+            } else {
+                alert("Order <%= this.OrderNo%> must be OPEN to be cancelled.");
+            }
         });
 
         $("[id$=btnPartRequest_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
@@ -32,37 +90,37 @@
 
                     if (typeof (partRequestWindow) == 'undefined' || partRequestWindow.closed) {
                         if ("<%= this.Sh.WarrantyProp.IsPDA %>" == "YES") {
-                            if ("<%= this.CanCreatePDAPartRequest%>" == "true") {
-                                partRequestWindow = window.open("PDAForms/CreatePartRequest.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>",
-                                    null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
-                            } else {
-                                alert("You do not have the required permission to create a PDA Part Request.");
-                            }
+                        if ("<%= this.CanCreatePDAPartRequest%>" == "true") {
+                            partRequestWindow = window.open("PDAForms/CreatePartRequest.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>",
+                                null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
                         } else {
-                            if ("<%= this.CanCreatePartRequest%>" == "true") {
-                                partRequestWindow = window.open("FunctionForms/CreatePartialRequest.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>",
-                                    null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
-                            } else {
-                                alert("You do not have the required permission to create a Part Request.");
-                            }
+                            alert("You do not have the required permission to create a PDA Part Request.");
                         }
-
-                        function checkIfWinClosed(intervalID) {
-                            if (partRequestWindow.closed) {
-                                __doPostBack('[id$=btnReload', '');
-                                clearInterval(intervalID);
-                            }
-                        }
-                        var interval = setInterval(function () {
-                            checkIfWinClosed(interval);
-                        }, 1000);
-
                     } else {
-                        alert('Please close the current active Part Request dialog window before trying to open a new instance.');
+                        if ("<%= this.CanCreatePartRequest%>" == "true") {
+                            partRequestWindow = window.open("FunctionForms/CreatePartialRequest.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>",
+                                null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                        } else {
+                            alert("You do not have the required permission to create a Part Request.");
+                        }
                     }
 
+                    function checkIfWinClosed(intervalID) {
+                        if (partRequestWindow.closed) {
+                            __doPostBack('[id$=btnReload', '');
+                            clearInterval(intervalID);
+                        }
+                    }
+                    var interval = setInterval(function () {
+                        checkIfWinClosed(interval);
+                    }, 1000);
+
                 } else {
-                    alert("Order <%= this.OrderNo %> has not been shipped and cannot be Part Requested.");
+                    alert('Please close the current active Part Request dialog window before trying to open a new instance.');
+                }
+
+            } else {
+                alert("Order <%= this.OrderNo %> has not been shipped and cannot be Part Requested.");
                 }
             } else {
                 alert("Order <%= this.OrderNo %> is out of warranty range.");
@@ -79,35 +137,35 @@
 
                     if (typeof (createReturnWindow) == 'undefined' || createReturnWindow.closed) {
                         if ("<%= this.Sh.WarrantyProp.IsPDA %>" == "YES") {
-                            if ("<%= this.CanReturnPDA %>" == "true") {
-                                createReturnWindow = window.open("PDAForms/CreateRMA.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
-                                    null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
-                            } else {
-                                alert("You do not have the required permission to create a PDA Replacement Return Order.");
-                            }
+                        if ("<%= this.CanReturnPDA %>" == "true") {
+                            createReturnWindow = window.open("PDAForms/CreateRMA.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
+                                null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
                         } else {
-                            if ("<%= this.CanReturn %>" == "true") {
-                                createReturnWindow = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
-                                    null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
-                            } else {
-                                alert("You do not have the required permission to create a Return Order.");
-                            }
+                            alert("You do not have the required permission to create a PDA Replacement Return Order.");
                         }
-
-                        function checkIfWinClosed(intervalID) {
-                            if (createReturnWindow.closed) {
-                                __doPostBack('[id$=btnReload', '');
-                                clearInterval(intervalID);
-                            }
-                        }
-                        var interval = setInterval(function () {
-                            checkIfWinClosed(interval);
-                        }, 1000);
                     } else {
-                        alert('Please close the current active Create Return Order dialog window before trying to open a new instance.');
+                        if ("<%= this.CanReturn %>" == "true") {
+                            createReturnWindow = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
+                                null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                        } else {
+                            alert("You do not have the required permission to create a Return Order.");
+                        }
                     }
+
+                    function checkIfWinClosed(intervalID) {
+                        if (createReturnWindow.closed) {
+                            __doPostBack('[id$=btnReload', '');
+                            clearInterval(intervalID);
+                        }
+                    }
+                    var interval = setInterval(function () {
+                        checkIfWinClosed(interval);
+                    }, 1000);
                 } else {
-                    alert("Order <%= this.OrderNo %> has no shipped items and cannot be returned.");
+                    alert('Please close the current active Create Return Order dialog window before trying to open a new instance.');
+                }
+            } else {
+                alert("Order <%= this.OrderNo %> has no shipped items and cannot be returned.");
                 }
             }
             else {
@@ -184,7 +242,7 @@
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
-        <asp:TableCell Text="Sales Order No:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" ID="lblOrderLabelNo"/>
+        <asp:TableCell Text="Sales Order No:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" ID="lblOrderLabelNo" />
         <asp:TableCell runat="server" ID="tcSalesOrderNo" />
         <asp:TableCell Text="Shipments:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcShipmentsTotal" />

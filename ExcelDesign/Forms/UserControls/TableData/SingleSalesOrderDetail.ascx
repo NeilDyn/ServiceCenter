@@ -32,7 +32,7 @@
                             dataType: "json",
                             success: function (error) {
                                 if (error.d.indexOf("Error") == -1) {
-                                    alert("Order " + rmaNo + " cancelled.");
+                                    alert("Order " + orderNo + " cancelled.");
                                     __doPostBack('[id$=btnReload', '');
                                 } else {
                                     alert(error.d);
@@ -59,7 +59,7 @@
                             dataType: "json",
                             success: function (error) {
                                 if (error.d.indexOf("Error") == -1) {
-                                    alert("Order " + rmaNo + " cancelled.");
+                                    alert("Order " + orderNo + " cancelled.");
                                     __doPostBack('[id$=btnReload', '');
                                 } else {
                                     alert(error.d);

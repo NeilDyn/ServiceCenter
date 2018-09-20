@@ -159,3 +159,35 @@ System.Net.WebException: Unable to connect to the remote server ---> System.Net.
    at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 124
    at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 23
    at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-09-19 12:02:47,321 97421ms ServiceCenter          IssueRefund        - Method "CreateRefundOrder" is invalid!
+System.Web.Services.Protocols.SoapException: Method "CreateRefundOrder" is invalid!
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.CreateRefundOrder(String rMANo, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 507
+   at ExcelDesign.Class_Objects.WebService.IssueRefund(String rmaNo, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueRefund(String rmaNo, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 446
+   at ExcelDesign.Forms.ServiceCenter.IssueRefund(String rmaNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 435
+ERROR 2018-09-19 12:03:57,990 168089ms ServiceCenter          IssueRefund        - Method "CreateRefundOrder" is invalid!
+System.Web.Services.Protocols.SoapException: Method "CreateRefundOrder" is invalid!
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.CreateRefundOrder(String rMANo, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 507
+   at ExcelDesign.Class_Objects.WebService.IssueRefund(String rmaNo, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueRefund(String rmaNo, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 446
+   at ExcelDesign.Forms.ServiceCenter.IssueRefund(String rmaNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 435
+ERROR 2018-09-19 12:17:43,124 98592ms ServiceCenter          IssueRefund        - TESTA - RMA-237506
+System.Web.Services.Protocols.SoapException: TESTA - RMA-237506
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.CreateRefund(String rMANo, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 507
+   at ExcelDesign.Class_Objects.WebService.IssueRefund(String rmaNo, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueRefund(String rmaNo, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 446
+   at ExcelDesign.Forms.ServiceCenter.IssueRefund(String rmaNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 435
+ERROR 2018-09-19 12:19:25,672 201139ms ServiceCenter          IssueRefund        - The maximum length for a string value is 20.
+System.Web.Services.Protocols.SoapException: The maximum length for a string value is 20.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.CreateRefund(String rMANo, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 507
+   at ExcelDesign.Class_Objects.WebService.IssueRefund(String rmaNo, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueRefund(String rmaNo, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 446
+   at ExcelDesign.Forms.ServiceCenter.IssueRefund(String rmaNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 435

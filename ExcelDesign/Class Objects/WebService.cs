@@ -169,5 +169,15 @@ namespace ExcelDesign.Class_Objects
 
             return ao;
         }
+
+        public void IssueRefund(string rmaNo, string sessionID)
+        {
+            functions.CreateRefund(rmaNo, sessionID);
+        }
+
+        public void CancelOrder(string orderNo, string sessionID)
+        {
+            //functions.CancelOrder(orderNo, sessionID);
+        }
     }
 }

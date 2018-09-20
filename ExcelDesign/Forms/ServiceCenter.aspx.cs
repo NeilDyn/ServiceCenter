@@ -25,7 +25,7 @@ namespace ExcelDesign.Forms
     {
         /* NJ 5 September 2018
          * Updated with User Control Navigation bar.
-        */ 
+        */
 
         #region Global
 
@@ -414,6 +414,67 @@ namespace ExcelDesign.Forms
             return "Success";
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static string IssueRefund(string rmaNo)
+        {
+            try
+            {
+                string sessionID = string.Empty;
+                if (HttpContext.Current.Session["ActiveUser"] != null)
+                {
+                    User u = (User)HttpContext.Current.Session["ActiveUser"];
+                    sessionID = u.SessionID;
+                }
+                else
+                {
+                    sessionID = "{A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0}";
+                }
+
+
+                 StaticService.IssueRefund(rmaNo, sessionID);
+
+                HttpContext.Current.Session["NoUserInteraction"] = true;
+                HttpContext.Current.Session["UserInteraction"] = true;
+            }
+            catch (Exception e)
+            {
+                return "Error - " + e.Message;
+            }
+
+            return "Success";
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static string CancelOrder(string orderNo)
+        {
+            try
+            {
+                string sessionID = string.Empty;
+                if (HttpContext.Current.Session["ActiveUser"] != null)
+                {
+                    User u = (User)HttpContext.Current.Session["ActiveUser"];
+                    sessionID = u.SessionID;
+                }
+                else
+                {
+                    sessionID = "{A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0}";
+                }
+
+
+                StaticService.CancelOrder(orderNo, sessionID);
+
+                HttpContext.Current.Session["NoUserInteraction"] = true;
+                HttpContext.Current.Session["UserInteraction"] = true;
+            }
+            catch (Exception e)
+            {
+                return "Error - " + e.Message;
+            }
+
+            return "Success";
+        }
         #endregion
 
         #region Buttons

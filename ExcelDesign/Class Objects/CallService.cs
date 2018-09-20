@@ -769,7 +769,7 @@ namespace ExcelDesign.Class_Objects
                                     }
                                     else
                                     {
-                                        returnStatus = "Partial Receipt";
+                                        returnStatus = "Partial Received";
                                     }
 
                                     if (currResults.ExtendedSalesHeader != null)

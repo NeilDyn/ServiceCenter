@@ -19,6 +19,10 @@
           <element minOccurs="1" maxOccurs="1" name="CreateExchange" type="string" />
           <element minOccurs="1" maxOccurs="1" name="CreatePartRequest" type="string" />
           <element minOccurs="1" maxOccurs="1" name="CreatePDAPartRequest" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="IssueRefund" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="IssuePDARefund" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CancelOrder" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CancelPDAOrder" type="string" />
         </sequence>
       </complexType>
       <complexType name="UserSetup" mixed="true">
@@ -809,7 +813,7 @@
       <element name="CancelOrder">
         <complexType>
           <sequence>
-            <element minOccurs="1" maxOccurs="1" name="test" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
           </sequence>
         </complexType>

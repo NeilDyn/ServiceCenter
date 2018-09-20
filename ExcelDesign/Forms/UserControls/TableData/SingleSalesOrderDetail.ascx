@@ -19,7 +19,7 @@
         var partRequestWindow;
 
         $("[id$=btnCancelOrder_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            if ("<%= this.tcOrderStatus.Text.ToUpper()%>" == "OrderCreated") {
+            if ("<%= this.tcOrderStatus.Text%>" == "OrderCreated") {
                 if ("<%= this.Sh.WarrantyProp.IsPDA %>" == "YES") {
                     if ("<%= this.CanCancelPDAOrder%>" == "true") {
                         var orderNo = "<%= this.OrderNo %>";

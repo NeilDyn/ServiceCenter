@@ -19,7 +19,7 @@
         var partRequestWindow;
 
         $("[id$=btnCancelOrder_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            if ("<%= this.tcStatus.Text.ToUpper()%>" == "Open") {
+            if ("<%= this.tcOrderStatus.Text.ToUpper()%>" == "OrderCreated") {
                 if ("<%= this.Sh.WarrantyProp.IsPDA %>" == "YES") {
                     if ("<%= this.CanCancelPDAOrder%>" == "true") {
                         var orderNo = "<%= this.OrderNo %>";
@@ -76,7 +76,7 @@
                     }
                 }
             } else {
-                alert("Order <%= this.OrderNo%> must be OPEN to be cancelled.");
+                alert("Order <%= this.OrderNo%> must be not be shipped to be cancelled.");
             }
         });
 

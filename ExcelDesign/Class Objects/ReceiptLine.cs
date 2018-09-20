@@ -33,7 +33,7 @@ namespace ExcelDesign.Class_Objects
             this.Price = priceP;
             this.LineAmount = lineAmountP;
             this.QuantityExchanged = quantityExchangedP;
-            this.QuantityRefunded = QuantityRefunded;
+            this.QuantityRefunded = quantityRefundedP;
             this.REQReturnAction = reqReturnActionP;
             this.ReturnReasonCode = returnReasonCodeP;
         }

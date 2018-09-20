@@ -177,7 +177,7 @@ namespace ExcelDesign.Class_Objects
 
         public void CancelOrder(string orderNo, string sessionID)
         {
-            //functions.CancelOrder(orderNo, sessionID);
+            functions.CancelOrder(orderNo, sessionID);
         }
     }
 }

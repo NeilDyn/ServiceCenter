@@ -23,21 +23,23 @@ namespace ExcelDesign.ServiceFunctions {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="Functions_Binding", Namespace="urn:microsoft-dynamics-schemas/codeunit/Functions")]
     public partial class Functions : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback IsValidSessionOperationCompleted;
+        private System.Threading.SendOrPostCallback GetStatisticsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SearchDetermineNoTypeOperationCompleted;
         
         private System.Threading.SendOrPostCallback ResetSessionOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback IsValidSessionOperationCompleted;
         
         private System.Threading.SendOrPostCallback LogInOperationCompleted;
         
         private System.Threading.SendOrPostCallback UpdateUserPasswordOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SearchDetermineNoTypeOperationCompleted;
         
         private System.Threading.SendOrPostCallback SetDateFiltersOperationCompleted;
         
@@ -58,8 +60,6 @@ namespace ExcelDesign.ServiceFunctions {
         private System.Threading.SendOrPostCallback CancelOrderOperationCompleted;
         
         private System.Threading.SendOrPostCallback IssueReturnLabelOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetStatisticsOperationCompleted;
         
         private System.Threading.SendOrPostCallback AllowCustomerStatsViewOperationCompleted;
         
@@ -122,19 +122,22 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
-        public event IsValidSessionCompletedEventHandler IsValidSessionCompleted;
+        public event GetStatisticsCompletedEventHandler GetStatisticsCompleted;
+        
+        /// <remarks/>
+        public event SearchDetermineNoTypeCompletedEventHandler SearchDetermineNoTypeCompleted;
         
         /// <remarks/>
         public event ResetSessionCompletedEventHandler ResetSessionCompleted;
+        
+        /// <remarks/>
+        public event IsValidSessionCompletedEventHandler IsValidSessionCompleted;
         
         /// <remarks/>
         public event LogInCompletedEventHandler LogInCompleted;
         
         /// <remarks/>
         public event UpdateUserPasswordCompletedEventHandler UpdateUserPasswordCompleted;
-        
-        /// <remarks/>
-        public event SearchDetermineNoTypeCompletedEventHandler SearchDetermineNoTypeCompleted;
         
         /// <remarks/>
         public event SetDateFiltersCompletedEventHandler SetDateFiltersCompleted;
@@ -165,9 +168,6 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         public event IssueReturnLabelCompletedEventHandler IssueReturnLabelCompleted;
-        
-        /// <remarks/>
-        public event GetStatisticsCompletedEventHandler GetStatisticsCompleted;
         
         /// <remarks/>
         public event AllowCustomerStatsViewCompletedEventHandler AllowCustomerStatsViewCompleted;
@@ -203,32 +203,70 @@ namespace ExcelDesign.ServiceFunctions {
         public event UpdateCommentPartReqCompletedEventHandler UpdateCommentPartReqCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:IsValidSession", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="IsValidSession_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:GetStatistics", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="GetStatistics_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetStatistics(string sessionID, ref Statistics statistics) {
+            object[] results = this.Invoke("GetStatistics", new object[] {
+                        sessionID,
+                        statistics});
+            statistics = ((Statistics)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetStatisticsAsync(string sessionID, Statistics statistics) {
+            this.GetStatisticsAsync(sessionID, statistics, null);
+        }
+        
+        /// <remarks/>
+        public void GetStatisticsAsync(string sessionID, Statistics statistics, object userState) {
+            if ((this.GetStatisticsOperationCompleted == null)) {
+                this.GetStatisticsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetStatisticsOperationCompleted);
+            }
+            this.InvokeAsync("GetStatistics", new object[] {
+                        sessionID,
+                        statistics}, this.GetStatisticsOperationCompleted, userState);
+        }
+        
+        private void OnGetStatisticsOperationCompleted(object arg) {
+            if ((this.GetStatisticsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetStatisticsCompleted(this, new GetStatisticsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:SearchDetermineNoType", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="SearchDetermineNoType_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string IsValidSession(string sessionID) {
-            object[] results = this.Invoke("IsValidSession", new object[] {
-                        sessionID});
+        public string SearchDetermineNoType(string sessionID, string searchNo, ref SearchResults searchResults, int _SearchOption) {
+            object[] results = this.Invoke("SearchDetermineNoType", new object[] {
+                        sessionID,
+                        searchNo,
+                        searchResults,
+                        _SearchOption});
+            searchResults = ((SearchResults)(results[1]));
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void IsValidSessionAsync(string sessionID) {
-            this.IsValidSessionAsync(sessionID, null);
+        public void SearchDetermineNoTypeAsync(string sessionID, string searchNo, SearchResults searchResults, int _SearchOption) {
+            this.SearchDetermineNoTypeAsync(sessionID, searchNo, searchResults, _SearchOption, null);
         }
         
         /// <remarks/>
-        public void IsValidSessionAsync(string sessionID, object userState) {
-            if ((this.IsValidSessionOperationCompleted == null)) {
-                this.IsValidSessionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIsValidSessionOperationCompleted);
+        public void SearchDetermineNoTypeAsync(string sessionID, string searchNo, SearchResults searchResults, int _SearchOption, object userState) {
+            if ((this.SearchDetermineNoTypeOperationCompleted == null)) {
+                this.SearchDetermineNoTypeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSearchDetermineNoTypeOperationCompleted);
             }
-            this.InvokeAsync("IsValidSession", new object[] {
-                        sessionID}, this.IsValidSessionOperationCompleted, userState);
+            this.InvokeAsync("SearchDetermineNoType", new object[] {
+                        sessionID,
+                        searchNo,
+                        searchResults,
+                        _SearchOption}, this.SearchDetermineNoTypeOperationCompleted, userState);
         }
         
-        private void OnIsValidSessionOperationCompleted(object arg) {
-            if ((this.IsValidSessionCompleted != null)) {
+        private void OnSearchDetermineNoTypeOperationCompleted(object arg) {
+            if ((this.SearchDetermineNoTypeCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.IsValidSessionCompleted(this, new IsValidSessionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.SearchDetermineNoTypeCompleted(this, new SearchDetermineNoTypeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -257,6 +295,36 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.ResetSessionCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ResetSessionCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:IsValidSession", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="IsValidSession_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string IsValidSession(string sessionID) {
+            object[] results = this.Invoke("IsValidSession", new object[] {
+                        sessionID});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void IsValidSessionAsync(string sessionID) {
+            this.IsValidSessionAsync(sessionID, null);
+        }
+        
+        /// <remarks/>
+        public void IsValidSessionAsync(string sessionID, object userState) {
+            if ((this.IsValidSessionOperationCompleted == null)) {
+                this.IsValidSessionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIsValidSessionOperationCompleted);
+            }
+            this.InvokeAsync("IsValidSession", new object[] {
+                        sessionID}, this.IsValidSessionOperationCompleted, userState);
+        }
+        
+        private void OnIsValidSessionOperationCompleted(object arg) {
+            if ((this.IsValidSessionCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.IsValidSessionCompleted(this, new IsValidSessionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -324,43 +392,6 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.UpdateUserPasswordCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.UpdateUserPasswordCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:SearchDetermineNoType", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="SearchDetermineNoType_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string SearchDetermineNoType(string sessionID, string searchNo, ref SearchResults searchResults, int _SearchOption) {
-            object[] results = this.Invoke("SearchDetermineNoType", new object[] {
-                        sessionID,
-                        searchNo,
-                        searchResults,
-                        _SearchOption});
-            searchResults = ((SearchResults)(results[1]));
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void SearchDetermineNoTypeAsync(string sessionID, string searchNo, SearchResults searchResults, int _SearchOption) {
-            this.SearchDetermineNoTypeAsync(sessionID, searchNo, searchResults, _SearchOption, null);
-        }
-        
-        /// <remarks/>
-        public void SearchDetermineNoTypeAsync(string sessionID, string searchNo, SearchResults searchResults, int _SearchOption, object userState) {
-            if ((this.SearchDetermineNoTypeOperationCompleted == null)) {
-                this.SearchDetermineNoTypeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSearchDetermineNoTypeOperationCompleted);
-            }
-            this.InvokeAsync("SearchDetermineNoType", new object[] {
-                        sessionID,
-                        searchNo,
-                        searchResults,
-                        _SearchOption}, this.SearchDetermineNoTypeOperationCompleted, userState);
-        }
-        
-        private void OnSearchDetermineNoTypeOperationCompleted(object arg) {
-            if ((this.SearchDetermineNoTypeCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SearchDetermineNoTypeCompleted(this, new SearchDetermineNoTypeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -736,37 +767,6 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:GetStatistics", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="GetStatistics_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetStatistics(string sessionID, ref Statistics statistics) {
-            object[] results = this.Invoke("GetStatistics", new object[] {
-                        sessionID,
-                        statistics});
-            statistics = ((Statistics)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetStatisticsAsync(string sessionID, Statistics statistics) {
-            this.GetStatisticsAsync(sessionID, statistics, null);
-        }
-        
-        /// <remarks/>
-        public void GetStatisticsAsync(string sessionID, Statistics statistics, object userState) {
-            if ((this.GetStatisticsOperationCompleted == null)) {
-                this.GetStatisticsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetStatisticsOperationCompleted);
-            }
-            this.InvokeAsync("GetStatistics", new object[] {
-                        sessionID,
-                        statistics}, this.GetStatisticsOperationCompleted, userState);
-        }
-        
-        private void OnGetStatisticsOperationCompleted(object arg) {
-            if ((this.GetStatisticsCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetStatisticsCompleted(this, new GetStatisticsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:AllowCustomerStatsView", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="AllowCustomerStatsView_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
         public bool AllowCustomerStatsView(string customerNo) {
@@ -1122,25 +1122,25 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50003")]
-    public partial class UserSetup {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50016")]
+    public partial class Statistics {
         
-        private User[] userField;
+        private SalesLine[] salesLineField;
         
         private string[] textField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("User")]
-        public User[] User {
+        [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
+        public SalesLine[] SalesLine {
             get {
-                return this.userField;
+                return this.salesLineField;
             }
             set {
-                this.userField = value;
+                this.salesLineField = value;
             }
         }
         
@@ -1157,385 +1157,12 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50003")]
-    public partial class User {
-        
-        private string userIDField;
-        
-        private string createRMAField;
-        
-        private string createRetLabelField;
-        
-        private string createPDARmaField;
-        
-        private string createPDAExchangeField;
-        
-        private string adminField;
-        
-        private string developerField;
-        
-        private string sessionIDField;
-        
-        private string passwordField;
-        
-        private int sessionTimeoutField;
-        
-        private string passwordExpiryDateField;
-        
-        private string passwordLastUpdatedField;
-        
-        private string createExchangeField;
-        
-        private string createPartRequestField;
-        
-        private string createPDAPartRequestField;
-        
-        private string issueRefundField;
-        
-        private string issuePDARefundField;
-        
-        private string cancelOrderField;
-        
-        private string cancelPDAOrderField;
-        
-        public User() {
-            this.sessionTimeoutField = 0;
-        }
-        
-        /// <remarks/>
-        public string UserID {
-            get {
-                return this.userIDField;
-            }
-            set {
-                this.userIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CreateRMA {
-            get {
-                return this.createRMAField;
-            }
-            set {
-                this.createRMAField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CreateRetLabel {
-            get {
-                return this.createRetLabelField;
-            }
-            set {
-                this.createRetLabelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CreatePDARma {
-            get {
-                return this.createPDARmaField;
-            }
-            set {
-                this.createPDARmaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CreatePDAExchange {
-            get {
-                return this.createPDAExchangeField;
-            }
-            set {
-                this.createPDAExchangeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Admin {
-            get {
-                return this.adminField;
-            }
-            set {
-                this.adminField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Developer {
-            get {
-                return this.developerField;
-            }
-            set {
-                this.developerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SessionID {
-            get {
-                return this.sessionIDField;
-            }
-            set {
-                this.sessionIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Password {
-            get {
-                return this.passwordField;
-            }
-            set {
-                this.passwordField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int SessionTimeout {
-            get {
-                return this.sessionTimeoutField;
-            }
-            set {
-                this.sessionTimeoutField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PasswordExpiryDate {
-            get {
-                return this.passwordExpiryDateField;
-            }
-            set {
-                this.passwordExpiryDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PasswordLastUpdated {
-            get {
-                return this.passwordLastUpdatedField;
-            }
-            set {
-                this.passwordLastUpdatedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CreateExchange {
-            get {
-                return this.createExchangeField;
-            }
-            set {
-                this.createExchangeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CreatePartRequest {
-            get {
-                return this.createPartRequestField;
-            }
-            set {
-                this.createPartRequestField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CreatePDAPartRequest {
-            get {
-                return this.createPDAPartRequestField;
-            }
-            set {
-                this.createPDAPartRequestField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string IssueRefund {
-            get {
-                return this.issueRefundField;
-            }
-            set {
-                this.issueRefundField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string IssuePDARefund {
-            get {
-                return this.issuePDARefundField;
-            }
-            set {
-                this.issuePDARefundField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CancelOrder {
-            get {
-                return this.cancelOrderField;
-            }
-            set {
-                this.cancelOrderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CancelPDAOrder {
-            get {
-                return this.cancelPDAOrderField;
-            }
-            set {
-                this.cancelPDAOrderField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50017")]
-    public partial class Object {
-        
-        private int idField;
-        
-        private string typeField;
-        
-        private string nameField;
-        
-        private string versionListField;
-        
-        private string dateField;
-        
-        private string timeField;
-        
-        private string compiledField;
-        
-        public Object() {
-            this.idField = 0;
-        }
-        
-        /// <remarks/>
-        public int ID {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Type {
-            get {
-                return this.typeField;
-            }
-            set {
-                this.typeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string VersionList {
-            get {
-                return this.versionListField;
-            }
-            set {
-                this.versionListField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Date {
-            get {
-                return this.dateField;
-            }
-            set {
-                this.dateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Time {
-            get {
-                return this.timeField;
-            }
-            set {
-                this.timeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Compiled {
-            get {
-                return this.compiledField;
-            }
-            set {
-                this.compiledField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50017")]
-    public partial class AboutObjects {
-        
-        private Object[] objectField;
-        
-        private string[] textField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Object")]
-        public Object[] Object {
-            get {
-                return this.objectField;
-            }
-            set {
-                this.objectField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
-            get {
-                return this.textField;
-            }
-            set {
-                this.textField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="urn:microsoft-dynamics-nav/xmlports/x50016")]
-    public partial class SalesLine4 {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50016")]
+    public partial class SalesLine {
         
         private string docTypeField;
         
@@ -1700,25 +1327,122 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50016")]
-    public partial class Statistics {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50017")]
+    public partial class Object {
         
-        private SalesLine4[] salesLineField;
+        private int idField;
+        
+        private string typeField;
+        
+        private string nameField;
+        
+        private string versionListField;
+        
+        private string dateField;
+        
+        private string timeField;
+        
+        private string compiledField;
+        
+        public Object() {
+            this.idField = 0;
+        }
+        
+        /// <remarks/>
+        public int ID {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string VersionList {
+            get {
+                return this.versionListField;
+            }
+            set {
+                this.versionListField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Date {
+            get {
+                return this.dateField;
+            }
+            set {
+                this.dateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Time {
+            get {
+                return this.timeField;
+            }
+            set {
+                this.timeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Compiled {
+            get {
+                return this.compiledField;
+            }
+            set {
+                this.compiledField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50017")]
+    public partial class AboutObjects {
+        
+        private Object[] objectField;
         
         private string[] textField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
-        public SalesLine4[] SalesLine {
+        [System.Xml.Serialization.XmlElementAttribute("Object")]
+        public Object[] Object {
             get {
-                return this.salesLineField;
+                return this.objectField;
             }
             set {
-                this.salesLineField = value;
+                this.objectField = value;
             }
         }
         
@@ -1735,12 +1459,12 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="urn:microsoft-dynamics-nav/xmlports/x50002")]
-    public partial class SalesLine3 {
+    public partial class SalesLine4 {
         
         private string docNoField;
         
@@ -1876,7 +1600,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1937,7 +1661,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2139,7 +1863,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2148,7 +1872,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         private SalesHeader3[] salesHeaderField;
         
-        private SalesLine3[] salesLineField;
+        private SalesLine4[] salesLineField;
         
         private string[] textField;
         
@@ -2165,7 +1889,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
-        public SalesLine3[] SalesLine {
+        public SalesLine4[] SalesLine {
             get {
                 return this.salesLineField;
             }
@@ -2187,7 +1911,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2256,12 +1980,12 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="urn:microsoft-dynamics-nav/xmlports/x50015")]
-    public partial class SalesLine2 {
+    public partial class SalesLine3 {
         
         private string docNoField;
         
@@ -2373,7 +2097,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2434,7 +2158,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2690,7 +2414,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2699,7 +2423,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         private SalesHeader2[] salesHeaderField;
         
-        private SalesLine2[] salesLineField;
+        private SalesLine3[] salesLineField;
         
         private ExtendedSalesHeader1[] extendedSalesHeaderField;
         
@@ -2718,7 +2442,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
-        public SalesLine2[] SalesLine {
+        public SalesLine3[] SalesLine {
             get {
                 return this.salesLineField;
             }
@@ -2751,12 +2475,12 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="urn:microsoft-dynamics-nav/xmlports/x50014")]
-    public partial class SalesLine1 {
+    public partial class SalesLine2 {
         
         private string docNoField;
         
@@ -2868,7 +2592,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2929,7 +2653,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3185,7 +2909,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3194,7 +2918,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         private SalesHeader1[] salesHeaderField;
         
-        private SalesLine1[] salesLineField;
+        private SalesLine2[] salesLineField;
         
         private string[] textField;
         
@@ -3211,7 +2935,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
-        public SalesLine1[] SalesLine {
+        public SalesLine2[] SalesLine {
             get {
                 return this.salesLineField;
             }
@@ -3233,7 +2957,283 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50003")]
+    public partial class User {
+        
+        private string userIDField;
+        
+        private string createRMAField;
+        
+        private string createRetLabelField;
+        
+        private string createPDARmaField;
+        
+        private string createPDAExchangeField;
+        
+        private string adminField;
+        
+        private string developerField;
+        
+        private string sessionIDField;
+        
+        private string passwordField;
+        
+        private int sessionTimeoutField;
+        
+        private string passwordExpiryDateField;
+        
+        private string passwordLastUpdatedField;
+        
+        private string createExchangeField;
+        
+        private string createPartRequestField;
+        
+        private string createPDAPartRequestField;
+        
+        private string issueRefundField;
+        
+        private string issuePDARefundField;
+        
+        private string cancelOrderField;
+        
+        private string cancelPDAOrderField;
+        
+        public User() {
+            this.sessionTimeoutField = 0;
+        }
+        
+        /// <remarks/>
+        public string UserID {
+            get {
+                return this.userIDField;
+            }
+            set {
+                this.userIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreateRMA {
+            get {
+                return this.createRMAField;
+            }
+            set {
+                this.createRMAField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreateRetLabel {
+            get {
+                return this.createRetLabelField;
+            }
+            set {
+                this.createRetLabelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreatePDARma {
+            get {
+                return this.createPDARmaField;
+            }
+            set {
+                this.createPDARmaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreatePDAExchange {
+            get {
+                return this.createPDAExchangeField;
+            }
+            set {
+                this.createPDAExchangeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Admin {
+            get {
+                return this.adminField;
+            }
+            set {
+                this.adminField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Developer {
+            get {
+                return this.developerField;
+            }
+            set {
+                this.developerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SessionID {
+            get {
+                return this.sessionIDField;
+            }
+            set {
+                this.sessionIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                this.passwordField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int SessionTimeout {
+            get {
+                return this.sessionTimeoutField;
+            }
+            set {
+                this.sessionTimeoutField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PasswordExpiryDate {
+            get {
+                return this.passwordExpiryDateField;
+            }
+            set {
+                this.passwordExpiryDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PasswordLastUpdated {
+            get {
+                return this.passwordLastUpdatedField;
+            }
+            set {
+                this.passwordLastUpdatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreateExchange {
+            get {
+                return this.createExchangeField;
+            }
+            set {
+                this.createExchangeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreatePartRequest {
+            get {
+                return this.createPartRequestField;
+            }
+            set {
+                this.createPartRequestField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreatePDAPartRequest {
+            get {
+                return this.createPDAPartRequestField;
+            }
+            set {
+                this.createPDAPartRequestField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string IssueRefund {
+            get {
+                return this.issueRefundField;
+            }
+            set {
+                this.issueRefundField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string IssuePDARefund {
+            get {
+                return this.issuePDARefundField;
+            }
+            set {
+                this.issuePDARefundField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CancelOrder {
+            get {
+                return this.cancelOrderField;
+            }
+            set {
+                this.cancelOrderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CancelPDAOrder {
+            get {
+                return this.cancelPDAOrderField;
+            }
+            set {
+                this.cancelPDAOrderField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50003")]
+    public partial class UserSetup {
+        
+        private User[] userField;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("User")]
+        public User[] User {
+            get {
+                return this.userField;
+            }
+            set {
+                this.userField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3278,7 +3278,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3690,7 +3690,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3735,7 +3735,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3753,6 +3753,10 @@ namespace ExcelDesign.ServiceFunctions {
         private string isPartRequestField;
         
         private string partRequestOrderNoField;
+        
+        private string isRefundField;
+        
+        private string refundStatusField;
         
         /// <remarks/>
         public string RMANo {
@@ -3813,10 +3817,30 @@ namespace ExcelDesign.ServiceFunctions {
                 this.partRequestOrderNoField = value;
             }
         }
+        
+        /// <remarks/>
+        public string IsRefund {
+            get {
+                return this.isRefundField;
+            }
+            set {
+                this.isRefundField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RefundStatus {
+            get {
+                return this.refundStatusField;
+            }
+            set {
+                this.refundStatusField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3916,7 +3940,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4143,7 +4167,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4260,7 +4284,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4413,7 +4437,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4494,7 +4518,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4695,7 +4719,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4800,7 +4824,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5001,7 +5025,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5082,7 +5106,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5223,7 +5247,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5316,7 +5340,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5505,7 +5529,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5586,7 +5610,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5686,7 +5710,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5912,12 +5936,12 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
-    public partial class SalesLine {
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
+    public partial class SalesLine1 {
         
         private string docTypeField;
         
@@ -6089,7 +6113,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6189,7 +6213,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6452,7 +6476,7 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2558.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6461,7 +6485,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         private SalesHeader[] salesHeaderField;
         
-        private SalesLine[] salesLineField;
+        private SalesLine1[] salesLineField;
         
         private SalesShipmentHeader[] salesShipmentHeaderField;
         
@@ -6514,7 +6538,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
-        public SalesLine[] SalesLine {
+        public SalesLine1[] SalesLine {
             get {
                 return this.salesLineField;
             }
@@ -6734,79 +6758,37 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
-    public delegate void IsValidSessionCompletedEventHandler(object sender, IsValidSessionCompletedEventArgs e);
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void GetStatisticsCompletedEventHandler(object sender, GetStatisticsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class IsValidSessionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class GetStatisticsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal IsValidSessionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal GetStatisticsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public string Result {
+        public Statistics statistics {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
+                return ((Statistics)(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
-    public delegate void ResetSessionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
-    public delegate void LogInCompletedEventHandler(object sender, LogInCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class LogInCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal LogInCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-        
-        /// <remarks/>
-        public UserSetup webSvcUserSetup {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((UserSetup)(this.results[1]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
-    public delegate void UpdateUserPasswordCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void SearchDetermineNoTypeCompletedEventHandler(object sender, SearchDetermineNoTypeCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SearchDetermineNoTypeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -6836,19 +6818,87 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void ResetSessionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void IsValidSessionCompletedEventHandler(object sender, IsValidSessionCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class IsValidSessionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal IsValidSessionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void LogInCompletedEventHandler(object sender, LogInCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class LogInCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal LogInCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public UserSetup webSvcUserSetup {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((UserSetup)(this.results[1]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
+    public delegate void UpdateUserPasswordCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void SetDateFiltersCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void SetCommentFiltersCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void CreateExchangeOrderCompletedEventHandler(object sender, CreateExchangeOrderCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CreateExchangeOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -6878,11 +6928,11 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void CreatePartRequestCompletedEventHandler(object sender, CreatePartRequestCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CreatePartRequestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -6912,11 +6962,11 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void CreateRefundCompletedEventHandler(object sender, CreateRefundCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CreateRefundCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -6938,11 +6988,11 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void CreateRefundOrderCompletedEventHandler(object sender, CreateRefundOrderCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CreateRefundOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -6964,11 +7014,11 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void CreateReturnOrderCompletedEventHandler(object sender, CreateReturnOrderCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CreateReturnOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -6998,11 +7048,11 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void DeleteReturnOrderCompletedEventHandler(object sender, DeleteReturnOrderCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class DeleteReturnOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -7024,11 +7074,11 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void CancelOrderCompletedEventHandler(object sender, CancelOrderCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CancelOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -7050,41 +7100,15 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void IssueReturnLabelCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
-    public delegate void GetStatisticsCompletedEventHandler(object sender, GetStatisticsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetStatisticsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetStatisticsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public Statistics statistics {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((Statistics)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void AllowCustomerStatsViewCompletedEventHandler(object sender, AllowCustomerStatsViewCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AllowCustomerStatsViewCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -7106,15 +7130,15 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void SetDebugCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void PullAboutDetailsCompletedEventHandler(object sender, PullAboutDetailsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class PullAboutDetailsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -7136,11 +7160,11 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void TestCompletedEventHandler(object sender, TestCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -7162,31 +7186,31 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void a47a47a45a62_Monitoring_User_ActionsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void WriteToLogFileCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void a47a47a45a62_CommentsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void UpdateCommentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void UpdateComment1CompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void UpdateCommentUserCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2053.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2558.0")]
     public delegate void UpdateCommentPartReqCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 

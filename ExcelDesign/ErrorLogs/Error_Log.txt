@@ -191,3 +191,61 @@ System.Web.Services.Protocols.SoapException: The maximum length for a string val
    at ExcelDesign.Class_Objects.WebService.IssueRefund(String rmaNo, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
    at ExcelDesign.Class_Objects.SendService.IssueRefund(String rmaNo, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 446
    at ExcelDesign.Forms.ServiceCenter.IssueRefund(String rmaNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 435
+ERROR 2018-09-26 14:02:20,548 115091ms ServiceCenter          ConnectToService   - The underlying connection was closed: An unexpected error occurred on a receive.
+System.Net.WebException: The underlying connection was closed: An unexpected error occurred on a receive. ---> System.IO.IOException: Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host. ---> System.Net.Sockets.SocketException: An existing connection was forcibly closed by the remote host
+   at System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   at System.Net.PooledStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   at System.Net.Connection.SyncRead(HttpWebRequest request, Boolean userRetrievedStream, Boolean probeRead)
+   --- End of inner exception stack trace ---
+   at System.Web.Services.Protocols.WebClientProtocol.GetWebResponse(WebRequest request)
+   at System.Web.Services.Protocols.HttpWebClientProtocol.GetWebResponse(WebRequest request)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.SearchDetermineNoType(String sessionID, String searchNo, SearchResults& searchResults, Int32 _SearchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 240
+   at ExcelDesign.Class_Objects.WebService.FindOrder(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 69
+   at ExcelDesign.Class_Objects.CallService.OpenService(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 28
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 238
+ERROR 2018-09-26 14:02:20,968 115510ms ServiceCenter          Page_Load          - Thread was being aborted.
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 258
+   at ExcelDesign.Forms.ServiceCenter.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 114
+ERROR 2018-09-26 14:06:30,440 30423ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 335
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 124
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 23
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-09-26 14:07:09,192 69174ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 335
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 124
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 23
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-09-26 14:09:35,458 215441ms ServiceCenter          ConnectToService   - A value in the filter '113-4566924-1989815RMA-233639' in the External Document No. field in the Sales Shipment Header table is too long for the field type.  Type: Code25
+System.Web.Services.Protocols.SoapException: A value in the filter '113-4566924-1989815RMA-233639' in the External Document No. field in the Sales Shipment Header table is too long for the field type.  Type: Code25
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.SearchDetermineNoType(String sessionID, String searchNo, SearchResults& searchResults, Int32 _SearchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 240
+   at ExcelDesign.Class_Objects.WebService.FindOrder(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 69
+   at ExcelDesign.Class_Objects.CallService.OpenService(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 28
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 248

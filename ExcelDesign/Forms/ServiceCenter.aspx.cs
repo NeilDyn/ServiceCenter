@@ -104,17 +104,34 @@ namespace ExcelDesign.Forms
                         {
                             Session["NoUserInteraction"] = null;
                             string searchValue = Convert.ToString(Session["SearchValue"]);
-                            int searchSelection = Convert.ToInt32(Session["SearchSelection"]);
-                            ConnectToService(searchValue, searchSelection);
+
+                            if(searchValue == "ORDER CANCELLED")
+                            {
+                                txtSearchBox.Text = string.Empty;
+                                Session["NoUserInteraction"] = null;
+                                customerInfoTable = new Control();
+                                customerInfo = new Control();
+                                salesOrderHeader = new Control();
+                                salesOrderDetail = new Control();
+                                salesReturnOrderHeader = new Control();
+                                salesReturnOrderDetails = new Control();
+                                customers = new List<Customer>();
+                                PopulateData();
+                            }
+                            else
+                            {
+                                int searchSelection = Convert.ToInt32(Session["SearchSelection"]);
+                                ConnectToService(searchValue, searchSelection);
+                            }      
                         }
                     }
 
                     if (Session["ActiveCustomer"] != null)
                     {
                         customers = new List<Customer>
-                    {
-                        (Customer)Session["ActiveCustomer"]
-                    };
+                        {
+                            (Customer)Session["ActiveCustomer"]
+                        };
 
                         customerInfoTable = LoadControl("UserControls/MainTables/CustomerInfoTable.ascx");
                         customerInfoTable.ID = "Customer_Info_Table";
@@ -467,6 +484,7 @@ namespace ExcelDesign.Forms
 
                 HttpContext.Current.Session["NoUserInteraction"] = true;
                 HttpContext.Current.Session["UserInteraction"] = true;
+                HttpContext.Current.Session["SearchValue"] = "ORDER CANCELLED";
             }
             catch (Exception e)
             {

@@ -640,6 +640,11 @@ namespace ExcelDesign.Class_Objects
                                             if (currResults.ExtendedSalesHeader[esh].RMANo == rmaNo)
                                             {
                                                 email = currResults.ExtendedSalesHeader[esh].Email;
+
+                                                if(currResults.ExtendedSalesHeader[esh].IsRefund.ToUpper() == "YES")
+                                                {
+                                                    returnStatus = currResults.ExtendedSalesHeader[esh].RefundStatus;
+                                                }
                                             }
                                         }
                                     }
@@ -657,6 +662,7 @@ namespace ExcelDesign.Class_Objects
                                     returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo,
                                         orderDate, rmaNo, externalDocumentNo, email, false, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines, imeiNo,
                                         shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
+
                                     insertedReturnNumbners.Add(rmaNo);
                                     readRMA.Add(rmaNo);
 
@@ -779,6 +785,11 @@ namespace ExcelDesign.Class_Objects
                                             if (currResults.ExtendedSalesHeader[esh].RMANo == rmaNo)
                                             {
                                                 email = currResults.ExtendedSalesHeader[esh].Email;
+
+                                                if (currResults.ExtendedSalesHeader[esh].IsRefund.ToUpper() == "YES")
+                                                {
+                                                    returnStatus = currResults.ExtendedSalesHeader[esh].RefundStatus;
+                                                }
                                             }
                                         }
                                     }
@@ -870,6 +881,11 @@ namespace ExcelDesign.Class_Objects
                                         if (currResults.ExtendedSalesHeader[esh].RMANo == rmaNo)
                                         {
                                             email = currResults.ExtendedSalesHeader[esh].Email;
+
+                                            if (currResults.ExtendedSalesHeader[esh].IsRefund.ToUpper() == "YES")
+                                            {
+                                                returnStatus = currResults.ExtendedSalesHeader[esh].RefundStatus;
+                                            }
                                         }
                                     }
                                 }
@@ -1563,6 +1579,11 @@ namespace ExcelDesign.Class_Objects
                                                 if (currResults.ExtendedSalesHeader[esh].RMANo == rmaNo)
                                                 {
                                                     email = currResults.ExtendedSalesHeader[esh].Email;
+
+                                                    if (currResults.ExtendedSalesHeader[esh].IsRefund.ToUpper() == "YES")
+                                                    {
+                                                        returnStatus = currResults.ExtendedSalesHeader[esh].RefundStatus;
+                                                    }
                                                 }
                                             }
                                         }
@@ -1696,6 +1717,11 @@ namespace ExcelDesign.Class_Objects
                                                 if (currResults.ExtendedSalesHeader[esh].RMANo == rmaNo)
                                                 {
                                                     email = currResults.ExtendedSalesHeader[esh].Email;
+
+                                                    if (currResults.ExtendedSalesHeader[esh].IsRefund.ToUpper() == "YES")
+                                                    {
+                                                        returnStatus = currResults.ExtendedSalesHeader[esh].RefundStatus;
+                                                    }
                                                 }
                                             }
                                         }

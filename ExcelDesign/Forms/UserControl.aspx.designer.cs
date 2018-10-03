@@ -130,6 +130,60 @@ namespace ExcelDesign.Forms {
         protected global::System.Web.UI.WebControls.CheckBox cbxCreatePartialRequest;
         
         /// <summary>
+        /// tcCreateRefund control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcCreateRefund;
+        
+        /// <summary>
+        /// cbxCreateRefund control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbxCreateRefund;
+        
+        /// <summary>
+        /// tcCancelOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcCancelOrder;
+        
+        /// <summary>
+        /// cbxCancelOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbxCancelOrder;
+        
+        /// <summary>
+        /// tcPartialRefund control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcPartialRefund;
+        
+        /// <summary>
+        /// cbxPartialRefund control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbxPartialRefund;
+        
+        /// <summary>
         /// tcCreatePDARMA control.
         /// </summary>
         /// <remarks>
@@ -182,6 +236,60 @@ namespace ExcelDesign.Forms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox cbxCreatePDAPartRequest;
+        
+        /// <summary>
+        /// tcCreatePDARefund control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcCreatePDARefund;
+        
+        /// <summary>
+        /// cbxCreatePDARefund control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbxCreatePDARefund;
+        
+        /// <summary>
+        /// tcCancelPDAOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcCancelPDAOrder;
+        
+        /// <summary>
+        /// cbxCancelPDAOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbxCancelPDAOrder;
+        
+        /// <summary>
+        /// tcPartialRefundPDA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcPartialRefundPDA;
+        
+        /// <summary>
+        /// cbxPartialRefundPDA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbxPartialRefundPDA;
         
         /// <summary>
         /// tcAdmin control.

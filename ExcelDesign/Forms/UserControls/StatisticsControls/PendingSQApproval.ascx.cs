@@ -8,6 +8,10 @@ using System.Web.UI.WebControls;
 
 namespace ExcelDesign.Forms.UserControls.StatisticsControls
 {
+    /* v7.1 - 3 October 2018 - Neil Jansen
+     * Added logic for Is Older than 24 Hours bucket
+     */
+
     public partial class PendingSQApproval : System.Web.UI.UserControl
     {
         public List<StatisticsSalesLine> SQList { get; set; }
@@ -32,6 +36,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                 int invNotAvail = 0;
                 int olderThan72Hours = 0;
                 int olderThan48Hours = 0;
+                int olderThan24Hours = 0;
 
                 foreach (StatisticsSalesLine line in SQList)
                 {
@@ -42,6 +47,10 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                     else if (line.IsOlderThan48Hours)
                     {
                         olderThan48Hours++;
+                    }
+                    else if (line.IsOlderThan24Hours)
+                    {
+                        olderThan24Hours++;
                     }
 
                     if (line.IsNotInvtAvailable)
@@ -77,7 +86,16 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                     tcSQOlderThan48Hours.Text = olderThan48Hours.ToString();
                 }
 
-                if(SQList.Count > 0)
+                if (olderThan24Hours > 0)
+                {
+                    tcSQOlderThan24Hours.Text = "<a href='javascript:OpenSalesLineWindow(\"PendingSQApproval\", \"24Hours\")'>" + olderThan24Hours.ToString() + "</a>";
+                }
+                else
+                {
+                    tcSQOlderThan24Hours.Text = olderThan24Hours.ToString();
+                }
+
+                if (SQList.Count > 0)
                 {
                     tcAllSQPending.Text = "<a href='javascript:OpenSalesLineWindow(\"PendingSQApproval\", \"AllPending\")'>" + SQList.Count.ToString() + "</a>";
                 }

@@ -9,10 +9,14 @@
         <asp:TableHeaderCell runat="server" ID="tcAllRefundsPending" />
     </asp:TableHeaderRow>
     <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify" BackColor="#EFF3FB">
+        <asp:TableHeaderCell Text="Older than 24 hours" Font-Bold="false"/>
+        <asp:TableHeaderCell runat="server" ID="tcRefundOlder24Hours" />
+    </asp:TableHeaderRow>
+    <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableHeaderCell Text="Older than 48 hours" Font-Bold="false"/>
         <asp:TableHeaderCell runat="server" ID="tcRefundOlder48Hours" />
     </asp:TableHeaderRow>
-    <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify">
+    <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify" BackColor="#EFF3FB">
         <asp:TableHeaderCell Text="Older than 72 hours" Font-Bold="false"/>
         <asp:TableHeaderCell runat="server" ID="tcRefundOlder72Hours" />
      </asp:TableHeaderRow>

@@ -25,6 +25,11 @@ namespace ExcelDesign.Forms
     {
         /* NJ 5 September 2018
          * Updated with User Control Navigation bar.
+         * 
+         * v7.1 - 3 October 2018 - Neil Jansen
+         * Added logic to prevent "Thread was being aborted" to be the error that is displayed as it is caused by lower level exceptions being thrown that should be displayed instead
+         * Added logic to display as alert when Order has been cancelled
+         * Updated logic to clear all controls and lists when PostBack occours to prevent Customer data to be duplicated
         */
 
         #region Global
@@ -80,6 +85,14 @@ namespace ExcelDesign.Forms
 
                 if (IsPostBack)
                 {
+                    customerInfoTable = new Control();
+                    customerInfo = new Control();
+                    salesOrderHeader = new Control();
+                    salesOrderDetail = new Control();
+                    salesReturnOrderHeader = new Control();
+                    salesReturnOrderDetails = new Control();
+                    customers = new List<Customer>();
+
                     if (Session["SearchValue"] != null && Session["SearchSelection"] != null && Session["UserInteraction"] != null)
                     {
                         Session["UserInteraction"] = null;
@@ -87,12 +100,6 @@ namespace ExcelDesign.Forms
                         if (Session["NoUserInteraction"] == null)
                         {
                             Session["NoUserInteraction"] = null;
-                            customerInfoTable = new Control();
-                            customerInfo = new Control();
-                            salesOrderHeader = new Control();
-                            salesOrderDetail = new Control();
-                            salesReturnOrderHeader = new Control();
-                            salesReturnOrderDetails = new Control();
 
                             if (Session["CustomerList"] != null)
                             {
@@ -105,17 +112,10 @@ namespace ExcelDesign.Forms
                             Session["NoUserInteraction"] = null;
                             string searchValue = Convert.ToString(Session["SearchValue"]);
 
-                            if(searchValue == "ORDER CANCELLED")
+                            if (searchValue == "ORDER CANCELLED")
                             {
                                 txtSearchBox.Text = string.Empty;
-                                Session["NoUserInteraction"] = null;
-                                customerInfoTable = new Control();
-                                customerInfo = new Control();
-                                salesOrderHeader = new Control();
-                                salesOrderDetail = new Control();
-                                salesReturnOrderHeader = new Control();
-                                salesReturnOrderDetails = new Control();
-                                customers = new List<Customer>();
+                                Session["NoUserInteraction"] = null;                              
                                 PopulateData();
                             }
                             else
@@ -144,16 +144,19 @@ namespace ExcelDesign.Forms
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message, ex);
-                Session["Error"] = ex.Message;
+                if (ex.Message != "Thread was being aborted.")
+                {
+                    Log.Error(ex.Message, ex);
+                    Session["Error"] = ex.Message;
 
-                if (Request.Url.AbsoluteUri.Contains("Forms"))
-                {
-                    Response.Redirect("ErrorForm.aspx");
-                }
-                else
-                {
-                    Response.Redirect("Forms/ErrorForm.aspx");
+                    if (Request.Url.AbsoluteUri.Contains("Forms"))
+                    {
+                        Response.Redirect("ErrorForm.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("Forms/ErrorForm.aspx");
+                    }
                 }
             }
         }
@@ -225,19 +228,22 @@ namespace ExcelDesign.Forms
             }
             catch (Exception ex)
             {
-                if (Session["Error"] == null)
+                if (ex.Message != "Thread was being aborted.")
                 {
-                    Log.Error(ex.Message, ex);
-                    Session["Error"] = ex.Message;
-                }
+                    if (Session["Error"] == null)
+                    {
+                        Log.Error(ex.Message, ex);
+                        Session["Error"] = ex.Message;
+                    }
 
-                if (Request.Url.AbsoluteUri.Contains("Forms"))
-                {
-                    Response.Redirect("ErrorForm.aspx");
-                }
-                else
-                {
-                    Response.Redirect("Forms/ErrorForm.aspx");
+                    if (Request.Url.AbsoluteUri.Contains("Forms"))
+                    {
+                        Response.Redirect("ErrorForm.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("Forms/ErrorForm.aspx");
+                    }
                 }
             }
         }
@@ -258,19 +264,29 @@ namespace ExcelDesign.Forms
             }
             catch (Exception ex)
             {
-                if (Session["Error"] == null)
+                if (ex.Message != "Thread was being aborted.")
                 {
-                    Log.Error(ex.Message, ex);
-                    Session["Error"] = ex.Message;
-                }
+                    if (ex.Message.ToUpper().Contains("HAS BEEN CANCELLED"))
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "orderCancelled", "alert('" + ex.Message + "');", true);
+                    }
+                    else
+                    {
+                        if (Session["Error"] == null)
+                        {
+                            Log.Error(ex.Message, ex);
+                            Session["Error"] = ex.Message;
+                        }
 
-                if (Request.Url.AbsoluteUri.Contains("Forms"))
-                {
-                    Response.Redirect("ErrorForm.aspx");
-                }
-                else
-                {
-                    Response.Redirect("Forms/ErrorForm.aspx");
+                        if (Request.Url.AbsoluteUri.Contains("Forms"))
+                        {
+                            Response.Redirect("ErrorForm.aspx");
+                        }
+                        else
+                        {
+                            Response.Redirect("Forms/ErrorForm.aspx");
+                        }
+                    }
                 }
             }
         }
@@ -296,19 +312,22 @@ namespace ExcelDesign.Forms
             }
             catch (Exception ex)
             {
-                if (Session["Error"] == null)
+                if (ex.Message != "Thread was being aborted.")
                 {
-                    Log.Error(ex.Message, ex);
-                    Session["Error"] = ex.Message;
-                }
+                    if (Session["Error"] == null)
+                    {
+                        Log.Error(ex.Message, ex);
+                        Session["Error"] = ex.Message;
+                    }
 
-                if (Request.Url.AbsoluteUri.Contains("Forms"))
-                {
-                    Response.Redirect("ErrorForm.aspx");
-                }
-                else
-                {
-                    Response.Redirect("Forms/ErrorForm.aspx");
+                    if (Request.Url.AbsoluteUri.Contains("Forms"))
+                    {
+                        Response.Redirect("ErrorForm.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("Forms/ErrorForm.aspx");
+                    }
                 }
             }
         }
@@ -461,38 +480,7 @@ namespace ExcelDesign.Forms
 
             return "Success";
         }
-
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static string CancelOrder(string orderNo)
-        {
-            try
-            {
-                string sessionID = string.Empty;
-                if (HttpContext.Current.Session["ActiveUser"] != null)
-                {
-                    User u = (User)HttpContext.Current.Session["ActiveUser"];
-                    sessionID = u.SessionID;
-                }
-                else
-                {
-                    sessionID = "{A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0}";
-                }
-
-
-                StaticService.CancelOrder(orderNo, sessionID);
-
-                HttpContext.Current.Session["NoUserInteraction"] = true;
-                HttpContext.Current.Session["UserInteraction"] = true;
-                HttpContext.Current.Session["SearchValue"] = "ORDER CANCELLED";
-            }
-            catch (Exception e)
-            {
-                return "Error - " + e.Message;
-            }
-
-            return "Success";
-        }
+      
         #endregion
 
         #region Buttons

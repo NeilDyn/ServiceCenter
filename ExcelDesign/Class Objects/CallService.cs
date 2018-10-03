@@ -8,6 +8,10 @@ using System;
 
 namespace ExcelDesign.Class_Objects
 {
+    /* v7.1 - 3 October 2018 - Neil Jansen
+     * GetStatisticsInformation() - Added older than 24 hours bucket
+     */
+
     public class CallService
     {
         private WebService webService;
@@ -641,7 +645,7 @@ namespace ExcelDesign.Class_Objects
                                             {
                                                 email = currResults.ExtendedSalesHeader[esh].Email;
 
-                                                if(currResults.ExtendedSalesHeader[esh].IsRefund.ToUpper() == "YES")
+                                                if (currResults.ExtendedSalesHeader[esh].IsRefund.ToUpper() == "YES")
                                                 {
                                                     returnStatus = currResults.ExtendedSalesHeader[esh].RefundStatus;
                                                 }
@@ -2220,6 +2224,7 @@ namespace ExcelDesign.Class_Objects
             bool isNotInvtAvailable = false;
             bool isOlderThan72Hours = false;
             bool isOlderThan48Hours = false;
+            bool isOlderThan24Hours = false;
             bool isPendingSQApproval = false;
             string status = string.Empty;
 
@@ -2231,14 +2236,16 @@ namespace ExcelDesign.Class_Objects
                     docNo = stats.SalesLine[sl].DocNo;
                     externalDocNo = stats.SalesLine[sl].ExternalDocumentNo[0];
                     itemNo = stats.SalesLine[sl].ItemNo;
+
                     int.TryParse(stats.SalesLine[sl].Qty.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out qty);
                     description = stats.SalesLine[sl].Description;
-                    createdDate = stats.SalesLine[sl].CreatedDate;
+                    createdDate = stats.SalesLine[sl].CreatedDate[0];
                     reqReturnAction = stats.SalesLine[sl].ReqReturnAction;
                     customerNo = stats.SalesLine[sl].CustomerNo;
                     isNotInvtAvailable = stats.SalesLine[sl].IsNotInvtAvailable[0] == "Yes" ? true : false;
                     isOlderThan72Hours = stats.SalesLine[sl].IsOlderThan72Hrs[0] == "Yes" ? true : false;
                     isOlderThan48Hours = stats.SalesLine[sl].IsOlderThan48Hrs[0] == "Yes" ? true : false;
+                    isOlderThan24Hours = stats.SalesLine[sl].IsOlderThan24Hrs[0] == "Yes" ? true : false;
                     isPendingSQApproval = stats.SalesLine[sl].IsPendingSQApproval[0] == "Yes" ? true : false;
 
                     if (isNotInvtAvailable)
@@ -2268,12 +2275,23 @@ namespace ExcelDesign.Class_Objects
                             status += ", Is older than 48 hours";
                         }
                     }
+                    else if (isOlderThan24Hours)
+                    {
+                        if (status.Length == 0)
+                        {
+                            status = "Is older than 24 hours";
+                        }
+                        else
+                        {
+                            status += ", Is older than 24 hours";
+                        }
+                    }
 
                     if (isPendingSQApproval)
                     {
                         if (status.Length == 0)
                         {
-                            status = "Is pending SQ approval";
+                            status = "Is pending SQ Approval";
                         }
                         else
                         {
@@ -2282,7 +2300,7 @@ namespace ExcelDesign.Class_Objects
                     }
 
                     statLines.Add(new StatisticsSalesLine(docType, docNo, externalDocNo, itemNo, qty, description, createdDate, reqReturnAction, isNotInvtAvailable, isOlderThan72Hours,
-                        isPendingSQApproval, customerNo, isOlderThan48Hours, status));
+                        isPendingSQApproval, customerNo, isOlderThan48Hours, status, isOlderThan24Hours));
 
                     docType = string.Empty;
                     docNo = string.Empty;
@@ -2296,6 +2314,7 @@ namespace ExcelDesign.Class_Objects
                     isNotInvtAvailable = false;
                     isOlderThan72Hours = false;
                     isOlderThan48Hours = false;
+                    isOlderThan24Hours = false;
                     isPendingSQApproval = false;
                     status = string.Empty;
                 }
@@ -2319,7 +2338,7 @@ namespace ExcelDesign.Class_Objects
 
             ao = webService.GetObjectInfo();
 
-            if(ao.Object != null)
+            if (ao.Object != null)
             {
                 for (int obj = 0; obj < ao.Object.Length; obj++)
                 {

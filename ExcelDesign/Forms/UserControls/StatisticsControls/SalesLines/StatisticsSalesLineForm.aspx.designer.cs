@@ -22,12 +22,21 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines {
         protected global::System.Web.UI.HtmlControls.HtmlForm frmStatisticsSalesLineDetail;
         
         /// <summary>
-        /// tblPendingSQApprovalLines control.
+        /// tblStatisticsSalesLines control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblPendingSQApprovalLines;
+        protected global::System.Web.UI.WebControls.Table tblStatisticsSalesLines;
+        
+        /// <summary>
+        /// ProcessColumn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell ProcessColumn;
     }
 }

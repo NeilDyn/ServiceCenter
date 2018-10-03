@@ -8,6 +8,10 @@ using System.Web.UI.WebControls;
 
 namespace ExcelDesign.Forms.UserControls.StatisticsControls
 {
+    /* v7.1 - 3 October 2018 - Neil Jansen
+     * Added logic for Is Older than 24 Hours bucket
+     */
+
     public partial class Pending_Unknown : System.Web.UI.UserControl
     {
         public List<StatisticsSalesLine> UnknownList { get; set; }
@@ -33,6 +37,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                 int invNotAvail = 0;
                 int olderThan72Hours = 0;
                 int olderThan48Hours = 0;
+                int olderThan24Hours = 0;
 
                 foreach (StatisticsSalesLine line in UnknownList)
                 {
@@ -45,6 +50,10 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                         else if (line.IsOlderThan48Hours)
                         {
                             olderThan48Hours++;
+                        }
+                        else if (line.IsOlderThan24Hours)
+                        {
+                            olderThan24Hours++;
                         }
 
                         if (line.IsNotInvtAvailable)
@@ -81,7 +90,16 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                     tcUnknownOlderThan48Hours.Text = olderThan48Hours.ToString();
                 }
 
-                if(UnknownList.Count > 0)
+                if (olderThan24Hours > 0)
+                {
+                    tcUnknownOlderThan24Hours.Text = "<a href='javascript:OpenSalesLineWindow(\"Unknown\", \"24Hours\")'>" + olderThan24Hours.ToString() + "</a>";
+                }
+                else
+                {
+                    tcUnknownOlderThan24Hours.Text = olderThan24Hours.ToString();
+                }
+
+                if (UnknownList.Count > 0)
                 {
                     tcAllUnknownPending.Text = "<a href='javascript:OpenSalesLineWindow(\"Unknown\", \"AllPending\")'>" + UnknownList.Count.ToString() + "</a>";
                 }

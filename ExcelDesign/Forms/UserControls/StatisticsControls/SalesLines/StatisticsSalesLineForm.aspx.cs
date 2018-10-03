@@ -2,16 +2,28 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Web;
-using System.Web.UI;
+using System.Web.Script.Services;
+using System.Web.Services;
 using System.Web.UI.WebControls;
 
 namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
 {
+    /* v7.1 3 October 2018 - Neil Jansen
+     * Added Send Service Object as static for AJAX WebMethod for Processing Replacements
+     * Added Log reference to log any error occurrences
+     * Added logic for Is Older than 24 hour bucket
+     * Added new WebMethod for AJAX call to Process Replacements
+     * Added new button columns that only display if the Pending List is of type Replacement
+     */
+
     public partial class StatisticsSalesLineForm : System.Web.UI.Page
     {
         public List<StatisticsSalesLine> SalesLineList { get; set; }
+        protected static SendService StaticService = new SendService();
+
+        protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(StatisticsSalesLineForm));
+
         protected string pendingList;
         protected string pendingType;
 
@@ -33,6 +45,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
             {
                 case "Replacement":
                     Title = "Statistics - Pending Replacement ";
+                    ProcessColumn.Visible = true;
 
                     foreach (StatisticsSalesLine exchange in SalesLineList)
                     {
@@ -45,6 +58,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
 
                 case "Refund":
                     Title = "Statistics - Pending Refund ";
+                    ProcessColumn.Visible = false;
 
                     foreach (StatisticsSalesLine refund in SalesLineList)
                     {
@@ -57,6 +71,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
 
                 case "Unknown":
                     Title = "Statistics - Pending Unknown ";
+                    ProcessColumn.Visible = false;
 
                     foreach (StatisticsSalesLine unknown in SalesLineList)
                     {
@@ -69,6 +84,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
 
                 case "PendingSQApproval":
                     Title = "Statistics - Pending Unknown ";
+                    ProcessColumn.Visible = false;
 
                     foreach (StatisticsSalesLine sqApproval in SalesLineList)
                     {
@@ -108,6 +124,18 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                         if (twoDays.IsOlderThan48Hours && !twoDays.IsOlderThan72Hours)
                         {
                             displayList.Add(twoDays);
+                        }
+                    }
+                    break;
+
+                case "24Hours":
+                    Title += "Older than 24 Hours";
+
+                    foreach (StatisticsSalesLine oneDay in pendingDisplayList)
+                    {
+                        if (oneDay.IsOlderThan24Hours && !oneDay.IsOlderThan48Hours)
+                        {
+                            displayList.Add(oneDay);
                         }
                     }
                     break;
@@ -155,6 +183,8 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                     reqReturnAction.Text = line.REQReturnAction;
                     status.Text = line.Status;
 
+                    docNo.ID = "docNo_" + lineCount.ToString(); ;
+
                     qty.HorizontalAlign = HorizontalAlign.Center;
 
                     tr.Cells.Add(custNo);
@@ -176,7 +206,20 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                         tr.BackColor = ColorTranslator.FromHtml("#EFF3FB");
                     }
 
-                    tblPendingSQApprovalLines.Rows.Add(tr);
+                    if (pendingList == "Replacement")
+                    {
+                        TableCell processCell = new TableCell();
+                        CheckBox cb = new CheckBox
+                        {
+                            ID = "cbxExchange_" + lineCount.ToString(),
+                            Checked = false
+                        };
+
+                        processCell.Controls.Add(cb);
+                        tr.Cells.Add(processCell);
+                    }
+
+                    tblStatisticsSalesLines.Rows.Add(tr);
                 }
 
                 TableRow breakRow = new TableRow();
@@ -186,12 +229,101 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                 };
 
                 breakRow.Cells.Add(breakCell);
-                tblPendingSQApprovalLines.Rows.Add(breakRow);
+                tblStatisticsSalesLines.Rows.Add(breakRow);
+
+                if(pendingList == "Replacement")
+                {
+                    TableRow checkboxRow = new TableRow
+                    {
+                        ID = "ProcessCheckBox"
+                    };
+
+                    TableRow buttonRow = new TableRow
+                    {
+                        ID = "ProcessButton"
+                    };
+
+                    TableCell checkBoxCell = new TableCell();
+                    TableCell buttonCell = new TableCell();
+
+                    CheckBox checkBox = new CheckBox
+                    {
+                        ID = "cbxSelectAll",
+                        Text = "Select All"
+                    };
+
+                    Button button = new Button
+                    {
+                        ID = "BtnProcessAll",
+                        Text = "Process",
+                        OnClientClick = "return ProcessItems()"
+                    };
+
+                    checkBoxCell.Controls.Add(checkBox);
+                    buttonCell.Controls.Add(button);
+
+                    checkboxRow.Cells.Add(new TableCell());
+                    checkboxRow.Cells.Add(new TableCell());
+                    checkboxRow.Cells.Add(new TableCell());
+                    checkboxRow.Cells.Add(new TableCell());
+                    checkboxRow.Cells.Add(new TableCell());
+                    checkboxRow.Cells.Add(new TableCell());
+                    checkboxRow.Cells.Add(new TableCell());
+                    checkboxRow.Cells.Add(new TableCell());
+                    checkboxRow.Cells.Add(new TableCell());
+                    checkboxRow.Cells.Add(checkBoxCell);
+
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(buttonCell);
+
+                    tblStatisticsSalesLines.Rows.Add(checkboxRow);
+                    tblStatisticsSalesLines.Rows.Add(buttonRow);
+                }
             }
             catch (Exception ex)
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "alertError", "alert('" + ex.Message + "');", true);
             }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static string ProcessItems(string rmaList)
+        {
+            try
+            {
+                string sessionID = string.Empty;
+                if (HttpContext.Current.Session["ActiveUser"] != null)
+                {
+                    User u = (User)HttpContext.Current.Session["ActiveUser"];
+                    sessionID = u.SessionID;
+                }
+                else
+                {
+                    sessionID = "{A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0}";
+                }
+
+
+                StaticService.ProcessItems(rmaList, sessionID);
+
+                HttpContext.Current.Session["NoUserInteraction"] = true;
+                HttpContext.Current.Session["UserInteraction"] = true;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message, e);
+                return "Error - " + e.Message;
+            }
+
+            return "Success";
         }
     }
 }

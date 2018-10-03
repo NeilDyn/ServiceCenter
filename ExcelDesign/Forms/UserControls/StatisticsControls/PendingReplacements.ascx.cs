@@ -8,18 +8,14 @@ using System.Web.UI.WebControls;
 
 namespace ExcelDesign.Forms.UserControls.StatisticsControls
 {
+    /* v7.1 - 3 October 2018 - Neil Jansen
+     * Added logic for Is Older than 24 Hours bucket
+     */
+
     public partial class PendingReplacements : System.Web.UI.UserControl
     {
         public List<StatisticsSalesLine> ReplacementList { get; set; }
 
-        protected TableCell invLinesCell;
-        protected TableCell older72HoursLinesCell;
-
-        protected Control invLinesControl;
-        protected Control older72HoursLinesControl;
-
-        protected const string invLinesPath = "SalesLines/ReplacementNoInvLines.ascx";
-        protected const string older72HoursLinesPath = "SalesLines/ReplacementOlder72HoursLines.ascx";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -42,28 +38,26 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                 int invNotAvail = 0;
                 int olderThan72Hours = 0;
                 int olderThan48Hours = 0;
-
-                List<StatisticsSalesLine> olderThan72HoursList = new List<StatisticsSalesLine>();
-                List<StatisticsSalesLine> olderThan48HoursList = new List<StatisticsSalesLine>();
-                List<StatisticsSalesLine> invNotAvailList = new List<StatisticsSalesLine>();
+                int olderThan24Hours = 0;
 
                 foreach (StatisticsSalesLine line in ReplacementList)
                 {
                     if (line.IsOlderThan72Hours)
                     {
                         olderThan72Hours++;
-                        olderThan72HoursList.Add(line);
                     }
                     else if (line.IsOlderThan48Hours)
                     {
                         olderThan48Hours++;
-                        olderThan48HoursList.Add(line);
+                    }
+                    else if (line.IsOlderThan24Hours)
+                    {
+                        olderThan24Hours++;
                     }
 
                     if (line.IsNotInvtAvailable)
                     {
                         invNotAvail++;
-                        invNotAvailList.Add(line);
                     }
 
                 }
@@ -93,6 +87,15 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                 else
                 {
                     tcReplacementOlderThan48Hours.Text = olderThan48Hours.ToString();
+                }
+
+                if (olderThan24Hours > 0)
+                {
+                    tcReplacementOlderThan24Hours.Text = "<a href='javascript:OpenSalesLineWindow(\"Replacement\", \"24Hours\")'>" + olderThan24Hours.ToString() + "</a>";
+                }
+                else
+                {
+                    tcReplacementOlderThan24Hours.Text = olderThan24Hours.ToString();
                 }
 
                 if (ReplacementList.Count > 0)

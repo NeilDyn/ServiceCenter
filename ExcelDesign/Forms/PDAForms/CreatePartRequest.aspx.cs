@@ -297,7 +297,20 @@ namespace ExcelDesign.Forms.PDAForms
 
                                     if (c.ID.Contains("ddlReason_"))
                                     {
-                                        reason = ((List<ReturnReason>)Session["ReturnReasons"])[index].ReasonCode;
+                                        /* v7.1 - 3 October 2018 - Neil Jansen
+                                         * Updated logic to filter out incorrect catagories for Return Reason Code
+                                         */
+
+                                        List<ReturnReason> sr = (List<ReturnReason>)Session["ReturnReasons"];
+                                        List<ReturnReason> rl = new List<ReturnReason>();
+                                        foreach (ReturnReason item in sr)
+                                        {
+                                            if (item.Category == "Part Request" || item.Category == "")
+                                            {
+                                                rl.Add(item);
+                                            }
+                                        }
+                                        reason = (rl)[index].ReasonCode;
                                     }
                                 }
                             }

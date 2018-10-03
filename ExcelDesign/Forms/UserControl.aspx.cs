@@ -1,6 +1,7 @@
 ﻿using ExcelDesign.Class_Objects;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -13,6 +14,10 @@ namespace ExcelDesign.Forms
     {
         /* NJ 5 September 2018
          * Updated with User Control Navigation bar.
+         * 
+         * v7.1 - 3 October 2018 - Neil Jansen
+         * Added new Permissions for Issue Refund, Cancel Order and Partial Refund
+         * Redesigned Web Page to display each permission and checkbox in their own row
         */
 
         protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(UserControl));
@@ -34,6 +39,22 @@ namespace ExcelDesign.Forms
                     {
                         activeUser = (User)Session["ActiveUser"];
                         PopulateSingleUser(activeUser);
+                    }
+
+                    int rowCount = 0;
+
+                    foreach (TableRow row in TblUserControl.Rows)
+                    {
+                        rowCount++;
+
+                        if (rowCount % 2 == 0)
+                        {
+                            row.BackColor = Color.White;
+                        }
+                        else
+                        {
+                            row.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                        }
                     }
                 }
             }
@@ -71,6 +92,12 @@ namespace ExcelDesign.Forms
                 cbxCreatePDAExchange.Checked = u.CreatePDAExchange;
                 cbxCreatePartialRequest.Checked = u.CreatePartRequest;
                 cbxCreatePDAPartRequest.Checked = u.CreatePDAPartRequest;
+                cbxCreateRefund.Checked = u.CanIssueRefund;
+                cbxCreatePDARefund.Checked = u.CanIssuePDARefund;
+                cbxCancelOrder.Checked = u.CanCancelOrder;
+                cbxCancelPDAOrder.Checked = u.CanCancelPDAOrder;
+                cbxPartialRefund.Checked = u.CanPartialRefund;
+                cbxPartialRefundPDA.Checked = u.CanPartialRefundPDA;
             }
             catch (Exception ex)
             {

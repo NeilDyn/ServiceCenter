@@ -13,10 +13,14 @@
         <asp:TableHeaderCell runat="server" ID="tcSQNoInvAvail" />
     </asp:TableHeaderRow>
     <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify">
+        <asp:TableHeaderCell Text="Older than 24 hours" Font-Bold="false"/>
+        <asp:TableHeaderCell runat="server" ID="tcSQOlderThan24Hours" />
+    </asp:TableHeaderRow>
+    <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify" BackColor="#EFF3FB">
         <asp:TableHeaderCell Text="Older than 48 hours" Font-Bold="false"/>
         <asp:TableHeaderCell runat="server" ID="tcSQOlderThan48Hours" />
     </asp:TableHeaderRow>
-    <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify" BackColor="#EFF3FB">
+    <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify" >
         <asp:TableHeaderCell Text="Older Than 72 hours" Font-Bold="false" />
         <asp:TableHeaderCell runat="server" ID="tcSQOlderThan72Hours" />
     </asp:TableHeaderRow>

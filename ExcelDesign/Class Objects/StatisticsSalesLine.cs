@@ -5,6 +5,10 @@ using System.Web;
 
 namespace ExcelDesign.Class_Objects
 {
+    /* v7.1 - 3 October 2018 - Neil Jansen
+     * Added logic for Is Older than 24 Hours bucket
+     */
+
     public class StatisticsSalesLine
     {
         public string DocType { get; set; }
@@ -20,10 +24,11 @@ namespace ExcelDesign.Class_Objects
         public bool IsNotInvtAvailable { get; set; }
         public bool IsOlderThan72Hours { get; set; }
         public bool IsOlderThan48Hours { get; set; }
+        public bool IsOlderThan24Hours { get; set; }
         public bool IsPendingSQApproval { get; set; }
 
         public StatisticsSalesLine(string docTypeP, string docNoP, string externalDocumentNoP, string itemNoP, int qtyP, string descriptionP, string createdDateP, string reqReturnActionP,
-            bool isNotInvAvailableP, bool isOlderThan72HoursP, bool isPendingSQApprovalP, string customerNoP, bool isOlderThan48HoursP, string statusP)
+            bool isNotInvAvailableP, bool isOlderThan72HoursP, bool isPendingSQApprovalP, string customerNoP, bool isOlderThan48HoursP, string statusP, bool isOlderThan24HoursP)
         {
             DocType = docTypeP;
             DocNo = docNoP;
@@ -38,7 +43,8 @@ namespace ExcelDesign.Class_Objects
             IsPendingSQApproval = isPendingSQApprovalP;
             CustomerNumber = customerNoP;
             IsOlderThan48Hours = isOlderThan48HoursP;
-            Status = statusP;         
+            Status = statusP;
+            IsOlderThan24Hours = isOlderThan24HoursP;
         }
 
         public StatisticsSalesLine()

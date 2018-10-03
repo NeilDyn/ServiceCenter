@@ -25,7 +25,7 @@
             var top = (screen.height - height) * 0.5;
 
             if (typeof (createExchangeWin) == 'undefined' || createExchangeWin.closed) {
-                if ("<%= this.tcIMEINo.Text %>" != "") {
+                if ("<%= this.tcChannelName.Text %>" == "PDA REPLACEMENTS") {
                     if ("<%= this.CanExchangePDA %>" == "true") {
                         createExchangeWin = window.open("FunctionForms/CreateExchange.aspx?RMANo=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>",
                             null,
@@ -58,60 +58,69 @@
         });
 
         $("[id$=btnIssueRefund<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+            var r;
             if ("<%= this.tcReturnStatus.Text%>" == "Received" || "<%= this.tcReturnStatus.Text%>" == "Partial Received") {
-                if ("<%= this.tcIMEINo.Text %>" != "") {
-                    if ("<%= this.CanRefundPDA%>" == "true") {
+                if ("<%= this.tcChannelName.Text %>" == "PDA REPLACEMENTS") {
+                    if ("<%= this.CanRefundPDA %>" == "true") {
                         var rmaNo = "<%= this.Rh.RMANo %>";
 
-                        $.ajax({
-                            type: "POST",
-                            url: "ServiceCenter.aspx/IssueRefund",
-                            data: JSON.stringify({ rmaNo: rmaNo }),
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function (error) {
-                                if (error.d.indexOf("Error") == -1) {
-                                    alert("PDA Refund issued for Return: " + rmaNo);
-                                    __doPostBack('[id$=btnReload', '');
-                                } else {
-                                    alert(error.d);
-                                }
-                            },
-                            error: function (xhr, status, text) {
-                                console.log(xhr.status);
-                                console.log(xhr.text);
-                                console.log(xhr.responseText);
-                            },
-                        });
+                        r = window.confirm("Are you sure you wish to issue a refund this return " + rmaNo + "?");
+
+                        if (r == true) {
+                            $.ajax({
+                                type: "POST",
+                                url: "ServiceCenter.aspx/IssueRefund",
+                                data: JSON.stringify({ rmaNo: rmaNo }),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (error) {
+                                    if (error.d.indexOf("Error") == -1) {
+                                        alert("PDA Refund issued for Return: " + rmaNo);
+                                        __doPostBack('[id$=btnReload', '');
+                                    } else {
+                                        alert(error.d);
+                                    }
+                                },
+                                error: function (xhr, status, text) {
+                                    console.log(xhr.status);
+                                    console.log(xhr.text);
+                                    console.log(xhr.responseText);
+                                },
+                            });
+                        }
                     } else {
-                        alert("You do not have the required permission to Issue a Refund");
+                        alert("You do not have the required permission to Issue PDA a Refund");
                     }
                 } else {
-                    if ("<%= this.CanRefund%>" == "true") {
+                    if ("<%= this.CanRefund %>" == "true") {
                         var rmaNo = "<%= this.Rh.RMANo %>";
 
-                        $.ajax({
-                            type: "POST",
-                            url: "ServiceCenter.aspx/IssueRefund",
-                            data: JSON.stringify({ rmaNo: rmaNo }),
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function (error) {
-                                if (error.d.indexOf("Error") == -1) {
-                                    alert("Refund issued for Return: " + rmaNo);
-                                    __doPostBack('[id$=btnReload', '');
-                                } else {
-                                    alert(error.d);
-                                }
-                            },
-                            error: function (xhr, status, text) {
-                                console.log(xhr.status);
-                                console.log(xhr.text);
-                                console.log(xhr.responseText);
-                            },
-                        });
+                        r = window.confirm("Are you sure you wish to issue a refund this return " + rmaNo + "?");
+
+                        if (r == true) {
+                            $.ajax({
+                                type: "POST",
+                                url: "ServiceCenter.aspx/IssueRefund",
+                                data: JSON.stringify({ rmaNo: rmaNo }),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (error) {
+                                    if (error.d.indexOf("Error") == -1) {
+                                        alert("Refund issued for Return: " + rmaNo);
+                                        __doPostBack('[id$=btnReload', '');
+                                    } else {
+                                        alert(error.d);
+                                    }
+                                },
+                                error: function (xhr, status, text) {
+                                    console.log(xhr.status);
+                                    console.log(xhr.text);
+                                    console.log(xhr.responseText);
+                                },
+                            });
+                        }
                     } else {
-                        alert("You do not have the required permission to Issue a PDA Refund");
+                        alert("You do not have the required permission to Issue a Refund");
                     }
                 }
             } else {
@@ -131,7 +140,7 @@
                 var top = (screen.height - height) * 0.5;
 
                 if (typeof (updateRMAWin) == 'undefined' || updateRMAWin.closed) {
-                    if ("<%= this.tcIMEINo.Text %>" != "") {
+                    if ("<%= this.tcChannelName.Text %>" == "PDA REPLACEMENTS") {
                         if ("<%= this.CanReturnPDA%>" == "true") {
                             updateRMAWin = window.open("PDAForms/CreateRMA.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= true %>&ReturnTrackingNo=<%= this.Rh.ReturnTrackingNo %>",
                                 null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");

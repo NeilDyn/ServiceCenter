@@ -14,6 +14,10 @@ using System.Web.UI.WebControls;
 
 namespace ExcelDesign.Forms.PDAForms
 {
+    /* v7.1 - 3 October 2018 - Neil Jansen
+     * Updated logic to filter out incorrect catagories for Return Reason Code
+     */
+
     public partial class CreateRMA : System.Web.UI.Page
     {
         protected List<SalesHeader> Sh;
@@ -294,10 +298,14 @@ namespace ExcelDesign.Forms.PDAForms
                                     TableCell returnReasonCode = new TableCell();
                                     TableCell reqReturnAction = new TableCell();
 
+                                    /* v7.1 3 October 2018 - Neil Jansen
+                                     * Updated logic to filter out incorrect catagories for Return Reason Code
+                                     */
+
                                     DropDownList ddlReturnReasonCode = new DropDownList
                                     {
                                         DataValueField = "Display",
-                                        DataSource = rrList.Where(x => x.Category != "Part Request"),
+                                        DataSource = rrList.Where(x => x.Category != "Part Request" && x.Category != "Cancel Order" && x.Category != "Partial Refund"),
                                         ID = "ddlReturnReasonCode_" + lineCount.ToString(),
                                         CssClass = "inputBox"
                                     };
@@ -392,10 +400,14 @@ namespace ExcelDesign.Forms.PDAForms
                                             TableCell returnReasonCode = new TableCell();
                                             TableCell reqReturnAction = new TableCell();
 
+                                            /* v7.1 - 3 October 2018 - Neil Jansen
+                                             * Updated logic to filter out incorrect catagories for Return Reason Code
+                                             */
+
                                             DropDownList ddlReturnReasonCode = new DropDownList
                                             {
                                                 DataValueField = "Display",
-                                                DataSource = rrList.Where(x => x.Category != "Part Request"),
+                                                DataSource = rrList.Where(x => x.Category != "Part Request" && x.Category != "Cancel Order" && x.Category != "Partial Refund"),
                                                 ID = "ddlReturnReasonCode_" + lineCount.ToString(),
                                                 CssClass = "inputBox"
                                             };
@@ -576,7 +588,20 @@ namespace ExcelDesign.Forms.PDAForms
 
                                     if (c.ID.Contains("ddlReturnReasonCode"))
                                     {
-                                        reasonCode = ((List<ReturnReason>)Session["ReturnReasons"])[index].ReasonCode;
+                                        /* v7.1 - 3 October 2018 - Neil Jansen
+                                         * Updated logic to filter out incorrect catagories for Return Reason Code
+                                         */
+
+                                        List<ReturnReason> sr = (List<ReturnReason>)Session["ReturnReasons"];
+                                        List<ReturnReason> rl = new List<ReturnReason>();
+                                        foreach (ReturnReason item in sr)
+                                        {
+                                            if (item.Category != "Part Request" && item.Category != "Cancel Order" && item.Category != "Partial Refund")
+                                            {
+                                                rl.Add(item);
+                                            }
+                                        }
+                                        reasonCode = (rl)[index].ReasonCode;
                                     }
                                     else if (c.ID.Contains("ddlREQReturnAction"))
                                     {

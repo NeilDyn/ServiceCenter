@@ -6,6 +6,10 @@ using System.Web;
 
 namespace ExcelDesign.Class_Objects
 {
+    /* v7.1 - 3 October 2018 - Neil Jansen
+     * Added properties for new permissions for Cancallations, Refunds and Partial Refunds
+     */
+
     public class User
     {
         public string UserID { get; set; }
@@ -16,12 +20,14 @@ namespace ExcelDesign.Class_Objects
         public bool CreateExchange { get; set; }
         public bool CreatePartRequest { get; set; }
         public bool CanIssueRefund { get; set; }
+        public bool CanPartialRefund { get; set; }
         public bool CreatePDARMA { get; set; }
         public bool CreatePDAExchange { get; set; }
         public bool CreatePDAPartRequest { get; set; }
         public bool CanIssuePDARefund { get; set; }
         public bool CanCancelOrder { get; set; }
         public bool CanCancelPDAOrder { get; set; }
+        public bool CanPartialRefundPDA { get; set; }
         public bool Admin { get; set; }
         public bool Developer { get; set; }
         public string PasswordLastUpdated { get; set; }
@@ -50,11 +56,14 @@ namespace ExcelDesign.Class_Objects
             CreatePartRequest = us.User[0].CreatePartRequest.ToUpper() == "YES" ? true : false;
             CreatePDAPartRequest = us.User[0].CreatePDAPartRequest.ToUpper() == "YES" ? true : false;
 
-            //CanIssueRefund = us.User[0].IssueRefund.ToUpper() == "YES" ? true : false;
-            //CanIssuePDARefund = us.User[0].IssuePDARefund.ToUpper() == "YES" ? true : false;
+            CanIssueRefund = us.User[0].IssueRefund.ToUpper() == "YES" ? true : false;
+            CanIssuePDARefund = us.User[0].IssuePDARefund.ToUpper() == "YES" ? true : false;
 
-            //CanCancelOrder = us.User[0].CancelOrder.ToUpper() == "YES" ? true : false;
-            //CanCancelPDAOrder = us.User[0].CancelPDAOrder.ToUpper() == "YES" ? true : false;
+            CanCancelOrder = us.User[0].CancelOrder.ToUpper() == "YES" ? true : false;
+            CanCancelPDAOrder = us.User[0].CancelPDAOrder.ToUpper() == "YES" ? true : false;
+
+            CanPartialRefund = us.User[0].CanPartialRefund.ToUpper() == "YES" ? true : false;
+            CanPartialRefundPDA = us.User[0].CanPartialRefundPDA.ToUpper() == "YES" ? true : false;
 
             Admin = us.User[0].Admin.ToUpper() == "YES" ? true : false;
             Developer = us.User[0].Developer.ToUpper() == "YES" ? true : false;

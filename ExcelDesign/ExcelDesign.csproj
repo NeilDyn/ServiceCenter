@@ -95,12 +95,14 @@
     <Content Include="Forms\AboutPage.aspx" />
     <Content Include="Forms\AdminControl.aspx" />
     <Content Include="Forms\ErrorForm.aspx" />
+    <Content Include="Forms\FunctionForms\CancelOrder.aspx" />
     <Content Include="Forms\FunctionForms\CreatedExchange.aspx" />
     <Content Include="Forms\FunctionForms\CreatedPartialRequest.aspx" />
     <Content Include="Forms\FunctionForms\CreatedRMA.aspx" />
     <Content Include="Forms\FunctionForms\CreateExchange.aspx" />
     <Content Include="Forms\FunctionForms\CreatePartialRequest.aspx" />
     <Content Include="Forms\FunctionForms\CreateReturn.aspx" />
+    <Content Include="Forms\FunctionForms\PartialRefund.aspx" />
     <Content Include="Forms\FunctionForms\RMAPDFForm.aspx" />
     <Content Include="Forms\LoginPage.aspx" />
     <Content Include="Forms\PDAForms\CreatedPartRequest.aspx" />
@@ -215,6 +217,13 @@
     <Compile Include="Forms\ErrorForm.aspx.designer.cs">
       <DependentUpon>ErrorForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FunctionForms\CancelOrder.aspx.cs">
+      <DependentUpon>CancelOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\CancelOrder.aspx.designer.cs">
+      <DependentUpon>CancelOrder.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FunctionForms\CreatedExchange.aspx.cs">
       <DependentUpon>CreatedExchange.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -256,6 +265,13 @@
     </Compile>
     <Compile Include="Forms\FunctionForms\CreateReturn.aspx.designer.cs">
       <DependentUpon>CreateReturn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\PartialRefund.aspx.cs">
+      <DependentUpon>PartialRefund.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\PartialRefund.aspx.designer.cs">
+      <DependentUpon>PartialRefund.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\FunctionForms\RMAPDFForm.aspx.cs">
       <DependentUpon>RMAPDFForm.aspx</DependentUpon>

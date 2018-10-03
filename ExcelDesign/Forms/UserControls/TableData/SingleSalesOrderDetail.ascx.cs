@@ -11,6 +11,10 @@ using ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines;
 
 namespace ExcelDesign.Forms.UserControls.TableData
 {
+    /* v7.1 - 3 October 2018 - Neil Jansen
+     * Added logic for new Permissions for Issue Refund, Cancel Order and Partial Refund
+     */
+     
     public partial class SingleSalesOrderDetail : System.Web.UI.UserControl
     {
         public SalesHeader Sh { get; set; }
@@ -26,6 +30,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
         public string CanCreatePDAPartRequest { get; set; }
         public string CanCancelOrder { get; set; }
         public string CanCancelPDAOrder { get; set; }
+        public string CanPartialRefund { get; set; }
+        public string CanPartialRefundPDA { get; set; }
 
         protected TableRow buttonRow = new TableRow();
         protected TableCell cancelOrderCell = new TableCell();
@@ -73,6 +79,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 CanCreatePDAPartRequest = "true";
                 CanCancelOrder = "true";
                 CanCancelPDAOrder = "true";
+                CanPartialRefund = "true";
+                CanPartialRefundPDA = "true";
             }
             else if (activeUser.Developer)
             {
@@ -82,6 +90,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 CanCreatePDAPartRequest = "true";
                 CanCancelOrder = "true";
                 CanCancelPDAOrder = "true";
+                CanPartialRefund = "true";
+                CanPartialRefundPDA = "true";
             }
             else
             {
@@ -91,6 +101,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 CanCreatePDAPartRequest = activeUser.CreatePDAPartRequest ? "true" : "false";
                 CanCancelOrder = activeUser.CanCancelOrder ? "true" : "false";
                 CanCancelPDAOrder = activeUser.CanCancelPDAOrder ? "true" : "false";
+                CanPartialRefund = activeUser.CanPartialRefund ? "true" : "false";
+                CanPartialRefundPDA = activeUser.CanPartialRefundPDA ? "true" : "false";
             }
         }
 
@@ -123,9 +135,9 @@ namespace ExcelDesign.Forms.UserControls.TableData
             {
                 this.tcRMANo.Visible = false;
                 this.tcRMANoTitle.Visible = false;
-            }  
-            
-            if(Sh.QuoteOrderNo != string.Empty)
+            }
+
+            if (Sh.QuoteOrderNo != string.Empty)
             {
                 this.tcOrderNoTitle.Visible = true;
                 this.tcOriginalOrderNo.Visible = true;
@@ -137,9 +149,9 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 this.tcOriginalOrderNo.Visible = false;
             }
 
-            if(Sh.IsPartRequest)
+            if (Sh.IsPartRequest)
             {
-                if(Sh.SalesOrderNo.ToUpper().Contains("SQ"))
+                if (Sh.SalesOrderNo.ToUpper().Contains("SQ"))
                 {
                     this.tcOrderStatus.Text = "Pending Approval";
                     this.lblOrderLabelNo.Text = "Quote No:";
@@ -223,7 +235,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 this.tcDaysRemaining.Text = Sh.WarrantyProp.DaysRemaining.ToString();
                 this.tcWarrantyType.Text = Sh.WarrantyProp.WarrantyType;
 
-                if(Sh.WarrantyProp.IsPDA == "YES")
+                if (Sh.WarrantyProp.IsPDA == "YES")
                 {
                     this.tcPDAStamp.Text = "PDA Replacement Warranty Program";
                     this.tcPDAStamp.BackColor = Color.LawnGreen;

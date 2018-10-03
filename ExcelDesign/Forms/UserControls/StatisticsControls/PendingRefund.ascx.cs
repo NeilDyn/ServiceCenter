@@ -8,6 +8,10 @@ using System.Web.UI.WebControls;
 
 namespace ExcelDesign.Forms.UserControls.StatisticsControls
 {
+    /* v7.1 - 3 October 2018 - Neil Jansen
+     * Added logic for Is Older than 24 Hours bucket
+     */
+
     public partial class PendingRefund : System.Web.UI.UserControl
     {
         public List<StatisticsSalesLine> RefundList { get; set; }
@@ -27,6 +31,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
 
                 int olderThan72Hours = 0;
                 int olderThan48Hours = 0;
+                int olderThan24Hours = 0;
 
                 foreach (StatisticsSalesLine line in RefundList)
                 {
@@ -37,6 +42,10 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                     else if (line.IsOlderThan48Hours)
                     {
                         olderThan48Hours++;
+                    }
+                    else if (line.IsOlderThan24Hours)
+                    {
+                        olderThan24Hours++;
                     }
                 }
 
@@ -58,7 +67,16 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                     tcRefundOlder48Hours.Text = olderThan48Hours.ToString();
                 }
 
-                if(RefundList.Count > 0)
+                if (olderThan24Hours > 0)
+                {
+                    tcRefundOlder24Hours.Text = "<a href='javascript:OpenSalesLineWindow(\"Refund\", \"24Hours\")'>" + olderThan24Hours.ToString() + "</a>";
+                }
+                else
+                {
+                    tcRefundOlder24Hours.Text = olderThan24Hours.ToString();
+                }
+
+                if (RefundList.Count > 0)
                 {
                    tcAllRefundsPending.Text = "<a href='javascript:OpenSalesLineWindow(\"Refund\", \"AllPending\")'>" + RefundList.Count.ToString() + "</a>";
                 }

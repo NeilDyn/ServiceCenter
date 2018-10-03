@@ -12,6 +12,10 @@ using System.Web;
 
 namespace ExcelDesign.Class_Objects
 {
+    /* v7.1 - 3 October 2018 - Neil Jansen
+     * Added functions for Issue Refund, Cancel Order, Process Exchanges and Partial Refunds
+     */
+
     public class SendService
     {
         public List<Customer> CustomerList { get; set; }
@@ -444,11 +448,21 @@ namespace ExcelDesign.Class_Objects
         public void IssueRefund(string rmaNo, string sessionID)
         {
             webService.IssueRefund(rmaNo, sessionID);
+        }      
+
+        public void CancelOrder(string orderNo, string docNo, string lineValues)
+        {
+            webService.CancelOrder(orderNo, docNo, lineValues);
         }
 
-        public void CancelOrder(string orderNo, string sessionID)
+        public void ProcessItems(string rmaList, string sessionID)
         {
-            webService.CancelOrder(orderNo, sessionID);
+            webService.ProcessItems(rmaList, sessionID);
+        }
+
+        public void PartialRefund(string orderNo, string docNo, string lineValues)
+        {
+            webService.PartialRefund(orderNo, docNo, lineValues);
         }
     }
 }

@@ -12,6 +12,10 @@ using System.Threading.Tasks;
 
 namespace ExcelDesign.Class_Objects
 {
+    /* v7.1 - 3 October 2018 - Neil Jansen
+     * Added functions for Issue Refund, Cancel Order, Process Exchanges and Partial Refunds
+     */
+
     public class WebService
     { 
         private readonly string functionsURL = "Codeunit/Functions";
@@ -175,9 +179,19 @@ namespace ExcelDesign.Class_Objects
             functions.CreateRefund(rmaNo, sessionID);
         }
 
-        public void CancelOrder(string orderNo, string sessionID)
+        public void CancelOrder(string orderNo, string docNo, string lineValues)
         {
-            functions.CancelOrder(orderNo, sessionID);
+            functions.CancelOrder(orderNo, docNo, lineValues, SessionID());
+        }
+
+        public void ProcessItems(string rmaList, string sessionID)
+        {
+            functions.ProcessReplacements(rmaList, sessionID);
+        }
+
+        public void PartialRefund(string orderNo, string docNo, string lineValues)
+        {
+            functions.PartialRefund(orderNo, docNo, lineValues, SessionID());
         }
     }
 }

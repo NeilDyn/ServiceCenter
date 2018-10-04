@@ -8,6 +8,7 @@ namespace ExcelDesign.Class_Objects
 {
     /* v7.1 - 3 October 2018 - Neil Jansen
      * Added properties for new permissions for Cancallations, Refunds and Partial Refunds
+     * Added RefundTier for refund option selection
      */
 
     public class User
@@ -33,6 +34,7 @@ namespace ExcelDesign.Class_Objects
         public string PasswordLastUpdated { get; set; }
         public string PasswordExpiryDate { get; set; }
         public int SessionTimeout { get; set; }
+        public string RefundTier { get; set; }
 
         public User(UserSetup us)
         {
@@ -72,6 +74,8 @@ namespace ExcelDesign.Class_Objects
             PasswordExpiryDate = us.User[0].PasswordExpiryDate;
 
             SessionTimeout = us.User[0].SessionTimeout;
+
+            RefundTier = "Supervisor";
         }
 
         public User()

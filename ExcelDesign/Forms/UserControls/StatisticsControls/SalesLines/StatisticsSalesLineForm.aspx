@@ -47,6 +47,7 @@
                     success: function (error) {
                         if (error.d.indexOf("Error") == -1) {
                             alert("Selected item(s) have been processed successfully.");
+                            parent.window.close();
                         } else {
                             alert(error.d);
                         }

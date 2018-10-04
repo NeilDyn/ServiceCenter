@@ -140,10 +140,10 @@
                                 __doPostBack('[id$=btnReload', '');
                                 clearInterval(intervalID);
                             }
+                        }
                             var interval = setInterval(function () {
                                 checkIfWinClosed(interval);
                             }, 1000);
-                        }
                     } else {
                         alert('Please close the current active Create Return Order dialog window before trying to open a new instance.');
                     }
@@ -157,7 +157,7 @@
         });
 
         $("[id$=btnIssueRefund_<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            if ("<%= this.tcOrderStatus.Text%>" == "OrderCreated") {
+            if ("<%= this.tcStatus.Text.ToUpper()%>" == "OPEN") {
                 var width = 1500;
                 var height = 800;
                 var left = (screen.height - width) + 1500;
@@ -195,20 +195,20 @@
                     alert('Please close the current active Partial Refund dialog window before trying to open a new instance.');
                 }
             } else {
-                alert("Order <%= this.OrderNo%> must be not be shipped to be Partially Refunded.");
+                alert("Warranty Status must be set to 'OPEN'.");
             }
         });
     });
 
     function expandMoreOrderLines<%= this.CustID %><%= this.CountID %>(lineID) {
         if ($("a#expandMoreClickOrderLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text() == "Show More") {
-                $("a#expandMoreClickOrderLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text("Show Less");
-            }
-            else {
-                $("a#expandMoreClickOrderLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text("Show More");
-            }
+            $("a#expandMoreClickOrderLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text("Show Less");
+        }
+        else {
+            $("a#expandMoreClickOrderLine_<%=this.CustID %>_<%= this.CountID %>_" + lineID).text("Show More");
+        }
 
-            $("[id*=showMoreOrderLines_<%= this.CustID %>_<%= this.CountID %>_" + lineID + "]").toggle();
+        $("[id*=showMoreOrderLines_<%= this.CustID %>_<%= this.CountID %>_" + lineID + "]").toggle();
     };
 
     function expandShipments<%=this.CustID %><%= this.CountID %>() {

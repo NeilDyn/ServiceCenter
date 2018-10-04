@@ -319,7 +319,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             btnCreateReturn.ID = "btnCreateReturn_" + CustID.ToString() + "_" + CountID.ToString();
             btnCreateReturn.OnClientClick = "return false;";
 
-            btnIssueRefund.Text = "Issue Refund";
+            btnIssueRefund.Text = "Partial Refund";
             btnIssueRefund.ID = "btnIssueRefund_" + CustID.ToString() + "_" + CountID.ToString();
             btnIssueRefund.OnClientClick = "return false;";
         }

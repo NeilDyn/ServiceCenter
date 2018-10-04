@@ -179,6 +179,7 @@
     <Compile Include="Class Objects\PostedReceiveLine.cs" />
     <Compile Include="Class Objects\ReceiptHeader.cs" />
     <Compile Include="Class Objects\ReceiptLine.cs" />
+    <Compile Include="Class Objects\RefundOptions.cs" />
     <Compile Include="Class Objects\ReturnHeader.cs" />
     <Compile Include="Class Objects\SalesHeader.cs" />
     <Compile Include="Class Objects\SendService.cs" />

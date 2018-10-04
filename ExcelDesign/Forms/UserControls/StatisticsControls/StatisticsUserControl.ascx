@@ -51,6 +51,7 @@
 
             function checkIfWinClosed(intervalID) {
                 if (statisticsSalesLine.closed) {
+                    __doPostBack('[id$=btnReload', '');
                     clearInterval(intervalID);
                 }
             }

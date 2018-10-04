@@ -47,6 +47,7 @@
                             <asp:TableHeaderCell Text="Qty" ID="HeaderQty" />
                             <asp:TableHeaderCell Text="Action Qty." ID="HeaderActionQty" Width="8%" />
                             <asp:TableHeaderCell Text="Reason Code" HorizontalAlign="Left" ID="HeaderReasonCode" />
+                            <asp:TableHeaderCell Text="Refund Option" HorizontalAlign="Left" ID="HeaderRefundOption" />
                         </asp:TableHeaderRow>
                     </asp:Table>
                 </asp:TableCell>

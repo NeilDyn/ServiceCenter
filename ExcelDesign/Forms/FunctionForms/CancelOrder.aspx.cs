@@ -242,6 +242,7 @@ namespace ExcelDesign.Forms.FunctionForms
 
                     ss.CancelOrder(no, docNo, lineValues);
                     Session["NoUserInteraction"] = true;
+                    Session["SearchValue"] = "ORDER CANCELLED";
 
                     ClientScript.RegisterStartupScript(this.GetType(), "cancelledOrder", "alert('Order " + no + " has been successfully cancelled.');", true);
                     ClientScript.RegisterStartupScript(this.GetType(), "closeCancelOrder", "CloseAfterCancel();", true);

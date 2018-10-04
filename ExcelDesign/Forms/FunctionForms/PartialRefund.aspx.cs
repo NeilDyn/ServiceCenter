@@ -50,6 +50,9 @@ namespace ExcelDesign.Forms.FunctionForms
                 Sh = (List<SalesHeader>)Session["SalesHeaders"];
 
                 List<ReturnReason> rrList = (List<ReturnReason>)Session["ReturnReasons"];
+                List<RefundOptions> ro = new RefundOptions().Populate();
+
+                User u = (User)Session["ActiveUser"];
 
 
                 int lineCount = 0;
@@ -66,7 +69,7 @@ namespace ExcelDesign.Forms.FunctionForms
 
                             foreach (ShipmentLine line in header.ShipmentLines)
                             {
-                                if (line.Quantity > 0 && line.Type.ToUpper() == "ITEM")
+                                if (line.Quantity > 0)
                                 {
                                     lineCount++; ;
 
@@ -77,12 +80,21 @@ namespace ExcelDesign.Forms.FunctionForms
                                     TableCell qty = new TableCell();
                                     TableCell actionQty = new TableCell();
                                     TableCell returnReasonCode = new TableCell();
+                                    TableCell refundOption = new TableCell();
 
                                     DropDownList ddlReturnReasonCode = new DropDownList
                                     {
                                         DataValueField = "Display",
                                         DataSource = rrList.Where(x => x.Category == "Partial Refund" || x.Category == ""),
                                         ID = "ddlReturnReasonCode_" + lineCount.ToString(),
+                                        CssClass = "inputBox"
+                                    };
+
+                                    DropDownList ddlRefundOption = new DropDownList
+                                    {
+                                        DataValueField = "Option",
+                                        DataSource = ro.Where(o => o.Tier == u.RefundTier),
+                                        ID = "ddlRefundOption_" + lineCount.ToString(),
                                         CssClass = "inputBox"
                                     };
 
@@ -95,18 +107,21 @@ namespace ExcelDesign.Forms.FunctionForms
                                     };
 
                                     ddlReturnReasonCode.DataBind();
+                                    ddlRefundOption.DataBind();
 
                                     itemNo.ID = "itemNo_" + lineCount.ToString();
                                     qty.ID = "itemQuanity_" + lineCount.ToString();
                                     desc.ID = "desc_" + lineCount.ToString();
                                     actionQty.ID = "actionQty_" + lineCount.ToString();
                                     returnReasonCode.ID = "returnReasonCode_" + lineCount.ToString();
+                                    refundOption.ID = "refundOption_" + lineCount.ToString();
 
                                     itemNo.Text = line.ItemNo;
                                     desc.Text = line.Description;
                                     qty.Text = (line.Quantity).ToString();
                                     actionQty.Controls.Add(actionQtyInsert);
                                     returnReasonCode.Controls.Add(ddlReturnReasonCode);
+                                    refundOption.Controls.Add(ddlRefundOption);
 
                                     qty.HorizontalAlign = HorizontalAlign.Center;
                                     actionQty.HorizontalAlign = HorizontalAlign.Center;
@@ -118,18 +133,21 @@ namespace ExcelDesign.Forms.FunctionForms
                                     singleRow.Cells.Add(qty);
                                     singleRow.Cells.Add(actionQty);
                                     singleRow.Cells.Add(returnReasonCode);
+                                    singleRow.Cells.Add(refundOption);
 
                                     if (lineCount % 2 == 0)
                                     {
                                         singleRow.BackColor = Color.White;
                                         actionQtyInsert.BackColor = Color.White;
                                         ddlReturnReasonCode.BackColor = Color.White;
+                                        ddlRefundOption.BackColor = Color.White;
                                     }
                                     else
                                     {
                                         singleRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
                                         actionQtyInsert.BackColor = ColorTranslator.FromHtml("#EFF3FB");
                                         ddlReturnReasonCode.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                                        ddlRefundOption.BackColor = ColorTranslator.FromHtml("#EFF3FB");
                                     }
 
                                     singleRow.Attributes.CssStyle.Add("border-collapse", "collapse");
@@ -157,6 +175,8 @@ namespace ExcelDesign.Forms.FunctionForms
                 no = tcNo.Text;
                 docNo = tcDocNo.Text;
 
+                User u = (User)Session["ActiveUser"];
+
                 bool allValidLines = true;
                 int rowCount = 0;
                 int controlCount = 0;
@@ -168,6 +188,7 @@ namespace ExcelDesign.Forms.FunctionForms
                     int qtyLine = 0;
                     int actionQty = 0;
                     string reasonCode = string.Empty;
+                    decimal refundOption = 0;
 
                     controlCount = 0;
 
@@ -197,22 +218,42 @@ namespace ExcelDesign.Forms.FunctionForms
                             {
                                 int index = ((DropDownList)c).SelectedIndex;
 
-                                List<ReturnReason> sr = (List<ReturnReason>)Session["ReturnReasons"];
-                                List<ReturnReason> rl = new List<ReturnReason>();
-                                foreach (ReturnReason item in sr)
+                                if(c.ID.Contains("ddlReturnReasonCode_"))
                                 {
-                                    if (item.Category == "Partial Refund" || item.Category == "")
+                                    List<ReturnReason> sr = (List<ReturnReason>)Session["ReturnReasons"];
+                                    List<ReturnReason> rl = new List<ReturnReason>();
+                                    foreach (ReturnReason item in sr)
                                     {
-                                        rl.Add(item);
+                                        if (item.Category == "Partial Refund" || item.Category == "")
+                                        {
+                                            rl.Add(item);
+                                        }
                                     }
+                                    reasonCode = (rl)[index].ReasonCode;
                                 }
-                                reasonCode = (rl)[index].ReasonCode;
+
+                                if(c.ID.Contains("ddlRefundOption"))
+                                {
+                                    List<RefundOptions> ro = new RefundOptions().Populate();
+                                    List<RefundOptions> newRo = new List<RefundOptions>();
+
+                                    foreach (RefundOptions option in ro)
+                                    {
+                                        if(option.Tier == u.RefundTier)
+                                        {
+                                            newRo.Add(option);
+                                        }
+                                    }
+
+                                    string value = (newRo)[index].Option.Replace("%", "");
+                                    Decimal.TryParse(value, out refundOption);
+                                }
                             }
                         }
 
                         string lineValidMessage = string.Empty;
 
-                        if ((rowCount > 1 && controlCount == 2 && actionQty != 0))
+                        if ((rowCount > 1 && controlCount == 3 && actionQty != 0))
                         {
                             lineValidMessage = ValidateLine(itemNo, qtyLine, actionQty, reasonCode);
 
@@ -220,7 +261,8 @@ namespace ExcelDesign.Forms.FunctionForms
                             {
                                 lineBuild.Append(itemNo).Append(":");
                                 lineBuild.Append(actionQty).Append(":");
-                                lineBuild.Append(reasonCode).Append(",");
+                                lineBuild.Append(reasonCode).Append(":");
+                                lineBuild.Append(refundOption).Append(',');
                             }
                             else
                             {

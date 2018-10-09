@@ -102,4 +102,10 @@
     <asp:TableRow runat="server" TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell runat="server" ID="expandPendingUnknown" ColumnSpan="2" Width="50%" Height="100%" />
     </asp:TableRow>
+    <asp:TableRow>
+        <asp:TableCell />
+    </asp:TableRow>
+    <asp:TableRow>
+        <asp:TableCell><asp:ImageButton ID="BtnRefreshStatistics" runat="server" ImageUrl="~/images/refresh.png" Height="30px" OnClick="BtnRefreshStatistics_Click"/></asp:TableCell>
+    </asp:TableRow>
 </asp:Table>

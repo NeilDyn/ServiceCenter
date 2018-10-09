@@ -27,11 +27,11 @@
                 if ($(this).is(':checked')) {
                     if (rmaList == "") {
                         singleLine = $(this).attr('id').substr(12, $(this).attr('id').length);
-                        rmaList = $("[id$=docNo_" + singleLine + "]").text().trim();
+                        rmaList = $("[id$=docNoInv_" + singleLine + "]").text().trim();
                     }
                     else {
                         singleLine = $(this).attr('id').substr(12, $(this).attr('id').length);
-                        rmaList += "," + $("[id$=docNo_" + singleLine + "]").text().trim();
+                        rmaList += "," + $("[id$=docNoInv_" + singleLine + "]").text().trim();
                     }
                 }
             });

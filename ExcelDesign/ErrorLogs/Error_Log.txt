@@ -186,3 +186,11 @@ System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowe
    at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 194
    at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 465
    at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
+ERROR 2018-10-05 08:27:37,117 62520ms CancelOrder            nCancelOrder_Click - Action Cancellation is not allowed for Customer OSTKMP.
+System.Web.Services.Protocols.SoapException: Action Cancellation is not allowed for Customer OSTKMP.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.CancelOrder(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 757
+   at ExcelDesign.Class_Objects.WebService.CancelOrder(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 184
+   at ExcelDesign.Class_Objects.SendService.CancelOrder(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 455
+   at ExcelDesign.Forms.FunctionForms.CancelOrder.btnCancelOrder_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\CancelOrder.aspx.cs:line 243

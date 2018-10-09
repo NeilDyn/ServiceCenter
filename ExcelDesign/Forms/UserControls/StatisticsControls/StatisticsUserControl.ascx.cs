@@ -37,12 +37,21 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
 
             try
             {
-                User activeUser = null;
-
-                if (Session["ActiveUser"] != null)
+                if (!IsPostBack)
                 {
-                    activeUser = (User)Session["ActiveUser"];
-                    statisticsInformation = cs.GetStatisticsInformation();
+                    User activeUser = null;
+
+                    if (Session["ActiveUser"] != null)
+                    {
+                        activeUser = (User)Session["ActiveUser"];
+                        statisticsInformation = cs.GetStatisticsInformation();
+                        Session["StatisticsInformation"] = statisticsInformation;
+                        PopulateLines();
+                    }
+                }
+                else
+                {
+                    statisticsInformation = (List<StatisticsSalesLine>)Session["StatisticsInformation"];
                     PopulateLines();
                 }
             }
@@ -198,6 +207,19 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
             ((PendingSQApproval)quoteLinesControl).PopulateData();
 
             expandPendingSQApproval.Controls.Add(quoteLinesControl);
+        }
+
+        protected void BtnRefreshStatistics_Click(object sender, ImageClickEventArgs e)
+        {
+
+            User activeUser = null;
+
+            if (Session["ActiveUser"] != null)
+            {
+                activeUser = (User)Session["ActiveUser"];
+                statisticsInformation = cs.GetStatisticsInformation();
+                Session["StatisticsInformation"] = statisticsInformation;
+            }
         }
     }
 }

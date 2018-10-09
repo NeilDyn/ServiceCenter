@@ -149,6 +149,7 @@
     <Content Include="Headers\Navbar.ascx" />
     <Content Include="images\Logo.png" />
     <Content Include="images\icon.ico" />
+    <Content Include="images\refresh.png" />
     <Content Include="images\sketch.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

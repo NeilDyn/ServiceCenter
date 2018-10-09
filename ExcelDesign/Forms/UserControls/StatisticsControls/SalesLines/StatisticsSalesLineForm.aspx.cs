@@ -156,6 +156,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
             try
             {
                 int lineCount = 0;
+                int processCount = 0;
 
                 foreach (StatisticsSalesLine line in displayList)
                 {
@@ -183,7 +184,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                     reqReturnAction.Text = line.REQReturnAction;
                     status.Text = line.Status;
 
-                    docNo.ID = "docNo_" + lineCount.ToString(); ;
+                    docNo.ID = "docNo_" + lineCount.ToString();
 
                     qty.HorizontalAlign = HorizontalAlign.Center;
 
@@ -206,8 +207,11 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                         tr.BackColor = ColorTranslator.FromHtml("#EFF3FB");
                     }
 
-                    if (pendingList == "Replacement")
+                    if (pendingList == "Replacement" && !line.Status.ToLower().Contains("no inventory"))
                     {
+                        processCount++;
+                        docNo.ID = "docNoInv_" + lineCount.ToString();
+
                         TableCell processCell = new TableCell();
                         CheckBox cb = new CheckBox
                         {
@@ -231,7 +235,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                 breakRow.Cells.Add(breakCell);
                 tblStatisticsSalesLines.Rows.Add(breakRow);
 
-                if(pendingList == "Replacement")
+                if(pendingList == "Replacement" && processCount > 0)
                 {
                     TableRow checkboxRow = new TableRow
                     {
@@ -286,6 +290,10 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
 
                     tblStatisticsSalesLines.Rows.Add(checkboxRow);
                     tblStatisticsSalesLines.Rows.Add(buttonRow);
+                }
+                else
+                {
+                    ProcessColumn.Visible = false;
                 }
             }
             catch (Exception ex)

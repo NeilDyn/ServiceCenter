@@ -98,6 +98,7 @@ namespace ExcelDesign.Forms
                 cbxCancelPDAOrder.Checked = u.CanCancelPDAOrder;
                 cbxPartialRefund.Checked = u.CanPartialRefund;
                 cbxPartialRefundPDA.Checked = u.CanPartialRefundPDA;
+                tcPartialrefundTier.Text = u.RefundTier;
             }
             catch (Exception ex)
             {

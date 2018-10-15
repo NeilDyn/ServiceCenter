@@ -12,6 +12,10 @@ namespace ExcelDesign.Class_Objects
      * GetStatisticsInformation() - Added older than 24 hours bucket
      */
 
+    /* v7.2 - 12 October 2018 - Neil Jansen
+     * Added Customer Allow Refund property logic in GetStatisticsInformation()
+     */ 
+
     public class CallService
     {
         private WebService webService;
@@ -2226,6 +2230,7 @@ namespace ExcelDesign.Class_Objects
             bool isOlderThan48Hours = false;
             bool isOlderThan24Hours = false;
             bool isPendingSQApproval = false;
+            bool custAllowRefund = false;
             string status = string.Empty;
 
             if (stats.SalesLine != null)
@@ -2247,6 +2252,7 @@ namespace ExcelDesign.Class_Objects
                     isOlderThan48Hours = stats.SalesLine[sl].IsOlderThan48Hrs[0] == "Yes" ? true : false;
                     isOlderThan24Hours = stats.SalesLine[sl].IsOlderThan24Hrs[0] == "Yes" ? true : false;
                     isPendingSQApproval = stats.SalesLine[sl].IsPendingSQApproval[0] == "Yes" ? true : false;
+                    custAllowRefund = stats.SalesLine[sl].CustAllowRefund[0] == "Yes" ? true : false;
 
                     if (isNotInvtAvailable)
                     {
@@ -2300,7 +2306,7 @@ namespace ExcelDesign.Class_Objects
                     }
 
                     statLines.Add(new StatisticsSalesLine(docType, docNo, externalDocNo, itemNo, qty, description, createdDate, reqReturnAction, isNotInvtAvailable, isOlderThan72Hours,
-                        isPendingSQApproval, customerNo, isOlderThan48Hours, status, isOlderThan24Hours));
+                        isPendingSQApproval, customerNo, isOlderThan48Hours, status, isOlderThan24Hours, custAllowRefund));
 
                     docType = string.Empty;
                     docNo = string.Empty;
@@ -2316,6 +2322,7 @@ namespace ExcelDesign.Class_Objects
                     isOlderThan48Hours = false;
                     isOlderThan24Hours = false;
                     isPendingSQApproval = false;
+                    custAllowRefund = false;
                     status = string.Empty;
                 }
             }

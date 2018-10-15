@@ -51,6 +51,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                 }
                 else
                 {
+                    statisticsInformation = new List<StatisticsSalesLine>();
                     statisticsInformation = (List<StatisticsSalesLine>)Session["StatisticsInformation"];
                     PopulateLines();
                 }
@@ -211,14 +212,17 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
 
         protected void BtnRefreshStatistics_Click(object sender, ImageClickEventArgs e)
         {
-
             User activeUser = null;
 
             if (Session["ActiveUser"] != null)
             {
                 activeUser = (User)Session["ActiveUser"];
+                statisticsInformation = new List<StatisticsSalesLine>();
                 statisticsInformation = cs.GetStatisticsInformation();
+
                 Session["StatisticsInformation"] = statisticsInformation;
+
+                PopulateLines();
             }
         }
     }

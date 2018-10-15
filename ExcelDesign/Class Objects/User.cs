@@ -75,7 +75,7 @@ namespace ExcelDesign.Class_Objects
 
             SessionTimeout = us.User[0].SessionTimeout;
 
-            RefundTier = "Supervisor";
+            RefundTier = us.User[0].PartialRefundTier;
         }
 
         public User()

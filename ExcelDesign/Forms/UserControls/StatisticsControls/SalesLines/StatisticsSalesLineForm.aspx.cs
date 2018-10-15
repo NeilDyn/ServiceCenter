@@ -24,7 +24,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
 
         protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(StatisticsSalesLineForm));
 
-        protected string pendingList;
+        public string pendingList { get; set; }
         protected string pendingType;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -46,6 +46,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                 case "Replacement":
                     Title = "Statistics - Pending Replacement ";
                     ProcessColumn.Visible = true;
+                    RefundProcessing.Visible = false;
 
                     foreach (StatisticsSalesLine exchange in SalesLineList)
                     {
@@ -58,7 +59,8 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
 
                 case "Refund":
                     Title = "Statistics - Pending Refund ";
-                    ProcessColumn.Visible = false;
+                    ProcessColumn.Visible = true;
+                    RefundProcessing.Visible = true;
 
                     foreach (StatisticsSalesLine refund in SalesLineList)
                     {
@@ -72,6 +74,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                 case "Unknown":
                     Title = "Statistics - Pending Unknown ";
                     ProcessColumn.Visible = false;
+                    RefundProcessing.Visible = false;
 
                     foreach (StatisticsSalesLine unknown in SalesLineList)
                     {
@@ -85,6 +88,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                 case "PendingSQApproval":
                     Title = "Statistics - Pending Unknown ";
                     ProcessColumn.Visible = false;
+                    RefundProcessing.Visible = false;
 
                     foreach (StatisticsSalesLine sqApproval in SalesLineList)
                     {
@@ -198,6 +202,16 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                     tr.Cells.Add(reqReturnAction);
                     tr.Cells.Add(status);
 
+                    if(pendingList == "Refund")
+                    {
+                        TableCell refundProcess = new TableCell
+                        {
+                            Text = line.CustAllowRefund ? "Auto" : "Maunual"
+                        };
+
+                        tr.Cells.Add(refundProcess);
+                    }
+
                     if (lineCount % 2 == 0)
                     {
                         tr.BackColor = Color.White;
@@ -215,7 +229,23 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                         TableCell processCell = new TableCell();
                         CheckBox cb = new CheckBox
                         {
-                            ID = "cbxExchange_" + lineCount.ToString(),
+                            ID = "cbxProcess" + lineCount.ToString(),
+                            Checked = false
+                        };
+
+                        processCell.Controls.Add(cb);
+                        tr.Cells.Add(processCell);
+                    }
+
+                    if(pendingList == "Refund" && !line.Status.ToLower().Contains("no inventory") && line.CustAllowRefund)
+                    {
+                        processCount++;
+                        docNo.ID = "docNoInv_" + lineCount.ToString();
+
+                        TableCell processCell = new TableCell();
+                        CheckBox cb = new CheckBox
+                        {
+                            ID = "cbxProcess" + lineCount.ToString(),
                             Checked = false
                         };
 
@@ -235,7 +265,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                 breakRow.Cells.Add(breakCell);
                 tblStatisticsSalesLines.Rows.Add(breakRow);
 
-                if(pendingList == "Replacement" && processCount > 0)
+                if((pendingList == "Replacement" || pendingList == "Refund") && processCount > 0)
                 {
                     TableRow checkboxRow = new TableRow
                     {
@@ -275,8 +305,10 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                     checkboxRow.Cells.Add(new TableCell());
                     checkboxRow.Cells.Add(new TableCell());
                     checkboxRow.Cells.Add(new TableCell());
+                    checkboxRow.Cells.Add(new TableCell());
                     checkboxRow.Cells.Add(checkBoxCell);
 
+                    buttonRow.Cells.Add(new TableCell());
                     buttonRow.Cells.Add(new TableCell());
                     buttonRow.Cells.Add(new TableCell());
                     buttonRow.Cells.Add(new TableCell());
@@ -304,7 +336,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static string ProcessItems(string rmaList)
+        public static string ProcessItems(string rmaList, string type)
         {
             try
             {
@@ -320,7 +352,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                 }
 
 
-                StaticService.ProcessItems(rmaList, sessionID);
+                StaticService.ProcessItems(rmaList, sessionID, type);
 
                 HttpContext.Current.Session["NoUserInteraction"] = true;
                 HttpContext.Current.Session["UserInteraction"] = true;

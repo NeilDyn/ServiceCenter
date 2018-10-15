@@ -16,6 +16,10 @@ namespace ExcelDesign.Class_Objects
      * Added functions for Issue Refund, Cancel Order, Process Exchanges and Partial Refunds
      */
 
+    /* v7.2 - 15 October 2018 - Neil Jansen
+    * Updated Process Items function to added parameter type determing if processing replacements or refunds.
+    */
+
     public class SendService
     {
         public List<Customer> CustomerList { get; set; }
@@ -455,9 +459,9 @@ namespace ExcelDesign.Class_Objects
             webService.CancelOrder(orderNo, docNo, lineValues);
         }
 
-        public void ProcessItems(string rmaList, string sessionID)
+        public void ProcessItems(string rmaList, string sessionID, string type)
         {
-            webService.ProcessItems(rmaList, sessionID);
+            webService.ProcessItems(rmaList, sessionID, type);
         }
 
         public void PartialRefund(string orderNo, string docNo, string lineValues)

@@ -138,6 +138,10 @@
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
+                <asp:TableCell Text="Partial Refund Tier" />
+                <asp:TableCell ID="tcPartialrefundTier" />
+            </asp:TableRow>
+            <asp:TableRow>
                 <asp:TableCell Text="Admin" />
                 <asp:TableCell ID="tcAdmin" HorizontalAlign="Center">
                     <asp:CheckBox ID="cbxAdmin" runat="server" Enabled="false" />

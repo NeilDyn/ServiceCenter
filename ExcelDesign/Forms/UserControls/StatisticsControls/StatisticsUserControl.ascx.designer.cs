@@ -22,6 +22,15 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls {
         protected global::System.Web.UI.WebControls.Table tblStatistics;
         
         /// <summary>
+        /// BtnRefreshStatistics control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton BtnRefreshStatistics;
+        
+        /// <summary>
         /// tcPendingReplacements control.
         /// </summary>
         /// <remarks>
@@ -92,14 +101,5 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableCell expandPendingUnknown;
-        
-        /// <summary>
-        /// BtnRefreshStatistics control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton BtnRefreshStatistics;
     }
 }

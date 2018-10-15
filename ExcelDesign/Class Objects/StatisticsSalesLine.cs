@@ -9,6 +9,10 @@ namespace ExcelDesign.Class_Objects
      * Added logic for Is Older than 24 Hours bucket
      */
 
+    /* v7.2 - 15 October 2018 - Neil Jansen
+     * Added new property for Customer Refund Permission to determine if the could Auto process from portal
+     */ 
+
     public class StatisticsSalesLine
     {
         public string DocType { get; set; }
@@ -26,9 +30,10 @@ namespace ExcelDesign.Class_Objects
         public bool IsOlderThan48Hours { get; set; }
         public bool IsOlderThan24Hours { get; set; }
         public bool IsPendingSQApproval { get; set; }
+        public bool CustAllowRefund { get; set; }
 
         public StatisticsSalesLine(string docTypeP, string docNoP, string externalDocumentNoP, string itemNoP, int qtyP, string descriptionP, string createdDateP, string reqReturnActionP,
-            bool isNotInvAvailableP, bool isOlderThan72HoursP, bool isPendingSQApprovalP, string customerNoP, bool isOlderThan48HoursP, string statusP, bool isOlderThan24HoursP)
+            bool isNotInvAvailableP, bool isOlderThan72HoursP, bool isPendingSQApprovalP, string customerNoP, bool isOlderThan48HoursP, string statusP, bool isOlderThan24HoursP, bool custAllowRefundP)
         {
             DocType = docTypeP;
             DocNo = docNoP;
@@ -45,6 +50,7 @@ namespace ExcelDesign.Class_Objects
             IsOlderThan48Hours = isOlderThan48HoursP;
             Status = statusP;
             IsOlderThan24Hours = isOlderThan24HoursP;
+            CustAllowRefund = custAllowRefundP;
         }
 
         public StatisticsSalesLine()

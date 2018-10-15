@@ -11,10 +11,10 @@
         $(document).ready(function () {
             $("[id$=cbxSelectAll]").click(function () {
                 if ($(this).is(':checked')) {
-                    $("[id*=cbxExchange_]").prop('checked', true);
+                    $("[id*=cbxProcess]").prop('checked', true);
                 }
                 else {
-                    $("[id*=cbxExchange_]").prop('checked', false);
+                    $("[id*=cbxProcess]").prop('checked', false);
                 };
             });
         });
@@ -22,26 +22,27 @@
         function ProcessItems() {
             var rmaList = "";
             var singleLine = "";
+            var type = "<%= this.pendingList%>";
 
-            $("[id*=cbxExchange_]").each(function () {
+            $("[id*=cbxProcess]").each(function () {
                 if ($(this).is(':checked')) {
                     if (rmaList == "") {
-                        singleLine = $(this).attr('id').substr(12, $(this).attr('id').length);
+                        singleLine = $(this).attr('id').substr(10, $(this).attr('id').length);
                         rmaList = $("[id$=docNoInv_" + singleLine + "]").text().trim();
                     }
                     else {
-                        singleLine = $(this).attr('id').substr(12, $(this).attr('id').length);
+                        singleLine = $(this).attr('id').substr(10, $(this).attr('id').length);
                         rmaList += "," + $("[id$=docNoInv_" + singleLine + "]").text().trim();
                     }
                 }
             });
 
-            if (rmaList != "") {
+            if (rmaList != "") {              
                 rmaList += ",";
                 $.ajax({
                     type: "POST",
                     url: "StatisticsSalesLineForm.aspx/ProcessItems",
-                    data: JSON.stringify({ rmaList: rmaList }),
+                    data: JSON.stringify({ rmaList: rmaList, type: type }),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (error) {
@@ -76,6 +77,7 @@
                 <asp:TableHeaderCell Text="Qty" />
                 <asp:TableHeaderCell Text="REQ Return Action" />
                 <asp:TableHeaderCell Text="Status" />
+                <asp:TableHeaderCell Text="Refund Processing" ID="RefundProcessing" Visible="false" />
                 <asp:TableHeaderCell Text="Process" ID="ProcessColumn" Visible="false" />
             </asp:TableHeaderRow>
             <asp:TableHeaderRow>

@@ -194,3 +194,153 @@ System.Web.Services.Protocols.SoapException: Action Cancellation is not allowed 
    at ExcelDesign.Class_Objects.WebService.CancelOrder(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 184
    at ExcelDesign.Class_Objects.SendService.CancelOrder(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 455
    at ExcelDesign.Forms.FunctionForms.CancelOrder.btnCancelOrder_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\CancelOrder.aspx.cs:line 243
+ERROR 2018-10-15 09:53:53,789 481059ms PartialRefund          artialRefund_Click - Order SO-04447229 is already shipped. Cannot Create Partial Refund.
+System.Web.Services.Protocols.SoapException: Order SO-04447229 is already shipped. Cannot Create Partial Refund.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
+ERROR 2018-10-15 10:13:56,982 233284ms PartialRefund          artialRefund_Click - Order SO-04447229 is already shipped. Cannot Create Partial Refund.
+System.Web.Services.Protocols.SoapException: Order SO-04447229 is already shipped. Cannot Create Partial Refund.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
+ERROR 2018-10-15 10:16:40,398 121292ms PartialRefund          artialRefund_Click - Order SO-04447229 is already shipped. Cannot Create Partial Refund.
+System.Web.Services.Protocols.SoapException: Order SO-04447229 is already shipped. Cannot Create Partial Refund.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
+ERROR 2018-10-15 10:17:52,814 193708ms PartialRefund          artialRefund_Click - The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
+System.Web.Services.Protocols.SoapException: The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
+ERROR 2018-10-15 10:18:06,737 207631ms PartialRefund          artialRefund_Click - The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
+System.Web.Services.Protocols.SoapException: The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
+ERROR 2018-10-15 10:18:29,049 229943ms PartialRefund          artialRefund_Click - The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
+System.Web.Services.Protocols.SoapException: The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
+ERROR 2018-10-15 10:18:47,041 247935ms PartialRefund          artialRefund_Click - The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
+System.Web.Services.Protocols.SoapException: The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
+ERROR 2018-10-15 10:20:25,507 346401ms PartialRefund          artialRefund_Click - Order SO-04447229 is already shipped. Cannot Create Partial Refund.
+System.Web.Services.Protocols.SoapException: Order SO-04447229 is already shipped. Cannot Create Partial Refund.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
+ERROR 2018-10-15 10:22:03,634 444528ms PartialRefund          artialRefund_Click - The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
+System.Web.Services.Protocols.SoapException: The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
+ERROR 2018-10-15 10:22:50,046 490940ms PartialRefund          artialRefund_Click - TESTA
+System.Web.Services.Protocols.SoapException: TESTA
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
+ERROR 2018-10-15 10:23:08,290 509184ms PartialRefund          artialRefund_Click - TESTA
+System.Web.Services.Protocols.SoapException: TESTA
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
+ERROR 2018-10-15 10:23:21,034 521928ms PartialRefund          artialRefund_Click - TESTA
+System.Web.Services.Protocols.SoapException: TESTA
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
+ERROR 2018-10-15 10:23:34,614 535508ms PartialRefund          artialRefund_Click - The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
+System.Web.Services.Protocols.SoapException: The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
+ERROR 2018-10-15 10:23:50,280 551175ms PartialRefund          artialRefund_Click - The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
+System.Web.Services.Protocols.SoapException: The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
+ERROR 2018-10-15 10:24:17,098 577992ms PartialRefund          artialRefund_Click - The following ODBC error occurred:  Error: [Microsoft][ODBC SQL Server Driver]Database is invalid or cannot be accessed State ID: HY024
+System.Web.Services.Protocols.SoapException: The following ODBC error occurred:  Error: [Microsoft][ODBC SQL Server Driver]Database is invalid or cannot be accessed State ID: HY024
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
+ERROR 2018-10-15 13:44:48,176 92014ms PartialRefund          artialRefund_Click - Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 248
+ERROR 2018-10-15 13:45:11,537 115375ms PartialRefund          artialRefund_Click - Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 248
+ERROR 2018-10-15 13:46:31,363 195201ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer AMZMKT001.
+System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer AMZMKT001.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
+ERROR 2018-10-15 14:46:41,766 61155ms tatisticsSalesLineForm ProcessItems       - No lines with Qty. Received for Refund found on Return Order RMA-238786.
+System.Web.Services.Protocols.SoapException: No lines with Qty. Received for Refund found on Return Order RMA-238786.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.ProcessRefunds(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 304
+   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 199
+   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 464
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 355

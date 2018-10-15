@@ -67,10 +67,14 @@
 </script>
 <asp:Table runat="server" ID="tblStatistics" Height="100%" Width="30%" HorizontalAlign="Right">
     <asp:TableHeaderRow HorizontalAlign="Justify" ForeColor="White" BackColor="#507CD1" Font-Size="Larger" Font-Bold="true">
+        <asp:TableHeaderCell BackColor="#FFFFFF">
+            <asp:ImageButton ID="BtnRefreshStatistics" runat="server" ImageUrl="~/images/refresh.png" Height="20px" OnClick="BtnRefreshStatistics_Click"/>
+        </asp:TableHeaderCell>
         <asp:TableHeaderCell Text="Returns" ColumnSpan="2" Width="50%" />
         <asp:TableHeaderCell Text="Part Requests" ColumnSpan="2" Width="50%" />
     </asp:TableHeaderRow>
     <asp:TableHeaderRow>
+        <asp:TableHeaderCell />
         <asp:TableHeaderCell ColumnSpan="2">
                     <hr class="HeaderLine" />
         </asp:TableHeaderCell>
@@ -79,33 +83,36 @@
         </asp:TableHeaderCell>
     </asp:TableHeaderRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
+        <asp:TableHeaderCell />
         <asp:TableCell Text="Pending Replacement" Font-Bold="true" />
         <asp:TableCell runat="server" ID="tcPendingReplacements" />
         <asp:TableCell Text="Pending SQ Approval" Font-Bold="true" />
         <asp:TableCell runat="server" ID="tcPendingSQApproval" />
     </asp:TableRow>
     <asp:TableRow runat="server" TableSection="TableBody" HorizontalAlign="Justify">
+        <asp:TableHeaderCell />
         <asp:TableCell runat="server" ID="expandReplacementDetails" ColumnSpan="2" Width="50%" Height="100%"/>
         <asp:TableCell runat="server" ID="expandPendingSQApproval" ColumnSpan="2" Width="50%" Height="100%" />
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" BackColor="#EFF3FB" HorizontalAlign="Justify">
+        <asp:TableHeaderCell />
         <asp:TableCell Text="Pending Refund" Font-Bold="true" />
         <asp:TableCell runat="server" ID="tcPendingRefunds" />
     </asp:TableRow>
     <asp:TableRow runat="server" TableSection="TableBody" HorizontalAlign="Justify">
+        <asp:TableHeaderCell />
         <asp:TableCell runat="server" ID="expandRefundDetails" ColumnSpan="2" Width="50%" Height="100%" />
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
+        <asp:TableHeaderCell />
         <asp:TableCell Text="Pending Unknown" Font-Bold="true" />
         <asp:TableCell runat="server" ID="tcPendingUnknown" />
     </asp:TableRow>
     <asp:TableRow runat="server" TableSection="TableBody" HorizontalAlign="Justify">
+        <asp:TableHeaderCell />
         <asp:TableCell runat="server" ID="expandPendingUnknown" ColumnSpan="2" Width="50%" Height="100%" />
     </asp:TableRow>
     <asp:TableRow>
         <asp:TableCell />
-    </asp:TableRow>
-    <asp:TableRow>
-        <asp:TableCell><asp:ImageButton ID="BtnRefreshStatistics" runat="server" ImageUrl="~/images/refresh.png" Height="30px" OnClick="BtnRefreshStatistics_Click"/></asp:TableCell>
     </asp:TableRow>
 </asp:Table>

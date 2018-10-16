@@ -237,7 +237,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                         tr.Cells.Add(processCell);
                     }
 
-                    if(pendingList == "Refund" && !line.Status.ToLower().Contains("no inventory") && line.CustAllowRefund)
+                    if(pendingList == "Refund" && line.CustAllowRefund)
                     {
                         processCount++;
                         docNo.ID = "docNoInv_" + lineCount.ToString();

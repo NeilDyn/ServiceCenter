@@ -14,7 +14,8 @@ namespace ExcelDesign.Class_Objects
 
     /* v7.2 - 12 October 2018 - Neil Jansen
      * Added Customer Allow Refund property logic in GetStatisticsInformation()
-     */ 
+     * Updated logic for GetReturnOrdersFromSalesHeader()
+     */
 
     public class CallService
     {
@@ -1460,6 +1461,9 @@ namespace ExcelDesign.Class_Objects
 
         public List<ReturnHeader> GetReturnOrdersFromSalesHeader(List<SalesHeader> salesHeaders, ref List<string> readRMA)
         {
+            /* 16 October 2018 - Neil Jansen
+             * Updated logic to not match on external document no.s, but to loop through the extended sales header as we have updated the logic to link Sales Orders and Return Orders through this record.
+             */ 
             List<ReturnHeader> returnHead = new List<ReturnHeader>();
 
             string returnStatus = string.Empty;
@@ -1501,144 +1505,156 @@ namespace ExcelDesign.Class_Objects
                     {
                         if (currResults.SalesHeader[so].DocType == "Return Order")
                         {
-                            if (currResults.SalesHeader[so].ExtDocNo == sh.ExternalDocumentNo)
+                            if (currResults.ExtendedSalesHeader != null)
                             {
-                                rmaNo = currResults.SalesHeader[so].No;
-
-                                if (!readRMA.Any(rma => rma.Equals(rmaNo)))
+                                for (int esh = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
                                 {
-                                    if (!insertedReturnNumbners.Any(order => order.Equals(rmaNo)))
+                                    if (currResults.ExtendedSalesHeader[esh].RMANo == currResults.SalesHeader[so].No)
                                     {
-                                        receiptHeader = ReturnReceiptHeader(rmaNo);
-                                        channelName = currResults.SalesHeader[so].SellToCustomerName;
-                                        orderDate = currResults.SalesHeader[so].DocDate;
-                                        externalDocumentNo = currResults.SalesHeader[so].ExtDocNo;
-                                        returnTrackingNo = currResults.SalesHeader[so].ReturnTrackingNo;
-
-                                        if (receiptHeader.Count == 0)
+                                        foreach (ShipmentHeader ssh in sh.ShipmentHeaderObject)
                                         {
-                                            receiptHeader.AddRange(ReturnShipmentReceiptHeader(sh.SalesOrderNo, externalDocumentNo, rmaNo));
-                                        }
-                                        else
-                                        {
-                                            foreach (ReceiptHeader rh in receiptHeader)
+                                            if (currResults.ExtendedSalesHeader[esh].SSHNo == ssh.No)
                                             {
-                                                postedReceive.AddRange(ReturnPostedReceive(rmaNo, rh.No));
-                                            }
-                                        }
+                                                rmaNo = currResults.SalesHeader[so].No;
 
-                                        returnLabelCreated = currResults.SalesHeader[so].UPSRetLabelCreated.ToUpper() == "YES" ? true : false;
-                                        sellToCustomerNo = currResults.SalesHeader[so].SellToCustomerNo;
-                                        imeiNo = currResults.SalesHeader[so].IMEI;
-
-                                        if (currResults.SalesHeader[so].RMANo != "")
-                                        {
-                                            exchangeCreated = true;
-
-                                            if (currResults.SalesHeader[so].ExchangeOrderNos[0].Contains("|"))
-                                            {
-                                                string[] tempSplit = currResults.SalesHeader[so].ExchangeOrderNos[0].Split('|');
-
-                                                for (int i = 0; i < tempSplit.Length; i++)
+                                                if (!readRMA.Any(rma => rma.Equals(rmaNo)))
                                                 {
-                                                    exchangeOrderNo.Add(tempSplit[i]);
-                                                }
-                                            }
-                                            else
-                                            {
-                                                exchangeOrderNo.Add(currResults.SalesHeader[so].ExchangeOrderNos[0]);
-                                            }
-                                        }
-
-                                        if (currResults.SalesLine != null)
-                                        {
-                                            for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
-                                            {
-                                                if ((currResults.SalesLine[sl].DocNo == rmaNo) && (currResults.SalesLine[sl].Type == "Item"))
-                                                {
-                                                    totalCounter++;
-                                                    dateCreated = currResults.SalesLine[sl].DateCreated;
-                                                    int.TryParse(currResults.SalesLine[sl].QtyToReceive, out int qtyToRec);
-                                                    if (qtyToRec > 0)
+                                                    if (!insertedReturnNumbners.Any(order => order.Equals(rmaNo)))
                                                     {
-                                                        statusCounter++;
+                                                        receiptHeader = ReturnReceiptHeader(rmaNo);
+                                                        channelName = currResults.SalesHeader[so].SellToCustomerName;
+                                                        orderDate = currResults.SalesHeader[so].DocDate;
+                                                        externalDocumentNo = currResults.SalesHeader[so].ExtDocNo;
+                                                        returnTrackingNo = currResults.SalesHeader[so].ReturnTrackingNo;
+
+                                                        if (receiptHeader.Count == 0)
+                                                        {
+                                                            receiptHeader.AddRange(ReturnShipmentReceiptHeader(sh.SalesOrderNo, externalDocumentNo, rmaNo));
+                                                        }
+                                                        else
+                                                        {
+                                                            foreach (ReceiptHeader rh in receiptHeader)
+                                                            {
+                                                                postedReceive.AddRange(ReturnPostedReceive(rmaNo, rh.No));
+                                                            }
+                                                        }
+
+                                                        returnLabelCreated = currResults.SalesHeader[so].UPSRetLabelCreated.ToUpper() == "YES" ? true : false;
+                                                        sellToCustomerNo = currResults.SalesHeader[so].SellToCustomerNo;
+                                                        imeiNo = currResults.SalesHeader[so].IMEI;
+
+                                                        if (currResults.SalesHeader[so].RMANo != "")
+                                                        {
+                                                            exchangeCreated = true;
+
+                                                            if (currResults.SalesHeader[so].ExchangeOrderNos[0].Contains("|"))
+                                                            {
+                                                                string[] tempSplit = currResults.SalesHeader[so].ExchangeOrderNos[0].Split('|');
+
+                                                                for (int i = 0; i < tempSplit.Length; i++)
+                                                                {
+                                                                    exchangeOrderNo.Add(tempSplit[i]);
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                exchangeOrderNo.Add(currResults.SalesHeader[so].ExchangeOrderNos[0]);
+                                                            }
+                                                        }
+
+                                                        if (currResults.SalesLine != null)
+                                                        {
+                                                            for (int sl = 0; sl < currResults.SalesLine.Length; sl++)
+                                                            {
+                                                                if ((currResults.SalesLine[sl].DocNo == rmaNo) && (currResults.SalesLine[sl].Type == "Item"))
+                                                                {
+                                                                    totalCounter++;
+                                                                    dateCreated = currResults.SalesLine[sl].DateCreated;
+                                                                    int.TryParse(currResults.SalesLine[sl].QtyToReceive, out int qtyToRec);
+                                                                    if (qtyToRec > 0)
+                                                                    {
+                                                                        statusCounter++;
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+
+                                                        if (statusCounter == totalCounter)
+                                                        {
+                                                            returnStatus = "Open";
+                                                        }
+                                                        else if (statusCounter == 0)
+                                                        {
+                                                            returnStatus = "Received";
+                                                        }
+                                                        else
+                                                        {
+                                                            returnStatus = "Partial Receipt";
+                                                        }
+
+                                                        if (currResults.ExtendedSalesHeader != null)
+                                                        {
+                                                            for (int hse = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
+                                                            {
+                                                                if (currResults.ExtendedSalesHeader[hse].RMANo == rmaNo)
+                                                                {
+                                                                    email = currResults.ExtendedSalesHeader[hse].Email;
+
+                                                                    if (currResults.ExtendedSalesHeader[hse].IsRefund.ToUpper() == "YES")
+                                                                    {
+                                                                        returnStatus = currResults.ExtendedSalesHeader[hse].RefundStatus;
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+
+                                                        shipToName = currResults.SalesHeader[so].ShipToName;
+                                                        shipToAddress1 = currResults.SalesHeader[so].ShipToAddress;
+                                                        shipToAddress2 = currResults.SalesHeader[so].ShipToAddress2;
+                                                        shipToContact = currResults.SalesHeader[so].ShipToContact;
+                                                        shipToCity = currResults.SalesHeader[so].ShipToCity;
+                                                        shipToCode = currResults.SalesHeader[so].ShipToZip;
+                                                        shipToState = currResults.SalesHeader[so].ShipToState;
+                                                        shipToCountry = currResults.SalesHeader[so].ShipToCountry;
+
+                                                        commentLines = GetSalesLineComments(rmaNo);
+                                                        returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
+                                                            rmaNo, externalDocumentNo, email, returnLabelCreated, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines, imeiNo,
+                                                        shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
+                                                        insertedReturnNumbners.Add(rmaNo);
+                                                        readRMA.Add(rmaNo);
+
+                                                        returnStatus = string.Empty;
+                                                        dateCreated = string.Empty;
+                                                        channelName = string.Empty;
+                                                        receiptHeader = new List<ReceiptHeader>();
+                                                        postedReceive = new List<PostedReceive>();
+                                                        returnTrackingNo = string.Empty;
+                                                        orderDate = string.Empty;
+                                                        rmaNo = string.Empty;
+                                                        externalDocumentNo = string.Empty;
+                                                        email = string.Empty;
+                                                        returnLabelCreated = false;
+                                                        exchangeCreated = false;
+                                                        exchangeOrderNo = new List<string>();
+                                                        commentLines = new List<Comment>();
+                                                        imeiNo = string.Empty;
+
+                                                        shipToName = string.Empty;
+                                                        shipToAddress1 = string.Empty;
+                                                        shipToAddress2 = string.Empty;
+                                                        shipToContact = string.Empty;
+                                                        shipToCity = string.Empty;
+                                                        shipToCode = string.Empty;
+                                                        shipToState = string.Empty;
+                                                        shipToCountry = string.Empty;
+
+                                                        totalCounter = 0;
+                                                        statusCounter = 0;
                                                     }
                                                 }
                                             }
                                         }
-
-                                        if (statusCounter == totalCounter)
-                                        {
-                                            returnStatus = "Open";
-                                        }
-                                        else if (statusCounter == 0)
-                                        {
-                                            returnStatus = "Received";
-                                        }
-                                        else
-                                        {
-                                            returnStatus = "Partial Receipt";
-                                        }
-
-                                        if (currResults.ExtendedSalesHeader != null)
-                                        {
-                                            for (int esh = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
-                                            {
-                                                if (currResults.ExtendedSalesHeader[esh].RMANo == rmaNo)
-                                                {
-                                                    email = currResults.ExtendedSalesHeader[esh].Email;
-
-                                                    if (currResults.ExtendedSalesHeader[esh].IsRefund.ToUpper() == "YES")
-                                                    {
-                                                        returnStatus = currResults.ExtendedSalesHeader[esh].RefundStatus;
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        shipToName = currResults.SalesHeader[so].ShipToName;
-                                        shipToAddress1 = currResults.SalesHeader[so].ShipToAddress;
-                                        shipToAddress2 = currResults.SalesHeader[so].ShipToAddress2;
-                                        shipToContact = currResults.SalesHeader[so].ShipToContact;
-                                        shipToCity = currResults.SalesHeader[so].ShipToCity;
-                                        shipToCode = currResults.SalesHeader[so].ShipToZip;
-                                        shipToState = currResults.SalesHeader[so].ShipToState;
-                                        shipToCountry = currResults.SalesHeader[so].ShipToCountry;
-
-                                        commentLines = GetSalesLineComments(rmaNo);
-                                        returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
-                                            rmaNo, externalDocumentNo, email, returnLabelCreated, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines, imeiNo,
-                                        shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
-                                        insertedReturnNumbners.Add(rmaNo);
-                                        readRMA.Add(rmaNo);
-
-                                        returnStatus = string.Empty;
-                                        dateCreated = string.Empty;
-                                        channelName = string.Empty;
-                                        receiptHeader = new List<ReceiptHeader>();
-                                        postedReceive = new List<PostedReceive>();
-                                        returnTrackingNo = string.Empty;
-                                        orderDate = string.Empty;
-                                        rmaNo = string.Empty;
-                                        externalDocumentNo = string.Empty;
-                                        email = string.Empty;
-                                        returnLabelCreated = false;
-                                        exchangeCreated = false;
-                                        exchangeOrderNo = new List<string>();
-                                        commentLines = new List<Comment>();
-                                        imeiNo = string.Empty;
-
-                                        shipToName = string.Empty;
-                                        shipToAddress1 = string.Empty;
-                                        shipToAddress2 = string.Empty;
-                                        shipToContact = string.Empty;
-                                        shipToCity = string.Empty;
-                                        shipToCode = string.Empty;
-                                        shipToState = string.Empty;
-                                        shipToCountry = string.Empty;
-
-                                        totalCounter = 0;
-                                        statusCounter = 0;
                                     }
                                 }
                             }

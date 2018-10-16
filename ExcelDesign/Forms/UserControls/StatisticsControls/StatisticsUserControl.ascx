@@ -76,10 +76,8 @@
     <asp:TableHeaderRow>
         <asp:TableHeaderCell />
         <asp:TableHeaderCell ColumnSpan="2">
-                    <hr class="HeaderLine" />
         </asp:TableHeaderCell>
         <asp:TableHeaderCell ColumnSpan="2">
-                    <hr class="HeaderLine" />
         </asp:TableHeaderCell>
     </asp:TableHeaderRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
@@ -94,7 +92,7 @@
         <asp:TableCell runat="server" ID="expandReplacementDetails" ColumnSpan="2" Width="50%" Height="100%"/>
         <asp:TableCell runat="server" ID="expandPendingSQApproval" ColumnSpan="2" Width="50%" Height="100%" />
     </asp:TableRow>
-    <asp:TableRow TableSection="TableBody" BackColor="#EFF3FB" HorizontalAlign="Justify">
+    <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableHeaderCell />
         <asp:TableCell Text="Pending Refund" Font-Bold="true" />
         <asp:TableCell runat="server" ID="tcPendingRefunds" />

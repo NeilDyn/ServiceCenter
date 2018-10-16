@@ -14,7 +14,7 @@
     <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/themes/ui-lightness/jquery-ui.css" type="text/css" />
-    <mainnav:MainNavbar ID="MainNavbar" runat="server"/>
+    <mainnav:MainNavbar ID="MainNavbar" runat="server" />
     <script>
         $("id$=btnExtendSessionTime").click(function () {
             ResetTimers();
@@ -75,16 +75,14 @@
         </div>
 
         <div id="ServiceCenterHeader">
-            <div id="StatisticsOnService">
-                <suc:StatisticsUserControl ID="StatisticsUserControl" runat="server"/>
+            <div id="StatisticsOnService" style="z-index:10">
+                <suc:StatisticsUserControl ID="StatisticsUserControl" runat="server" />
             </div>
-            <asp:Image ID="imgLogo" runat="server" ImageUrl="~/images/Logo.png" />         
-            <asp:Label ID="lblCustomerServicePortal" runat="server" Style="margin-left: 200px;" Text="Customer Service Portal" ForeColor="#0099FF" Font-Bold="True" Font-Size="XX-Large" CssClass="HeaderLabel" />        
+            <asp:Image ID="imgLogo" runat="server" ImageUrl="~/images/Logo.png" />
+            <asp:Label ID="lblCustomerServicePortal" runat="server" Style="margin-left: 200px;" Text="Customer Service Portal" ForeColor="#0099FF" Font-Bold="True" Font-Size="XX-Large" CssClass="HeaderLabel" />
         </div>
 
-        
-        
-        <hr class="HeaderLine" />
+        <hr class="HeaderLine" style="z-index:1000"/>
 
         <div class="SearchArea" id="SearchArea" style="margin-top: 20px;">
             <asp:Label ID="lblSearch" runat="server" Text="Search" ForeColor="#0099FF" Font-Bold="True" />

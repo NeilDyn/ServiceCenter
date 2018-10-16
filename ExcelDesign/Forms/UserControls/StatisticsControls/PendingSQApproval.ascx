@@ -8,7 +8,7 @@
         <asp:TableHeaderCell Text="All Pending" Font-Bold="false" />
         <asp:TableHeaderCell runat="server" ID="tcAllSQPending" />
     </asp:TableHeaderRow>
-    <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify" BackColor="#EFF3FB">
+    <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableHeaderCell Text="No Inventory Avail." Font-Bold="false" />
         <asp:TableHeaderCell runat="server" ID="tcSQNoInvAvail" />
     </asp:TableHeaderRow>
@@ -16,7 +16,7 @@
         <asp:TableHeaderCell Text="Older than 24 hours" Font-Bold="false"/>
         <asp:TableHeaderCell runat="server" ID="tcSQOlderThan24Hours" />
     </asp:TableHeaderRow>
-    <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify" BackColor="#EFF3FB">
+    <asp:TableHeaderRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableHeaderCell Text="Older than 48 hours" Font-Bold="false"/>
         <asp:TableHeaderCell runat="server" ID="tcSQOlderThan48Hours" />
     </asp:TableHeaderRow>

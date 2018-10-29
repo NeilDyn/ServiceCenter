@@ -1594,7 +1594,7 @@ namespace ExcelDesign.Class_Objects
 
                                                         if (currResults.ExtendedSalesHeader != null)
                                                         {
-                                                            for (int hse = 0; esh < currResults.ExtendedSalesHeader.Length; esh++)
+                                                            for (int hse = 0; hse < currResults.ExtendedSalesHeader.Length; hse++)
                                                             {
                                                                 if (currResults.ExtendedSalesHeader[hse].RMANo == rmaNo)
                                                                 {

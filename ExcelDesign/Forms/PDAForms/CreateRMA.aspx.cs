@@ -305,7 +305,8 @@ namespace ExcelDesign.Forms.PDAForms
                                     DropDownList ddlReturnReasonCode = new DropDownList
                                     {
                                         DataValueField = "Display",
-                                        DataSource = rrList.Where(x => x.Category != "Part Request" && x.Category != "Cancel Order" && x.Category != "Partial Refund"),
+                                        DataSource = rrList.Where(x => x.Category != "Part Request" && x.Category != "Cancel Order" && x.Category != "Partial Refund" && x.Category != "Unknown"
+                                                                   && x.Category != "Nonconformed" && x.Category != "Vendor Rejected"),
                                         ID = "ddlReturnReasonCode_" + lineCount.ToString(),
                                         CssClass = "inputBox"
                                     };
@@ -407,7 +408,8 @@ namespace ExcelDesign.Forms.PDAForms
                                             DropDownList ddlReturnReasonCode = new DropDownList
                                             {
                                                 DataValueField = "Display",
-                                                DataSource = rrList.Where(x => x.Category != "Part Request" && x.Category != "Cancel Order" && x.Category != "Partial Refund"),
+                                                DataSource = rrList.Where(x => x.Category != "Part Request" && x.Category != "Cancel Order" && x.Category != "Partial Refund" && x.Category != "Unknown"
+                                                                   && x.Category != "Nonconformed" && x.Category != "Vendor Rejected"),
                                                 ID = "ddlReturnReasonCode_" + lineCount.ToString(),
                                                 CssClass = "inputBox"
                                             };
@@ -596,7 +598,8 @@ namespace ExcelDesign.Forms.PDAForms
                                         List<ReturnReason> rl = new List<ReturnReason>();
                                         foreach (ReturnReason item in sr)
                                         {
-                                            if (item.Category != "Part Request" && item.Category != "Cancel Order" && item.Category != "Partial Refund")
+                                            if (item.Category != "Part Request" && item.Category != "Cancel Order" && item.Category != "Partial Refund" && item.Category != "Unknown"
+                                                                   && item.Category != "Nonconformed" && item.Category != "Vendor Rejected")
                                             {
                                                 rl.Add(item);
                                             }

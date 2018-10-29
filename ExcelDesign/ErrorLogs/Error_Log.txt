@@ -344,3 +344,21 @@ System.Web.Services.Protocols.SoapException: No lines with Qty. Received for Ref
    at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 199
    at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 464
    at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 355
+ERROR 2018-10-17 16:16:02,310 46288ms ServiceCenter          ConnectToService   - Index was outside the bounds of the array.
+System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at ExcelDesign.Class_Objects.CallService.GetReturnOrdersFromSalesHeader(List`1 salesHeaders, List`1& readRMA) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1516
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1318
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 261
+ERROR 2018-10-17 16:20:58,590 152723ms ServiceCenter          ConnectToService   - Index was outside the bounds of the array.
+System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at ExcelDesign.Class_Objects.CallService.GetReturnOrdersFromSalesHeader(List`1 salesHeaders, List`1& readRMA) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1516
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1318
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 261
+ERROR 2018-10-23 08:23:25,462 77405ms CreateRMA              BtnCreateRMA_Click - The maximum length for a string value is 15.
+System.Web.Services.Protocols.SoapException: The maximum length for a string value is 15.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.CreateReturnOrder(String orderNo, String extDocNo, String returnReasonCode, String notes, Boolean includeResourceLines, Boolean printRmaInstructions, Boolean createUPSReturnLabel, String emailAddress, String lineDetails, ReturnOrder& createdReturn, Boolean updateRMA, String sessionID, String returnTrackNo, String shipToDetails, String iMEI) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 690
+   at ExcelDesign.Class_Objects.WebService.CreateReturnOrder(String orderNo, String externalDocumentNo, String returnReason, String notes, Boolean includeResource, Boolean printRMA, Boolean createLabel, String email, String lineValues, Boolean update, String returnTrackingNo, String shippingDetails, String imeiNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 117
+   at ExcelDesign.Class_Objects.SendService.CreateReturnOrder(String orderNo, String externalDocumentNo, String returnReason, String notes, Boolean includeResource, Boolean printRMA, Boolean createLabel, String email, String lineValues, Boolean update, String returnTrackingNo, String shippingDetails, String imeiNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 47
+   at ExcelDesign.Forms.PDAForms.CreateRMA.BtnCreateRMA_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\PDAForms\CreateRMA.aspx.cs:line 664

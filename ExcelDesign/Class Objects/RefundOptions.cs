@@ -40,6 +40,16 @@ namespace ExcelDesign.Class_Objects
                 new RefundOptions("Supervisor", "80%"),
                 new RefundOptions("Supervisor", "90%"),
                 new RefundOptions("Supervisor", "100%"),
+                new RefundOptions("20Dollar", "10%"),
+                new RefundOptions("20Dollar", "20%"),
+                new RefundOptions("20Dollar", "30%"),
+                new RefundOptions("20Dollar", "40%"),
+                new RefundOptions("20Dollar", "50%"),
+                new RefundOptions("20Dollar", "60%"),
+                new RefundOptions("20Dollar", "70%"),
+                new RefundOptions("20Dollar", "80%"),
+                new RefundOptions("20Dollar", "90%"),
+                new RefundOptions("20Dollar", "100%"),
             };
 
             return populatedOptions;

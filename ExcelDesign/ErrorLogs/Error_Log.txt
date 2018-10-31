@@ -362,3 +362,87 @@ System.Web.Services.Protocols.SoapException: The maximum length for a string val
    at ExcelDesign.Class_Objects.WebService.CreateReturnOrder(String orderNo, String externalDocumentNo, String returnReason, String notes, Boolean includeResource, Boolean printRMA, Boolean createLabel, String email, String lineValues, Boolean update, String returnTrackingNo, String shippingDetails, String imeiNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 117
    at ExcelDesign.Class_Objects.SendService.CreateReturnOrder(String orderNo, String externalDocumentNo, String returnReason, String notes, Boolean includeResource, Boolean printRMA, Boolean createLabel, String email, String lineValues, Boolean update, String returnTrackingNo, String shippingDetails, String imeiNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 47
    at ExcelDesign.Forms.PDAForms.CreateRMA.BtnCreateRMA_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\PDAForms\CreateRMA.aspx.cs:line 664
+ERROR 2018-10-31 09:42:46,284 324694ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer AMZMKT001.
+System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer AMZMKT001.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325
+ERROR 2018-10-31 09:43:26,715 365125ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer AMZMKT001.
+System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer AMZMKT001.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325
+ERROR 2018-10-31 09:46:20,961 539371ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer AMZMKT001.
+System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer AMZMKT001.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325
+ERROR 2018-10-31 09:46:31,708 550118ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer AMZMKT001.
+System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer AMZMKT001.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325
+ERROR 2018-10-31 09:46:50,000 568410ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer AMZMKT001.
+System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer AMZMKT001.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325
+ERROR 2018-10-31 11:32:21,455 30016ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 270
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 132
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 32
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-10-31 11:36:52,637 301198ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer WALMARTDB.
+System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer WALMARTDB.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325
+ERROR 2018-10-31 11:38:01,562 370123ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer WALMARTDB.
+System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer WALMARTDB.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325
+ERROR 2018-10-31 11:40:18,936 507497ms PartialRefund          artialRefund_Click - Import Setup Header Code 'WALMARTDB' does not exist.
+System.Web.Services.Protocols.SoapException: Import Setup Header Code 'WALMARTDB' does not exist.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325
+ERROR 2018-10-31 11:41:54,590 603150ms PartialRefund          artialRefund_Click - There is no Import Setup Line within the filter.  Filters: Customer No.: AMZMKT001, Import Field Description: Partial Refund
+System.Web.Services.Protocols.SoapException: There is no Import Setup Line within the filter.  Filters: Customer No.: AMZMKT001, Import Field Description: Partial Refund
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325

@@ -56,6 +56,7 @@ namespace ExcelDesign.Forms.FunctionForms
 
 
                 int lineCount = 0;
+                double orderTotal = 0;
                 string filterNo = string.Empty;
 
                 filterNo = tcNo.Text;
@@ -122,6 +123,7 @@ namespace ExcelDesign.Forms.FunctionForms
                                     actionQty.Controls.Add(actionQtyInsert);
                                     returnReasonCode.Controls.Add(ddlReturnReasonCode);
                                     refundOption.Controls.Add(ddlRefundOption);
+                                    orderTotal += line.LineAmount;
 
                                     qty.HorizontalAlign = HorizontalAlign.Center;
                                     actionQty.HorizontalAlign = HorizontalAlign.Center;
@@ -155,6 +157,31 @@ namespace ExcelDesign.Forms.FunctionForms
                                 }
                             }
                         }
+                    }
+                }
+
+                Session["OrderTotal"] = orderTotal;
+
+                // Implements 20 dollar refund tier
+                if (orderTotal <= 20)
+                {
+                    for (int i = 1; i < lineCount + 1; i++)
+                    {
+                        foreach (TableRow row in tblPartialRefundDetails.Rows)
+                        {
+                            foreach (TableCell cell in row.Cells)
+                            {
+                                foreach (Control c in cell.Controls)
+                                {
+                                    if (c.ID.Contains("ddlRefundOption_" + i.ToString()))
+                                    {
+                                        DropDownList ddlRefundOption = (DropDownList)c;
+                                        ddlRefundOption.DataSource = ro.Where(o => o.Tier == "20Dollar");
+                                        ddlRefundOption.DataBind();
+                                    }                                  
+                                }
+                            }
+                        }                           
                     }
                 }
             }
@@ -236,10 +263,23 @@ namespace ExcelDesign.Forms.FunctionForms
                                 {
                                     List<RefundOptions> ro = new RefundOptions().Populate();
                                     List<RefundOptions> newRo = new List<RefundOptions>();
+                                    double total = 0;
 
                                     foreach (RefundOptions option in ro)
                                     {
-                                        if(option.Tier == u.RefundTier)
+                                        if(Session["OrderTotal"] != null)
+                                        {
+                                            total = Convert.ToDouble(Session["OrderTotal"]);
+                                        }
+
+                                        if(total <= 20)
+                                        {
+                                            if(option.Tier == "20Dollar")
+                                            {
+                                                newRo.Add(option);
+                                            }
+                                        }
+                                        else if(option.Tier == u.RefundTier)
                                         {
                                             newRo.Add(option);
                                         }

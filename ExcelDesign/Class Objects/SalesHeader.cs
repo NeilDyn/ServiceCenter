@@ -21,6 +21,7 @@ namespace ExcelDesign.Class_Objects
         public string SellToCustomerNo { get; set; }
         public List<Comment> OrderComments { get; set; }
         public string QuoteOrderNo { get; set; }
+        public List<PartialRefunded> PartialRefunds { get; set; }
 
         public SalesHeader()
         {
@@ -29,7 +30,7 @@ namespace ExcelDesign.Class_Objects
 
         public SalesHeader(string orderStatusP, string orderDateP, string salesOrderNoP, string channelNameP, List<ShipmentHeader> shipmentHeaderObjectP,
             List<PostedPackage> postedPackageObjectP, string externalDocumentNoP, Warranty _warrantyP, bool rmaExistsP, string rmaNoP, bool isExchangeOrderP,
-            string sellToCustomerNoP, List<Comment> orderCommentsP, bool isPartRequest, string quoteOrderNoP)
+            string sellToCustomerNoP, List<Comment> orderCommentsP, bool isPartRequest, string quoteOrderNoP, List<PartialRefunded> partialRefundsP)
         {
             this.OrderStatus = orderStatusP;
             this.OrderDate = orderDateP;
@@ -45,6 +46,7 @@ namespace ExcelDesign.Class_Objects
             this.OrderComments = orderCommentsP;
             this.IsPartRequest = isPartRequest;
             this.QuoteOrderNo = quoteOrderNoP;
+            this.PartialRefunds = partialRefundsP;
         }
     }
 }

@@ -29,25 +29,13 @@ namespace ExcelDesign.ServiceFunctions {
     [System.Web.Services.WebServiceBindingAttribute(Name="Functions_Binding", Namespace="urn:microsoft-dynamics-schemas/codeunit/Functions")]
     public partial class Functions : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback GetStatisticsOperationCompleted;
+        private System.Threading.SendOrPostCallback ResetSessionOperationCompleted;
         
         private System.Threading.SendOrPostCallback LogInOperationCompleted;
         
-        private System.Threading.SendOrPostCallback ProcessRefundsOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SearchDetermineNoTypeOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback IsValidSessionOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback ResetSessionOperationCompleted;
-        
         private System.Threading.SendOrPostCallback UpdateUserPasswordOperationCompleted;
         
-        private System.Threading.SendOrPostCallback CheckSOCancelOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SetDateFiltersOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SetCommentFiltersOperationCompleted;
+        private System.Threading.SendOrPostCallback SearchDetermineNoTypeOperationCompleted;
         
         private System.Threading.SendOrPostCallback CreateExchangeOrderOperationCompleted;
         
@@ -67,9 +55,13 @@ namespace ExcelDesign.ServiceFunctions {
         
         private System.Threading.SendOrPostCallback IssueReturnLabelOperationCompleted;
         
-        private System.Threading.SendOrPostCallback AllowCustomerStatsViewOperationCompleted;
+        private System.Threading.SendOrPostCallback GetStatisticsOperationCompleted;
         
         private System.Threading.SendOrPostCallback ProcessReplacementsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ProcessRefundsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback UpdateREQReturnActionOperationCompleted;
         
         private System.Threading.SendOrPostCallback SetDebugOperationCompleted;
         
@@ -79,21 +71,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         private System.Threading.SendOrPostCallback a47a47a45a62_Monitoring_User_ActionsOperationCompleted;
         
-        private System.Threading.SendOrPostCallback WriteToLogFileOperationCompleted;
-        
         private System.Threading.SendOrPostCallback a47a47a45a62_CommentsOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback UpdateCommentOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback UpdateComment1OperationCompleted;
-        
-        private System.Threading.SendOrPostCallback UpdateCommentUserOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback UpdateCommentPartReqOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback UpdateCancelCommentOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback UpdatePartRefundCommentOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -134,34 +112,16 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
-        public event GetStatisticsCompletedEventHandler GetStatisticsCompleted;
+        public event ResetSessionCompletedEventHandler ResetSessionCompleted;
         
         /// <remarks/>
         public event LogInCompletedEventHandler LogInCompleted;
         
         /// <remarks/>
-        public event ProcessRefundsCompletedEventHandler ProcessRefundsCompleted;
-        
-        /// <remarks/>
-        public event SearchDetermineNoTypeCompletedEventHandler SearchDetermineNoTypeCompleted;
-        
-        /// <remarks/>
-        public event IsValidSessionCompletedEventHandler IsValidSessionCompleted;
-        
-        /// <remarks/>
-        public event ResetSessionCompletedEventHandler ResetSessionCompleted;
-        
-        /// <remarks/>
         public event UpdateUserPasswordCompletedEventHandler UpdateUserPasswordCompleted;
         
         /// <remarks/>
-        public event CheckSOCancelCompletedEventHandler CheckSOCancelCompleted;
-        
-        /// <remarks/>
-        public event SetDateFiltersCompletedEventHandler SetDateFiltersCompleted;
-        
-        /// <remarks/>
-        public event SetCommentFiltersCompletedEventHandler SetCommentFiltersCompleted;
+        public event SearchDetermineNoTypeCompletedEventHandler SearchDetermineNoTypeCompleted;
         
         /// <remarks/>
         public event CreateExchangeOrderCompletedEventHandler CreateExchangeOrderCompleted;
@@ -191,10 +151,16 @@ namespace ExcelDesign.ServiceFunctions {
         public event IssueReturnLabelCompletedEventHandler IssueReturnLabelCompleted;
         
         /// <remarks/>
-        public event AllowCustomerStatsViewCompletedEventHandler AllowCustomerStatsViewCompleted;
+        public event GetStatisticsCompletedEventHandler GetStatisticsCompleted;
         
         /// <remarks/>
         public event ProcessReplacementsCompletedEventHandler ProcessReplacementsCompleted;
+        
+        /// <remarks/>
+        public event ProcessRefundsCompletedEventHandler ProcessRefundsCompleted;
+        
+        /// <remarks/>
+        public event UpdateREQReturnActionCompletedEventHandler UpdateREQReturnActionCompleted;
         
         /// <remarks/>
         public event SetDebugCompletedEventHandler SetDebugCompleted;
@@ -209,57 +175,33 @@ namespace ExcelDesign.ServiceFunctions {
         public event a47a47a45a62_Monitoring_User_ActionsCompletedEventHandler a47a47a45a62_Monitoring_User_ActionsCompleted;
         
         /// <remarks/>
-        public event WriteToLogFileCompletedEventHandler WriteToLogFileCompleted;
-        
-        /// <remarks/>
         public event a47a47a45a62_CommentsCompletedEventHandler a47a47a45a62_CommentsCompleted;
         
         /// <remarks/>
-        public event UpdateCommentCompletedEventHandler UpdateCommentCompleted;
-        
-        /// <remarks/>
-        public event UpdateComment1CompletedEventHandler UpdateComment1Completed;
-        
-        /// <remarks/>
-        public event UpdateCommentUserCompletedEventHandler UpdateCommentUserCompleted;
-        
-        /// <remarks/>
-        public event UpdateCommentPartReqCompletedEventHandler UpdateCommentPartReqCompleted;
-        
-        /// <remarks/>
-        public event UpdateCancelCommentCompletedEventHandler UpdateCancelCommentCompleted;
-        
-        /// <remarks/>
-        public event UpdatePartRefundCommentCompletedEventHandler UpdatePartRefundCommentCompleted;
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:GetStatistics", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="GetStatistics_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetStatistics(string sessionID, ref Statistics statistics) {
-            object[] results = this.Invoke("GetStatistics", new object[] {
-                        sessionID,
-                        statistics});
-            statistics = ((Statistics)(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:ResetSession", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="ResetSession_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void ResetSession(string userID) {
+            this.Invoke("ResetSession", new object[] {
+                        userID});
         }
         
         /// <remarks/>
-        public void GetStatisticsAsync(string sessionID, Statistics statistics) {
-            this.GetStatisticsAsync(sessionID, statistics, null);
+        public void ResetSessionAsync(string userID) {
+            this.ResetSessionAsync(userID, null);
         }
         
         /// <remarks/>
-        public void GetStatisticsAsync(string sessionID, Statistics statistics, object userState) {
-            if ((this.GetStatisticsOperationCompleted == null)) {
-                this.GetStatisticsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetStatisticsOperationCompleted);
+        public void ResetSessionAsync(string userID, object userState) {
+            if ((this.ResetSessionOperationCompleted == null)) {
+                this.ResetSessionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnResetSessionOperationCompleted);
             }
-            this.InvokeAsync("GetStatistics", new object[] {
-                        sessionID,
-                        statistics}, this.GetStatisticsOperationCompleted, userState);
+            this.InvokeAsync("ResetSession", new object[] {
+                        userID}, this.ResetSessionOperationCompleted, userState);
         }
         
-        private void OnGetStatisticsOperationCompleted(object arg) {
-            if ((this.GetStatisticsCompleted != null)) {
+        private void OnResetSessionOperationCompleted(object arg) {
+            if ((this.ResetSessionCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetStatisticsCompleted(this, new GetStatisticsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.ResetSessionCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -299,32 +241,34 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:ProcessRefunds", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="ProcessRefunds_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void ProcessRefunds(string rMAList, string sessionID) {
-            this.Invoke("ProcessRefunds", new object[] {
-                        rMAList,
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:UpdateUserPassword", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="UpdateUserPassword_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void UpdateUserPassword(string userID, string newPassword, string sessionID) {
+            this.Invoke("UpdateUserPassword", new object[] {
+                        userID,
+                        newPassword,
                         sessionID});
         }
         
         /// <remarks/>
-        public void ProcessRefundsAsync(string rMAList, string sessionID) {
-            this.ProcessRefundsAsync(rMAList, sessionID, null);
+        public void UpdateUserPasswordAsync(string userID, string newPassword, string sessionID) {
+            this.UpdateUserPasswordAsync(userID, newPassword, sessionID, null);
         }
         
         /// <remarks/>
-        public void ProcessRefundsAsync(string rMAList, string sessionID, object userState) {
-            if ((this.ProcessRefundsOperationCompleted == null)) {
-                this.ProcessRefundsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnProcessRefundsOperationCompleted);
+        public void UpdateUserPasswordAsync(string userID, string newPassword, string sessionID, object userState) {
+            if ((this.UpdateUserPasswordOperationCompleted == null)) {
+                this.UpdateUserPasswordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateUserPasswordOperationCompleted);
             }
-            this.InvokeAsync("ProcessRefunds", new object[] {
-                        rMAList,
-                        sessionID}, this.ProcessRefundsOperationCompleted, userState);
+            this.InvokeAsync("UpdateUserPassword", new object[] {
+                        userID,
+                        newPassword,
+                        sessionID}, this.UpdateUserPasswordOperationCompleted, userState);
         }
         
-        private void OnProcessRefundsOperationCompleted(object arg) {
-            if ((this.ProcessRefundsCompleted != null)) {
+        private void OnUpdateUserPasswordOperationCompleted(object arg) {
+            if ((this.UpdateUserPasswordCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ProcessRefundsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.UpdateUserPasswordCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -362,176 +306,6 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.SearchDetermineNoTypeCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.SearchDetermineNoTypeCompleted(this, new SearchDetermineNoTypeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:IsValidSession", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="IsValidSession_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string IsValidSession(string sessionID) {
-            object[] results = this.Invoke("IsValidSession", new object[] {
-                        sessionID});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void IsValidSessionAsync(string sessionID) {
-            this.IsValidSessionAsync(sessionID, null);
-        }
-        
-        /// <remarks/>
-        public void IsValidSessionAsync(string sessionID, object userState) {
-            if ((this.IsValidSessionOperationCompleted == null)) {
-                this.IsValidSessionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIsValidSessionOperationCompleted);
-            }
-            this.InvokeAsync("IsValidSession", new object[] {
-                        sessionID}, this.IsValidSessionOperationCompleted, userState);
-        }
-        
-        private void OnIsValidSessionOperationCompleted(object arg) {
-            if ((this.IsValidSessionCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.IsValidSessionCompleted(this, new IsValidSessionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:ResetSession", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="ResetSession_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void ResetSession(string userID) {
-            this.Invoke("ResetSession", new object[] {
-                        userID});
-        }
-        
-        /// <remarks/>
-        public void ResetSessionAsync(string userID) {
-            this.ResetSessionAsync(userID, null);
-        }
-        
-        /// <remarks/>
-        public void ResetSessionAsync(string userID, object userState) {
-            if ((this.ResetSessionOperationCompleted == null)) {
-                this.ResetSessionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnResetSessionOperationCompleted);
-            }
-            this.InvokeAsync("ResetSession", new object[] {
-                        userID}, this.ResetSessionOperationCompleted, userState);
-        }
-        
-        private void OnResetSessionOperationCompleted(object arg) {
-            if ((this.ResetSessionCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ResetSessionCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:UpdateUserPassword", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="UpdateUserPassword_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void UpdateUserPassword(string userID, string newPassword, string sessionID) {
-            this.Invoke("UpdateUserPassword", new object[] {
-                        userID,
-                        newPassword,
-                        sessionID});
-        }
-        
-        /// <remarks/>
-        public void UpdateUserPasswordAsync(string userID, string newPassword, string sessionID) {
-            this.UpdateUserPasswordAsync(userID, newPassword, sessionID, null);
-        }
-        
-        /// <remarks/>
-        public void UpdateUserPasswordAsync(string userID, string newPassword, string sessionID, object userState) {
-            if ((this.UpdateUserPasswordOperationCompleted == null)) {
-                this.UpdateUserPasswordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateUserPasswordOperationCompleted);
-            }
-            this.InvokeAsync("UpdateUserPassword", new object[] {
-                        userID,
-                        newPassword,
-                        sessionID}, this.UpdateUserPasswordOperationCompleted, userState);
-        }
-        
-        private void OnUpdateUserPasswordOperationCompleted(object arg) {
-            if ((this.UpdateUserPasswordCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.UpdateUserPasswordCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CheckSOCancel", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CheckSOCancel_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void CheckSOCancel(string searchNo) {
-            this.Invoke("CheckSOCancel", new object[] {
-                        searchNo});
-        }
-        
-        /// <remarks/>
-        public void CheckSOCancelAsync(string searchNo) {
-            this.CheckSOCancelAsync(searchNo, null);
-        }
-        
-        /// <remarks/>
-        public void CheckSOCancelAsync(string searchNo, object userState) {
-            if ((this.CheckSOCancelOperationCompleted == null)) {
-                this.CheckSOCancelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCheckSOCancelOperationCompleted);
-            }
-            this.InvokeAsync("CheckSOCancel", new object[] {
-                        searchNo}, this.CheckSOCancelOperationCompleted, userState);
-        }
-        
-        private void OnCheckSOCancelOperationCompleted(object arg) {
-            if ((this.CheckSOCancelCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.CheckSOCancelCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:SetDateFilters", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="SetDateFilters_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SetDateFilters() {
-            this.Invoke("SetDateFilters", new object[0]);
-        }
-        
-        /// <remarks/>
-        public void SetDateFiltersAsync() {
-            this.SetDateFiltersAsync(null);
-        }
-        
-        /// <remarks/>
-        public void SetDateFiltersAsync(object userState) {
-            if ((this.SetDateFiltersOperationCompleted == null)) {
-                this.SetDateFiltersOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSetDateFiltersOperationCompleted);
-            }
-            this.InvokeAsync("SetDateFilters", new object[0], this.SetDateFiltersOperationCompleted, userState);
-        }
-        
-        private void OnSetDateFiltersOperationCompleted(object arg) {
-            if ((this.SetDateFiltersCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SetDateFiltersCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:SetCommentFilters", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="SetCommentFilters_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SetCommentFilters() {
-            this.Invoke("SetCommentFilters", new object[0]);
-        }
-        
-        /// <remarks/>
-        public void SetCommentFiltersAsync() {
-            this.SetCommentFiltersAsync(null);
-        }
-        
-        /// <remarks/>
-        public void SetCommentFiltersAsync(object userState) {
-            if ((this.SetCommentFiltersOperationCompleted == null)) {
-                this.SetCommentFiltersOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSetCommentFiltersOperationCompleted);
-            }
-            this.InvokeAsync("SetCommentFilters", new object[0], this.SetCommentFiltersOperationCompleted, userState);
-        }
-        
-        private void OnSetCommentFiltersOperationCompleted(object arg) {
-            if ((this.SetCommentFiltersCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SetCommentFiltersCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -895,32 +669,33 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:AllowCustomerStatsView", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="AllowCustomerStatsView_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public bool AllowCustomerStatsView(string customerNo) {
-            object[] results = this.Invoke("AllowCustomerStatsView", new object[] {
-                        customerNo});
-            return ((bool)(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:GetStatistics", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="GetStatistics_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetStatistics(string sessionID, ref Statistics statistics) {
+            object[] results = this.Invoke("GetStatistics", new object[] {
+                        sessionID,
+                        statistics});
+            statistics = ((Statistics)(results[0]));
         }
         
         /// <remarks/>
-        public void AllowCustomerStatsViewAsync(string customerNo) {
-            this.AllowCustomerStatsViewAsync(customerNo, null);
+        public void GetStatisticsAsync(string sessionID, Statistics statistics) {
+            this.GetStatisticsAsync(sessionID, statistics, null);
         }
         
         /// <remarks/>
-        public void AllowCustomerStatsViewAsync(string customerNo, object userState) {
-            if ((this.AllowCustomerStatsViewOperationCompleted == null)) {
-                this.AllowCustomerStatsViewOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAllowCustomerStatsViewOperationCompleted);
+        public void GetStatisticsAsync(string sessionID, Statistics statistics, object userState) {
+            if ((this.GetStatisticsOperationCompleted == null)) {
+                this.GetStatisticsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetStatisticsOperationCompleted);
             }
-            this.InvokeAsync("AllowCustomerStatsView", new object[] {
-                        customerNo}, this.AllowCustomerStatsViewOperationCompleted, userState);
+            this.InvokeAsync("GetStatistics", new object[] {
+                        sessionID,
+                        statistics}, this.GetStatisticsOperationCompleted, userState);
         }
         
-        private void OnAllowCustomerStatsViewOperationCompleted(object arg) {
-            if ((this.AllowCustomerStatsViewCompleted != null)) {
+        private void OnGetStatisticsOperationCompleted(object arg) {
+            if ((this.GetStatisticsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.AllowCustomerStatsViewCompleted(this, new AllowCustomerStatsViewCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GetStatisticsCompleted(this, new GetStatisticsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -951,6 +726,70 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.ProcessReplacementsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ProcessReplacementsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:ProcessRefunds", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="ProcessRefunds_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void ProcessRefunds(string rMAList, string sessionID) {
+            this.Invoke("ProcessRefunds", new object[] {
+                        rMAList,
+                        sessionID});
+        }
+        
+        /// <remarks/>
+        public void ProcessRefundsAsync(string rMAList, string sessionID) {
+            this.ProcessRefundsAsync(rMAList, sessionID, null);
+        }
+        
+        /// <remarks/>
+        public void ProcessRefundsAsync(string rMAList, string sessionID, object userState) {
+            if ((this.ProcessRefundsOperationCompleted == null)) {
+                this.ProcessRefundsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnProcessRefundsOperationCompleted);
+            }
+            this.InvokeAsync("ProcessRefunds", new object[] {
+                        rMAList,
+                        sessionID}, this.ProcessRefundsOperationCompleted, userState);
+        }
+        
+        private void OnProcessRefundsOperationCompleted(object arg) {
+            if ((this.ProcessRefundsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ProcessRefundsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:UpdateREQReturnAction", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="UpdateREQReturnAction_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void UpdateREQReturnAction(string orderNo, string externalDocumentNo, string lineValues, string sessionID) {
+            this.Invoke("UpdateREQReturnAction", new object[] {
+                        orderNo,
+                        externalDocumentNo,
+                        lineValues,
+                        sessionID});
+        }
+        
+        /// <remarks/>
+        public void UpdateREQReturnActionAsync(string orderNo, string externalDocumentNo, string lineValues, string sessionID) {
+            this.UpdateREQReturnActionAsync(orderNo, externalDocumentNo, lineValues, sessionID, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateREQReturnActionAsync(string orderNo, string externalDocumentNo, string lineValues, string sessionID, object userState) {
+            if ((this.UpdateREQReturnActionOperationCompleted == null)) {
+                this.UpdateREQReturnActionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateREQReturnActionOperationCompleted);
+            }
+            this.InvokeAsync("UpdateREQReturnAction", new object[] {
+                        orderNo,
+                        externalDocumentNo,
+                        lineValues,
+                        sessionID}, this.UpdateREQReturnActionOperationCompleted, userState);
+        }
+        
+        private void OnUpdateREQReturnActionOperationCompleted(object arg) {
+            if ((this.UpdateREQReturnActionCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateREQReturnActionCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1069,48 +908,6 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:WriteToLogFile", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="WriteToLogFile_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void WriteToLogFile(string userID, string sessionID, int _UserAction, string orderNo, string rMANo, string quoteNo, bool issueUPSLabel, bool createUPSLabel) {
-            this.Invoke("WriteToLogFile", new object[] {
-                        userID,
-                        sessionID,
-                        _UserAction,
-                        orderNo,
-                        rMANo,
-                        quoteNo,
-                        issueUPSLabel,
-                        createUPSLabel});
-        }
-        
-        /// <remarks/>
-        public void WriteToLogFileAsync(string userID, string sessionID, int _UserAction, string orderNo, string rMANo, string quoteNo, bool issueUPSLabel, bool createUPSLabel) {
-            this.WriteToLogFileAsync(userID, sessionID, _UserAction, orderNo, rMANo, quoteNo, issueUPSLabel, createUPSLabel, null);
-        }
-        
-        /// <remarks/>
-        public void WriteToLogFileAsync(string userID, string sessionID, int _UserAction, string orderNo, string rMANo, string quoteNo, bool issueUPSLabel, bool createUPSLabel, object userState) {
-            if ((this.WriteToLogFileOperationCompleted == null)) {
-                this.WriteToLogFileOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWriteToLogFileOperationCompleted);
-            }
-            this.InvokeAsync("WriteToLogFile", new object[] {
-                        userID,
-                        sessionID,
-                        _UserAction,
-                        orderNo,
-                        rMANo,
-                        quoteNo,
-                        issueUPSLabel,
-                        createUPSLabel}, this.WriteToLogFileOperationCompleted, userState);
-        }
-        
-        private void OnWriteToLogFileOperationCompleted(object arg) {
-            if ((this.WriteToLogFileCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.WriteToLogFileCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:a47a47a45a62_Comments", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="a47a47a45a62_Comments_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void a47a47a45a62_Comments() {
             this.Invoke("a47a47a45a62_Comments", new object[0]);
@@ -1133,202 +930,6 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.a47a47a45a62_CommentsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.a47a47a45a62_CommentsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:UpdateComment", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="UpdateComment_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void UpdateComment(string quoteNo, string comment) {
-            this.Invoke("UpdateComment", new object[] {
-                        quoteNo,
-                        comment});
-        }
-        
-        /// <remarks/>
-        public void UpdateCommentAsync(string quoteNo, string comment) {
-            this.UpdateCommentAsync(quoteNo, comment, null);
-        }
-        
-        /// <remarks/>
-        public void UpdateCommentAsync(string quoteNo, string comment, object userState) {
-            if ((this.UpdateCommentOperationCompleted == null)) {
-                this.UpdateCommentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateCommentOperationCompleted);
-            }
-            this.InvokeAsync("UpdateComment", new object[] {
-                        quoteNo,
-                        comment}, this.UpdateCommentOperationCompleted, userState);
-        }
-        
-        private void OnUpdateCommentOperationCompleted(object arg) {
-            if ((this.UpdateCommentCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.UpdateCommentCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:UpdateComment1", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="UpdateComment1_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void UpdateComment1(string quoteNo, string comment1) {
-            this.Invoke("UpdateComment1", new object[] {
-                        quoteNo,
-                        comment1});
-        }
-        
-        /// <remarks/>
-        public void UpdateComment1Async(string quoteNo, string comment1) {
-            this.UpdateComment1Async(quoteNo, comment1, null);
-        }
-        
-        /// <remarks/>
-        public void UpdateComment1Async(string quoteNo, string comment1, object userState) {
-            if ((this.UpdateComment1OperationCompleted == null)) {
-                this.UpdateComment1OperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateComment1OperationCompleted);
-            }
-            this.InvokeAsync("UpdateComment1", new object[] {
-                        quoteNo,
-                        comment1}, this.UpdateComment1OperationCompleted, userState);
-        }
-        
-        private void OnUpdateComment1OperationCompleted(object arg) {
-            if ((this.UpdateComment1Completed != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.UpdateComment1Completed(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:UpdateCommentUser", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="UpdateCommentUser_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void UpdateCommentUser(string quoteNo, string custSvcUser) {
-            this.Invoke("UpdateCommentUser", new object[] {
-                        quoteNo,
-                        custSvcUser});
-        }
-        
-        /// <remarks/>
-        public void UpdateCommentUserAsync(string quoteNo, string custSvcUser) {
-            this.UpdateCommentUserAsync(quoteNo, custSvcUser, null);
-        }
-        
-        /// <remarks/>
-        public void UpdateCommentUserAsync(string quoteNo, string custSvcUser, object userState) {
-            if ((this.UpdateCommentUserOperationCompleted == null)) {
-                this.UpdateCommentUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateCommentUserOperationCompleted);
-            }
-            this.InvokeAsync("UpdateCommentUser", new object[] {
-                        quoteNo,
-                        custSvcUser}, this.UpdateCommentUserOperationCompleted, userState);
-        }
-        
-        private void OnUpdateCommentUserOperationCompleted(object arg) {
-            if ((this.UpdateCommentUserCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.UpdateCommentUserCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:UpdateCommentPartReq", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="UpdateCommentPartReq_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void UpdateCommentPartReq(string quoteNo, string itemNo, string returnReasonCode, string partReqOption) {
-            this.Invoke("UpdateCommentPartReq", new object[] {
-                        quoteNo,
-                        itemNo,
-                        returnReasonCode,
-                        partReqOption});
-        }
-        
-        /// <remarks/>
-        public void UpdateCommentPartReqAsync(string quoteNo, string itemNo, string returnReasonCode, string partReqOption) {
-            this.UpdateCommentPartReqAsync(quoteNo, itemNo, returnReasonCode, partReqOption, null);
-        }
-        
-        /// <remarks/>
-        public void UpdateCommentPartReqAsync(string quoteNo, string itemNo, string returnReasonCode, string partReqOption, object userState) {
-            if ((this.UpdateCommentPartReqOperationCompleted == null)) {
-                this.UpdateCommentPartReqOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateCommentPartReqOperationCompleted);
-            }
-            this.InvokeAsync("UpdateCommentPartReq", new object[] {
-                        quoteNo,
-                        itemNo,
-                        returnReasonCode,
-                        partReqOption}, this.UpdateCommentPartReqOperationCompleted, userState);
-        }
-        
-        private void OnUpdateCommentPartReqOperationCompleted(object arg) {
-            if ((this.UpdateCommentPartReqCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.UpdateCommentPartReqCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:UpdateCancelComment", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="UpdateCancelComment_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void UpdateCancelComment(string orderNo, string itemNo, string returnReasonCode, string user, int qty) {
-            this.Invoke("UpdateCancelComment", new object[] {
-                        orderNo,
-                        itemNo,
-                        returnReasonCode,
-                        user,
-                        qty});
-        }
-        
-        /// <remarks/>
-        public void UpdateCancelCommentAsync(string orderNo, string itemNo, string returnReasonCode, string user, int qty) {
-            this.UpdateCancelCommentAsync(orderNo, itemNo, returnReasonCode, user, qty, null);
-        }
-        
-        /// <remarks/>
-        public void UpdateCancelCommentAsync(string orderNo, string itemNo, string returnReasonCode, string user, int qty, object userState) {
-            if ((this.UpdateCancelCommentOperationCompleted == null)) {
-                this.UpdateCancelCommentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateCancelCommentOperationCompleted);
-            }
-            this.InvokeAsync("UpdateCancelComment", new object[] {
-                        orderNo,
-                        itemNo,
-                        returnReasonCode,
-                        user,
-                        qty}, this.UpdateCancelCommentOperationCompleted, userState);
-        }
-        
-        private void OnUpdateCancelCommentOperationCompleted(object arg) {
-            if ((this.UpdateCancelCommentCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.UpdateCancelCommentCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:UpdatePartRefundComment", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="UpdatePartRefundComment_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void UpdatePartRefundComment(string orderNo, string itemNo, string returnReasonCode, string user, decimal amount) {
-            this.Invoke("UpdatePartRefundComment", new object[] {
-                        orderNo,
-                        itemNo,
-                        returnReasonCode,
-                        user,
-                        amount});
-        }
-        
-        /// <remarks/>
-        public void UpdatePartRefundCommentAsync(string orderNo, string itemNo, string returnReasonCode, string user, decimal amount) {
-            this.UpdatePartRefundCommentAsync(orderNo, itemNo, returnReasonCode, user, amount, null);
-        }
-        
-        /// <remarks/>
-        public void UpdatePartRefundCommentAsync(string orderNo, string itemNo, string returnReasonCode, string user, decimal amount, object userState) {
-            if ((this.UpdatePartRefundCommentOperationCompleted == null)) {
-                this.UpdatePartRefundCommentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdatePartRefundCommentOperationCompleted);
-            }
-            this.InvokeAsync("UpdatePartRefundComment", new object[] {
-                        orderNo,
-                        itemNo,
-                        returnReasonCode,
-                        user,
-                        amount}, this.UpdatePartRefundCommentOperationCompleted, userState);
-        }
-        
-        private void OnUpdatePartRefundCommentOperationCompleted(object arg) {
-            if ((this.UpdatePartRefundCommentCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.UpdatePartRefundCommentCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1356,21 +957,21 @@ namespace ExcelDesign.ServiceFunctions {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50016")]
-    public partial class Statistics {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50003")]
+    public partial class UserSetup {
         
-        private SalesLine[] salesLineField;
+        private User[] userField;
         
         private string[] textField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
-        public SalesLine[] SalesLine {
+        [System.Xml.Serialization.XmlElementAttribute("User")]
+        public User[] User {
             get {
-                return this.salesLineField;
+                return this.userField;
             }
             set {
-                this.salesLineField = value;
+                this.userField = value;
             }
         }
         
@@ -1391,8 +992,573 @@ namespace ExcelDesign.ServiceFunctions {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50016")]
-    public partial class SalesLine {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50003")]
+    public partial class User {
+        
+        private string userIDField;
+        
+        private string createRMAField;
+        
+        private string createRetLabelField;
+        
+        private string createPDARmaField;
+        
+        private string createPDAExchangeField;
+        
+        private string adminField;
+        
+        private string developerField;
+        
+        private string sessionIDField;
+        
+        private string passwordField;
+        
+        private int sessionTimeoutField;
+        
+        private string passwordExpiryDateField;
+        
+        private string passwordLastUpdatedField;
+        
+        private string createExchangeField;
+        
+        private string createPartRequestField;
+        
+        private string createPDAPartRequestField;
+        
+        private string issueRefundField;
+        
+        private string issuePDARefundField;
+        
+        private string partialRefundTierField;
+        
+        private string cancelOrderField;
+        
+        private string cancelPDAOrderField;
+        
+        private string canPartialRefundField;
+        
+        private string canPartialRefundPDAField;
+        
+        private string supervisorField;
+        
+        public User() {
+            this.sessionTimeoutField = 0;
+        }
+        
+        /// <remarks/>
+        public string UserID {
+            get {
+                return this.userIDField;
+            }
+            set {
+                this.userIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreateRMA {
+            get {
+                return this.createRMAField;
+            }
+            set {
+                this.createRMAField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreateRetLabel {
+            get {
+                return this.createRetLabelField;
+            }
+            set {
+                this.createRetLabelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreatePDARma {
+            get {
+                return this.createPDARmaField;
+            }
+            set {
+                this.createPDARmaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreatePDAExchange {
+            get {
+                return this.createPDAExchangeField;
+            }
+            set {
+                this.createPDAExchangeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Admin {
+            get {
+                return this.adminField;
+            }
+            set {
+                this.adminField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Developer {
+            get {
+                return this.developerField;
+            }
+            set {
+                this.developerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SessionID {
+            get {
+                return this.sessionIDField;
+            }
+            set {
+                this.sessionIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                this.passwordField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int SessionTimeout {
+            get {
+                return this.sessionTimeoutField;
+            }
+            set {
+                this.sessionTimeoutField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PasswordExpiryDate {
+            get {
+                return this.passwordExpiryDateField;
+            }
+            set {
+                this.passwordExpiryDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PasswordLastUpdated {
+            get {
+                return this.passwordLastUpdatedField;
+            }
+            set {
+                this.passwordLastUpdatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreateExchange {
+            get {
+                return this.createExchangeField;
+            }
+            set {
+                this.createExchangeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreatePartRequest {
+            get {
+                return this.createPartRequestField;
+            }
+            set {
+                this.createPartRequestField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreatePDAPartRequest {
+            get {
+                return this.createPDAPartRequestField;
+            }
+            set {
+                this.createPDAPartRequestField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string IssueRefund {
+            get {
+                return this.issueRefundField;
+            }
+            set {
+                this.issueRefundField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string IssuePDARefund {
+            get {
+                return this.issuePDARefundField;
+            }
+            set {
+                this.issuePDARefundField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PartialRefundTier {
+            get {
+                return this.partialRefundTierField;
+            }
+            set {
+                this.partialRefundTierField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CancelOrder {
+            get {
+                return this.cancelOrderField;
+            }
+            set {
+                this.cancelOrderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CancelPDAOrder {
+            get {
+                return this.cancelPDAOrderField;
+            }
+            set {
+                this.cancelPDAOrderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CanPartialRefund {
+            get {
+                return this.canPartialRefundField;
+            }
+            set {
+                this.canPartialRefundField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CanPartialRefundPDA {
+            get {
+                return this.canPartialRefundPDAField;
+            }
+            set {
+                this.canPartialRefundPDAField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Supervisor {
+            get {
+                return this.supervisorField;
+            }
+            set {
+                this.supervisorField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50017")]
+    public partial class Object {
+        
+        private int idField;
+        
+        private string typeField;
+        
+        private string nameField;
+        
+        private string versionListField;
+        
+        private string dateField;
+        
+        private string timeField;
+        
+        private string compiledField;
+        
+        public Object() {
+            this.idField = 0;
+        }
+        
+        /// <remarks/>
+        public int ID {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string VersionList {
+            get {
+                return this.versionListField;
+            }
+            set {
+                this.versionListField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Date {
+            get {
+                return this.dateField;
+            }
+            set {
+                this.dateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Time {
+            get {
+                return this.timeField;
+            }
+            set {
+                this.timeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Compiled {
+            get {
+                return this.compiledField;
+            }
+            set {
+                this.compiledField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50017")]
+    public partial class AboutObjects {
+        
+        private Object[] objectField;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Object")]
+        public Object[] Object {
+            get {
+                return this.objectField;
+            }
+            set {
+                this.objectField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="ReturnsBuffer", Namespace="urn:microsoft-dynamics-nav/xmlports/x50016")]
+    public partial class ReturnsBuffer1 {
+        
+        private string statusField;
+        
+        private string extDocNoField;
+        
+        private string customerNoField;
+        
+        private string itemNoField;
+        
+        private string descriptionField;
+        
+        private string rMANoField;
+        
+        private string exchangeOrderNoField;
+        
+        private string dateCreatedField;
+        
+        private string[] isOlderThan24Hrs2Field;
+        
+        private string[] isOlderThan48Hrs2Field;
+        
+        private string[] isOlderThan72Hrs2Field;
+        
+        /// <remarks/>
+        public string Status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ExtDocNo {
+            get {
+                return this.extDocNoField;
+            }
+            set {
+                this.extDocNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CustomerNo {
+            get {
+                return this.customerNoField;
+            }
+            set {
+                this.customerNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ItemNo {
+            get {
+                return this.itemNoField;
+            }
+            set {
+                this.itemNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RMANo {
+            get {
+                return this.rMANoField;
+            }
+            set {
+                this.rMANoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ExchangeOrderNo {
+            get {
+                return this.exchangeOrderNoField;
+            }
+            set {
+                this.exchangeOrderNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DateCreated {
+            get {
+                return this.dateCreatedField;
+            }
+            set {
+                this.dateCreatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("IsOlderThan24Hrs2")]
+        public string[] IsOlderThan24Hrs2 {
+            get {
+                return this.isOlderThan24Hrs2Field;
+            }
+            set {
+                this.isOlderThan24Hrs2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("IsOlderThan48Hrs2")]
+        public string[] IsOlderThan48Hrs2 {
+            get {
+                return this.isOlderThan48Hrs2Field;
+            }
+            set {
+                this.isOlderThan48Hrs2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("IsOlderThan72Hrs2")]
+        public string[] IsOlderThan72Hrs2 {
+            get {
+                return this.isOlderThan72Hrs2Field;
+            }
+            set {
+                this.isOlderThan72Hrs2Field = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="urn:microsoft-dynamics-nav/xmlports/x50016")]
+    public partial class SalesLine4 {
         
         private string docTypeField;
         
@@ -1588,118 +1754,34 @@ namespace ExcelDesign.ServiceFunctions {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50017")]
-    public partial class Object {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50016")]
+    public partial class Statistics {
         
-        private int idField;
+        private SalesLine4[] salesLineField;
         
-        private string typeField;
-        
-        private string nameField;
-        
-        private string versionListField;
-        
-        private string dateField;
-        
-        private string timeField;
-        
-        private string compiledField;
-        
-        public Object() {
-            this.idField = 0;
-        }
-        
-        /// <remarks/>
-        public int ID {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Type {
-            get {
-                return this.typeField;
-            }
-            set {
-                this.typeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string VersionList {
-            get {
-                return this.versionListField;
-            }
-            set {
-                this.versionListField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Date {
-            get {
-                return this.dateField;
-            }
-            set {
-                this.dateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Time {
-            get {
-                return this.timeField;
-            }
-            set {
-                this.timeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Compiled {
-            get {
-                return this.compiledField;
-            }
-            set {
-                this.compiledField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50017")]
-    public partial class AboutObjects {
-        
-        private Object[] objectField;
+        private ReturnsBuffer1[] returnsBufferField;
         
         private string[] textField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Object")]
-        public Object[] Object {
+        [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
+        public SalesLine4[] SalesLine {
             get {
-                return this.objectField;
+                return this.salesLineField;
             }
             set {
-                this.objectField = value;
+                this.salesLineField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ReturnsBuffer")]
+        public ReturnsBuffer1[] ReturnsBuffer {
+            get {
+                return this.returnsBufferField;
+            }
+            set {
+                this.returnsBufferField = value;
             }
         }
         
@@ -1721,7 +1803,7 @@ namespace ExcelDesign.ServiceFunctions {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="urn:microsoft-dynamics-nav/xmlports/x50002")]
-    public partial class SalesLine4 {
+    public partial class SalesLine3 {
         
         private string docNoField;
         
@@ -2129,7 +2211,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         private SalesHeader3[] salesHeaderField;
         
-        private SalesLine4[] salesLineField;
+        private SalesLine3[] salesLineField;
         
         private string[] textField;
         
@@ -2146,7 +2228,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
-        public SalesLine4[] SalesLine {
+        public SalesLine3[] SalesLine {
             get {
                 return this.salesLineField;
             }
@@ -2242,7 +2324,7 @@ namespace ExcelDesign.ServiceFunctions {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="urn:microsoft-dynamics-nav/xmlports/x50015")]
-    public partial class SalesLine3 {
+    public partial class SalesLine2 {
         
         private string docNoField;
         
@@ -2680,7 +2762,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         private SalesHeader2[] salesHeaderField;
         
-        private SalesLine3[] salesLineField;
+        private SalesLine2[] salesLineField;
         
         private ExtendedSalesHeader1[] extendedSalesHeaderField;
         
@@ -2699,7 +2781,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
-        public SalesLine3[] SalesLine {
+        public SalesLine2[] SalesLine {
             get {
                 return this.salesLineField;
             }
@@ -2737,7 +2819,7 @@ namespace ExcelDesign.ServiceFunctions {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="urn:microsoft-dynamics-nav/xmlports/x50014")]
-    public partial class SalesLine2 {
+    public partial class SalesLine1 {
         
         private string docNoField;
         
@@ -3175,7 +3257,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         private SalesHeader1[] salesHeaderField;
         
-        private SalesLine2[] salesLineField;
+        private SalesLine1[] salesLineField;
         
         private string[] textField;
         
@@ -3192,7 +3274,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
-        public SalesLine2[] SalesLine {
+        public SalesLine1[] SalesLine {
             get {
                 return this.salesLineField;
             }
@@ -3711,6 +3793,111 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.categoryField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
+    public partial class ReturnsBuffer {
+        
+        private string statusField;
+        
+        private string orderNoField;
+        
+        private string extDocNoField;
+        
+        private string itemNoField;
+        
+        private string descriptionField;
+        
+        private string returnReasonField;
+        
+        private string refundQtyField;
+        
+        private string refundAmtField;
+        
+        /// <remarks/>
+        public string Status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string OrderNo {
+            get {
+                return this.orderNoField;
+            }
+            set {
+                this.orderNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ExtDocNo {
+            get {
+                return this.extDocNoField;
+            }
+            set {
+                this.extDocNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ItemNo {
+            get {
+                return this.itemNoField;
+            }
+            set {
+                this.itemNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ReturnReason {
+            get {
+                return this.returnReasonField;
+            }
+            set {
+                this.returnReasonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RefundQty {
+            get {
+                return this.refundQtyField;
+            }
+            set {
+                this.refundQtyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RefundAmt {
+            get {
+                return this.refundAmtField;
+            }
+            set {
+                this.refundAmtField = value;
             }
         }
     }
@@ -5921,8 +6108,8 @@ namespace ExcelDesign.ServiceFunctions {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
-    public partial class SalesLine1 {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
+    public partial class SalesLine {
         
         private string docTypeField;
         
@@ -6466,7 +6653,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         private SalesHeader[] salesHeaderField;
         
-        private SalesLine1[] salesLineField;
+        private SalesLine[] salesLineField;
         
         private SalesShipmentHeader[] salesShipmentHeaderField;
         
@@ -6496,6 +6683,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private ExtendedSalesHeader[] extendedSalesHeaderField;
         
+        private ReturnsBuffer[] returnsBufferField;
+        
         private ReturnReasonCode[] returnReasonCodeField;
         
         private DefectOptions[] defectOptionsField;
@@ -6519,7 +6708,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
-        public SalesLine1[] SalesLine {
+        public SalesLine[] SalesLine {
             get {
                 return this.salesLineField;
             }
@@ -6683,6 +6872,17 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ReturnsBuffer")]
+        public ReturnsBuffer[] ReturnsBuffer {
+            get {
+                return this.returnsBufferField;
+            }
+            set {
+                this.returnsBufferField = value;
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("ReturnReasonCode")]
         public ReturnReasonCode[] ReturnReasonCode {
             get {
@@ -6739,342 +6939,8 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50003")]
-    public partial class User {
-        
-        private string userIDField;
-        
-        private string createRMAField;
-        
-        private string createRetLabelField;
-        
-        private string createPDARmaField;
-        
-        private string createPDAExchangeField;
-        
-        private string adminField;
-        
-        private string developerField;
-        
-        private string sessionIDField;
-        
-        private string passwordField;
-        
-        private int sessionTimeoutField;
-        
-        private string passwordExpiryDateField;
-        
-        private string passwordLastUpdatedField;
-        
-        private string createExchangeField;
-        
-        private string createPartRequestField;
-        
-        private string createPDAPartRequestField;
-        
-        private string issueRefundField;
-        
-        private string issuePDARefundField;
-        
-        private string cancelOrderField;
-        
-        private string cancelPDAOrderField;
-        
-        private string canPartialRefundField;
-        
-        private string canPartialRefundPDAField;
-        
-        private string partialRefundTierField;
-        
-        public User() {
-            this.sessionTimeoutField = 0;
-        }
-        
-        /// <remarks/>
-        public string UserID {
-            get {
-                return this.userIDField;
-            }
-            set {
-                this.userIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CreateRMA {
-            get {
-                return this.createRMAField;
-            }
-            set {
-                this.createRMAField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CreateRetLabel {
-            get {
-                return this.createRetLabelField;
-            }
-            set {
-                this.createRetLabelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CreatePDARma {
-            get {
-                return this.createPDARmaField;
-            }
-            set {
-                this.createPDARmaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CreatePDAExchange {
-            get {
-                return this.createPDAExchangeField;
-            }
-            set {
-                this.createPDAExchangeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Admin {
-            get {
-                return this.adminField;
-            }
-            set {
-                this.adminField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Developer {
-            get {
-                return this.developerField;
-            }
-            set {
-                this.developerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SessionID {
-            get {
-                return this.sessionIDField;
-            }
-            set {
-                this.sessionIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Password {
-            get {
-                return this.passwordField;
-            }
-            set {
-                this.passwordField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int SessionTimeout {
-            get {
-                return this.sessionTimeoutField;
-            }
-            set {
-                this.sessionTimeoutField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PasswordExpiryDate {
-            get {
-                return this.passwordExpiryDateField;
-            }
-            set {
-                this.passwordExpiryDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PasswordLastUpdated {
-            get {
-                return this.passwordLastUpdatedField;
-            }
-            set {
-                this.passwordLastUpdatedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CreateExchange {
-            get {
-                return this.createExchangeField;
-            }
-            set {
-                this.createExchangeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CreatePartRequest {
-            get {
-                return this.createPartRequestField;
-            }
-            set {
-                this.createPartRequestField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CreatePDAPartRequest {
-            get {
-                return this.createPDAPartRequestField;
-            }
-            set {
-                this.createPDAPartRequestField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string IssueRefund {
-            get {
-                return this.issueRefundField;
-            }
-            set {
-                this.issueRefundField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string IssuePDARefund {
-            get {
-                return this.issuePDARefundField;
-            }
-            set {
-                this.issuePDARefundField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CancelOrder {
-            get {
-                return this.cancelOrderField;
-            }
-            set {
-                this.cancelOrderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CancelPDAOrder {
-            get {
-                return this.cancelPDAOrderField;
-            }
-            set {
-                this.cancelPDAOrderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CanPartialRefund {
-            get {
-                return this.canPartialRefundField;
-            }
-            set {
-                this.canPartialRefundField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CanPartialRefundPDA {
-            get {
-                return this.canPartialRefundPDAField;
-            }
-            set {
-                this.canPartialRefundPDAField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PartialRefundTier {
-            get {
-                return this.partialRefundTierField;
-            }
-            set {
-                this.partialRefundTierField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50003")]
-    public partial class UserSetup {
-        
-        private User[] userField;
-        
-        private string[] textField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("User")]
-        public User[] User {
-            get {
-                return this.userField;
-            }
-            set {
-                this.userField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
-            get {
-                return this.textField;
-            }
-            set {
-                this.textField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void GetStatisticsCompletedEventHandler(object sender, GetStatisticsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetStatisticsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetStatisticsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public Statistics statistics {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((Statistics)(this.results[0]));
-            }
-        }
-    }
+    public delegate void ResetSessionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
@@ -7112,7 +6978,7 @@ namespace ExcelDesign.ServiceFunctions {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void ProcessRefundsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void UpdateUserPasswordCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
@@ -7147,52 +7013,6 @@ namespace ExcelDesign.ServiceFunctions {
             }
         }
     }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void IsValidSessionCompletedEventHandler(object sender, IsValidSessionCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class IsValidSessionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal IsValidSessionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void ResetSessionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void UpdateUserPasswordCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void CheckSOCancelCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void SetDateFiltersCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void SetCommentFiltersCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
@@ -7432,26 +7252,26 @@ namespace ExcelDesign.ServiceFunctions {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void AllowCustomerStatsViewCompletedEventHandler(object sender, AllowCustomerStatsViewCompletedEventArgs e);
+    public delegate void GetStatisticsCompletedEventHandler(object sender, GetStatisticsCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class AllowCustomerStatsViewCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class GetStatisticsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal AllowCustomerStatsViewCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal GetStatisticsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public bool Result {
+        public Statistics statistics {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
+                return ((Statistics)(this.results[0]));
             }
         }
     }
@@ -7459,6 +7279,14 @@ namespace ExcelDesign.ServiceFunctions {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void ProcessReplacementsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void ProcessRefundsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void UpdateREQReturnActionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
@@ -7522,35 +7350,7 @@ namespace ExcelDesign.ServiceFunctions {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void WriteToLogFileCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void a47a47a45a62_CommentsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void UpdateCommentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void UpdateComment1CompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void UpdateCommentUserCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void UpdateCommentPartReqCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void UpdateCancelCommentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void UpdatePartRefundCommentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

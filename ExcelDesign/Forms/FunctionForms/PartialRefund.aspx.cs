@@ -34,6 +34,7 @@ namespace ExcelDesign.Forms.FunctionForms
                 }
 
                 LoadPartialRefundLines();
+                LoadAlreadyPartialRefundLines();
             }
             catch (Exception loadE)
             {
@@ -72,7 +73,7 @@ namespace ExcelDesign.Forms.FunctionForms
                             {
                                 if (line.Quantity > 0)
                                 {
-                                    lineCount++; ;
+                                    lineCount++;
 
                                     TableRow singleRow = new TableRow();
 
@@ -82,6 +83,8 @@ namespace ExcelDesign.Forms.FunctionForms
                                     TableCell actionQty = new TableCell();
                                     TableCell returnReasonCode = new TableCell();
                                     TableCell refundOption = new TableCell();
+                                    TableCell lineAmount = new TableCell();
+                                    TableCell refundAmount = new TableCell();
 
                                     DropDownList ddlReturnReasonCode = new DropDownList
                                     {
@@ -116,6 +119,8 @@ namespace ExcelDesign.Forms.FunctionForms
                                     actionQty.ID = "actionQty_" + lineCount.ToString();
                                     returnReasonCode.ID = "returnReasonCode_" + lineCount.ToString();
                                     refundOption.ID = "refundOption_" + lineCount.ToString();
+                                    lineAmount.ID = "lineAmount_" + lineCount.ToString();
+                                    refundAmount.ID = "refundAmount_" + lineCount.ToString();
 
                                     itemNo.Text = line.ItemNo;
                                     desc.Text = line.Description;
@@ -123,6 +128,11 @@ namespace ExcelDesign.Forms.FunctionForms
                                     actionQty.Controls.Add(actionQtyInsert);
                                     returnReasonCode.Controls.Add(ddlReturnReasonCode);
                                     refundOption.Controls.Add(ddlRefundOption);
+                                    lineAmount.Text = "$      " + line.LineAmount.ToGBString();
+                                    if(ro.Count > 0)
+                                    {
+                                        refundAmount.Text = "$      " + Math.Round((line.LineAmount * 0.1), 2).ToGBString(); //10% is default
+                                    }
                                     orderTotal += line.LineAmount;
 
                                     qty.HorizontalAlign = HorizontalAlign.Center;
@@ -136,6 +146,8 @@ namespace ExcelDesign.Forms.FunctionForms
                                     singleRow.Cells.Add(actionQty);
                                     singleRow.Cells.Add(returnReasonCode);
                                     singleRow.Cells.Add(refundOption);
+                                    singleRow.Cells.Add(lineAmount);
+                                    singleRow.Cells.Add(refundAmount);
 
                                     if (lineCount % 2 == 0)
                                     {
@@ -183,6 +195,76 @@ namespace ExcelDesign.Forms.FunctionForms
                             }
                         }                           
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+                ClientScript.RegisterStartupScript(this.GetType(), "exceptionAlert", "alert('" + ex.Message + "');", true);
+            }
+        }
+
+        protected void LoadAlreadyPartialRefundLines()
+        {
+            try
+            {
+                bool partialRefundExists = false;
+                int lineCount = 0;
+                TableRow lineRow = new TableRow();
+
+                Sh = (List<SalesHeader>)Session["SalesHeaders"];
+
+                foreach (SalesHeader header in Sh)
+                {
+                    foreach (PartialRefunded partref in header.PartialRefunds)
+                    {
+                        if (partref.Price > 0)
+                        {
+                            lineCount++;
+
+                            partialRefundExists = true;
+
+                            TableRow singleRow = new TableRow();
+
+                            TableCell itemNo = new TableCell();
+                            TableCell desc = new TableCell();
+                            TableCell returnReason = new TableCell();
+                            TableCell refundAmount = new TableCell();
+
+                            itemNo.ID = "infoItemNo_" + lineCount.ToString();
+                            desc.ID = "infoDesc_" + lineCount.ToString();
+                            returnReason.ID = "infoReturnReasonCode_" + lineCount.ToString();
+                            refundAmount.ID = "infoRefundAmount" + lineCount.ToString();
+
+                            itemNo.Text = partref.ItemNo;
+                            desc.Text = partref.Description;
+                            returnReason.Text = partref.ReturnReason;
+                            refundAmount.Text = "$      " + partref.Price.ToGBString();
+
+                            refundAmount.HorizontalAlign = HorizontalAlign.Right;
+
+                            singleRow.Cells.Add(itemNo);
+                            singleRow.Cells.Add(desc);
+                            singleRow.Cells.Add(returnReason);
+                            singleRow.Cells.Add(refundAmount);
+
+                            if (lineCount % 2 == 0)
+                            {
+                                singleRow.BackColor = Color.White;
+                            }
+                            else
+                            {
+                                singleRow.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                            }
+
+                            tblAlreadyPartialRefunded.Rows.Add(singleRow);
+                        }
+                    }
+                }
+
+                if(!partialRefundExists)
+                {
+                    tblAlreadyPartialRefunded.Visible = false;
                 }
             }
             catch (Exception ex)

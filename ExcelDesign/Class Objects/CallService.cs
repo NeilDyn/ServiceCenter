@@ -980,6 +980,8 @@ namespace ExcelDesign.Class_Objects
 
             List<string> insertedOrderNumbers = new List<string>();
 
+            List<PartialRefunded> partialRefunds = new List<PartialRefunded>();
+
             int statusCounter = 0;
 
             if (currResults.SOImportBuffer != null)
@@ -1033,8 +1035,9 @@ namespace ExcelDesign.Class_Objects
                                 }
 
                                 commentLines = GetSalesLineComments(orderNo);
+                                partialRefunds = GetPartialRefunds(orderNo, externalDocumentNo);
                                 salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo,
-                                    warranty, rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines, isPartRequest, quoteOrderNo));
+                                    warranty, rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines, isPartRequest, quoteOrderNo, partialRefunds));
 
                                 insertedOrderNumbers.Add(orderNo);
 
@@ -1047,6 +1050,7 @@ namespace ExcelDesign.Class_Objects
                                 externalDocumentNo = string.Empty;
                                 warranty = new Warranty();
                                 commentLines = new List<Comment>();
+                                partialRefunds = new List<PartialRefunded>();
 
                                 status = string.Empty;
                                 policy = string.Empty;
@@ -1153,8 +1157,9 @@ namespace ExcelDesign.Class_Objects
                                 }
 
                                 commentLines = GetSalesLineComments(orderNo);
+                                partialRefunds = GetPartialRefunds(orderNo, externalDocumentNo);
                                 salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty,
-                                    rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines, isPartRequest, quoteOrderNo));
+                                    rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines, isPartRequest, quoteOrderNo, partialRefunds));
 
                                 insertedOrderNumbers.Add(orderNo);
 
@@ -1167,6 +1172,7 @@ namespace ExcelDesign.Class_Objects
                                 externalDocumentNo = string.Empty;
                                 warranty = new Warranty();
                                 commentLines = new List<Comment>();
+                                partialRefunds = new List<PartialRefunded>();
 
                                 status = string.Empty;
                                 policy = string.Empty;
@@ -1238,9 +1244,11 @@ namespace ExcelDesign.Class_Objects
                                 }
                             }
 
-                            commentLines = GetSalesLineComments(orderNo);
+                            // 2 November 2018 -  Updated touse SSH No.
+                            commentLines = GetSalesLineComments(currResults.SalesShipmentHeader[so].No);
+                            partialRefunds = GetPartialRefunds(orderNo, externalDocumentNo);
                             salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty,
-                                rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines, isPartRequest, quoteOrderNo));
+                                rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines, isPartRequest, quoteOrderNo, partialRefunds));
 
                             insertedOrderNumbers.Add(orderNo);
 
@@ -1253,6 +1261,7 @@ namespace ExcelDesign.Class_Objects
                             externalDocumentNo = string.Empty;
                             warranty = new Warranty();
                             commentLines = new List<Comment>();
+                            partialRefunds = new List<PartialRefunded>();
 
                             status = string.Empty;
                             policy = string.Empty;
@@ -1463,7 +1472,7 @@ namespace ExcelDesign.Class_Objects
         {
             /* 16 October 2018 - Neil Jansen
              * Updated logic to not match on external document no.s, but to loop through the extended sales header as we have updated the logic to link Sales Orders and Return Orders through this record.
-             */ 
+             */
             List<ReturnHeader> returnHead = new List<ReturnHeader>();
 
             string returnStatus = string.Empty;
@@ -2386,6 +2395,45 @@ namespace ExcelDesign.Class_Objects
             }
 
             return buildInfo;
+        }
+
+        private List<PartialRefunded> GetPartialRefunds(string no, string docNo)
+        {
+            List<PartialRefunded> pr = new List<PartialRefunded>();
+
+            string orderNo = string.Empty;
+            string extDocNo = string.Empty;
+            string itemNo = string.Empty;
+            string description = string.Empty;
+            string returnReason = string.Empty;
+            double price = 0;
+
+            if (currResults.ReturnsBuffer != null)
+            {
+                for (int rb = 0; rb < currResults.ReturnsBuffer.Length; rb++)
+                {
+                    if (currResults.ReturnsBuffer[rb].OrderNo == no && currResults.ReturnsBuffer[rb].ExtDocNo == docNo)
+                    {
+                        orderNo = currResults.ReturnsBuffer[rb].OrderNo;
+                        extDocNo = currResults.ReturnsBuffer[rb].ExtDocNo;
+                        itemNo = currResults.ReturnsBuffer[rb].ItemNo;
+                        description = currResults.ReturnsBuffer[rb].Description;
+                        returnReason = currResults.ReturnsBuffer[rb].ReturnReason;
+                        double.TryParse(currResults.ReturnsBuffer[rb].RefundAmt.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
+
+                        pr.Add(new PartialRefunded(orderNo, extDocNo, itemNo, description, returnReason, price));
+                    }
+
+                    orderNo = string.Empty;
+                    extDocNo = string.Empty;
+                    itemNo = string.Empty;
+                    description = string.Empty;
+                    returnReason = string.Empty;
+                    price = 0;
+                }
+            }
+
+            return pr;
         }
     }
 }

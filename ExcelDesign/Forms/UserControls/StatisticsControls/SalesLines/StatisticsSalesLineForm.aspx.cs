@@ -310,10 +310,12 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                     if (lineCount % 2 == 0)
                     {
                         tr.BackColor = Color.White;
+                        exchangeOrderNo.BackColor = Color.White;
                     }
                     else
                     {
                         tr.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                        exchangeOrderNo.BackColor = ColorTranslator.FromHtml("#EFF3FB");
                     }
 
                     tblStatisticsSalesLines.Rows.Add(tr);

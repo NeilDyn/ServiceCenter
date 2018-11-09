@@ -468,5 +468,10 @@ namespace ExcelDesign.Class_Objects
         {
             webService.PartialRefund(orderNo, docNo, lineValues);
         }
+
+        public void UpdateREQReturnAction(string rmaList, string sessionID)
+        {
+            webService.UpdateREQReturnAction(rmaList, sessionID);
+        }
     }
 }

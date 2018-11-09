@@ -12,16 +12,19 @@ namespace ExcelDesign.Class_Objects
         public string ItemNo { get; set; }
         public string Description { get; set; }
         public string ReturnReason { get; set; }
-        public double Price { get; set; }
+        public double RefundAmount { get; set; }
+        public double RefundSalesTax { get; set; }
+        public double RefundShippingTax { get; set; }
 
-        public PartialRefunded(string orderNoP, string extDocNoP, string itemNoP, string descriptionP, string returnReasonP, double priceP)
+        public PartialRefunded(string orderNoP, string extDocNoP, string itemNoP, string descriptionP, string returnReasonP, double refundAmount,
+                               double refundSalesTax, double refundShippingTax)
         {
             OrderNo = orderNoP;
             ExtDocNo = extDocNoP;
             ItemNo = itemNoP;
             Description = descriptionP;
             ReturnReason = returnReasonP;
-            Price = priceP;
+            RefundAmount = refundAmount;
         }
 
         public PartialRefunded()

@@ -4,6 +4,7 @@
 <%@ Register Src="~/Forms/UserControls/StatisticsControls/PendingRefund.ascx" TagName="PendingRefunds" TagPrefix="prd" %>
 <%@ Register Src="~/Forms/UserControls/StatisticsControls/PendingUnknown.ascx" TagName="PendingUnknown" TagPrefix="pu" %>
 <%@ Register Src="~/Forms/UserControls/StatisticsControls/PendingSQApproval.ascx" TagName="PendingSQApproval" TagPrefix="psqa" %>
+<%@ Register Src="~/Forms/UserControls/StatisticsControls/CompletedExchanges.ascx" TagName="CompletedExchanges" TagPrefix="ce" %>
 
 <link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 
@@ -14,6 +15,7 @@
         $("[id$=expandRefundDetails]").hide();
         $("[id$=expandPendingSQApproval]").hide();
         $("[id$=expandPendingUnknown]").hide();
+        $("[id$=expandCompletedExchanges]").hide();
 
         var statisticsSalesLine;
     });
@@ -32,6 +34,10 @@
 
     function expandPendingUnknown() {
         $("[id$=expandPendingUnknown]").toggle();
+    };
+
+    function expandCompletedExchanges() {
+        $("[id$=expandCompletedExchanges]").toggle();
     };
 
     function OpenSalesLineWindow(pendingList, pendingType) {
@@ -65,16 +71,19 @@
         }
     }
 </script>
-<asp:Table runat="server" ID="tblStatistics" Height="100%" Width="30%" HorizontalAlign="Right">
+<asp:Table runat="server" ID="tblStatistics" Height="100%" Width="50%" HorizontalAlign="Right">
     <asp:TableHeaderRow HorizontalAlign="Justify" ForeColor="White" BackColor="#507CD1" Font-Size="Larger" Font-Bold="true">
         <asp:TableHeaderCell BackColor="#FFFFFF">
             <asp:ImageButton ID="BtnRefreshStatistics" runat="server" ImageUrl="~/images/refresh.png" Height="20px" OnClick="BtnRefreshStatistics_Click"/>
         </asp:TableHeaderCell>
-        <asp:TableHeaderCell Text="Returns" ColumnSpan="2" Width="50%" />
-        <asp:TableHeaderCell Text="Part Requests" ColumnSpan="2" Width="50%" />
+        <asp:TableHeaderCell Text="Returns" ColumnSpan="2" Width="33%" />
+        <asp:TableHeaderCell Text="Part Requests" ColumnSpan="2" Width="33%" />
+        <asp:TableHeaderCell Text="Returns Buffer" ColumnSpan="2" Width="33%"/>
     </asp:TableHeaderRow>
     <asp:TableHeaderRow>
         <asp:TableHeaderCell />
+        <asp:TableHeaderCell ColumnSpan="2">
+        </asp:TableHeaderCell>
         <asp:TableHeaderCell ColumnSpan="2">
         </asp:TableHeaderCell>
         <asp:TableHeaderCell ColumnSpan="2">
@@ -86,11 +95,14 @@
         <asp:TableCell runat="server" ID="tcPendingReplacements" />
         <asp:TableCell Text="Pending SQ Approval" Font-Bold="true" />
         <asp:TableCell runat="server" ID="tcPendingSQApproval" />
+        <asp:TableCell Text="Completed Exchanges" Font-Bold="true" />
+        <asp:TableCell runat="server" ID="tcCompletedExchanges" />
     </asp:TableRow>
     <asp:TableRow runat="server" TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableHeaderCell />
-        <asp:TableCell runat="server" ID="expandReplacementDetails" ColumnSpan="2" Width="50%" Height="100%"/>
-        <asp:TableCell runat="server" ID="expandPendingSQApproval" ColumnSpan="2" Width="50%" Height="100%" />
+        <asp:TableCell runat="server" ID="expandReplacementDetails" ColumnSpan="2" Width="30%" Height="100%"/>
+        <asp:TableCell runat="server" ID="expandPendingSQApproval" ColumnSpan="2" Width="30%" Height="100%" />
+        <asp:TableCell runat="server" ID="expandCompletedExchanges" ColumnSpan="2" Width="30%" Height="100%" />
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableHeaderCell />

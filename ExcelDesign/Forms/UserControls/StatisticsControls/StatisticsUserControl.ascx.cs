@@ -22,11 +22,15 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
         protected Control refundLinesControl;
         protected Control unknownLinesControl;
         protected Control quoteLinesControl;
+        protected Control completedExchangesControl;
 
         protected const string replacementLinesPath = "PendingReplacements.ascx";
         protected const string refundLinesPath = "PendingRefund.ascx";
         protected const string unknownLinesPath = "PendingUnknown.ascx";
         protected const string quoteLinesPath = "PendingSQApproval.ascx";
+        protected const string completedExchangesPath = "CompletedExchanges.ascx";
+
+        protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(StatisticsUserControl));
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -77,11 +81,13 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
             int pendingRefund = 0;
             int pendingSQApproval = 0;
             int unknown = 0;
+            int completedExchanges = 0;
 
             List<StatisticsSalesLine> replacementList = new List<StatisticsSalesLine>();
             List<StatisticsSalesLine> refundList = new List<StatisticsSalesLine>();
             List<StatisticsSalesLine> quoteList = new List<StatisticsSalesLine>();
             List<StatisticsSalesLine> unknownList = new List<StatisticsSalesLine>();
+            List<StatisticsSalesLine> completedExchangesList = new List<StatisticsSalesLine>();            
 
             try
             {
@@ -112,6 +118,14 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                         case "QUOTE":
                             pendingSQApproval++;
                             quoteList.Add(line);
+                            break;
+
+                        case "RETURNS BUFFER":
+                            if(line.Status.ToUpper().Contains("EXCHANGE PROCESSED"))
+                            {
+                                completedExchanges++;
+                                completedExchangesList.Add(line);
+                            }
                             break;
                     }
                 }
@@ -152,16 +166,28 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
                     tcPendingUnknown.Text = unknown.ToString();
                 }
 
+                if(completedExchanges > 0)
+                {
+                    tcCompletedExchanges.Text = "<a href='javascript:expandCompletedExchanges()'>" + completedExchanges.ToString() + "</a>";
+                }
+                else
+                {
+                    tcCompletedExchanges.Text = completedExchanges.ToString();
+                }
+
                 PopulateReplacementLines(replacementList);
                 PopulateRefundLines(refundList);
                 PopulatePendingSQ(quoteList);
                 PopulateUnknownLines(unknownList);
+                PopulateCompletedExchangeLines(completedExchangesList);
 
                 Session["StatisticsSalesLine"] = statisticsInformation;
             }
             catch (Exception ex)
             {
                 Session["Error"] = ex.Message;
+
+                Log.Error(ex.Message, ex);
 
                 if (Request.Url.AbsoluteUri.Contains("Forms"))
                 {
@@ -208,6 +234,15 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
             ((PendingSQApproval)quoteLinesControl).PopulateData();
 
             expandPendingSQApproval.Controls.Add(quoteLinesControl);
+        }
+
+        protected void PopulateCompletedExchangeLines(List<StatisticsSalesLine> exchangeList)
+        {
+            completedExchangesControl = LoadControl(completedExchangesPath);
+            ((CompletedExchanges)completedExchangesControl).ExchangeList = exchangeList;
+            ((CompletedExchanges)completedExchangesControl).PopulateData();
+
+            expandCompletedExchanges.Controls.Add(completedExchangesControl);
         }
 
         protected void BtnRefreshStatistics_Click(object sender, ImageClickEventArgs e)

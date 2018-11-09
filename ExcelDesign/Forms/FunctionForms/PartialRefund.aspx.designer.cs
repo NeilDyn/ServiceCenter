@@ -58,6 +58,69 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.TableHeaderCell tcDocNo;
         
         /// <summary>
+        /// tblAlreadyPartialRefunded control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblAlreadyPartialRefunded;
+        
+        /// <summary>
+        /// InfoItem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell InfoItem;
+        
+        /// <summary>
+        /// InfoDesc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell InfoDesc;
+        
+        /// <summary>
+        /// InfoReturnReason control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell InfoReturnReason;
+        
+        /// <summary>
+        /// InfoRefundAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell InfoRefundAmount;
+        
+        /// <summary>
+        /// InfoRefundSalesTax control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell InfoRefundSalesTax;
+        
+        /// <summary>
+        /// InfoRefundShippingTax control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableHeaderCell InfoRefundShippingTax;
+        
+        /// <summary>
         /// tblPartialRefundDetails control.
         /// </summary>
         /// <remarks>
@@ -137,51 +200,6 @@ namespace ExcelDesign.Forms.FunctionForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableHeaderCell HeaderRefundAmount;
-        
-        /// <summary>
-        /// tblAlreadyPartialRefunded control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblAlreadyPartialRefunded;
-        
-        /// <summary>
-        /// InfoItem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell InfoItem;
-        
-        /// <summary>
-        /// InfoDesc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell InfoDesc;
-        
-        /// <summary>
-        /// InfoReturnReason control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell InfoReturnReason;
-        
-        /// <summary>
-        /// InfoReturnAmount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell InfoReturnAmount;
         
         /// <summary>
         /// btnCancel control.

@@ -667,7 +667,12 @@ namespace ExcelDesign.Class_Objects
                                     shipToState = currResults.SalesHeader[so].ShipToState;
                                     shipToCountry = currResults.SalesHeader[so].ShipToCountry;
 
-                                    commentLines = GetSalesLineComments(rmaNo);
+                                    // 9 November 2018 - Updated logic to pull comments using SSH no aswell
+                                    commentLines.AddRange(GetSalesLineComments(rmaNo));
+                                    foreach (ReceiptHeader rh in receiptHeader)
+                                    {
+                                        commentLines.AddRange(GetSalesLineComments(rh.No));
+                                    }
                                     returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo,
                                         orderDate, rmaNo, externalDocumentNo, email, false, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines, imeiNo,
                                         shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
@@ -812,7 +817,12 @@ namespace ExcelDesign.Class_Objects
                                     shipToState = currResults.SalesHeader[so].ShipToState;
                                     shipToCountry = currResults.SalesHeader[so].ShipToCountry;
 
-                                    commentLines = GetSalesLineComments(rmaNo);
+                                    //9 November 2018 - Updated logic to pull comments using Receipt No aswell
+                                    commentLines.AddRange(GetSalesLineComments(rmaNo));
+                                    foreach (ReceiptHeader rh in receiptHeader)
+                                    {
+                                        commentLines.AddRange(GetSalesLineComments(rh.No));
+                                    }
                                     returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
                                         rmaNo, externalDocumentNo, email, returnLabelCreated, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines, imeiNo,
                                         shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
@@ -908,7 +918,12 @@ namespace ExcelDesign.Class_Objects
                                 shipToState = currResults.SalesHeader[so].ShipToState;
                                 shipToCountry = currResults.SalesHeader[so].ShipToCountry;
 
-                                commentLines = GetSalesLineComments(rmaNo);
+                                //9 November 2018 - Updated logic to pull comments using Receipt No aswell
+                                commentLines.AddRange(GetSalesLineComments(rmaNo));
+                                foreach (ReceiptHeader rh in receiptHeader)
+                                {
+                                    commentLines.AddRange(GetSalesLineComments(rh.No));
+                                }
                                 returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
                                     rmaNo, externalDocumentNo, email, false, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines, imeiNo,
                                         shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
@@ -1034,7 +1049,13 @@ namespace ExcelDesign.Class_Objects
                                     }
                                 }
 
-                                commentLines = GetSalesLineComments(orderNo);
+                                //9 November 2018 - Updated logic to pull comments using SSH No aswell
+                                commentLines.AddRange(GetSalesLineComments(orderNo));
+                                foreach (ShipmentHeader sh in shipHeader)
+                                {
+                                    commentLines.AddRange(GetSalesLineComments(sh.No));
+                                }
+
                                 partialRefunds = GetPartialRefunds(orderNo, externalDocumentNo);
                                 salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo,
                                     warranty, rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines, isPartRequest, quoteOrderNo, partialRefunds));
@@ -1156,7 +1177,13 @@ namespace ExcelDesign.Class_Objects
                                     }
                                 }
 
-                                commentLines = GetSalesLineComments(orderNo);
+                                //9 November 2018 - Updated logic to pull comments using SSH No aswell
+                                commentLines.AddRange(GetSalesLineComments(orderNo));
+                                foreach (ShipmentHeader sh in shipHeader)
+                                {
+                                    commentLines.AddRange(GetSalesLineComments(sh.No));
+                                }
+
                                 partialRefunds = GetPartialRefunds(orderNo, externalDocumentNo);
                                 salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty,
                                     rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines, isPartRequest, quoteOrderNo, partialRefunds));
@@ -1427,42 +1454,6 @@ namespace ExcelDesign.Class_Objects
                 }
             }
 
-            if (currResults.ReturnReceiptHeader != null)
-            {
-                //    for (int c = 0; c < currResults.ReturnReceiptHeader.Length; c++)
-                //    {
-                //        shipToName = currResults.ReturnReceiptHeader[c].ShipToName;
-
-                //        if (!customerNames.Any(order => order.Equals(shipToName)))
-                //        {
-                //            shipToAddress1 = currResults.ReturnReceiptHeader[c].ShipToAddress;
-                //            shipToAddress2 = currResults.ReturnReceiptHeader[c].ShipToAddress2;
-                //            shipToContact = currResults.ReturnReceiptHeader[c].ShipToContact;
-                //            shipToCity = currResults.ReturnReceiptHeader[c].ShipToCity;
-                //            shipToZip = currResults.ReturnReceiptHeader[c].ShipToZip;
-                //            shipToState = currResults.ReturnReceiptHeader[c].ShipToState;
-                //            shipToCountry = currResults.ReturnReceiptHeader[c].ShipToCountry;
-                //            salesHeaders = GetSalesOrders(shipToName, shipToAddress1);
-                //            returnHeaders = GetReturnOrders(shipToName, shipToAddress1);
-
-                //            returnCust.Add(new Customer(shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToZip, shipToState, shipToCountry, salesHeaders, returnHeaders));
-                //            customerNames.Add(shipToName);
-
-                //            shipToName = string.Empty;
-                //            shipToAddress1 = string.Empty;
-                //            shipToAddress2 = string.Empty;
-                //            shipToContact = string.Empty;
-                //            shipToCity = string.Empty;
-                //            shipToZip = string.Empty;
-                //            shipToState = string.Empty;
-                //            shipToCountry = string.Empty;
-
-                //            salesHeaders = new List<SalesHeader>();
-                //            returnHeaders = new List<ReturnHeader>();
-                //        }  
-                //}
-            }
-
             SetFunctionData();
 
             return returnCust;
@@ -1626,7 +1617,12 @@ namespace ExcelDesign.Class_Objects
                                                         shipToState = currResults.SalesHeader[so].ShipToState;
                                                         shipToCountry = currResults.SalesHeader[so].ShipToCountry;
 
-                                                        commentLines = GetSalesLineComments(rmaNo);
+                                                        //9 November 2018 - Updated logic to pull comments using Receipt No aswell
+                                                        commentLines.AddRange(GetSalesLineComments(rmaNo));
+                                                        foreach (ReceiptHeader rh in receiptHeader)
+                                                        {
+                                                            commentLines.AddRange(GetSalesLineComments(rh.No));
+                                                        }
                                                         returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
                                                             rmaNo, externalDocumentNo, email, returnLabelCreated, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines, imeiNo,
                                                         shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
@@ -1724,6 +1720,9 @@ namespace ExcelDesign.Class_Objects
                                         dateCreated = currResults.ReturnReceiptHeader[so].ReceiveDate;
                                         receiptHeader = ReturnReceiptHeader(rmaNo);
                                         channelName = currResults.ReturnReceiptHeader[so].SellToCustomerName;
+                                        orderDate = currResults.ReturnReceiptHeader[so].OrderDate;
+                                        externalDocumentNo = currResults.ReturnReceiptHeader[so].ExtDocNo;
+                                        sellToCustomerNo = currResults.ReturnReceiptHeader[so].SellToCustomerNo;
 
                                         if (receiptHeader.Count == 0)
                                         {
@@ -1736,10 +1735,6 @@ namespace ExcelDesign.Class_Objects
                                                 postedReceive.AddRange(ReturnPostedReceive(rmaNo, rh.No));
                                             }
                                         }
-
-                                        orderDate = currResults.ReturnReceiptHeader[so].OrderDate;
-                                        externalDocumentNo = currResults.ReturnReceiptHeader[so].ExtDocNo;
-                                        sellToCustomerNo = currResults.ReturnReceiptHeader[so].SellToCustomerNo;
 
                                         returnStatus = "Received";
 
@@ -1768,7 +1763,12 @@ namespace ExcelDesign.Class_Objects
                                         shipToState = currResults.ReturnReceiptHeader[so].ShipToState;
                                         shipToCountry = currResults.ReturnReceiptHeader[so].ShipToCountry;
 
-                                        commentLines = GetSalesLineComments(rmaNo);
+                                        //9 November 2018 - Updated logic to pull comments using Receipt No aswell
+                                        commentLines.AddRange(GetSalesLineComments(rmaNo));
+                                        foreach (ReceiptHeader rh in receiptHeader)
+                                        {
+                                            commentLines.AddRange(GetSalesLineComments(rh.No));
+                                        }
                                         returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
                                             rmaNo, externalDocumentNo, email, false, false, new List<string>(), sellToCustomerNo, commentLines, imeiNo,
                                         shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
@@ -2168,11 +2168,6 @@ namespace ExcelDesign.Class_Objects
                         }
                     }
                 }
-
-                if (currResults.SalesCreditMemoLines != null)
-                {
-
-                }
             }
 
             return receiptLines;
@@ -2257,6 +2252,7 @@ namespace ExcelDesign.Class_Objects
             bool isPendingSQApproval = false;
             bool custAllowRefund = false;
             string status = string.Empty;
+            string exchangeOrderNo = string.Empty;
 
             if (stats.SalesLine != null)
             {
@@ -2331,7 +2327,7 @@ namespace ExcelDesign.Class_Objects
                     }
 
                     statLines.Add(new StatisticsSalesLine(docType, docNo, externalDocNo, itemNo, qty, description, createdDate, reqReturnAction, isNotInvtAvailable, isOlderThan72Hours,
-                        isPendingSQApproval, customerNo, isOlderThan48Hours, status, isOlderThan24Hours, custAllowRefund));
+                        isPendingSQApproval, customerNo, isOlderThan48Hours, status, isOlderThan24Hours, custAllowRefund, exchangeOrderNo));
 
                     docType = string.Empty;
                     docNo = string.Empty;
@@ -2349,6 +2345,82 @@ namespace ExcelDesign.Class_Objects
                     isPendingSQApproval = false;
                     custAllowRefund = false;
                     status = string.Empty;
+                    exchangeOrderNo = string.Empty;
+                }
+            }
+
+            if (stats.ReturnsBuffer != null)
+            {
+                for (int rb = 0; rb < stats.ReturnsBuffer.Length; rb++)
+                {
+                    docType = "RETURNS BUFFER";
+                    docNo = stats.ReturnsBuffer[rb].RMANo;
+                    externalDocNo = stats.ReturnsBuffer[rb].ExtDocNo;
+                    itemNo = stats.ReturnsBuffer[rb].ItemNo;
+                    status = stats.ReturnsBuffer[rb].Status;
+                    exchangeOrderNo = stats.ReturnsBuffer[rb].ExchangeOrderNo;
+
+                    description = stats.ReturnsBuffer[rb].Description;
+                    createdDate = stats.ReturnsBuffer[rb].DateCreated;
+                    customerNo = stats.ReturnsBuffer[rb].CustomerNo;
+                    isOlderThan72Hours = stats.ReturnsBuffer[rb].IsOlderThan72Hrs2[0] == "Yes" ? true : false;
+                    isOlderThan48Hours = stats.ReturnsBuffer[rb].IsOlderThan48Hrs2[0] == "Yes" ? true : false;
+                    isOlderThan24Hours = stats.ReturnsBuffer[rb].IsOlderThan24Hrs2[0] == "Yes" ? true : false;
+
+                    if (isOlderThan72Hours)
+                    {
+                        if (status.Length == 0)
+                        {
+                            status = "Is older than 72 hours";
+                        }
+                        else
+                        {
+                            status += ", Is older than 72 hours";
+                        }
+                    }
+                    else if (isOlderThan48Hours)
+                    {
+                        if (status.Length == 0)
+                        {
+                            status = "Is older than 48 hours";
+                        }
+                        else
+                        {
+                            status += ", Is older than 48 hours";
+                        }
+                    }
+                    else if (isOlderThan24Hours)
+                    {
+                        if (status.Length == 0)
+                        {
+                            status = "Is older than 24 hours";
+                        }
+                        else
+                        {
+                            status += ", Is older than 24 hours";
+                        }
+                    }
+
+                    statLines.Add(new StatisticsSalesLine(docType, docNo, externalDocNo, itemNo, qty, description, createdDate, reqReturnAction, isNotInvtAvailable, isOlderThan72Hours,
+                        isPendingSQApproval, customerNo, isOlderThan48Hours, status, isOlderThan24Hours, custAllowRefund, exchangeOrderNo));
+
+                    docType = string.Empty;
+                    docNo = string.Empty;
+                    externalDocNo = string.Empty;
+                    itemNo = string.Empty;
+                    qty = 0;
+                    description = string.Empty;
+                    createdDate = string.Empty;
+                    reqReturnAction = string.Empty;
+                    customerNo = string.Empty;
+                    isNotInvtAvailable = false;
+                    isOlderThan72Hours = false;
+                    isOlderThan48Hours = false;
+                    isOlderThan24Hours = false;
+                    isPendingSQApproval = false;
+                    custAllowRefund = false;
+                    status = string.Empty;
+                    exchangeOrderNo = string.Empty;
                 }
             }
 
@@ -2406,7 +2478,10 @@ namespace ExcelDesign.Class_Objects
             string itemNo = string.Empty;
             string description = string.Empty;
             string returnReason = string.Empty;
-            double price = 0;
+            double refundAmount = 0;
+            double refundSalesTax = 0;
+            double refundShippingTax = 0;
+
 
             if (currResults.ReturnsBuffer != null)
             {
@@ -2419,9 +2494,11 @@ namespace ExcelDesign.Class_Objects
                         itemNo = currResults.ReturnsBuffer[rb].ItemNo;
                         description = currResults.ReturnsBuffer[rb].Description;
                         returnReason = currResults.ReturnsBuffer[rb].ReturnReason;
-                        double.TryParse(currResults.ReturnsBuffer[rb].RefundAmt.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
+                        double.TryParse(currResults.ReturnsBuffer[rb].RefundAmt.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out refundAmount);
+                        double.TryParse(currResults.ReturnsBuffer[rb].TaxAmount.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out refundSalesTax);
+                        double.TryParse(currResults.ReturnsBuffer[rb].ShippingTax.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out refundShippingTax);
 
-                        pr.Add(new PartialRefunded(orderNo, extDocNo, itemNo, description, returnReason, price));
+                        pr.Add(new PartialRefunded(orderNo, extDocNo, itemNo, description, returnReason, refundAmount, refundSalesTax, refundShippingTax));
                     }
 
                     orderNo = string.Empty;
@@ -2429,7 +2506,9 @@ namespace ExcelDesign.Class_Objects
                     itemNo = string.Empty;
                     description = string.Empty;
                     returnReason = string.Empty;
-                    price = 0;
+                    refundAmount = 0;
+                    refundSalesTax = 0;
+                    refundShippingTax = 0;
                 }
             }
 

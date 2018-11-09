@@ -124,6 +124,7 @@
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnDetailHeader.ascx" />
     <Content Include="Forms\UserControls\SalesReturn\SalesReturnHeader.ascx" />
     <Content Include="Forms\UserControls\SingleControls\MultipleCustomers.ascx" />
+    <Content Include="Forms\UserControls\StatisticsControls\CompletedExchanges.ascx" />
     <Content Include="Forms\UserControls\StatisticsControls\PendingUnknown.ascx" />
     <Content Include="Forms\UserControls\StatisticsControls\PendingRefund.ascx" />
     <Content Include="Forms\UserControls\StatisticsControls\PendingReplacements.ascx" />
@@ -422,6 +423,13 @@
     </Compile>
     <Compile Include="Forms\UserControls\SingleControls\MultipleCustomers.ascx.designer.cs">
       <DependentUpon>MultipleCustomers.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\CompletedExchanges.ascx.cs">
+      <DependentUpon>CompletedExchanges.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\CompletedExchanges.ascx.designer.cs">
+      <DependentUpon>CompletedExchanges.ascx</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserControls\StatisticsControls\PendingUnknown.ascx.cs">
       <DependentUpon>PendingUnknown.ascx</DependentUpon>

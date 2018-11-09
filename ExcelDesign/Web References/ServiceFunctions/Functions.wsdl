@@ -1,41 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/Functions" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
-    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50003" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50003" xmlns="http://www.w3.org/2001/XMLSchema">
-      <complexType name="User">
-        <sequence>
-          <element minOccurs="1" maxOccurs="1" name="UserID" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="CreateRMA" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="CreateRetLabel" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="CreatePDARma" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="CreatePDAExchange" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="Admin" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="Developer" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="SessionID" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="Password" type="string" />
-          <element minOccurs="1" maxOccurs="1" default="0" name="SessionTimeout" type="int" />
-          <element minOccurs="1" maxOccurs="1" name="PasswordExpiryDate" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="PasswordLastUpdated" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="CreateExchange" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="CreatePartRequest" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="CreatePDAPartRequest" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="IssueRefund" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="IssuePDARefund" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="PartialRefundTier" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="CancelOrder" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="CancelPDAOrder" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="CanPartialRefund" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="CanPartialRefundPDA" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="Supervisor" type="string" />
-        </sequence>
-      </complexType>
-      <complexType name="UserSetup" mixed="true">
-        <sequence>
-          <element minOccurs="0" maxOccurs="unbounded" name="User" type="tns:User" />
-        </sequence>
-      </complexType>
-      <element name="UserSetup" type="tns:UserSetup" />
-    </schema>
     <schema xmlns:tns="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" elementFormDefault="qualified" targetNamespace="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" xmlns="http://www.w3.org/2001/XMLSchema">
       <complexType name="Warranty2" mixed="true">
         <sequence>
@@ -332,6 +297,8 @@
           <element minOccurs="1" maxOccurs="1" name="ReturnReason" type="string" />
           <element minOccurs="1" maxOccurs="1" name="RefundQty" type="string" />
           <element minOccurs="1" maxOccurs="1" name="RefundAmt" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="TaxAmount" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShippingTax" type="string" />
         </sequence>
       </complexType>
       <complexType name="ReturnReasonCode">
@@ -408,6 +375,41 @@
         </sequence>
       </complexType>
       <element name="SearchResults" type="tns:SearchResults" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50003" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50003" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="User">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="UserID" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CreateRMA" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CreateRetLabel" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CreatePDARma" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CreatePDAExchange" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Admin" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Developer" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="SessionID" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Password" type="string" />
+          <element minOccurs="1" maxOccurs="1" default="0" name="SessionTimeout" type="int" />
+          <element minOccurs="1" maxOccurs="1" name="PasswordExpiryDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="PasswordLastUpdated" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CreateExchange" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CreatePartRequest" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CreatePDAPartRequest" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="IssueRefund" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="IssuePDARefund" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="PartialRefundTier" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CancelOrder" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CancelPDAOrder" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CanPartialRefund" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CanPartialRefundPDA" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Supervisor" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="UserSetup" mixed="true">
+        <sequence>
+          <element minOccurs="0" maxOccurs="unbounded" name="User" type="tns:User" />
+        </sequence>
+      </complexType>
+      <element name="UserSetup" type="tns:UserSetup" />
     </schema>
     <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50014" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50014" xmlns="http://www.w3.org/2001/XMLSchema">
       <complexType name="Warranty2" mixed="true">
@@ -596,6 +598,7 @@
       </complexType>
       <complexType name="ReturnsBuffer">
         <sequence>
+          <element minOccurs="1" maxOccurs="1" name="OrderDocType" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Status" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ExtDocNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="CustomerNo" type="string" />
@@ -604,6 +607,8 @@
           <element minOccurs="1" maxOccurs="1" name="RMANo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ExchangeOrderNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="DateCreated" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="TaxAmount" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ShippingTax" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="IsOlderThan24Hrs2" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="IsOlderThan48Hrs2" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="IsOlderThan72Hrs2" type="string" />
@@ -637,6 +642,41 @@
       <element name="AboutObjects" type="tns:AboutObjects" />
     </schema>
     <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="PartialRefund">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="externalDocumentNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="lineValues" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="PartialRefund_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SearchDetermineNoType">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="searchNo" type="string" />
+            <element xmlns:q1="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" minOccurs="1" maxOccurs="1" name="searchResults" type="q1:SearchResults" />
+            <element minOccurs="1" maxOccurs="1" name="_SearchOption" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SearchDetermineNoType_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+            <element xmlns:q2="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" minOccurs="1" maxOccurs="1" name="searchResults" type="q2:SearchResults" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="ResetSession">
         <complexType>
           <sequence>
@@ -654,7 +694,7 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="userID" type="string" />
             <element minOccurs="1" maxOccurs="1" name="password" type="string" />
-            <element xmlns:q1="urn:microsoft-dynamics-nav/xmlports/x50003" minOccurs="1" maxOccurs="1" name="webSvcUserSetup" type="q1:UserSetup" />
+            <element xmlns:q3="urn:microsoft-dynamics-nav/xmlports/x50003" minOccurs="1" maxOccurs="1" name="webSvcUserSetup" type="q3:UserSetup" />
           </sequence>
         </complexType>
       </element>
@@ -662,7 +702,7 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-            <element xmlns:q2="urn:microsoft-dynamics-nav/xmlports/x50003" minOccurs="1" maxOccurs="1" name="webSvcUserSetup" type="q2:UserSetup" />
+            <element xmlns:q4="urn:microsoft-dynamics-nav/xmlports/x50003" minOccurs="1" maxOccurs="1" name="webSvcUserSetup" type="q4:UserSetup" />
           </sequence>
         </complexType>
       </element>
@@ -678,24 +718,6 @@
       <element name="UpdateUserPassword_Result">
         <complexType>
           <sequence />
-        </complexType>
-      </element>
-      <element name="SearchDetermineNoType">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="searchNo" type="string" />
-            <element xmlns:q3="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" minOccurs="1" maxOccurs="1" name="searchResults" type="q3:SearchResults" />
-            <element minOccurs="1" maxOccurs="1" name="_SearchOption" type="int" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="SearchDetermineNoType_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-            <element xmlns:q4="&lt;urn:microsoft-dynamics-nav/xmlports/searchresults&gt;" minOccurs="1" maxOccurs="1" name="searchResults" type="q4:SearchResults" />
-          </sequence>
         </complexType>
       </element>
       <element name="CreateExchangeOrder">
@@ -813,23 +835,6 @@
           </sequence>
         </complexType>
       </element>
-      <element name="PartialRefund">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="externalDocumentNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="lineValues" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="PartialRefund_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
-          </sequence>
-        </complexType>
-      </element>
       <element name="CancelOrder">
         <complexType>
           <sequence>
@@ -905,9 +910,7 @@
       <element name="UpdateREQReturnAction">
         <complexType>
           <sequence>
-            <element minOccurs="1" maxOccurs="1" name="orderNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="externalDocumentNo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="lineValues" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="toModLineValues" type="string" />
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
           </sequence>
         </complexType>
@@ -978,6 +981,18 @@
       </element>
     </schema>
   </types>
+  <message name="PartialRefund">
+    <part name="parameters" element="tns:PartialRefund" />
+  </message>
+  <message name="PartialRefund_Result">
+    <part name="parameters" element="tns:PartialRefund_Result" />
+  </message>
+  <message name="SearchDetermineNoType">
+    <part name="parameters" element="tns:SearchDetermineNoType" />
+  </message>
+  <message name="SearchDetermineNoType_Result">
+    <part name="parameters" element="tns:SearchDetermineNoType_Result" />
+  </message>
   <message name="ResetSession">
     <part name="parameters" element="tns:ResetSession" />
   </message>
@@ -995,12 +1010,6 @@
   </message>
   <message name="UpdateUserPassword_Result">
     <part name="parameters" element="tns:UpdateUserPassword_Result" />
-  </message>
-  <message name="SearchDetermineNoType">
-    <part name="parameters" element="tns:SearchDetermineNoType" />
-  </message>
-  <message name="SearchDetermineNoType_Result">
-    <part name="parameters" element="tns:SearchDetermineNoType_Result" />
   </message>
   <message name="CreateExchangeOrder">
     <part name="parameters" element="tns:CreateExchangeOrder" />
@@ -1037,12 +1046,6 @@
   </message>
   <message name="DeleteReturnOrder_Result">
     <part name="parameters" element="tns:DeleteReturnOrder_Result" />
-  </message>
-  <message name="PartialRefund">
-    <part name="parameters" element="tns:PartialRefund" />
-  </message>
-  <message name="PartialRefund_Result">
-    <part name="parameters" element="tns:PartialRefund_Result" />
   </message>
   <message name="CancelOrder">
     <part name="parameters" element="tns:CancelOrder" />
@@ -1111,6 +1114,14 @@
     <part name="parameters" element="tns:a47a47a45a62_Comments_Result" />
   </message>
   <portType name="Functions_Port">
+    <operation name="PartialRefund">
+      <input name="PartialRefund" message="tns:PartialRefund" />
+      <output name="PartialRefund_Result" message="tns:PartialRefund_Result" />
+    </operation>
+    <operation name="SearchDetermineNoType">
+      <input name="SearchDetermineNoType" message="tns:SearchDetermineNoType" />
+      <output name="SearchDetermineNoType_Result" message="tns:SearchDetermineNoType_Result" />
+    </operation>
     <operation name="ResetSession">
       <input name="ResetSession" message="tns:ResetSession" />
       <output name="ResetSession_Result" message="tns:ResetSession_Result" />
@@ -1122,10 +1133,6 @@
     <operation name="UpdateUserPassword">
       <input name="UpdateUserPassword" message="tns:UpdateUserPassword" />
       <output name="UpdateUserPassword_Result" message="tns:UpdateUserPassword_Result" />
-    </operation>
-    <operation name="SearchDetermineNoType">
-      <input name="SearchDetermineNoType" message="tns:SearchDetermineNoType" />
-      <output name="SearchDetermineNoType_Result" message="tns:SearchDetermineNoType_Result" />
     </operation>
     <operation name="CreateExchangeOrder">
       <input name="CreateExchangeOrder" message="tns:CreateExchangeOrder" />
@@ -1150,10 +1157,6 @@
     <operation name="DeleteReturnOrder">
       <input name="DeleteReturnOrder" message="tns:DeleteReturnOrder" />
       <output name="DeleteReturnOrder_Result" message="tns:DeleteReturnOrder_Result" />
-    </operation>
-    <operation name="PartialRefund">
-      <input name="PartialRefund" message="tns:PartialRefund" />
-      <output name="PartialRefund_Result" message="tns:PartialRefund_Result" />
     </operation>
     <operation name="CancelOrder">
       <input name="CancelOrder" message="tns:CancelOrder" />
@@ -1202,6 +1205,24 @@
   </portType>
   <binding name="Functions_Binding" type="tns:Functions_Port">
     <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="PartialRefund">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:PartialRefund" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="PartialRefund">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="PartialRefund_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="SearchDetermineNoType">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:SearchDetermineNoType" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="SearchDetermineNoType">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="SearchDetermineNoType_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
     <operation name="ResetSession">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:ResetSession" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="ResetSession">
@@ -1226,15 +1247,6 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="UpdateUserPassword_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="SearchDetermineNoType">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:SearchDetermineNoType" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="SearchDetermineNoType">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="SearchDetermineNoType_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -1289,15 +1301,6 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="DeleteReturnOrder_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
-    <operation name="PartialRefund">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:PartialRefund" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="PartialRefund">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="PartialRefund_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

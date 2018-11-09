@@ -218,7 +218,7 @@ namespace ExcelDesign.Forms.FunctionForms
                 {
                     foreach (PartialRefunded partref in header.PartialRefunds)
                     {
-                        if (partref.Price > 0)
+                        if (partref.RefundAmount > 0)
                         {
                             lineCount++;
 
@@ -230,23 +230,33 @@ namespace ExcelDesign.Forms.FunctionForms
                             TableCell desc = new TableCell();
                             TableCell returnReason = new TableCell();
                             TableCell refundAmount = new TableCell();
+                            TableCell refundSalesTax = new TableCell();
+                            TableCell refundShippingTax = new TableCell();
 
                             itemNo.ID = "infoItemNo_" + lineCount.ToString();
                             desc.ID = "infoDesc_" + lineCount.ToString();
                             returnReason.ID = "infoReturnReasonCode_" + lineCount.ToString();
-                            refundAmount.ID = "infoRefundAmount" + lineCount.ToString();
+                            refundAmount.ID = "infoRefundAmount_" + lineCount.ToString();
+                            refundSalesTax.ID = "infoRefundSalesTax_" + lineCount.ToString();
+                            refundShippingTax.ID = "infoRefundShippingTax_" + lineCount.ToString();
 
                             itemNo.Text = partref.ItemNo;
                             desc.Text = partref.Description;
                             returnReason.Text = partref.ReturnReason;
-                            refundAmount.Text = "$      " + partref.Price.ToGBString();
+                            refundAmount.Text = "$      " + partref.RefundAmount.ToGBString();
+                            refundSalesTax.Text = "$    " + partref.RefundSalesTax.ToGBString();
+                            refundShippingTax.Text = "$    " + partref.RefundShippingTax.ToGBString();
 
                             refundAmount.HorizontalAlign = HorizontalAlign.Right;
+                            refundSalesTax.HorizontalAlign = HorizontalAlign.Right;
+                            refundShippingTax.HorizontalAlign = HorizontalAlign.Right;
 
                             singleRow.Cells.Add(itemNo);
                             singleRow.Cells.Add(desc);
                             singleRow.Cells.Add(returnReason);
                             singleRow.Cells.Add(refundAmount);
+                            singleRow.Cells.Add(refundSalesTax);
+                            singleRow.Cells.Add(refundShippingTax);
 
                             if (lineCount % 2 == 0)
                             {
@@ -300,9 +310,12 @@ namespace ExcelDesign.Forms.FunctionForms
                     decimal refundOption = 0;
 
                     controlCount = 0;
+                    int cellCount = 0;
 
                     foreach (TableCell cell in row.Cells)
                     {
+                        cellCount++;
+
                         if (cell.ID.Contains("itemNo_"))
                         {
                             itemNo = cell.Text.ToString();
@@ -375,7 +388,7 @@ namespace ExcelDesign.Forms.FunctionForms
 
                         string lineValidMessage = string.Empty;
 
-                        if ((rowCount > 1 && controlCount == 3 && actionQty != 0))
+                        if ((rowCount > 1 && controlCount == 3 && actionQty != 0 && cellCount == 6))
                         {
                             lineValidMessage = ValidateLine(itemNo, qtyLine, actionQty, reasonCode);
 

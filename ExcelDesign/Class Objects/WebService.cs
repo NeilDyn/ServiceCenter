@@ -204,5 +204,10 @@ namespace ExcelDesign.Class_Objects
         {
             functions.PartialRefund(orderNo, docNo, lineValues, SessionID());
         }
+
+        public void UpdateREQReturnAction(string rmaList, string sessionID)
+        {
+            functions.UpdateREQReturnAction(rmaList, sessionID);
+        }
     }
 }

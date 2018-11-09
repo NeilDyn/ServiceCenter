@@ -49,6 +49,15 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls {
         protected global::System.Web.UI.WebControls.TableCell tcPendingSQApproval;
         
         /// <summary>
+        /// tcCompletedExchanges control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcCompletedExchanges;
+        
+        /// <summary>
         /// expandReplacementDetails control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableCell expandPendingSQApproval;
+        
+        /// <summary>
+        /// expandCompletedExchanges control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell expandCompletedExchanges;
         
         /// <summary>
         /// tcPendingRefunds control.

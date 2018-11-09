@@ -51,6 +51,28 @@
                 </asp:TableHeaderCell>
             </asp:TableHeaderRow>
             <asp:TableRow>
+                <asp:TableCell ColumnSpan="6">
+                    <asp:Table runat="server" ID="tblAlreadyPartialRefunded" Height="100%" Width="100%">
+                        <asp:TableHeaderRow>
+                            <asp:TableHeaderCell Text="Existing Partial Refunds:" Font-Bold="true" Font-Underline="true" HorizontalAlign="Left"/>
+                        </asp:TableHeaderRow>
+                        <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
+                            <asp:TableHeaderCell Text="Item No." HorizontalAlign="Left" ID="InfoItem" />
+                            <asp:TableHeaderCell Text="Description" HorizontalAlign="Left" Width="30%" ID="InfoDesc" />
+                            <asp:TableHeaderCell Text="Refund Reason" HorizontalAlign="Left" ID="InfoReturnReason" />
+                            <asp:TableHeaderCell Text="Refund Amount" HorizontalAlign="Left" ID="InfoRefundAmount" />
+                            <asp:TableHeaderCell Text="Refund Sales Tax" HorizontalAlign="Left" ID="InfoRefundSalesTax" />
+                            <asp:TableHeaderCell Text="Refund Shipping Tax" HorizontalAlign="Left" ID="InfoRefundShippingTax" />
+                        </asp:TableHeaderRow>
+                    </asp:Table>
+                </asp:TableCell>               
+            </asp:TableRow>
+            <asp:TableRow>
+                <asp:TableCell>
+                    <br />
+                </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow>
                 <asp:TableCell ColumnSpan="8">
                     <asp:Table runat="server" ID="tblPartialRefundDetails" Height="100%" Width="100%">
                         <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
@@ -64,22 +86,7 @@
                             <asp:TableHeaderCell Text="Refund Amount" HorizontalAlign="Left" ID="HeaderRefundAmount" />
                         </asp:TableHeaderRow>
                     </asp:Table>
-                </asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow>
-                <asp:TableCell ColumnSpan="4">
-                    <asp:Table runat="server" ID="tblAlreadyPartialRefunded" Height="100%" Width="100%">
-                        <asp:TableHeaderRow>
-                            <asp:TableHeaderCell Text="Existing Partial Refunds:" Font-Bold="true" Font-Underline="true" HorizontalAlign="Left"/>
-                        </asp:TableHeaderRow>
-                        <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
-                            <asp:TableHeaderCell Text="Item No." HorizontalAlign="Left" ID="InfoItem" />
-                            <asp:TableHeaderCell Text="Description" HorizontalAlign="Left" Width="30%" ID="InfoDesc" />
-                            <asp:TableHeaderCell Text="Refund Reason" HorizontalAlign="Left" ID="InfoReturnReason" />
-                            <asp:TableHeaderCell Text="Refund Amount" HorizontalAlign="Left" ID="InfoReturnAmount" />
-                        </asp:TableHeaderRow>
-                    </asp:Table>
-                </asp:TableCell>
+                </asp:TableCell>    
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell>

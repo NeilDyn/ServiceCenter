@@ -7,63 +7,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines {
+namespace ExcelDesign.Forms.UserControls.StatisticsControls {
     
     
-    public partial class StatisticsSalesLineForm {
+    public partial class CompletedExchanges {
         
         /// <summary>
-        /// frmStatisticsSalesLineDetail control.
+        /// tblCompletedExchanges control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm frmStatisticsSalesLineDetail;
+        protected global::System.Web.UI.WebControls.Table tblCompletedExchanges;
         
         /// <summary>
-        /// tblStatisticsSalesLines control.
+        /// tcExchangeToday control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblStatisticsSalesLines;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcExchangeToday;
         
         /// <summary>
-        /// reqReturnAction control.
+        /// tcExchangeOlderThan24Hours control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell reqReturnAction;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcExchangeOlderThan24Hours;
         
         /// <summary>
-        /// RefundProcessing control.
+        /// tcExchangeOlderThan48Hours control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell RefundProcessing;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcExchangeOlderThan48Hours;
         
         /// <summary>
-        /// ProcessColumn control.
+        /// tcExchangeOlderThan72Hours control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell ProcessColumn;
-        
-        /// <summary>
-        /// ExchangeOrderNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell ExchangeOrderNo;
+        protected global::System.Web.UI.WebControls.TableHeaderCell tcExchangeOlderThan72Hours;
     }
 }

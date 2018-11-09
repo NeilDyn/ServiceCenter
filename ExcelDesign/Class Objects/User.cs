@@ -31,6 +31,7 @@ namespace ExcelDesign.Class_Objects
         public bool CanPartialRefundPDA { get; set; }
         public bool Admin { get; set; }
         public bool Developer { get; set; }
+        public bool Supervisor { get; set; }
         public string PasswordLastUpdated { get; set; }
         public string PasswordExpiryDate { get; set; }
         public int SessionTimeout { get; set; }
@@ -66,6 +67,8 @@ namespace ExcelDesign.Class_Objects
 
             CanPartialRefund = us.User[0].CanPartialRefund.ToUpper() == "YES" ? true : false;
             CanPartialRefundPDA = us.User[0].CanPartialRefundPDA.ToUpper() == "YES" ? true : false;
+
+            Supervisor =  us.User[0].Supervisor.ToUpper() == "YES" ? true : false;
 
             Admin = us.User[0].Admin.ToUpper() == "YES" ? true : false;
             Developer = us.User[0].Developer.ToUpper() == "YES" ? true : false;

@@ -68,7 +68,6 @@ namespace ExcelDesign.Forms.FunctionForms
                     {
                         if (head.SalesOrderNo == filterNo)
                         {
-
                             foreach (ShipmentLine line in header.ShipmentLines)
                             {
                                 if (line.Quantity > 0)
@@ -129,10 +128,12 @@ namespace ExcelDesign.Forms.FunctionForms
                                     returnReasonCode.Controls.Add(ddlReturnReasonCode);
                                     refundOption.Controls.Add(ddlRefundOption);
                                     lineAmount.Text = "$      " + line.LineAmount.ToGBString();
+
                                     if(ro.Count > 0)
                                     {
                                         refundAmount.Text = "$      " + Math.Round((line.LineAmount * 0.1), 2).ToGBString(); //10% is default
                                     }
+
                                     orderTotal += line.LineAmount;
 
                                     qty.HorizontalAlign = HorizontalAlign.Center;

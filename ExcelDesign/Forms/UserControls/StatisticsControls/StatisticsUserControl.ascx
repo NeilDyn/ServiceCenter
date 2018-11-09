@@ -71,14 +71,14 @@
         }
     }
 </script>
-<asp:Table runat="server" ID="tblStatistics" Height="100%" Width="50%" HorizontalAlign="Right">
+<asp:Table runat="server" ID="tblStatistics" Height="100%" Width="30%" HorizontalAlign="Right">
     <asp:TableHeaderRow HorizontalAlign="Justify" ForeColor="White" BackColor="#507CD1" Font-Size="Larger" Font-Bold="true">
-        <asp:TableHeaderCell BackColor="#FFFFFF">
+        <asp:TableHeaderCell BackColor="#FFFFFF" Width="5%">
             <asp:ImageButton ID="BtnRefreshStatistics" runat="server" ImageUrl="~/images/refresh.png" Height="20px" OnClick="BtnRefreshStatistics_Click"/>
         </asp:TableHeaderCell>
-        <asp:TableHeaderCell Text="Returns" ColumnSpan="2" Width="33%" />
-        <asp:TableHeaderCell Text="Part Requests" ColumnSpan="2" Width="33%" />
-        <asp:TableHeaderCell Text="Returns Buffer" ColumnSpan="2" Width="33%"/>
+        <asp:TableHeaderCell Text="Returns" ColumnSpan="2" Width="20%" />
+        <asp:TableHeaderCell Text="Part Requests" ColumnSpan="2" Width="20%" />
+        <asp:TableHeaderCell Text="Returns Buffer" ColumnSpan="2" Width="20%"/>
     </asp:TableHeaderRow>
     <asp:TableHeaderRow>
         <asp:TableHeaderCell />
@@ -100,9 +100,9 @@
     </asp:TableRow>
     <asp:TableRow runat="server" TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableHeaderCell />
-        <asp:TableCell runat="server" ID="expandReplacementDetails" ColumnSpan="2" Width="30%" Height="100%"/>
-        <asp:TableCell runat="server" ID="expandPendingSQApproval" ColumnSpan="2" Width="30%" Height="100%" />
-        <asp:TableCell runat="server" ID="expandCompletedExchanges" ColumnSpan="2" Width="30%" Height="100%" />
+        <asp:TableCell runat="server" ID="expandReplacementDetails" ColumnSpan="2" Width="20%" Height="100%"/>
+        <asp:TableCell runat="server" ID="expandPendingSQApproval" ColumnSpan="2" Width="20%" Height="100%" />
+        <asp:TableCell runat="server" ID="expandCompletedExchanges" ColumnSpan="2" Width="20%" Height="100%" />
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableHeaderCell />
@@ -111,7 +111,7 @@
     </asp:TableRow>
     <asp:TableRow runat="server" TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableHeaderCell />
-        <asp:TableCell runat="server" ID="expandRefundDetails" ColumnSpan="2" Width="50%" Height="100%" />
+        <asp:TableCell runat="server" ID="expandRefundDetails" ColumnSpan="2" Width="20%" Height="100%" />
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableHeaderCell />
@@ -120,7 +120,7 @@
     </asp:TableRow>
     <asp:TableRow runat="server" TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableHeaderCell />
-        <asp:TableCell runat="server" ID="expandPendingUnknown" ColumnSpan="2" Width="50%" Height="100%" />
+        <asp:TableCell runat="server" ID="expandPendingUnknown" ColumnSpan="2" Width="20%" Height="100%" />
     </asp:TableRow>
     <asp:TableRow>
         <asp:TableCell />

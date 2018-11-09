@@ -34,6 +34,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
 
         public void PopulateData()
         {
+            User u = (User)Session["ActiveUser"];
             pendingList = Convert.ToString(Request.QueryString["PendingList"]);
             pendingType = Convert.ToString(Request.QueryString["PendingType"]);
 
@@ -239,7 +240,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                     itemNo.ID = "itemNo_" + lineCount.ToString();
                     docNo.ID = "docNo_" + lineCount.ToString();
 
-                    if (pendingList == "Unknown")
+                    if (pendingList == "Unknown" && u.Supervisor)
                     {
                         reqReturnAction.Controls.Add(reqReturnSelect);
                     }
@@ -310,10 +311,12 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                     if (lineCount % 2 == 0)
                     {
                         tr.BackColor = Color.White;
+                        exchangeOrderNo.BackColor = Color.White;
                     }
                     else
                     {
                         tr.BackColor = ColorTranslator.FromHtml("#EFF3FB");
+                        exchangeOrderNo.BackColor = ColorTranslator.FromHtml("#EFF3FB");
                     }
 
                     tblStatisticsSalesLines.Rows.Add(tr);
@@ -395,7 +398,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                 {
                     ProcessColumn.Visible = false;
 
-                    if (pendingList == "Unknown")
+                    if (pendingList == "Unknown" && u.Supervisor)
                     {
                         TableRow buttonREQRow = new TableRow
                         {

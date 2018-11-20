@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Web;
 using System.Web.Script.Services;
+using System.Web.Security;
 using System.Web.Services;
 using System.Web.UI.WebControls;
 
@@ -24,31 +26,52 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
 
         protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(StatisticsSalesLineForm));
 
-        public string pendingList { get; set; }
+        public string PendingList { get; set; }
         protected string pendingType;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            PopulateData();
+            ClientScript.GetPostBackEventReference(this, string.Empty);
+            try
+            {
+                if (!this.Page.User.Identity.IsAuthenticated || Session["ActiveUser"] == null)
+                {
+                    FormsAuthentication.RedirectToLoginPage();
+                }
+
+                PopulateData();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+                ClientScript.RegisterStartupScript(this.GetType(), "exceptionAlert", "alert('" + ex.Message + "');", true);
+            }
         }
 
         public void PopulateData()
         {
             User u = (User)Session["ActiveUser"];
-            pendingList = Convert.ToString(Request.QueryString["PendingList"]);
+            PendingList = Convert.ToString(Request.QueryString["PendingList"]);
             pendingType = Convert.ToString(Request.QueryString["PendingType"]);
 
             SalesLineList = (List<StatisticsSalesLine>)Session["StatisticsSalesLine"];
             List<StatisticsSalesLine> pendingDisplayList = new List<StatisticsSalesLine>();
             List<StatisticsSalesLine> displayList = new List<StatisticsSalesLine>();
 
-            switch (pendingList)
+            switch (PendingList)
             {
                 case "Replacement":
                     Title = "Statistics - Pending Replacement ";
                     ProcessColumn.Visible = true;
                     RefundProcessing.Visible = false;
                     ExchangeOrderNo.Visible = false;
+                    
+                    if(u.Supervisor)
+                    {
+                        SimilarItemNo.Visible = true;
+                        LookupSimalarItem.Visible = true;
+                        RemoveSelectedSimilarItem.Visible = true;
+                    }
 
                     foreach (StatisticsSalesLine exchange in SalesLineList)
                     {
@@ -64,6 +87,9 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                     ProcessColumn.Visible = true;
                     RefundProcessing.Visible = true;
                     ExchangeOrderNo.Visible = false;
+                    SimilarItemNo.Visible = false;
+                    LookupSimalarItem.Visible = false;
+                    RemoveSelectedSimilarItem.Visible = false;
 
                     foreach (StatisticsSalesLine refund in SalesLineList)
                     {
@@ -79,6 +105,9 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                     ProcessColumn.Visible = false;
                     RefundProcessing.Visible = false;
                     ExchangeOrderNo.Visible = false;
+                    SimilarItemNo.Visible = false;
+                    LookupSimalarItem.Visible = false;
+                    RemoveSelectedSimilarItem.Visible = false;
 
                     foreach (StatisticsSalesLine unknown in SalesLineList)
                     {
@@ -94,6 +123,9 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                     ProcessColumn.Visible = false;
                     RefundProcessing.Visible = false;
                     ExchangeOrderNo.Visible = false;
+                    SimilarItemNo.Visible = false;
+                    LookupSimalarItem.Visible = false;
+                    RemoveSelectedSimilarItem.Visible = false;
 
                     foreach (StatisticsSalesLine sqApproval in SalesLineList)
                     {
@@ -109,6 +141,9 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                     ProcessColumn.Visible = false;
                     RefundProcessing.Visible = false;
                     ExchangeOrderNo.Visible = true;
+                    SimilarItemNo.Visible = false;
+                    LookupSimalarItem.Visible = false;
+                    RemoveSelectedSimilarItem.Visible = false;
 
                     foreach (StatisticsSalesLine completeExchange in SalesLineList)
                     {
@@ -125,11 +160,37 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                 case "AllPending":
                     Title += "All Pending";
 
+                    if ((PendingList == "Replacement" || PendingList == "Refund") && pendingDisplayList.Any(x => !x.Status.ToLower().Contains("no inventory")))
+                    {
+                        ProcessColumn.Visible = true;
+                    }
+                    else
+                    {
+                        ProcessColumn.Visible = false;
+                    }
+
+                    if (SimilarItemNo.Visible && pendingDisplayList.Any(x => x.Status.ToLower().Contains("no inventory")) && u.Supervisor)
+                    {
+                        SimilarItemNo.Visible = true;
+                        LookupSimalarItem.Visible = true;
+                        RemoveSelectedSimilarItem.Visible = true;
+                    }
+
                     displayList = pendingDisplayList;
                     break;
 
                 case "NoInventory":
                     Title += "No Inventory";
+
+                    ProcessColumn.Visible = false;
+                    RefundProcessing.Visible = false;                 
+
+                    if (SimilarItemNo.Visible && u.Supervisor)
+                    {
+                        SimilarItemNo.Visible = true;
+                        LookupSimalarItem.Visible = true;
+                        RemoveSelectedSimilarItem.Visible = true;
+                    }
 
                     foreach (StatisticsSalesLine noInv in pendingDisplayList)
                     {
@@ -193,6 +254,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
             {
                 int lineCount = 0;
                 int processCount = 0;
+                int suggestionCount = 0;
 
                 List<string> reqActions = new List<string>
                 {
@@ -240,7 +302,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                     itemNo.ID = "itemNo_" + lineCount.ToString();
                     docNo.ID = "docNo_" + lineCount.ToString();
 
-                    if (pendingList == "Unknown" && u.Supervisor)
+                    if (PendingList == "Unknown" && u.Supervisor)
                     {
                         reqReturnAction.Controls.Add(reqReturnSelect);
                     }
@@ -261,7 +323,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                     tr.Cells.Add(reqReturnAction);
                     tr.Cells.Add(status);
 
-                    if (pendingList == "Refund")
+                    if (PendingList == "Refund")
                     {
                         TableCell refundProcess = new TableCell
                         {
@@ -271,7 +333,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                         tr.Cells.Add(refundProcess);
                     }
 
-                    if (pendingList == "Replacement" && !line.Status.ToLower().Contains("no inventory"))
+                    if (PendingList == "Replacement" && !line.Status.ToLower().Contains("no inventory"))
                     {
                         processCount++;
                         docNo.ID = "docNoInv_" + lineCount.ToString();
@@ -287,7 +349,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                         tr.Cells.Add(processCell);
                     }
 
-                    if (pendingList == "Refund" && line.CustAllowRefund)
+                    if (PendingList == "Refund" && line.CustAllowRefund)
                     {
                         processCount++;
                         docNo.ID = "docNoInv_" + lineCount.ToString();
@@ -303,9 +365,53 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                         tr.Cells.Add(processCell);
                     }
 
-                    if (pendingList == "CompletedExchanges")
+                    if (PendingList == "CompletedExchanges")
                     {
                         tr.Cells.Add(exchangeOrderNo);
+                    }
+
+                    if (PendingList == "Replacement" && line.Status.ToLower().Contains("no inventory") && u.Supervisor)
+                    {
+                        suggestionCount++;
+                        docNo.ID = "docNoRepInv_" + lineCount.ToString();
+                        TableCell suggestItemCell = new TableCell();
+                        TableCell clearSuggestionCell = new TableCell();
+
+                        TableCell suggestItemNoCell = new TableCell
+                        {
+                            ID = "suggestItemNo_" + lineCount.ToString()
+                        };
+
+                        Button btnLookupSimilarItem = new Button
+                        {
+                            ID = "btnLookupSimilarItem" + lineCount.ToString(),
+                            Text = "...",
+                            OnClientClick = "return LookupSimilarItem('" + line.ItemNo + "', '" + lineCount + "')"
+                        };
+
+                        ImageButton imgBtnClearSuggestion = new ImageButton
+                        {
+                            ID = "imgBtnClearSuggestion_" + lineCount.ToString(),
+                            ImageUrl = "../../../../../images/cancel.png",
+                            Height = new Unit("50%"),
+                            Width = new Unit("50%"),
+                            OnClientClick = "return RemoveSimilarItem('" + line.ItemNo + "', '" + lineCount + "')"
+                        };
+
+                        suggestItemCell.HorizontalAlign = HorizontalAlign.Center;
+                        clearSuggestionCell.HorizontalAlign = HorizontalAlign.Center;
+
+                        if (Session[line.ItemNo + "_" + lineCount.ToString()] != null)
+                        {
+                            suggestItemNoCell.Text = Convert.ToString(Session[line.ItemNo + "_" + lineCount.ToString()]);
+                        }
+
+                        suggestItemCell.Controls.Add(btnLookupSimilarItem);
+                        clearSuggestionCell.Controls.Add(imgBtnClearSuggestion);
+
+                        tr.Cells.Add(suggestItemNoCell);
+                        tr.Cells.Add(suggestItemCell);
+                        tr.Cells.Add(clearSuggestionCell);
                     }
 
                     if (lineCount % 2 == 0)
@@ -331,7 +437,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                 breakRow.Cells.Add(breakCell);
                 tblStatisticsSalesLines.Rows.Add(breakRow);
 
-                if ((pendingList == "Replacement" || pendingList == "Refund") && processCount > 0)
+                if ((PendingList == "Replacement" || PendingList == "Refund") && processCount > 0)
                 {
                     TableRow checkboxRow = new TableRow
                     {
@@ -397,38 +503,71 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                 else
                 {
                     ProcessColumn.Visible = false;
+                }
 
-                    if (pendingList == "Unknown" && u.Supervisor)
+                if (PendingList == "Replacement" && suggestionCount > 0)
+                {
+                    TableRow buttonRow = new TableRow
                     {
-                        TableRow buttonREQRow = new TableRow
-                        {
-                            ID = "UpdateREQButton"
-                        };
+                        ID = "ProcessButton"
+                    };
 
-                        TableCell updateButtonCell = new TableCell();
+                    TableCell buttonCell = new TableCell();
 
-                        Button updateREQReturnAction = new Button
-                        {
-                            ID = "BtnUpdateREQReturnActions",
-                            Text = "Update REQ Return Actions",
-                            OnClientClick = "return UpdateREQReturnActions()"
-                        };
+                    Button button = new Button
+                    {
+                        ID = "BtnProcessSuggestSimilarItems",
+                        Text = "Update Suggest Similar Items",
+                        OnClientClick = "return ProcessSuggestSimilarItems()"
+                    };
 
-                        updateButtonCell.Controls.Add(updateREQReturnAction);
+                    buttonCell.Controls.Add(button);
 
-                        buttonREQRow.Cells.Add(new TableCell());
-                        buttonREQRow.Cells.Add(new TableCell());
-                        buttonREQRow.Cells.Add(new TableCell());
-                        buttonREQRow.Cells.Add(new TableCell());
-                        buttonREQRow.Cells.Add(new TableCell());
-                        buttonREQRow.Cells.Add(new TableCell());
-                        buttonREQRow.Cells.Add(new TableCell());
-                        buttonREQRow.Cells.Add(new TableCell());
-                        buttonREQRow.Cells.Add(new TableCell());
-                        buttonREQRow.Cells.Add(updateButtonCell);
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(new TableCell());
+                    buttonRow.Cells.Add(buttonCell);
 
-                        tblStatisticsSalesLines.Rows.Add(buttonREQRow);
-                    }
+                    tblStatisticsSalesLines.Rows.Add(buttonRow);
+                }
+
+                if (PendingList == "Unknown" && u.Supervisor)
+                {
+                    TableRow buttonREQRow = new TableRow
+                    {
+                        ID = "UpdateREQButton"
+                    };
+
+                    TableCell updateButtonCell = new TableCell();
+
+                    Button updateREQReturnAction = new Button
+                    {
+                        ID = "BtnUpdateREQReturnActions",
+                        Text = "Update REQ Return Actions",
+                        OnClientClick = "return UpdateREQReturnActions()"
+                    };
+
+                    updateButtonCell.Controls.Add(updateREQReturnAction);
+
+                    buttonREQRow.Cells.Add(new TableCell());
+                    buttonREQRow.Cells.Add(new TableCell());
+                    buttonREQRow.Cells.Add(new TableCell());
+                    buttonREQRow.Cells.Add(new TableCell());
+                    buttonREQRow.Cells.Add(new TableCell());
+                    buttonREQRow.Cells.Add(new TableCell());
+                    buttonREQRow.Cells.Add(new TableCell());
+                    buttonREQRow.Cells.Add(new TableCell());
+                    buttonREQRow.Cells.Add(new TableCell());
+                    buttonREQRow.Cells.Add(updateButtonCell);
+
+                    tblStatisticsSalesLines.Rows.Add(buttonREQRow);
                 }
             }
             catch (Exception ex)
@@ -487,6 +626,54 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                 }
 
                 StaticService.UpdateREQReturnAction(rmaList, sessionID);
+
+                HttpContext.Current.Session["NoUserInteraction"] = true;
+                HttpContext.Current.Session["UserInteraction"] = true;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message, e);
+                return "Error - " + e.Message;
+            }
+
+            return "Success";
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static string RemoveSimilarItem(string itemNo, string lineNo)
+        {
+            try
+            {
+                HttpContext.Current.Session[itemNo + "_" + lineNo] = null;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message, e);
+                return "Error - " + e.Message;
+            }
+            return "Success";
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static string ProcessSuggestSimilarItems(string suggestionList)
+        {
+            try
+            {
+                string sessionID = string.Empty;
+                if (HttpContext.Current.Session["ActiveUser"] != null)
+                {
+                    User u = (User)HttpContext.Current.Session["ActiveUser"];
+                    sessionID = u.SessionID;
+                }
+                else
+                {
+                    sessionID = "{A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0}";
+                }
+
+
+                StaticService.ProcessSuggestSimilarItems(suggestionList, sessionID);
 
                 HttpContext.Current.Session["NoUserInteraction"] = true;
                 HttpContext.Current.Session["UserInteraction"] = true;

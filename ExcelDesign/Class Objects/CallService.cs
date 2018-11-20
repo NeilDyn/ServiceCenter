@@ -2253,6 +2253,7 @@ namespace ExcelDesign.Class_Objects
             bool custAllowRefund = false;
             string status = string.Empty;
             string exchangeOrderNo = string.Empty;
+            bool noItemSubFound = false;
 
             if (stats.SalesLine != null)
             {
@@ -2274,6 +2275,7 @@ namespace ExcelDesign.Class_Objects
                     isOlderThan24Hours = stats.SalesLine[sl].IsOlderThan24Hrs[0] == "Yes" ? true : false;
                     isPendingSQApproval = stats.SalesLine[sl].IsPendingSQApproval[0] == "Yes" ? true : false;
                     custAllowRefund = stats.SalesLine[sl].CustAllowRefund[0] == "Yes" ? true : false;
+                    noItemSubFound = stats.SalesLine[sl].NoItemSubFound[0] == "Yes" ? true : false;
 
                     if (isNotInvtAvailable)
                     {
@@ -2323,6 +2325,18 @@ namespace ExcelDesign.Class_Objects
                         else
                         {
                             status += ", Is pending SQ Approval";
+                        }
+                    }
+
+                    if (noItemSubFound)
+                    {
+                        if(status.Length == 0)
+                        {
+                            status = "No Item Substitution Found";
+                        }
+                        else
+                        {
+                            status += ", No Item Substitution Found";
                         }
                     }
 
@@ -2513,6 +2527,36 @@ namespace ExcelDesign.Class_Objects
             }
 
             return pr;
+        }
+
+        public List<Item> GetSuggestedSimilarItems(string itemNo, int suggestionOption)
+        {
+            List<Item> items = new List<Item>();
+            SuggestSimilarItem ssi = new SuggestSimilarItem();
+
+            ssi = webService.GetSuggestSimilarItems(itemNo, suggestionOption);
+
+            string no = string.Empty;
+            string desc = string.Empty;
+            double unitPrice = 0.0;
+
+            if (ssi.Item != null)
+            {
+                for (int i = 0; i < ssi.Item.Length; i++)
+                {
+                    no = ssi.Item[i].No;
+                    desc = ssi.Item[i].Description;
+                    double.TryParse(ssi.Item[i].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out unitPrice);
+
+                    items.Add(new Item(no, desc, unitPrice));
+
+                    no = string.Empty;
+                    desc = string.Empty;
+                    unitPrice = 0.0;
+                }
+            }
+
+            return items;
         }
     }
 }

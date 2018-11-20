@@ -30,3 +30,78 @@ System.Web.Services.Protocols.SoapException: You cannot enter 'Refund' in Intege
    at ExcelDesign.Class_Objects.WebService.UpdateREQReturnAction(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 210
    at ExcelDesign.Class_Objects.SendService.UpdateREQReturnAction(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 474
    at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.UpdateREQReturnActions(String rmaList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 486
+ERROR 2018-11-16 08:45:59,608 279217ms SuggestSimilarItem     Page_Load          - Marked: Yes, Description: ' *****', Blocked: No, Quantity in Finished Goods: >1
+System.Web.Services.Protocols.SoapException: Marked: Yes, Description: ' *****', Blocked: No, Quantity in Finished Goods: >1
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.ViewSimilarItem(String sessionID, String itemNo, Int32 _SearchType, SuggestSimilarItem& custSvcSimilarItem) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 800
+   at ExcelDesign.Class_Objects.WebService.GetSuggestSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 216
+   at ExcelDesign.Class_Objects.CallService.GetSuggestedSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2523
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.LoadSuggestionLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 58
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 32
+ERROR 2018-11-16 08:47:53,899 24232ms SuggestSimilarItem     Page_Load          - Marked: Yes, Description: ' *****', Blocked: No, Quantity in Finished Goods: >1
+System.Web.Services.Protocols.SoapException: Marked: Yes, Description: ' *****', Blocked: No, Quantity in Finished Goods: >1
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.ViewSimilarItem(String sessionID, String itemNo, Int32 _SearchType, SuggestSimilarItem& custSvcSimilarItem) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 800
+   at ExcelDesign.Class_Objects.WebService.GetSuggestSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 216
+   at ExcelDesign.Class_Objects.CallService.GetSuggestedSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2523
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.LoadSuggestionLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 51
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 32
+ERROR 2018-11-16 08:50:50,136 23136ms SuggestSimilarItem     Page_Load          - Callback functions are not allowed.
+System.Web.Services.Protocols.SoapException: Callback functions are not allowed.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.ViewSimilarItem(String sessionID, String itemNo, Int32 _SearchType, SuggestSimilarItem& custSvcSimilarItem) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 800
+   at ExcelDesign.Class_Objects.WebService.GetSuggestSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 216
+   at ExcelDesign.Class_Objects.CallService.GetSuggestedSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2523
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.LoadSuggestionLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 49
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 32
+ERROR 2018-11-16 08:55:54,414 327414ms SuggestSimilarItem     Page_Load          - Callback functions are not allowed.
+System.Web.Services.Protocols.SoapException: Callback functions are not allowed.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.ViewSimilarItem(String sessionID, String itemNo, Int32 _SearchType, SuggestSimilarItem& custSvcSimilarItem) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 800
+   at ExcelDesign.Class_Objects.WebService.GetSuggestSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 216
+   at ExcelDesign.Class_Objects.CallService.GetSuggestedSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2523
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.LoadSuggestionLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 49
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 32
+ERROR 2018-11-16 09:32:12,350 23987ms ServiceCenter          ConnectToService   - The maximum length for a string value is 25.
+System.Web.Services.Protocols.SoapException: The maximum length for a string value is 25.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.SearchDetermineNoType(String sessionID, String searchNo, SearchResults& searchResults, Int32 _SearchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 284
+   at ExcelDesign.Class_Objects.WebService.FindOrder(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 77
+   at ExcelDesign.Class_Objects.CallService.OpenService(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 37
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 255
+ERROR 2018-11-16 11:15:25,061 348181ms LoginPage              UserLogin          - The Microsoft Dynamics NAV Server cannot connect the Change Listener to SQL Server because of the following error: Cannot open database "Daily_Dev" requested by the login. The login failed.
+Login failed for user 'JEG\mswart'.
+System.Web.Services.Protocols.SoapException: The Microsoft Dynamics NAV Server cannot connect the Change Listener to SQL Server because of the following error: Cannot open database "Daily_Dev" requested by the login. The login failed.
+Login failed for user 'JEG\mswart'.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 217
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 132
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 32
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-11-16 11:54:58,254 81809ms SuggestSimilarItem     Page_Load          - Method "ViewSimilarItem" is invalid!
+System.Web.Services.Protocols.SoapException: Method "ViewSimilarItem" is invalid!
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.ViewSimilarItem(String sessionID, String itemNo, Int32 _SearchType, SuggestSimilarItem& custSvcSimilarItem) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 800
+   at ExcelDesign.Class_Objects.WebService.GetSuggestSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 216
+   at ExcelDesign.Class_Objects.CallService.GetSuggestedSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2523
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.LoadSuggestionLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 57
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 39
+ERROR 2018-11-16 12:13:19,597 19080ms tatisticsSalesLineForm Page_Load          - Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.PopulateData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 71
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 42
+ERROR 2018-11-20 16:17:46,992 94902ms CreateExchange         eateExchange_Click - Standard Text Code 'TAC100135' does not exist.
+System.Web.Services.Protocols.SoapException: Standard Text Code 'TAC100135' does not exist.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.CreateExchangeOrder(String orderNo, CreatedExchangeOrder& exchangeOrder, String externalDocumentNo, String sessionID, String lineDetails) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 326
+   at ExcelDesign.Class_Objects.WebService.CreateExchange(String rmaNo, String externalDocNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 148
+   at ExcelDesign.Class_Objects.SendService.CreateExchangeOrder(String rmaNo, String externalDocumentNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 183
+   at ExcelDesign.Forms.FunctionForms.CreateExchange.BtnCreateExchange_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\CreateExchange.aspx.cs:line 257

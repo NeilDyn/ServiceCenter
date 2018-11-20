@@ -49,6 +49,7 @@ namespace ExcelDesign.Forms
                     }
                     catch (Exception ex)
                     {
+                        Log.Error(ex.Message, ex);
                         Session["Error"] = ex.Message;
 
                         if (Request.Url.AbsoluteUri.Contains("Forms"))

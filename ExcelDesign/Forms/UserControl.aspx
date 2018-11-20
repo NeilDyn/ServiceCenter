@@ -154,6 +154,12 @@
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
+                <asp:TableCell Text="Supervisor" />
+                <asp:TableCell ID="tcSupervisor" HorizontalAlign="Center">
+                    <asp:CheckBox ID="cbxSupervisor" runat="server" Enabled="false" />
+                </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow>
                 <asp:TableCell Text="Last Password Update" />
                 <asp:TableCell ID="tcLastPasswordUpdate" />
             </asp:TableRow>

@@ -99,6 +99,7 @@ namespace ExcelDesign.Forms
                 cbxPartialRefund.Checked = u.CanPartialRefund;
                 cbxPartialRefundPDA.Checked = u.CanPartialRefundPDA;
                 tcPartialrefundTier.Text = u.RefundTier;
+                cbxSupervisor.Checked = u.Supervisor;
             }
             catch (Exception ex)
             {

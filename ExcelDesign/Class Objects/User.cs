@@ -72,6 +72,7 @@ namespace ExcelDesign.Class_Objects
 
             Admin = us.User[0].Admin.ToUpper() == "YES" ? true : false;
             Developer = us.User[0].Developer.ToUpper() == "YES" ? true : false;
+            Supervisor = us.User[0].Supervisor.ToUpper() == "YES" ? true : false;
 
             PasswordLastUpdated = us.User[0].PasswordLastUpdated;
             PasswordExpiryDate = us.User[0].PasswordExpiryDate;

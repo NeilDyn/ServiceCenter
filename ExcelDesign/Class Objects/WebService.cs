@@ -209,5 +209,17 @@ namespace ExcelDesign.Class_Objects
         {
             functions.UpdateREQReturnAction(rmaList, sessionID);
         }
+
+        public SuggestSimilarItem GetSuggestSimilarItems(string itemNo, int suggestionOption)
+        {
+            SuggestSimilarItem ssi = new SuggestSimilarItem();
+            functions.ViewSimilarItem(SessionID(), itemNo, suggestionOption, ref ssi);
+            return ssi;
+        }
+
+        public void ProcessSuggestSimilarItems(string suggestionList, string sessionID)
+        {
+            functions.UpdateRMAItemNo(sessionID, suggestionList);
+        }
     }
 }

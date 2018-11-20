@@ -41,44 +41,28 @@
     };
 
     function OpenSalesLineWindow(pendingList, pendingType) {
-        var width = 1500;
+        var width = 1700;
         var height = 800;
-        var left = (screen.height - width) + 1500;
+        var left = (screen.height - width) + 1700;
         var top = (screen.height - height);
 
-        if (typeof (partRequestWindow) == 'undefined' || partRequestWindow.closed) {
-            if (window.location.href.indexOf("Forms") > -1) {
-                statisticsSalesLine = window.open("UserControls/StatisticsControls/SalesLines/StatisticsSalesLineForm.aspx?PendingList=" + pendingList + "&PendingType=" + pendingType,
-                    null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
-            } else {
-                statisticsSalesLine = window.open("Forms/UserControls/StatisticsControls/SalesLines/StatisticsSalesLineForm.aspx?PendingList=" + pendingList + "&PendingType=" + pendingType,
+        if (window.location.href.indexOf("Forms") > -1) {
+            statisticsSalesLine = window.open("UserControls/StatisticsControls/SalesLines/StatisticsSalesLineForm.aspx?PendingList=" + pendingList + "&PendingType=" + pendingType,
                 null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
-            }
-
-            function checkIfWinClosed(intervalID) {
-                if (statisticsSalesLine.closed) {
-                    __doPostBack('[id$=btnReload', '');
-                    clearInterval(intervalID);
-                }
-            }
-
-            var interval = setInterval(function () {
-                checkIfWinClosed(interval);
-            }, 1000);
-
         } else {
-            alert('Please close the current active Statistics dialog window before trying to open a new instance.');
+            statisticsSalesLine = window.open("Forms/UserControls/StatisticsControls/SalesLines/StatisticsSalesLineForm.aspx?PendingList=" + pendingList + "&PendingType=" + pendingType,
+                null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
         }
-    }
+    };
 </script>
 <asp:Table runat="server" ID="tblStatistics" Height="100%" Width="30%" HorizontalAlign="Right">
     <asp:TableHeaderRow HorizontalAlign="Justify" ForeColor="White" BackColor="#507CD1" Font-Size="Larger" Font-Bold="true">
         <asp:TableHeaderCell BackColor="#FFFFFF" Width="5%">
-            <asp:ImageButton ID="BtnRefreshStatistics" runat="server" ImageUrl="~/images/refresh.png" Height="20px" OnClick="BtnRefreshStatistics_Click"/>
+            <asp:ImageButton ID="BtnRefreshStatistics" runat="server" ImageUrl="~/images/refresh.png" Height="20px" OnClick="BtnRefreshStatistics_Click" />
         </asp:TableHeaderCell>
         <asp:TableHeaderCell Text="Returns" ColumnSpan="2" Width="20%" />
         <asp:TableHeaderCell Text="Part Requests" ColumnSpan="2" Width="20%" />
-        <asp:TableHeaderCell Text="Returns Buffer" ColumnSpan="2" Width="20%"/>
+        <asp:TableHeaderCell Text="Returns Buffer" ColumnSpan="2" Width="20%" />
     </asp:TableHeaderRow>
     <asp:TableHeaderRow>
         <asp:TableHeaderCell />
@@ -100,7 +84,7 @@
     </asp:TableRow>
     <asp:TableRow runat="server" TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableHeaderCell />
-        <asp:TableCell runat="server" ID="expandReplacementDetails" ColumnSpan="2" Width="20%" Height="100%"/>
+        <asp:TableCell runat="server" ID="expandReplacementDetails" ColumnSpan="2" Width="20%" Height="100%" />
         <asp:TableCell runat="server" ID="expandPendingSQApproval" ColumnSpan="2" Width="20%" Height="100%" />
         <asp:TableCell runat="server" ID="expandCompletedExchanges" ColumnSpan="2" Width="20%" Height="100%" />
     </asp:TableRow>

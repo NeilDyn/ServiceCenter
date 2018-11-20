@@ -131,6 +131,7 @@
     <Content Include="Forms\UserControls\StatisticsControls\PendingSQApproval.ascx" />
     <Content Include="Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx" />
     <Content Include="Forms\UserControls\StatisticsControls\StatisticsUserControl.ascx" />
+    <Content Include="Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx" />
     <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderComments.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderExchangeNos.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderPackages.ascx" />
@@ -148,6 +149,7 @@
     <Content Include="Forms\UserControls\TableHeaders\SingleSalesOrderTableHeader.ascx" />
     <Content Include="Global.asax" />
     <Content Include="Headers\Navbar.ascx" />
+    <Content Include="images\cancel.png" />
     <Content Include="images\Logo.png" />
     <Content Include="images\icon.ico" />
     <Content Include="images\refresh.png" />
@@ -175,6 +177,7 @@
     <Compile Include="Class Objects\FunctionData\PartRequestOptions.cs" />
     <Compile Include="Class Objects\FunctionData\ReturnReason.cs" />
     <Compile Include="Class Objects\Information.cs" />
+    <Compile Include="Class Objects\Item.cs" />
     <Compile Include="Class Objects\PartialRefunded.cs" />
     <Compile Include="Class Objects\PostedPackage.cs" />
     <Compile Include="Class Objects\PostedPackageLine.cs" />
@@ -473,6 +476,13 @@
     <Compile Include="Forms\UserControls\StatisticsControls\StatisticsUserControl.ascx.designer.cs">
       <DependentUpon>StatisticsUserControl.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs">
+      <DependentUpon>SuggestSimilarItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.designer.cs">
+      <DependentUpon>SuggestSimilarItem.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderComments.ascx.cs">
       <DependentUpon>SingleReturnOrderComments.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -637,6 +647,9 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\ServiceFunctions\Statistics.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ServiceFunctions\SuggestSimilarItem.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">

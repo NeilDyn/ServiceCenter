@@ -473,5 +473,10 @@ namespace ExcelDesign.Class_Objects
         {
             webService.UpdateREQReturnAction(rmaList, sessionID);
         }
+
+        public void ProcessSuggestSimilarItems(string suggestionList, string sessionID)
+        {
+            webService.ProcessSuggestSimilarItems(suggestionList, sessionID);
+        }
     }
 }

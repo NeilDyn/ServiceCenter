@@ -469,7 +469,7 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
 
                     CheckBox checkBox = new CheckBox
                     {
-                        ID = "cbxSelectAll",
+                        ID = "cbxSelectAllProcessItems",
                         Text = "Select All"
                     };
 

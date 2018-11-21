@@ -9,7 +9,7 @@
     <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
     <script>
         $(document).ready(function () {
-            $("[id$=cbxSelectAll]").click(function () {
+            $("[id$=cbxSelectAllProcessItems]").click(function () {
                 if ($(this).is(':checked')) {
                     $("[id*=cbxProcess]").prop('checked', true);
                 }

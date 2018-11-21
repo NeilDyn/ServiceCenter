@@ -1767,6 +1767,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string qtyField;
         
+        private string[] unitCostField;
+        
         private string descriptionField;
         
         private string reqReturnActionField;
@@ -1828,6 +1830,17 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.qtyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("UnitCost")]
+        public string[] UnitCost {
+            get {
+                return this.unitCostField;
+            }
+            set {
+                this.unitCostField = value;
             }
         }
         

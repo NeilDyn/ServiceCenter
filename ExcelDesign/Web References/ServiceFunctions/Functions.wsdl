@@ -583,6 +583,7 @@
           <element minOccurs="1" maxOccurs="1" name="DocNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ItemNo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="UnitCost" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ReqReturnAction" type="string" />
           <element minOccurs="1" maxOccurs="1" name="CustomerNo" type="string" />

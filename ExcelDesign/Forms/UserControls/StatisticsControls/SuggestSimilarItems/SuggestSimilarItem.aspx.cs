@@ -50,11 +50,34 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems
         {
             int lineCount = 0;
             List<Item> items = new List<Item>();
+            List<string> selectedItem = new List<string>();
+
             ItemNo = Convert.ToString(Request.QueryString["ItemNo"]);
             RowNo = Convert.ToString(Request.QueryString["RowNo"]);
             SuggestionOption = ddlSuggestionOptions.SelectedIndex;
 
             items = cs.GetSuggestedSimilarItems(ItemNo, SuggestionOption);
+
+            if (Session[ItemNo] != null)
+            {
+                selectedItem = (List<string>)Session[ItemNo];
+
+                TableRow originalRow = new TableRow();
+                TableCell originalNo = new TableCell();
+                TableCell originalDesc = new TableCell();
+                TableCell originalCost = new TableCell();
+
+                originalNo.Text = selectedItem[0];
+                originalDesc.Text = selectedItem[1];
+                originalCost.Text = "$     " + selectedItem[2];
+                originalCost.HorizontalAlign = HorizontalAlign.Right;
+
+                originalRow.Cells.Add(originalNo);
+                originalRow.Cells.Add(originalDesc);
+                originalRow.Cells.Add(originalCost);
+
+                tblOriginalItem.Rows.Add(originalRow);
+            }
 
             foreach (Item item in items)
             {

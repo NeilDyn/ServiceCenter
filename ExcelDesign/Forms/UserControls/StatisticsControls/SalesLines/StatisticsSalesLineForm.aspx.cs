@@ -399,11 +399,20 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                         ImageButton imgBtnClearSuggestion = new ImageButton
                         {
                             ID = "imgBtnClearSuggestion_" + lineCount.ToString(),
-                            ImageUrl = "../../../../../images/cancel.png",
+                            ImageUrl = "~/images/cancel.png",
                             Height = new Unit("50%"),
-                            Width = new Unit("50%"),
+                            Width = new Unit("40%"),
                             OnClientClick = "return RemoveSimilarItem('" + line.ItemNo + "', '" + lineCount + "')"
                         };
+
+                        List<string> currItem = new List<string>
+                        {
+                            line.ItemNo,
+                            line.Description,
+                            line.UnitCost
+                        };
+
+                        Session[line.ItemNo] = currItem; 
 
                         suggestItemCell.HorizontalAlign = HorizontalAlign.Center;
                         clearSuggestionCell.HorizontalAlign = HorizontalAlign.Center;

@@ -32,10 +32,11 @@ namespace ExcelDesign.Class_Objects
         public bool IsPendingSQApproval { get; set; }
         public bool CustAllowRefund { get; set; }
         public string ExchangeOrderNo { get; set; }
+        public string UnitCost { get; set; }
 
         public StatisticsSalesLine(string docTypeP, string docNoP, string externalDocumentNoP, string itemNoP, int qtyP, string descriptionP, string createdDateP, string reqReturnActionP,
             bool isNotInvAvailableP, bool isOlderThan72HoursP, bool isPendingSQApprovalP, string customerNoP, bool isOlderThan48HoursP, string statusP, bool isOlderThan24HoursP,
-            bool custAllowRefundP, string exchangeOrderNoP)
+            bool custAllowRefundP, string exchangeOrderNoP, string unitCostP)
         {
             DocType = docTypeP;
             DocNo = docNoP;
@@ -54,6 +55,7 @@ namespace ExcelDesign.Class_Objects
             IsOlderThan24Hours = isOlderThan24HoursP;
             CustAllowRefund = custAllowRefundP;
             ExchangeOrderNo = exchangeOrderNoP;
+            UnitCost = unitCostP;
         }
 
         public StatisticsSalesLine()

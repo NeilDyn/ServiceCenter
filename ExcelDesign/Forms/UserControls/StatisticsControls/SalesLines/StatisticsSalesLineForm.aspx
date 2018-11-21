@@ -243,9 +243,9 @@
                 <asp:TableHeaderCell Text="Refund Processing" ID="RefundProcessing" Visible="false" />
                 <asp:TableHeaderCell Text="Process" ID="ProcessColumn" Visible="false" />
                 <asp:TableHeaderCell Text="Exchange Order No" ID="ExchangeOrderNo" Visible="false" />
-                <asp:TableHeaderCell Text="Similar Item No" ID="SimilarItemNo" Visible="false" />
-                <asp:TableHeaderCell ID="LookupSimalarItem" Visible="false" />
-                <asp:TableHeaderCell Text="Remove" ID="RemoveSelectedSimilarItem" Visible="false" />
+                <asp:TableHeaderCell Text="Alternate Item" ID="SimilarItemNo" Visible="false" />
+                <asp:TableHeaderCell Text="Suggest Similar Item" ID="LookupSimalarItem" Visible="false" />
+                <asp:TableHeaderCell Text="Remove Item" ID="RemoveSelectedSimilarItem" Visible="false" />
             </asp:TableHeaderRow>
             <asp:TableHeaderRow>
                 <asp:TableHeaderCell ColumnSpan="14">

@@ -2254,6 +2254,7 @@ namespace ExcelDesign.Class_Objects
             string status = string.Empty;
             string exchangeOrderNo = string.Empty;
             bool noItemSubFound = false;
+            string unitCost = string.Empty;
 
             if (stats.SalesLine != null)
             {
@@ -2276,6 +2277,7 @@ namespace ExcelDesign.Class_Objects
                     isPendingSQApproval = stats.SalesLine[sl].IsPendingSQApproval[0] == "Yes" ? true : false;
                     custAllowRefund = stats.SalesLine[sl].CustAllowRefund[0] == "Yes" ? true : false;
                     noItemSubFound = stats.SalesLine[sl].NoItemSubFound[0] == "Yes" ? true : false;
+                    unitCost = stats.SalesLine[sl].UnitCost[0];
 
                     if (isNotInvtAvailable)
                     {
@@ -2341,7 +2343,7 @@ namespace ExcelDesign.Class_Objects
                     }
 
                     statLines.Add(new StatisticsSalesLine(docType, docNo, externalDocNo, itemNo, qty, description, createdDate, reqReturnAction, isNotInvtAvailable, isOlderThan72Hours,
-                        isPendingSQApproval, customerNo, isOlderThan48Hours, status, isOlderThan24Hours, custAllowRefund, exchangeOrderNo));
+                        isPendingSQApproval, customerNo, isOlderThan48Hours, status, isOlderThan24Hours, custAllowRefund, exchangeOrderNo, unitCost));
 
                     docType = string.Empty;
                     docNo = string.Empty;
@@ -2360,6 +2362,8 @@ namespace ExcelDesign.Class_Objects
                     custAllowRefund = false;
                     status = string.Empty;
                     exchangeOrderNo = string.Empty;
+                    noItemSubFound = false;
+                    unitCost = string.Empty;
                 }
             }
 
@@ -2416,7 +2420,7 @@ namespace ExcelDesign.Class_Objects
                     }
 
                     statLines.Add(new StatisticsSalesLine(docType, docNo, externalDocNo, itemNo, qty, description, createdDate, reqReturnAction, isNotInvtAvailable, isOlderThan72Hours,
-                        isPendingSQApproval, customerNo, isOlderThan48Hours, status, isOlderThan24Hours, custAllowRefund, exchangeOrderNo));
+                        isPendingSQApproval, customerNo, isOlderThan48Hours, status, isOlderThan24Hours, custAllowRefund, exchangeOrderNo, unitCost));
 
                     docType = string.Empty;
                     docNo = string.Empty;

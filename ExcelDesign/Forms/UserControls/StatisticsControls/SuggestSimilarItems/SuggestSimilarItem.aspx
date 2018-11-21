@@ -35,6 +35,17 @@
 </head>
 <body>
     <form id="frmSuggestSimilarItem" runat="server">
+        <asp:Table ID="tblOriginalItem" runat="server" Height="100%" Width="70%">
+            <asp:TableHeaderRow HorizontalAlign="Justify" ForeColor="White" BackColor="#507CD1">
+                <asp:TableHeaderCell Text="Item No" />
+                <asp:TableHeaderCell Text="Description" />
+                <asp:TableHeaderCell Text="Unit Cost" />
+            </asp:TableHeaderRow>
+        </asp:Table>
+        <br />
+        <br />
+        <asp:Label ID="lblHeaderSuggestSimilarItem" runat="server" Text="View Suggested Similar Items By:" />
+        <br />
         <asp:DropDownList ID="ddlSuggestionOptions" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSuggestionOptions_SelectedIndexChanged">
             <asp:ListItem Value=""></asp:ListItem>
             <asp:ListItem Value="Product Group & Unit Cost"></asp:ListItem>
@@ -47,7 +58,7 @@
             <asp:TableHeaderRow HorizontalAlign="Justify" ForeColor="White" BackColor="#507CD1">
                 <asp:TableHeaderCell Text="Item No" />
                 <asp:TableHeaderCell Text="Description" />
-                <asp:TableHeaderCell Text="Unit Price" />
+                <asp:TableHeaderCell Text="Unit Cost" />
                 <asp:TableHeaderCell Text="Select" />
             </asp:TableHeaderRow>
         </asp:Table>

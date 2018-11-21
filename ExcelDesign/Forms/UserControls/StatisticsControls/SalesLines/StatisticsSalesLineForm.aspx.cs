@@ -58,6 +58,8 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
             List<StatisticsSalesLine> pendingDisplayList = new List<StatisticsSalesLine>();
             List<StatisticsSalesLine> displayList = new List<StatisticsSalesLine>();
 
+            bool processAndSuggest = false;
+
             switch (PendingList)
             {
                 case "Replacement":
@@ -174,6 +176,11 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                         SimilarItemNo.Visible = true;
                         LookupSimalarItem.Visible = true;
                         RemoveSelectedSimilarItem.Visible = true;
+                    }
+
+                    if(ProcessColumn.Visible && SimilarItemNo.Visible)
+                    {
+                        processAndSuggest = true;
                     }
 
                     displayList = pendingDisplayList;
@@ -409,6 +416,11 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                         suggestItemCell.Controls.Add(btnLookupSimilarItem);
                         clearSuggestionCell.Controls.Add(imgBtnClearSuggestion);
 
+                        if(processAndSuggest)
+                        {
+                            tr.Cells.Add(new TableCell());
+                        }
+
                         tr.Cells.Add(suggestItemNoCell);
                         tr.Cells.Add(suggestItemCell);
                         tr.Cells.Add(clearSuggestionCell);
@@ -439,20 +451,9 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
 
                 if ((PendingList == "Replacement" || PendingList == "Refund") && processCount > 0)
                 {
-                    TableRow checkboxRow = new TableRow
-                    {
-                        ID = "ProcessCheckBox"
-                    };
-
-                    TableRow buttonRow = new TableRow
-                    {
-                        ID = "ProcessButton"
-                    };
-
-                    TableRow buttonREQRow = new TableRow
-                    {
-                        ID = "UpdateREQButton"
-                    };
+                    TableRow checkboxRow = new TableRow();
+                    TableRow buttonRow = new TableRow();
+                    TableRow buttonREQRow = new TableRow();
 
                     TableCell checkBoxCell = new TableCell();
                     TableCell buttonCell = new TableCell();
@@ -465,7 +466,6 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
 
                     Button button = new Button
                     {
-                        ID = "BtnProcessAll",
                         Text = "Process",
                         OnClientClick = "return ProcessItems()"
                     };
@@ -503,20 +503,16 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines
                 else
                 {
                     ProcessColumn.Visible = false;
+                    processAndSuggest = false;
                 }
 
                 if (PendingList == "Replacement" && suggestionCount > 0)
                 {
-                    TableRow buttonRow = new TableRow
-                    {
-                        ID = "ProcessButton"
-                    };
+                    TableRow buttonRow = new TableRow();
 
                     TableCell buttonCell = new TableCell();
-
                     Button button = new Button
                     {
-                        ID = "BtnProcessSuggestSimilarItems",
                         Text = "Update Suggest Similar Items",
                         OnClientClick = "return ProcessSuggestSimilarItems()"
                     };

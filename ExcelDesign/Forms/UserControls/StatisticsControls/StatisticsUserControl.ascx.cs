@@ -252,6 +252,12 @@ namespace ExcelDesign.Forms.UserControls.StatisticsControls
             if (Session["ActiveUser"] != null)
             {
                 activeUser = (User)Session["ActiveUser"];
+
+                expandPendingUnknown = new TableCell();
+                expandCompletedExchanges = new TableCell();
+                expandPendingSQApproval = new TableCell();
+                expandRefundDetails = new TableCell();
+                expandReplacementDetails = new TableCell();
                 statisticsInformation = new List<StatisticsSalesLine>();
                 statisticsInformation = cs.GetStatisticsInformation();
 

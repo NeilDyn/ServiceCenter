@@ -56,7 +56,7 @@
     };
 </script>
 <asp:Table runat="server" ID="tblStatistics" Height="100%" Width="30%" HorizontalAlign="Right">
-    <asp:TableHeaderRow HorizontalAlign="Justify" ForeColor="White" BackColor="#507CD1" Font-Size="Larger" Font-Bold="true">
+    <asp:TableHeaderRow HorizontalAlign="Justify" ForeColor="White" BackColor="#507CD1" Font-Size="Medium" Font-Bold="true">
         <asp:TableHeaderCell BackColor="#FFFFFF" Width="5%">
             <asp:ImageButton ID="BtnRefreshStatistics" runat="server" ImageUrl="~/images/refresh.png" Height="20px" OnClick="BtnRefreshStatistics_Click" />
         </asp:TableHeaderCell>

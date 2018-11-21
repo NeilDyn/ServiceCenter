@@ -105,3 +105,32 @@ System.Web.Services.Protocols.SoapException: Standard Text Code 'TAC100135' does
    at ExcelDesign.Class_Objects.WebService.CreateExchange(String rmaNo, String externalDocNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 148
    at ExcelDesign.Class_Objects.SendService.CreateExchangeOrder(String rmaNo, String externalDocumentNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 183
    at ExcelDesign.Forms.FunctionForms.CreateExchange.BtnCreateExchange_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\CreateExchange.aspx.cs:line 257
+ERROR 2018-11-21 09:58:20,177 114786ms SuggestSimilarItem     Page_Load          - The active session has expired, your request will not be processed until you log into the system again.
+System.Web.Services.Protocols.SoapException: The active session has expired, your request will not be processed until you log into the system again.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.ViewSimilarItem(String sessionID, String itemNo, Int32 _SearchType, SuggestSimilarItem& custSvcSimilarItem) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 805
+   at ExcelDesign.Class_Objects.WebService.GetSuggestSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 216
+   at ExcelDesign.Class_Objects.CallService.GetSuggestedSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2537
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.LoadSuggestionLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 57
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 39
+ERROR 2018-11-21 11:04:44,433 31767ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 222
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 132
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 32
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-11-21 13:45:01,642 128679ms tatisticsSalesLineForm ProcessItems       - No lines with Qty. Received for Exchange found on Return Order RMA-244714.
+System.Web.Services.Protocols.SoapException: No lines with Qty. Received for Exchange found on Return Order RMA-244714.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 715
+   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 195
+   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 464
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 593

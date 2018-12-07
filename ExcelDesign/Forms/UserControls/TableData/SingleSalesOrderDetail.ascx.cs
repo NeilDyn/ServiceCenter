@@ -48,16 +48,19 @@ namespace ExcelDesign.Forms.UserControls.TableData
         protected TableCell packageCell;
         protected TableCell trackingCell;
         protected TableCell commentCell;
+        protected TableCell zendeskOrderCell;
 
         protected Control singleSalesOrderShipmentLines;
         protected Control singleSalesOrderPackageLines;
         protected Control singleSalesOrderTrackingLines;
         protected Control singelSalesOrderCommentLines;
+        protected Control singelSalesOrderZendeskLines;
 
         protected const string singleSalesOrderShipmentLinesPath = "DataLines/SalesOrderLines/SingleSalesOrderShipments.ascx";
         protected const string singleSalesOrderPackageLinesPath = "DataLines/SalesOrderLines/SingleSalesOrderPackages.ascx";
         protected const string singleSalesOrderTrackingLinesPath = "DataLines/SalesOrderLines/SingleSalesOrderTrackingNos.ascx";
         protected const string singleSalesOrderCommentLinesPath = "DataLines/SalesOrderLines/SingleSalesOrderComments.ascx";
+        protected const string singleSalesOrderZendeskLinesPath = "DataLines/SalesOrderLines/SingleSalesOrderZendeskTickets.ascx";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -264,6 +267,12 @@ namespace ExcelDesign.Forms.UserControls.TableData
             {
                 lblOrderComment.Visible = false;
                 imgOrderComments.Visible = false;
+            }
+
+            tcZendeskTickets.Text = Sh.Tickets.Count > 1 ? "<a href='javascript:expandSalesOrderZendeskTickets" + CustID.ToString() + "" + CountID.ToString() + "()'>Multiple</a>" : Sh.Tickets.Count == 0 ? "0" : Sh.Tickets[0].TicketLink();
+            if (Sh.Tickets.Count > 0)
+            {
+                PopulateZendeskTicketLines();
             }
         }
 
@@ -591,6 +600,21 @@ namespace ExcelDesign.Forms.UserControls.TableData
             commentCell.Width = new Unit("50%");
             this.expandOrderComments.Cells.Add(commentCell);
             this.expandOrderComments.ID = "expandOrderComments_" + CustID.ToString() + "_" + CountID.ToString();
+        }
+
+        protected void PopulateZendeskTicketLines()
+        {
+            zendeskOrderCell = new TableCell();
+            singelSalesOrderZendeskLines = LoadControl(singleSalesOrderZendeskLinesPath);
+            ((SingleSalesOrderZendeskTickets)singelSalesOrderZendeskLines).ZendeskTickets = Sh.Tickets;
+            ((SingleSalesOrderZendeskTickets)singelSalesOrderZendeskLines).PopulateData();
+
+            zendeskOrderCell.Controls.Add(singelSalesOrderZendeskLines);
+            zendeskOrderCell.ColumnSpan = 8;
+            zendeskOrderCell.Height = new Unit("100%");
+            zendeskOrderCell.Width = new Unit("50%");
+            this.expandSalesOrderZendeskTickets.Cells.Add(zendeskOrderCell);
+            this.expandSalesOrderZendeskTickets.ID = "expandSalesOrderZendeskTickets" + CustID.ToString() + "_" + CountID.ToString();
         }
     }
 }

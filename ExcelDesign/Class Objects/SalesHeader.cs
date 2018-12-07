@@ -22,6 +22,7 @@ namespace ExcelDesign.Class_Objects
         public List<Comment> OrderComments { get; set; }
         public string QuoteOrderNo { get; set; }
         public List<PartialRefunded> PartialRefunds { get; set; }
+        public List<Zendesk> Tickets { get; set; }
 
         public SalesHeader()
         {

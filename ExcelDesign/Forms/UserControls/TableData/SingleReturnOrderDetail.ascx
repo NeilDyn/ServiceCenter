@@ -3,6 +3,7 @@
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/ReturnOrderLines/SingleReturnOrderPackages.ascx" TagName="SingleReturnOrderPackages" TagPrefix="srop" %>
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/ReturnOrderLines/SingleReturnOrderComments.ascx" TagName="SingleReturnOrderComments" TagPrefix="sroc" %>
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/ReturnOrderLines/SingleReturnOrderExchangeNos.ascx" TagName="SingleReturnOrderExchangeNos" TagPrefix="sroen" %>
+<%@ Register Src="~/Forms/UserControls/TableData/DataLines/ReturnOrderLines/SingleReturnOrderZendeskTickets.ascx" TagName="SingleReturnOrderZendeskTickets" TagPrefix="srozt" %>
 
 <link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
@@ -15,6 +16,7 @@
         $("[id*=showMoreReturnLines_<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id*=expandMultipleExchange<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id$=expandReturnComments_<%= this.CustID %>_<%= this.CountID %>]").hide();
+        $("[id$=expandReturnZendeskTickets_<%= this.CustID %>_<%= this.CountID %>]").hide();
         var updateRMAWin;
         var createExchangeWin;
 
@@ -250,6 +252,10 @@
         return false;
     };
 
+    function expandReturnZendeskTickets<%=this.CustID %><%= this.CountID %>() {
+        $("[id$=expandReturnZendeskTickets_<%= this.CustID %>_<%= this.CountID %>]").toggle();
+    };
+
     function validateEmail(email) {
         var re = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
         return re.test(email);
@@ -291,10 +297,8 @@
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
-        <asp:TableCell Text="Zendesk Ticket #:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
-        <asp:TableCell runat="server" ID="tcZendeskTicketNo">
-            <asp:TextBox ID="txtZendeskTicketNo" runat="server"></asp:TextBox>
-        </asp:TableCell>
+        <asp:TableCell Text="Zendesk Ticket(s):" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
+        <asp:TableCell runat="server" ID="tcZendeskTickets" />
         <asp:TableCell Text="Package(s):" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcPackagesCount" />
         <asp:TableCell Text="Email:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
@@ -302,10 +306,12 @@
     </asp:TableRow>
     <asp:TableRow runat="server" ID="expandReceives" TableSection="TableBody" HorizontalAlign="Justify">
     </asp:TableRow>
+    <asp:TableRow runat="server" ID="expandReturnZendeskTickets" TableSection="TableBody" HorizontalAlign="Justify">
+    </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
-        <asp:TableCell Text="Zendesk Ticket(s):" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
-        <asp:TableCell runat="server" ID="tcZendeskTickets" />
+        <asp:TableCell Text="IMEI No:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
+        <asp:TableCell runat="server" ID="tcIMEINo" />
         <asp:TableCell Text="UPS Return Label Created:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcUPSReturnLabelCreated" />
         <asp:TableCell Text="Exchange Order No(s):" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
@@ -318,9 +324,7 @@
         <asp:TableCell ID="lblReturnComment" Text="Comments:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell>
             <asp:ImageButton ID="imgReturnComments" runat="server" ImageUrl="~/images/sketch.png" Width="25" />
-        </asp:TableCell>
-        <asp:TableCell Text="IMEI No:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
-        <asp:TableCell runat="server" ID="tcIMEINo" />
+        </asp:TableCell>    
     </asp:TableRow>
     <asp:TableRow runat="server" ID="expandReturnComments" TableSection="TableBody" HorizontalAlign="Justify">
     </asp:TableRow>

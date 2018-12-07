@@ -3,6 +3,7 @@
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/SalesOrderLines/SingleSalesOrderPackages.ascx" TagName="SingleSalesOrderPackages" TagPrefix="ssop" %>
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/SalesOrderLines/SingleSalesOrderTrackingNos.ascx" TagName="SingleSalesOrderTrackingNos" TagPrefix="ssotn" %>
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/SalesOrderLines/SingleSalesOrderComments.ascx" TagName="SingleSalesOrderComments" TagPrefix="ssoc" %>
+<%@ Register Src="~/Forms/UserControls/TableData/DataLines/SalesOrderLines/SingleSalesOrderZendeskTickets.ascx" TagName="SingleSalesOrderZendeskTickets" TagPrefix="ssozt" %>
 
 <link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
@@ -14,6 +15,7 @@
         $("[id$=expandSerialNos_<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id$=expandPackages_<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id$=expandOrderComments_<%= this.CustID %>_<%= this.CountID %>]").hide();
+        $("[id$=expandSalesOrderZendeskTickets<%= this.CustID %>_<%= this.CountID %>]").hide();
         $("[id*=showMoreOrderLines_<%= this.CustID %>_<%= this.CountID %>]").hide();
         var createReturnWindow;
         var partRequestWindow;
@@ -227,6 +229,10 @@
         $("[id$=expandOrderComments_<%= this.CustID %>_<%= this.CountID %>]").toggle();
         return false;
     };
+
+    function expandSalesOrderZendeskTickets<%=this.CustID %><%= this.CountID %>() {
+        $("[id$=expandSalesOrderZendeskTickets<%= this.CustID %>_<%= this.CountID %>]").toggle();
+    };
 </script>
 
 <asp:Table ID="tblSingleSalesOrderDetail" runat="server" Height="100%" Width="100%">
@@ -287,19 +293,19 @@
     </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
         <asp:TableCell />
-        <asp:TableCell Text="Zendesk Ticket #:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
-        <asp:TableCell runat="server" ID="tcZendeskTicketNo">
-            <asp:TextBox ID="txtZendeskNo" runat="server"></asp:TextBox>
-        </asp:TableCell>
+        <asp:TableCell Text="Zendesk Ticket(s):" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
+        <asp:TableCell runat="server" ID="tcZendeskTickets" />
         <asp:TableCell Text="Ship Method:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcShipMethod" />
         <asp:TableCell Text="Days Remaining:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcDaysRemaining" />
     </asp:TableRow>
+    <asp:TableRow runat="server" ID="expandSalesOrderZendeskTickets" TableSection="TableBody" HorizontalAlign="Justify">
+    </asp:TableRow>
     <asp:TableRow TableSection="TableBody" HorizontalAlign="Justify">
+        <asp:TableCell />      
         <asp:TableCell />
-        <asp:TableCell Text="Zendesk Ticket(s):" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
-        <asp:TableCell runat="server" ID="tcZendeskTickets" />
+        <asp:TableCell />
         <asp:TableCell Text="Tracking #:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell runat="server" ID="tcTrackingNo" />
         <asp:TableCell Text="Warranty Type:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />

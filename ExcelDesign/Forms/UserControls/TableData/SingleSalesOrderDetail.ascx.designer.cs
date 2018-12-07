@@ -184,22 +184,13 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         protected global::System.Web.UI.WebControls.TableRow expandPackages;
         
         /// <summary>
-        /// tcZendeskTicketNo control.
+        /// tcZendeskTickets control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcZendeskTicketNo;
-        
-        /// <summary>
-        /// txtZendeskNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtZendeskNo;
+        protected global::System.Web.UI.WebControls.TableCell tcZendeskTickets;
         
         /// <summary>
         /// tcShipMethod control.
@@ -220,13 +211,13 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         protected global::System.Web.UI.WebControls.TableCell tcDaysRemaining;
         
         /// <summary>
-        /// tcZendeskTickets control.
+        /// expandSalesOrderZendeskTickets control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcZendeskTickets;
+        protected global::System.Web.UI.WebControls.TableRow expandSalesOrderZendeskTickets;
         
         /// <summary>
         /// tcTrackingNo control.

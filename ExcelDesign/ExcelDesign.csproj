@@ -21,6 +21,8 @@
     <IISExpressUseClassicPipelineMode />
     <Use64BitIISExpress />
     <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,10 +49,23 @@
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -87,6 +102,12 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="ZendeskApi.Client, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZendeskApi.Client.2.0.28\lib\net45\ZendeskApi.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="ZendeskApi.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZendeskApi.Client.2.0.28\lib\net45\ZendeskApi.Contracts.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\mainpage.css" />
@@ -136,10 +157,12 @@
     <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderExchangeNos.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderPackages.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderReceipts.ascx" />
+    <Content Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderZendeskTickets.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderComments.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderPackages.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderShipments.ascx" />
     <Content Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderTrackingNos.ascx" />
+    <Content Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderZendeskTickets.ascx" />
     <Content Include="Forms\UserControls\TableData\SingleCustomerTableDetail.ascx" />
     <Content Include="Forms\UserControls\TableData\SingleReturnOrderDetail.ascx" />
     <Content Include="Forms\UserControls\TableHeaders\SingleReturnOrderTableHeader.ascx" />
@@ -511,6 +534,13 @@
     <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderReceipts.ascx.designer.cs">
       <DependentUpon>SingleReturnOrderReceipts.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderZendeskTickets.ascx.cs">
+      <DependentUpon>SingleReturnOrderZendeskTickets.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\ReturnOrderLines\SingleReturnOrderZendeskTickets.ascx.designer.cs">
+      <DependentUpon>SingleReturnOrderZendeskTickets.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderComments.ascx.cs">
       <DependentUpon>SingleSalesOrderComments.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -538,6 +568,13 @@
     </Compile>
     <Compile Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderTrackingNos.ascx.designer.cs">
       <DependentUpon>SingleSalesOrderTrackingNos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderZendeskTickets.ascx.cs">
+      <DependentUpon>SingleSalesOrderZendeskTickets.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\TableData\DataLines\SalesOrderLines\SingleSalesOrderZendeskTickets.ascx.designer.cs">
+      <DependentUpon>SingleSalesOrderZendeskTickets.ascx</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserControls\TableData\SingleCustomerTableDetail.ascx.cs">
       <DependentUpon>SingleCustomerTableDetail.ascx</DependentUpon>
@@ -609,6 +646,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="ZendeskAPI\ZendeskHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -701,6 +739,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

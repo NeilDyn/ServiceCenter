@@ -103,22 +103,13 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         protected global::System.Web.UI.WebControls.TableRow expandReceipts;
         
         /// <summary>
-        /// tcZendeskTicketNo control.
+        /// tcZendeskTickets control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcZendeskTicketNo;
-        
-        /// <summary>
-        /// txtZendeskTicketNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtZendeskTicketNo;
+        protected global::System.Web.UI.WebControls.TableCell tcZendeskTickets;
         
         /// <summary>
         /// tcPackagesCount control.
@@ -148,13 +139,22 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         protected global::System.Web.UI.WebControls.TableRow expandReceives;
         
         /// <summary>
-        /// tcZendeskTickets control.
+        /// expandReturnZendeskTickets control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcZendeskTickets;
+        protected global::System.Web.UI.WebControls.TableRow expandReturnZendeskTickets;
+        
+        /// <summary>
+        /// tcIMEINo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell tcIMEINo;
         
         /// <summary>
         /// tcUPSReturnLabelCreated control.
@@ -200,15 +200,6 @@ namespace ExcelDesign.Forms.UserControls.TableData {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgReturnComments;
-        
-        /// <summary>
-        /// tcIMEINo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcIMEINo;
         
         /// <summary>
         /// expandReturnComments control.

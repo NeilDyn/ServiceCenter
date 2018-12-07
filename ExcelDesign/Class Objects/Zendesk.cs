@@ -7,21 +7,21 @@ namespace ExcelDesign.Class_Objects
 {
     public class Zendesk
     {
-        private string ticket;
-        private int ticketCount;
+        public string TicketNo { get; set; }
 
-        public int TicketCount
+        public Zendesk()
         {
-            get { return ticketCount; }
-            set { ticketCount = value; }
-        }
-        
 
-        public string Ticket
-        {
-            get { return ticket; }
-            set { ticket = value; }
         }
-        
+
+        public Zendesk(string ticketNoP)
+        {
+            TicketNo = ticketNoP;
+        }
+
+        public string TicketLink()
+        {            
+            return String.Format("<a href = 'https://jegsons.zendesk.com/agent/tickets/" + TicketNo + "' target = '_blank' > #" + TicketNo + " </ a > ");
+        }
     }
 }

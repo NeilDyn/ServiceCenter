@@ -42,6 +42,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
         protected TableCell receiveCell;
         protected TableCell commentCell;
         protected TableCell multipleExchangeOrderCell;
+        protected TableCell zendeskReturnCell;
 
         protected Button btnCreateExchange = new Button();
         protected Button btnIssueRefund = new Button();
@@ -53,11 +54,13 @@ namespace ExcelDesign.Forms.UserControls.TableData
         protected Control singleReturnOrderReceiveLines;
         protected Control singelReturnOrderCommentLines;
         protected Control singelReturnOrderMultipleExchangeOrderLines;
+        protected Control singelReturnOrderZendeskLines;
 
         protected const string singleReturnOrderReceiptLinesPath = "DataLines/ReturnOrderLines/SingleReturnOrderReceipts.ascx";
         protected const string singleReturnOrderReceiveLinesPath = "DataLines/ReturnOrderLines/SingleReturnOrderPackages.ascx";
         protected const string singleReturnOrderCommentLinesPath = "DataLines/ReturnOrderLines/SingleReturnOrderComments.ascx";
         protected const string singleReturnOrderMultipleExchangeOrderPath = "DataLines/ReturnOrderLines/SingleReturnOrderExchangeNos.ascx";
+        protected const string singleReturnOrderZendeskLinesPath = "DataLines/ReturnOrderLines/SingleReturnOrderZendeskTickets.ascx";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -234,6 +237,12 @@ namespace ExcelDesign.Forms.UserControls.TableData
             {
                 lblReturnComment.Visible = false;
                 imgReturnComments.Visible = false;
+            }
+
+            tcZendeskTickets.Text = Rh.Tickets.Count > 1 ? "<a href='javascript:expandReturnZendeskTickets" + CustID.ToString() + "" + CountID.ToString() + "()'>Multiple</a>" : Rh.Tickets.Count == 0 ? "0" : Rh.Tickets[0].TicketLink();
+            if (Rh.Tickets.Count > 0)
+            {
+                PopulateZendeskTicketLines();
             }
         }
 
@@ -560,6 +569,21 @@ namespace ExcelDesign.Forms.UserControls.TableData
             commentCell.Width = new Unit("50%");
             this.expandReturnComments.Cells.Add(commentCell);
             this.expandReturnComments.ID = "expandReturnComments_" + CustID.ToString() + "_" + CountID.ToString();
+        }
+
+        protected void PopulateZendeskTicketLines()
+        {
+            zendeskReturnCell = new TableCell();
+            singelReturnOrderZendeskLines = LoadControl(singleReturnOrderZendeskLinesPath);
+            ((SingleReturnOrderZendeskTickets)singelReturnOrderZendeskLines).ZendeskTickets = Rh.Tickets;
+            ((SingleReturnOrderZendeskTickets)singelReturnOrderZendeskLines).PopulateData();
+
+            zendeskReturnCell.Controls.Add(singelReturnOrderZendeskLines);
+            zendeskReturnCell.ColumnSpan = 8;
+            zendeskReturnCell.Height = new Unit("100%");
+            zendeskReturnCell.Width = new Unit("50%");
+            this.expandReturnZendeskTickets.Cells.Add(zendeskReturnCell);
+            this.expandReturnZendeskTickets.ID = "expandReturnZendeskTickets_" + CustID.ToString() + "_" + CountID.ToString();
         }
 
         protected void PopulateMultipleExchangeOrderNo()

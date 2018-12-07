@@ -31,6 +31,7 @@ namespace ExcelDesign.Class_Objects
         public string ShipToCode { get; set; }
         public string ShipToState { get; set; }
         public string ShipToCountry { get; set; }
+        public List<Zendesk> Tickets { get; set; }
 
         public ReturnHeader()
         {

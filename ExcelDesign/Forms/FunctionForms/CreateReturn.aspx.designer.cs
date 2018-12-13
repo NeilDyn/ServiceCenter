@@ -256,30 +256,57 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.TextBox txtInsertTrackingNo;
         
         /// <summary>
-        /// btnCancel control.
+        /// lblZendeskTicketNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.TableCell lblZendeskTicketNo;
         
         /// <summary>
-        /// btnCancelRMA control.
+        /// tcZendeskTicketNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelRMA;
+        protected global::System.Web.UI.WebControls.TableCell tcZendeskTicketNo;
         
         /// <summary>
-        /// btnCreateRMA control.
+        /// txtZendeskTicketNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCreateRMA;
+        protected global::System.Web.UI.WebControls.TextBox txtZendeskTicketNo;
+        
+        /// <summary>
+        /// BtnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCancel;
+        
+        /// <summary>
+        /// BtnCancelRMA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCancelRMA;
+        
+        /// <summary>
+        /// BtnCreateRMA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCreateRMA;
     }
 }

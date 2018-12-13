@@ -322,24 +322,25 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CreateExchangeOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CreateExchangeOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string CreateExchangeOrder(string orderNo, ref CreatedExchangeOrder exchangeOrder, string externalDocumentNo, string sessionID, string lineDetails) {
+        public string CreateExchangeOrder(string orderNo, ref CreatedExchangeOrder exchangeOrder, string externalDocumentNo, string sessionID, string lineDetails, int zendeskTicketNo) {
             object[] results = this.Invoke("CreateExchangeOrder", new object[] {
                         orderNo,
                         exchangeOrder,
                         externalDocumentNo,
                         sessionID,
-                        lineDetails});
+                        lineDetails,
+                        zendeskTicketNo});
             exchangeOrder = ((CreatedExchangeOrder)(results[1]));
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void CreateExchangeOrderAsync(string orderNo, CreatedExchangeOrder exchangeOrder, string externalDocumentNo, string sessionID, string lineDetails) {
-            this.CreateExchangeOrderAsync(orderNo, exchangeOrder, externalDocumentNo, sessionID, lineDetails, null);
+        public void CreateExchangeOrderAsync(string orderNo, CreatedExchangeOrder exchangeOrder, string externalDocumentNo, string sessionID, string lineDetails, int zendeskTicketNo) {
+            this.CreateExchangeOrderAsync(orderNo, exchangeOrder, externalDocumentNo, sessionID, lineDetails, zendeskTicketNo, null);
         }
         
         /// <remarks/>
-        public void CreateExchangeOrderAsync(string orderNo, CreatedExchangeOrder exchangeOrder, string externalDocumentNo, string sessionID, string lineDetails, object userState) {
+        public void CreateExchangeOrderAsync(string orderNo, CreatedExchangeOrder exchangeOrder, string externalDocumentNo, string sessionID, string lineDetails, int zendeskTicketNo, object userState) {
             if ((this.CreateExchangeOrderOperationCompleted == null)) {
                 this.CreateExchangeOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateExchangeOrderOperationCompleted);
             }
@@ -348,7 +349,8 @@ namespace ExcelDesign.ServiceFunctions {
                         exchangeOrder,
                         externalDocumentNo,
                         sessionID,
-                        lineDetails}, this.CreateExchangeOrderOperationCompleted, userState);
+                        lineDetails,
+                        zendeskTicketNo}, this.CreateExchangeOrderOperationCompleted, userState);
         }
         
         private void OnCreateExchangeOrderOperationCompleted(object arg) {
@@ -361,7 +363,7 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CreatePartRequest", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CreatePartRequest_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string CreatePartRequest(string orderNo, string externalDocumentNo, ref CreatedPartialRequest createdPartReq, string sessionID, string lineDetails, string notes, string shipToDetails, string emailAddress) {
+        public string CreatePartRequest(string orderNo, string externalDocumentNo, ref CreatedPartialRequest createdPartReq, string sessionID, string lineDetails, string notes, string shipToDetails, string emailAddress, int zendeskTicketNo) {
             object[] results = this.Invoke("CreatePartRequest", new object[] {
                         orderNo,
                         externalDocumentNo,
@@ -370,18 +372,19 @@ namespace ExcelDesign.ServiceFunctions {
                         lineDetails,
                         notes,
                         shipToDetails,
-                        emailAddress});
+                        emailAddress,
+                        zendeskTicketNo});
             createdPartReq = ((CreatedPartialRequest)(results[1]));
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void CreatePartRequestAsync(string orderNo, string externalDocumentNo, CreatedPartialRequest createdPartReq, string sessionID, string lineDetails, string notes, string shipToDetails, string emailAddress) {
-            this.CreatePartRequestAsync(orderNo, externalDocumentNo, createdPartReq, sessionID, lineDetails, notes, shipToDetails, emailAddress, null);
+        public void CreatePartRequestAsync(string orderNo, string externalDocumentNo, CreatedPartialRequest createdPartReq, string sessionID, string lineDetails, string notes, string shipToDetails, string emailAddress, int zendeskTicketNo) {
+            this.CreatePartRequestAsync(orderNo, externalDocumentNo, createdPartReq, sessionID, lineDetails, notes, shipToDetails, emailAddress, zendeskTicketNo, null);
         }
         
         /// <remarks/>
-        public void CreatePartRequestAsync(string orderNo, string externalDocumentNo, CreatedPartialRequest createdPartReq, string sessionID, string lineDetails, string notes, string shipToDetails, string emailAddress, object userState) {
+        public void CreatePartRequestAsync(string orderNo, string externalDocumentNo, CreatedPartialRequest createdPartReq, string sessionID, string lineDetails, string notes, string shipToDetails, string emailAddress, int zendeskTicketNo, object userState) {
             if ((this.CreatePartRequestOperationCompleted == null)) {
                 this.CreatePartRequestOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreatePartRequestOperationCompleted);
             }
@@ -393,7 +396,8 @@ namespace ExcelDesign.ServiceFunctions {
                         lineDetails,
                         notes,
                         shipToDetails,
-                        emailAddress}, this.CreatePartRequestOperationCompleted, userState);
+                        emailAddress,
+                        zendeskTicketNo}, this.CreatePartRequestOperationCompleted, userState);
         }
         
         private void OnCreatePartRequestOperationCompleted(object arg) {
@@ -406,26 +410,28 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CreateRefund", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CreateRefund_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string CreateRefund(string rMANo, string sessionID) {
+        public string CreateRefund(string rMANo, string sessionID, int zendeskTicketNo) {
             object[] results = this.Invoke("CreateRefund", new object[] {
                         rMANo,
-                        sessionID});
+                        sessionID,
+                        zendeskTicketNo});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void CreateRefundAsync(string rMANo, string sessionID) {
-            this.CreateRefundAsync(rMANo, sessionID, null);
+        public void CreateRefundAsync(string rMANo, string sessionID, int zendeskTicketNo) {
+            this.CreateRefundAsync(rMANo, sessionID, zendeskTicketNo, null);
         }
         
         /// <remarks/>
-        public void CreateRefundAsync(string rMANo, string sessionID, object userState) {
+        public void CreateRefundAsync(string rMANo, string sessionID, int zendeskTicketNo, object userState) {
             if ((this.CreateRefundOperationCompleted == null)) {
                 this.CreateRefundOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateRefundOperationCompleted);
             }
             this.InvokeAsync("CreateRefund", new object[] {
                         rMANo,
-                        sessionID}, this.CreateRefundOperationCompleted, userState);
+                        sessionID,
+                        zendeskTicketNo}, this.CreateRefundOperationCompleted, userState);
         }
         
         private void OnCreateRefundOperationCompleted(object arg) {
@@ -470,7 +476,23 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CreateReturnOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CreateReturnOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string CreateReturnOrder(string orderNo, string extDocNo, string returnReasonCode, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ref ReturnOrder createdReturn, bool updateRMA, string sessionID, string returnTrackNo, string shipToDetails, string iMEI) {
+        public string CreateReturnOrder(
+                    string orderNo, 
+                    string extDocNo, 
+                    string returnReasonCode, 
+                    string notes, 
+                    bool includeResourceLines, 
+                    bool printRmaInstructions, 
+                    bool createUPSReturnLabel, 
+                    string emailAddress, 
+                    string lineDetails, 
+                    ref ReturnOrder createdReturn, 
+                    bool updateRMA, 
+                    string sessionID, 
+                    string returnTrackNo, 
+                    string shipToDetails, 
+                    string iMEI, 
+                    int zendeskTicketNo) {
             object[] results = this.Invoke("CreateReturnOrder", new object[] {
                         orderNo,
                         extDocNo,
@@ -486,14 +508,10 @@ namespace ExcelDesign.ServiceFunctions {
                         sessionID,
                         returnTrackNo,
                         shipToDetails,
-                        iMEI});
+                        iMEI,
+                        zendeskTicketNo});
             createdReturn = ((ReturnOrder)(results[1]));
             return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void CreateReturnOrderAsync(string orderNo, string extDocNo, string returnReasonCode, string notes, bool includeResourceLines, bool printRmaInstructions, bool createUPSReturnLabel, string emailAddress, string lineDetails, ReturnOrder createdReturn, bool updateRMA, string sessionID, string returnTrackNo, string shipToDetails, string iMEI) {
-            this.CreateReturnOrderAsync(orderNo, extDocNo, returnReasonCode, notes, includeResourceLines, printRmaInstructions, createUPSReturnLabel, emailAddress, lineDetails, createdReturn, updateRMA, sessionID, returnTrackNo, shipToDetails, iMEI, null);
         }
         
         /// <remarks/>
@@ -513,6 +531,28 @@ namespace ExcelDesign.ServiceFunctions {
                     string returnTrackNo, 
                     string shipToDetails, 
                     string iMEI, 
+                    int zendeskTicketNo) {
+            this.CreateReturnOrderAsync(orderNo, extDocNo, returnReasonCode, notes, includeResourceLines, printRmaInstructions, createUPSReturnLabel, emailAddress, lineDetails, createdReturn, updateRMA, sessionID, returnTrackNo, shipToDetails, iMEI, zendeskTicketNo, null);
+        }
+        
+        /// <remarks/>
+        public void CreateReturnOrderAsync(
+                    string orderNo, 
+                    string extDocNo, 
+                    string returnReasonCode, 
+                    string notes, 
+                    bool includeResourceLines, 
+                    bool printRmaInstructions, 
+                    bool createUPSReturnLabel, 
+                    string emailAddress, 
+                    string lineDetails, 
+                    ReturnOrder createdReturn, 
+                    bool updateRMA, 
+                    string sessionID, 
+                    string returnTrackNo, 
+                    string shipToDetails, 
+                    string iMEI, 
+                    int zendeskTicketNo, 
                     object userState) {
             if ((this.CreateReturnOrderOperationCompleted == null)) {
                 this.CreateReturnOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateReturnOrderOperationCompleted);
@@ -532,7 +572,8 @@ namespace ExcelDesign.ServiceFunctions {
                         sessionID,
                         returnTrackNo,
                         shipToDetails,
-                        iMEI}, this.CreateReturnOrderOperationCompleted, userState);
+                        iMEI,
+                        zendeskTicketNo}, this.CreateReturnOrderOperationCompleted, userState);
         }
         
         private void OnCreateReturnOrderOperationCompleted(object arg) {
@@ -577,22 +618,23 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:PartialRefund", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="PartialRefund_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string PartialRefund(string orderNo, string externalDocumentNo, string lineValues, string sessionID) {
+        public string PartialRefund(string orderNo, string externalDocumentNo, string lineValues, string sessionID, int zendeskTicketNo) {
             object[] results = this.Invoke("PartialRefund", new object[] {
                         orderNo,
                         externalDocumentNo,
                         lineValues,
-                        sessionID});
+                        sessionID,
+                        zendeskTicketNo});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void PartialRefundAsync(string orderNo, string externalDocumentNo, string lineValues, string sessionID) {
-            this.PartialRefundAsync(orderNo, externalDocumentNo, lineValues, sessionID, null);
+        public void PartialRefundAsync(string orderNo, string externalDocumentNo, string lineValues, string sessionID, int zendeskTicketNo) {
+            this.PartialRefundAsync(orderNo, externalDocumentNo, lineValues, sessionID, zendeskTicketNo, null);
         }
         
         /// <remarks/>
-        public void PartialRefundAsync(string orderNo, string externalDocumentNo, string lineValues, string sessionID, object userState) {
+        public void PartialRefundAsync(string orderNo, string externalDocumentNo, string lineValues, string sessionID, int zendeskTicketNo, object userState) {
             if ((this.PartialRefundOperationCompleted == null)) {
                 this.PartialRefundOperationCompleted = new System.Threading.SendOrPostCallback(this.OnPartialRefundOperationCompleted);
             }
@@ -600,7 +642,8 @@ namespace ExcelDesign.ServiceFunctions {
                         orderNo,
                         externalDocumentNo,
                         lineValues,
-                        sessionID}, this.PartialRefundOperationCompleted, userState);
+                        sessionID,
+                        zendeskTicketNo}, this.PartialRefundOperationCompleted, userState);
         }
         
         private void OnPartialRefundOperationCompleted(object arg) {
@@ -613,22 +656,23 @@ namespace ExcelDesign.ServiceFunctions {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CancelOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CancelOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string CancelOrder(string orderNo, string externalDocumentNo, string lineValues, string sessionID) {
+        public string CancelOrder(string orderNo, string externalDocumentNo, string lineValues, string sessionID, int zendeskTicketNo) {
             object[] results = this.Invoke("CancelOrder", new object[] {
                         orderNo,
                         externalDocumentNo,
                         lineValues,
-                        sessionID});
+                        sessionID,
+                        zendeskTicketNo});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void CancelOrderAsync(string orderNo, string externalDocumentNo, string lineValues, string sessionID) {
-            this.CancelOrderAsync(orderNo, externalDocumentNo, lineValues, sessionID, null);
+        public void CancelOrderAsync(string orderNo, string externalDocumentNo, string lineValues, string sessionID, int zendeskTicketNo) {
+            this.CancelOrderAsync(orderNo, externalDocumentNo, lineValues, sessionID, zendeskTicketNo, null);
         }
         
         /// <remarks/>
-        public void CancelOrderAsync(string orderNo, string externalDocumentNo, string lineValues, string sessionID, object userState) {
+        public void CancelOrderAsync(string orderNo, string externalDocumentNo, string lineValues, string sessionID, int zendeskTicketNo, object userState) {
             if ((this.CancelOrderOperationCompleted == null)) {
                 this.CancelOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCancelOrderOperationCompleted);
             }
@@ -636,7 +680,8 @@ namespace ExcelDesign.ServiceFunctions {
                         orderNo,
                         externalDocumentNo,
                         lineValues,
-                        sessionID}, this.CancelOrderOperationCompleted, userState);
+                        sessionID,
+                        zendeskTicketNo}, this.CancelOrderOperationCompleted, userState);
         }
         
         private void OnCancelOrderOperationCompleted(object arg) {

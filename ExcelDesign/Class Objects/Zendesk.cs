@@ -8,10 +8,23 @@ namespace ExcelDesign.Class_Objects
     public class Zendesk
     {
         public string TicketNo { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public string Status { get; set; }
+        public string Priority { get; set; }
 
         public Zendesk()
         {
 
+        }
+
+        public Zendesk(string ticketNoP, DateTime? createdDateP, DateTime? updatedDateP, string statusP, string priorityP)
+        {
+            TicketNo = ticketNoP;
+            CreatedDate = createdDateP;
+            UpdatedDate = updatedDateP;
+            Status = statusP;
+            Priority = priorityP;
         }
 
         public Zendesk(string ticketNoP)
@@ -21,7 +34,8 @@ namespace ExcelDesign.Class_Objects
 
         public string TicketLink()
         {            
-            return String.Format("<a href = 'https://jegsons.zendesk.com/agent/tickets/" + TicketNo + "' target = '_blank' > #" + TicketNo + " </ a > ");
+            
+            return TicketNo == "0" ? TicketNo : String.Format("<a href = 'https://jegsons.zendesk.com/agent/tickets/" + TicketNo + "' target = '_blank' > #" + TicketNo + " </ a > ");
         }
     }
 }

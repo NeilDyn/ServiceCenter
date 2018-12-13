@@ -61,6 +61,9 @@
 
         $("[id$=btnIssueRefund<%= this.CustID %>_<%= this.CountID %>]").click(function () {
             var r;
+            var z;
+            var zendeskTicketNo;
+
             if ("<%= this.tcReturnStatus.Text%>" == "Received" || "<%= this.tcReturnStatus.Text%>" == "Partial Received") {
                 if ("<%= this.tcChannelName.Text %>" == "PDA REPLACEMENTS") {
                     if ("<%= this.CanRefundPDA %>" == "true") {
@@ -69,26 +72,36 @@
                         r = window.confirm("Are you sure you wish to issue a refund this return " + rmaNo + "?");
 
                         if (r == true) {
-                            $.ajax({
-                                type: "POST",
-                                url: "ServiceCenter.aspx/IssueRefund",
-                                data: JSON.stringify({ rmaNo: rmaNo }),
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                success: function (error) {
-                                    if (error.d.indexOf("Error") == -1) {
-                                        alert("PDA Refund issued for Return: " + rmaNo);
-                                        __doPostBack('[id$=btnReload', '');
-                                    } else {
-                                        alert(error.d);
-                                    }
-                                },
-                                error: function (xhr, status, text) {
-                                    console.log(xhr.status);
-                                    console.log(xhr.text);
-                                    console.log(xhr.responseText);
-                                },
-                            });
+
+                            z = window.confirm("Do you wish to add a Zendesk Ticket # to this refund?");
+                            if (z == true) {
+                                zendeskTicketNo = prompt("Please insert a Zendesk Ticket #.");
+                            };
+
+                            if (($.isNumeric(zendeskTicketNo) && zendeskTicketNo.length == 7) || zendeskTicketNo == null) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "ServiceCenter.aspx/IssueRefund",
+                                    data: JSON.stringify({ rmaNo: rmaNo }),
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    success: function (error) {
+                                        if (error.d.indexOf("Error") == -1) {
+                                            alert("PDA Refund issued for Return: " + rmaNo);
+                                            __doPostBack('[id$=btnReload', '');
+                                        } else {
+                                            alert(error.d);
+                                        }
+                                    },
+                                    error: function (xhr, status, text) {
+                                        console.log(xhr.status);
+                                        console.log(xhr.text);
+                                        console.log(xhr.responseText);
+                                    },
+                                });
+                            } else {
+                                alert("Zendesk Ticket # should be only 7 numeric characters.");
+                            }
                         }
                     } else {
                         alert("You do not have the required permission to Issue PDA a Refund");
@@ -100,35 +113,46 @@
                         r = window.confirm("Are you sure you wish to issue a refund this return " + rmaNo + "?");
 
                         if (r == true) {
-                            $.ajax({
-                                type: "POST",
-                                url: "ServiceCenter.aspx/IssueRefund",
-                                data: JSON.stringify({ rmaNo: rmaNo }),
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                success: function (error) {
-                                    if (error.d.indexOf("Error") == -1) {
-                                        alert("Refund issued for Return: " + rmaNo);
-                                        __doPostBack('[id$=btnReload', '');
-                                    } else {
-                                        alert(error.d);
-                                    }
-                                },
-                                error: function (xhr, status, text) {
-                                    console.log(xhr.status);
-                                    console.log(xhr.text);
-                                    console.log(xhr.responseText);
-                                },
-                            });
+                            z = window.confirm("Do you wish to add a Zendesk Ticket # to this refund?");
+                            if (z == true) {
+                                zendeskTicketNo = prompt("Please insert a Zendesk Ticket #.");
+                            };
+
+                            if (($.isNumeric(zendeskTicketNo) && zendeskTicketNo.length == 7) || zendeskTicketNo == null) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "ServiceCenter.aspx/IssueRefund",
+                                    data: JSON.stringify({ rmaNo: rmaNo, zendeskTicketNo: zendeskTicketNo }),
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    success: function (error) {
+                                        if (error.d.indexOf("Error") == -1) {
+                                            alert("Refund issued for Return: " + rmaNo);
+                                            __doPostBack('[id$=btnReload', '');
+                                        } else {
+                                            alert(error.d);
+                                        }
+                                    },
+                                    error: function (xhr, status, text) {
+                                        console.log(xhr.status);
+                                        console.log(xhr.text);
+                                        console.log(xhr.responseText);
+                                    },
+                                });
+                            }
+                            else {
+                                alert("Zendesk Ticket # should be only 7 numeric characters.");
+                            }
+                        } else {
+                            alert("You do not have the required permission to Issue a Refund");
                         }
-                    } else {
-                        alert("You do not have the required permission to Issue a Refund");
                     }
                 }
-            } else {
+            }
+            else {
                 alert("Return Order <%= this.RMANo %> can only be refunded if Received or Partial Received.");
-                }
-            });
+            }
+        });
 
         $("[id$=btnPrintRMAInstructions<%= this.CustID%>_<%= this.CountID %>]").click(function () {
             window.open("FunctionForms/RMAPDFForm.aspx?RMANo=<%= this.Rh.RMANo %>", "_blank");
@@ -324,7 +348,7 @@
         <asp:TableCell ID="lblReturnComment" Text="Comments:" Font-Bold="true" HorizontalAlign="Left" Style="text-align: right" />
         <asp:TableCell>
             <asp:ImageButton ID="imgReturnComments" runat="server" ImageUrl="~/images/sketch.png" Width="25" />
-        </asp:TableCell>    
+        </asp:TableCell>
     </asp:TableRow>
     <asp:TableRow runat="server" ID="expandReturnComments" TableSection="TableBody" HorizontalAlign="Justify">
     </asp:TableRow>

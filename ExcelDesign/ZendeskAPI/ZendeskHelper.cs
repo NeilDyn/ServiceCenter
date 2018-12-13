@@ -18,9 +18,9 @@ namespace ExcelDesign.ZendeskAPI
          * Created By Neil Jansen, Dynetek (Pty) Ltd.
          */
          
-        private static string zendeskUsername = "zalmy@jegsons.com";
-        private static string zendeskAPIToken = "9gryAaOh6JfSIaIWPetf42R4y4J0bPvdG3ta2uX9";
-        private static string zendeskURL = "https://jegsons.zendesk.com";
+        private static readonly string zendeskUsername = "zalmy@jegsons.com";
+        private static readonly string zendeskAPIToken = "9gryAaOh6JfSIaIWPetf42R4y4J0bPvdG3ta2uX9";
+        private static readonly string zendeskURL = "https://jegsons.zendesk.com";
         private static ZendeskDefaultConfiguration configuration;
         private static Uri zendeskURI;
         private static IZendeskClient client;
@@ -30,8 +30,15 @@ namespace ExcelDesign.ZendeskAPI
             
         }
 
-        public static List<Zendesk> SearchTickets(string searchCriteria, ref List<long?> listTickets)
+        public static List<Zendesk> SearchCustomFieldTickets(string searchCriteria, ref List<long?> listTickets)
         {
+            /* Created by Neil Jansen - 5 December 2018
+             * Create a list of Zendesk objects through filtering the custom fields in Zendesk
+             * 
+             * Updated by Neil Jansen - 12 December 2018
+             * Changed function name to specify 'CustomFields' - Updated Zendesk list object creation to include new parameters
+             */
+             
             ConnectToZendesk();
 
             List<Zendesk> zendeskTickets = new List<Zendesk>();
@@ -42,7 +49,55 @@ namespace ExcelDesign.ZendeskAPI
             {
                 if (!listTickets.Any(ticket => ticket.Equals(singleTicket.Id)))
                 {
-                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString()));
+                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, singleTicket.Status.ToString(), singleTicket.Priority));
+                    listTickets.Add(singleTicket.Id);
+                }
+            }
+
+            return zendeskTickets;
+        }
+
+        public static List<Zendesk> SearchSubjectTickets(string searchCriteria, ref List<long?> listTickets)
+        {
+            /* Created by Neil Jansen - 12 December 2018
+             * Create a list of Zendesk objects through filtering the Subject field in Zendesk
+             */
+
+            ConnectToZendesk();
+
+            List<Zendesk> zendeskTickets = new List<Zendesk>();
+            IListResponse<Ticket> responses = client.Search.Find(new ZendeskQuery<Ticket>().WithCustomFilter("subject", searchCriteria));
+            List<Ticket> responseTickets = (List<Ticket>)responses.Results;
+
+            foreach (Ticket singleTicket in responseTickets)
+            {
+                if (!listTickets.Any(ticket => ticket.Equals(singleTicket.Id)))
+                {
+                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, singleTicket.Status.ToString(), singleTicket.Priority));
+                    listTickets.Add(singleTicket.Id);
+                }
+            }
+
+            return zendeskTickets;
+        }
+
+        public static List<Zendesk> SearchDescriptionTickets(string searchCriteria, ref List<long?> listTickets)
+        {
+            /* Created by Neil Jansen - 12 December 2018
+             * Create a list of Zendesk objects through filtering the Description field in Zendesk
+             */
+
+            ConnectToZendesk();
+
+            List<Zendesk> zendeskTickets = new List<Zendesk>();
+            IListResponse<Ticket> responses = client.Search.Find(new ZendeskQuery<Ticket>().WithCustomFilter("description", searchCriteria));
+            List<Ticket> responseTickets = (List<Ticket>)responses.Results;
+
+            foreach (Ticket singleTicket in responseTickets)
+            {
+                if (!listTickets.Any(ticket => ticket.Equals(singleTicket.Id)))
+                {
+                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, singleTicket.Status.ToString(), singleTicket.Priority));
                     listTickets.Add(singleTicket.Id);
                 }
             }

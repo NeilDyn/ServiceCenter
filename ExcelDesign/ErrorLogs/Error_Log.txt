@@ -336,3 +336,27 @@ System.InvalidOperationException: There is an error in XML document (1, 22153). 
    at ExcelDesign.Class_Objects.WebService.FindOrder(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 77
    at ExcelDesign.Class_Objects.CallService.OpenService(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 38
    at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 255
+ERROR 2018-12-13 11:14:39,730 1366634ms PartialRefund          artialRefund_Click - There is no Import Setup Header within the filter.  Filters: Code: AMZMKT001, Partial Refund Batch: Yes
+System.Web.Services.Protocols.SoapException: There is no Import Setup Header within the filter.  Filters: Code: AMZMKT001, Partial Refund Batch: Yes
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 622
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 217
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 479
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.BtnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 441
+ERROR 2018-12-13 13:37:23,011 135960ms CreateExchange         eateExchange_Click - Action Exchange is not allowed for Customer SHOPHQ.
+System.Web.Services.Protocols.SoapException: Action Exchange is not allowed for Customer SHOPHQ.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.CreateExchangeOrder(String orderNo, CreatedExchangeOrder& exchangeOrder, String externalDocumentNo, String sessionID, String lineDetails, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 326
+   at ExcelDesign.Class_Objects.WebService.CreateExchange(String rmaNo, String externalDocNo, String lineValues, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 160
+   at ExcelDesign.Class_Objects.SendService.CreateExchangeOrder(String rmaNo, String externalDocumentNo, String lineValues, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 193
+   at ExcelDesign.Forms.FunctionForms.CreateExchange.BtnCreateExchange_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\CreateExchange.aspx.cs:line 277
+ERROR 2018-12-13 13:38:19,594 192543ms CreateExchange         eateExchange_Click - Action Exchange is not allowed for Customer SHOPHQ.
+System.Web.Services.Protocols.SoapException: Action Exchange is not allowed for Customer SHOPHQ.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.CreateExchangeOrder(String orderNo, CreatedExchangeOrder& exchangeOrder, String externalDocumentNo, String sessionID, String lineDetails, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 326
+   at ExcelDesign.Class_Objects.WebService.CreateExchange(String rmaNo, String externalDocNo, String lineValues, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 160
+   at ExcelDesign.Class_Objects.SendService.CreateExchangeOrder(String rmaNo, String externalDocumentNo, String lineValues, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 193
+   at ExcelDesign.Forms.FunctionForms.CreateExchange.BtnCreateExchange_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\CreateExchange.aspx.cs:line 277

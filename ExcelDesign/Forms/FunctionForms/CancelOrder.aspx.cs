@@ -11,11 +11,16 @@ using System.Web.UI.WebControls;
 
 namespace ExcelDesign.Forms.FunctionForms
 {
+    /* v9.2 - 13 December 2018- Neil Jansen
+     * Added Zendesk Ticket # field to design and added logic to send through webservice to NAV
+     */
+
     public partial class CancelOrder : System.Web.UI.Page
     {
         protected List<SalesHeader> Sh;
         protected string no;
         protected string docNo;
+        protected int zendeskTicketNo;
 
         protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(CancelOrder));
 
@@ -147,7 +152,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
         }
 
-        protected void btnCancelOrder_Click(object sender, EventArgs e)
+        protected void BtnCancelOrder_Click(object sender, EventArgs e)
         {
             StringBuilder lineBuild = new StringBuilder();
             string lineError = "";
@@ -157,99 +162,120 @@ namespace ExcelDesign.Forms.FunctionForms
                 no = tcNo.Text;
                 docNo = tcDocNo.Text;
 
+                string validateMsg = string.Empty;
                 bool allValidLines = true;
                 int rowCount = 0;
                 int controlCount = 0;
 
-                foreach (TableRow row in tblCancelOrderTableDetails.Rows)
+
+                if (!String.IsNullOrWhiteSpace(txtZendeskTicketNo.Text) || !String.IsNullOrEmpty(txtZendeskTicketNo.Text))
                 {
-                    rowCount++;
-                    string itemNo = string.Empty;
-                    int qtyLine = 0;
-                    int actionQty = 0;
-                    string reasonCode = string.Empty;
-
-                    controlCount = 0;
-
-                    foreach (TableCell cell in row.Cells)
+                    if (txtZendeskTicketNo.Text.Length == 7)
                     {
-                        if (cell.ID.Contains("itemNo_"))
-                        {
-                            itemNo = cell.Text.ToString();
-                        }
+                        int.TryParse(txtZendeskTicketNo.Text, out zendeskTicketNo);
+                    }
+                    else
+                    {
+                        validateMsg = "Zendesk Ticket # should be 7 numeric characters.";
+                    }
+                }
 
-                        if (cell.ID.Contains("itemQuanity_"))
-                        {
-                            int.TryParse(cell.Text.ToString(), out qtyLine);
-                        }
+                if (validateMsg == string.Empty)
+                {
+                    foreach (TableRow row in tblCancelOrderTableDetails.Rows)
+                    {
+                        rowCount++;
+                        string itemNo = string.Empty;
+                        int qtyLine = 0;
+                        int actionQty = 0;
+                        string reasonCode = string.Empty;
 
-                        foreach (Control c in cell.Controls)
-                        {
-                            controlCount++;
+                        controlCount = 0;
 
-                            if (c.GetType() == typeof(TextBox))
+                        foreach (TableCell cell in row.Cells)
+                        {
+                            if (cell.ID.Contains("itemNo_"))
                             {
-                                string value = ((TextBox)c).Text;
-                                int.TryParse(value, out actionQty);
+                                itemNo = cell.Text.ToString();
                             }
 
-                            if (c.GetType() == typeof(DropDownList))
+                            if (cell.ID.Contains("itemQuanity_"))
                             {
-                                int index = ((DropDownList)c).SelectedIndex;
+                                int.TryParse(cell.Text.ToString(), out qtyLine);
+                            }
 
-                                List<ReturnReason> sr = (List<ReturnReason>)Session["ReturnReasons"];
-                                List<ReturnReason> rl = new List<ReturnReason>();
-                                foreach (ReturnReason item in sr)
+                            foreach (Control c in cell.Controls)
+                            {
+                                controlCount++;
+
+                                if (c.GetType() == typeof(TextBox))
                                 {
-                                    if (item.Category == "Cancel Order" || item.Category == "")
-                                    {
-                                        rl.Add(item);
-                                    }
+                                    string value = ((TextBox)c).Text;
+                                    int.TryParse(value, out actionQty);
                                 }
-                                reasonCode = (rl)[index].ReasonCode;
-                            }
-                        }
 
-                        string lineValidMessage = string.Empty;
-
-                        if ((rowCount > 1 && controlCount == 2 && actionQty != 0))
-                        {
-                            lineValidMessage = ValidateLine(itemNo, qtyLine, actionQty, reasonCode);
-
-                            if (lineValidMessage == "Valid Line Input")
-                            {
-                                lineBuild.Append(itemNo).Append(":");
-                                lineBuild.Append(actionQty).Append(":");
-                                lineBuild.Append(reasonCode).Append(",");
-                            }
-                            else
-                            {
-                                allValidLines = false;
-
-                                if (lineError == "")
+                                if (c.GetType() == typeof(DropDownList))
                                 {
-                                    lineError = lineValidMessage;
+                                    int index = ((DropDownList)c).SelectedIndex;
+
+                                    List<ReturnReason> sr = (List<ReturnReason>)Session["ReturnReasons"];
+                                    List<ReturnReason> rl = new List<ReturnReason>();
+                                    foreach (ReturnReason item in sr)
+                                    {
+                                        if (item.Category == "Cancel Order" || item.Category == "")
+                                        {
+                                            rl.Add(item);
+                                        }
+                                    }
+                                    reasonCode = (rl)[index].ReasonCode;
+                                }
+                            }
+
+                            string lineValidMessage = string.Empty;
+
+                            if ((rowCount > 1 && controlCount == 2 && actionQty != 0))
+                            {
+                                lineValidMessage = ValidateLine(itemNo, qtyLine, actionQty, reasonCode);
+
+                                if (lineValidMessage == "Valid Line Input")
+                                {
+                                    lineBuild.Append(itemNo).Append(":");
+                                    lineBuild.Append(actionQty).Append(":");
+                                    lineBuild.Append(reasonCode).Append(",");
+                                }
+                                else
+                                {
+                                    allValidLines = false;
+
+                                    if (lineError == "")
+                                    {
+                                        lineError = lineValidMessage;
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
-                if (allValidLines)
-                {
-                    string lineValues = lineBuild.ToString();
-                    SendService ss = new SendService();
+                    if (allValidLines)
+                    {
+                        string lineValues = lineBuild.ToString();
+                        SendService ss = new SendService();
 
-                    ss.CancelOrder(no, docNo, lineValues);
-                    Session["NoUserInteraction"] = true;
-                    Session["SearchValue"] = "ORDER CANCELLED";
+                        ss.CancelOrder(no, docNo, lineValues, zendeskTicketNo);
+                        Session["NoUserInteraction"] = true;
+                        Session["SearchValue"] = "ORDER CANCELLED";
 
-                    ClientScript.RegisterStartupScript(this.GetType(), "cancelledOrder", "alert('Order " + no + " has been successfully cancelled.');", true);
-                    ClientScript.RegisterStartupScript(this.GetType(), "closeCancelOrder", "CloseAfterCancel();", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "cancelledOrder", "alert('Order " + no + " has been successfully cancelled.');", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "closeCancelOrder", "CloseAfterCancel();", true);
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "lineError", "alert('" + lineError + "');", true);
+                    }
                 }
                 else
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "lineError", "alert('" + lineError + "');", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "validateMsg", "alert('" + validateMsg + "');", true);
                 }
             }
             catch (Exception ex)

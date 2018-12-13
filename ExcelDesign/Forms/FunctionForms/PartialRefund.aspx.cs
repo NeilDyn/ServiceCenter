@@ -11,11 +11,16 @@ using System.Web.UI.WebControls;
 
 namespace ExcelDesign.Forms.FunctionForms
 {
+    /* v9.2 - 13 December 2018 - Neil Jansen
+     * Added Zendesk Ticket # field to design and added logic to send through webservice to NAV
+     */
+
     public partial class PartialRefund : System.Web.UI.Page
     {
         protected List<SalesHeader> Sh;
         protected string no;
         protected string docNo;
+        protected int zendeskTicketNo;
 
         protected static log4net.ILog Log { get; set; } = log4net.LogManager.GetLogger(typeof(PartialRefund));
 
@@ -285,7 +290,7 @@ namespace ExcelDesign.Forms.FunctionForms
             }
         }
 
-        protected void btnCreatePartialRefund_Click(object sender, EventArgs e)
+        protected void BtnCreatePartialRefund_Click(object sender, EventArgs e)
         {
             StringBuilder lineBuild = new StringBuilder();
             string lineError = "";
@@ -297,136 +302,156 @@ namespace ExcelDesign.Forms.FunctionForms
 
                 User u = (User)Session["ActiveUser"];
 
+                string validateMsg = string.Empty;
                 bool allValidLines = true;
                 int rowCount = 0;
                 int controlCount = 0;
 
-                foreach (TableRow row in tblPartialRefundDetails.Rows)
+                if (!String.IsNullOrWhiteSpace(txtZendeskTicketNo.Text) || !String.IsNullOrEmpty(txtZendeskTicketNo.Text))
                 {
-                    rowCount++;
-                    string itemNo = string.Empty;
-                    int qtyLine = 0;
-                    int actionQty = 0;
-                    string reasonCode = string.Empty;
-                    decimal refundOption = 0;
-
-                    controlCount = 0;
-                    int cellCount = 0;
-
-                    foreach (TableCell cell in row.Cells)
+                    if (txtZendeskTicketNo.Text.Length == 7)
                     {
-                        cellCount++;
+                        int.TryParse(txtZendeskTicketNo.Text, out zendeskTicketNo);
+                    }
+                    else
+                    {
+                        validateMsg = "Zendesk Ticket # should be 7 numeric characters.";
+                    }
+                }
 
-                        if (cell.ID.Contains("itemNo_"))
+                if (validateMsg == string.Empty)
+                {
+                    foreach (TableRow row in tblPartialRefundDetails.Rows)
+                    {
+                        rowCount++;
+                        string itemNo = string.Empty;
+                        int qtyLine = 0;
+                        int actionQty = 0;
+                        string reasonCode = string.Empty;
+                        decimal refundOption = 0;
+
+                        controlCount = 0;
+                        int cellCount = 0;
+
+                        foreach (TableCell cell in row.Cells)
                         {
-                            itemNo = cell.Text.ToString();
-                        }
+                            cellCount++;
 
-                        if (cell.ID.Contains("itemQuanity_"))
-                        {
-                            int.TryParse(cell.Text.ToString(), out qtyLine);
-                        }
-
-                        foreach (Control c in cell.Controls)
-                        {
-                            controlCount++;
-
-                            if (c.GetType() == typeof(TextBox))
+                            if (cell.ID.Contains("itemNo_"))
                             {
-                                string value = ((TextBox)c).Text;
-                                int.TryParse(value, out actionQty);
+                                itemNo = cell.Text.ToString();
                             }
 
-                            if (c.GetType() == typeof(DropDownList))
+                            if (cell.ID.Contains("itemQuanity_"))
                             {
-                                int index = ((DropDownList)c).SelectedIndex;
+                                int.TryParse(cell.Text.ToString(), out qtyLine);
+                            }
 
-                                if(c.ID.Contains("ddlReturnReasonCode_"))
+                            foreach (Control c in cell.Controls)
+                            {
+                                controlCount++;
+
+                                if (c.GetType() == typeof(TextBox))
                                 {
-                                    List<ReturnReason> sr = (List<ReturnReason>)Session["ReturnReasons"];
-                                    List<ReturnReason> rl = new List<ReturnReason>();
-                                    foreach (ReturnReason item in sr)
-                                    {
-                                        if (item.Category == "Partial Refund" || item.Category == "")
-                                        {
-                                            rl.Add(item);
-                                        }
-                                    }
-                                    reasonCode = (rl)[index].ReasonCode;
+                                    string value = ((TextBox)c).Text;
+                                    int.TryParse(value, out actionQty);
                                 }
 
-                                if(c.ID.Contains("ddlRefundOption"))
+                                if (c.GetType() == typeof(DropDownList))
                                 {
-                                    List<RefundOptions> ro = new RefundOptions().Populate();
-                                    List<RefundOptions> newRo = new List<RefundOptions>();
-                                    double total = 0;
+                                    int index = ((DropDownList)c).SelectedIndex;
 
-                                    foreach (RefundOptions option in ro)
+                                    if (c.ID.Contains("ddlReturnReasonCode_"))
                                     {
-                                        if(Session["OrderTotal"] != null)
+                                        List<ReturnReason> sr = (List<ReturnReason>)Session["ReturnReasons"];
+                                        List<ReturnReason> rl = new List<ReturnReason>();
+                                        foreach (ReturnReason item in sr)
                                         {
-                                            total = Convert.ToDouble(Session["OrderTotal"]);
+                                            if (item.Category == "Partial Refund" || item.Category == "")
+                                            {
+                                                rl.Add(item);
+                                            }
                                         }
+                                        reasonCode = (rl)[index].ReasonCode;
+                                    }
 
-                                        if(total <= 20)
+                                    if (c.ID.Contains("ddlRefundOption"))
+                                    {
+                                        List<RefundOptions> ro = new RefundOptions().Populate();
+                                        List<RefundOptions> newRo = new List<RefundOptions>();
+                                        double total = 0;
+
+                                        foreach (RefundOptions option in ro)
                                         {
-                                            if(option.Tier == "20Dollar")
+                                            if (Session["OrderTotal"] != null)
+                                            {
+                                                total = Convert.ToDouble(Session["OrderTotal"]);
+                                            }
+
+                                            if (total <= 20)
+                                            {
+                                                if (option.Tier == "20Dollar")
+                                                {
+                                                    newRo.Add(option);
+                                                }
+                                            }
+                                            else if (option.Tier == u.RefundTier)
                                             {
                                                 newRo.Add(option);
                                             }
                                         }
-                                        else if(option.Tier == u.RefundTier)
-                                        {
-                                            newRo.Add(option);
-                                        }
-                                    }
 
-                                    string value = (newRo)[index].Option.Replace("%", "");
-                                    Decimal.TryParse(value, out refundOption);
+                                        string value = (newRo)[index].Option.Replace("%", "");
+                                        Decimal.TryParse(value, out refundOption);
+                                    }
                                 }
                             }
-                        }
 
-                        string lineValidMessage = string.Empty;
+                            string lineValidMessage = string.Empty;
 
-                        if ((rowCount > 1 && controlCount == 3 && actionQty != 0 && cellCount == 6))
-                        {
-                            lineValidMessage = ValidateLine(itemNo, qtyLine, actionQty, reasonCode);
-
-                            if (lineValidMessage == "Valid Line Input")
+                            if ((rowCount > 1 && controlCount == 3 && actionQty != 0 && cellCount == 6))
                             {
-                                lineBuild.Append(itemNo).Append(":");
-                                lineBuild.Append(actionQty).Append(":");
-                                lineBuild.Append(reasonCode).Append(":");
-                                lineBuild.Append(refundOption).Append(',');
-                            }
-                            else
-                            {
-                                allValidLines = false;
+                                lineValidMessage = ValidateLine(itemNo, qtyLine, actionQty, reasonCode);
 
-                                if (lineError == "")
+                                if (lineValidMessage == "Valid Line Input")
                                 {
-                                    lineError = lineValidMessage;
+                                    lineBuild.Append(itemNo).Append(":");
+                                    lineBuild.Append(actionQty).Append(":");
+                                    lineBuild.Append(reasonCode).Append(":");
+                                    lineBuild.Append(refundOption).Append(',');
+                                }
+                                else
+                                {
+                                    allValidLines = false;
+
+                                    if (lineError == "")
+                                    {
+                                        lineError = lineValidMessage;
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
-                if (allValidLines)
-                {
-                    string lineValues = lineBuild.ToString();
-                    SendService ss = new SendService();
+                    if (allValidLines)
+                    {
+                        string lineValues = lineBuild.ToString();
+                        SendService ss = new SendService();
 
-                    ss.PartialRefund(no, docNo, lineValues);
-                    Session["NoUserInteraction"] = true;
+                        ss.PartialRefund(no, docNo, lineValues, zendeskTicketNo);
+                        Session["NoUserInteraction"] = true;
 
-                    ClientScript.RegisterStartupScript(this.GetType(), "refundedOrder", "alert('Order " + no + " has been partially refunded.');", true);
-                    ClientScript.RegisterStartupScript(this.GetType(), "closeRefundOrder", "CloseAfterCancel();", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "refundedOrder", "alert('Order " + no + " has been partially refunded.');", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "closeRefundOrder", "CloseAfterCancel();", true);
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "lineError", "alert('" + lineError + "');", true);
+                    }
                 }
                 else
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "lineError", "alert('" + lineError + "');", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "validateMsg", "alert('" + validateMsg + "');", true);
                 }
             }
             catch (Exception ex)

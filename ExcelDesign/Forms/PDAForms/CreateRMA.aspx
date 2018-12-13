@@ -214,6 +214,12 @@
                                 <asp:TextBox ID="txtInsertTrackingNo" runat="server" Width="50%" CssClass="inputBox" />
                             </asp:TableCell>
                         </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell ID="lblZendeskTicketNo" Text="Zendesk Ticket #: " ForeColor="#0099FF" Font-Bold="true" Style="text-align: right; padding-right: 30px" />
+                            <asp:TableCell ID="tcZendeskTicketNo">
+                                <asp:TextBox ID="txtZendeskTicketNo" runat="server" Width="50%" CssClass="inputBox" TextMode="Number" MaxLength="7" />
+                            </asp:TableCell>
+                        </asp:TableRow>
                     </asp:Table>
                 </asp:TableCell>
             </asp:TableRow>
@@ -222,9 +228,9 @@
                 <asp:TableHeaderCell />
                 <asp:TableHeaderCell />
                 <asp:TableHeaderCell HorizontalAlign="Right">
-                    <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClientClick="CloseWindow();" />
-                    <asp:Button ID="btnCancelRMA" runat="server" Text="Cancel RMA" OnClick="BtnCancelRMA_Click" />
-                    <asp:Button ID="btnCreateRMA" runat="server" Text="Create RMA" OnClick="BtnCreateRMA_Click" />
+                    <asp:Button ID="BtnCancel" runat="server" Text="Cancel" OnClientClick="CloseWindow();" />
+                    <asp:Button ID="BtnCancelRMA" runat="server" Text="Cancel RMA" OnClick="BtnCancelRMA_Click" />
+                    <asp:Button ID="BtnCreateRMA" runat="server" Text="Create RMA" OnClick="BtnCreateRMA_Click" />
                 </asp:TableHeaderCell>
             </asp:TableFooterRow>
         </asp:Table>

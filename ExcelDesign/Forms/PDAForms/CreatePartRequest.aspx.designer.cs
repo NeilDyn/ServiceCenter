@@ -301,21 +301,21 @@ namespace ExcelDesign.Forms.PDAForms {
         protected global::System.Web.UI.WebControls.TextBox txtZendeskTicketNo;
         
         /// <summary>
-        /// btnCancel control.
+        /// BtnCancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.Button BtnCancel;
         
         /// <summary>
-        /// btnCreatePartRequest control.
+        /// BtnCreatePartRequest control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCreatePartRequest;
+        protected global::System.Web.UI.WebControls.Button BtnCreatePartRequest;
     }
 }

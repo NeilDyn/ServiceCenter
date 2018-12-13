@@ -2598,47 +2598,47 @@ namespace ExcelDesign.Class_Objects
             }
 
             //Now we loop through the tickets in NAV
-            if(currResults.CustSvcLog != null)
-            {
-                string ticketNo = string.Empty;
+             //if(currResults.CustSvcLog != null)
+            //{
+            //    string ticketNo = string.Empty;
 
-                foreach (Customer singleCust in cust)
-                {
-                    foreach (SalesHeader salesHead in singleCust.SalesHeader)
-                    {
-                        for (int csl = 0; csl < currResults.CustSvcLog.Length; csl++)
-                        {
-                            if (salesHead.SalesOrderNo == currResults.CustSvcLog[csl].OrderNo || salesHead.SalesOrderNo == currResults.CustSvcLog[csl].SalesQuoteNo)
-                            {
-                                if(!salesTickets.Any(ticket => ticket.Equals(currResults.CustSvcLog[csl].ZendeskTicketNo)))
-                                {
-                                    ticketNo = currResults.CustSvcLog[csl].ZendeskTicketNo.ToString();
-                                    salesHead.Tickets.Add(new Zendesk(ticketNo));
-                                }
-                            }
+            //    foreach (Customer singleCust in cust)
+            //    {
+            //        foreach (SalesHeader salesHead in singleCust.SalesHeader)
+            //        {
+            //            for (int csl = 0; csl < currResults.CustSvcLog.Length; csl++)
+            //            {
+            //                if (salesHead.SalesOrderNo == currResults.CustSvcLog[csl].OrderNo || salesHead.SalesOrderNo == currResults.CustSvcLog[csl].SalesQuoteNo)
+            //                {
+            //                    if(!salesTickets.Any(ticket => ticket.Equals(currResults.CustSvcLog[csl].ZendeskTicketNo)))
+            //                    {
+            //                        ticketNo = currResults.CustSvcLog[csl].ZendeskTicketNo.ToString();
+            //                        salesHead.Tickets.Add(new Zendesk(ticketNo));
+            //                    }
+            //                }
 
-                            ticketNo = string.Empty;
-                        }
-                    }
+            //                ticketNo = string.Empty;
+            //            }
+            //        }
 
-                    foreach (ReturnHeader returnHead in singleCust.ReturnHeaders)
-                    {
-                        for (int csl = 0; csl < currResults.CustSvcLog.Length; csl++)
-                        {
-                            if (returnHead.RMANo == currResults.CustSvcLog[csl].RMANo)
-                            {
-                                if (!salesTickets.Any(ticket => ticket.Equals(currResults.CustSvcLog[csl].ZendeskTicketNo)))
-                                {
-                                    ticketNo = currResults.CustSvcLog[csl].ZendeskTicketNo.ToString();
-                                    returnHead.Tickets.Add(new Zendesk(ticketNo));
-                                }
-                            }
+            //        foreach (ReturnHeader returnHead in singleCust.ReturnHeaders)
+            //        {
+            //            for (int csl = 0; csl < currResults.CustSvcLog.Length; csl++)
+            //            {
+            //                if (returnHead.RMANo == currResults.CustSvcLog[csl].RMANo)
+            //                {
+            //                    if (!salesTickets.Any(ticket => ticket.Equals(currResults.CustSvcLog[csl].ZendeskTicketNo)))
+            //                    {
+            //                        ticketNo = currResults.CustSvcLog[csl].ZendeskTicketNo.ToString();
+            //                        returnHead.Tickets.Add(new Zendesk(ticketNo));
+            //                    }
+            //                }
 
-                            ticketNo = string.Empty;
-                        }
-                    }
-                }
-            }
+            //                ticketNo = string.Empty;
+            //            }
+            //        }
+            //    }
+            //}
         }
     }
 }

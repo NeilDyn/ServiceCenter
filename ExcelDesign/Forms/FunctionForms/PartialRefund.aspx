@@ -92,12 +92,24 @@
                 <asp:TableCell>
                     <br />
                 </asp:TableCell>
-            </asp:TableRow>           
+            </asp:TableRow>     
+            <asp:TableRow>
+                <asp:TableCell ColumnSpan="4">
+                    <asp:Table runat="server" Height="100%" Width="100%">
+                        <asp:TableRow>
+                            <asp:TableCell ID="lblZendeskTicketNo" Text="Zendesk Ticket #: " Width="20%" ForeColor="#0099FF" Font-Bold="true" Style="text-align: right; padding-right: 30px" />
+                            <asp:TableCell ID="tcZendeskTicketNo">
+                                <asp:TextBox ID="txtZendeskTicketNo" runat="server" Width="50%" CssClass="inputBox" TextMode="Number" MaxLength="7" />
+                            </asp:TableCell>
+                        </asp:TableRow>
+                    </asp:Table>
+                </asp:TableCell>
+            </asp:TableRow>
             <asp:TableFooterRow HorizontalAlign="Right">
                 <asp:TableHeaderCell />
                 <asp:TableHeaderCell HorizontalAlign="Right">
-                    <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClientClick="CloseWindow();" />
-                    <asp:Button ID="btnCreatePartialRefund" runat="server" Text="Create Partial Refund" OnClick="btnCreatePartialRefund_Click" />
+                    <asp:Button ID="BtnCancel" runat="server" Text="Cancel" OnClientClick="CloseWindow();" />
+                    <asp:Button ID="BtnCreatePartialRefund" runat="server" Text="Create Partial Refund" OnClick="BtnCreatePartialRefund_Click" />
                 </asp:TableHeaderCell>
             </asp:TableFooterRow>
         </asp:Table>

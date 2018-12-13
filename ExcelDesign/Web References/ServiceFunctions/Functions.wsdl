@@ -738,6 +738,7 @@
             <element minOccurs="1" maxOccurs="1" name="externalDocumentNo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
             <element minOccurs="1" maxOccurs="1" name="lineDetails" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="zendeskTicketNo" type="int" />
           </sequence>
         </complexType>
       </element>
@@ -760,6 +761,7 @@
             <element minOccurs="1" maxOccurs="1" name="notes" type="string" />
             <element minOccurs="1" maxOccurs="1" name="shipToDetails" type="string" />
             <element minOccurs="1" maxOccurs="1" name="emailAddress" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="zendeskTicketNo" type="int" />
           </sequence>
         </complexType>
       </element>
@@ -776,6 +778,7 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="rMANo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="zendeskTicketNo" type="int" />
           </sequence>
         </complexType>
       </element>
@@ -819,6 +822,7 @@
             <element minOccurs="1" maxOccurs="1" name="returnTrackNo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="shipToDetails" type="string" />
             <element minOccurs="1" maxOccurs="1" name="iMEI" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="zendeskTicketNo" type="int" />
           </sequence>
         </complexType>
       </element>
@@ -852,6 +856,7 @@
             <element minOccurs="1" maxOccurs="1" name="externalDocumentNo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="lineValues" type="string" />
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="zendeskTicketNo" type="int" />
           </sequence>
         </complexType>
       </element>
@@ -869,6 +874,7 @@
             <element minOccurs="1" maxOccurs="1" name="externalDocumentNo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="lineValues" type="string" />
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="zendeskTicketNo" type="int" />
           </sequence>
         </complexType>
       </element>

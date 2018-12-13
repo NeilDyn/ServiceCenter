@@ -25,12 +25,18 @@ namespace ExcelDesign.Forms
     {
         /* NJ 5 September 2018
          * Updated with User Control Navigation bar.
-         * 
+        */
+
+        /*
          * v7.1 - 3 October 2018 - Neil Jansen
          * Added logic to prevent "Thread was being aborted" to be the error that is displayed as it is caused by lower level exceptions being thrown that should be displayed instead
          * Added logic to display as alert when Order has been cancelled
          * Updated logic to clear all controls and lists when PostBack occours to prevent Customer data to be duplicated
-        */
+         */
+
+        /* v9.1 - 13 December 2018 - Neil Jansen
+         * Update logic to allow IssueRefund to pass Zendesk Ticket # through webservice
+         */
 
         #region Global
 
@@ -55,7 +61,7 @@ namespace ExcelDesign.Forms
         protected Control salesReturnOrderDetails;
         protected Control customerInfo;
         protected static Control customerInfoTable;
-        #endregion    
+        #endregion
 
         #region SendService
 
@@ -115,23 +121,23 @@ namespace ExcelDesign.Forms
                             if (searchValue == "ORDER CANCELLED")
                             {
                                 txtSearchBox.Text = string.Empty;
-                                Session["NoUserInteraction"] = null;                              
+                                Session["NoUserInteraction"] = null;
                                 PopulateData();
                             }
                             else
                             {
                                 int searchSelection = Convert.ToInt32(Session["SearchSelection"]);
                                 ConnectToService(searchValue, searchSelection);
-                            }      
+                            }
                         }
                     }
 
                     if (Session["ActiveCustomer"] != null)
                     {
                         customers = new List<Customer>
-                        {
-                            (Customer)Session["ActiveCustomer"]
-                        };
+                {
+                    (Customer)Session["ActiveCustomer"]
+                };
 
                         customerInfoTable = LoadControl("UserControls/MainTables/CustomerInfoTable.ascx");
                         customerInfoTable.ID = "Customer_Info_Table";
@@ -452,7 +458,7 @@ namespace ExcelDesign.Forms
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static string IssueRefund(string rmaNo)
+        public static string IssueRefund(string rmaNo, int zendeskTicketNo)
         {
             try
             {
@@ -468,7 +474,7 @@ namespace ExcelDesign.Forms
                 }
 
 
-                 StaticService.IssueRefund(rmaNo, sessionID);
+                StaticService.IssueRefund(rmaNo, sessionID, zendeskTicketNo);
 
                 HttpContext.Current.Session["NoUserInteraction"] = true;
                 HttpContext.Current.Session["UserInteraction"] = true;
@@ -480,7 +486,7 @@ namespace ExcelDesign.Forms
 
             return "Success";
         }
-      
+
         #endregion
 
         #region Buttons

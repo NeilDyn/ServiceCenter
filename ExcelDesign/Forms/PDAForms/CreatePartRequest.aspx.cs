@@ -15,6 +15,10 @@ using System.Web.UI.WebControls;
 
 namespace ExcelDesign.Forms.PDAForms
 {
+    /* v9.2 - 13 December 2018- Neil Jansen
+     * Added Zendesk Ticket # field to design and added logic to send through webservice to NAV
+     */
+
     public partial class CreatePartRequest : System.Web.UI.Page
     {
         protected List<SalesHeader> Sh;
@@ -24,6 +28,7 @@ namespace ExcelDesign.Forms.PDAForms
         protected string externalDocumentNo;
         protected string notes;
         protected string email;
+        protected int zendeskTicketNo;
 
         protected string shipToName;
         protected string shipToAddress1;
@@ -220,7 +225,7 @@ namespace ExcelDesign.Forms.PDAForms
             }
         }
 
-        protected void btnCreatePartRequest_Click(object sender, EventArgs e)
+        protected void BtnCreatePartRequest_Click(object sender, EventArgs e)
         {
             StringBuilder lineBuild = new StringBuilder();
             StringBuilder shippingBuild = new StringBuilder();
@@ -244,6 +249,18 @@ namespace ExcelDesign.Forms.PDAForms
                 bool allValidLines = true;
                 int rowCount = 0;
                 int controlCount = 0;
+
+                if (!String.IsNullOrWhiteSpace(txtZendeskTicketNo.Text) || !String.IsNullOrEmpty(txtZendeskTicketNo.Text))
+                {
+                    if (txtZendeskTicketNo.Text.Length == 7)
+                    {
+                        int.TryParse(txtZendeskTicketNo.Text, out zendeskTicketNo);
+                    }
+                    else
+                    {
+                        validateMsg = "Zendesk Ticket # should be 7 numeric characters.";
+                    }
+                }
 
                 if (validateMsg == "All Input Valid")
                 {
@@ -358,7 +375,7 @@ namespace ExcelDesign.Forms.PDAForms
 
                         string shippingDetails = shippingBuild.ToString();
 
-                        cprh = ss.CreatePartialRequest(no, externalDocumentNo, lineValues, notes, shippingDetails, email);
+                        cprh = ss.CreatePartialRequest(no, externalDocumentNo, lineValues, notes, shippingDetails, email, zendeskTicketNo);
 
                         Session["CreatedPartRequest"] = cprh;
                         Session["NoUserInteraction"] = true;

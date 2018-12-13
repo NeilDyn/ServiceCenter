@@ -34,7 +34,35 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                     ToolTip = ticket.TicketNo
                 };
 
+                TableCell createdDate = new TableCell
+                {
+                    Text = ticket.CreatedDate.ToString(),
+                    ToolTip = ticket.CreatedDate.ToString()
+                };
+
+                TableCell updatedDate = new TableCell
+                {
+                    Text = ticket.UpdatedDate.ToString(),
+                    ToolTip = ticket.UpdatedDate.ToString()
+                };
+
+                TableCell status = new TableCell
+                {
+                    Text = ticket.Status,
+                    ToolTip = ticket.Status
+                };
+
+                TableCell priority = new TableCell
+                {
+                    Text = ticket.Priority,
+                    ToolTip = ticket.Priority
+                };
+
                 tr.Cells.Add(ticketID);
+                tr.Cells.Add(createdDate);
+                tr.Cells.Add(updatedDate);
+                tr.Cells.Add(status);
+                tr.Cells.Add(priority);
 
                 if (lineCount % 2 == 0)
                 {

@@ -20,12 +20,22 @@ namespace ExcelDesign.Class_Objects
     * Updated Process Items function to added parameter type determing if processing replacements or refunds.
     */
 
+    /* v9.2 - 12 December 2018 - Neil Jansen
+     * Update CreateReturnOrders and PDA Return functions to pass Zendesk Ticket # Parameter
+     * 
+     * 13 December 2018 - Neil Jansen
+     * Update CreateExchangeOrder to pass Zendesk Ticket # Parameter
+     * Update CreatePartialRequest(Actuall a part request) to pass Zendesk Ticket # Parameter
+     * Update PartialRefund to pass Zendesk Ticket # Parameter
+     * Update CancelOrder to pass Zendesk Ticket # Parameter
+     * Update IssueRefund to pass Zendesk Ticket # Parameter
+     */
+
     public class SendService
     {
         public List<Customer> CustomerList { get; set; }
 
         private WebService webService;
-
 
         public void SetActiveCustomer(int custID)
         {
@@ -39,13 +49,14 @@ namespace ExcelDesign.Class_Objects
 
         public CreatedReturnHeader CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, string notes,
             bool includeResource, bool printRMA, bool createLabel, string email, string lineValues, bool update, string returnTrackingNo,
-            string shippingDetails, string imeiNo)
+            string shippingDetails, string imeiNo, int zendeskTicketNo)
         {
             ReturnOrder returnRMA = new ReturnOrder();
             CreatedReturnHeader cth = new CreatedReturnHeader();
 
+            /* v9.2 - 12 December 2018 - Neil Jansen */
             returnRMA = webService.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, notes, includeResource, printRMA,
-                createLabel, email, lineValues, update, returnTrackingNo, shippingDetails, imeiNo);
+                createLabel, email, lineValues, update, returnTrackingNo, shippingDetails, imeiNo, zendeskTicketNo);
 
             cth = CreateReturnRMA(returnRMA);
 
@@ -175,12 +186,12 @@ namespace ExcelDesign.Class_Objects
             return ctl;
         }
 
-        public CreatedExchangeHeader CreateExchangeOrder(string rmaNo, string externalDocumentNo, string lineValues)
+        public CreatedExchangeHeader CreateExchangeOrder(string rmaNo, string externalDocumentNo, string lineValues, int zendeskTicketNo)
         {
             CreatedExchangeOrder ceo = new CreatedExchangeOrder();
             CreatedExchangeHeader ceh = new CreatedExchangeHeader();
 
-            ceo = webService.CreateExchange(rmaNo, externalDocumentNo, lineValues);
+            ceo = webService.CreateExchange(rmaNo, externalDocumentNo, lineValues, zendeskTicketNo);
 
             ceh = CreateExchange(ceo);
             return ceh;
@@ -297,12 +308,12 @@ namespace ExcelDesign.Class_Objects
         }
 
         public CreatedPartRequestHeader CreatePartialRequest(string orderNo, string exernalDocumentNo, string lineDetails, string notes,
-            string shippingDetails, string email)
+            string shippingDetails, string email, int zendeskTicketNo)
         {
             CreatedPartialRequest cpr = new CreatedPartialRequest();
             CreatedPartRequestHeader cprh = new CreatedPartRequestHeader();
 
-            cpr = webService.CreatePartRequest(orderNo, exernalDocumentNo, lineDetails, notes, shippingDetails, email);
+            cpr = webService.CreatePartRequest(orderNo, exernalDocumentNo, lineDetails, notes, shippingDetails, email, zendeskTicketNo);
 
             cprh = CreatePartialRequestHeader(cpr);
             return cprh;
@@ -449,14 +460,14 @@ namespace ExcelDesign.Class_Objects
             webService.ResetSession(userID);
         }
 
-        public void IssueRefund(string rmaNo, string sessionID)
+        public void IssueRefund(string rmaNo, string sessionID, int zendeskTicketNo)
         {
-            webService.IssueRefund(rmaNo, sessionID);
+            webService.IssueRefund(rmaNo, sessionID, zendeskTicketNo);
         }      
 
-        public void CancelOrder(string orderNo, string docNo, string lineValues)
+        public void CancelOrder(string orderNo, string docNo, string lineValues, int zendeskTicketNo)
         {
-            webService.CancelOrder(orderNo, docNo, lineValues);
+            webService.CancelOrder(orderNo, docNo, lineValues, zendeskTicketNo);
         }
 
         public void ProcessItems(string rmaList, string sessionID, string type)
@@ -464,9 +475,9 @@ namespace ExcelDesign.Class_Objects
             webService.ProcessItems(rmaList, sessionID, type);
         }
 
-        public void PartialRefund(string orderNo, string docNo, string lineValues)
+        public void PartialRefund(string orderNo, string docNo, string lineValues, int zendeskTicketNo)
         {
-            webService.PartialRefund(orderNo, docNo, lineValues);
+            webService.PartialRefund(orderNo, docNo, lineValues, zendeskTicketNo);
         }
 
         public void UpdateREQReturnAction(string rmaList, string sessionID)
@@ -480,3 +491,4 @@ namespace ExcelDesign.Class_Objects
         }
     }
 }
+ 

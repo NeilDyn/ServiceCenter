@@ -18,6 +18,10 @@ namespace ExcelDesign.Forms.PDAForms
      * Updated logic to filter out incorrect catagories for Return Reason Code
      */
 
+    /* v9.2 - 12 December 2018- Neil Jansen
+     * Added Zendesk Ticket # field to design and added logic to send through webservice to NAV
+     */
+
     public partial class CreateRMA : System.Web.UI.Page
     {
         protected List<SalesHeader> Sh;
@@ -29,6 +33,7 @@ namespace ExcelDesign.Forms.PDAForms
         protected string email;
         protected string returnTrackingNo;
         protected string imeiNo;
+        protected int zendeskTicketNo;
 
         protected string shipToName;
         protected string shipToAddress1;
@@ -86,8 +91,8 @@ namespace ExcelDesign.Forms.PDAForms
                     if (updateRma.ToUpper() == "TRUE")
                     {
                         noTitle.Text = "RMA No:";
-                        btnCreateRMA.Text = "Update RMA";
-                        btnCancelRMA.Visible = true;
+                        BtnCreateRMA.Text = "Update RMA";
+                        BtnCancelRMA.Visible = true;
 
                         lblInsertTrackingNo.Visible = true;
                         txtInsertTrackingNo.Visible = true;
@@ -150,8 +155,8 @@ namespace ExcelDesign.Forms.PDAForms
                     else
                     {
                         noTitle.Text = "Order No:";
-                        btnCreateRMA.Text = "Create RMA";
-                        btnCancelRMA.Visible = false;
+                        BtnCreateRMA.Text = "Create RMA";
+                        BtnCancelRMA.Visible = false;
 
                         lblInsertTrackingNo.Visible = false;
                         txtInsertTrackingNo.Visible = false;
@@ -536,15 +541,27 @@ namespace ExcelDesign.Forms.PDAForms
                 createLabel = cbxCreateLabel.Checked;
                 email = txtCustEmail.Text;
                 returnTrackingNo = txtInsertTrackingNo.Text;
-                imeiNo = tcIMEINo.Text;
+                imeiNo = tcIMEINo.Text;              
 
                 string validateMsg = ValidateInput();
                 bool allValidLines = true;
                 int rowCount = 0;
                 int controlCount = 0;
 
-                if (validateMsg == "All Input Valid")
+                if(!String.IsNullOrWhiteSpace(txtZendeskTicketNo.Text) || !String.IsNullOrEmpty(txtZendeskTicketNo.Text))
                 {
+                    if(txtZendeskTicketNo.Text.Length == 7)
+                    {
+                        int.TryParse(txtZendeskTicketNo.Text, out zendeskTicketNo);
+                    }
+                    else
+                    {
+                        validateMsg = "Zendesk Ticket # should be 7 numeric characters.";
+                    }
+                }
+
+                if (validateMsg == "All Input Valid")
+                { 
                     foreach (TableRow row in tblCreateReturnOrderTableDetails.Rows)
                     {
 
@@ -665,7 +682,7 @@ namespace ExcelDesign.Forms.PDAForms
                         string shippingDetails = shippingBuild.ToString();
 
                         crh = ss.CreateReturnOrder(no, docNo, string.Empty, notes, resources, printRMA, createLabel, email, lineValues, update, returnTrackingNo,
-                            shippingDetails, imeiNo);
+                            shippingDetails, imeiNo, zendeskTicketNo);
 
                         if (createLabel)
                         {
@@ -719,7 +736,6 @@ namespace ExcelDesign.Forms.PDAForms
                 {
                     ClientScript.RegisterStartupScript(this.GetType(), "validateMsg", "alert('" + validateMsg + "');", true);
                 }
-
             }
             catch (Exception ex)
             {

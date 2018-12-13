@@ -2579,9 +2579,26 @@ namespace ExcelDesign.Class_Objects
                         salesHead.Tickets = new List<Zendesk>();
                     }
 
-                    salesHead.Tickets.AddRange(ZendeskHelper.SearchTickets(salesHead.ExternalDocumentNo, ref salesTickets));
-                    salesHead.Tickets.AddRange(ZendeskHelper.SearchTickets(salesHead.RMANo, ref salesTickets));
-                    salesHead.Tickets.AddRange(ZendeskHelper.SearchTickets(salesHead.QuoteOrderNo, ref salesTickets));
+                    if (salesHead.ExternalDocumentNo != "")
+                    {
+                        salesHead.Tickets.AddRange(ZendeskHelper.SearchCustomFieldTickets(salesHead.ExternalDocumentNo, ref salesTickets));
+                        salesHead.Tickets.AddRange(ZendeskHelper.SearchSubjectTickets(salesHead.ExternalDocumentNo, ref salesTickets));
+                        salesHead.Tickets.AddRange(ZendeskHelper.SearchDescriptionTickets(salesHead.ExternalDocumentNo, ref salesTickets));
+                    }
+
+                    if (salesHead.RMANo != "")
+                    {
+                        salesHead.Tickets.AddRange(ZendeskHelper.SearchCustomFieldTickets(salesHead.RMANo, ref salesTickets));
+                        salesHead.Tickets.AddRange(ZendeskHelper.SearchSubjectTickets(salesHead.RMANo, ref salesTickets));
+                        salesHead.Tickets.AddRange(ZendeskHelper.SearchDescriptionTickets(salesHead.RMANo, ref salesTickets));
+                    }
+
+                    if (salesHead.QuoteOrderNo != "")
+                    {
+                        salesHead.Tickets.AddRange(ZendeskHelper.SearchCustomFieldTickets(salesHead.QuoteOrderNo, ref salesTickets));
+                        salesHead.Tickets.AddRange(ZendeskHelper.SearchSubjectTickets(salesHead.QuoteOrderNo, ref salesTickets));
+                        salesHead.Tickets.AddRange(ZendeskHelper.SearchDescriptionTickets(salesHead.QuoteOrderNo, ref salesTickets));
+                    }              
                 }
 
                 foreach (ReturnHeader returnHead in singleCust.ReturnHeaders)
@@ -2591,9 +2608,26 @@ namespace ExcelDesign.Class_Objects
                         returnHead.Tickets = new List<Zendesk>();
                     }
 
-                    returnHead.Tickets.AddRange(ZendeskHelper.SearchTickets(returnHead.ExternalDocumentNo, ref returnTickets));
-                    returnHead.Tickets.AddRange(ZendeskHelper.SearchTickets(returnHead.RMANo, ref returnTickets));
-                    returnHead.Tickets.AddRange(ZendeskHelper.SearchTickets(returnHead.IMEINo, ref returnTickets));
+                    if (returnHead.ExternalDocumentNo != "")
+                    {
+                        returnHead.Tickets.AddRange(ZendeskHelper.SearchCustomFieldTickets(returnHead.ExternalDocumentNo, ref returnTickets));
+                        returnHead.Tickets.AddRange(ZendeskHelper.SearchSubjectTickets(returnHead.ExternalDocumentNo, ref returnTickets));
+                        returnHead.Tickets.AddRange(ZendeskHelper.SearchDescriptionTickets(returnHead.ExternalDocumentNo, ref returnTickets));
+                    }
+
+                    if (returnHead.RMANo != "")
+                    {
+                        returnHead.Tickets.AddRange(ZendeskHelper.SearchCustomFieldTickets(returnHead.RMANo, ref returnTickets));
+                        returnHead.Tickets.AddRange(ZendeskHelper.SearchSubjectTickets(returnHead.RMANo, ref returnTickets));
+                        returnHead.Tickets.AddRange(ZendeskHelper.SearchDescriptionTickets(returnHead.RMANo, ref returnTickets));
+                    }
+
+                    if (returnHead.IMEINo != "")
+                    {
+                        returnHead.Tickets.AddRange(ZendeskHelper.SearchCustomFieldTickets(returnHead.IMEINo, ref returnTickets));
+                        returnHead.Tickets.AddRange(ZendeskHelper.SearchSubjectTickets(returnHead.IMEINo, ref returnTickets));
+                        returnHead.Tickets.AddRange(ZendeskHelper.SearchDescriptionTickets(returnHead.IMEINo, ref returnTickets));
+                    }        
                 }
             }
 
@@ -2610,7 +2644,7 @@ namespace ExcelDesign.Class_Objects
                         {
                             if (salesHead.SalesOrderNo == currResults.CustSvcLog[csl].OrderNo || salesHead.SalesOrderNo == currResults.CustSvcLog[csl].SalesQuoteNo)
                             {
-                                if(!salesTickets.Any(ticket => ticket.Equals(currResults.CustSvcLog[csl].ZendeskTicketNo)))
+                                if(!salesTickets.Any(ticket => ticket.Equals(currResults.CustSvcLog[csl].ZendeskTicketNo)) && currResults.CustSvcLog[csl].ZendeskTicketNo != 0)
                                 {
                                     ticketNo = currResults.CustSvcLog[csl].ZendeskTicketNo.ToString();
                                     salesHead.Tickets.Add(new Zendesk(ticketNo));
@@ -2627,7 +2661,7 @@ namespace ExcelDesign.Class_Objects
                         {
                             if (returnHead.RMANo == currResults.CustSvcLog[csl].RMANo)
                             {
-                                if (!salesTickets.Any(ticket => ticket.Equals(currResults.CustSvcLog[csl].ZendeskTicketNo)))
+                                if (!salesTickets.Any(ticket => ticket.Equals(currResults.CustSvcLog[csl].ZendeskTicketNo)) && currResults.CustSvcLog[csl].ZendeskTicketNo != 0)
                                 {
                                     ticketNo = currResults.CustSvcLog[csl].ZendeskTicketNo.ToString();
                                     returnHead.Tickets.Add(new Zendesk(ticketNo));

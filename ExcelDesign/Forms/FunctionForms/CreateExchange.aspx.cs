@@ -11,12 +11,17 @@ using System.Web.UI.WebControls;
 
 namespace ExcelDesign.Forms.FunctionForms
 {
+    /* v9.2 - 13 December 2018- Neil Jansen
+     * Added Zendesk Ticket # field to design and added logic to send through webservice to NAV
+     */
+
     public partial class CreateExchange : System.Web.UI.Page
     {
         protected List<ReturnHeader> Rh;
         protected Customer cust;
         protected string rmaNo;
         protected string docNo;
+        protected int zendeskTicketNo;
 
         protected bool anyLines = false;
         protected bool imeiExists = false;
@@ -186,83 +191,103 @@ namespace ExcelDesign.Forms.FunctionForms
                 rmaNo = tcRMANo.Text;
                 docNo = tcDocNo.Text;
 
+                string validateMsg = string.Empty;
                 bool allValidLines = true;
                 int rowCount = 0;
                 int controlCount = 0;
 
-                foreach (TableRow row in tblCreateReturnOrderTableDetails.Rows)
+                if (!String.IsNullOrWhiteSpace(txtZendeskTicketNo.Text) || !String.IsNullOrEmpty(txtZendeskTicketNo.Text))
                 {
-                    rowCount++;
-                    string itemNo = string.Empty;
-                    int qtyReceivedLine = 0;
-                    int actionQty = 0;
-
-                    controlCount = 0;
-
-                    foreach (TableCell cell in row.Cells)
+                    if (txtZendeskTicketNo.Text.Length == 7)
                     {
-                        if(cell.ID.Contains("itemNo"))
-                        {
-                            itemNo = cell.Text.ToString();
-                        }
+                        int.TryParse(txtZendeskTicketNo.Text, out zendeskTicketNo);
+                    }
+                    else
+                    {
+                        validateMsg = "Zendesk Ticket # should be 7 numeric characters.";
+                    }
+                }
 
-                        if(cell.ID.Contains("qtyReceived_"))
-                        {
-                            int.TryParse(cell.Text.ToString(), out qtyReceivedLine);
-                        }
+                if (validateMsg == string.Empty)
+                {
+                    foreach (TableRow row in tblCreateReturnOrderTableDetails.Rows)
+                    {
+                        rowCount++;
+                        string itemNo = string.Empty;
+                        int qtyReceivedLine = 0;
+                        int actionQty = 0;
 
-                        foreach (Control c in cell.Controls)
-                        {
-                            controlCount++;
+                        controlCount = 0;
 
-                            if(c.GetType() == typeof(TextBox))
+                        foreach (TableCell cell in row.Cells)
+                        {
+                            if (cell.ID.Contains("itemNo"))
                             {
-                                string value = ((TextBox)c).Text;
-                                int.TryParse(value, out actionQty);
+                                itemNo = cell.Text.ToString();
                             }
-                        }
 
-                        string lineValidMessage = string.Empty;
-
-                        if((rowCount > 1 && controlCount == 1))
-                        {
-                            lineValidMessage = ValidateLine(itemNo, qtyReceivedLine, actionQty);
-
-                            if (lineValidMessage == "Valid Line Input")
+                            if (cell.ID.Contains("qtyReceived_"))
                             {
-                                lineBuild.Append(itemNo).Append(":");
-                                lineBuild.Append(actionQty).Append(",");
+                                int.TryParse(cell.Text.ToString(), out qtyReceivedLine);
                             }
-                            else
-                            {
-                                allValidLines = false;
 
-                                if(lineError == "")
+                            foreach (Control c in cell.Controls)
+                            {
+                                controlCount++;
+
+                                if (c.GetType() == typeof(TextBox))
                                 {
-                                    lineError = lineValidMessage;
+                                    string value = ((TextBox)c).Text;
+                                    int.TryParse(value, out actionQty);
+                                }
+                            }
+
+                            string lineValidMessage = string.Empty;
+
+                            if ((rowCount > 1 && controlCount == 1))
+                            {
+                                lineValidMessage = ValidateLine(itemNo, qtyReceivedLine, actionQty);
+
+                                if (lineValidMessage == "Valid Line Input")
+                                {
+                                    lineBuild.Append(itemNo).Append(":");
+                                    lineBuild.Append(actionQty).Append(",");
+                                }
+                                else
+                                {
+                                    allValidLines = false;
+
+                                    if (lineError == "")
+                                    {
+                                        lineError = lineValidMessage;
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
-                if(allValidLines)
-                {
-                    string lineValues = lineBuild.ToString();
+                    if (allValidLines)
+                    {
+                        string lineValues = lineBuild.ToString();
 
-                    CreatedExchangeHeader ceh = new CreatedExchangeHeader();
+                        CreatedExchangeHeader ceh = new CreatedExchangeHeader();
 
-                    SendService ss = new SendService();
+                        SendService ss = new SendService();
 
-                    ceh = ss.CreateExchangeOrder(rmaNo, docNo, lineValues);
-                    Session["CreatedExchange"] = ceh;
-                    Session["NoUserInteraction"] = true;
-                    ClientScript.RegisterStartupScript(this.GetType(), "returnOrderNo", "alert('" + ceh.OrderNo + "');", true);
-                    ClientScript.RegisterStartupScript(this.GetType(), "openCreatedExchange", "OpenCreateExchange();", true);
+                        ceh = ss.CreateExchangeOrder(rmaNo, docNo, lineValues, zendeskTicketNo);
+                        Session["CreatedExchange"] = ceh;
+                        Session["NoUserInteraction"] = true;
+                        ClientScript.RegisterStartupScript(this.GetType(), "returnOrderNo", "alert('" + ceh.OrderNo + "');", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "openCreatedExchange", "OpenCreateExchange();", true);
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "lineError", "alert('" + lineError + "');", true);
+                    }
                 }
                 else
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "lineError", "alert('" + lineError + "');", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "validateMsg", "alert('" + validateMsg + "');", true);
                 }
             }
             catch (Exception ex)

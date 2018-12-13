@@ -214,7 +214,7 @@
                         <asp:TableRow>
                             <asp:TableCell ID="lblZendeskTicketNo" Text="Zendesk Ticket # " ForeColor="#0099FF" Font-Bold="true" Style="text-align: right; padding-right: 30px" />
                             <asp:TableCell ID="tcZendeskTicketNo">
-                                <asp:TextBox ID="txtZendeskTicketNo" runat="server" Width="50%" CssClass="inputBox" />
+                                <asp:TextBox ID="txtZendeskTicketNo" runat="server" Width="50%" CssClass="inputBox" TextMode="Number" MaxLength="7" />
                             </asp:TableCell>
                         </asp:TableRow>
                     </asp:Table>
@@ -225,8 +225,8 @@
                 <asp:TableHeaderCell />
                 <asp:TableHeaderCell />
                 <asp:TableHeaderCell HorizontalAlign="Right">
-                    <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClientClick="CloseWindow();" />
-                    <asp:Button ID="btnCreatePartRequest" runat="server" Text="Create Part Request" OnClick="btnCreatePartRequest_Click" />
+                    <asp:Button ID="BtnCancel" runat="server" Text="Cancel" OnClientClick="CloseWindow();" />
+                    <asp:Button ID="BtnCreatePartRequest" runat="server" Text="Create Part Request" OnClick="btnCreatePartRequest_Click" />
                 </asp:TableHeaderCell>
             </asp:TableFooterRow>
         </asp:Table>

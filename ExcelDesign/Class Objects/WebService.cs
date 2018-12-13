@@ -20,6 +20,17 @@ namespace ExcelDesign.Class_Objects
     * Updated Process Items function to added parameter type determing if processing replacements or refunds.
     */
 
+    /* v9.2 - 12 December 2018 - Neil Jansen
+    * Update CreateReturnOrders and PDA Return functions to pass Zendesk Ticket # Parameter  
+    *  
+    * 13 December 2018 - Neil Jansen
+    * Update CreateExchangeOrder to pass Zendesk Ticket # Parameter
+    * Update CreatePartialRequest(Actuall a part request) to pass Zendesk Ticket # Parameter
+    * Update PartialRefund to pass Zendesk Ticket # Parameter
+    * Update CancelOrder to pass Zendesk Ticket # Parameter
+    * Update IssueRefund to pass Zendesk Ticket # Parameter
+    */
+
     public class WebService
     { 
         private readonly string functionsURL = "Codeunit/Functions";
@@ -99,23 +110,25 @@ namespace ExcelDesign.Class_Objects
         }
 
         public CreatedPartialRequest CreatePartRequest(string orderNo, string externalDocumentNo, string lineDetails, string notes,
-            string shippingDetails, string email)
+            string shippingDetails, string email, int zendeskTicketNo)
         {
             CreatedPartialRequest returnPartReq = new CreatedPartialRequest();
 
-            functions.CreatePartRequest(orderNo, externalDocumentNo, ref returnPartReq, SessionID(), lineDetails, notes, shippingDetails, email);
+            functions.CreatePartRequest(orderNo, externalDocumentNo, ref returnPartReq, SessionID(), lineDetails, notes, 
+                shippingDetails, email, zendeskTicketNo);
 
             return returnPartReq;
         }
 
         public ReturnOrder CreateReturnOrder(string orderNo, string externalDocumentNo, string returnReason, string notes,
             bool includeResource, bool printRMA, bool createLabel, string email, string lineValues, bool update, string returnTrackingNo,
-            string shippingDetails, string imeiNo)
+            string shippingDetails, string imeiNo, int zendeskTicketNo)
         {
             ReturnOrder returnRMA = new ReturnOrder();
 
+            /* v9.2 - 12 December 2018 - Neil Jansen */
             functions.CreateReturnOrder(orderNo, externalDocumentNo, returnReason, notes, includeResource, printRMA, createLabel,
-                email, lineValues, ref returnRMA, update, SessionID(), returnTrackingNo, shippingDetails, imeiNo);
+                email, lineValues, ref returnRMA, update, SessionID(), returnTrackingNo, shippingDetails, imeiNo, zendeskTicketNo);
 
             return returnRMA;
         }
@@ -141,11 +154,11 @@ namespace ExcelDesign.Class_Objects
             functions.IssueReturnLabelAsync(rmaNo, email, sessionID);
         }
 
-        public CreatedExchangeOrder CreateExchange(string rmaNo, string externalDocNo, string lineValues)
+        public CreatedExchangeOrder CreateExchange(string rmaNo, string externalDocNo, string lineValues, int zendeskTicketNo)
         {
             CreatedExchangeOrder eo = new CreatedExchangeOrder();
 
-            functions.CreateExchangeOrder(rmaNo, ref eo, externalDocNo, SessionID(), lineValues);
+            functions.CreateExchangeOrder(rmaNo, ref eo, externalDocNo, SessionID(), lineValues, zendeskTicketNo);
 
             return eo;
         }
@@ -178,14 +191,14 @@ namespace ExcelDesign.Class_Objects
             return ao;
         }
 
-        public void IssueRefund(string rmaNo, string sessionID)
+        public void IssueRefund(string rmaNo, string sessionID, int zendeskTicketNo)
         {
-            functions.CreateRefund(rmaNo, sessionID);
+            functions.CreateRefund(rmaNo, sessionID, zendeskTicketNo);
         }
 
-        public void CancelOrder(string orderNo, string docNo, string lineValues)
+        public void CancelOrder(string orderNo, string docNo, string lineValues, int zendeskTicketNo)
         {
-            functions.CancelOrder(orderNo, docNo, lineValues, SessionID());
+            functions.CancelOrder(orderNo, docNo, lineValues, SessionID(), zendeskTicketNo);
         }
 
         public void ProcessItems(string rmaList, string sessionID, string type)
@@ -200,9 +213,9 @@ namespace ExcelDesign.Class_Objects
             }
         }
 
-        public void PartialRefund(string orderNo, string docNo, string lineValues)
+        public void PartialRefund(string orderNo, string docNo, string lineValues, int zendeskTicketNo)
         {
-            functions.PartialRefund(orderNo, docNo, lineValues, SessionID());
+            functions.PartialRefund(orderNo, docNo, lineValues, SessionID(), zendeskTicketNo);
         }
 
         public void UpdateREQReturnAction(string rmaList, string sessionID)
@@ -223,3 +236,4 @@ namespace ExcelDesign.Class_Objects
         }
     }
 }
+ 

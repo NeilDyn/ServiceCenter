@@ -10,6 +10,7 @@ namespace ExcelDesign.Class_Objects
         public string TicketNo { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
+        public string Subject { get; set; }
         public string Status { get; set; }
         public string Priority { get; set; }
 
@@ -18,11 +19,12 @@ namespace ExcelDesign.Class_Objects
 
         }
 
-        public Zendesk(string ticketNoP, DateTime? createdDateP, DateTime? updatedDateP, string statusP, string priorityP)
+        public Zendesk(string ticketNoP, DateTime? createdDateP, DateTime? updatedDateP, string subjectP, string statusP, string priorityP)
         {
             TicketNo = ticketNoP;
             CreatedDate = createdDateP;
             UpdatedDate = updatedDateP;
+            Subject = subjectP;
             Status = statusP;
             Priority = priorityP;
         }

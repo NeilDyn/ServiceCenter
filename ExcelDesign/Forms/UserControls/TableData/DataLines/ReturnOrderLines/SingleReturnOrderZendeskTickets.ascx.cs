@@ -46,6 +46,12 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                     ToolTip = ticket.UpdatedDate.ToString()
                 };
 
+                TableCell subject = new TableCell
+                {
+                    Text = ticket.Subject,
+                    ToolTip = ticket.Subject
+                };
+
                 TableCell status = new TableCell
                 {
                     Text = ticket.Status,
@@ -61,6 +67,7 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                 tr.Cells.Add(ticketID);
                 tr.Cells.Add(createdDate);
                 tr.Cells.Add(updatedDate);
+                tr.Cells.Add(subject);
                 tr.Cells.Add(status);
                 tr.Cells.Add(priority);
 

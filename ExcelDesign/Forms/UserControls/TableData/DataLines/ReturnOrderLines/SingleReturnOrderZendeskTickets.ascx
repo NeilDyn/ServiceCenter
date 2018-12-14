@@ -7,6 +7,7 @@
         <asp:TableHeaderCell Text="Zendesk Ticket #" HorizontalAlign="Left"/>
         <asp:TableHeaderCell Text="Created Date" HorizontalAlign="Left"/>
         <asp:TableHeaderCell Text="Updated Date" HorizontalAlign="Left"/>
+        <asp:TableHeaderCell Text="Subject" HorizontalAlign="Left" />
         <asp:TableHeaderCell Text="Status" HorizontalAlign="Left"/>
         <asp:TableHeaderCell Text="Priority" HorizontalAlign="Left"/>
     </asp:TableHeaderRow>

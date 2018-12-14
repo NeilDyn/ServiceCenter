@@ -49,7 +49,8 @@ namespace ExcelDesign.ZendeskAPI
             {
                 if (!listTickets.Any(ticket => ticket.Equals(singleTicket.Id)))
                 {
-                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, singleTicket.Status.ToString(), singleTicket.Priority));
+                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, singleTicket.Subject,
+                        singleTicket.Status.ToString(), singleTicket.Priority));
                     listTickets.Add(singleTicket.Id);
                 }
             }
@@ -73,7 +74,8 @@ namespace ExcelDesign.ZendeskAPI
             {
                 if (!listTickets.Any(ticket => ticket.Equals(singleTicket.Id)))
                 {
-                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, singleTicket.Status.ToString(), singleTicket.Priority));
+                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, singleTicket.Subject,
+                        singleTicket.Status.ToString(), singleTicket.Priority));
                     listTickets.Add(singleTicket.Id);
                 }
             }
@@ -97,7 +99,8 @@ namespace ExcelDesign.ZendeskAPI
             {
                 if (!listTickets.Any(ticket => ticket.Equals(singleTicket.Id)))
                 {
-                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, singleTicket.Status.ToString(), singleTicket.Priority));
+                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, singleTicket.Subject,
+                        singleTicket.Status.ToString(), singleTicket.Priority));
                     listTickets.Add(singleTicket.Id);
                 }
             }

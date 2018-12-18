@@ -81,7 +81,8 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                     Button updateTicket = new Button
                     {
                         ID = "updateOrderTicketButton_" + lineCount.ToString(),
-                        Text = "Update Ticket"
+                        Text = "Update Ticket",
+                        OnClientClick = "return false"
                     };
 
                     buttonCell.Controls.Add(updateTicket);

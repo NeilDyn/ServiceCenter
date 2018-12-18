@@ -15,6 +15,7 @@ namespace ExcelDesign.Class_Objects.Enums
         IMEI = 4,
         ShiptoName = 5,
         ShiptoAddress = 6,
-        RMANo = 7
+        RMANo = 7,
+        EbayUserID = 8
     }
 }

@@ -23,6 +23,7 @@ namespace ExcelDesign.Class_Objects
         public string QuoteOrderNo { get; set; }
         public List<PartialRefunded> PartialRefunds { get; set; }
         public List<Zendesk> Tickets { get; set; }
+        public string EbayUserID { get; set; }
 
         public SalesHeader()
         {
@@ -31,7 +32,7 @@ namespace ExcelDesign.Class_Objects
 
         public SalesHeader(string orderStatusP, string orderDateP, string salesOrderNoP, string channelNameP, List<ShipmentHeader> shipmentHeaderObjectP,
             List<PostedPackage> postedPackageObjectP, string externalDocumentNoP, Warranty _warrantyP, bool rmaExistsP, string rmaNoP, bool isExchangeOrderP,
-            string sellToCustomerNoP, List<Comment> orderCommentsP, bool isPartRequest, string quoteOrderNoP, List<PartialRefunded> partialRefundsP)
+            string sellToCustomerNoP, List<Comment> orderCommentsP, bool isPartRequest, string quoteOrderNoP, List<PartialRefunded> partialRefundsP, string ebayUserIDP)
         {
             this.OrderStatus = orderStatusP;
             this.OrderDate = orderDateP;
@@ -48,6 +49,7 @@ namespace ExcelDesign.Class_Objects
             this.IsPartRequest = isPartRequest;
             this.QuoteOrderNo = quoteOrderNoP;
             this.PartialRefunds = partialRefundsP;
+            this.EbayUserID = ebayUserIDP;
         }
     }
 }

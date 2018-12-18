@@ -10,5 +10,6 @@
         <asp:TableHeaderCell Text="Subject" HorizontalAlign="Left" />
         <asp:TableHeaderCell Text="Status" HorizontalAlign="Left"/>
         <asp:TableHeaderCell Text="Priority" HorizontalAlign="Left"/>
+        <asp:TableHeaderCell Text="Update Ticket No" HorizontalAlign="Left" />
     </asp:TableHeaderRow>
 </asp:Table>

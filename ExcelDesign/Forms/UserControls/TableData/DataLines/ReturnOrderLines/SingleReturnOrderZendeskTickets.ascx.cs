@@ -71,6 +71,23 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                 tr.Cells.Add(status);
                 tr.Cells.Add(priority);
 
+                if (ticket.FromNAV)
+                {
+                    TableCell buttonCell = new TableCell
+                    {
+                        ID = "orderTicketButtonCell_" + lineCount.ToString(),
+                    };
+
+                    Button updateTicket = new Button
+                    {
+                        ID = "updateOrderTicketButton_" + lineCount.ToString(),
+                        Text = "Update Ticket"
+                    };
+
+                    buttonCell.Controls.Add(updateTicket);
+                    tr.Cells.Add(buttonCell);
+                }
+
                 if (lineCount % 2 == 0)
                 {
                     tr.BackColor = Color.White;

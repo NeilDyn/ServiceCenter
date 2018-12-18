@@ -308,6 +308,7 @@
           <element minOccurs="1" maxOccurs="1" name="ShipToState" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
           <element minOccurs="0" maxOccurs="unbounded" name="Warranty" type="tns:Warranty" />
+          <element minOccurs="1" maxOccurs="1" name="EbayUserID" type="string" />
         </sequence>
       </complexType>
       <complexType name="ExtendedSalesHeader">
@@ -730,6 +731,20 @@
           </sequence>
         </complexType>
       </element>
+      <element name="FilterEbayUserIDSOImportBuffer">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="ebayUserID" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="FilterEbayUserIDSOImportBuffer_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="CreateExchangeOrder">
         <complexType>
           <sequence>
@@ -1068,6 +1083,12 @@
   <message name="SearchDetermineNoType_Result">
     <part name="parameters" element="tns:SearchDetermineNoType_Result" />
   </message>
+  <message name="FilterEbayUserIDSOImportBuffer">
+    <part name="parameters" element="tns:FilterEbayUserIDSOImportBuffer" />
+  </message>
+  <message name="FilterEbayUserIDSOImportBuffer_Result">
+    <part name="parameters" element="tns:FilterEbayUserIDSOImportBuffer_Result" />
+  </message>
   <message name="CreateExchangeOrder">
     <part name="parameters" element="tns:CreateExchangeOrder" />
   </message>
@@ -1205,6 +1226,10 @@
       <input name="SearchDetermineNoType" message="tns:SearchDetermineNoType" />
       <output name="SearchDetermineNoType_Result" message="tns:SearchDetermineNoType_Result" />
     </operation>
+    <operation name="FilterEbayUserIDSOImportBuffer">
+      <input name="FilterEbayUserIDSOImportBuffer" message="tns:FilterEbayUserIDSOImportBuffer" />
+      <output name="FilterEbayUserIDSOImportBuffer_Result" message="tns:FilterEbayUserIDSOImportBuffer_Result" />
+    </operation>
     <operation name="CreateExchangeOrder">
       <input name="CreateExchangeOrder" message="tns:CreateExchangeOrder" />
       <output name="CreateExchangeOrder_Result" message="tns:CreateExchangeOrder_Result" />
@@ -1321,6 +1346,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="SearchDetermineNoType_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="FilterEbayUserIDSOImportBuffer">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:FilterEbayUserIDSOImportBuffer" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="FilterEbayUserIDSOImportBuffer">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="FilterEbayUserIDSOImportBuffer_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

@@ -222,6 +222,10 @@ namespace ExcelDesign.Forms
                             searchSelection = 0;
                             break;
 
+                        case SearchOptions.EbayUserID:
+                            searchSelection = 8;
+                            break;
+
                         default:
                             searchSelection = 0;
                             break;

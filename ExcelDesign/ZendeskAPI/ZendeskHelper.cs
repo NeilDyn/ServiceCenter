@@ -50,7 +50,7 @@ namespace ExcelDesign.ZendeskAPI
                 if (!listTickets.Any(ticket => ticket.Equals(singleTicket.Id)))
                 {
                     zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, singleTicket.Subject,
-                        singleTicket.Status.ToString(), singleTicket.Priority));
+                        singleTicket.Status.ToString(), singleTicket.Priority, false));
                     listTickets.Add(singleTicket.Id);
                 }
             }
@@ -75,7 +75,7 @@ namespace ExcelDesign.ZendeskAPI
                 if (!listTickets.Any(ticket => ticket.Equals(singleTicket.Id)))
                 {
                     zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, singleTicket.Subject,
-                        singleTicket.Status.ToString(), singleTicket.Priority));
+                        singleTicket.Status.ToString(), singleTicket.Priority, false));
                     listTickets.Add(singleTicket.Id);
                 }
             }
@@ -100,7 +100,32 @@ namespace ExcelDesign.ZendeskAPI
                 if (!listTickets.Any(ticket => ticket.Equals(singleTicket.Id)))
                 {
                     zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, singleTicket.Subject,
-                        singleTicket.Status.ToString(), singleTicket.Priority));
+                        singleTicket.Status.ToString(), singleTicket.Priority, false));
+                    listTickets.Add(singleTicket.Id);
+                }
+            }
+
+            return zendeskTickets;
+        }
+
+        public static List<Zendesk> SearchRequestorTickets(string searchCriteria, ref List<long?> listTickets)
+        {
+            /* Created by Neil Jansen - 18 December 2018
+             * Create a list of Zendesk objects through filtering the Description field in Zendesk
+             */
+
+            ConnectToZendesk();
+
+            List<Zendesk> zendeskTickets = new List<Zendesk>();
+            IListResponse<Ticket> responses = client.Search.Find(new ZendeskQuery<Ticket>().WithCustomFilter("requester", searchCriteria));
+            List<Ticket> responseTickets = (List<Ticket>)responses.Results;
+
+            foreach (Ticket singleTicket in responseTickets)
+            {
+                if (!listTickets.Any(ticket => ticket.Equals(singleTicket.Id)))
+                {
+                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, singleTicket.Subject,
+                        singleTicket.Status.ToString(), singleTicket.Priority, false));
                     listTickets.Add(singleTicket.Id);
                 }
             }

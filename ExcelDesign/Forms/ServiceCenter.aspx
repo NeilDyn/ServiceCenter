@@ -98,6 +98,7 @@
                 <asp:ListItem Value="Ship-to Name"></asp:ListItem>
                 <asp:ListItem Value="Ship-to Address"></asp:ListItem>
                 <asp:ListItem Value="RMA-No"></asp:ListItem>
+                <asp:ListItem Value="Ebay User ID"></asp:ListItem>
             </asp:DropDownList>
         </div>
         <br />

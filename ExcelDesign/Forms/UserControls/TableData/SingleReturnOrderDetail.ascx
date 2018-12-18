@@ -158,7 +158,7 @@
             window.open("FunctionForms/RMAPDFForm.aspx?RMANo=<%= this.Rh.RMANo %>", "_blank");
         });
 
-        $("[id$=btnUpdateRMA<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+        $("[id$=BtnUpdateRMA<%= this.CustID %>_<%= this.CountID %>]").click(function () {
             if ("<%= this.tcReturnStatus.Text%>" == "Open") {
                 var width = 1500;
                 var height = 500;

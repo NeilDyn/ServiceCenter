@@ -995,6 +995,7 @@ namespace ExcelDesign.Class_Objects
             string sellToCustomerNo = string.Empty;
 
             List<string> insertedOrderNumbers = new List<string>();
+            string ebayUserID = string.Empty;
 
             List<PartialRefunded> partialRefunds = new List<PartialRefunded>();
 
@@ -1031,6 +1032,7 @@ namespace ExcelDesign.Class_Objects
                                 allowRefund = currResults.SOImportBuffer[so].Warranty[0].RefundAllowed[0] == "Yes" ? true : false;
                                 warranty = new Warranty(status, policy, int.Parse(daysRemaining), warrantyType, isPDA, allowRefund);
                                 sellToCustomerNo = currResults.SOImportBuffer[so].CustomerNo;
+                                ebayUserID = currResults.SOImportBuffer[so].EbayUserID;
 
                                 if (currResults.ExtendedSalesHeader != null)
                                 {
@@ -1059,7 +1061,8 @@ namespace ExcelDesign.Class_Objects
 
                                 partialRefunds = GetPartialRefunds(orderNo, externalDocumentNo);
                                 salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo,
-                                    warranty, rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines, isPartRequest, quoteOrderNo, partialRefunds));
+                                    warranty, rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines, isPartRequest, quoteOrderNo,
+                                    partialRefunds, ebayUserID));
 
                                 insertedOrderNumbers.Add(orderNo);
 
@@ -1086,6 +1089,7 @@ namespace ExcelDesign.Class_Objects
                                 sellToCustomerNo = string.Empty;
                                 quoteOrderNo = string.Empty;
                                 allowRefund = false;
+                                ebayUserID = string.Empty;
                             }
                         }
                     }
@@ -1187,7 +1191,8 @@ namespace ExcelDesign.Class_Objects
 
                                 partialRefunds = GetPartialRefunds(orderNo, externalDocumentNo);
                                 salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty,
-                                    rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines, isPartRequest, quoteOrderNo, partialRefunds));
+                                    rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines, isPartRequest, quoteOrderNo,
+                                    partialRefunds, ebayUserID));
 
                                 insertedOrderNumbers.Add(orderNo);
 
@@ -1214,6 +1219,7 @@ namespace ExcelDesign.Class_Objects
                                 sellToCustomerNo = string.Empty;
                                 quoteOrderNo = string.Empty;
                                 allowRefund = false;
+                                ebayUserID = string.Empty;
                             }
                         }
                     }
@@ -1276,7 +1282,8 @@ namespace ExcelDesign.Class_Objects
                             commentLines = GetSalesLineComments(currResults.SalesShipmentHeader[so].No);
                             partialRefunds = GetPartialRefunds(orderNo, externalDocumentNo);
                             salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty,
-                                rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines, isPartRequest, quoteOrderNo, partialRefunds));
+                                rmaExists, rmaNo, isExchangeOrder, sellToCustomerNo, commentLines, isPartRequest, quoteOrderNo,
+                                partialRefunds, ebayUserID));
 
                             insertedOrderNumbers.Add(orderNo);
 
@@ -1303,6 +1310,7 @@ namespace ExcelDesign.Class_Objects
                             sellToCustomerNo = string.Empty;
                             quoteOrderNo = string.Empty;
                             allowRefund = false;
+                            ebayUserID = string.Empty;
                         }
                     }
                 }
@@ -2334,7 +2342,7 @@ namespace ExcelDesign.Class_Objects
 
                     if (noItemSubFound)
                     {
-                        if(status.Length == 0)
+                        if (status.Length == 0)
                         {
                             status = "No Item Substitution Found";
                         }
@@ -2567,11 +2575,11 @@ namespace ExcelDesign.Class_Objects
 
         private void GetZendeskTickets(ref List<Customer> cust)
         {
-            List<long?> salesTickets = new List<long?>();
-            List<long?> returnTickets = new List<long?>();
-
             foreach (Customer singleCust in cust)
             {
+                List<long?> salesTickets = new List<long?>();
+                List<long?> returnTickets = new List<long?>();
+
                 foreach (SalesHeader salesHead in singleCust.SalesHeader)
                 {
                     if (salesHead.Tickets == null)
@@ -2598,56 +2606,36 @@ namespace ExcelDesign.Class_Objects
                         salesHead.Tickets.AddRange(ZendeskHelper.SearchCustomFieldTickets(salesHead.QuoteOrderNo, ref salesTickets));
                         salesHead.Tickets.AddRange(ZendeskHelper.SearchSubjectTickets(salesHead.QuoteOrderNo, ref salesTickets));
                         salesHead.Tickets.AddRange(ZendeskHelper.SearchDescriptionTickets(salesHead.QuoteOrderNo, ref salesTickets));
-                    }              
-                }
-
-                foreach (ReturnHeader returnHead in singleCust.ReturnHeaders)
-                {
-                    if (returnHead.Tickets == null)
-                    {
-                        returnHead.Tickets = new List<Zendesk>();
                     }
 
-                    if (returnHead.ExternalDocumentNo != "")
+                    if (salesHead.EbayUserID != "")
                     {
-                        returnHead.Tickets.AddRange(ZendeskHelper.SearchCustomFieldTickets(returnHead.ExternalDocumentNo, ref returnTickets));
-                        returnHead.Tickets.AddRange(ZendeskHelper.SearchSubjectTickets(returnHead.ExternalDocumentNo, ref returnTickets));
-                        returnHead.Tickets.AddRange(ZendeskHelper.SearchDescriptionTickets(returnHead.ExternalDocumentNo, ref returnTickets));
+                        salesHead.Tickets.AddRange(ZendeskHelper.SearchCustomFieldTickets(salesHead.EbayUserID, ref salesTickets));
+                        salesHead.Tickets.AddRange(ZendeskHelper.SearchSubjectTickets(salesHead.EbayUserID, ref salesTickets));
+                        salesHead.Tickets.AddRange(ZendeskHelper.SearchDescriptionTickets(salesHead.EbayUserID, ref salesTickets));
+                        salesHead.Tickets.AddRange(ZendeskHelper.SearchRequestorTickets(salesHead.EbayUserID, ref salesTickets));
                     }
 
-                    if (returnHead.RMANo != "")
+                    if (singleCust.Name != "")
                     {
-                        returnHead.Tickets.AddRange(ZendeskHelper.SearchCustomFieldTickets(returnHead.RMANo, ref returnTickets));
-                        returnHead.Tickets.AddRange(ZendeskHelper.SearchSubjectTickets(returnHead.RMANo, ref returnTickets));
-                        returnHead.Tickets.AddRange(ZendeskHelper.SearchDescriptionTickets(returnHead.RMANo, ref returnTickets));
+                        salesHead.Tickets.AddRange(ZendeskHelper.SearchCustomFieldTickets(singleCust.Name, ref salesTickets));
+                        salesHead.Tickets.AddRange(ZendeskHelper.SearchSubjectTickets(singleCust.Name, ref salesTickets));
+                        salesHead.Tickets.AddRange(ZendeskHelper.SearchDescriptionTickets(singleCust.Name, ref salesTickets));
+                        salesHead.Tickets.AddRange(ZendeskHelper.SearchRequestorTickets(singleCust.Name, ref salesTickets));
                     }
 
-                    if (returnHead.IMEINo != "")
+                    if (currResults.CustSvcLog != null)
                     {
-                        returnHead.Tickets.AddRange(ZendeskHelper.SearchCustomFieldTickets(returnHead.IMEINo, ref returnTickets));
-                        returnHead.Tickets.AddRange(ZendeskHelper.SearchSubjectTickets(returnHead.IMEINo, ref returnTickets));
-                        returnHead.Tickets.AddRange(ZendeskHelper.SearchDescriptionTickets(returnHead.IMEINo, ref returnTickets));
-                    }        
-                }
-            }
+                        string ticketNo = string.Empty;
 
-            //Now we loop through the tickets in NAV
-            if(currResults.CustSvcLog != null)
-            {
-                string ticketNo = string.Empty;
-
-                foreach (Customer singleCust in cust)
-                {
-                    foreach (SalesHeader salesHead in singleCust.SalesHeader)
-                    {
                         for (int csl = 0; csl < currResults.CustSvcLog.Length; csl++)
                         {
                             if (salesHead.SalesOrderNo == currResults.CustSvcLog[csl].OrderNo || salesHead.SalesOrderNo == currResults.CustSvcLog[csl].SalesQuoteNo)
                             {
-                                if(!salesTickets.Any(ticket => ticket.Equals(currResults.CustSvcLog[csl].ZendeskTicketNo)) && currResults.CustSvcLog[csl].ZendeskTicketNo != 0)
+                                if (!salesTickets.Any(ticket => ticket.Equals(currResults.CustSvcLog[csl].ZendeskTicketNo)) && currResults.CustSvcLog[csl].ZendeskTicketNo != 0)
                                 {
                                     ticketNo = currResults.CustSvcLog[csl].ZendeskTicketNo.ToString();
-                                    salesHead.Tickets.Add(new Zendesk(ticketNo));
+                                    salesHead.Tickets.Add(new Zendesk(ticketNo, true));
                                 }
                             }
 
@@ -2657,19 +2645,58 @@ namespace ExcelDesign.Class_Objects
 
                     foreach (ReturnHeader returnHead in singleCust.ReturnHeaders)
                     {
-                        for (int csl = 0; csl < currResults.CustSvcLog.Length; csl++)
+                        if (returnHead.Tickets == null)
                         {
-                            if (returnHead.RMANo == currResults.CustSvcLog[csl].RMANo)
-                            {
-                                if (!salesTickets.Any(ticket => ticket.Equals(currResults.CustSvcLog[csl].ZendeskTicketNo)) && currResults.CustSvcLog[csl].ZendeskTicketNo != 0)
-                                {
-                                    ticketNo = currResults.CustSvcLog[csl].ZendeskTicketNo.ToString();
-                                    returnHead.Tickets.Add(new Zendesk(ticketNo));
-                                }
-                            }
-
-                            ticketNo = string.Empty;
+                            returnHead.Tickets = new List<Zendesk>();
                         }
+
+                        if (returnHead.ExternalDocumentNo != "")
+                        {
+                            returnHead.Tickets.AddRange(ZendeskHelper.SearchCustomFieldTickets(returnHead.ExternalDocumentNo, ref returnTickets));
+                            returnHead.Tickets.AddRange(ZendeskHelper.SearchSubjectTickets(returnHead.ExternalDocumentNo, ref returnTickets));
+                            returnHead.Tickets.AddRange(ZendeskHelper.SearchDescriptionTickets(returnHead.ExternalDocumentNo, ref returnTickets));
+                        }
+
+                        if (returnHead.RMANo != "")
+                        {
+                            returnHead.Tickets.AddRange(ZendeskHelper.SearchCustomFieldTickets(returnHead.RMANo, ref returnTickets));
+                            returnHead.Tickets.AddRange(ZendeskHelper.SearchSubjectTickets(returnHead.RMANo, ref returnTickets));
+                            returnHead.Tickets.AddRange(ZendeskHelper.SearchDescriptionTickets(returnHead.RMANo, ref returnTickets));
+                        }
+
+                        if (returnHead.IMEINo != "")
+                        {
+                            returnHead.Tickets.AddRange(ZendeskHelper.SearchCustomFieldTickets(returnHead.IMEINo, ref returnTickets));
+                            returnHead.Tickets.AddRange(ZendeskHelper.SearchSubjectTickets(returnHead.IMEINo, ref returnTickets));
+                            returnHead.Tickets.AddRange(ZendeskHelper.SearchDescriptionTickets(returnHead.IMEINo, ref returnTickets));
+                        }
+
+                        if (singleCust.Name != "")
+                        {
+                            returnHead.Tickets.AddRange(ZendeskHelper.SearchCustomFieldTickets(singleCust.Name, ref returnTickets));
+                            returnHead.Tickets.AddRange(ZendeskHelper.SearchSubjectTickets(singleCust.Name, ref returnTickets));
+                            returnHead.Tickets.AddRange(ZendeskHelper.SearchDescriptionTickets(singleCust.Name, ref returnTickets));
+                            returnHead.Tickets.AddRange(ZendeskHelper.SearchRequestorTickets(singleCust.Name, ref returnTickets));
+                        }
+
+                        if (currResults.CustSvcLog != null)
+                        {
+                            string ticketNo = string.Empty;
+
+                            for (int csl = 0; csl < currResults.CustSvcLog.Length; csl++)
+                            {
+                                if (returnHead.RMANo == currResults.CustSvcLog[csl].RMANo)
+                                {
+                                    if (!salesTickets.Any(ticket => ticket.Equals(currResults.CustSvcLog[csl].ZendeskTicketNo)) && currResults.CustSvcLog[csl].ZendeskTicketNo != 0)
+                                    {
+                                        ticketNo = currResults.CustSvcLog[csl].ZendeskTicketNo.ToString();
+                                        returnHead.Tickets.Add(new Zendesk(ticketNo, true));
+                                    }
+                                }
+                                
+                                ticketNo = string.Empty;
+                            }
+                        } // if null
                     }
                 }
             }

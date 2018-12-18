@@ -13,13 +13,14 @@ namespace ExcelDesign.Class_Objects
         public string Subject { get; set; }
         public string Status { get; set; }
         public string Priority { get; set; }
+        public bool FromNAV { get; set; }
 
         public Zendesk()
         {
 
         }
 
-        public Zendesk(string ticketNoP, DateTime? createdDateP, DateTime? updatedDateP, string subjectP, string statusP, string priorityP)
+        public Zendesk(string ticketNoP, DateTime? createdDateP, DateTime? updatedDateP, string subjectP, string statusP, string priorityP, bool fromNAVP)
         {
             TicketNo = ticketNoP;
             CreatedDate = createdDateP;
@@ -27,11 +28,13 @@ namespace ExcelDesign.Class_Objects
             Subject = subjectP;
             Status = statusP;
             Priority = priorityP;
+            FromNAV = fromNAVP;
         }
 
-        public Zendesk(string ticketNoP)
+        public Zendesk(string ticketNoP, bool fromNAVP)
         {
             TicketNo = ticketNoP;
+            FromNAV = fromNAVP;
         }
 
         public string TicketLink()

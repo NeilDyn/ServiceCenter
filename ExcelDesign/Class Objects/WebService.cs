@@ -84,8 +84,9 @@ namespace ExcelDesign.Class_Objects
         public SearchResults FindOrder(string searchNo, int searchOption)
         {
             SearchResults results = new SearchResults();
-   
+
             functions.SearchDetermineNoType(SessionID(), searchNo, ref results, searchOption);
+           
             return results;
         }
 

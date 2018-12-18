@@ -32,7 +32,7 @@
         function CloseWindow() {
             var c;
 
-            if ("<%= this.btnCreateRMA.Text %>" == "Update RMA") {
+            if ("<%= this.BtnCreateRMA.Text %>" == "Update RMA") {
                 c = window.confirm("Are you sure you wish to cancel updating this return?");
             } else {
                 c = window.confirm("Are you sure you wish to cancel creating this return?");

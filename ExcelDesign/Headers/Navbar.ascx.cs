@@ -15,7 +15,7 @@ namespace ExcelDesign.Headers
          * Created top navigation bar as it's own User Control to add to multiple pages and allow for easier and prettier navigation
         */
 
-        protected const string version = "v9.2";
+        protected const string version = "v9.3";
 
         protected void Page_Load(object sender, EventArgs e)
         {

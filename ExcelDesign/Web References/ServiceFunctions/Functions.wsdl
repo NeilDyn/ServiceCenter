@@ -384,6 +384,14 @@
           <element minOccurs="1" maxOccurs="1" name="Date" type="string" />
         </sequence>
       </complexType>
+      <complexType name="CustSvcLog">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="OrderNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="RMANo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="SalesQuoteNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" default="0" name="ZendeskTicketNo" type="int" />
+        </sequence>
+      </complexType>
       <complexType name="SearchResults" mixed="true">
         <sequence>
           <element minOccurs="0" maxOccurs="unbounded" name="SalesHeader" type="tns:SalesHeader" />
@@ -407,6 +415,7 @@
           <element minOccurs="1" maxOccurs="unbounded" name="DefectOptions" type="tns:DefectOptions" />
           <element minOccurs="1" maxOccurs="unbounded" name="SalesCommentLine" type="tns:SalesCommentLine" />
           <element minOccurs="1" maxOccurs="unbounded" name="PartReqOption" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="CustSvcLog" type="tns:CustSvcLog" />
         </sequence>
       </complexType>
       <element name="SearchResults" type="tns:SearchResults" />

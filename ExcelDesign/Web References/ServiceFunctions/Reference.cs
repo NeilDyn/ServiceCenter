@@ -3571,6 +3571,67 @@ namespace ExcelDesign.ServiceFunctions {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
+    public partial class CustSvcLog {
+        
+        private string orderNoField;
+        
+        private string rMANoField;
+        
+        private string salesQuoteNoField;
+        
+        private int zendeskTicketNoField;
+        
+        public CustSvcLog() {
+            this.zendeskTicketNoField = 0;
+        }
+        
+        /// <remarks/>
+        public string OrderNo {
+            get {
+                return this.orderNoField;
+            }
+            set {
+                this.orderNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RMANo {
+            get {
+                return this.rMANoField;
+            }
+            set {
+                this.rMANoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SalesQuoteNo {
+            get {
+                return this.salesQuoteNoField;
+            }
+            set {
+                this.salesQuoteNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int ZendeskTicketNo {
+            get {
+                return this.zendeskTicketNoField;
+            }
+            set {
+                this.zendeskTicketNoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
     public partial class SalesCommentLine {
         
         private string docNoField;
@@ -6987,6 +7048,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string[] partReqOptionField;
         
+        private CustSvcLog[] custSvcLogField;
+        
         private string[] textField;
         
         /// <remarks/>
@@ -7217,6 +7280,17 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.partReqOptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("CustSvcLog")]
+        public CustSvcLog[] CustSvcLog {
+            get {
+                return this.custSvcLogField;
+            }
+            set {
+                this.custSvcLogField = value;
             }
         }
         

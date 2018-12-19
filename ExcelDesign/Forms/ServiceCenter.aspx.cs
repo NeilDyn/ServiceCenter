@@ -38,6 +38,10 @@ namespace ExcelDesign.Forms
          * Update logic to allow IssueRefund to pass Zendesk Ticket # through webservice
          */
 
+        /* v9.3 - 19 December 2018 - Neil Jansen
+         * Added new WebMethod to update Zendesk Ticket No
+         */
+
         #region Global
 
         //protected const string version = "v5.2";
@@ -479,6 +483,36 @@ namespace ExcelDesign.Forms
 
 
                 StaticService.IssueRefund(rmaNo, sessionID, zendeskTicketNo);
+
+                HttpContext.Current.Session["NoUserInteraction"] = true;
+                HttpContext.Current.Session["UserInteraction"] = true;
+            }
+            catch (Exception e)
+            {
+                return "Error - " + e.Message;
+            }
+
+            return "Success";
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static string UpdateZendeskTicket(int currentTicketNo, int updateTicketNo)
+        {
+            try
+            {
+                string sessionID = string.Empty;
+                if (HttpContext.Current.Session["ActiveUser"] != null)
+                {
+                    User u = (User)HttpContext.Current.Session["ActiveUser"];
+                    sessionID = u.SessionID;
+                }
+                else
+                {
+                    sessionID = "{A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0}";
+                }
+
+                StaticService.UpdateZendeskTicket(sessionID, currentTicketNo, updateTicketNo);
 
                 HttpContext.Current.Session["NoUserInteraction"] = true;
                 HttpContext.Current.Session["UserInteraction"] = true;

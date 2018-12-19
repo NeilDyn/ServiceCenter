@@ -82,7 +82,7 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines
                     {
                         ID = "updateOrderTicketButton_" + lineCount.ToString(),
                         Text = "Update Ticket",
-                        OnClientClick = "return false"
+                        OnClientClick = "return UpdateZendeskTicket(" + ticket.TicketNo + ")"
                     };
 
                     buttonCell.Controls.Add(updateTicket);

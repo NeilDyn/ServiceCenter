@@ -69,6 +69,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private System.Threading.SendOrPostCallback UpdateRMAItemNoOperationCompleted;
         
+        private System.Threading.SendOrPostCallback UpdateZendeskTicketOperationCompleted;
+        
         private System.Threading.SendOrPostCallback SetDebugOperationCompleted;
         
         private System.Threading.SendOrPostCallback PullAboutDetailsOperationCompleted;
@@ -176,6 +178,9 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         public event UpdateRMAItemNoCompletedEventHandler UpdateRMAItemNoCompleted;
+        
+        /// <remarks/>
+        public event UpdateZendeskTicketCompletedEventHandler UpdateZendeskTicketCompleted;
         
         /// <remarks/>
         public event SetDebugCompletedEventHandler SetDebugCompleted;
@@ -941,6 +946,38 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.UpdateRMAItemNoCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.UpdateRMAItemNoCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:UpdateZendeskTicket", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="UpdateZendeskTicket_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void UpdateZendeskTicket(string sessionID, int currentTicketNo, int updateTicketNo) {
+            this.Invoke("UpdateZendeskTicket", new object[] {
+                        sessionID,
+                        currentTicketNo,
+                        updateTicketNo});
+        }
+        
+        /// <remarks/>
+        public void UpdateZendeskTicketAsync(string sessionID, int currentTicketNo, int updateTicketNo) {
+            this.UpdateZendeskTicketAsync(sessionID, currentTicketNo, updateTicketNo, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateZendeskTicketAsync(string sessionID, int currentTicketNo, int updateTicketNo, object userState) {
+            if ((this.UpdateZendeskTicketOperationCompleted == null)) {
+                this.UpdateZendeskTicketOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateZendeskTicketOperationCompleted);
+            }
+            this.InvokeAsync("UpdateZendeskTicket", new object[] {
+                        sessionID,
+                        currentTicketNo,
+                        updateTicketNo}, this.UpdateZendeskTicketOperationCompleted, userState);
+        }
+        
+        private void OnUpdateZendeskTicketOperationCompleted(object arg) {
+            if ((this.UpdateZendeskTicketCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateZendeskTicketCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -3663,67 +3700,6 @@ namespace ExcelDesign.ServiceFunctions {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
-    public partial class CustSvcLog {
-        
-        private string orderNoField;
-        
-        private string rMANoField;
-        
-        private string salesQuoteNoField;
-        
-        private int zendeskTicketNoField;
-        
-        public CustSvcLog() {
-            this.zendeskTicketNoField = 0;
-        }
-        
-        /// <remarks/>
-        public string OrderNo {
-            get {
-                return this.orderNoField;
-            }
-            set {
-                this.orderNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string RMANo {
-            get {
-                return this.rMANoField;
-            }
-            set {
-                this.rMANoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SalesQuoteNo {
-            get {
-                return this.salesQuoteNoField;
-            }
-            set {
-                this.salesQuoteNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int ZendeskTicketNo {
-            get {
-                return this.zendeskTicketNoField;
-            }
-            set {
-                this.zendeskTicketNoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -7819,6 +7795,10 @@ namespace ExcelDesign.ServiceFunctions {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void UpdateRMAItemNoCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void UpdateZendeskTicketCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]

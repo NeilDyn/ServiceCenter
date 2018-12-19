@@ -2577,11 +2577,10 @@ namespace ExcelDesign.Class_Objects
         {
             foreach (Customer singleCust in cust)
             {
-                List<long?> salesTickets = new List<long?>();
-                List<long?> returnTickets = new List<long?>();
-
                 foreach (SalesHeader salesHead in singleCust.SalesHeader)
                 {
+                    List<long?> salesTickets = new List<long?>();
+
                     if (salesHead.Tickets == null)
                     {
                         salesHead.Tickets = new List<Zendesk>();
@@ -2632,10 +2631,11 @@ namespace ExcelDesign.Class_Objects
                         {
                             if (salesHead.SalesOrderNo == currResults.CustSvcLog[csl].OrderNo || salesHead.SalesOrderNo == currResults.CustSvcLog[csl].SalesQuoteNo)
                             {
-                                if (!salesTickets.Any(ticket => ticket.Equals(currResults.CustSvcLog[csl].ZendeskTicketNo)) && currResults.CustSvcLog[csl].ZendeskTicketNo != 0)
+                                if (!salesTickets.Any(ticket => ticket.Equals(Convert.ToInt64(currResults.CustSvcLog[csl].ZendeskTicketNo))) && currResults.CustSvcLog[csl].ZendeskTicketNo != 0)
                                 {
                                     ticketNo = currResults.CustSvcLog[csl].ZendeskTicketNo.ToString();
                                     salesHead.Tickets.Add(new Zendesk(ticketNo, true));
+                                    salesTickets.Add(Convert.ToInt64(ticketNo));
                                 }
                             }
 
@@ -2645,6 +2645,8 @@ namespace ExcelDesign.Class_Objects
 
                     foreach (ReturnHeader returnHead in singleCust.ReturnHeaders)
                     {
+                        List<long?> returnTickets = new List<long?>();
+
                         if (returnHead.Tickets == null)
                         {
                             returnHead.Tickets = new List<Zendesk>();
@@ -2687,10 +2689,11 @@ namespace ExcelDesign.Class_Objects
                             {
                                 if (returnHead.RMANo == currResults.CustSvcLog[csl].RMANo)
                                 {
-                                    if (!salesTickets.Any(ticket => ticket.Equals(currResults.CustSvcLog[csl].ZendeskTicketNo)) && currResults.CustSvcLog[csl].ZendeskTicketNo != 0)
+                                    if (!returnTickets.Any(ticket => ticket.Equals(currResults.CustSvcLog[csl].ZendeskTicketNo)) && currResults.CustSvcLog[csl].ZendeskTicketNo != 0)
                                     {
                                         ticketNo = currResults.CustSvcLog[csl].ZendeskTicketNo.ToString();
                                         returnHead.Tickets.Add(new Zendesk(ticketNo, true));
+                                        returnTickets.Add(Convert.ToInt64(ticketNo));
                                     }
                                 }
                                 

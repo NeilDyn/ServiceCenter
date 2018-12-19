@@ -31,6 +31,10 @@ namespace ExcelDesign.Class_Objects
     * Update IssueRefund to pass Zendesk Ticket # Parameter
     */
 
+    /* v9.3 - 19 December 2018 - Neil Jansen
+     * Added new Function UpdateZendeskNo
+     */
+
     public class WebService
     { 
         private readonly string functionsURL = "Codeunit/Functions";
@@ -234,6 +238,11 @@ namespace ExcelDesign.Class_Objects
         public void ProcessSuggestSimilarItems(string suggestionList, string sessionID)
         {
             functions.UpdateRMAItemNo(sessionID, suggestionList);
+        }
+
+        public void UpdateZendeskTicket(string sessionID, int currentTicketNo, int updateTicketNo)
+        {
+            functions.UpdateZendeskTicket(sessionID, currentTicketNo, updateTicketNo);
         }
     }
 }

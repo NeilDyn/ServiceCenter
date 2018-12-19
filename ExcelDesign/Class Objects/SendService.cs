@@ -31,6 +31,10 @@ namespace ExcelDesign.Class_Objects
      * Update IssueRefund to pass Zendesk Ticket # Parameter
      */
 
+    /* v9.3 - 19 December 2018 - Neil Jansen
+     * Added new function UpdateZendeskTicket called from WebMethod
+     */
+
     public class SendService
     {
         public List<Customer> CustomerList { get; set; }
@@ -488,6 +492,11 @@ namespace ExcelDesign.Class_Objects
         public void ProcessSuggestSimilarItems(string suggestionList, string sessionID)
         {
             webService.ProcessSuggestSimilarItems(suggestionList, sessionID);
+        }
+
+        public void UpdateZendeskTicket(string sessionID, int currentTicketNo, int updateTicketNo)
+        {
+            webService.UpdateZendeskTicket(sessionID, currentTicketNo, updateTicketNo);
         }
     }
 }

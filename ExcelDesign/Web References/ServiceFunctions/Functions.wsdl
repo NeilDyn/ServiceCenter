@@ -998,6 +998,20 @@
           <sequence />
         </complexType>
       </element>
+      <element name="UpdateZendeskTicket">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="currentTicketNo" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="updateTicketNo" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="UpdateZendeskTicket_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
       <element name="SetDebug">
         <complexType>
           <sequence>
@@ -1179,6 +1193,12 @@
   <message name="UpdateRMAItemNo_Result">
     <part name="parameters" element="tns:UpdateRMAItemNo_Result" />
   </message>
+  <message name="UpdateZendeskTicket">
+    <part name="parameters" element="tns:UpdateZendeskTicket" />
+  </message>
+  <message name="UpdateZendeskTicket_Result">
+    <part name="parameters" element="tns:UpdateZendeskTicket_Result" />
+  </message>
   <message name="SetDebug">
     <part name="parameters" element="tns:SetDebug" />
   </message>
@@ -1289,6 +1309,10 @@
     <operation name="UpdateRMAItemNo">
       <input name="UpdateRMAItemNo" message="tns:UpdateRMAItemNo" />
       <output name="UpdateRMAItemNo_Result" message="tns:UpdateRMAItemNo_Result" />
+    </operation>
+    <operation name="UpdateZendeskTicket">
+      <input name="UpdateZendeskTicket" message="tns:UpdateZendeskTicket" />
+      <output name="UpdateZendeskTicket_Result" message="tns:UpdateZendeskTicket_Result" />
     </operation>
     <operation name="SetDebug">
       <input name="SetDebug" message="tns:SetDebug" />
@@ -1490,6 +1514,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="UpdateRMAItemNo_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="UpdateZendeskTicket">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:UpdateZendeskTicket" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="UpdateZendeskTicket">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="UpdateZendeskTicket_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

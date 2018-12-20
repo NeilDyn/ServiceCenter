@@ -40,6 +40,9 @@ namespace ExcelDesign.Forms
 
         /* v9.3 - 19 December 2018 - Neil Jansen
          * Added new WebMethod to update Zendesk Ticket No
+         * 
+         * 20 December 2018 - Neil Jansen
+         * Added condition to PopulateData function to display message when no search results are returned.
          */
 
         #region Global
@@ -309,20 +312,27 @@ namespace ExcelDesign.Forms
         {
             try
             {
-                if (customers.Count > 1)
+                if(customers.Count > 0)
                 {
-                    multipleCustomers = LoadControl("UserControls/SingleControls/MultipleCustomers.ascx");
-                    this.frmOrderDetails.Controls.Add(multipleCustomers);
-                    Session["MultipleCustomers"] = multipleCustomers;
+                    if (customers.Count > 1)
+                    {
+                        multipleCustomers = LoadControl("UserControls/SingleControls/MultipleCustomers.ascx");
+                        this.frmOrderDetails.Controls.Add(multipleCustomers);
+                        Session["MultipleCustomers"] = multipleCustomers;
+                    }
+
+                    customerInfoTable = LoadControl("UserControls/MainTables/CustomerInfoTable.ascx");
+                    customerInfoTable.ID = "Customer_Info_Table";
+                    ((CustomerInfoTable)customerInfoTable).CustomerList = customers;
+                    ((CustomerInfoTable)customerInfoTable).CreateCustomerInfo();
+                    this.frmOrderDetails.Controls.Add(customerInfoTable);
+
+                    StaticService.CustomerList = customers;
                 }
-
-                customerInfoTable = LoadControl("UserControls/MainTables/CustomerInfoTable.ascx");
-                customerInfoTable.ID = "Customer_Info_Table";
-                ((CustomerInfoTable)customerInfoTable).CustomerList = customers;
-                ((CustomerInfoTable)customerInfoTable).CreateCustomerInfo();
-                this.frmOrderDetails.Controls.Add(customerInfoTable);
-
-                StaticService.CustomerList = customers;
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "noSerachResults", "alert(No Search Results Found.);", true);
+                }
             }
             catch (Exception ex)
             {

@@ -269,7 +269,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 imgOrderComments.Visible = false;
             }
 
-            tcZendeskTickets.Text = Sh.Tickets.Count > 0 ? "<a href='javascript:expandSalesOrderZendeskTickets" + CustID.ToString() + "" + CountID.ToString() + "()'>Multiple</a>" : Sh.Tickets.Count.ToString();
+            tcZendeskTickets.Text = Sh.Tickets.Count > 0 ? "<a href='javascript:expandSalesOrderZendeskTickets" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Sh.Tickets.Count.ToString() + "</a>" : Sh.Tickets.Count.ToString();
             if (Sh.Tickets.Count > 0)
             {
                 PopulateZendeskTicketLines();

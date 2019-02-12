@@ -391,6 +391,9 @@
           <element minOccurs="1" maxOccurs="1" name="RMANo" type="string" />
           <element minOccurs="1" maxOccurs="1" name="SalesQuoteNo" type="string" />
           <element minOccurs="1" maxOccurs="1" default="0" name="ZendeskTicketNo" type="int" />
+          <element minOccurs="1" maxOccurs="1" name="Subject" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CreatedDate" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="UpdateDate" type="string" />
         </sequence>
       </complexType>
       <complexType name="SearchResults" mixed="true">
@@ -745,6 +748,16 @@
           </sequence>
         </complexType>
       </element>
+      <element name="ExecuteExtraSearch">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="ExecuteExtraSearch_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
       <element name="CreateExchangeOrder">
         <complexType>
           <sequence>
@@ -1012,6 +1025,19 @@
           <sequence />
         </complexType>
       </element>
+      <element name="DeleteZendeskTicket">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="currentTicketNo" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="DeleteZendeskTicket_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
       <element name="SetDebug">
         <complexType>
           <sequence>
@@ -1102,6 +1128,12 @@
   </message>
   <message name="FilterEbayUserIDSOImportBuffer_Result">
     <part name="parameters" element="tns:FilterEbayUserIDSOImportBuffer_Result" />
+  </message>
+  <message name="ExecuteExtraSearch">
+    <part name="parameters" element="tns:ExecuteExtraSearch" />
+  </message>
+  <message name="ExecuteExtraSearch_Result">
+    <part name="parameters" element="tns:ExecuteExtraSearch_Result" />
   </message>
   <message name="CreateExchangeOrder">
     <part name="parameters" element="tns:CreateExchangeOrder" />
@@ -1199,6 +1231,12 @@
   <message name="UpdateZendeskTicket_Result">
     <part name="parameters" element="tns:UpdateZendeskTicket_Result" />
   </message>
+  <message name="DeleteZendeskTicket">
+    <part name="parameters" element="tns:DeleteZendeskTicket" />
+  </message>
+  <message name="DeleteZendeskTicket_Result">
+    <part name="parameters" element="tns:DeleteZendeskTicket_Result" />
+  </message>
   <message name="SetDebug">
     <part name="parameters" element="tns:SetDebug" />
   </message>
@@ -1249,6 +1287,10 @@
     <operation name="FilterEbayUserIDSOImportBuffer">
       <input name="FilterEbayUserIDSOImportBuffer" message="tns:FilterEbayUserIDSOImportBuffer" />
       <output name="FilterEbayUserIDSOImportBuffer_Result" message="tns:FilterEbayUserIDSOImportBuffer_Result" />
+    </operation>
+    <operation name="ExecuteExtraSearch">
+      <input name="ExecuteExtraSearch" message="tns:ExecuteExtraSearch" />
+      <output name="ExecuteExtraSearch_Result" message="tns:ExecuteExtraSearch_Result" />
     </operation>
     <operation name="CreateExchangeOrder">
       <input name="CreateExchangeOrder" message="tns:CreateExchangeOrder" />
@@ -1313,6 +1355,10 @@
     <operation name="UpdateZendeskTicket">
       <input name="UpdateZendeskTicket" message="tns:UpdateZendeskTicket" />
       <output name="UpdateZendeskTicket_Result" message="tns:UpdateZendeskTicket_Result" />
+    </operation>
+    <operation name="DeleteZendeskTicket">
+      <input name="DeleteZendeskTicket" message="tns:DeleteZendeskTicket" />
+      <output name="DeleteZendeskTicket_Result" message="tns:DeleteZendeskTicket_Result" />
     </operation>
     <operation name="SetDebug">
       <input name="SetDebug" message="tns:SetDebug" />
@@ -1379,6 +1425,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="FilterEbayUserIDSOImportBuffer_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ExecuteExtraSearch">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:ExecuteExtraSearch" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ExecuteExtraSearch">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ExecuteExtraSearch_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -1523,6 +1578,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="UpdateZendeskTicket_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="DeleteZendeskTicket">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:DeleteZendeskTicket" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="DeleteZendeskTicket">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="DeleteZendeskTicket_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

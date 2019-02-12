@@ -13,6 +13,51 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines {
     public partial class SingleReturnOrderZendeskTickets {
         
         /// <summary>
+        /// lblCurrentZendeskTicketNoReturn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCurrentZendeskTicketNoReturn;
+        
+        /// <summary>
+        /// txtUpdateZendeskTicketNoReturn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtUpdateZendeskTicketNoReturn;
+        
+        /// <summary>
+        /// btnUpdateZendeskTicketNoReturn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdateZendeskTicketNoReturn;
+        
+        /// <summary>
+        /// btnDeleteZendeskTicketNoReturn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDeleteZendeskTicketNoReturn;
+        
+        /// <summary>
+        /// btnCancelZendeskOptionsReturn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelZendeskOptionsReturn;
+        
+        /// <summary>
         /// SingleReturnOrderZendeskTicketsTable control.
         /// </summary>
         /// <remarks>

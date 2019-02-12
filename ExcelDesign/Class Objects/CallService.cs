@@ -1032,7 +1032,12 @@ namespace ExcelDesign.Class_Objects
                                 allowRefund = currResults.SOImportBuffer[so].Warranty[0].RefundAllowed[0] == "Yes" ? true : false;
                                 warranty = new Warranty(status, policy, int.Parse(daysRemaining), warrantyType, isPDA, allowRefund);
                                 sellToCustomerNo = currResults.SOImportBuffer[so].CustomerNo;
-                                ebayUserID = currResults.SOImportBuffer[so].EbayUserID;
+
+                                // NJ - 11 January 2019 - Allow any customers channels of containing ebay condition
+                                if (currResults.SOImportBuffer[so].CustomerNo.ToLower().Contains("ebay"))
+                                {
+                                    ebayUserID = currResults.SOImportBuffer[so].EbayUserID;
+                                }
 
                                 if (currResults.ExtendedSalesHeader != null)
                                 {
@@ -1278,7 +1283,7 @@ namespace ExcelDesign.Class_Objects
                                 }
                             }
 
-                            // 2 November 2018 -  Updated touse SSH No.
+                            // 2 November 2018 -  Updated to use SSH No.
                             commentLines = GetSalesLineComments(currResults.SalesShipmentHeader[so].No);
                             partialRefunds = GetPartialRefunds(orderNo, externalDocumentNo);
                             salesHead.Add(new SalesHeader(orderStatus, orderDate, orderNo, channelName, shipHeader, postPackage, externalDocumentNo, warranty,
@@ -2625,7 +2630,11 @@ namespace ExcelDesign.Class_Objects
 
                     if (currResults.CustSvcLog != null)
                     {
+                        CultureInfo culture = new CultureInfo("en-US");
                         string ticketNo = string.Empty;
+                        string createdDate = null;
+                        string updatedDate = null;
+                        string subject = string.Empty;
 
                         for (int csl = 0; csl < currResults.CustSvcLog.Length; csl++)
                         {
@@ -2634,12 +2643,19 @@ namespace ExcelDesign.Class_Objects
                                 if (!salesTickets.Any(ticket => ticket.Equals(Convert.ToInt64(currResults.CustSvcLog[csl].ZendeskTicketNo))) && currResults.CustSvcLog[csl].ZendeskTicketNo != 0)
                                 {
                                     ticketNo = currResults.CustSvcLog[csl].ZendeskTicketNo.ToString();
-                                    salesHead.Tickets.Add(new Zendesk(ticketNo, true));
+                                    createdDate = currResults.CustSvcLog[csl].CreatedDate;
+                                    updatedDate = currResults.CustSvcLog[csl].UpdateDate;
+                                    subject = currResults.CustSvcLog[csl].Subject;
+                                    salesHead.Tickets.Add(new Zendesk(ticketNo, DateTime.Parse(createdDate, culture), DateTime.Parse(createdDate, culture), subject,
+                                        string.Empty, string.Empty, true));
                                     salesTickets.Add(Convert.ToInt64(ticketNo));
                                 }
                             }
 
                             ticketNo = string.Empty;
+                            createdDate = null;
+                            updatedDate = null;
+                            subject = string.Empty;
                         }
                     }
 
@@ -2683,7 +2699,11 @@ namespace ExcelDesign.Class_Objects
 
                         if (currResults.CustSvcLog != null)
                         {
+                            CultureInfo culture = new CultureInfo("en-US");
                             string ticketNo = string.Empty;
+                            string createdDate = null;
+                            string updatedDate = null;
+                            string subject = string.Empty;
 
                             for (int csl = 0; csl < currResults.CustSvcLog.Length; csl++)
                             {
@@ -2692,12 +2712,19 @@ namespace ExcelDesign.Class_Objects
                                     if (!returnTickets.Any(ticket => ticket.Equals(currResults.CustSvcLog[csl].ZendeskTicketNo)) && currResults.CustSvcLog[csl].ZendeskTicketNo != 0)
                                     {
                                         ticketNo = currResults.CustSvcLog[csl].ZendeskTicketNo.ToString();
-                                        returnHead.Tickets.Add(new Zendesk(ticketNo, true));
+                                        createdDate = currResults.CustSvcLog[csl].CreatedDate;
+                                        updatedDate = currResults.CustSvcLog[csl].UpdateDate;
+                                        subject = currResults.CustSvcLog[csl].Subject;
+                                        returnHead.Tickets.Add(new Zendesk(ticketNo, DateTime.Parse(createdDate, culture), DateTime.Parse(createdDate, culture), subject,
+                                            string.Empty, string.Empty, true));
                                         returnTickets.Add(Convert.ToInt64(ticketNo));
                                     }
                                 }
-                                
+
                                 ticketNo = string.Empty;
+                                createdDate = null;
+                                updatedDate = null;
+                                subject = string.Empty;
                             }
                         } // if null
                     }

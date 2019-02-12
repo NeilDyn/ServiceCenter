@@ -35,6 +35,10 @@ namespace ExcelDesign.Class_Objects
      * Added new Function UpdateZendeskNo
      */
 
+    /* v9.3.2 - 15 January 2019 - Neil jansen
+     * Added Delete function to delete Zendesk Ticket No's
+     */
+
     public class WebService
     { 
         private readonly string functionsURL = "Codeunit/Functions";
@@ -243,6 +247,11 @@ namespace ExcelDesign.Class_Objects
         public void UpdateZendeskTicket(string sessionID, int currentTicketNo, int updateTicketNo)
         {
             functions.UpdateZendeskTicket(sessionID, currentTicketNo, updateTicketNo);
+        }
+
+        public void DeleteZendeskTicket(string sessionID, int currentTicketNo)
+        {
+            functions.DeleteZendeskTicket(sessionID, currentTicketNo);
         }
     }
 }

@@ -39,6 +39,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private System.Threading.SendOrPostCallback FilterEbayUserIDSOImportBufferOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ExecuteExtraSearchOperationCompleted;
+        
         private System.Threading.SendOrPostCallback CreateExchangeOrderOperationCompleted;
         
         private System.Threading.SendOrPostCallback CreatePartRequestOperationCompleted;
@@ -70,6 +72,8 @@ namespace ExcelDesign.ServiceFunctions {
         private System.Threading.SendOrPostCallback UpdateRMAItemNoOperationCompleted;
         
         private System.Threading.SendOrPostCallback UpdateZendeskTicketOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback DeleteZendeskTicketOperationCompleted;
         
         private System.Threading.SendOrPostCallback SetDebugOperationCompleted;
         
@@ -135,6 +139,9 @@ namespace ExcelDesign.ServiceFunctions {
         public event FilterEbayUserIDSOImportBufferCompletedEventHandler FilterEbayUserIDSOImportBufferCompleted;
         
         /// <remarks/>
+        public event ExecuteExtraSearchCompletedEventHandler ExecuteExtraSearchCompleted;
+        
+        /// <remarks/>
         public event CreateExchangeOrderCompletedEventHandler CreateExchangeOrderCompleted;
         
         /// <remarks/>
@@ -181,6 +188,9 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         public event UpdateZendeskTicketCompletedEventHandler UpdateZendeskTicketCompleted;
+        
+        /// <remarks/>
+        public event DeleteZendeskTicketCompletedEventHandler DeleteZendeskTicketCompleted;
         
         /// <remarks/>
         public event SetDebugCompletedEventHandler SetDebugCompleted;
@@ -356,6 +366,32 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.FilterEbayUserIDSOImportBufferCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.FilterEbayUserIDSOImportBufferCompleted(this, new FilterEbayUserIDSOImportBufferCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:ExecuteExtraSearch", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="ExecuteExtraSearch_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void ExecuteExtraSearch() {
+            this.Invoke("ExecuteExtraSearch", new object[0]);
+        }
+        
+        /// <remarks/>
+        public void ExecuteExtraSearchAsync() {
+            this.ExecuteExtraSearchAsync(null);
+        }
+        
+        /// <remarks/>
+        public void ExecuteExtraSearchAsync(object userState) {
+            if ((this.ExecuteExtraSearchOperationCompleted == null)) {
+                this.ExecuteExtraSearchOperationCompleted = new System.Threading.SendOrPostCallback(this.OnExecuteExtraSearchOperationCompleted);
+            }
+            this.InvokeAsync("ExecuteExtraSearch", new object[0], this.ExecuteExtraSearchOperationCompleted, userState);
+        }
+        
+        private void OnExecuteExtraSearchOperationCompleted(object arg) {
+            if ((this.ExecuteExtraSearchCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ExecuteExtraSearchCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -978,6 +1014,36 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.UpdateZendeskTicketCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.UpdateZendeskTicketCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:DeleteZendeskTicket", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="DeleteZendeskTicket_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void DeleteZendeskTicket(string sessionID, int currentTicketNo) {
+            this.Invoke("DeleteZendeskTicket", new object[] {
+                        sessionID,
+                        currentTicketNo});
+        }
+        
+        /// <remarks/>
+        public void DeleteZendeskTicketAsync(string sessionID, int currentTicketNo) {
+            this.DeleteZendeskTicketAsync(sessionID, currentTicketNo, null);
+        }
+        
+        /// <remarks/>
+        public void DeleteZendeskTicketAsync(string sessionID, int currentTicketNo, object userState) {
+            if ((this.DeleteZendeskTicketOperationCompleted == null)) {
+                this.DeleteZendeskTicketOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDeleteZendeskTicketOperationCompleted);
+            }
+            this.InvokeAsync("DeleteZendeskTicket", new object[] {
+                        sessionID,
+                        currentTicketNo}, this.DeleteZendeskTicketOperationCompleted, userState);
+        }
+        
+        private void OnDeleteZendeskTicketOperationCompleted(object arg) {
+            if ((this.DeleteZendeskTicketCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.DeleteZendeskTicketCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -3653,6 +3719,12 @@ namespace ExcelDesign.ServiceFunctions {
         
         private int zendeskTicketNoField;
         
+        private string subjectField;
+        
+        private string createdDateField;
+        
+        private string updateDateField;
+        
         public CustSvcLog() {
             this.zendeskTicketNoField = 0;
         }
@@ -3694,6 +3766,36 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.zendeskTicketNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Subject {
+            get {
+                return this.subjectField;
+            }
+            set {
+                this.subjectField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string UpdateDate {
+            get {
+                return this.updateDateField;
+            }
+            set {
+                this.updateDateField = value;
             }
         }
     }
@@ -7494,6 +7596,10 @@ namespace ExcelDesign.ServiceFunctions {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void ExecuteExtraSearchCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void CreateExchangeOrderCompletedEventHandler(object sender, CreateExchangeOrderCompletedEventArgs e);
     
     /// <remarks/>
@@ -7799,6 +7905,10 @@ namespace ExcelDesign.ServiceFunctions {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void UpdateZendeskTicketCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void DeleteZendeskTicketCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]

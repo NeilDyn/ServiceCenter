@@ -123,7 +123,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             btnPrintRMAInstructions.OnClientClick = "return false;";
 
             btnUpdateRMA.Text = "Update RMA";
-            btnUpdateRMA.ID = "btnUpdateRMA" + CustID.ToString() + "_" + CountID.ToString();
+            btnUpdateRMA.ID = "BtnUpdateRMA" + CustID.ToString() + "_" + CountID.ToString();
             btnUpdateRMA.OnClientClick = "return false;";
 
             btnIssueReturnLabel.Text = "Issue Return Label";

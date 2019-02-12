@@ -13,6 +13,51 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines {
     public partial class SingleSalesOrderZendeskTickets {
         
         /// <summary>
+        /// lblCurrentZendeskTicketNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCurrentZendeskTicketNo;
+        
+        /// <summary>
+        /// txtUpdateZendeskTicketNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtUpdateZendeskTicketNo;
+        
+        /// <summary>
+        /// btnUpdateZendeskTicketNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdateZendeskTicketNo;
+        
+        /// <summary>
+        /// btnDeleteZendeskTicketNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDeleteZendeskTicketNo;
+        
+        /// <summary>
+        /// btnCancelZendeskOptions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelZendeskOptions;
+        
+        /// <summary>
         /// SingleSalesOrderZendeskTicketsTable control.
         /// </summary>
         /// <remarks>

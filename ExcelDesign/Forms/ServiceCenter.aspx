@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/themes/ui-lightness/jquery-ui.css" type="text/css" />
     <mainnav:MainNavbar ID="MainNavbar" runat="server" />
     <script>
-        $("id$=btnExtendSessionTime").click(function () {
+        $("btnExtendSessionTime").click(function () {
             ResetTimers();
         });
-
+   
         var warningTimer;
         var timeoutTimer;
 
@@ -41,7 +41,7 @@
         //Show idle timeout warning dialog
         function IdleWarning() {
             $("#timeout").dialog({
-                title: "Session about to expire",
+                title: "Session about to expire.",
                 modal: true
             });
         };
@@ -63,6 +63,8 @@
                 },
             });
         };
+
+        
     </script>
 </head>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -73,6 +75,7 @@
             <p>Warning, your session will expire in 1 minute. Do you want to continue working?</p>
             <asp:Button ID="btnExtendSessionTime" Text="Yes" runat="server" OnClientClick="ResetTimers()" />
         </div>
+       
 
         <div id="ServiceCenterHeader">
             <div id="StatisticsOnService" style="z-index:10">

@@ -35,6 +35,10 @@ namespace ExcelDesign.Class_Objects
      * Added new function UpdateZendeskTicket called from WebMethod
      */
 
+    /* v9.3.2 - 15 January 2019 - Neil jansen
+     * Added Delete function to delete Zendesk Ticket No's
+     */
+
     public class SendService
     {
         public List<Customer> CustomerList { get; set; }
@@ -497,6 +501,11 @@ namespace ExcelDesign.Class_Objects
         public void UpdateZendeskTicket(string sessionID, int currentTicketNo, int updateTicketNo)
         {
             webService.UpdateZendeskTicket(sessionID, currentTicketNo, updateTicketNo);
+        }
+
+        public void DeleteZendeskTicket(string sessionID, int currentTicketNo)
+        {
+            webService.DeleteZendeskTicket(sessionID, currentTicketNo);
         }
     }
 }

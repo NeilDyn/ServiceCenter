@@ -82,11 +82,15 @@ namespace ExcelDesign.Forms.UserControls.TableData.DataLines.SalesOrderLines
                     {
                         ID = "updateOrderTicketButton_" + lineCount.ToString(),
                         Text = "Update Ticket",
-                        OnClientClick = "return UpdateZendeskTicket(" + ticket.TicketNo + ")"
+                        OnClientClick = "return ZendeskOptionsOrders(" + ticket.TicketNo + ")"
                     };
 
                     buttonCell.Controls.Add(updateTicket);
                     tr.Cells.Add(buttonCell);
+                }
+                else
+                {
+                    tr.Cells.Add(new TableCell());
                 }
 
                 if (lineCount % 2 == 0)

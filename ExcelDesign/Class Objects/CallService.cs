@@ -2634,6 +2634,8 @@ namespace ExcelDesign.Class_Objects
                         string ticketNo = string.Empty;
                         string createdDate = null;
                         string updatedDate = null;
+                        DateTime? createdDateTime = null;
+                        DateTime? updateDateTime = null;
                         string subject = string.Empty;
 
                         for (int csl = 0; csl < currResults.CustSvcLog.Length; csl++)
@@ -2646,8 +2648,27 @@ namespace ExcelDesign.Class_Objects
                                     createdDate = currResults.CustSvcLog[csl].CreatedDate;
                                     updatedDate = currResults.CustSvcLog[csl].UpdateDate;
                                     subject = currResults.CustSvcLog[csl].Subject;
-                                    salesHead.Tickets.Add(new Zendesk(ticketNo, DateTime.Parse(createdDate, culture), DateTime.Parse(createdDate, culture), subject,
-                                        string.Empty, string.Empty, true));
+
+                                    if(createdDate == null)
+                                    {
+                                        createdDateTime = null;
+                                    }
+                                    else
+                                    {
+                                        createdDateTime = Convert.ToDateTime(createdDate);
+                                    }
+
+                                    if (updatedDate == null)
+                                    {
+                                        updateDateTime = null;
+                                    }
+                                    else
+                                    {
+                                        updateDateTime = Convert.ToDateTime(updatedDate);
+                                    }
+
+                                    salesHead.Tickets.Add(new Zendesk(ticketNo, createdDateTime, updateDateTime, subject,
+                                            string.Empty, string.Empty, true));
                                     salesTickets.Add(Convert.ToInt64(ticketNo));
                                 }
                             }
@@ -2656,6 +2677,8 @@ namespace ExcelDesign.Class_Objects
                             createdDate = null;
                             updatedDate = null;
                             subject = string.Empty;
+                            createdDateTime = null;
+                            updateDateTime = null;
                         }
                     }
 
@@ -2703,6 +2726,8 @@ namespace ExcelDesign.Class_Objects
                             string ticketNo = string.Empty;
                             string createdDate = null;
                             string updatedDate = null;
+                            DateTime? createdDateTime = null;
+                            DateTime? updateDateTime = null;
                             string subject = string.Empty;
 
                             for (int csl = 0; csl < currResults.CustSvcLog.Length; csl++)
@@ -2715,7 +2740,26 @@ namespace ExcelDesign.Class_Objects
                                         createdDate = currResults.CustSvcLog[csl].CreatedDate;
                                         updatedDate = currResults.CustSvcLog[csl].UpdateDate;
                                         subject = currResults.CustSvcLog[csl].Subject;
-                                        returnHead.Tickets.Add(new Zendesk(ticketNo, DateTime.Parse(createdDate, culture), DateTime.Parse(createdDate, culture), subject,
+
+                                        if (createdDate == "")
+                                        {
+                                            createdDateTime = null;
+                                        }
+                                        else
+                                        {
+                                            createdDateTime = Convert.ToDateTime(createdDate);
+                                        }
+
+                                        if (updatedDate == "")
+                                        {
+                                            updateDateTime = null;
+                                        }
+                                        else
+                                        {
+                                            updateDateTime = Convert.ToDateTime(updatedDate);
+                                        }
+
+                                        returnHead.Tickets.Add(new Zendesk(ticketNo, createdDateTime, updateDateTime, subject,
                                             string.Empty, string.Empty, true));
                                         returnTickets.Add(Convert.ToInt64(ticketNo));
                                     }
@@ -2725,6 +2769,8 @@ namespace ExcelDesign.Class_Objects
                                 createdDate = null;
                                 updatedDate = null;
                                 subject = string.Empty;
+                                createdDateTime = null;
+                                updateDateTime = null;
                             }
                         } // if null
                     }

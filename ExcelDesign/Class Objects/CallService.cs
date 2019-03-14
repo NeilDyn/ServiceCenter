@@ -2649,22 +2649,22 @@ namespace ExcelDesign.Class_Objects
                                     updatedDate = currResults.CustSvcLog[csl].UpdateDate;
                                     subject = currResults.CustSvcLog[csl].Subject;
 
-                                    if(createdDate == null)
+                                    if(createdDate == "")
                                     {
                                         createdDateTime = null;
                                     }
                                     else
                                     {
-                                        createdDateTime = Convert.ToDateTime(createdDate);
+                                        createdDateTime = Convert.ToDateTime(createdDate, culture);
                                     }
 
-                                    if (updatedDate == null)
+                                    if (updatedDate == "")
                                     {
                                         updateDateTime = null;
                                     }
                                     else
                                     {
-                                        updateDateTime = Convert.ToDateTime(updatedDate);
+                                        updateDateTime = Convert.ToDateTime(updatedDate, culture);
                                     }
 
                                     salesHead.Tickets.Add(new Zendesk(ticketNo, createdDateTime, updateDateTime, subject,
@@ -2747,7 +2747,7 @@ namespace ExcelDesign.Class_Objects
                                         }
                                         else
                                         {
-                                            createdDateTime = Convert.ToDateTime(createdDate);
+                                            createdDateTime = Convert.ToDateTime(createdDate, culture);
                                         }
 
                                         if (updatedDate == "")
@@ -2756,7 +2756,7 @@ namespace ExcelDesign.Class_Objects
                                         }
                                         else
                                         {
-                                            updateDateTime = Convert.ToDateTime(updatedDate);
+                                            updateDateTime = Convert.ToDateTime(updatedDate, culture);
                                         }
 
                                         returnHead.Tickets.Add(new Zendesk(ticketNo, createdDateTime, updateDateTime, subject,

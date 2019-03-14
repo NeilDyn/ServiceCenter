@@ -226,7 +226,7 @@
                 <asp:TableHeaderCell />
                 <asp:TableHeaderCell HorizontalAlign="Right">
                     <asp:Button ID="BtnCancel" runat="server" Text="Cancel" OnClientClick="CloseWindow();" />
-                    <asp:Button ID="BtnCreatePartRequest" runat="server" Text="Create Part Request" OnClick="btnCreatePartRequest_Click" />
+                    <asp:Button ID="BtnCreatePartRequest" runat="server" Text="Create Part Request" OnClick="BtnCreatePartRequest_Click" />
                 </asp:TableHeaderCell>
             </asp:TableFooterRow>
         </asp:Table>

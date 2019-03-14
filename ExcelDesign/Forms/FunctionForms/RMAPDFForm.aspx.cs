@@ -30,7 +30,7 @@ namespace ExcelDesign.Forms.FunctionForms
                 Response.ContentType = "application/pdf";
                 Response.OutputStream.Write(MemStream.GetBuffer(), 0, MemStream.GetBuffer().Length);
                 Response.OutputStream.Flush();
-                Response.OutputStream.Close();                
+                Response.OutputStream.Close();     
             }
             catch (Exception ex)
             {

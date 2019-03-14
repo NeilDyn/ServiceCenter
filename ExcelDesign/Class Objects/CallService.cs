@@ -9,6 +9,10 @@ using ExcelDesign.ZendeskAPI;
 
 namespace ExcelDesign.Class_Objects
 {
+    /* 16 October 2018 - Neil Jansen
+    * Updated logic to not match on external document no.s, but to loop through the extended sales header as we have updated the logic to link Sales Orders and Return Orders through this record.
+    */
+
     /* v7.1 - 3 October 2018 - Neil Jansen
      * GetStatisticsInformation() - Added older than 24 hours bucket
      */
@@ -1406,6 +1410,7 @@ namespace ExcelDesign.Class_Objects
                             shipToState = currResults.SalesHeader[c].ShipToState;
                             shipToCountry = currResults.SalesHeader[c].ShipToCountry;
                             salesHeaders = GetSalesOrders(shipToName, shipToAddress1);
+
                             returnHeaders.AddRange(GetReturnOrders(shipToName, shipToAddress1, ref readRMA));
                             returnHeaders.AddRange(GetReturnOrdersFromSalesHeader(salesHeaders, ref readRMA));
 
@@ -1479,6 +1484,7 @@ namespace ExcelDesign.Class_Objects
             /* 16 October 2018 - Neil Jansen
              * Updated logic to not match on external document no.s, but to loop through the extended sales header as we have updated the logic to link Sales Orders and Return Orders through this record.
              */
+
             List<ReturnHeader> returnHead = new List<ReturnHeader>();
 
             string returnStatus = string.Empty;
@@ -2649,22 +2655,22 @@ namespace ExcelDesign.Class_Objects
                                     updatedDate = currResults.CustSvcLog[csl].UpdateDate;
                                     subject = currResults.CustSvcLog[csl].Subject;
 
-                                    if(createdDate == null)
+                                    if(createdDate == "")
                                     {
                                         createdDateTime = null;
                                     }
                                     else
                                     {
-                                        createdDateTime = Convert.ToDateTime(createdDate);
+                                        createdDateTime = Convert.ToDateTime(createdDate, culture);
                                     }
 
-                                    if (updatedDate == null)
+                                    if (updatedDate == "")
                                     {
                                         updateDateTime = null;
                                     }
                                     else
                                     {
-                                        updateDateTime = Convert.ToDateTime(updatedDate);
+                                        updateDateTime = Convert.ToDateTime(updatedDate, culture);
                                     }
 
                                     salesHead.Tickets.Add(new Zendesk(ticketNo, createdDateTime, updateDateTime, subject,
@@ -2747,7 +2753,7 @@ namespace ExcelDesign.Class_Objects
                                         }
                                         else
                                         {
-                                            createdDateTime = Convert.ToDateTime(createdDate);
+                                            createdDateTime = Convert.ToDateTime(createdDate, culture);
                                         }
 
                                         if (updatedDate == "")
@@ -2756,7 +2762,7 @@ namespace ExcelDesign.Class_Objects
                                         }
                                         else
                                         {
-                                            updateDateTime = Convert.ToDateTime(updatedDate);
+                                            updateDateTime = Convert.ToDateTime(updatedDate, culture);
                                         }
 
                                         returnHead.Tickets.Add(new Zendesk(ticketNo, createdDateTime, updateDateTime, subject,

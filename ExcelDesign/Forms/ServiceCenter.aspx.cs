@@ -27,11 +27,11 @@ namespace ExcelDesign.Forms
          * Updated with User Control Navigation bar.
         */
 
-         /* v7.1 - 3 October 2018 - Neil Jansen
-         * Added logic to prevent "Thread was being aborted" to be the error that is displayed as it is caused by lower level exceptions being thrown that should be displayed instead
-         * Added logic to display as alert when Order has been cancelled
-         * Updated logic to clear all controls and lists when PostBack occours to prevent Customer data to be duplicated
-         */
+        /* v7.1 - 3 October 2018 - Neil Jansen
+        * Added logic to prevent "Thread was being aborted" to be the error that is displayed as it is caused by lower level exceptions being thrown that should be displayed instead
+        * Added logic to display as alert when Order has been cancelled
+        * Updated logic to clear all controls and lists when PostBack occours to prevent Customer data to be duplicated
+        */
 
         /* v9.1 - 13 December 2018 - Neil Jansen
          * Update logic to allow IssueRefund to pass Zendesk Ticket # through webservice
@@ -44,9 +44,13 @@ namespace ExcelDesign.Forms
          * Added condition to PopulateData function to display message when no search results are returned.
          */
 
-        /* v9.3.2 - 15 January 2019 - Neil jansen
+        /* v9.3.2 - 15 January 2019 - Neil Jansen
          * Added Delete function to delete Zendesk Ticket No's
-         */ 
+         */
+
+        /* v10 - 12 March 2019 - Neil Jansen
+         * Added new function for Legacy Return Label
+         */
 
         #region Global
 
@@ -145,9 +149,9 @@ namespace ExcelDesign.Forms
                     if (Session["ActiveCustomer"] != null)
                     {
                         customers = new List<Customer>
-                {
-                    (Customer)Session["ActiveCustomer"]
-                };
+                        {
+                            (Customer)Session["ActiveCustomer"]
+                        };
 
                         customerInfoTable = LoadControl("UserControls/MainTables/CustomerInfoTable.ascx");
                         customerInfoTable.ID = "Customer_Info_Table";
@@ -332,7 +336,7 @@ namespace ExcelDesign.Forms
 
                 if (customers.Count == 0)
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "noSerachResults", "alert('No Search Results Found.');", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "noSearchResults", "alert('No Search Results Found.');", true);
                 }
             }
             catch (Exception ex)
@@ -380,7 +384,7 @@ namespace ExcelDesign.Forms
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static string IssueReturnLabel(string rmaNo, string email)
+        public static string LegacyReturnLabel(string rmaNo, string email)
         {
             try
             {
@@ -399,7 +403,7 @@ namespace ExcelDesign.Forms
                 {
                     try
                     {
-                        StaticService.IssueReturnLabel(rmaNo, email, sessionID);
+                        StaticService.LegacyReturnLabel(rmaNo, email, sessionID);
                     }
                     catch (Exception workerE)
                     {
@@ -408,6 +412,43 @@ namespace ExcelDesign.Forms
                 });
 
                 worker.Start();
+
+                HttpContext.Current.Session["NoUserInteraction"] = true;
+                HttpContext.Current.Session["UserInteraction"] = true;
+            }
+            catch (Exception e)
+            {
+                return "Error - " + e.Message;
+            }
+
+            return "success";
+        }
+        
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static string IssueReturnLabel(string rmaNo, string email)
+        {
+            try
+            {
+                string sessionID = string.Empty;
+                if (HttpContext.Current.Session["ActiveUser"] != null)
+                {
+                    User u = (User)HttpContext.Current.Session["ActiveUser"];
+                    sessionID = u.SessionID;
+                }
+                else
+                {
+                    sessionID = "{A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0}";
+                }
+
+                try
+                {
+                    StaticService.IssueReturnLabel(rmaNo, email, sessionID);
+                }
+                catch (Exception workerE)
+                {
+                    Log.Error(workerE.Message, workerE);
+                }
 
                 HttpContext.Current.Session["NoUserInteraction"] = true;
                 HttpContext.Current.Session["UserInteraction"] = true;

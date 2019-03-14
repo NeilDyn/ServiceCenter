@@ -39,6 +39,10 @@ namespace ExcelDesign.Class_Objects
      * Added Delete function to delete Zendesk Ticket No's
      */
 
+    /* v10 - 12 March 2019 - Neil Jansen
+     * Added new function for Legacy Return Label
+     */
+
     public class SendService
     {
         public List<Customer> CustomerList { get; set; }
@@ -451,6 +455,11 @@ namespace ExcelDesign.Class_Objects
         public string DeleteRMA(string rmaNo)
         {
             return webService.DeleteRMA(rmaNo);
+        }
+
+        public void LegacyReturnLabel(string rmaNo, string email, string sessionID)
+        {
+            webService.LegacyReturnLabel(rmaNo, email, sessionID);
         }
 
         public void IssueReturnLabel(string rmaNo, string email, string sessionID)

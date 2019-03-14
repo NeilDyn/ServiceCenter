@@ -39,6 +39,10 @@ namespace ExcelDesign.Class_Objects
      * Added Delete function to delete Zendesk Ticket No's
      */
 
+    /* v10 - 12 March 2019 - Neil Jansen
+     * Added new function for Legacy Return Label
+     */
+
     public class WebService
     { 
         private readonly string functionsURL = "Codeunit/Functions";
@@ -158,9 +162,14 @@ namespace ExcelDesign.Class_Objects
             return login;
         }
 
+        public void LegacyReturnLabel(string rmaNo, string email, string sessionID)
+        {
+            functions.LegacyIssueReturnLabel(rmaNo, email, sessionID);
+        }
+
         public void IssueReturnLabel(string rmaNo, string email, string sessionID)
         {
-            functions.IssueReturnLabelAsync(rmaNo, email, sessionID);
+            functions.IssueReturnLabel(rmaNo, email, sessionID);
         }
 
         public CreatedExchangeOrder CreateExchange(string rmaNo, string externalDocNo, string lineValues, int zendeskTicketNo)

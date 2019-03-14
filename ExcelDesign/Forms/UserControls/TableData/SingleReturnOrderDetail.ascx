@@ -219,7 +219,54 @@
                                     dataType: "json",
                                     success: function (error) {
                                         if (error.d.indexOf("Error") == -1) {
-                                            alert("Return Label Created for Return: " + rmaNo + " and is being processed and will be emailed within 1-2 hours");
+                                            alert("Return Label Created for Return: " + rmaNo + " and is being processed and will be emailed shortly.");
+                                            __doPostBack('[id$=btnReload', '');
+                                        } else {
+                                            alert(error.d);
+                                        }
+                                    },
+                                    error: function (xhr, status, text) {
+                                        console.log(xhr.status);
+                                        console.log(xhr.text);
+                                        console.log(xhr.responseText);
+                                    },
+                                });
+                            } else {
+                                alert("Invalid email address entered.")
+                            }
+                        }
+                    } else {
+                        alert("Only Return Orders that have an 'OPEN' return status can be issued Return Labels.");
+                    }
+                } else {
+                    alert("You do not have the required permission to issue a return label.");
+                }
+            } else {
+                alert("Return Label has already been created.");
+            }
+        });
+
+        $("[id$=btnLegacyReturnLabel<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+            if ("<%= this.UPSLabelCreated %>" == "false") {
+                if ("<%= this.CanIssueLabel %>" == "true") {
+                    if ("<%= this.tcReturnStatus.Text %>" == "Open") {
+                        var rmaNo = "<%= this.Rh.RMANo %>";
+                        var emailIn = prompt("Please enter a valid email address:");
+
+                        if (emailIn == null || emailIn == "") {
+                            alert("Invalid email address entered.");
+                        }
+                        else {
+                            if (validateEmail(emailIn)) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "ServiceCenter.aspx/LegacyReturnLabel",
+                                    data: JSON.stringify({ rmaNo: rmaNo, email: emailIn }),
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    success: function (error) {
+                                        if (error.d.indexOf("Error") == -1) {
+                                            alert("Return Label Created for Return: " + rmaNo + " and is being processed and will be emailed within 1-2 hours.");
                                             __doPostBack('[id$=btnReload', '');
                                         } else {
                                             alert(error.d);

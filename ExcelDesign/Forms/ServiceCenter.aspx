@@ -74,8 +74,7 @@
             <h1>Session is about to expire</h1>
             <p>Warning, your session will expire in 1 minute. Do you want to continue working?</p>
             <asp:Button ID="btnExtendSessionTime" Text="Yes" runat="server" OnClientClick="ResetTimers()" />
-        </div>
-       
+        </div>    
 
         <div id="ServiceCenterHeader">
             <div id="StatisticsOnService" style="z-index:10">
@@ -96,11 +95,11 @@
                 <asp:ListItem Value="Default (Exludes Ship-to Filters)"></asp:ListItem>
                 <asp:ListItem Value="Search All"></asp:ListItem>
                 <asp:ListItem Value="External Document No."></asp:ListItem>
-                <asp:ListItem Value="Tracking No"></asp:ListItem>
+                <asp:ListItem Value="Tracking No."></asp:ListItem>
                 <asp:ListItem Value="IMEI"></asp:ListItem>
                 <asp:ListItem Value="Ship-to Name"></asp:ListItem>
                 <asp:ListItem Value="Ship-to Address"></asp:ListItem>
-                <asp:ListItem Value="RMA-No"></asp:ListItem>
+                <asp:ListItem Value="RMA-No."></asp:ListItem>
                 <asp:ListItem Value="Ebay User ID"></asp:ListItem>
             </asp:DropDownList>
         </div>

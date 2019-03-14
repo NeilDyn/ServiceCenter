@@ -12,6 +12,12 @@ using ExcelDesign.Forms.UserControls.TableData.DataLines.ReturnOrderLines;
 
 namespace ExcelDesign.Forms.UserControls.TableData
 {
+    /* v10 - 12 March 2019 - Neil Jansen
+     * Updated logic for Issue Return Label to call new function to email and print new logic of Return Label
+     * 
+     * Added new button Legacy Return Label that executes the current functionality of the Issue Return Label
+     */
+
     public partial class SingleReturnOrderDetail : System.Web.UI.UserControl
     {
         public ReturnHeader Rh { get; set; }
@@ -36,6 +42,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
         protected TableCell issueRefundCell = new TableCell();
         protected TableCell printRMAInstructions = new TableCell();
         protected TableCell updateRMA = new TableCell();
+        protected TableCell legacyReturnLabel = new TableCell();
         protected TableCell issueReturnLabel = new TableCell();
 
         protected TableCell receiptCell;
@@ -48,6 +55,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
         protected Button btnIssueRefund = new Button();
         protected Button btnPrintRMAInstructions = new Button();
         protected Button btnUpdateRMA = new Button();
+        protected Button btnLegacyReturnLabel = new Button();
         protected Button btnIssueReturnLabel = new Button();
 
         protected Control singleReturnOrderReceiptLines;
@@ -125,6 +133,10 @@ namespace ExcelDesign.Forms.UserControls.TableData
             btnUpdateRMA.Text = "Update RMA";
             btnUpdateRMA.ID = "BtnUpdateRMA" + CustID.ToString() + "_" + CountID.ToString();
             btnUpdateRMA.OnClientClick = "return false;";
+
+            btnLegacyReturnLabel.Text = "Legacy Return Label";
+            btnLegacyReturnLabel.ID = "btnLegacyReturnLabel" + CustID.ToString() + "_" + CountID.ToString();
+            btnLegacyReturnLabel.OnClientClick = "return false;";
 
             btnIssueReturnLabel.Text = "Issue Return Label";
             btnIssueReturnLabel.ID = "btnIssueReturnLabel" + CustID.ToString() + "_" + CountID.ToString();
@@ -469,10 +481,9 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 issueRefundCell.Controls.Add(btnIssueRefund);
                 updateRMA.Controls.Add(btnUpdateRMA);
                 printRMAInstructions.Controls.Add(btnPrintRMAInstructions);
+                legacyReturnLabel.Controls.Add(btnLegacyReturnLabel);
                 issueReturnLabel.Controls.Add(btnIssueReturnLabel);
 
-                buttonRow.Cells.Add(new TableCell());
-                buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
@@ -481,6 +492,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 buttonRow.Cells.Add(updateRMA);
                 buttonRow.Cells.Add(createExchangeCell);
                 buttonRow.Cells.Add(issueRefundCell);
+                buttonRow.Cells.Add(legacyReturnLabel);
                 buttonRow.Cells.Add(issueReturnLabel);
                 buttonRow.Cells.Add(printRMAInstructions);
 

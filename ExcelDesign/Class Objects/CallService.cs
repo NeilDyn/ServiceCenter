@@ -9,6 +9,10 @@ using ExcelDesign.ZendeskAPI;
 
 namespace ExcelDesign.Class_Objects
 {
+    /* 16 October 2018 - Neil Jansen
+    * Updated logic to not match on external document no.s, but to loop through the extended sales header as we have updated the logic to link Sales Orders and Return Orders through this record.
+    */
+
     /* v7.1 - 3 October 2018 - Neil Jansen
      * GetStatisticsInformation() - Added older than 24 hours bucket
      */
@@ -1406,6 +1410,7 @@ namespace ExcelDesign.Class_Objects
                             shipToState = currResults.SalesHeader[c].ShipToState;
                             shipToCountry = currResults.SalesHeader[c].ShipToCountry;
                             salesHeaders = GetSalesOrders(shipToName, shipToAddress1);
+
                             returnHeaders.AddRange(GetReturnOrders(shipToName, shipToAddress1, ref readRMA));
                             returnHeaders.AddRange(GetReturnOrdersFromSalesHeader(salesHeaders, ref readRMA));
 
@@ -1479,6 +1484,7 @@ namespace ExcelDesign.Class_Objects
             /* 16 October 2018 - Neil Jansen
              * Updated logic to not match on external document no.s, but to loop through the extended sales header as we have updated the logic to link Sales Orders and Return Orders through this record.
              */
+
             List<ReturnHeader> returnHead = new List<ReturnHeader>();
 
             string returnStatus = string.Empty;

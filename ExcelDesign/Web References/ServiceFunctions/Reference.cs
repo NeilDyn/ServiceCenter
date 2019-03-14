@@ -57,7 +57,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         private System.Threading.SendOrPostCallback CancelOrderOperationCompleted;
         
-        private System.Threading.SendOrPostCallback IssueReturnLabelOperationCompleted;
+        private System.Threading.SendOrPostCallback LegacyIssueReturnLabelOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetStatisticsOperationCompleted;
         
@@ -84,6 +84,8 @@ namespace ExcelDesign.ServiceFunctions {
         private System.Threading.SendOrPostCallback a47a47a45a62_Monitoring_User_ActionsOperationCompleted;
         
         private System.Threading.SendOrPostCallback a47a47a45a62_CommentsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback IssueReturnLabelOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -166,7 +168,7 @@ namespace ExcelDesign.ServiceFunctions {
         public event CancelOrderCompletedEventHandler CancelOrderCompleted;
         
         /// <remarks/>
-        public event IssueReturnLabelCompletedEventHandler IssueReturnLabelCompleted;
+        public event LegacyIssueReturnLabelCompletedEventHandler LegacyIssueReturnLabelCompleted;
         
         /// <remarks/>
         public event GetStatisticsCompletedEventHandler GetStatisticsCompleted;
@@ -206,6 +208,9 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         public event a47a47a45a62_CommentsCompletedEventHandler a47a47a45a62_CommentsCompleted;
+        
+        /// <remarks/>
+        public event IssueReturnLabelCompletedEventHandler IssueReturnLabelCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:ResetSession", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="ResetSession_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -768,34 +773,34 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:IssueReturnLabel", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="IssueReturnLabel_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void IssueReturnLabel(string rMANo, string emailAddress, string sessionID) {
-            this.Invoke("IssueReturnLabel", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:LegacyIssueReturnLabel", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="LegacyIssueReturnLabel_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void LegacyIssueReturnLabel(string rMANo, string emailAddress, string sessionID) {
+            this.Invoke("LegacyIssueReturnLabel", new object[] {
                         rMANo,
                         emailAddress,
                         sessionID});
         }
         
         /// <remarks/>
-        public void IssueReturnLabelAsync(string rMANo, string emailAddress, string sessionID) {
-            this.IssueReturnLabelAsync(rMANo, emailAddress, sessionID, null);
+        public void LegacyIssueReturnLabelAsync(string rMANo, string emailAddress, string sessionID) {
+            this.LegacyIssueReturnLabelAsync(rMANo, emailAddress, sessionID, null);
         }
         
         /// <remarks/>
-        public void IssueReturnLabelAsync(string rMANo, string emailAddress, string sessionID, object userState) {
-            if ((this.IssueReturnLabelOperationCompleted == null)) {
-                this.IssueReturnLabelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIssueReturnLabelOperationCompleted);
+        public void LegacyIssueReturnLabelAsync(string rMANo, string emailAddress, string sessionID, object userState) {
+            if ((this.LegacyIssueReturnLabelOperationCompleted == null)) {
+                this.LegacyIssueReturnLabelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnLegacyIssueReturnLabelOperationCompleted);
             }
-            this.InvokeAsync("IssueReturnLabel", new object[] {
+            this.InvokeAsync("LegacyIssueReturnLabel", new object[] {
                         rMANo,
                         emailAddress,
-                        sessionID}, this.IssueReturnLabelOperationCompleted, userState);
+                        sessionID}, this.LegacyIssueReturnLabelOperationCompleted, userState);
         }
         
-        private void OnIssueReturnLabelOperationCompleted(object arg) {
-            if ((this.IssueReturnLabelCompleted != null)) {
+        private void OnLegacyIssueReturnLabelOperationCompleted(object arg) {
+            if ((this.LegacyIssueReturnLabelCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.IssueReturnLabelCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.LegacyIssueReturnLabelCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1184,6 +1189,38 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.a47a47a45a62_CommentsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.a47a47a45a62_CommentsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:IssueReturnLabel", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="IssueReturnLabel_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void IssueReturnLabel(string rMANo, string emailAddress, string sessionID) {
+            this.Invoke("IssueReturnLabel", new object[] {
+                        rMANo,
+                        emailAddress,
+                        sessionID});
+        }
+        
+        /// <remarks/>
+        public void IssueReturnLabelAsync(string rMANo, string emailAddress, string sessionID) {
+            this.IssueReturnLabelAsync(rMANo, emailAddress, sessionID, null);
+        }
+        
+        /// <remarks/>
+        public void IssueReturnLabelAsync(string rMANo, string emailAddress, string sessionID, object userState) {
+            if ((this.IssueReturnLabelOperationCompleted == null)) {
+                this.IssueReturnLabelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIssueReturnLabelOperationCompleted);
+            }
+            this.InvokeAsync("IssueReturnLabel", new object[] {
+                        rMANo,
+                        emailAddress,
+                        sessionID}, this.IssueReturnLabelOperationCompleted, userState);
+        }
+        
+        private void OnIssueReturnLabelOperationCompleted(object arg) {
+            if ((this.IssueReturnLabelCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.IssueReturnLabelCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -7832,7 +7869,7 @@ namespace ExcelDesign.ServiceFunctions {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void IssueReturnLabelCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void LegacyIssueReturnLabelCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
@@ -7973,6 +8010,10 @@ namespace ExcelDesign.ServiceFunctions {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void a47a47a45a62_CommentsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void IssueReturnLabelCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

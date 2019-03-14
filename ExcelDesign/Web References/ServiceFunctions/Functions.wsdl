@@ -913,7 +913,7 @@
           </sequence>
         </complexType>
       </element>
-      <element name="IssueReturnLabel">
+      <element name="LegacyIssueReturnLabel">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="rMANo" type="string" />
@@ -922,7 +922,7 @@
           </sequence>
         </complexType>
       </element>
-      <element name="IssueReturnLabel_Result">
+      <element name="LegacyIssueReturnLabel_Result">
         <complexType>
           <sequence />
         </complexType>
@@ -1097,6 +1097,20 @@
           <sequence />
         </complexType>
       </element>
+      <element name="IssueReturnLabel">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="rMANo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="emailAddress" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="IssueReturnLabel_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
     </schema>
   </types>
   <message name="ResetSession">
@@ -1183,11 +1197,11 @@
   <message name="CancelOrder_Result">
     <part name="parameters" element="tns:CancelOrder_Result" />
   </message>
-  <message name="IssueReturnLabel">
-    <part name="parameters" element="tns:IssueReturnLabel" />
+  <message name="LegacyIssueReturnLabel">
+    <part name="parameters" element="tns:LegacyIssueReturnLabel" />
   </message>
-  <message name="IssueReturnLabel_Result">
-    <part name="parameters" element="tns:IssueReturnLabel_Result" />
+  <message name="LegacyIssueReturnLabel_Result">
+    <part name="parameters" element="tns:LegacyIssueReturnLabel_Result" />
   </message>
   <message name="GetStatistics">
     <part name="parameters" element="tns:GetStatistics" />
@@ -1267,6 +1281,12 @@
   <message name="a47a47a45a62_Comments_Result">
     <part name="parameters" element="tns:a47a47a45a62_Comments_Result" />
   </message>
+  <message name="IssueReturnLabel">
+    <part name="parameters" element="tns:IssueReturnLabel" />
+  </message>
+  <message name="IssueReturnLabel_Result">
+    <part name="parameters" element="tns:IssueReturnLabel_Result" />
+  </message>
   <portType name="Functions_Port">
     <operation name="ResetSession">
       <input name="ResetSession" message="tns:ResetSession" />
@@ -1324,9 +1344,9 @@
       <input name="CancelOrder" message="tns:CancelOrder" />
       <output name="CancelOrder_Result" message="tns:CancelOrder_Result" />
     </operation>
-    <operation name="IssueReturnLabel">
-      <input name="IssueReturnLabel" message="tns:IssueReturnLabel" />
-      <output name="IssueReturnLabel_Result" message="tns:IssueReturnLabel_Result" />
+    <operation name="LegacyIssueReturnLabel">
+      <input name="LegacyIssueReturnLabel" message="tns:LegacyIssueReturnLabel" />
+      <output name="LegacyIssueReturnLabel_Result" message="tns:LegacyIssueReturnLabel_Result" />
     </operation>
     <operation name="GetStatistics">
       <input name="GetStatistics" message="tns:GetStatistics" />
@@ -1379,6 +1399,10 @@
     <operation name="a47a47a45a62_Comments">
       <input name="a47a47a45a62_Comments" message="tns:a47a47a45a62_Comments" />
       <output name="a47a47a45a62_Comments_Result" message="tns:a47a47a45a62_Comments_Result" />
+    </operation>
+    <operation name="IssueReturnLabel">
+      <input name="IssueReturnLabel" message="tns:IssueReturnLabel" />
+      <output name="IssueReturnLabel_Result" message="tns:IssueReturnLabel_Result" />
     </operation>
   </portType>
   <binding name="Functions_Binding" type="tns:Functions_Port">
@@ -1509,12 +1533,12 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
-    <operation name="IssueReturnLabel">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:IssueReturnLabel" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="IssueReturnLabel">
+    <operation name="LegacyIssueReturnLabel">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:LegacyIssueReturnLabel" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="LegacyIssueReturnLabel">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
-      <output name="IssueReturnLabel_Result">
+      <output name="LegacyIssueReturnLabel_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -1632,6 +1656,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="a47a47a45a62_Comments_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="IssueReturnLabel">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/Functions:IssueReturnLabel" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="IssueReturnLabel">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="IssueReturnLabel_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

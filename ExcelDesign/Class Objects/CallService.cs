@@ -2674,7 +2674,7 @@ namespace ExcelDesign.Class_Objects
                                     }
 
                                     salesHead.Tickets.Add(new Zendesk(ticketNo, createdDateTime, updateDateTime, subject,
-                                            string.Empty, string.Empty, true));
+                                            string.Empty, string.Empty, true, null, null, null, null));
                                     salesTickets.Add(Convert.ToInt64(ticketNo));
                                 }
                             }
@@ -2766,7 +2766,7 @@ namespace ExcelDesign.Class_Objects
                                         }
 
                                         returnHead.Tickets.Add(new Zendesk(ticketNo, createdDateTime, updateDateTime, subject,
-                                            string.Empty, string.Empty, true));
+                                            string.Empty, string.Empty, true, null, null, null, null));
                                         returnTickets.Add(Convert.ToInt64(ticketNo));
                                     }
                                 }

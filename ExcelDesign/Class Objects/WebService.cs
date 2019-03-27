@@ -167,9 +167,14 @@ namespace ExcelDesign.Class_Objects
             functions.LegacyIssueReturnLabel(rmaNo, email, sessionID);
         }
 
-        public void IssueReturnLabel(string rmaNo, string email, string sessionID)
+        public string IssueReturnLabel(string rmaNo, string emailTo, bool existingZendeskTicket, string fromEmail, bool downloadManually, string email, 
+             string fromEmailName, string emailSubject)
         {
-            functions.IssueReturnLabel(rmaNo, email, sessionID);
+            string pdf64String = string.Empty;
+
+            functions.IssueReturnLabel(rmaNo, SessionID(), existingZendeskTicket, downloadManually, emailTo, fromEmail, ref pdf64String); 
+
+            return pdf64String;
         }
 
         public CreatedExchangeOrder CreateExchange(string rmaNo, string externalDocNo, string lineValues, int zendeskTicketNo)

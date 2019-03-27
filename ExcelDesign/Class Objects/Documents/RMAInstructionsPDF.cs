@@ -8,6 +8,10 @@ using System.IO;
 
 namespace ExcelDesign.Class_Objects.Documents
 {
+    /* v10 - 26 March - Neil Jansen
+     * Changed Verbiage of document
+     */
+
     public class RMAInstructionsPDF
     {
         protected Chunk chunk;
@@ -53,7 +57,7 @@ namespace ExcelDesign.Class_Objects.Documents
                     doc.Open();
                     barcodeByte = writer.DirectContent;
 
-                    mainHeading = new Paragraph("Return Merchandise Authorization Check List", new Font(Font.HELVETICA, 20f, Font.BOLD))
+                    mainHeading = new Paragraph("Return Merchandise Authorization Instructions", new Font(Font.HELVETICA, 20f, Font.BOLD))
                     {
                         Alignment = Element.ALIGN_CENTER,
                         SpacingAfter = 40f

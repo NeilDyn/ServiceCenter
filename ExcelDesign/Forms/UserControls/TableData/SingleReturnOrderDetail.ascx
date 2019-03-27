@@ -5,6 +5,7 @@
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/ReturnOrderLines/SingleReturnOrderExchangeNos.ascx" TagName="SingleReturnOrderExchangeNos" TagPrefix="sroen" %>
 <%@ Register Src="~/Forms/UserControls/TableData/DataLines/ReturnOrderLines/SingleReturnOrderZendeskTickets.ascx" TagName="SingleReturnOrderZendeskTickets" TagPrefix="srozt" %>
 
+
 <link href="../../../css/mainpage.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/jquery-ui.min.js"></script>
@@ -200,40 +201,29 @@
         });
 
         $("[id$=btnIssueReturnLabel<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            if ("<%= this.UPSLabelCreated %>" == "false") {
+            if ("<%= this.UPSLabelCreated %>" != "derf") {
                 if ("<%= this.CanIssueLabel %>" == "true") {
                     if ("<%= this.tcReturnStatus.Text %>" == "Open") {
-                        var rmaNo = "<%= this.Rh.RMANo %>";
-                        var emailIn = prompt("Please enter a valid email address:");
+                        var width = 1500;
+                        var height = 500;
+                        var left = (screen.width - width) + 500;
+                        var top = (screen.height - height) * 0.5;
 
-                        if (emailIn == null || emailIn == "") {
-                            alert("Invalid email address entered.");
-                        }
-                        else {
-                            if (validateEmail(emailIn)) {
-                                $.ajax({
-                                    type: "POST",
-                                    url: "ServiceCenter.aspx/IssueReturnLabel",
-                                    data: JSON.stringify({ rmaNo: rmaNo, email: emailIn }),
-                                    contentType: "application/json; charset=utf-8",
-                                    dataType: "json",
-                                    success: function (error) {
-                                        if (error.d.indexOf("Error") == -1) {
-                                            alert("Return Label Created for Return: " + rmaNo + " and is being processed and will be emailed shortly.");
-                                            __doPostBack('[id$=btnReload', '');
-                                        } else {
-                                            alert(error.d);
-                                        }
-                                    },
-                                    error: function (xhr, status, text) {
-                                        console.log(xhr.status);
-                                        console.log(xhr.text);
-                                        console.log(xhr.responseText);
-                                    },
-                                });
-                            } else {
-                                alert("Invalid email address entered.")
+                        if (typeof (issueReturnLabel) == 'undefined' || issueReturnLabel.closed) {
+                            issueReturnLabel = window.open("FunctionForms/IssueReturnLabel.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>",
+                                null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+
+                            function checkIfWinClosed(intervalID) {
+                                if (updateRMAWin.closed) {
+                                    __doPostBack('[id$=btnReload', '');
+                                    clearInterval(intervalID);
+                                }
                             }
+                            var interval = setInterval(function () {
+                                checkIfWinClosed(interval);
+                            }, 1000);
+                        } else {
+                            alert('Please close the current active Issue Return Label dialog window before trying to open a new instance.');
                         }
                     } else {
                         alert("Only Return Orders that have an 'OPEN' return status can be issued Return Labels.");

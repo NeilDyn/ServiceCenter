@@ -36,6 +36,7 @@ namespace ExcelDesign.Class_Objects
         public string PasswordExpiryDate { get; set; }
         public int SessionTimeout { get; set; }
         public string RefundTier { get; set; }
+        public string ZendeskEmail { get; set; }
 
         public User(UserSetup us)
         {
@@ -80,6 +81,7 @@ namespace ExcelDesign.Class_Objects
             SessionTimeout = us.User[0].SessionTimeout;
 
             RefundTier = us.User[0].PartialRefundTier;
+            ZendeskEmail = us.User[0].ZendeskEmail;
         }
 
         public User()

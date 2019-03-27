@@ -424,42 +424,42 @@ namespace ExcelDesign.Forms
             return "success";
         }
         
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static string IssueReturnLabel(string rmaNo, string email)
-        {
-            try
-            {
-                string sessionID = string.Empty;
-                if (HttpContext.Current.Session["ActiveUser"] != null)
-                {
-                    User u = (User)HttpContext.Current.Session["ActiveUser"];
-                    sessionID = u.SessionID;
-                }
-                else
-                {
-                    sessionID = "{A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0}";
-                }
+        //[WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        //public static string IssueReturnLabel(string rmaNo, string email)
+        //{
+        //    try
+        //    {
+        //        string sessionID = string.Empty;
+        //        if (HttpContext.Current.Session["ActiveUser"] != null)
+        //        {
+        //            User u = (User)HttpContext.Current.Session["ActiveUser"];
+        //            sessionID = u.SessionID;
+        //        }
+        //        else
+        //        {
+        //            sessionID = "{A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0}";
+        //        }
 
-                try
-                {
-                    StaticService.IssueReturnLabel(rmaNo, email, sessionID);
-                }
-                catch (Exception workerE)
-                {
-                    Log.Error(workerE.Message, workerE);
-                }
+        //        try
+        //        {
+        //            StaticService.IssueReturnLabel(rmaNo, email, sessionID);
+        //        }
+        //        catch (Exception workerE)
+        //        {
+        //            Log.Error(workerE.Message, workerE);
+        //        }
 
-                HttpContext.Current.Session["NoUserInteraction"] = true;
-                HttpContext.Current.Session["UserInteraction"] = true;
-            }
-            catch (Exception e)
-            {
-                return "Error - " + e.Message;
-            }
+        //        HttpContext.Current.Session["NoUserInteraction"] = true;
+        //        HttpContext.Current.Session["UserInteraction"] = true;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return "Error - " + e.Message;
+        //    }
 
-            return "success";
-        }
+        //    return "success";
+        //}
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]

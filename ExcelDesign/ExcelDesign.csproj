@@ -123,6 +123,7 @@
     <Content Include="Forms\FunctionForms\CreateExchange.aspx" />
     <Content Include="Forms\FunctionForms\CreatePartialRequest.aspx" />
     <Content Include="Forms\FunctionForms\CreateReturn.aspx" />
+    <Content Include="Forms\FunctionForms\IssueReturnLabel.aspx" />
     <Content Include="Forms\FunctionForms\PartialRefund.aspx" />
     <Content Include="Forms\FunctionForms\RMAPDFForm.aspx" />
     <Content Include="Forms\LoginPage.aspx" />
@@ -195,6 +196,7 @@
     <Compile Include="Class Objects\FunctionData\ReturnReason.cs" />
     <Compile Include="Class Objects\Information.cs" />
     <Compile Include="Class Objects\Item.cs" />
+    <Compile Include="Class Objects\MemoryFile.cs" />
     <Compile Include="Class Objects\PartialRefunded.cs" />
     <Compile Include="Class Objects\PostedPackage.cs" />
     <Compile Include="Class Objects\PostedPackageLine.cs" />
@@ -212,6 +214,7 @@
     <Compile Include="Class Objects\User.cs" />
     <Compile Include="Class Objects\Warranty.cs" />
     <Compile Include="Class Objects\WebService.cs" />
+    <Compile Include="Class Objects\ZendDeskEmailEntry.cs" />
     <Compile Include="Class Objects\Zendesk.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -289,6 +292,13 @@
     </Compile>
     <Compile Include="Forms\FunctionForms\CreateReturn.aspx.designer.cs">
       <DependentUpon>CreateReturn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\IssueReturnLabel.aspx.cs">
+      <DependentUpon>IssueReturnLabel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\FunctionForms\IssueReturnLabel.aspx.designer.cs">
+      <DependentUpon>IssueReturnLabel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\FunctionForms\PartialRefund.aspx.cs">
       <DependentUpon>PartialRefund.aspx</DependentUpon>
@@ -598,6 +608,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="ZendeskAPI\ZendDeskEmailParser.cs" />
     <Compile Include="ZendeskAPI\ZendeskHelper.cs" />
   </ItemGroup>
   <ItemGroup>

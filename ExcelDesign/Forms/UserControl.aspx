@@ -167,6 +167,10 @@
                 <asp:TableCell Text="Password Expiry Date" />
                 <asp:TableCell ID="tcPasswordExpiryDate" />
             </asp:TableRow> 
+            <asp:TableRow>
+                <asp:TableCell Text="Zendesk Email Address" />
+                <asp:TableCell ID="tcZendeskEmail" />
+            </asp:TableRow>
             <asp:TableFooterRow>
                 <asp:TableHeaderCell>
                     <asp:Button ID="BtnUpdatePassword" runat="server" Text="Update Password" OnClientClick="UpdatePassword()" />

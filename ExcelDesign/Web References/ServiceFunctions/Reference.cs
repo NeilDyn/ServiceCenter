@@ -1194,33 +1194,42 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:IssueReturnLabel", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="IssueReturnLabel_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void IssueReturnLabel(string rMANo, string emailAddress, string sessionID) {
-            this.Invoke("IssueReturnLabel", new object[] {
+        public void IssueReturnLabel(string rMANo, string sessionID, bool useExsistingZenDesk, bool downloadManually, string emailTo, string fromEmail, ref string pDFBase64String) {
+            object[] results = this.Invoke("IssueReturnLabel", new object[] {
                         rMANo,
-                        emailAddress,
-                        sessionID});
+                        sessionID,
+                        useExsistingZenDesk,
+                        downloadManually,
+                        emailTo,
+                        fromEmail,
+                        pDFBase64String});
+            pDFBase64String = ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void IssueReturnLabelAsync(string rMANo, string emailAddress, string sessionID) {
-            this.IssueReturnLabelAsync(rMANo, emailAddress, sessionID, null);
+        public void IssueReturnLabelAsync(string rMANo, string sessionID, bool useExsistingZenDesk, bool downloadManually, string emailTo, string fromEmail, string pDFBase64String) {
+            this.IssueReturnLabelAsync(rMANo, sessionID, useExsistingZenDesk, downloadManually, emailTo, fromEmail, pDFBase64String, null);
         }
         
         /// <remarks/>
-        public void IssueReturnLabelAsync(string rMANo, string emailAddress, string sessionID, object userState) {
+        public void IssueReturnLabelAsync(string rMANo, string sessionID, bool useExsistingZenDesk, bool downloadManually, string emailTo, string fromEmail, string pDFBase64String, object userState) {
             if ((this.IssueReturnLabelOperationCompleted == null)) {
                 this.IssueReturnLabelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIssueReturnLabelOperationCompleted);
             }
             this.InvokeAsync("IssueReturnLabel", new object[] {
                         rMANo,
-                        emailAddress,
-                        sessionID}, this.IssueReturnLabelOperationCompleted, userState);
+                        sessionID,
+                        useExsistingZenDesk,
+                        downloadManually,
+                        emailTo,
+                        fromEmail,
+                        pDFBase64String}, this.IssueReturnLabelOperationCompleted, userState);
         }
         
         private void OnIssueReturnLabelOperationCompleted(object arg) {
             if ((this.IssueReturnLabelCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.IssueReturnLabelCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.IssueReturnLabelCompleted(this, new IssueReturnLabelCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1288,6 +1297,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string userIDField;
         
+        private string zendeskEmailField;
+        
         private string createRMAField;
         
         private string createRetLabelField;
@@ -1343,6 +1354,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.userIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ZendeskEmail {
+            get {
+                return this.zendeskEmailField;
+            }
+            set {
+                this.zendeskEmailField = value;
             }
         }
         
@@ -8013,7 +8034,29 @@ namespace ExcelDesign.ServiceFunctions {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void IssueReturnLabelCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void IssueReturnLabelCompletedEventHandler(object sender, IssueReturnLabelCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class IssueReturnLabelCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal IssueReturnLabelCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string pDFBase64String {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
 }
 
 #pragma warning restore 1591

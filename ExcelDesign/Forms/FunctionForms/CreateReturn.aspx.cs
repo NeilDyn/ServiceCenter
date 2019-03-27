@@ -577,7 +577,7 @@ namespace ExcelDesign.Forms.FunctionForms
                             {
                                 try
                                 {
-                                    ss.IssueReturnLabel(crh.RMANo, email, sessionID);
+                                    ss.LegacyReturnLabel(crh.RMANo, email, sessionID);
                                 }
                                 catch (Exception workerE)
                                 {

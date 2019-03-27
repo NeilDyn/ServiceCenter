@@ -100,6 +100,7 @@ namespace ExcelDesign.Forms
                 cbxPartialRefundPDA.Checked = u.CanPartialRefundPDA;
                 tcPartialrefundTier.Text = u.RefundTier;
                 cbxSupervisor.Checked = u.Supervisor;
+                tcZendeskEmail.Text = u.ZendeskEmail;
             }
             catch (Exception ex)
             {

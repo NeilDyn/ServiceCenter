@@ -462,9 +462,10 @@ namespace ExcelDesign.Class_Objects
             webService.LegacyReturnLabel(rmaNo, email, sessionID);
         }
 
-        public void IssueReturnLabel(string rmaNo, string email, string sessionID)
+        public string IssueReturnLabel(string rmaNo, string emailTo, bool existingZendeskTicket, string fromEmail, bool downloadManually, string email, 
+             string fromEmailName, string emailSubject)
         {
-            webService.IssueReturnLabel(rmaNo, email, sessionID);
+            return webService.IssueReturnLabel(rmaNo, emailTo, existingZendeskTicket, fromEmail, downloadManually, email, fromEmailName, emailSubject);
         }
 
         public void UpdateUserPassword(string currentUser, string newPassword)

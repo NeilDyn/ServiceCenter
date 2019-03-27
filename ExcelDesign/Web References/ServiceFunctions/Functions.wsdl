@@ -5,6 +5,7 @@
       <complexType name="User">
         <sequence>
           <element minOccurs="1" maxOccurs="1" name="UserID" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ZendeskEmail" type="string" />
           <element minOccurs="1" maxOccurs="1" name="CreateRMA" type="string" />
           <element minOccurs="1" maxOccurs="1" name="CreateRetLabel" type="string" />
           <element minOccurs="1" maxOccurs="1" name="CreatePDARma" type="string" />
@@ -1101,14 +1102,20 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="rMANo" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="emailAddress" type="string" />
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="useExsistingZenDesk" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="downloadManually" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="emailTo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="fromEmail" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="pDFBase64String" type="string" />
           </sequence>
         </complexType>
       </element>
       <element name="IssueReturnLabel_Result">
         <complexType>
-          <sequence />
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="pDFBase64String" type="string" />
+          </sequence>
         </complexType>
       </element>
     </schema>

@@ -13,6 +13,10 @@ namespace ExcelDesign.Class_Objects
     * Updated logic to not match on external document no.s, but to loop through the extended sales header as we have updated the logic to link Sales Orders and Return Orders through this record.
     */
 
+    /* V10 - 28 March 2019 - Neil Jansen
+     * Added Cross-Reference No from Sales Line
+     */ 
+
     /* v7.1 - 3 October 2018 - Neil Jansen
      * GetStatisticsInformation() - Added older than 24 hours bucket
      */
@@ -317,6 +321,8 @@ namespace ExcelDesign.Class_Objects
             double price = 0;
             double lineAmount = 0;
             string type = string.Empty;
+            string crossRefNo = string.Empty;
+
             List<string> insertedItems = new List<string>();
 
             if (currResults.SalesLine != null)
@@ -331,6 +337,7 @@ namespace ExcelDesign.Class_Objects
                         double.TryParse(currResults.SalesLine[sl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
                         type = currResults.SalesLine[sl].Type;
+                        crossRefNo = currResults.SalesLine[sl].CrossRefNo;
 
                         if (insertedItems.Any(item => item.Equals(itemNo)) && insertedItems.Any(desc => desc.Equals(description)))
                         {
@@ -345,7 +352,7 @@ namespace ExcelDesign.Class_Objects
                         }
                         else
                         {
-                            shipLine.Add(new ShipmentLine(itemNo, description, quantity, quantityShipped, price, lineAmount, type));
+                            shipLine.Add(new ShipmentLine(itemNo, description, quantity, quantityShipped, price, lineAmount, type, crossRefNo));
                             insertedItems.Add(itemNo);
                             insertedItems.Add(description);
                         }
@@ -356,6 +363,7 @@ namespace ExcelDesign.Class_Objects
                         quantityShipped = 0;
                         price = 0;
                         lineAmount = 0;
+                        crossRefNo = string.Empty;
                     }
                 }
             }
@@ -375,6 +383,8 @@ namespace ExcelDesign.Class_Objects
             double lineAmount = 0;
             string type = string.Empty;
             List<string> insertedItems = new List<string>();
+            string crossRefNo = string.Empty;
+
 
             if (currResults.SalesShipmentLine != null)
             {
@@ -388,6 +398,7 @@ namespace ExcelDesign.Class_Objects
                         double.TryParse(currResults.SalesShipmentLine[sl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
                         type = currResults.SalesShipmentLine[sl].Type;
+                        crossRefNo = currResults.SalesShipmentLine[sl].CrossRefNo;
 
                         if (insertedItems.Any(item => item.Equals(itemNo)) && insertedItems.Any(desc => desc.Equals(description)))
                         {
@@ -411,7 +422,7 @@ namespace ExcelDesign.Class_Objects
                                 }
                             }
 
-                            shipLine.Add(new ShipmentLine(itemNo, description, quantity, quantityShipped, price, lineAmount, type));
+                            shipLine.Add(new ShipmentLine(itemNo, description, quantity, quantityShipped, price, lineAmount, type, crossRefNo));
                             insertedItems.Add(itemNo);
                             insertedItems.Add(description);
                         }
@@ -422,6 +433,7 @@ namespace ExcelDesign.Class_Objects
                         quantityShipped = 0;
                         price = 0;
                         lineAmount = 0;
+                        crossRefNo = string.Empty;
                     }
                 }
             }
@@ -443,6 +455,7 @@ namespace ExcelDesign.Class_Objects
             int quantityRefunded = 0;
             string reqReturnAction = string.Empty;
             string returnReason = string.Empty;
+            string crossRefNo = string.Empty;
             List<string> insertedItems = new List<string>();
 
             if (currResults.ReturnReceiptLine != null)
@@ -456,6 +469,7 @@ namespace ExcelDesign.Class_Objects
                         int.TryParse(currResults.ReturnReceiptLine[rl].Qty.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out quantity);
                         double.TryParse(currResults.ReturnReceiptLine[rl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                         lineAmount = quantity * price;
+                        crossRefNo = currResults.ReturnReceiptLine[rl].CrossRefNo;
 
                         if (insertedItems.Any(item => item.Equals(itemNo)))
                         {
@@ -519,7 +533,7 @@ namespace ExcelDesign.Class_Objects
                                 }
                             }
 
-                            receiptLine.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, quantityRefunded, reqReturnAction, returnReason));
+                            receiptLine.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, quantityRefunded, reqReturnAction, returnReason, crossRefNo));
                             insertedItems.Add(itemNo);
                         }
 
@@ -533,6 +547,7 @@ namespace ExcelDesign.Class_Objects
                         quantityRefunded = 0;
                         reqReturnAction = string.Empty;
                         returnReason = string.Empty;
+                        crossRefNo = string.Empty;
                     }
                 }
             }
@@ -1918,6 +1933,7 @@ namespace ExcelDesign.Class_Objects
             int quantityRefunded = 0;
             string reqReturnAction = string.Empty;
             string returnReason = string.Empty;
+            string crossRefNo = string.Empty;
 
             if (currResults.SalesShipmentLine != null)
             {
@@ -1933,8 +1949,9 @@ namespace ExcelDesign.Class_Objects
                         quantityReceived = 0;
                         quantityExchanged = 0;
                         quantityRefunded = 0;
+                        crossRefNo = currResults.SalesShipmentLine[rl].CrossRefNo;
 
-                        receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, quantityRefunded, string.Empty, string.Empty));
+                        receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, quantityRefunded, string.Empty, string.Empty, crossRefNo));
                     }
                 }
             }
@@ -1956,6 +1973,7 @@ namespace ExcelDesign.Class_Objects
             int quantityRefunded = 0;
             string reqReturnAction = string.Empty;
             string returnReason = string.Empty;
+            string crossRefNo = string.Empty;
 
             if (currResults.SalesLine != null)
             {
@@ -1974,8 +1992,9 @@ namespace ExcelDesign.Class_Objects
 
                         reqReturnAction = currResults.SalesLine[slr].REQReturnAction;
                         returnReason = currResults.SalesLine[slr].ReturnReason;
+                        crossRefNo = currResults.SalesLine[slr].CrossRefNo;
 
-                        receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, quantityRefunded, reqReturnAction, returnReason));
+                        receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, quantityRefunded, reqReturnAction, returnReason, crossRefNo));
 
                         itemNo = string.Empty;
                         description = string.Empty;
@@ -1987,6 +2006,7 @@ namespace ExcelDesign.Class_Objects
                         quantityRefunded = 0;
                         reqReturnAction = string.Empty;
                         returnReason = string.Empty;
+                        crossRefNo = string.Empty;
                     }
                 }
             }
@@ -2010,6 +2030,7 @@ namespace ExcelDesign.Class_Objects
             int quantityRefunded = 0;
             string reqReturnAction = string.Empty;
             string returnReason = string.Empty;
+            string crossRefNo = string.Empty;
 
             List<string> rmaNo = new List<string>();
 
@@ -2043,6 +2064,8 @@ namespace ExcelDesign.Class_Objects
                                 quantityExchanged = 0;
                                 quantityRefunded = 0;
 
+                                crossRefNo = currResults.SalesLine[slr].CrossRefNo;
+
                                 if (insertedItems.Any(item => item.Equals(itemNo)))
                                 {
                                     foreach (ReceiptLine existingItem in receiptLines)
@@ -2068,7 +2091,7 @@ namespace ExcelDesign.Class_Objects
                                     }
                                 }
 
-                                receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, quantityRefunded, reqReturnAction, returnReason));
+                                receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, quantityRefunded, reqReturnAction, returnReason, crossRefNo));
                                 insertedItems.Add(itemNo);
 
                                 itemNo = string.Empty;
@@ -2081,6 +2104,7 @@ namespace ExcelDesign.Class_Objects
                                 quantityRefunded = 0;
                                 reqReturnAction = string.Empty;
                                 returnReason = string.Empty;
+                                crossRefNo = string.Empty;
                             }
                         }
                     }
@@ -2105,6 +2129,7 @@ namespace ExcelDesign.Class_Objects
                                             int.TryParse(currResults.ReturnReceiptLine[rl].Qty.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out quantity);
                                             double.TryParse(currResults.ReturnReceiptLine[rl].UnitPrice.Replace(",", ""), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out price);
                                             lineAmount = quantity * price;
+                                            crossRefNo = currResults.ReturnReceiptLine[rl].CrossRefNo;
 
                                             if (insertedItems.Any(item => item.Equals(itemNo)))
                                             {
@@ -2138,6 +2163,7 @@ namespace ExcelDesign.Class_Objects
                                                             int.TryParse(currResults.SalesLine[sl].QtyRefunded, out quantityRefunded);
                                                             reqReturnAction = currResults.SalesLine[sl].REQReturnAction;
                                                             returnReason = currResults.SalesLine[sl].ReturnReason;
+                                                            crossRefNo = currResults.SalesLine[sl].CrossRefNo;
                                                         }
                                                     }
                                                 }
@@ -2168,7 +2194,7 @@ namespace ExcelDesign.Class_Objects
                                                     }
                                                 }
 
-                                                receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, quantityRefunded, reqReturnAction, returnReason));
+                                                receiptLines.Add(new ReceiptLine(itemNo, description, quantity, quantityReceived, price, lineAmount, quantityExchanged, quantityRefunded, reqReturnAction, returnReason, crossRefNo));
                                                 insertedItems.Add(itemNo);
                                             }
 
@@ -2182,6 +2208,7 @@ namespace ExcelDesign.Class_Objects
                                             quantityRefunded = 0;
                                             reqReturnAction = string.Empty;
                                             returnReason = string.Empty;
+                                            crossRefNo = string.Empty;
                                         }
                                     }
                                 }
@@ -2276,6 +2303,7 @@ namespace ExcelDesign.Class_Objects
             string exchangeOrderNo = string.Empty;
             bool noItemSubFound = false;
             string unitCost = string.Empty;
+            string crossRefNo = string.Empty;
 
             if (stats.SalesLine != null)
             {
@@ -2299,6 +2327,7 @@ namespace ExcelDesign.Class_Objects
                     custAllowRefund = stats.SalesLine[sl].CustAllowRefund[0] == "Yes" ? true : false;
                     noItemSubFound = stats.SalesLine[sl].NoItemSubFound[0] == "Yes" ? true : false;
                     unitCost = stats.SalesLine[sl].UnitCost[0];
+                    //crossRefNo = stats.SalesLine[sl].
 
                     if (isNotInvtAvailable)
                     {
@@ -2385,6 +2414,7 @@ namespace ExcelDesign.Class_Objects
                     exchangeOrderNo = string.Empty;
                     noItemSubFound = false;
                     unitCost = string.Empty;
+                    crossRefNo = string.Empty;
                 }
             }
 

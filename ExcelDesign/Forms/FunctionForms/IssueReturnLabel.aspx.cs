@@ -21,6 +21,7 @@ namespace ExcelDesign.Forms.FunctionForms
         protected string no;
         protected string docNo;
         protected string ticketNo;
+        protected string existingLabel;
 
         protected bool existingZendeskTicket;
         protected bool newZendeskTicket;
@@ -48,6 +49,8 @@ namespace ExcelDesign.Forms.FunctionForms
                 {
                     tcNo.Text = Convert.ToString(Request.QueryString["No"]);
                     tcDocNo.Text = Convert.ToString(Request.QueryString["ExternalDocumentNo"]);
+                    existingLabel = Convert.ToString(Request.QueryString["ExistingLabel"]);
+
                     cust = (Customer)Session["SelectedCustomer"];
 
                     if (cust != null)
@@ -73,36 +76,50 @@ namespace ExcelDesign.Forms.FunctionForms
         {
             try
             {
-                zendeskTickets = new List<Zendesk>();
-                cust = (Customer)Session["SelectedCustomer"];
+                existingLabel = Convert.ToString(Request.QueryString["ExistingLabel"]);
 
-                foreach (SalesHeader head in cust.SalesHeader)
+                if (existingLabel.ToUpper() == "FALSE")
                 {
-                    foreach (Zendesk ticket in head.Tickets)
+                    trExistingZendeskTicket.Visible = true;
+                    trNewZendeskTicket.Visible = true;
+
+                    zendeskTickets = new List<Zendesk>();
+                    cust = (Customer)Session["SelectedCustomer"];
+
+                    foreach (SalesHeader head in cust.SalesHeader)
                     {
-                        if (!zendeskTickets.Any(t => t.TicketNo.Equals(ticket.TicketNo)))
+                        foreach (Zendesk ticket in head.Tickets)
                         {
-                            zendeskTickets.Add(ticket);
+                            if (!zendeskTickets.Any(t => t.TicketNo.Equals(ticket.TicketNo)))
+                            {
+                                zendeskTickets.Add(ticket);
+                            }
                         }
                     }
-                }
 
-                foreach (ReturnHeader returnHead in cust.ReturnHeaders)
-                {
-                    foreach (Zendesk ticket in returnHead.Tickets)
+                    foreach (ReturnHeader returnHead in cust.ReturnHeaders)
                     {
-                        if (!zendeskTickets.Any(t => t.TicketNo.Equals(ticket.TicketNo)))
+                        foreach (Zendesk ticket in returnHead.Tickets)
                         {
-                            zendeskTickets.Add(ticket);
+                            if (!zendeskTickets.Any(t => t.TicketNo.Equals(ticket.TicketNo)))
+                            {
+                                zendeskTickets.Add(ticket);
+                            }
                         }
                     }
-                }
 
-                zendeskTicketsParsed = JsonConvert.SerializeObject(zendeskTickets);
-                    
-                ddlZendeskTickets.DataValueField = "TicketNo";
-                ddlZendeskTickets.DataSource = zendeskTickets;
-                ddlZendeskTickets.DataBind();
+                    zendeskTicketsParsed = JsonConvert.SerializeObject(zendeskTickets);
+
+                    ddlZendeskTickets.DataValueField = "TicketNo";
+                    ddlZendeskTickets.DataSource = zendeskTickets;
+                    ddlZendeskTickets.DataBind();
+                }
+                else
+                {
+                    trExistingZendeskTicket.Visible = false;
+                    trNewZendeskTicket.Visible = false;
+                    zendeskTicketsParsed = JsonConvert.SerializeObject(string.Empty);
+                }
 
             }
             catch (Exception ex)
@@ -116,29 +133,6 @@ namespace ExcelDesign.Forms.FunctionForms
         {
             try
             {
-                cust = (Customer)Session["SelectedCustomer"];
-                foreach (SalesHeader head in cust.SalesHeader)
-                {
-                    foreach (Zendesk ticket in head.Tickets)
-                    {
-                        if (!zendeskTickets.Any(t => t.TicketNo.Equals(ticket.TicketNo)))
-                        {
-                            zendeskTickets.Add(ticket);
-                        }
-                    }
-                }
-
-                foreach (ReturnHeader returnHead in cust.ReturnHeaders)
-                {
-                    foreach (Zendesk ticket in returnHead.Tickets)
-                    {
-                        if (!zendeskTickets.Any(t => t.TicketNo.Equals(ticket.TicketNo)))
-                        {
-                            zendeskTickets.Add(ticket);
-                        }
-                    }
-                }
-
                 no = tcNo.Text;
                 docNo = tcDocNo.Text;
                 newEmail = txtcustEmailAddress.Text;
@@ -148,6 +142,32 @@ namespace ExcelDesign.Forms.FunctionForms
                 SendService ss = new SendService();
                 Zendesk zendeskTicket = new Zendesk();
                 string pdf64String = string.Empty;
+
+                if (!downloadManually)
+                {
+                    cust = (Customer)Session["SelectedCustomer"];
+                    foreach (SalesHeader head in cust.SalesHeader)
+                    {
+                        foreach (Zendesk ticket in head.Tickets)
+                        {
+                            if (!zendeskTickets.Any(t => t.TicketNo.Equals(ticket.TicketNo)))
+                            {
+                                zendeskTickets.Add(ticket);
+                            }
+                        }
+                    }
+
+                    foreach (ReturnHeader returnHead in cust.ReturnHeaders)
+                    {
+                        foreach (Zendesk ticket in returnHead.Tickets)
+                        {
+                            if (!zendeskTickets.Any(t => t.TicketNo.Equals(ticket.TicketNo)))
+                            {
+                                zendeskTickets.Add(ticket);
+                            }
+                        }
+                    }
+                }                
 
                 if (existingZendeskTicket)
                 {
@@ -202,7 +222,18 @@ namespace ExcelDesign.Forms.FunctionForms
                     pdf64String = ss.IssueReturnLabel(no, emailTo, existingZendeskTicket, fromEmail, downloadManually, newEmail, fromEmailName, emailSubject);
 
                     Session["NoUserInteraction"] = true;
-                    zendeskTicket.DownloadRMAPDFManually(pdf64String, no);
+
+                    if(pdf64String != string.Empty)
+                    {
+                        zendeskTicket.DownloadRMAPDFManually(pdf64String, no);
+
+                        ClientScript.RegisterStartupScript(this.GetType(), "manualDownloadExistingTicket", "alert('" + no + ", Return label has been successfully downloaded.');", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "closeAfterDownload", "parent.window.close();", true);
+                    }
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "manualDownloadExistingTicket", "alert('Please select a valid option.');", true);
                 }
             }
             catch (Exception ex)

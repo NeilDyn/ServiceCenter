@@ -89,6 +89,7 @@
           <element minOccurs="1" maxOccurs="1" name="QtyExchanged" type="string" />
           <element minOccurs="1" maxOccurs="1" name="QtyRefunded" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ReturnReason" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CrossRefNo" type="string" />
         </sequence>
       </complexType>
       <complexType name="Warranty3" mixed="true">
@@ -131,6 +132,7 @@
           <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
           <element minOccurs="1" maxOccurs="1" name="Qty" type="string" />
           <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CrossRefNo" type="string" />
         </sequence>
       </complexType>
       <complexType name="PostedPackage">
@@ -218,6 +220,7 @@
           <element minOccurs="1" maxOccurs="1" name="UnitPrice" type="string" />
           <element minOccurs="1" maxOccurs="1" name="REQReturnAction" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ReturnReasonCode" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="CrossRefNo" type="string" />
         </sequence>
       </complexType>
       <complexType name="PostedReceive">

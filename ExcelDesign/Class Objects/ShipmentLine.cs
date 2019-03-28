@@ -14,8 +14,9 @@ namespace ExcelDesign.Class_Objects
         public double Price { get; set; }
         public double LineAmount { get; set; }
         public string Type { get; set; }
+        public string CrossRefNo { get; set; }
 
-        public ShipmentLine(string itemNoP, string descriptionP, int quantityP, int quantityShippedP, double priceP, double lineAmountP, string typeP)
+        public ShipmentLine(string itemNoP, string descriptionP, int quantityP, int quantityShippedP, double priceP, double lineAmountP, string typeP, string crossRefNoP)
         {
             this.ItemNo = itemNoP;
             this.Description = descriptionP;
@@ -24,6 +25,7 @@ namespace ExcelDesign.Class_Objects
             this.Price = priceP;
             this.LineAmount = lineAmountP;
             this.Type = typeP;
+            this.CrossRefNo = crossRefNoP;
         }
 
         public ShipmentLine()

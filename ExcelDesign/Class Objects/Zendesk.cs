@@ -114,7 +114,7 @@ namespace ExcelDesign.Class_Objects
                 {
                     HttpContext.Current.Response.Clear();
                     HttpContext.Current.Response.ContentType = "application/pdf";
-                    HttpContext.Current.Response.AddHeader("Content-Disposition", file.FileName);
+                    HttpContext.Current.Response.AddHeader("Content-Disposition", "attachment;filename=\"" + file.FileName + "\";");
                     HttpContext.Current.Response.OutputStream.Write(buffer, 0, buffer.Length);
                     HttpContext.Current.Response.Flush();
                     HttpContext.Current.Response.End();

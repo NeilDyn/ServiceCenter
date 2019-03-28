@@ -131,7 +131,7 @@
             <asp:TableRow>
                 <asp:TableCell ColumnSpan="4">
                     <asp:Table runat="server" Height="100%" Width="100%" ID="tblZendeskInformation">
-                        <asp:TableRow>
+                        <asp:TableRow runat="server" ID="trExistingZendeskTicket">
                             <asp:TableCell Text="Zendesk Ticket:" ForeColor="#0099FF" Font-Bold="true" Style="text-align: left; padding-right: 30px" />
                             <asp:TableCell Width="80%">
                                 <asp:CheckBox ID="cbxZendeskTickets" runat="server" />
@@ -162,7 +162,7 @@
                                 </asp:Table>
                             </asp:TableCell>
                         </asp:TableRow>
-                        <asp:TableRow>
+                        <asp:TableRow runat="server" ID="trNewZendeskTicket">
                              <asp:TableCell Text="New Zendesk Ticket:" ForeColor="#0099FF" Font-Bold="true" Style="text-align: left; padding-right: 30px" />
                             <asp:TableCell Width="80%">
                                 <asp:CheckBox ID="cbxNewZendeskTicket" runat="server" />

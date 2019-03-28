@@ -14,6 +14,10 @@ namespace ExcelDesign.Forms.UserControls.TableData
     /* v7.1 - 3 October 2018 - Neil Jansen
      * Added logic for new Permissions for Issue Refund, Cancel Order and Partial Refund
      */
+
+    /* v10 - 28 March 2019 - Neil Jansen
+     * Added Cross Reference No.
+     */
      
     public partial class SingleSalesOrderDetail : System.Web.UI.UserControl
     {
@@ -359,6 +363,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
                         TableCell itemNo = new TableCell();
                         TableCell desc = new TableCell();
+                        TableCell crossRefNo = new TableCell();
                         TableCell qty = new TableCell();
                         TableCell qtyShipped = new TableCell();
                         TableCell price = new TableCell();
@@ -371,6 +376,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         itemNo.ToolTip = line.ItemNo;
                         desc.Text = line.Description;
                         desc.ToolTip = line.Description;
+                        crossRefNo.Text = line.CrossRefNo;
+                        crossRefNo.ToolTip = line.CrossRefNo;
                         qty.Text = line.Quantity.ToString();
                         qtyShipped.Text = line.QuantityShipped.ToString();
                         total += line.LineAmount;
@@ -415,6 +422,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
                         singleRow.Cells.Add(itemNo);
                         singleRow.Cells.Add(desc);
+                        singleRow.Cells.Add(crossRefNo);
                         singleRow.Cells.Add(qty);
                         singleRow.Cells.Add(qtyShipped);
                         singleRow.Cells.Add(price);

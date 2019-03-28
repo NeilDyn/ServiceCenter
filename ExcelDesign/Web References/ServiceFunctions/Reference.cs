@@ -5509,6 +5509,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string returnReasonCodeField;
         
+        private string crossRefNoField;
+        
         /// <remarks/>
         public string DocNo {
             get {
@@ -5586,6 +5588,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.returnReasonCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CrossRefNo {
+            get {
+                return this.crossRefNoField;
+            }
+            set {
+                this.crossRefNoField = value;
             }
         }
     }
@@ -6315,6 +6327,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string unitPriceField;
         
+        private string crossRefNoField;
+        
         /// <remarks/>
         public string DocNo {
             get {
@@ -6372,6 +6386,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.unitPriceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CrossRefNo {
+            get {
+                return this.crossRefNoField;
+            }
+            set {
+                this.crossRefNoField = value;
             }
         }
     }
@@ -6738,6 +6762,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string returnReasonField;
         
+        private string crossRefNoField;
+        
         /// <remarks/>
         public string DocType {
             get {
@@ -6875,6 +6901,16 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.returnReasonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CrossRefNo {
+            get {
+                return this.crossRefNoField;
+            }
+            set {
+                this.crossRefNoField = value;
             }
         }
     }

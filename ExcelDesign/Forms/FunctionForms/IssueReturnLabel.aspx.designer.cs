@@ -121,6 +121,15 @@ namespace ExcelDesign.Forms.FunctionForms {
         protected global::System.Web.UI.WebControls.Table tblZendeskInformation;
         
         /// <summary>
+        /// trExistingZendeskTicket control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableRow trExistingZendeskTicket;
+        
+        /// <summary>
         /// cbxZendeskTickets control.
         /// </summary>
         /// <remarks>
@@ -164,6 +173,15 @@ namespace ExcelDesign.Forms.FunctionForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtToEmail;
+        
+        /// <summary>
+        /// trNewZendeskTicket control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableRow trNewZendeskTicket;
         
         /// <summary>
         /// cbxNewZendeskTicket control.

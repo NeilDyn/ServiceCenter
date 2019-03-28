@@ -142,3 +142,263 @@ System.Web.Services.Protocols.SoapException: The operation cannot be performed w
    at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
    at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 468
    at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 202
+ERROR 2019-03-28 09:11:09,127 42753ms ServiceCenter          ConnectToService   - Your Zendesk email address credentials are not set up. Please see I.T.
+System.Exception: Your Zendesk email address credentials are not set up. Please see I.T.
+   at ExcelDesign.ZendeskAPI.ZendeskHelper.ConnectToZendesk() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\ZendeskAPI\ZendeskHelper.cs:line 183
+   at ExcelDesign.ZendeskAPI.ZendeskHelper.SearchCustomFieldTickets(String searchCriteria, List`1& listTickets) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\ZendeskAPI\ZendeskHelper.cs:line 57
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2602
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1477
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 285
+ERROR 2019-03-28 09:15:14,579 288205ms IssueReturnLabel       eReturnLabel_Click - Exsisting RMA Return Label RMA-264468 Not Found.
+System.Web.Services.Protocols.SoapException: Exsisting RMA Return Label RMA-264468 Not Found.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean useExsistingZenDesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 468
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 202
+ERROR 2019-03-28 09:30:00,267 1173893ms IssueReturnLabel       eReturnLabel_Click - The operation cannot be performed while the file is open.
+System.Web.Services.Protocols.SoapException: The operation cannot be performed while the file is open.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean useExsistingZenDesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 468
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 202
+ERROR 2019-03-28 09:37:48,964 1642590ms IssueReturnLabel       eReturnLabel_Click - The operation cannot be performed while the file is open.
+System.Web.Services.Protocols.SoapException: The operation cannot be performed while the file is open.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean useExsistingZenDesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 468
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 202
+ERROR 2019-03-28 09:38:37,274 1690900ms IssueReturnLabel       eReturnLabel_Click - The operation cannot be performed while the file is open.
+System.Web.Services.Protocols.SoapException: The operation cannot be performed while the file is open.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean useExsistingZenDesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 468
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 202
+ERROR 2019-03-28 09:39:03,361 1716987ms IssueReturnLabel       eReturnLabel_Click - The operation cannot be performed while the file is open.
+System.Web.Services.Protocols.SoapException: The operation cannot be performed while the file is open.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean useExsistingZenDesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 468
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 202
+ERROR 2019-03-28 09:45:15,218 2088844ms IssueReturnLabel       eReturnLabel_Click - The operation cannot be performed while the file is open.
+System.Web.Services.Protocols.SoapException: The operation cannot be performed while the file is open.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean useExsistingZenDesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 468
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 202
+ERROR 2019-03-28 09:45:50,518 2124144ms IssueReturnLabel       eReturnLabel_Click - The operation cannot be performed while the file is open.
+System.Web.Services.Protocols.SoapException: The operation cannot be performed while the file is open.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean useExsistingZenDesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 468
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 202
+ERROR 2019-03-28 09:47:41,640 2235266ms IssueReturnLabel       eReturnLabel_Click - The operation cannot be performed while the file is open.
+System.Web.Services.Protocols.SoapException: The operation cannot be performed while the file is open.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean useExsistingZenDesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 468
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 202
+ERROR 2019-03-28 09:49:37,324 2350951ms IssueReturnLabel       eReturnLabel_Click - The operation cannot be performed while the file is open.
+System.Web.Services.Protocols.SoapException: The operation cannot be performed while the file is open.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean useExsistingZenDesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 468
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 202
+ERROR 2019-03-28 09:50:34,913 2408539ms IssueReturnLabel       eReturnLabel_Click - maak LBL
+System.Web.Services.Protocols.SoapException: maak LBL
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean useExsistingZenDesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 468
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 202
+ERROR 2019-03-28 09:51:03,324 2436950ms IssueReturnLabel       eReturnLabel_Click - maak LBL
+System.Web.Services.Protocols.SoapException: maak LBL
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean useExsistingZenDesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 468
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 202
+ERROR 2019-03-28 09:51:27,553 2461179ms IssueReturnLabel       eReturnLabel_Click - The automation variable has already been created.
+System.Web.Services.Protocols.SoapException: The automation variable has already been created.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean useExsistingZenDesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 468
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 202
+ERROR 2019-03-28 09:53:03,606 2557232ms IssueReturnLabel       eReturnLabel_Click - Thread was being aborted.
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ExcelDesign.Class_Objects.Zendesk.DownloadRMAPDFManually(String pdf64String, String rmaFileName) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\Zendesk.cs:line 120
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 205
+ERROR 2019-03-28 09:58:30,446 106085ms IssueReturnLabel       eReturnLabel_Click - Thread was being aborted.
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ExcelDesign.Class_Objects.Zendesk.DownloadRMAPDFManually(String pdf64String, String rmaFileName) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\Zendesk.cs:line 120
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 205
+ERROR 2019-03-28 10:00:13,686 59626ms IssueReturnLabel       eReturnLabel_Click - Thread was being aborted.
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ExcelDesign.Class_Objects.Zendesk.DownloadRMAPDFManually(String pdf64String, String rmaFileName) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\Zendesk.cs:line 120
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 205
+ERROR 2019-03-28 10:04:12,585 65133ms IssueReturnLabel       eReturnLabel_Click - File \\JEG-SVR2\E$\Phillip Temp\EmailQueue\Portal\RMA-264468.pdf was not found.
+System.Web.Services.Protocols.SoapException: File \\JEG-SVR2\E$\Phillip Temp\EmailQueue\Portal\RMA-264468.pdf was not found.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean useExsistingZenDesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 468
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 202
+ERROR 2019-03-28 10:06:13,298 58693ms IssueReturnLabel       eReturnLabel_Click - File \\JEG-SVR2\E$\Phillip Temp\EmailQueue\Portal\RMA-264468.pdf was not found.
+System.Web.Services.Protocols.SoapException: File \\JEG-SVR2\E$\Phillip Temp\EmailQueue\Portal\RMA-264468.pdf was not found.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean useExsistingZenDesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 175
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 468
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 202
+ERROR 2019-03-28 10:08:50,003 59297ms IssueReturnLabel       eReturnLabel_Click - Thread was being aborted.
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ExcelDesign.Class_Objects.Zendesk.DownloadRMAPDFManually(String pdf64String, String rmaFileName) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\Zendesk.cs:line 120
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 205
+ERROR 2019-03-28 10:11:29,278 63059ms IssueReturnLabel       eReturnLabel_Click - Thread was being aborted.
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ExcelDesign.Class_Objects.Zendesk.DownloadRMAPDFManually(String pdf64String, String rmaFileName) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\Zendesk.cs:line 120
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 205
+ERROR 2019-03-28 10:14:11,630 106907ms IssueReturnLabel       eReturnLabel_Click - Thread was being aborted.
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ExcelDesign.Class_Objects.Zendesk.DownloadRMAPDFManually(String pdf64String, String rmaFileName) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\Zendesk.cs:line 120
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 205
+ERROR 2019-03-28 10:17:58,339 53327ms IssueReturnLabel       eReturnLabel_Click - Thread was being aborted.
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ExcelDesign.Class_Objects.Zendesk.DownloadRMAPDFManually(String pdf64String, String rmaFileName) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\Zendesk.cs:line 120
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 205
+ERROR 2019-03-28 10:26:11,289 135428ms IssueReturnLabel       eReturnLabel_Click - Thread was being aborted.
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ExcelDesign.Class_Objects.Zendesk.DownloadRMAPDFManually(String pdf64String, String rmaFileName) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\Zendesk.cs:line 120
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 207
+ERROR 2019-03-28 10:43:22,366 318085ms IssueReturnLabel       eReturnLabel_Click - Thread was being aborted.
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ExcelDesign.Class_Objects.Zendesk.DownloadRMAPDFManually(String pdf64String, String rmaFileName) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\Zendesk.cs:line 120
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 208
+ERROR 2019-03-28 13:48:47,090 121378ms ServiceCenter          ConnectToService   - Your Zendesk email address credentials are not set up. Please see I.T.
+System.Exception: Your Zendesk email address credentials are not set up. Please see I.T.
+   at ExcelDesign.ZendeskAPI.ZendeskHelper.ConnectToZendesk() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\ZendeskAPI\ZendeskHelper.cs:line 183
+   at ExcelDesign.ZendeskAPI.ZendeskHelper.SearchCustomFieldTickets(String searchCriteria, List`1& listTickets) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\ZendeskAPI\ZendeskHelper.cs:line 57
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2632
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1492
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 285
+ERROR 2019-03-28 14:10:34,873 10254ms IssueReturnLabel       oadIssueReturnData - Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.LoadIssueReturnData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 87
+ERROR 2019-03-28 14:11:37,987 73368ms IssueReturnLabel       oadIssueReturnData - Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.LoadIssueReturnData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 79
+ERROR 2019-03-28 14:11:38,026 73407ms IssueReturnLabel       eReturnLabel_Click - Value cannot be null.
+Parameter name: source
+System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 139
+ERROR 2019-03-28 14:11:50,131 85511ms IssueReturnLabel       oadIssueReturnData - Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.LoadIssueReturnData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 79
+ERROR 2019-03-28 14:11:50,150 85530ms IssueReturnLabel       eReturnLabel_Click - Value cannot be null.
+Parameter name: source
+System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 139
+ERROR 2019-03-28 14:13:50,099 54934ms IssueReturnLabel       oadIssueReturnData - Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.LoadIssueReturnData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 79
+ERROR 2019-03-28 14:13:50,159 54995ms IssueReturnLabel       eReturnLabel_Click - Value cannot be null.
+Parameter name: source
+System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 139
+ERROR 2019-03-28 14:17:07,426 135318ms IssueReturnLabel       eReturnLabel_Click - Value cannot be null.
+Parameter name: source
+System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 141
+ERROR 2019-03-28 14:17:20,778 148670ms IssueReturnLabel       eReturnLabel_Click - Value cannot be null.
+Parameter name: source
+System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 141
+ERROR 2019-03-28 14:19:16,382 49768ms IssueReturnLabel       eReturnLabel_Click - Value cannot be null.
+Parameter name: source
+System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 143
+ERROR 2019-03-28 14:20:07,640 101026ms IssueReturnLabel       eReturnLabel_Click - Value cannot be null.
+Parameter name: source
+System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 143
+ERROR 2019-03-28 14:21:36,872 53851ms IssueReturnLabel       eReturnLabel_Click - Thread was being aborted.
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ExcelDesign.Class_Objects.Zendesk.DownloadRMAPDFManually(String pdf64String, String rmaFileName) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\Zendesk.cs:line 120
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 228

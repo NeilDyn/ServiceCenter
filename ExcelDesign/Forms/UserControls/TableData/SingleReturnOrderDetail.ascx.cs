@@ -16,6 +16,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
      * Updated logic for Issue Return Label to call new function to email and print new logic of Return Label
      * 
      * Added new button Legacy Return Label that executes the current functionality of the Issue Return Label
+     * Added Cross Reference No
      */
 
     public partial class SingleReturnOrderDetail : System.Web.UI.UserControl
@@ -284,6 +285,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
                         TableCell itemNo = new TableCell();
                         TableCell desc = new TableCell();
+                        TableCell crossRefNo = new TableCell();
                         TableCell qty = new TableCell();
                         TableCell qtyReceived = new TableCell();
                         TableCell qtyExchanged = new TableCell();
@@ -300,6 +302,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                         itemNo.ToolTip = line.ItemNo;
                         desc.Text = line.Description;
                         desc.ToolTip = line.Description;
+                        crossRefNo.Text = line.CrossRefNo;
+                        crossRefNo.ToolTip = line.CrossRefNo;
                         qty.Text = line.Quantity.ToString();
                         qtyReceived.Text = line.QuantityReceived.ToString();
                         qtyExchanged.Text = line.QuantityExchanged.ToString();
@@ -359,6 +363,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
 
                         lineRow.Cells.Add(itemNo);
                         lineRow.Cells.Add(desc);
+                        lineRow.Cells.Add(crossRefNo);
                         lineRow.Cells.Add(qty);
                         lineRow.Cells.Add(qtyReceived);
                         lineRow.Cells.Add(qtyExchanged);

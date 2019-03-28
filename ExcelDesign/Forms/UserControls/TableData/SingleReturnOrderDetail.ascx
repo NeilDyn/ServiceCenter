@@ -201,45 +201,41 @@
         });
 
         $("[id$=btnIssueReturnLabel<%= this.CustID %>_<%= this.CountID %>]").click(function () {
-            if ("<%= this.UPSLabelCreated %>" != "derf") {
-                if ("<%= this.CanIssueLabel %>" == "true") {
-                    if ("<%= this.tcReturnStatus.Text %>" == "Open") {
-                        var width = 1500;
-                        var height = 500;
-                        var left = (screen.width - width) + 500;
-                        var top = (screen.height - height) * 0.5;
+            if ("<%= this.CanIssueLabel %>" == "true") {
+                if ("<%= this.tcReturnStatus.Text %>" == "Open") {
+                    var width = 1500;
+                    var height = 500;
+                    var left = (screen.width - width) + 500;
+                    var top = (screen.height - height) * 0.5;
 
-                        if (typeof (issueReturnLabel) == 'undefined' || issueReturnLabel.closed) {
-                            issueReturnLabel = window.open("FunctionForms/IssueReturnLabel.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>",
-                                null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
+                    if (typeof (issueReturnLabel) == 'undefined' || issueReturnLabel.closed) {
+                        issueReturnLabel = window.open("FunctionForms/IssueReturnLabel.aspx?No=<%= this.RMANo %>&ExternalDocumentNo=<%= this.DocNo %>&ExistingLabel=<%= this.UPSLabelCreated %>",
+                            null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
 
-                            function checkIfWinClosed(intervalID) {
-                                if (updateRMAWin.closed) {
-                                    __doPostBack('[id$=btnReload', '');
-                                    clearInterval(intervalID);
-                                }
+                        function checkIfWinClosed(intervalID) {
+                            if (issueReturnLabel.closed) {
+                                __doPostBack('[id$=btnReload', '');
+                                clearInterval(intervalID);
                             }
-                            var interval = setInterval(function () {
-                                checkIfWinClosed(interval);
-                            }, 1000);
-                        } else {
-                            alert('Please close the current active Issue Return Label dialog window before trying to open a new instance.');
                         }
+                        var interval = setInterval(function () {
+                            checkIfWinClosed(interval);
+                        }, 1000);
                     } else {
-                        alert("Only Return Orders that have an 'OPEN' return status can be issued Return Labels.");
+                        alert('Please close the current active Issue Return Label dialog window before trying to open a new instance.');
                     }
                 } else {
-                    alert("You do not have the required permission to issue a return label.");
+                    alert("Only Return Orders that have an 'OPEN' return status can be issued Return Labels.");
                 }
             } else {
-                alert("Return Label has already been created.");
+                alert("You do not have the required permission to issue a return label.");
             }
         });
 
         $("[id$=btnLegacyReturnLabel<%= this.CustID %>_<%= this.CountID %>]").click(function () {
             if ("<%= this.UPSLabelCreated %>" == "false") {
-                if ("<%= this.CanIssueLabel %>" == "true") {
-                    if ("<%= this.tcReturnStatus.Text %>" == "Open") {
+            if ("<%= this.CanIssueLabel %>" == "true") {
+                if ("<%= this.tcReturnStatus.Text %>" == "Open") {
                         var rmaNo = "<%= this.Rh.RMANo %>";
                         var emailIn = prompt("Please enter a valid email address:");
 
@@ -397,7 +393,8 @@
             <asp:Table runat="server" ID="tblReturnDetailLines" Height="100%" Width="100%">
                 <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
                     <asp:TableHeaderCell Text="Item No." HorizontalAlign="Left" />
-                    <asp:TableHeaderCell Text="Description" HorizontalAlign="Left" Width="25%" />
+                    <asp:TableHeaderCell Text="Description" HorizontalAlign="Left" Width="20%" />
+                    <asp:TableHeaderCell Text="Cross-Ref No." HorizontalAlign="Left" />
                     <asp:TableHeaderCell Text="Qty" />
                     <asp:TableHeaderCell Text="Qty Received" />
                     <asp:TableHeaderCell Text="Qty Exchanged" />

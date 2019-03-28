@@ -332,6 +332,7 @@
                 <asp:TableHeaderRow ForeColor="White" BackColor="#507CD1">
                     <asp:TableHeaderCell Text="Item No." HorizontalAlign="Left" />
                     <asp:TableHeaderCell Text="Description" HorizontalAlign="Left" Width="30%" />
+                    <asp:TableHeaderCell Text="Cross-Ref No." HorizontalAlign="Left" />
                     <asp:TableHeaderCell Text="Qty" />
                     <asp:TableHeaderCell Text="Qty Shipped" />
                     <asp:TableHeaderCell Text="Price" HorizontalAlign="Left" />

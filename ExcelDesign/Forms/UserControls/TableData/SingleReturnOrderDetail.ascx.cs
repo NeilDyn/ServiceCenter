@@ -57,7 +57,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
         protected Button btnPrintRMAInstructions = new Button();
         protected Button btnUpdateRMA = new Button();
         protected Button btnLegacyReturnLabel = new Button();
-        protected Button btnIssueReturnLabel = new Button();
+        protected Button btnReturnLabel = new Button();
 
         protected Control singleReturnOrderReceiptLines;
         protected Control singleReturnOrderReceiveLines;
@@ -139,9 +139,9 @@ namespace ExcelDesign.Forms.UserControls.TableData
             btnLegacyReturnLabel.ID = "btnLegacyReturnLabel" + CustID.ToString() + "_" + CountID.ToString();
             btnLegacyReturnLabel.OnClientClick = "return false;";
 
-            btnIssueReturnLabel.Text = "Issue Return Label";
-            btnIssueReturnLabel.ID = "btnIssueReturnLabel" + CustID.ToString() + "_" + CountID.ToString();
-            btnIssueReturnLabel.OnClientClick = "return false;";
+            btnReturnLabel.Text = "Return Label";
+            btnReturnLabel.ID = "btnReturnLabel" + CustID.ToString() + "_" + CountID.ToString();
+            btnReturnLabel.OnClientClick = "return false;";
         }
 
         protected void LoadData()
@@ -487,7 +487,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 updateRMA.Controls.Add(btnUpdateRMA);
                 printRMAInstructions.Controls.Add(btnPrintRMAInstructions);
                 legacyReturnLabel.Controls.Add(btnLegacyReturnLabel);
-                issueReturnLabel.Controls.Add(btnIssueReturnLabel);
+                issueReturnLabel.Controls.Add(btnReturnLabel);
 
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());

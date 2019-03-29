@@ -62,6 +62,15 @@ namespace ExcelDesign.Forms.FunctionForms
                         tcShipFromCity.Text = cust.City;
                         tcShipFromCode.Text = cust.Zip;
                     }
+
+                    if(existingLabel.ToUpper() == "TRUE")
+                    {
+                        BtnIssueReturnLabel.Text = "Download Return Label";
+                    }
+                }
+                else
+                {
+                    ticketNo = ddlZendeskTickets.SelectedValue;
                 }
 
                 LoadIssueReturnData();
@@ -171,7 +180,7 @@ namespace ExcelDesign.Forms.FunctionForms
 
                 if (existingZendeskTicket)
                 {
-                    ticketNo = ddlZendeskTickets.SelectedValue;
+                    //ticketNo = ddlZendeskTickets.SelectedValue;
                     foreach (Zendesk ticket in zendeskTickets)
                     {
                         if (ticket.TicketNo == ticketNo)
@@ -185,8 +194,20 @@ namespace ExcelDesign.Forms.FunctionForms
                         }
                     }
 
-                    int index = emailTo.IndexOf('@');
-                    emailTo = emailTo.Insert(index, "+id" + ticketNo);
+                    if (emailTo != null)
+                    {
+                        int index = emailTo.IndexOf('@');
+                        emailTo = emailTo.Insert(index, "+id" + ticketNo);
+                    }
+                    else
+                    {
+                        emailTo = string.Empty;
+                    }
+
+                    if (fromEmail == null)
+                    {
+                        fromEmail = string.Empty;
+                    }
 
                     pdf64String = ss.IssueReturnLabel(no, emailTo, existingZendeskTicket, fromEmail, downloadManually, newEmail, fromEmailName, emailSubject);
 

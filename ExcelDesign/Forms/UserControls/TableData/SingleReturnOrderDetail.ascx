@@ -200,7 +200,7 @@
             }
         });
 
-        $("[id$=btnIssueReturnLabel<%= this.CustID %>_<%= this.CountID %>]").click(function () {
+        $("[id$=btnReturnLabel<%= this.CustID %>_<%= this.CountID %>]").click(function () {
             if ("<%= this.CanIssueLabel %>" == "true") {
                 if ("<%= this.tcReturnStatus.Text %>" == "Open") {
                     var width = 1500;

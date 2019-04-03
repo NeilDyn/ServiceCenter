@@ -82,7 +82,7 @@ namespace ExcelDesign.Class_Objects
             {
                 baseURL = "http://jeg-psql1:7047/DynamicsNAV/WS/JEG_SONS,%20Inc/";
             }
-            else if(((mode != null) && (mode == "Development")))
+            else if((mode != null) && (mode == "Development"))
             {
                 baseURL = "http://jeg-svr2.jeg.local:7058/DynamicsNAV/WS/JEG_SONS,%20Inc/";
             }

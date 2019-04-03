@@ -197,7 +197,21 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 {
                     this.tcShipmentsTotal.Text = "<a href='javascript:expandShipments" + CustID.ToString() + "" + CountID.ToString() + "()'>0</a>";
                     this.tcShipmentsTotal.ID = "tcShipmentsTotal_" + CustID.ToString() + "_" + CountID.ToString();
+
+                    this.tcShipmentDate.Text = string.Empty;
+                    this.tcShipmentDate.ToolTip = string.Empty;
+
+                    this.tcShipMethod.Text = string.Empty;
+                    this.tcShipMethod.ToolTip = string.Empty;
                 }
+            }
+            else
+            {
+                this.tcShipmentDate.Text = string.Empty;
+                this.tcShipmentDate.ToolTip = string.Empty;
+
+                this.tcShipMethod.Text = string.Empty;
+                this.tcShipMethod.ToolTip = string.Empty;
             }
 
             if (Sh.PostedPackageObject.Count > 0)

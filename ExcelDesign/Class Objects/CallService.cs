@@ -15,7 +15,7 @@ namespace ExcelDesign.Class_Objects
 
     /* V10 - 28 March 2019 - Neil Jansen
      * Added Cross-Reference No from Sales Line
-     */ 
+     */
 
     /* v7.1 - 3 October 2018 - Neil Jansen
      * GetStatisticsInformation() - Added older than 24 hours bucket
@@ -1489,7 +1489,15 @@ namespace ExcelDesign.Class_Objects
             }
 
             SetFunctionData();
-            GetZendeskTickets(ref returnCust);
+
+            try
+            {
+                GetZendeskTickets(ref returnCust);
+            }
+            catch (Exception zendeskException)
+            {
+                HttpContext.Current.Session["ZendeskException"] = zendeskException.Message; 
+            }
 
             return returnCust;
         }
@@ -2685,7 +2693,7 @@ namespace ExcelDesign.Class_Objects
                                     updatedDate = currResults.CustSvcLog[csl].UpdateDate;
                                     subject = currResults.CustSvcLog[csl].Subject;
 
-                                    if(createdDate == "")
+                                    if (createdDate == "")
                                     {
                                         createdDateTime = null;
                                     }

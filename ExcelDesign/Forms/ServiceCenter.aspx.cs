@@ -283,8 +283,15 @@ namespace ExcelDesign.Forms
                 salesReturnOrderHeader = new Control();
                 salesReturnOrderDetails = new Control();
                 customers = cs.GetCustomerInfo();
+                
                 Session["CustomerList"] = customers;
                 PopulateData();
+
+                if (Session["ZendeskException"] != null)
+                {
+                    string zendeskException = Convert.ToString(Session["ZendeskException"]);
+                    ClientScript.RegisterStartupScript(this.GetType(), "zendeskException", "alert('" + zendeskException + "');", true);
+                }
             }
             catch (Exception ex)
             {

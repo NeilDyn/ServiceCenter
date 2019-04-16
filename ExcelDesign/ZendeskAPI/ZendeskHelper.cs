@@ -42,7 +42,7 @@ namespace ExcelDesign.ZendeskAPI
 
         public ZendeskHelper()
         {
-            
+
         }
 
         public static List<Zendesk> SearchCustomFieldTickets(string searchCriteria, ref List<long?> listTickets)

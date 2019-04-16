@@ -514,3 +514,9 @@ System.ArgumentNullException: Value cannot be null.
 Parameter name: source
    at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
    at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 162
+ERROR 2019-04-16 09:11:09,751 59406ms ServiceCenter          ConnectToService   - Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ExcelDesign.ZendeskAPI.ZendeskHelper.SearchCustomFieldTickets(String searchCriteria, List`1& listTickets) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\ZendeskAPI\ZendeskHelper.cs:line 61
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2643
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1495
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 285

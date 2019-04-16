@@ -45,6 +45,10 @@
                 $("[id$=tblNewZendeskTicket]").show();
                 $("[id$=cbxZendeskTickets]").prop("checked", false);
                 $("[id$=cbxDownloadManually]").prop("checked", false);
+
+                if ($("[id$=cbxNewZendeskTicket]").prop("checked") == true) {
+                    $("[id$=tblNewZendeskTicket]").hide();
+                }
             });
 
             $("[id$=cbxDownloadManually]").change(function () {

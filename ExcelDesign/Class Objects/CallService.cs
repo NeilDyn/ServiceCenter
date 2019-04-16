@@ -2626,6 +2626,23 @@ namespace ExcelDesign.Class_Objects
         {
             foreach (Customer singleCust in cust)
             {
+                // Initit all ticket objects
+                foreach (SalesHeader salesHeadInit in singleCust.SalesHeader)
+                {
+                    if (salesHeadInit.Tickets == null)
+                    {
+                        salesHeadInit.Tickets = new List<Zendesk>();
+                    }
+                }
+
+                foreach(ReturnHeader returnHeadInit in singleCust.ReturnHeaders)
+                {
+                    if(returnHeadInit.Tickets == null)
+                    {
+                        returnHeadInit.Tickets = new List<Zendesk>();
+                    }
+                }
+
                 foreach (SalesHeader salesHead in singleCust.SalesHeader)
                 {
                     List<long?> salesTickets = new List<long?>();

@@ -253,10 +253,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             }
 
             tcZendeskTickets.Text = Rh.Tickets.Count > 0 ? "<a href='javascript:expandReturnZendeskTickets" + CustID.ToString() + "" + CountID.ToString() + "()'>" + Rh.Tickets.Count.ToString() + "</a>" : Rh.Tickets.Count.ToString();
-            if (Rh.Tickets.Count > 0)
-            {
-                PopulateZendeskTicketLines();
-            }
+            PopulateZendeskTicketLines();         
         }
 
         protected void PopulateLines()

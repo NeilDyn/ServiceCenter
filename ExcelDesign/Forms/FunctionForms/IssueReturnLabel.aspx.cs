@@ -180,44 +180,52 @@ namespace ExcelDesign.Forms.FunctionForms
 
                 if (existingZendeskTicket)
                 {
-                    //ticketNo = ddlZendeskTickets.SelectedValue;
-                    foreach (Zendesk ticket in zendeskTickets)
+                    ticketNo = ddlZendeskTickets.SelectedValue;
+
+                    if (ticketNo != string.Empty)
                     {
-                        if (ticket.TicketNo == ticketNo)
+                        foreach (Zendesk ticket in zendeskTickets)
                         {
-                            emailSubject = ticket.Subject;
-                            fromEmail = ticket.FromEmailAddress;
-                            fromEmailName = ticket.FromEmailName;
+                            if (ticket.TicketNo == ticketNo)
+                            {
+                                emailSubject = ticket.Subject;
+                                fromEmail = ticket.FromEmailAddress;
+                                fromEmailName = ticket.FromEmailName;
 
-                            emailTo = ticket.ToEmailsAddress;
-                            zendeskTicket = ticket;
+                                emailTo = ticket.ToEmailsAddress;
+                                zendeskTicket = ticket;
+                            }
                         }
-                    }
 
-                    if (emailTo != null)
-                    {
-                        int index = emailTo.IndexOf('@');
-                        emailTo = emailTo.Insert(index, "+id" + ticketNo);
+                        if (emailTo != null)
+                        {
+                            int index = emailTo.IndexOf('@');
+                            emailTo = emailTo.Insert(index, "+id" + ticketNo);
+                        }
+                        else
+                        {
+                            emailTo = string.Empty;
+                        }
+
+                        if (fromEmail == null)
+                        {
+                            fromEmail = string.Empty;
+                        }
+
+                        pdf64String = ss.IssueReturnLabel(no, emailTo, existingZendeskTicket, fromEmail, downloadManually, newEmail, fromEmailName, emailSubject);
+
+                        Session["NoUserInteraction"] = true;
+                        if (pdf64String != string.Empty)
+                        {
+                            zendeskTicket.UpdateZendeskTicketWithPDFFile(pdf64String, no);
+
+                            ClientScript.RegisterStartupScript(this.GetType(), "issueReturnLableExistingTicket", "alert('" + no + ", Return label is being processed and will be emailed within 1 hour.');", true);
+                            ClientScript.RegisterStartupScript(this.GetType(), "closeErrorAlert", "parent.window.close();", true);
+                        }
                     }
                     else
                     {
-                        emailTo = string.Empty;
-                    }
-
-                    if (fromEmail == null)
-                    {
-                        fromEmail = string.Empty;
-                    }
-
-                    pdf64String = ss.IssueReturnLabel(no, emailTo, existingZendeskTicket, fromEmail, downloadManually, newEmail, fromEmailName, emailSubject);
-
-                    Session["NoUserInteraction"] = true;
-                    if (pdf64String != string.Empty)
-                    {
-                        zendeskTicket.UpdateZendeskTicketWithPDFFile(pdf64String, no);
-
-                        ClientScript.RegisterStartupScript(this.GetType(), "issueReturnLableExistingTicket", "alert('" + no + ", Return label is being processed and will be emailed within 1 hour.');", true);
-                        ClientScript.RegisterStartupScript(this.GetType(), "closeErrorAlert", "parent.window.close();", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "selectValidTicketNo", "alert('Please select a valid existing Zendesk ticket when attempting to update a ticket number.');", true);
                     }
                 }
                 else if(newZendeskTicket)

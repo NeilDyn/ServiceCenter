@@ -520,3 +520,82 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2643
    at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1495
    at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 285
+ERROR 2019-04-16 10:05:10,796 32789ms ServiceCenter          PopulateData       - Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ExcelDesign.Forms.UserControls.TableData.SingleReturnOrderDetail.LoadData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\TableData\SingleReturnOrderDetail.ascx.cs:line 264
+   at ExcelDesign.Forms.UserControls.TableData.SingleReturnOrderDetail.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\TableData\SingleReturnOrderDetail.ascx.cs:line 81
+   at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.AddedControl(Control control, Int32 index)
+   at System.Web.UI.ControlCollection.Add(Control child)
+   at ExcelDesign.Forms.ServiceCenter.PopulateData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 340
+ERROR 2019-04-16 10:06:23,801 105794ms ServiceCenter          PopulateData       - Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ExcelDesign.Forms.UserControls.TableData.SingleReturnOrderDetail.LoadData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\TableData\SingleReturnOrderDetail.ascx.cs:line 264
+   at ExcelDesign.Forms.UserControls.TableData.SingleReturnOrderDetail.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\TableData\SingleReturnOrderDetail.ascx.cs:line 81
+   at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.AddedControl(Control control, Int32 index)
+   at System.Web.UI.ControlCollection.Add(Control child)
+   at ExcelDesign.Forms.ServiceCenter.PopulateData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 340
+ERROR 2019-04-16 10:10:06,436 165431ms IssueReturnLabel       oadIssueReturnData - Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.LoadIssueReturnData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 111
+ERROR 2019-04-16 10:38:34,792 136591ms IssueReturnLabel       eReturnLabel_Click - Thread was being aborted.
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ExcelDesign.Class_Objects.Zendesk.DownloadRMAPDFManually(String pdf64String, String rmaFileName) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\Zendesk.cs:line 120
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 249
+ERROR 2019-04-16 10:53:51,636 283055ms IssueReturnLabel       eReturnLabel_Click - Thread was being aborted.
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ExcelDesign.Class_Objects.Zendesk.DownloadRMAPDFManually(String pdf64String, String rmaFileName) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\Zendesk.cs:line 120
+   at ExcelDesign.Forms.FunctionForms.IssueReturnLabel.BtnIssueReturnLabel_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\IssueReturnLabel.aspx.cs:line 257

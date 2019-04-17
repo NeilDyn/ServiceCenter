@@ -140,6 +140,7 @@
     <Content Include="Forms\UserControls\MainTables\ReturnOrderHeaderTable.ascx" />
     <Content Include="Forms\ServiceCenter.aspx" />
     <Content Include="Forms\UserControls\SingleControls\MultipleCustomers.ascx" />
+    <Content Include="Forms\UserControls\SingleControls\ZendeskAPIConnection.ascx" />
     <Content Include="Forms\UserControls\StatisticsControls\CompletedExchanges.ascx" />
     <Content Include="Forms\UserControls\StatisticsControls\PendingUnknown.ascx" />
     <Content Include="Forms\UserControls\StatisticsControls\PendingRefund.ascx" />
@@ -411,6 +412,13 @@
     </Compile>
     <Compile Include="Forms\UserControls\SingleControls\MultipleCustomers.ascx.designer.cs">
       <DependentUpon>MultipleCustomers.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\SingleControls\ZendeskAPIConnection.ascx.cs">
+      <DependentUpon>ZendeskAPIConnection.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\SingleControls\ZendeskAPIConnection.ascx.designer.cs">
+      <DependentUpon>ZendeskAPIConnection.ascx</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserControls\StatisticsControls\CompletedExchanges.ascx.cs">
       <DependentUpon>CompletedExchanges.ascx</DependentUpon>

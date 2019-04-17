@@ -69,6 +69,7 @@ namespace ExcelDesign.Forms
         #region Controls
 
         protected static Control multipleCustomers;
+        protected static Control zendeskAPIConnection;
         protected Control salesOrderHeader;
         protected Control salesOrderDetail;
         protected Control salesReturnOrderHeader;
@@ -285,13 +286,7 @@ namespace ExcelDesign.Forms
                 customers = cs.GetCustomerInfo();
                 
                 Session["CustomerList"] = customers;
-                PopulateData();
-
-                if (Session["ZendeskException"] != null)
-                {
-                    string zendeskException = Convert.ToString(Session["ZendeskException"]);
-                    ClientScript.RegisterStartupScript(this.GetType(), "zendeskException", "alert('" + zendeskException + "');", true);
-                }
+                PopulateData();              
             }
             catch (Exception ex)
             {
@@ -331,6 +326,19 @@ namespace ExcelDesign.Forms
                     multipleCustomers = LoadControl("UserControls/SingleControls/MultipleCustomers.ascx");
                     this.frmOrderDetails.Controls.Add(multipleCustomers);
                     Session["MultipleCustomers"] = multipleCustomers;
+                }
+
+                if (Session["ZendeskException"] != null)
+                {
+                    string zendeskException = Convert.ToString(Session["ZendeskException"]);
+
+                    if (zendeskException != null || zendeskException != string.Empty)
+                    {
+                        zendeskAPIConnection = LoadControl("UserControls/SingleControls/ZendeskAPIConnection.ascx");
+                        this.frmOrderDetails.Controls.Add(zendeskAPIConnection);
+                    }
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "zendeskException", "alert('" + zendeskException + "');", true);
                 }
 
                 customerInfoTable = LoadControl("UserControls/MainTables/CustomerInfoTable.ascx");

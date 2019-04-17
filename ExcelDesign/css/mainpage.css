@@ -2,10 +2,6 @@
     position: relative;
 }
 
-#StatisticsOnService {
-
-}
-
 .SearchArea {
     text-align: center;
     vertical-align: middle;
@@ -19,15 +15,6 @@
 
 form {
     font-family: Calibri;
-}
-
-table {
-    /*table-layout: fixed;*/
-}
-
-td {
-    /*white-space: normal;*/
-    /*overflow: hidden;*/
 }
 
 .HeaderNavbar {
@@ -86,6 +73,16 @@ td {
 
 .MultipleCustomersFound {
     background-color: lightcoral;
+    font-size: larger;
+    font-weight: bolder;
+    vertical-align: middle;
+    text-align: center;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+.ZendeskAPIConnectionDiv {
+    background-color: lawngreen;
     font-size: larger;
     font-weight: bolder;
     vertical-align: middle;

@@ -4,6 +4,7 @@
 
 <%@ Register Src="~/Forms/UserControls/StatisticsControls/StatisticsUserControl.ascx" TagName="StatisticsUserControl" TagPrefix="suc" %>
 <%@ Register Src="~/Forms/UserControls/SingleControls/MultipleCustomers.ascx" TagName="MultipleCustomers" TagPrefix="mc" %>
+<%@ Register Src="~/Forms/UserControls/SingleControls/ZendeskAPIConnection.ascx" TagName="ZendeskAPIConnection" TagPrefix="zapic" %>
 <%@ Register Src="~/Forms/UserControls/MainTables/CustomerInfoTable.ascx" TagName="CustomerInfoTable" TagPrefix="tib" %>
 <%@ Register Src="~/Headers/Navbar.ascx" TagName="MainNavbar" TagPrefix="mainnav" %>
 

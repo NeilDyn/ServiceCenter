@@ -2635,14 +2635,17 @@ namespace ExcelDesign.Class_Objects
                     }
                 }
 
-                foreach(ReturnHeader returnHeadInit in singleCust.ReturnHeaders)
+                foreach (ReturnHeader returnHeadInit in singleCust.ReturnHeaders)
                 {
-                    if(returnHeadInit.Tickets == null)
+                    if (returnHeadInit.Tickets == null)
                     {
                         returnHeadInit.Tickets = new List<Zendesk>();
                     }
                 }
+            }
 
+            foreach (Customer singleCust in cust)
+            {
                 foreach (SalesHeader salesHead in singleCust.SalesHeader)
                 {
                     List<long?> salesTickets = new List<long?>();

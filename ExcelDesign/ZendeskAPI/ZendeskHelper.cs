@@ -11,6 +11,8 @@ using ZendeskApi.Client.Resources;
 using System.Net;
 using ZendeskApi.Contracts.Requests;
 using System.Web.Services;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ExcelDesign.ZendeskAPI
 {
@@ -30,15 +32,35 @@ namespace ExcelDesign.ZendeskAPI
          * 25 March 2019
          * Added new function to update zendesk tickets with PDF attachment
          * Added new function to create new Zendesk tickets with PDF Attachment
-         * Added functionality to use Current User logged in ZendeskEmail to connecto to the api;
+         * Added functionality to use Current User logged in ZendeskEmail to connec to to the api;
+         */
+
+        /* v10.2 - 24 March 2019 - Neil Jansen
+         * Updated Ticket Status to 'SOLVED' when updating or creating a Zendesk Ticket
+         */
+
+        /* v11 - 15 May 2019 - Neil Jansen
+         * Added functionality to allow ZendeskAPI to be switch between Sandbox version and Production version
+         * 
+         * Update CreateNewZendesk ticket functionality to first create a new ticket on behalf of the customer, 
+         * and immediately after to update it with the return shipping infromation.
+         * 
+         * Updated the create and update zendesk ticket functions to accept and include in their comments the Amazon S3 bucket URL
+         * 
+         * Developed new function to verify a zendesk ticket. This is used when a user inputs an existing zendesk ticket manually.
          */
 
         private static string zendeskUsername = string.Empty;
         private static readonly string zendeskAPIToken = "9gryAaOh6JfSIaIWPetf42R4y4J0bPvdG3ta2uX9";
+        private static readonly string zendeskSandboxAPIToken = "TlULrYzysqHf7h0tk6pkPg6fbiuhamvBMNaLCBbm";
         private static readonly string zendeskURL = "https://jegsons.zendesk.com";
+        private static readonly string zendeskSandboxURL = "https://jegsons1556527099.zendesk.com";
         private static ZendeskDefaultConfiguration configuration;
         private static Uri zendeskURI;
         private static IZendeskClient client;
+
+        //True to use Sandbox version, False for production
+        private static readonly bool versionTypeSandbox = true;
 
         public ZendeskHelper()
         {
@@ -54,7 +76,7 @@ namespace ExcelDesign.ZendeskAPI
              * Changed function name to specify 'CustomFields' - Updated Zendesk list object creation to include new parameters
              */
 
-            ConnectToZendesk();
+            ConnectToZendesk(versionTypeSandbox);
 
             List<Zendesk> zendeskTickets = new List<Zendesk>();
             IListResponse<Ticket> responses = client.Search.Find(new ZendeskQuery<Ticket>().WithCustomFilter("fieldvalue", searchCriteria));
@@ -85,7 +107,7 @@ namespace ExcelDesign.ZendeskAPI
              * Create a list of Zendesk objects through filtering the Subject field in Zendesk
              */
 
-            ConnectToZendesk();
+            ConnectToZendesk(versionTypeSandbox);
 
             List<Zendesk> zendeskTickets = new List<Zendesk>();
             IListResponse<Ticket> responses = client.Search.Find(new ZendeskQuery<Ticket>().WithCustomFilter("subject", searchCriteria));
@@ -116,7 +138,7 @@ namespace ExcelDesign.ZendeskAPI
              * Create a list of Zendesk objects through filtering the Description field in Zendesk
              */
 
-            ConnectToZendesk();
+            ConnectToZendesk(versionTypeSandbox);
 
             List<Zendesk> zendeskTickets = new List<Zendesk>();
             IListResponse<Ticket> responses = client.Search.Find(new ZendeskQuery<Ticket>().WithCustomFilter("description", searchCriteria));
@@ -147,7 +169,8 @@ namespace ExcelDesign.ZendeskAPI
              * Create a list of Zendesk objects through filtering the Description field in Zendesk
              */
 
-            ConnectToZendesk();
+            //true if sandbox, false for production
+            ConnectToZendesk(versionTypeSandbox);
 
             List<Zendesk> zendeskTickets = new List<Zendesk>();
             IListResponse<Ticket> responses = client.Search.Find(new ZendeskQuery<Ticket>().WithCustomFilter("requester", searchCriteria));
@@ -172,7 +195,7 @@ namespace ExcelDesign.ZendeskAPI
             return zendeskTickets;
         }
 
-        private static void ConnectToZendesk()
+        private static void ConnectToZendesk(bool sandbox)
         {
             if (HttpContext.Current.Session["ActiveUser"] != null)
             {
@@ -183,88 +206,200 @@ namespace ExcelDesign.ZendeskAPI
                     throw new Exception("Your Zendesk email address credentials are not set up. Please see I.T.");
                 }
 
-                zendeskURI = new Uri(zendeskURL);
-                configuration = new ZendeskDefaultConfiguration(zendeskUsername, zendeskAPIToken);
+                if (!sandbox)
+                {
+                    zendeskURI = new Uri(zendeskURL);
+                    configuration = new ZendeskDefaultConfiguration(zendeskUsername, zendeskAPIToken);
+                }
+                else
+                {
+                    zendeskURI = new Uri(zendeskSandboxURL);
+                    configuration = new ZendeskDefaultConfiguration(zendeskUsername, zendeskSandboxAPIToken);
+                }
+
                 client = new ZendeskClient(zendeskURI, configuration);
                 ServicePointManager.Expect100Continue = true;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             }
         }
 
-        public void UpdateZendeskTicketWithPDFFile(long ticketNo, MemoryFile file, string rmaNo)
+        public void UpdateZendeskTicketWithPDFFile(long ticketNo, MemoryFile file, string rmaNo, string amazonBucketURL, bool fileAttached)
         {
-            ConnectToZendesk();
+            ConnectToZendesk(versionTypeSandbox);
 
-            string uploadToken = string.Empty;
+            
             IResponse<Ticket> ticketResponse = client.Tickets.Get(ticketNo);
             Ticket ticket = ticketResponse.Item;
             Ticket newTicket = ticket;
-            TicketComment newComment = new TicketComment();
-
-            IResponse<Upload> response = client.Upload.Post(new UploadRequest
+            TicketComment newComment = new TicketComment
             {
-                Item = file
-            });
+                Id = ticketNo
+            };
 
-            uploadToken = response.Item.Token;
+            if (fileAttached)
+            {
+                string uploadToken = string.Empty;
+                IResponse<Upload> response = client.Upload.Post(new UploadRequest
+                {
+                    Item = file
+                });
 
-            newComment.Id = ticketNo;
-            newComment.Body = @"Hello,
+                uploadToken = response.Item.Token;
+                newComment.AddAttachmentToComment(uploadToken);
 
-Your return request has been approved.  Your Return Merchandise Authorization number is " + rmaNo + @".
+                newComment.Body = @"Hello,
 
-Please see attached document for return instructions and shipping label.
+                Your return request has been approved.  Your Return Merchandise Authorization number is " + rmaNo + @".
 
-IMPORTANT: Please remove ALL locks and passwords. Any device(s) received locked with your information will be denied, returned at your expense with no refund submitted for processing.
+                Please see attached document for return instructions and shipping label. Alternatively [Click here](" + amazonBucketURL + @") to download your instructions return instructions and shipping label manually.
 
-Thank You";
+                IMPORTANT: Please remove ALL locks and passwords. Any device(s) received locked with your information will be denied, returned at your expense with no refund submitted for processing.
+
+                Thank You";
+            }
+            else
+            {
+                newComment.Body = @"Hello,
+
+                Your return request has been approved.  Your Return Merchandise Authorization number is " + rmaNo + @".
+
+                [Click here](" + amazonBucketURL + @") to download your return instructions and shipping label.
+
+                IMPORTANT: Please remove ALL locks and passwords. Any device(s) received locked with your information will be denied, returned at your expense with no refund submitted for processing.
+
+                Thank You";
+            }
+
             newComment.IsPublic = true;
             newComment.Type = TicketEventType.Comment;
-            newComment.AddAttachmentToComment(uploadToken);
-
+            
             newTicket.Comment = newComment;
+            newTicket.Status = TicketStatus.Solved;
 
             client.Tickets.Put(new TicketRequest { Item = newTicket });
         }
 
-        public long? CreateNewZendeskTicketWithPDFFile(MemoryFile file, string rmaNo)
+        public long? CreateNewZendeskTicketWithPDFFile(MemoryFile file, string rmaNo, string amazonBucketURL, string customerEmail, string customerName, bool fileAttached, string ExtDocNo)
         {
-            ConnectToZendesk();
+            ConnectToZendesk(versionTypeSandbox);
 
             string uploadToken = string.Empty;
-            Ticket ticket = new Ticket();
-            TicketComment comment = new TicketComment();
+            long? createdTicketID;
+            Ticket newTicket = new Ticket();
+            Ticket updateNewTicket = new Ticket();
+            Ticket ticketReponse;
 
-            IResponse<Upload> response = client.Upload.Post(new UploadRequest
+            // First we need to create the Zendesk Ticket per the customer request BEFORE we send the return shipping information
+            newTicket.Subject = "Return Label Request for: " + ExtDocNo;
+
+            TicketComment newComment = new TicketComment
             {
-                Item = file
-            });
-
-            uploadToken = response.Item.Token;
-            comment.AddAttachmentToComment(uploadToken);
-            comment.IsPublic = true;
-            comment.Type = TicketEventType.Comment;
-            comment.Body = @"Hello,
-
-Your return request has been approved.  Your Return Merchandise Authorization number is " + rmaNo + @".
-
-Please see attached document for return instructions and shipping label.
-
-IMPORTANT: Please remove ALL locks and passwords. Any device(s) received locked with your information will be denied, returned at your expense with no refund submitted for processing.";
-
-            ticket.Recipient = "itsupport@jegsons.zendesk.com";
-
-            ticket.Subject = "Return Request Information";
-            ticket.Comment = comment;
-
-            TicketRequest request = new TicketRequest
-            {
-                Item = ticket
+                IsPublic = true,
+                Type = TicketEventType.Comment,
+                Body = "Return Label Request"
             };
 
-            client.Tickets.Post(request);
+            newTicket.Comment = newComment;
 
-            return request.Item.Id;
+            Via via = new Via
+            {
+                Channel = "web_service"
+            };
+
+            newTicket.Via = via;
+
+            TicketRequester ticketRequester = new TicketRequester
+            {
+                Name = customerName,
+                Email = customerEmail,
+            };
+
+            newTicket.Requester = ticketRequester;
+            newTicket.Recipient = customerEmail;
+
+            TicketRequest newRequest = new TicketRequest
+            {
+                Item = newTicket
+            };
+
+            IResponse<Ticket> responseTicket = client.Tickets.Post(newRequest);
+
+            // We need to retrieve the ticket ID of the newly created Ticket
+            createdTicketID = responseTicket.Item.Id;
+
+            // Now we immediately update the newly created ticket with the return shipping information
+            IResponse<Ticket> updateTicketResponse = client.Tickets.Get(createdTicketID.Value);
+            ticketReponse = updateTicketResponse.Item;
+            updateNewTicket = ticketReponse;
+
+            TicketComment comment = new TicketComment
+            {
+                IsPublic = true,
+                Type = TicketEventType.Comment
+            };
+
+            if (fileAttached)
+            {
+                IResponse<Upload> response = client.Upload.Post(new UploadRequest
+                {
+                    Item = file
+                });
+
+                uploadToken = response.Item.Token;
+                comment.AddAttachmentToComment(uploadToken);
+
+                comment.Body = @"Hello,
+
+                Your return request has been approved.  Your Return Merchandise Authorization number is " + rmaNo + @".
+
+                Please see attached document for return instructions and shipping label. Alternatively [Click here](" + amazonBucketURL + @") to download your instructions return instructions and shipping label manually.
+
+                IMPORTANT: Please remove ALL locks and passwords. Any device(s) received locked with your information will be denied, returned at your expense with no refund submitted for processing.
+
+                Thank You";
+            }
+            else
+            {
+                comment.Body = @"Hello,
+
+                Your return request has been approved.  Your Return Merchandise Authorization number is " + rmaNo + @".
+
+                [Click here](" + amazonBucketURL + @") to download your return instructions and shipping label.
+
+                IMPORTANT: Please remove ALL locks and passwords. Any device(s) received locked with your information will be denied, returned at your expense with no refund submitted for processing.
+
+                Thank You";
+            }
+
+            updateNewTicket.Comment = comment;
+            updateNewTicket.Status = TicketStatus.Solved;         
+
+            client.Tickets.Put(new TicketRequest { Item = updateNewTicket });
+
+            return createdTicketID;
+        }
+
+        public Zendesk VerifyZendeskTicket(long zendeskTicket)
+        {
+            Zendesk ticket = new Zendesk();
+
+            try
+            {
+                IResponse<Ticket> validTicket = client.Tickets.Get(zendeskTicket);
+                Ticket response = validTicket.Item;
+
+                ZendDeskEmailEntry fromEmails = ZendDeskEmailParser.GetEmailList(response.Via.Source.From);
+                ZendDeskEmailEntry toEmails = ZendDeskEmailParser.GetEmailList(response.Via.Source.To);
+
+                ticket = new Zendesk(response.Id.ToString(), response.Created, response.Updated, response.Subject,
+                        response.Status.ToString(), response.Priority, false, fromEmails.Address, fromEmails.Name, toEmails.Address, toEmails.Name);
+            }
+            catch(Exception)
+            {
+                ticket = null;
+            }
+
+            return ticket;
         }
     }
 }

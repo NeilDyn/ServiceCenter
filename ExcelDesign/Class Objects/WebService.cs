@@ -43,6 +43,10 @@ namespace ExcelDesign.Class_Objects
      * Added new function for Legacy Return Label
      */
 
+    /* v11 - 5 May 2019 - Neil Jansen
+    * Updated IssueReturnLabel function to send a reference variable for the Amazon S3 Bucket URL
+    */
+
     public class WebService
     { 
         private readonly string functionsURL = "Codeunit/Functions";
@@ -168,11 +172,11 @@ namespace ExcelDesign.Class_Objects
         }
 
         public string IssueReturnLabel(string rmaNo, string emailTo, bool existingZendeskTicket, string fromEmail, bool downloadManually, string email, 
-             string fromEmailName, string emailSubject)
+             string fromEmailName, string emailSubject, ref string amazonBucketURL)
         {
             string pdf64String = string.Empty;
 
-            functions.IssueReturnLabel(rmaNo, SessionID(), existingZendeskTicket, downloadManually, emailTo, fromEmail, ref pdf64String); 
+            functions.IssueReturnLabel(rmaNo, SessionID(), existingZendeskTicket, downloadManually, emailTo, fromEmail, ref pdf64String, ref amazonBucketURL); 
 
             return pdf64String;
         }

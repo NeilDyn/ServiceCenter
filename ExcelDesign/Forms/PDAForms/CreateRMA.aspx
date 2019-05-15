@@ -1,15 +1,25 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateRMA.aspx.cs" Inherits="ExcelDesign.Forms.PDAForms.CreateRMA" Async="true" %>
+<%@ Register Src="~/Forms/UserControls/IssueReturnLabel/ZendeskIssueReturnLabel.ascx" TagName="ZendeskIssueReturnLabel" TagPrefix="zirl" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>PDA - Create Return Order</title>
-    <%Server.ScriptTimeout = 300; %>
     <link href="../../css/mainpage.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            $("[id$=tblZendeskInformation]").hide();
+
+            $("[id$=cbxCreateLabel]").change(function () {
+                if ($("[id$=cbxCreateLabel]").prop("checked") == true) {
+                    $("[id$=tblZendeskInformation]").show();
+                } else {
+                    $("[id$=tblZendeskInformation]").hide()
+                }
+            });
+
             $("[id$=cbxDefaultShipping]").change(function () {
                 if (this.checked) {
 
@@ -208,16 +218,16 @@
                                 <asp:CheckBox ID="cbxCreateLabel" runat="server" />
                             </asp:TableCell>
                         </asp:TableRow>
+                         <asp:TableRow>
+                            <asp:TableCell />
+                            <asp:TableCell>
+                                <zirl:ZendeskIssueReturnLabel ID="ZendeskIssueReturnLabelControl" runat="server" />
+                            </asp:TableCell>
+                        </asp:TableRow>
                         <asp:TableRow>
                             <asp:TableCell ID="lblInsertTrackingNo" Text="Return Tracking No: " ForeColor="#0099FF" Font-Bold="true" Style="text-align: right; padding-right: 30px" />
                             <asp:TableCell ID="tcInsertTrackingNo">
                                 <asp:TextBox ID="txtInsertTrackingNo" runat="server" Width="50%" CssClass="inputBox" />
-                            </asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow>
-                            <asp:TableCell ID="lblZendeskTicketNo" Text="Zendesk Ticket #: " ForeColor="#0099FF" Font-Bold="true" Style="text-align: right; padding-right: 30px" />
-                            <asp:TableCell ID="tcZendeskTicketNo">
-                                <asp:TextBox ID="txtZendeskTicketNo" runat="server" Width="50%" CssClass="inputBox" TextMode="Number" MaxLength="7" />
                             </asp:TableCell>
                         </asp:TableRow>
                     </asp:Table>

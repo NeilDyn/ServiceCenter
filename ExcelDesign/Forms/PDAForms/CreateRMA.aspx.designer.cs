@@ -310,6 +310,15 @@ namespace ExcelDesign.Forms.PDAForms {
         protected global::System.Web.UI.WebControls.CheckBox cbxCreateLabel;
         
         /// <summary>
+        /// ZendeskIssueReturnLabelControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ExcelDesign.Forms.UserControls.IssueReturnLabel.ZendeskIssueReturnLabel ZendeskIssueReturnLabelControl;
+        
+        /// <summary>
         /// lblInsertTrackingNo control.
         /// </summary>
         /// <remarks>
@@ -335,33 +344,6 @@ namespace ExcelDesign.Forms.PDAForms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtInsertTrackingNo;
-        
-        /// <summary>
-        /// lblZendeskTicketNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell lblZendeskTicketNo;
-        
-        /// <summary>
-        /// tcZendeskTicketNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell tcZendeskTicketNo;
-        
-        /// <summary>
-        /// txtZendeskTicketNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtZendeskTicketNo;
         
         /// <summary>
         /// BtnCancel control.

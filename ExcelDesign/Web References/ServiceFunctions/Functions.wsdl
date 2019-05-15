@@ -1106,11 +1106,12 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="rMANo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="sessionID" type="string" />
-            <element minOccurs="1" maxOccurs="1" name="useExsistingZenDesk" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="getLinkForZendesk" type="boolean" />
             <element minOccurs="1" maxOccurs="1" name="downloadManually" type="boolean" />
             <element minOccurs="1" maxOccurs="1" name="emailTo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="fromEmail" type="string" />
             <element minOccurs="1" maxOccurs="1" name="pDFBase64String" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="amazonS3BucketURL" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -1118,6 +1119,7 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="pDFBase64String" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="amazonS3BucketURL" type="string" />
           </sequence>
         </complexType>
       </element>

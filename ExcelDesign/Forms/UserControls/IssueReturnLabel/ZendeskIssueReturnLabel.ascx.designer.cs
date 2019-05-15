@@ -7,135 +7,171 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExcelDesign.Forms.FunctionForms {
+namespace ExcelDesign.Forms.UserControls.IssueReturnLabel {
     
     
-    public partial class IssueReturnLabel {
+    public partial class ZendeskIssueReturnLabel {
         
         /// <summary>
-        /// IssueReturnLabelForm control.
+        /// tblZendeskInformation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm IssueReturnLabelForm;
+        protected global::System.Web.UI.WebControls.Table tblZendeskInformation;
         
         /// <summary>
-        /// tblIssueReturnLabel control.
+        /// trExistingZendeskTicket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblIssueReturnLabel;
+        protected global::System.Web.UI.WebControls.TableRow trExistingZendeskTicket;
         
         /// <summary>
-        /// noTitle control.
+        /// cbxZendeskTickets control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell noTitle;
+        protected global::System.Web.UI.WebControls.CheckBox cbxZendeskTickets;
         
         /// <summary>
-        /// tcNo control.
+        /// tblExistingZendeskTicket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcNo;
+        protected global::System.Web.UI.WebControls.Table tblExistingZendeskTicket;
         
         /// <summary>
-        /// tcDocNo control.
+        /// cbxSelectZendeskTicket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcDocNo;
+        protected global::System.Web.UI.WebControls.CheckBox cbxSelectZendeskTicket;
         
         /// <summary>
-        /// tcShipFromName control.
+        /// selectZendeskTicketDropdown control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipFromName;
+        protected global::System.Web.UI.WebControls.TableRow selectZendeskTicketDropdown;
         
         /// <summary>
-        /// tcShipFromCity control.
+        /// ddlZendeskTickets control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipFromCity;
+        protected global::System.Web.UI.WebControls.DropDownList ddlZendeskTickets;
         
         /// <summary>
-        /// tcShipFromAddress1 control.
+        /// cbxInsertZendeskTicket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipFromAddress1;
+        protected global::System.Web.UI.WebControls.CheckBox cbxInsertZendeskTicket;
         
         /// <summary>
-        /// tcShipFromState control.
+        /// insertZendeskTicketTextbox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipFromState;
+        protected global::System.Web.UI.WebControls.TableRow insertZendeskTicketTextbox;
         
         /// <summary>
-        /// tcShipFromAddress2 control.
+        /// txtInsertZendeskTicket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipFromAddress2;
+        protected global::System.Web.UI.WebControls.TextBox txtInsertZendeskTicket;
         
         /// <summary>
-        /// tcShipFromCode control.
+        /// txtFromEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell tcShipFromCode;
+        protected global::System.Web.UI.WebControls.TextBox txtFromEmail;
         
         /// <summary>
-        /// ZendeskIssueReturnLabelControl control.
+        /// txtToEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ExcelDesign.Forms.UserControls.IssueReturnLabel.ZendeskIssueReturnLabel ZendeskIssueReturnLabelControl;
+        protected global::System.Web.UI.WebControls.TextBox txtToEmail;
         
         /// <summary>
-        /// BtnCancel control.
+        /// trNewZendeskTicket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnCancel;
+        protected global::System.Web.UI.WebControls.TableRow trNewZendeskTicket;
         
         /// <summary>
-        /// BtnIssueReturnLabel control.
+        /// cbxNewZendeskTicket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnIssueReturnLabel;
+        protected global::System.Web.UI.WebControls.CheckBox cbxNewZendeskTicket;
+        
+        /// <summary>
+        /// tblNewZendeskTicket control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblNewZendeskTicket;
+        
+        /// <summary>
+        /// txtcustEmailAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtcustEmailAddress;
+        
+        /// <summary>
+        /// txtCustomerName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCustomerName;
+        
+        /// <summary>
+        /// cbxDownloadManually control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbxDownloadManually;
     }
 }

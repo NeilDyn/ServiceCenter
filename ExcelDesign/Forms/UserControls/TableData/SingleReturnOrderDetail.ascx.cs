@@ -407,7 +407,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
                             moreTableRow.Cells.Add(new TableCell());
                             moreTableRow.Cells.Add(new TableCell());
                             moreTableRow.Cells.Add(new TableCell());
-                            moreTableRow.Cells.Add(new TableCell());                            
+                            moreTableRow.Cells.Add(new TableCell());
+                            moreTableRow.Cells.Add(new TableCell());
                             moreTableRow.Cells.Add(moreSerialNo);
                             moreTableRow.Cells.Add(new TableCell());
 

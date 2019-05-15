@@ -1,4 +1,5 @@
 ﻿using ExcelDesign.Class_Objects;
+using ExcelDesign.Forms.UserControls.IssueReturnLabel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,14 @@ using System.Web.UI.WebControls;
 
 namespace ExcelDesign.Forms.FunctionForms
 {
-    /* v10 - 19 March 2018 - Neil Jansen
+    /* v10 - 19 March 2019 - Neil Jansen
      * Created SubForm for usage of Issue Return Label
      */
+    
+    /* v11 - 15 May 2019 - Neil Jansen
+    * Redesigned form. Changed all existing logic to User Control.
+    * Call functions from User Control inherited to continue logic.
+    */
 
     public partial class IssueReturnLabel : System.Web.UI.Page
     {
@@ -63,17 +69,11 @@ namespace ExcelDesign.Forms.FunctionForms
                         tcShipFromCode.Text = cust.Zip;
                     }
 
-                    if(existingLabel.ToUpper() == "TRUE")
+                    if (existingLabel.ToUpper() == "TRUE")
                     {
                         BtnIssueReturnLabel.Text = "Download Return Label";
                     }
                 }
-                else
-                {
-                    ticketNo = ddlZendeskTickets.SelectedValue;
-                }
-
-                LoadIssueReturnData();
             }
             catch (Exception loadE)
             {
@@ -81,200 +81,14 @@ namespace ExcelDesign.Forms.FunctionForms
             }
         }
 
-        protected void LoadIssueReturnData()
-        {
-            try
-            {
-                existingLabel = Convert.ToString(Request.QueryString["ExistingLabel"]);
-
-                if (existingLabel.ToUpper() == "FALSE")
-                {
-                    trExistingZendeskTicket.Visible = true;
-                    trNewZendeskTicket.Visible = true;
-
-                    zendeskTickets = new List<Zendesk>();
-                    cust = (Customer)Session["SelectedCustomer"];
-
-                    foreach (SalesHeader head in cust.SalesHeader)
-                    {
-                        foreach (Zendesk ticket in head.Tickets)
-                        {
-                            if (!zendeskTickets.Any(t => t.TicketNo.Equals(ticket.TicketNo)))
-                            {
-                                zendeskTickets.Add(ticket);
-                            }
-                        }
-                    }
-
-                    foreach (ReturnHeader returnHead in cust.ReturnHeaders)
-                    {
-                        foreach (Zendesk ticket in returnHead.Tickets)
-                        {
-                            if (!zendeskTickets.Any(t => t.TicketNo.Equals(ticket.TicketNo)))
-                            {
-                                zendeskTickets.Add(ticket);
-                            }
-                        }
-                    }
-
-                    zendeskTicketsParsed = JsonConvert.SerializeObject(zendeskTickets);
-
-                    ddlZendeskTickets.DataValueField = "TicketNo";
-                    ddlZendeskTickets.DataSource = zendeskTickets;
-                    ddlZendeskTickets.DataBind();
-                }
-                else
-                {
-                    trExistingZendeskTicket.Visible = false;
-                    trNewZendeskTicket.Visible = false;
-                    zendeskTicketsParsed = JsonConvert.SerializeObject(string.Empty);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex.Message, ex);
-                ClientScript.RegisterStartupScript(this.GetType(), "exceptionAlert", "alert('" + ex.Message + "');", true);
-            }
-        }
-
         protected void BtnIssueReturnLabel_Click(object sender, EventArgs e)
         {
-            try
+            Zendesk ticket = new Zendesk();
+            bool dataVerified = ZendeskIssueReturnLabelControl.VerifyInput(ref ticket);
+
+            if (dataVerified)
             {
-                no = tcNo.Text;
-                docNo = tcDocNo.Text;
-                newEmail = txtcustEmailAddress.Text;
-                newZendeskTicket = cbxNewZendeskTicket.Checked;
-                existingZendeskTicket = cbxZendeskTickets.Checked;
-                downloadManually = cbxDownloadManually.Checked;
-                SendService ss = new SendService();
-                Zendesk zendeskTicket = new Zendesk();
-                string pdf64String = string.Empty;
-
-                if (!downloadManually)
-                {
-                    cust = (Customer)Session["SelectedCustomer"];
-                    foreach (SalesHeader head in cust.SalesHeader)
-                    {
-                        foreach (Zendesk ticket in head.Tickets)
-                        {
-                            if (!zendeskTickets.Any(t => t.TicketNo.Equals(ticket.TicketNo)))
-                            {
-                                zendeskTickets.Add(ticket);
-                            }
-                        }
-                    }
-
-                    foreach (ReturnHeader returnHead in cust.ReturnHeaders)
-                    {
-                        foreach (Zendesk ticket in returnHead.Tickets)
-                        {
-                            if (!zendeskTickets.Any(t => t.TicketNo.Equals(ticket.TicketNo)))
-                            {
-                                zendeskTickets.Add(ticket);
-                            }
-                        }
-                    }
-                }                
-
-                if (existingZendeskTicket)
-                {
-                    ticketNo = ddlZendeskTickets.SelectedValue;
-
-                    if (ticketNo != string.Empty)
-                    {
-                        foreach (Zendesk ticket in zendeskTickets)
-                        {
-                            if (ticket.TicketNo == ticketNo)
-                            {
-                                emailSubject = ticket.Subject;
-                                fromEmail = ticket.FromEmailAddress;
-                                fromEmailName = ticket.FromEmailName;
-
-                                emailTo = ticket.ToEmailsAddress;
-                                zendeskTicket = ticket;
-                            }
-                        }
-
-                        if (emailTo != null)
-                        {
-                            int index = emailTo.IndexOf('@');
-                            emailTo = emailTo.Insert(index, "+id" + ticketNo);
-                        }
-                        else
-                        {
-                            emailTo = string.Empty;
-                        }
-
-                        if (fromEmail == null)
-                        {
-                            fromEmail = string.Empty;
-                        }
-
-                        pdf64String = ss.IssueReturnLabel(no, emailTo, existingZendeskTicket, fromEmail, downloadManually, newEmail, fromEmailName, emailSubject);
-
-                        Session["NoUserInteraction"] = true;
-                        if (pdf64String != string.Empty)
-                        {
-                            zendeskTicket.UpdateZendeskTicketWithPDFFile(pdf64String, no);
-
-                            ClientScript.RegisterStartupScript(this.GetType(), "issueReturnLableExistingTicket", "alert('" + no + ", Return label is being processed and will be emailed within 1 hour.');", true);
-                            ClientScript.RegisterStartupScript(this.GetType(), "closeErrorAlert", "parent.window.close();", true);
-                        }
-                    }
-                    else
-                    {
-                        ClientScript.RegisterStartupScript(this.GetType(), "selectValidTicketNo", "alert('Please select a valid existing Zendesk ticket when attempting to update a ticket number.');", true);
-                    }
-                }
-                else if(newZendeskTicket)
-                {
-
-                    //pdf64String = ss.IssueReturnLabel(no, toEmail, existingZendeskTicket, fromEmail, downloadManually, newEmail, fromEmailName, emailSubject);
-                    //Session["NoUserInteraction"] = true;
-                    //if (pdf64String != string.Empty)
-                    //{
-                    //    long? newZendeskTicketID = 0;
-
-                    //    newZendeskTicketID = zendeskTicket.CreateNewZendeskTicketWithPDFFile(pdf64String, no);
-
-                    //    ClientScript.RegisterStartupScript(this.GetType(), "issueReturnLabelNewTicket", "alert('New Zendesk Ticket is:" + newZendeskTicketID + ".\n" + no + ", Return label is being processed and will be emailed within 1 hour.');", true);
-                    //    ClientScript.RegisterStartupScript(this.GetType(), "closeErrorAlert", "parent.window.close();", true);
-                    //}
-                    ClientScript.RegisterStartupScript(this.GetType(), "notyetImplemented", "alert('New TIcket Functionality not yet implemented.');", true);
-                }
-                else if(downloadManually)
-                {
-                    emailTo = string.Empty;
-                    fromEmail = string.Empty;
-                    pdf64String = ss.IssueReturnLabel(no, emailTo, existingZendeskTicket, fromEmail, downloadManually, newEmail, fromEmailName, emailSubject);
-
-                    Session["NoUserInteraction"] = true;
-
-                    if(pdf64String != string.Empty)
-                    {
-                        zendeskTicket.DownloadRMAPDFManually(pdf64String, no);
-
-                        ClientScript.RegisterStartupScript(this.GetType(), "manualDownloadExistingTicket", "alert('" + no + ", Return label has been successfully downloaded.');", true);
-                        ClientScript.RegisterStartupScript(this.GetType(), "closeAfterDownload", "parent.window.close();", true);
-                    }
-                }
-                else
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "manualDownloadExistingTicket", "alert('Please select a valid option.');", true);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex.Message, ex);
-
-                ClientScript.RegisterStartupScript(this.GetType(), "errorAlert", "alert('" + ex.Message.Replace("'", "\"") + "');", true);
-
-                if (ex.Message.ToLower().Contains("session"))
-                {
-                    ClientScript.RegisterStartupScript(this.GetType(), "closeErrorAlert", "parent.window.close();", true);
-                }
+                ZendeskIssueReturnLabelControl.IssueZendeskReturnLabel(tcNo.Text, tcDocNo.Text, true, ticket);
             }
         }
     }

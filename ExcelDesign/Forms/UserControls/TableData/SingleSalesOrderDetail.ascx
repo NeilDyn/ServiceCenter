@@ -123,14 +123,14 @@
                     if (typeof (createReturnWindow) == 'undefined' || createReturnWindow.closed) {
                         if ("<%= this.Sh.WarrantyProp.IsPDA %>" == "YES") {
                             if ("<%= this.CanReturnPDA %>" == "true") {
-                                createReturnWindow = window.open("PDAForms/CreateRMA.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
+                                createReturnWindow = window.open("PDAForms/CreateRMA.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>&ExistingLabel=false",
                                     null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
                             } else {
                                 alert("You do not have the required permission to create a PDA Replacement Return Order.");
                             }
                         } else {
                             if ("<%= this.CanReturn %>" == "true") {
-                                createReturnWindow = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>",
+                                createReturnWindow = window.open("FunctionForms/CreateReturn.aspx?No=<%= this.OrderNo %>&ExternalDocumentNo=<%= this.DocNo %>&CreateOrUpdate=<%= false %>&ExistingLabel=false",
                                     null, "left=" + left + ",width=" + width + ",height=" + height + ",top=" + top + ",status=no,resizable=no,toolbar=no,location=no,menubar=no,directories=no");
                             } else {
                                 alert("You do not have the required permission to create a Return Order.");

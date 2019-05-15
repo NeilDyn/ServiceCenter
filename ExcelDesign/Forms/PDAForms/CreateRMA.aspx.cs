@@ -22,6 +22,10 @@ namespace ExcelDesign.Forms.PDAForms
      * Added Zendesk Ticket # field to design and added logic to send through webservice to NAV
      */
 
+    /* v11 - 15 May 2019 - Neil Jansen
+     * Updated existing logic and design to include issueing of Zendesk tickets when Creating a return label
+     */
+
     public partial class CreateRMA : System.Web.UI.Page
     {
         protected List<SalesHeader> Sh;
@@ -541,195 +545,182 @@ namespace ExcelDesign.Forms.PDAForms
                 createLabel = cbxCreateLabel.Checked;
                 email = txtCustEmail.Text;
                 returnTrackingNo = txtInsertTrackingNo.Text;
-                imeiNo = tcIMEINo.Text;              
+                imeiNo = tcIMEINo.Text;
 
                 string validateMsg = ValidateInput();
+                bool validateZendesk = false;
                 bool allValidLines = true;
                 int rowCount = 0;
                 int controlCount = 0;
 
-                if(!String.IsNullOrWhiteSpace(txtZendeskTicketNo.Text) || !String.IsNullOrEmpty(txtZendeskTicketNo.Text))
-                {
-                    if(txtZendeskTicketNo.Text.Length == 7)
-                    {
-                        int.TryParse(txtZendeskTicketNo.Text, out zendeskTicketNo);
-                    }
-                    else
-                    {
-                        validateMsg = "Zendesk Ticket # should be 7 numeric characters.";
-                    }
-                }
+                Zendesk ticket = new Zendesk();
 
                 if (validateMsg == "All Input Valid")
-                { 
-                    foreach (TableRow row in tblCreateReturnOrderTableDetails.Rows)
+                {
+                    bool process = true;
+
+                    if (createLabel)
                     {
-
-                        rowCount++;
-                        string itemNo = string.Empty;
-                        int qtyLine = 0;
-                        int actionQty = 0;
-                        string reasonCode = string.Empty;
-                        int reqReturnAction = -1;
-
-                        controlCount = 0;
-
-                        foreach (TableCell cell in row.Cells)
-                        {
-                            if (cell.ID.Contains("itemNo_"))
-                            {
-                                itemNo = cell.Text.ToString();
-                            }
-
-                            if (cell.ID.Contains("itemQuantity_"))
-                            {
-                                int.TryParse(cell.Text.ToString(), out qtyLine);
-                            }
-
-                            if (cell.ID.Contains("actionQty_"))
-                            {
-                                int.TryParse(cell.Text.ToString(), out actionQty);
-                            }
-
-                            foreach (Control c in cell.Controls)
-                            {
-                                controlCount++;
-
-                                //if (c.GetType() == typeof(TextBox))
-                                //{
-                                //    string value = ((TextBox)c).Text;
-                                //    int.TryParse(value, out actionQty);
-                                //}
-
-                                if (c.GetType() == typeof(DropDownList))
-                                {
-                                    int index = ((DropDownList)c).SelectedIndex;
-
-                                    if (c.ID.Contains("ddlReturnReasonCode"))
-                                    {
-                                        /* v7.1 - 3 October 2018 - Neil Jansen
-                                         * Updated logic to filter out incorrect catagories for Return Reason Code
-                                         */
-
-                                        List<ReturnReason> sr = (List<ReturnReason>)Session["ReturnReasons"];
-                                        List<ReturnReason> rl = new List<ReturnReason>();
-                                        foreach (ReturnReason item in sr)
-                                        {
-                                            if (item.Category != "Part Request" && item.Category != "Cancel Order" && item.Category != "Partial Refund" && item.Category != "Unknown"
-                                                                   && item.Category != "Nonconformed" && item.Category != "Vendor Rejected")
-                                            {
-                                                rl.Add(item);
-                                            }
-                                        }
-                                        reasonCode = (rl)[index].ReasonCode;
-                                    }
-                                    else if (c.ID.Contains("ddlREQReturnAction"))
-                                    {
-                                        reqReturnAction = index;
-                                    }
-                                }
-                            }
-
-                            string lineValidMessage = string.Empty;
-
-                            if ((rowCount > 1 && controlCount == 2 && actionQty != 0))
-                            {
-                                lineValidMessage = ValidateLine(itemNo, qtyLine, actionQty, reasonCode, reqReturnAction);
-
-                                if (lineValidMessage == "Valid Line Input")
-                                {
-                                    lineBuild.Append(itemNo).Append(":");
-                                    lineBuild.Append(actionQty).Append(":");
-                                    lineBuild.Append(reasonCode).Append(":");
-                                    lineBuild.Append(reqReturnAction).Append(",");
-                                }
-                                else
-                                {
-                                    allValidLines = false;
-
-                                    if (lineError == "")
-                                    {
-                                        lineError = lineValidMessage;
-                                    }
-                                }
-                            }
-                        }
+                        validateZendesk = ZendeskIssueReturnLabelControl.VerifyInput(ref ticket);
+                        process = validateZendesk;
                     }
 
-                    if (allValidLines)
+                    if (process)
                     {
-                        string lineValues = lineBuild.ToString();
-                        CreatedReturnHeader crh = new CreatedReturnHeader();
-
-                        SendService ss = new SendService();
-
-                        if (no.ToUpper().Contains("RMA"))
+                        foreach (TableRow row in tblCreateReturnOrderTableDetails.Rows)
                         {
-                            update = true;
-                        }
-                        else
-                        {
-                            update = false;
-                        }
 
-                        shippingBuild.Append(shipToName).Append(":");
-                        shippingBuild.Append(shipToAddress1).Append(":");
-                        shippingBuild.Append(shipToAddress2).Append(":");
-                        shippingBuild.Append(shipToCity).Append(":");
-                        shippingBuild.Append(shipToCode).Append(":");
-                        shippingBuild.Append(shipToState);
+                            rowCount++;
+                            string itemNo = string.Empty;
+                            int qtyLine = 0;
+                            int actionQty = 0;
+                            string reasonCode = string.Empty;
+                            int reqReturnAction = -1;
 
-                        string shippingDetails = shippingBuild.ToString();
+                            controlCount = 0;
 
-                        crh = ss.CreateReturnOrder(no, docNo, string.Empty, notes, resources, printRMA, createLabel, email, lineValues, update, returnTrackingNo,
-                            shippingDetails, imeiNo, zendeskTicketNo);
-
-                        if (createLabel)
-                        {
-                            string sessionID = string.Empty;
-                            if (Session["ActiveUser"] != null)
+                            foreach (TableCell cell in row.Cells)
                             {
-                                User u = (User)Session["ActiveUser"];
-                                sessionID = u.SessionID;
+                                if (cell.ID.Contains("itemNo_"))
+                                {
+                                    itemNo = cell.Text.ToString();
+                                }
+
+                                if (cell.ID.Contains("itemQuantity_"))
+                                {
+                                    int.TryParse(cell.Text.ToString(), out qtyLine);
+                                }
+
+                                if (cell.ID.Contains("actionQty_"))
+                                {
+                                    int.TryParse(cell.Text.ToString(), out actionQty);
+                                }
+
+                                foreach (Control c in cell.Controls)
+                                {
+                                    controlCount++;
+
+                                    //if (c.GetType() == typeof(TextBox))
+                                    //{
+                                    //    string value = ((TextBox)c).Text;
+                                    //    int.TryParse(value, out actionQty);
+                                    //}
+
+                                    if (c.GetType() == typeof(DropDownList))
+                                    {
+                                        int index = ((DropDownList)c).SelectedIndex;
+
+                                        if (c.ID.Contains("ddlReturnReasonCode"))
+                                        {
+                                            /* v7.1 - 3 October 2018 - Neil Jansen
+                                             * Updated logic to filter out incorrect catagories for Return Reason Code
+                                             */
+
+                                            List<ReturnReason> sr = (List<ReturnReason>)Session["ReturnReasons"];
+                                            List<ReturnReason> rl = new List<ReturnReason>();
+                                            foreach (ReturnReason item in sr)
+                                            {
+                                                if (item.Category != "Part Request" && item.Category != "Cancel Order" && item.Category != "Partial Refund" && item.Category != "Unknown"
+                                                                       && item.Category != "Nonconformed" && item.Category != "Vendor Rejected")
+                                                {
+                                                    rl.Add(item);
+                                                }
+                                            }
+                                            reasonCode = (rl)[index].ReasonCode;
+                                        }
+                                        else if (c.ID.Contains("ddlREQReturnAction"))
+                                        {
+                                            reqReturnAction = index;
+                                        }
+                                    }
+                                }
+
+                                string lineValidMessage = string.Empty;
+
+                                if ((rowCount > 1 && controlCount == 2 && actionQty != 0))
+                                {
+                                    lineValidMessage = ValidateLine(itemNo, qtyLine, actionQty, reasonCode, reqReturnAction);
+
+                                    if (lineValidMessage == "Valid Line Input")
+                                    {
+                                        lineBuild.Append(itemNo).Append(":");
+                                        lineBuild.Append(actionQty).Append(":");
+                                        lineBuild.Append(reasonCode).Append(":");
+                                        lineBuild.Append(reqReturnAction).Append(",");
+                                    }
+                                    else
+                                    {
+                                        allValidLines = false;
+
+                                        if (lineError == "")
+                                        {
+                                            lineError = lineValidMessage;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        if (allValidLines)
+                        {
+                            string lineValues = lineBuild.ToString();
+                            CreatedReturnHeader crh = new CreatedReturnHeader();
+
+                            SendService ss = new SendService();
+
+                            if (no.ToUpper().Contains("RMA"))
+                            {
+                                update = true;
                             }
                             else
                             {
-                                sessionID = "{A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0}";
+                                update = false;
                             }
 
-                            worker = new Thread(() =>
+                            shippingBuild.Append(shipToName).Append(":");
+                            shippingBuild.Append(shipToAddress1).Append(":");
+                            shippingBuild.Append(shipToAddress2).Append(":");
+                            shippingBuild.Append(shipToCity).Append(":");
+                            shippingBuild.Append(shipToCode).Append(":");
+                            shippingBuild.Append(shipToState);
+
+                            string shippingDetails = shippingBuild.ToString();
+
+                            crh = ss.CreateReturnOrder(no, docNo, string.Empty, notes, resources, printRMA, createLabel, email, lineValues, update, returnTrackingNo,
+                                shippingDetails, imeiNo, zendeskTicketNo);
+
+                            ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + ", Return label is being processed and will be emailed within 1-2 hours');", true);
+
+                            if (createLabel)
                             {
-                                try
-                                {
-                                    ss.LegacyReturnLabel(crh.RMANo, email, sessionID);
-                                }
-                                catch (Exception workerE)
-                                {
-                                    Log.Error(workerE.Message, workerE);
-                                    ClientScript.RegisterStartupScript(this.GetType(), "labelError", "alert('" + workerE.Message.Replace("'", "\"") + "');", true);
-                                }
-                            });
+                                ZendeskIssueReturnLabelControl.IssueZendeskReturnLabel(no, docNo, false, ticket);
+                            }
 
-                            worker.Start();
-                        }
+                            // Replace legacy with Zendesk return label
+                            //worker = new Thread(() =>
+                            //{
+                            //    try
+                            //    {
+                            //        ss.LegacyReturnLabel(crh.RMANo, email, sessionID);
+                            //    }
+                            //    catch (Exception workerE)
+                            //    {
+                            //        Log.Error(workerE.Message, workerE);
+                            //        ClientScript.RegisterStartupScript(this.GetType(), "labelError", "alert('" + workerE.Message.Replace("'", "\"") + "');", true);
+                            //    }
+                            //});
 
-                        Session["CreatedRMA"] = crh;
-                        Session["NoUserInteraction"] = true;
+                            //worker.Start();
 
-                        if (!createLabel)
-                        {
-                            ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + "');", true);
+                            Session["CreatedRMA"] = crh;
+                            Session["NoUserInteraction"] = true;
+
+                            ClientScript.RegisterStartupScript(this.GetType(), "openCreatedRMA", "OpenCreatedRMA();", true);
                         }
                         else
                         {
-                            ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + ", Return label is being processed and will be emailed within 1-2 hours');", true);
+                            ClientScript.RegisterStartupScript(this.GetType(), "lineError", "alert('" + lineError + "');", true);
                         }
-
-                        ClientScript.RegisterStartupScript(this.GetType(), "openCreatedRMA", "OpenCreatedRMA();", true);
-                    }
-                    else
-                    {
-                        ClientScript.RegisterStartupScript(this.GetType(), "lineError", "alert('" + lineError + "');", true);
                     }
                 }
                 else
@@ -890,7 +881,7 @@ namespace ExcelDesign.Forms.PDAForms
                                     {
                                         return "Ship To State should be a maximum of 2 characters.";
                                     }
-                                    
+
                                 }
                                 else
                                 {

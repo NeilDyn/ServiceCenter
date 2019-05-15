@@ -54,8 +54,6 @@ namespace ExcelDesign.Forms
 
         #region Global
 
-        //protected const string version = "v5.2";
-
         protected CallService cs = new CallService();
         public int SessionTime;
         protected List<Customer> customers = new List<Customer>();
@@ -88,6 +86,7 @@ namespace ExcelDesign.Forms
         protected void Page_Load(object sender, EventArgs e)
         {
             ClientScript.GetPostBackEventReference(this, string.Empty);
+            //throw new Exception("My Exception Man.");
 
             try
             {

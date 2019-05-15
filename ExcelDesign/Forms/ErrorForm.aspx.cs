@@ -14,6 +14,9 @@ namespace ExcelDesign.Forms
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //this.errorMessage.InnerText = Request.Cookies["Error"].Value;
+            //Response.Cookies["Error"].Value = null;
+
             this.errorMessage.InnerText = Session["Error"].ToString();
             Session["Error"] = null;
         }          

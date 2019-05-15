@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateReturn.aspx.cs" Inherits="ExcelDesign.Forms.FunctionForms.CreateReturn" Async="true" %>
+<%@ Register Src="~/Forms/UserControls/IssueReturnLabel/ZendeskIssueReturnLabel.ascx" TagName="ZendeskIssueReturnLabel" TagPrefix="zirl" %>
 
 <!DOCTYPE html>
 
@@ -6,7 +7,21 @@
 <head runat="server">
     <title>Create Return Order</title>
     <link href="../../css/mainpage.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/jquery-ui.min.js"></script>
     <script type="text/javascript">
+        $(document).ready(function () {
+            $("[id$=tblZendeskInformation]").hide();
+
+            $("[id$=cbxCreateLabel]").change(function () {
+                if ($("[id$=cbxCreateLabel]").prop("checked") == true) {
+                    $("[id$=tblZendeskInformation]").show();
+                } else {
+                    $("[id$=tblZendeskInformation]").hide()
+                }
+            });
+        });
+
         function CloseWindow() {
             var c;
 
@@ -57,15 +72,15 @@
             </asp:TableHeaderRow>
             <asp:TableHeaderRow>
                 <asp:TableHeaderCell Text="Ship to Name:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
-                <asp:TableHeaderCell ID="tcShipToName" runat="server" HorizontalAlign="Left" Style="text-align: left"/>
+                <asp:TableHeaderCell ID="tcShipToName" runat="server" HorizontalAlign="Left" Style="text-align: left" />
                 <asp:TableHeaderCell Text="Ship to City:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
-                <asp:TableHeaderCell ID="tcShipToCity" runat="server" HorizontalAlign="Left" Style="text-align: left"/>
+                <asp:TableHeaderCell ID="tcShipToCity" runat="server" HorizontalAlign="Left" Style="text-align: left" />
             </asp:TableHeaderRow>
             <asp:TableHeaderRow>
                 <asp:TableHeaderCell Text="Ship to Address 1:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
-                <asp:TableHeaderCell ID="tcShipToAddress1" runat="server" HorizontalAlign="Left" Style="text-align: left"/>
+                <asp:TableHeaderCell ID="tcShipToAddress1" runat="server" HorizontalAlign="Left" Style="text-align: left" />
                 <asp:TableHeaderCell Text="Ship to State:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
-                <asp:TableHeaderCell ID="tcShipToState" runat="server" HorizontalAlign="Left" Style="text-align: left"/>
+                <asp:TableHeaderCell ID="tcShipToState" runat="server" HorizontalAlign="Left" Style="text-align: left" />
             </asp:TableHeaderRow>
             <asp:TableHeaderRow>
                 <asp:TableHeaderCell Text="Ship to Address 2:" Style="text-align: left" HorizontalAlign="Right" ForeColor="#0099FF" />
@@ -131,15 +146,15 @@
                             </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
-                            <asp:TableCell ID="lblInsertTrackingNo" Text="Return Tracking No: " ForeColor="#0099FF" Font-Bold="true" Style="text-align: right; padding-right: 30px" />
-                            <asp:TableCell ID="tcInsertTrackingNo">
-                                <asp:TextBox ID="txtInsertTrackingNo" runat="server" Width="50%" CssClass="inputBox" />
+                            <asp:TableCell />
+                            <asp:TableCell>
+                                <zirl:ZendeskIssueReturnLabel ID="ZendeskIssueReturnLabelControl" runat="server" />
                             </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
-                            <asp:TableCell ID="lblZendeskTicketNo" Text="Zendesk Ticket #: " ForeColor="#0099FF" Font-Bold="true" Style="text-align: right; padding-right: 30px" />
-                            <asp:TableCell ID="tcZendeskTicketNo">
-                                <asp:TextBox ID="txtZendeskTicketNo" runat="server" Width="50%" CssClass="inputBox" TextMode="Number" MaxLength="7" />
+                            <asp:TableCell ID="lblInsertTrackingNo" Text="Return Tracking No: " ForeColor="#0099FF" Font-Bold="true" Style="text-align: right; padding-right: 30px" />
+                            <asp:TableCell ID="tcInsertTrackingNo">
+                                <asp:TextBox ID="txtInsertTrackingNo" runat="server" Width="50%" CssClass="inputBox" />
                             </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableFooterRow HorizontalAlign="Right">

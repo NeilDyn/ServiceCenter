@@ -57,47 +57,54 @@ namespace ExcelDesign.Class_Objects
             return TicketNo == "0" ? TicketNo : String.Format("<a href = 'https://jegsons.zendesk.com/agent/tickets/" + TicketNo + "' target = '_blank' > #" + TicketNo + " </ a > ");
         }
 
-        public void UpdateZendeskTicketWithPDFFile(string pdf64String, string rmaFileName)
+        public void UpdateZendeskTicketWithPDFFile(string pdf64String, string rmaFileName, string amazonBucketURL)
         {
-            if (pdf64String != string.Empty)
+            ZendeskHelper helper = new ZendeskHelper();
+            long.TryParse(TicketNo, out long updateTicketNo);
+
+            if (updateTicketNo != 0)
             {
-                byte[] buffer = Convert.FromBase64String(pdf64String);
-                MemoryStream stream = new MemoryStream(buffer);
-
-                using (MemoryFile file = new MemoryFile(stream, "application/pdf", rmaFileName + ".pdf"))
+                if (pdf64String != string.Empty)
                 {
-                    ZendeskHelper helper = new ZendeskHelper();
-                    long.TryParse(TicketNo, out long updateTicketNo);
-
-                    if (updateTicketNo != 0)
+                    byte[] buffer = Convert.FromBase64String(pdf64String);
+                    using (MemoryStream stream = new MemoryStream(buffer))
                     {
-                        helper.UpdateZendeskTicketWithPDFFile(updateTicketNo, file, rmaFileName);
+                        using (MemoryFile file = new MemoryFile(stream, "application/pdf", rmaFileName + ".pdf"))
+                        {
+                            helper.UpdateZendeskTicketWithPDFFile(updateTicketNo, file, rmaFileName, amazonBucketURL, true);
+                        }
                     }
-                    else
-                    {
-                        throw new Exception("Invalid Zendesk Ticket No. attempting to update"); // prevent invalid tickets from being update due to parsing error
-                    }
-
-                    stream.Dispose();
                 }
+                else
+                {
+                    helper.UpdateZendeskTicketWithPDFFile(updateTicketNo, null, rmaFileName, amazonBucketURL, false);
+                }
+            }
+            else
+            {
+                throw new Exception("Invalid Zendesk Ticket No. attempting to update"); // prevent invalid tickets from being update due to parsing error
             }
         }
 
-        public long? CreateNewZendeskTicketWithPDFFile(string pdf64String, string rmaFileName)
+        public long? CreateNewZendeskTicketWithPDFFile(string pdf64String, string rmaFileName, string amazonBucketURL, string emailTo, string customerName, string extDocNo)
         {
-            long? newZendeskTicket = 0; ;
+            long? newZendeskTicket = 0;
+            ZendeskHelper helper = new ZendeskHelper();
 
-            if(pdf64String != string.Empty)
+            if (pdf64String != string.Empty)
             {
                 byte[] buffer = Convert.FromBase64String(pdf64String);
-                MemoryStream stream = new MemoryStream(buffer);
-
-                using (MemoryFile file = new MemoryFile(stream, "application/pdf", rmaFileName + ".pdf"))
+                using (MemoryStream stream = new MemoryStream(buffer))
                 {
-                    ZendeskHelper helper = new ZendeskHelper();
-
-                    newZendeskTicket = helper.CreateNewZendeskTicketWithPDFFile(file, rmaFileName);
+                    using (MemoryFile file = new MemoryFile(stream, "application/pdf", rmaFileName + ".pdf"))
+                    {
+                        newZendeskTicket = helper.CreateNewZendeskTicketWithPDFFile(file, rmaFileName, amazonBucketURL, emailTo, customerName, true, extDocNo);
+                    }
                 }
+            }
+            else
+            {
+                newZendeskTicket = helper.CreateNewZendeskTicketWithPDFFile(null, rmaFileName, amazonBucketURL, emailTo, customerName, false, extDocNo);
             }
 
             return newZendeskTicket;
@@ -120,6 +127,13 @@ namespace ExcelDesign.Class_Objects
                     HttpContext.Current.Response.End();
                 }
             }
+        }
+
+        public Zendesk VerifyInsertedZendeskTicket(long zendeskTicket)
+        {
+            ZendeskHelper helper = new ZendeskHelper();
+
+            return helper.VerifyZendeskTicket(zendeskTicket);
         }
     }
 }

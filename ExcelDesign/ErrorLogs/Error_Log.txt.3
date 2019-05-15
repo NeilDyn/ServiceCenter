@@ -1,552 +1,366 @@
-ERROR 2018-10-01 15:53:26,692 625990ms tatisticsSalesLineForm ProcessItems       - Could not locate Return Order 
-System.Web.Services.Protocols.SoapException: Could not locate Return Order 
+ERROR 2018-11-09 11:16:48,223 116952ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 285
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 132
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 32
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-11-09 11:17:09,582 138311ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 285
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 132
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 32
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-11-09 12:03:42,159 30813ms tatisticsSalesLineForm teREQReturnActions - You cannot enter 'Refund' in Integer.
+System.Web.Services.Protocols.SoapException: You cannot enter 'Refund' in Integer.
    at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
    at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 844
-   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 185
-   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 456
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 307
-ERROR 2018-10-01 15:53:53,952 653250ms tatisticsSalesLineForm ProcessItems       - WORKING
-System.Web.Services.Protocols.SoapException: WORKING
+   at ExcelDesign.ServiceFunctions.Functions.UpdateREQReturnAction(String toModLineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 765
+   at ExcelDesign.Class_Objects.WebService.UpdateREQReturnAction(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 210
+   at ExcelDesign.Class_Objects.SendService.UpdateREQReturnAction(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 474
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.UpdateREQReturnActions(String rmaList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 486
+ERROR 2018-11-16 08:45:59,608 279217ms SuggestSimilarItem     Page_Load          - Marked: Yes, Description: ' *****', Blocked: No, Quantity in Finished Goods: >1
+System.Web.Services.Protocols.SoapException: Marked: Yes, Description: ' *****', Blocked: No, Quantity in Finished Goods: >1
    at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
    at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 844
-   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 185
-   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 456
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 307
-ERROR 2018-10-01 15:54:33,261 692559ms tatisticsSalesLineForm ProcessItems       - WORKING
-System.Web.Services.Protocols.SoapException: WORKING
+   at ExcelDesign.ServiceFunctions.Functions.ViewSimilarItem(String sessionID, String itemNo, Int32 _SearchType, SuggestSimilarItem& custSvcSimilarItem) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 800
+   at ExcelDesign.Class_Objects.WebService.GetSuggestSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 216
+   at ExcelDesign.Class_Objects.CallService.GetSuggestedSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2523
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.LoadSuggestionLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 58
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 32
+ERROR 2018-11-16 08:47:53,899 24232ms SuggestSimilarItem     Page_Load          - Marked: Yes, Description: ' *****', Blocked: No, Quantity in Finished Goods: >1
+System.Web.Services.Protocols.SoapException: Marked: Yes, Description: ' *****', Blocked: No, Quantity in Finished Goods: >1
    at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
    at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 844
-   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 185
-   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 456
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 307
-ERROR 2018-10-01 15:55:10,242 729539ms tatisticsSalesLineForm ProcessItems       - Could not locate Return Order 
-System.Web.Services.Protocols.SoapException: Could not locate Return Order 
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 844
-   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 185
-   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 456
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 307
-ERROR 2018-10-01 15:55:36,960 756257ms tatisticsSalesLineForm ProcessItems       - WORKING RMA-238087
-System.Web.Services.Protocols.SoapException: WORKING RMA-238087
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 844
-   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 185
-   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 456
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 307
-ERROR 2018-10-01 15:56:47,100 826398ms tatisticsSalesLineForm ProcessItems       - Could not locate Return Order 
-System.Web.Services.Protocols.SoapException: Could not locate Return Order 
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 844
-   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 185
-   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 456
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 307
-ERROR 2018-10-01 16:01:47,848 1127146ms tatisticsSalesLineForm ProcessItems       - WORKING RMA-238087
-System.Web.Services.Protocols.SoapException: WORKING RMA-238087
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 844
-   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 185
-   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 456
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 307
-ERROR 2018-10-01 16:21:28,747 39684ms tatisticsSalesLineForm ProcessItems       - Could not locate Return Order 
-System.Web.Services.Protocols.SoapException: Could not locate Return Order 
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 844
-   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 185
-   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 456
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 307
-ERROR 2018-10-01 16:24:00,289 191226ms tatisticsSalesLineForm ProcessItems       - WORKING RMA-238087
-System.Web.Services.Protocols.SoapException: WORKING RMA-238087
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 844
-   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 185
-   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 456
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 307
-ERROR 2018-10-01 16:25:31,130 282067ms tatisticsSalesLineForm ProcessItems       - Could not locate Return Order 
-System.Web.Services.Protocols.SoapException: Could not locate Return Order 
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 844
-   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 185
-   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 456
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 307
-ERROR 2018-10-01 16:26:16,389 327327ms tatisticsSalesLineForm ProcessItems       - Could not locate Return Order 
-System.Web.Services.Protocols.SoapException: Could not locate Return Order 
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 844
-   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 185
-   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 456
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 307
-ERROR 2018-10-01 16:26:18,645 329583ms tatisticsSalesLineForm ProcessItems       - Could not locate Return Order 
-System.Web.Services.Protocols.SoapException: Could not locate Return Order 
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 844
-   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 185
-   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 456
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 307
-ERROR 2018-10-01 16:29:26,415 517353ms tatisticsSalesLineForm ProcessItems       - No lines with Qty. Received for Exchange found on Return Order RMA-238087.
-System.Web.Services.Protocols.SoapException: No lines with Qty. Received for Exchange found on Return Order RMA-238087.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 844
-   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 185
-   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 456
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 307
-ERROR 2018-10-01 16:58:33,630 402938ms tatisticsSalesLineForm ProcessItems       - Callback functions are not allowed.
+   at ExcelDesign.ServiceFunctions.Functions.ViewSimilarItem(String sessionID, String itemNo, Int32 _SearchType, SuggestSimilarItem& custSvcSimilarItem) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 800
+   at ExcelDesign.Class_Objects.WebService.GetSuggestSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 216
+   at ExcelDesign.Class_Objects.CallService.GetSuggestedSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2523
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.LoadSuggestionLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 51
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 32
+ERROR 2018-11-16 08:50:50,136 23136ms SuggestSimilarItem     Page_Load          - Callback functions are not allowed.
 System.Web.Services.Protocols.SoapException: Callback functions are not allowed.
    at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
    at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 844
-   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 185
-   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 456
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 307
-ERROR 2018-10-02 12:04:27,641 161890ms CancelOrder            nCancelOrder_Click - Action Cancellation is not allowed for Customer BLUESTEM.
-System.Web.Services.Protocols.SoapException: Action Cancellation is not allowed for Customer BLUESTEM.
+   at ExcelDesign.ServiceFunctions.Functions.ViewSimilarItem(String sessionID, String itemNo, Int32 _SearchType, SuggestSimilarItem& custSvcSimilarItem) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 800
+   at ExcelDesign.Class_Objects.WebService.GetSuggestSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 216
+   at ExcelDesign.Class_Objects.CallService.GetSuggestedSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2523
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.LoadSuggestionLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 49
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 32
+ERROR 2018-11-16 08:55:54,414 327414ms SuggestSimilarItem     Page_Load          - Callback functions are not allowed.
+System.Web.Services.Protocols.SoapException: Callback functions are not allowed.
    at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
    at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.CancelOrder(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 716
-   at ExcelDesign.Class_Objects.WebService.CancelOrder(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 180
-   at ExcelDesign.Class_Objects.SendService.CancelOrder(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 451
-   at ExcelDesign.Forms.FunctionForms.CancelOrder.btnCancelOrder_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\CancelOrder.aspx.cs:line 243
-ERROR 2018-10-03 11:25:09,573 23398ms LoginPage              UserLogin          - The Microsoft Dynamics NAV Server cannot connect the Change Listener to SQL Server because of the following error: Cannot open database "Daily_Dev" requested by the login. The login failed.
-Login failed for user 'JEG\mswart'.
-System.Web.Services.Protocols.SoapException: The Microsoft Dynamics NAV Server cannot connect the Change Listener to SQL Server because of the following error: Cannot open database "Daily_Dev" requested by the login. The login failed.
-Login failed for user 'JEG\mswart'.
+   at ExcelDesign.ServiceFunctions.Functions.ViewSimilarItem(String sessionID, String itemNo, Int32 _SearchType, SuggestSimilarItem& custSvcSimilarItem) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 800
+   at ExcelDesign.Class_Objects.WebService.GetSuggestSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 216
+   at ExcelDesign.Class_Objects.CallService.GetSuggestedSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2523
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.LoadSuggestionLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 49
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 32
+ERROR 2018-11-16 09:32:12,350 23987ms ServiceCenter          ConnectToService   - The maximum length for a string value is 25.
+System.Web.Services.Protocols.SoapException: The maximum length for a string value is 25.
    at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
    at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 282
-   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 128
-   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 27
-   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
-ERROR 2018-10-03 11:28:14,452 108349ms LoginPage              UserLogin          - The Microsoft Dynamics NAV Server cannot connect the Change Listener to SQL Server because of the following error: Cannot open database "Daily_Dev" requested by the login. The login failed.
-Login failed for user 'JEG\mswart'.
-System.Web.Services.Protocols.SoapException: The Microsoft Dynamics NAV Server cannot connect the Change Listener to SQL Server because of the following error: Cannot open database "Daily_Dev" requested by the login. The login failed.
-Login failed for user 'JEG\mswart'.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 282
-   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 128
-   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 27
-   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
-ERROR 2018-10-04 08:34:53,102 309075ms CreateExchange         eateExchange_Click - No quantity available for item PAC200190.
-System.Web.Services.Protocols.SoapException: No quantity available for item PAC200190.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.CreateExchangeOrder(String orderNo, CreatedExchangeOrder& exchangeOrder, String externalDocumentNo, String sessionID, String lineDetails) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 466
-   at ExcelDesign.Class_Objects.WebService.CreateExchange(String rmaNo, String externalDocNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 144
-   at ExcelDesign.Class_Objects.SendService.CreateExchangeOrder(String rmaNo, String externalDocumentNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 179
-   at ExcelDesign.Forms.FunctionForms.CreateExchange.BtnCreateExchange_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\CreateExchange.aspx.cs:line 257
-ERROR 2018-10-04 09:14:57,777 436669ms PartialRefund          artialRefund_Click - Order SO-04438772 is already shipped. Cannot Create Partial Refund.
-System.Web.Services.Protocols.SoapException: Order SO-04438772 is already shipped. Cannot Create Partial Refund.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 721
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 194
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 465
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 243
-ERROR 2018-10-04 10:26:17,125 33772ms LoginPage              UserLogin          - Unable to connect to the remote server
-System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
-   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
-   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
-   --- End of inner exception stack trace ---
-   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
-   at System.Net.HttpWebRequest.GetRequestStream()
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 282
-   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 128
-   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 27
-   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
-ERROR 2018-10-04 11:26:36,375 39261ms LoginPage              UserLogin          - Unable to connect to the remote server
-System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
-   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
-   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
-   --- End of inner exception stack trace ---
-   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
-   at System.Net.HttpWebRequest.GetRequestStream()
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 282
-   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 128
-   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 27
-   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
-ERROR 2018-10-04 13:58:02,412 354716ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer AMZMKT001.
-System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer AMZMKT001.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 721
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 194
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 465
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
-ERROR 2018-10-05 08:27:37,117 62520ms CancelOrder            nCancelOrder_Click - Action Cancellation is not allowed for Customer OSTKMP.
-System.Web.Services.Protocols.SoapException: Action Cancellation is not allowed for Customer OSTKMP.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.CancelOrder(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 757
-   at ExcelDesign.Class_Objects.WebService.CancelOrder(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 184
-   at ExcelDesign.Class_Objects.SendService.CancelOrder(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 455
-   at ExcelDesign.Forms.FunctionForms.CancelOrder.btnCancelOrder_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\CancelOrder.aspx.cs:line 243
-ERROR 2018-10-15 09:53:53,789 481059ms PartialRefund          artialRefund_Click - Order SO-04447229 is already shipped. Cannot Create Partial Refund.
-System.Web.Services.Protocols.SoapException: Order SO-04447229 is already shipped. Cannot Create Partial Refund.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
-ERROR 2018-10-15 10:13:56,982 233284ms PartialRefund          artialRefund_Click - Order SO-04447229 is already shipped. Cannot Create Partial Refund.
-System.Web.Services.Protocols.SoapException: Order SO-04447229 is already shipped. Cannot Create Partial Refund.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
-ERROR 2018-10-15 10:16:40,398 121292ms PartialRefund          artialRefund_Click - Order SO-04447229 is already shipped. Cannot Create Partial Refund.
-System.Web.Services.Protocols.SoapException: Order SO-04447229 is already shipped. Cannot Create Partial Refund.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
-ERROR 2018-10-15 10:17:52,814 193708ms PartialRefund          artialRefund_Click - The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
-System.Web.Services.Protocols.SoapException: The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
-ERROR 2018-10-15 10:18:06,737 207631ms PartialRefund          artialRefund_Click - The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
-System.Web.Services.Protocols.SoapException: The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
-ERROR 2018-10-15 10:18:29,049 229943ms PartialRefund          artialRefund_Click - The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
-System.Web.Services.Protocols.SoapException: The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
-ERROR 2018-10-15 10:18:47,041 247935ms PartialRefund          artialRefund_Click - The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
-System.Web.Services.Protocols.SoapException: The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
-ERROR 2018-10-15 10:20:25,507 346401ms PartialRefund          artialRefund_Click - Order SO-04447229 is already shipped. Cannot Create Partial Refund.
-System.Web.Services.Protocols.SoapException: Order SO-04447229 is already shipped. Cannot Create Partial Refund.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
-ERROR 2018-10-15 10:22:03,634 444528ms PartialRefund          artialRefund_Click - The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
-System.Web.Services.Protocols.SoapException: The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
-ERROR 2018-10-15 10:22:50,046 490940ms PartialRefund          artialRefund_Click - TESTA
-System.Web.Services.Protocols.SoapException: TESTA
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
-ERROR 2018-10-15 10:23:08,290 509184ms PartialRefund          artialRefund_Click - TESTA
-System.Web.Services.Protocols.SoapException: TESTA
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
-ERROR 2018-10-15 10:23:21,034 521928ms PartialRefund          artialRefund_Click - TESTA
-System.Web.Services.Protocols.SoapException: TESTA
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
-ERROR 2018-10-15 10:23:34,614 535508ms PartialRefund          artialRefund_Click - The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
-System.Web.Services.Protocols.SoapException: The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
-ERROR 2018-10-15 10:23:50,280 551175ms PartialRefund          artialRefund_Click - The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
-System.Web.Services.Protocols.SoapException: The Sales Header does not exist.   Identification fields and values:  Document Type='Quote',No.=''
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
-ERROR 2018-10-15 10:24:17,098 577992ms PartialRefund          artialRefund_Click - The following ODBC error occurred:  Error: [Microsoft][ODBC SQL Server Driver]Database is invalid or cannot be accessed State ID: HY024
-System.Web.Services.Protocols.SoapException: The following ODBC error occurred:  Error: [Microsoft][ODBC SQL Server Driver]Database is invalid or cannot be accessed State ID: HY024
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
-ERROR 2018-10-15 13:44:48,176 92014ms PartialRefund          artialRefund_Click - Index was out of range. Must be non-negative and less than the size of the collection.
-Parameter name: index
-System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
-Parameter name: index
-   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
-   at System.Collections.Generic.List`1.get_Item(Int32 index)
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 248
-ERROR 2018-10-15 13:45:11,537 115375ms PartialRefund          artialRefund_Click - Index was out of range. Must be non-negative and less than the size of the collection.
-Parameter name: index
-System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
-Parameter name: index
-   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
-   at System.Collections.Generic.List`1.get_Item(Int32 index)
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 248
-ERROR 2018-10-15 13:46:31,363 195201ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer AMZMKT001.
-System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer AMZMKT001.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 285
-ERROR 2018-10-15 14:46:41,766 61155ms tatisticsSalesLineForm ProcessItems       - No lines with Qty. Received for Refund found on Return Order RMA-238786.
-System.Web.Services.Protocols.SoapException: No lines with Qty. Received for Refund found on Return Order RMA-238786.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessRefunds(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 304
-   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 199
-   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 464
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 355
-ERROR 2018-10-17 16:16:02,310 46288ms ServiceCenter          ConnectToService   - Index was outside the bounds of the array.
-System.IndexOutOfRangeException: Index was outside the bounds of the array.
-   at ExcelDesign.Class_Objects.CallService.GetReturnOrdersFromSalesHeader(List`1 salesHeaders, List`1& readRMA) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1516
-   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1318
-   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 261
-ERROR 2018-10-17 16:20:58,590 152723ms ServiceCenter          ConnectToService   - Index was outside the bounds of the array.
-System.IndexOutOfRangeException: Index was outside the bounds of the array.
-   at ExcelDesign.Class_Objects.CallService.GetReturnOrdersFromSalesHeader(List`1 salesHeaders, List`1& readRMA) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1516
-   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1318
-   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 261
-ERROR 2018-10-23 08:23:25,462 77405ms CreateRMA              BtnCreateRMA_Click - The maximum length for a string value is 15.
-System.Web.Services.Protocols.SoapException: The maximum length for a string value is 15.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.CreateReturnOrder(String orderNo, String extDocNo, String returnReasonCode, String notes, Boolean includeResourceLines, Boolean printRmaInstructions, Boolean createUPSReturnLabel, String emailAddress, String lineDetails, ReturnOrder& createdReturn, Boolean updateRMA, String sessionID, String returnTrackNo, String shipToDetails, String iMEI) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 690
-   at ExcelDesign.Class_Objects.WebService.CreateReturnOrder(String orderNo, String externalDocumentNo, String returnReason, String notes, Boolean includeResource, Boolean printRMA, Boolean createLabel, String email, String lineValues, Boolean update, String returnTrackingNo, String shippingDetails, String imeiNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 117
-   at ExcelDesign.Class_Objects.SendService.CreateReturnOrder(String orderNo, String externalDocumentNo, String returnReason, String notes, Boolean includeResource, Boolean printRMA, Boolean createLabel, String email, String lineValues, Boolean update, String returnTrackingNo, String shippingDetails, String imeiNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 47
-   at ExcelDesign.Forms.PDAForms.CreateRMA.BtnCreateRMA_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\PDAForms\CreateRMA.aspx.cs:line 664
-ERROR 2018-10-31 09:42:46,284 324694ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer AMZMKT001.
-System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer AMZMKT001.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325
-ERROR 2018-10-31 09:43:26,715 365125ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer AMZMKT001.
-System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer AMZMKT001.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325
-ERROR 2018-10-31 09:46:20,961 539371ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer AMZMKT001.
-System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer AMZMKT001.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325
-ERROR 2018-10-31 09:46:31,708 550118ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer AMZMKT001.
-System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer AMZMKT001.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325
-ERROR 2018-10-31 09:46:50,000 568410ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer AMZMKT001.
-System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer AMZMKT001.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325
-ERROR 2018-10-31 11:32:21,455 30016ms LoginPage              UserLogin          - Unable to connect to the remote server
-System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
-   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
-   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
-   --- End of inner exception stack trace ---
-   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
-   at System.Net.HttpWebRequest.GetRequestStream()
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 270
-   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 132
-   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 32
-   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
-ERROR 2018-10-31 11:36:52,637 301198ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer WALMARTDB.
-System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer WALMARTDB.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325
-ERROR 2018-10-31 11:38:01,562 370123ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer WALMARTDB.
-System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer WALMARTDB.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325
-ERROR 2018-10-31 11:40:18,936 507497ms PartialRefund          artialRefund_Click - Import Setup Header Code 'WALMARTDB' does not exist.
-System.Web.Services.Protocols.SoapException: Import Setup Header Code 'WALMARTDB' does not exist.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325
-ERROR 2018-10-31 11:41:54,590 603150ms PartialRefund          artialRefund_Click - There is no Import Setup Line within the filter.  Filters: Customer No.: AMZMKT001, Import Field Description: Partial Refund
-System.Web.Services.Protocols.SoapException: There is no Import Setup Line within the filter.  Filters: Customer No.: AMZMKT001, Import Field Description: Partial Refund
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 797
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 325
-ERROR 2018-11-07 10:16:32,996 118848ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer WALMARTDB.
-System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer WALMARTDB.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 597
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 391
-ERROR 2018-11-07 11:28:56,473 34399ms LoginPage              UserLogin          - Unable to connect to the remote server
-System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
-   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
-   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
-   --- End of inner exception stack trace ---
-   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
-   at System.Net.HttpWebRequest.GetRequestStream()
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 212
-   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 132
-   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 32
-   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
-ERROR 2018-11-07 12:00:55,233 60799ms ServiceCenter          ConnectToService   - The maximum length for a string value is 30.
-System.Web.Services.Protocols.SoapException: The maximum length for a string value is 30.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.SearchDetermineNoType(String sessionID, String searchNo, SearchResults& searchResults, Int32 _SearchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 279
+   at ExcelDesign.ServiceFunctions.Functions.SearchDetermineNoType(String sessionID, String searchNo, SearchResults& searchResults, Int32 _SearchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 284
    at ExcelDesign.Class_Objects.WebService.FindOrder(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 77
    at ExcelDesign.Class_Objects.CallService.OpenService(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 37
    at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 255
-ERROR 2018-11-08 08:33:31,517 26340ms StatisticsUserControl  PopulateLines      - Unable to cast object of type 'ASP.forms_usercontrols_statisticscontrols_pendingsqapproval_ascx' to type 'ExcelDesign.Forms.UserControls.StatisticsControls.CompletedExchanges'.
-System.InvalidCastException: Unable to cast object of type 'ASP.forms_usercontrols_statisticscontrols_pendingsqapproval_ascx' to type 'ExcelDesign.Forms.UserControls.StatisticsControls.CompletedExchanges'.
-   at ExcelDesign.Forms.UserControls.StatisticsControls.StatisticsUserControl.PopulateCompletedExchangeLines(List`1 exchangeList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\StatisticsUserControl.ascx.cs:line 242
-   at ExcelDesign.Forms.UserControls.StatisticsControls.StatisticsUserControl.PopulateLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\StatisticsUserControl.ascx.cs:line 182
-ERROR 2018-11-08 08:33:44,100 38923ms StatisticsUserControl  PopulateLines      - Unable to cast object of type 'ASP.forms_usercontrols_statisticscontrols_pendingsqapproval_ascx' to type 'ExcelDesign.Forms.UserControls.StatisticsControls.CompletedExchanges'.
-System.InvalidCastException: Unable to cast object of type 'ASP.forms_usercontrols_statisticscontrols_pendingsqapproval_ascx' to type 'ExcelDesign.Forms.UserControls.StatisticsControls.CompletedExchanges'.
-   at ExcelDesign.Forms.UserControls.StatisticsControls.StatisticsUserControl.PopulateCompletedExchangeLines(List`1 exchangeList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\StatisticsUserControl.ascx.cs:line 242
-   at ExcelDesign.Forms.UserControls.StatisticsControls.StatisticsUserControl.PopulateLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\StatisticsUserControl.ascx.cs:line 182
-ERROR 2018-11-08 08:34:27,224 11239ms StatisticsUserControl  PopulateLines      - Unable to cast object of type 'ASP.forms_usercontrols_statisticscontrols_pendingsqapproval_ascx' to type 'ExcelDesign.Forms.UserControls.StatisticsControls.CompletedExchanges'.
-System.InvalidCastException: Unable to cast object of type 'ASP.forms_usercontrols_statisticscontrols_pendingsqapproval_ascx' to type 'ExcelDesign.Forms.UserControls.StatisticsControls.CompletedExchanges'.
-   at ExcelDesign.Forms.UserControls.StatisticsControls.StatisticsUserControl.PopulateCompletedExchangeLines(List`1 exchangeList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\StatisticsUserControl.ascx.cs:line 242
-   at ExcelDesign.Forms.UserControls.StatisticsControls.StatisticsUserControl.PopulateLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\StatisticsUserControl.ascx.cs:line 182
-ERROR 2018-11-08 08:36:41,352 49771ms StatisticsUserControl  PopulateLines      - Unable to cast object of type 'ASP.forms_usercontrols_statisticscontrols_pendingsqapproval_ascx' to type 'ExcelDesign.Forms.UserControls.StatisticsControls.CompletedExchanges'.
-System.InvalidCastException: Unable to cast object of type 'ASP.forms_usercontrols_statisticscontrols_pendingsqapproval_ascx' to type 'ExcelDesign.Forms.UserControls.StatisticsControls.CompletedExchanges'.
-   at ExcelDesign.Forms.UserControls.StatisticsControls.StatisticsUserControl.PopulateCompletedExchangeLines(List`1 exchangeList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\StatisticsUserControl.ascx.cs:line 242
-   at ExcelDesign.Forms.UserControls.StatisticsControls.StatisticsUserControl.PopulateLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\StatisticsUserControl.ascx.cs:line 182
-ERROR 2018-11-08 08:43:58,290 156834ms StatisticsUserControl  PopulateLines      - Unable to cast object of type 'ASP.forms_usercontrols_statisticscontrols_pendingsqapproval_ascx' to type 'ExcelDesign.Forms.UserControls.StatisticsControls.CompletedExchanges'.
-System.InvalidCastException: Unable to cast object of type 'ASP.forms_usercontrols_statisticscontrols_pendingsqapproval_ascx' to type 'ExcelDesign.Forms.UserControls.StatisticsControls.CompletedExchanges'.
-   at ExcelDesign.Forms.UserControls.StatisticsControls.StatisticsUserControl.PopulateCompletedExchangeLines(List`1 exchangeList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\StatisticsUserControl.ascx.cs:line 242
-   at ExcelDesign.Forms.UserControls.StatisticsControls.StatisticsUserControl.PopulateLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\StatisticsUserControl.ascx.cs:line 182
-ERROR 2018-11-08 08:47:10,556 92502ms StatisticsUserControl  PopulateLines      - Unable to cast object of type 'ASP.forms_usercontrols_statisticscontrols_pendingsqapproval_ascx' to type 'ExcelDesign.Forms.UserControls.StatisticsControls.CompletedExchanges'.
-System.InvalidCastException: Unable to cast object of type 'ASP.forms_usercontrols_statisticscontrols_pendingsqapproval_ascx' to type 'ExcelDesign.Forms.UserControls.StatisticsControls.CompletedExchanges'.
-   at ExcelDesign.Forms.UserControls.StatisticsControls.StatisticsUserControl.PopulateCompletedExchangeLines(List`1 exchangeList) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\StatisticsUserControl.ascx.cs:line 242
-   at ExcelDesign.Forms.UserControls.StatisticsControls.StatisticsUserControl.PopulateLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\StatisticsUserControl.ascx.cs:line 182
-ERROR 2018-11-08 09:43:13,865 62375ms PartialRefund          artialRefund_Click - PSC100720:1:PARTREF:40,
-System.Web.Services.Protocols.SoapException: PSC100720:1:PARTREF:40,
+ERROR 2018-11-16 11:15:25,061 348181ms LoginPage              UserLogin          - The Microsoft Dynamics NAV Server cannot connect the Change Listener to SQL Server because of the following error: Cannot open database "Daily_Dev" requested by the login. The login failed.
+Login failed for user 'JEG\mswart'.
+System.Web.Services.Protocols.SoapException: The Microsoft Dynamics NAV Server cannot connect the Change Listener to SQL Server because of the following error: Cannot open database "Daily_Dev" requested by the login. The login failed.
+Login failed for user 'JEG\mswart'.
    at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
    at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 571
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 410
-ERROR 2018-11-08 12:10:25,165 245829ms tatisticsSalesLineForm ProcessItems       - No quantity available for item PBN201400.
-System.Web.Services.Protocols.SoapException: No quantity available for item PBN201400.
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 217
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 132
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 32
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-11-16 11:54:58,254 81809ms SuggestSimilarItem     Page_Load          - Method "ViewSimilarItem" is invalid!
+System.Web.Services.Protocols.SoapException: Method "ViewSimilarItem" is invalid!
    at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
    at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 705
+   at ExcelDesign.ServiceFunctions.Functions.ViewSimilarItem(String sessionID, String itemNo, Int32 _SearchType, SuggestSimilarItem& custSvcSimilarItem) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 800
+   at ExcelDesign.Class_Objects.WebService.GetSuggestSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 216
+   at ExcelDesign.Class_Objects.CallService.GetSuggestedSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2523
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.LoadSuggestionLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 57
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 39
+ERROR 2018-11-16 12:13:19,597 19080ms tatisticsSalesLineForm Page_Load          - Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.PopulateData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 71
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 42
+ERROR 2018-11-20 16:17:46,992 94902ms CreateExchange         eateExchange_Click - Standard Text Code 'TAC100135' does not exist.
+System.Web.Services.Protocols.SoapException: Standard Text Code 'TAC100135' does not exist.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.CreateExchangeOrder(String orderNo, CreatedExchangeOrder& exchangeOrder, String externalDocumentNo, String sessionID, String lineDetails) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 326
+   at ExcelDesign.Class_Objects.WebService.CreateExchange(String rmaNo, String externalDocNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 148
+   at ExcelDesign.Class_Objects.SendService.CreateExchangeOrder(String rmaNo, String externalDocumentNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 183
+   at ExcelDesign.Forms.FunctionForms.CreateExchange.BtnCreateExchange_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\CreateExchange.aspx.cs:line 257
+ERROR 2018-11-21 09:58:20,177 114786ms SuggestSimilarItem     Page_Load          - The active session has expired, your request will not be processed until you log into the system again.
+System.Web.Services.Protocols.SoapException: The active session has expired, your request will not be processed until you log into the system again.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.ViewSimilarItem(String sessionID, String itemNo, Int32 _SearchType, SuggestSimilarItem& custSvcSimilarItem) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 805
+   at ExcelDesign.Class_Objects.WebService.GetSuggestSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 216
+   at ExcelDesign.Class_Objects.CallService.GetSuggestedSimilarItems(String itemNo, Int32 suggestionOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2537
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.LoadSuggestionLines() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 57
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SuggestSimilarItems.SuggestSimilarItem.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SuggestSimilarItems\SuggestSimilarItem.aspx.cs:line 39
+ERROR 2018-11-21 11:04:44,433 31767ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 222
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 132
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 32
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-11-21 13:45:01,642 128679ms tatisticsSalesLineForm ProcessItems       - No lines with Qty. Received for Exchange found on Return Order RMA-244714.
+System.Web.Services.Protocols.SoapException: No lines with Qty. Received for Exchange found on Return Order RMA-244714.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 715
    at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 195
    at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 464
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 393
-ERROR 2018-11-08 12:10:59,420 280084ms tatisticsSalesLineForm ProcessItems       - No quantity available for item PBN201400.
-System.Web.Services.Protocols.SoapException: No quantity available for item PBN201400.
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 593
+ERROR 2018-12-05 16:56:02,767 26767ms ServiceCenter          ConnectToService   - The request was aborted: Could not create SSL/TLS secure channel.
+System.Web.HttpException (0x80004005): The request was aborted: Could not create SSL/TLS secure channel.
+   at ZendeskApi.Client.ClientBase.ValidateResponse(IHttpResponse response)
+   at ZendeskApi.Client.ClientBase.Get[T](Uri requestUri, String resource, String operation)
+   at ZendeskApi.Client.Resources.SearchResource.Find[T](IZendeskQuery`1 zendeskQuery)
+   at ExcelDesign.ZendeskAPI.ZendeskHelper.SearchTickets(String searchCriteria) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\ZendeskAPI\ZendeskHelper.cs:line 38
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2576
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1459
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 261
+ERROR 2018-12-06 08:22:52,076 39264ms ServiceCenter          ConnectToService   - The request was aborted: Could not create SSL/TLS secure channel.
+System.Web.HttpException (0x80004005): The request was aborted: Could not create SSL/TLS secure channel.
+   at ZendeskApi.Client.ClientBase.ValidateResponse(IHttpResponse response)
+   at ZendeskApi.Client.ClientBase.Get[T](Uri requestUri, String resource, String operation)
+   at ZendeskApi.Client.Resources.SearchResource.Find[T](IZendeskQuery`1 zendeskQuery)
+   at ExcelDesign.ZendeskAPI.ZendeskHelper.SearchTickets(String searchCriteria) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\ZendeskAPI\ZendeskHelper.cs:line 37
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2576
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1459
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 261
+ERROR 2018-12-06 08:32:38,315 41372ms ServiceCenter          ConnectToService   - The request was aborted: Could not create SSL/TLS secure channel.
+System.Web.HttpException (0x80004005): The request was aborted: Could not create SSL/TLS secure channel.
+   at ZendeskApi.Client.ClientBase.ValidateResponse(IHttpResponse response)
+   at ZendeskApi.Client.ClientBase.Get[T](Uri requestUri, String resource, String operation)
+   at ZendeskApi.Client.Resources.SearchResource.Find[T](IZendeskQuery`1 zendeskQuery)
+   at ExcelDesign.ZendeskAPI.ZendeskHelper.SearchTickets(String searchCriteria) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\ZendeskAPI\ZendeskHelper.cs:line 37
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2574
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1459
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 261
+ERROR 2018-12-06 10:07:51,832 40339ms ServiceCenter          ConnectToService   - Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2574
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1459
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 261
+ERROR 2018-12-06 10:24:04,917 100408ms ServiceCenter          PopulateData       - Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at ExcelDesign.Forms.UserControls.TableData.SingleReturnOrderDetail.LoadData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\TableData\SingleReturnOrderDetail.ascx.cs:line 242
+   at ExcelDesign.Forms.UserControls.TableData.SingleReturnOrderDetail.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\TableData\SingleReturnOrderDetail.ascx.cs:line 72
+   at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.AddedControl(Control control, Int32 index)
+   at System.Web.UI.ControlCollection.Add(Control child)
+   at ExcelDesign.Forms.ServiceCenter.PopulateData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 309
+ERROR 2018-12-06 10:26:42,918 258408ms ServiceCenter          ConnectToService   - The active session has expired, your request will not be processed until you log into the system again.
+System.Web.Services.Protocols.SoapException: The active session has expired, your request will not be processed until you log into the system again.
    at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
    at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 705
-   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 195
-   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 464
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 393
-ERROR 2018-11-08 12:13:09,777 410441ms tatisticsSalesLineForm ProcessItems       - No quantity available for item PBN201400.
-System.Web.Services.Protocols.SoapException: No quantity available for item PBN201400.
+   at ExcelDesign.ServiceFunctions.Functions.SearchDetermineNoType(String sessionID, String searchNo, SearchResults& searchResults, Int32 _SearchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 289
+   at ExcelDesign.Class_Objects.WebService.FindOrder(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 77
+   at ExcelDesign.Class_Objects.CallService.OpenService(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 38
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 255
+ERROR 2018-12-06 10:27:56,237 331727ms ServiceCenter          PopulateData       - Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at ExcelDesign.Forms.UserControls.TableData.SingleReturnOrderDetail.LoadData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\TableData\SingleReturnOrderDetail.ascx.cs:line 242
+   at ExcelDesign.Forms.UserControls.TableData.SingleReturnOrderDetail.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\TableData\SingleReturnOrderDetail.ascx.cs:line 72
+   at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.AddedControl(Control control, Int32 index)
+   at System.Web.UI.ControlCollection.Add(Control child)
+   at ExcelDesign.Forms.ServiceCenter.PopulateData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 309
+ERROR 2018-12-06 10:28:33,006 368497ms ServiceCenter          PopulateData       - Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at ExcelDesign.Forms.UserControls.TableData.SingleReturnOrderDetail.LoadData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\TableData\SingleReturnOrderDetail.ascx.cs:line 242
+   at ExcelDesign.Forms.UserControls.TableData.SingleReturnOrderDetail.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\TableData\SingleReturnOrderDetail.ascx.cs:line 72
+   at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.AddedControl(Control control, Int32 index)
+   at System.Web.UI.ControlCollection.Add(Control child)
+   at ExcelDesign.Forms.ServiceCenter.PopulateData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 309
+ERROR 2018-12-06 10:34:19,950 715441ms ServiceCenter          PopulateData       - Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at ExcelDesign.Forms.UserControls.TableData.SingleReturnOrderDetail.LoadData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\TableData\SingleReturnOrderDetail.ascx.cs:line 242
+   at ExcelDesign.Forms.UserControls.TableData.SingleReturnOrderDetail.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\TableData\SingleReturnOrderDetail.ascx.cs:line 72
+   at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.AddedControl(Control control, Int32 index)
+   at System.Web.UI.ControlCollection.Add(Control child)
+   at ExcelDesign.Forms.ServiceCenter.PopulateData() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 309
+ERROR 2018-12-06 11:16:03,148 20569ms LoginPage              UserLogin          - The remote name could not be resolved: 'jeg-svr2.jeg.local'
+System.Net.WebException: The remote name could not be resolved: 'jeg-svr2.jeg.local'
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 222
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 132
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 33
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-12-07 11:50:19,418 714786ms ServiceCenter          ConnectToService   - There is an error in XML document (1, 22153).
+System.InvalidOperationException: There is an error in XML document (1, 22153). ---> System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at Microsoft.Xml.Serialization.GeneratedAssembly.XmlSerializationReaderFunctions.Read38_CustSvcLog(Boolean isNullable, Boolean checkType)
+   at Microsoft.Xml.Serialization.GeneratedAssembly.XmlSerializationReaderFunctions.Read39_SearchResults(Boolean isNullable, Boolean checkType)
+   at Microsoft.Xml.Serialization.GeneratedAssembly.XmlSerializationReaderFunctions.Read58_SearchDetermineNoType_Result()
+   at Microsoft.Xml.Serialization.GeneratedAssembly.ArrayOfObjectSerializer20.Deserialize(XmlSerializationReader reader)
+   at System.Xml.Serialization.XmlSerializer.Deserialize(XmlReader xmlReader, String encodingStyle, XmlDeserializationEvents events)
+   --- End of inner exception stack trace ---
+   at System.Xml.Serialization.XmlSerializer.Deserialize(XmlReader xmlReader, String encodingStyle, XmlDeserializationEvents events)
    at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
    at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 705
-   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 195
-   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 464
-   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 393
-ERROR 2018-11-09 09:01:00,990 649799ms PartialRefund          artialRefund_Click - Action Partial Refund is not allowed for Customer AMZMKT001.
-System.Web.Services.Protocols.SoapException: Action Partial Refund is not allowed for Customer AMZMKT001.
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
-   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 571
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 420
-ERROR 2018-11-09 09:01:49,777 698586ms PartialRefund          artialRefund_Click - There is no Import Setup Header within the filter.  Filters: Code: AMZMKT001, Partial Refund Batch: Yes
+   at ExcelDesign.ServiceFunctions.Functions.SearchDetermineNoType(String sessionID, String searchNo, SearchResults& searchResults, Int32 _SearchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 289
+   at ExcelDesign.Class_Objects.WebService.FindOrder(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 77
+   at ExcelDesign.Class_Objects.CallService.OpenService(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 38
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 255
+ERROR 2018-12-13 11:14:39,730 1366634ms PartialRefund          artialRefund_Click - There is no Import Setup Header within the filter.  Filters: Code: AMZMKT001, Partial Refund Batch: Yes
 System.Web.Services.Protocols.SoapException: There is no Import Setup Header within the filter.  Filters: Code: AMZMKT001, Partial Refund Batch: Yes
    at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
    at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 571
-   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 205
-   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 469
-   at ExcelDesign.Forms.FunctionForms.PartialRefund.btnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 420
-ERROR 2018-11-09 11:15:23,072 31801ms LoginPage              UserLogin          - Unable to connect to the remote server
+   at ExcelDesign.ServiceFunctions.Functions.PartialRefund(String orderNo, String externalDocumentNo, String lineValues, String sessionID, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 622
+   at ExcelDesign.Class_Objects.WebService.PartialRefund(String orderNo, String docNo, String lineValues, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 217
+   at ExcelDesign.Class_Objects.SendService.PartialRefund(String orderNo, String docNo, String lineValues, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 479
+   at ExcelDesign.Forms.FunctionForms.PartialRefund.BtnCreatePartialRefund_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\PartialRefund.aspx.cs:line 441
+ERROR 2018-12-13 13:37:23,011 135960ms CreateExchange         eateExchange_Click - Action Exchange is not allowed for Customer SHOPHQ.
+System.Web.Services.Protocols.SoapException: Action Exchange is not allowed for Customer SHOPHQ.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.CreateExchangeOrder(String orderNo, CreatedExchangeOrder& exchangeOrder, String externalDocumentNo, String sessionID, String lineDetails, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 326
+   at ExcelDesign.Class_Objects.WebService.CreateExchange(String rmaNo, String externalDocNo, String lineValues, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 160
+   at ExcelDesign.Class_Objects.SendService.CreateExchangeOrder(String rmaNo, String externalDocumentNo, String lineValues, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 193
+   at ExcelDesign.Forms.FunctionForms.CreateExchange.BtnCreateExchange_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\CreateExchange.aspx.cs:line 277
+ERROR 2018-12-13 13:38:19,594 192543ms CreateExchange         eateExchange_Click - Action Exchange is not allowed for Customer SHOPHQ.
+System.Web.Services.Protocols.SoapException: Action Exchange is not allowed for Customer SHOPHQ.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.CreateExchangeOrder(String orderNo, CreatedExchangeOrder& exchangeOrder, String externalDocumentNo, String sessionID, String lineDetails, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 326
+   at ExcelDesign.Class_Objects.WebService.CreateExchange(String rmaNo, String externalDocNo, String lineValues, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 160
+   at ExcelDesign.Class_Objects.SendService.CreateExchangeOrder(String rmaNo, String externalDocumentNo, String lineValues, Int32 zendeskTicketNo) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 193
+   at ExcelDesign.Forms.FunctionForms.CreateExchange.BtnCreateExchange_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\CreateExchange.aspx.cs:line 277
+ERROR 2018-12-18 08:56:48,477 32118ms LoginPage              UserLogin          - Unable to connect to the remote server
 System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
    at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
    at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
@@ -554,11 +368,11 @@ System.Net.WebException: Unable to connect to the remote server ---> System.Net.
    at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
    at System.Net.HttpWebRequest.GetRequestStream()
    at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 285
-   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 132
-   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 32
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 222
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 145
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 33
    at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
-ERROR 2018-11-09 11:15:44,525 53254ms LoginPage              UserLogin          - Unable to connect to the remote server
+ERROR 2018-12-18 08:57:31,870 75511ms LoginPage              UserLogin          - Unable to connect to the remote server
 System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
    at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
    at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
@@ -566,11 +380,11 @@ System.Net.WebException: Unable to connect to the remote server ---> System.Net.
    at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
    at System.Net.HttpWebRequest.GetRequestStream()
    at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 285
-   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 132
-   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 32
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 222
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 145
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 33
    at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
-ERROR 2018-11-09 11:16:05,605 74334ms LoginPage              UserLogin          - Unable to connect to the remote server
+ERROR 2018-12-18 08:58:25,941 37064ms LoginPage              UserLogin          - Unable to connect to the remote server
 System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
    at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
    at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
@@ -578,11 +392,35 @@ System.Net.WebException: Unable to connect to the remote server ---> System.Net.
    at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
    at System.Net.HttpWebRequest.GetRequestStream()
    at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 285
-   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 132
-   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 32
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 222
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 145
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 33
    at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
-ERROR 2018-11-09 11:16:26,762 95492ms LoginPage              UserLogin          - Unable to connect to the remote server
+ERROR 2018-12-18 09:08:29,974 290035ms ServiceCenter          ConnectToService   - The Writer is closed or in error state.
+System.Web.Services.Protocols.SoapException: The Writer is closed or in error state.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.SearchDetermineNoType(String sessionID, String searchNo, SearchResults& searchResults, Int32 _SearchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 289
+   at ExcelDesign.Class_Objects.WebService.FindOrder(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 88
+   at ExcelDesign.Class_Objects.CallService.OpenService(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 38
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 261
+ERROR 2018-12-18 09:09:40,529 360591ms ServiceCenter          ConnectToService   - The Writer is closed or in error state.
+System.Web.Services.Protocols.SoapException: The Writer is closed or in error state.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.SearchDetermineNoType(String sessionID, String searchNo, SearchResults& searchResults, Int32 _SearchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 289
+   at ExcelDesign.Class_Objects.WebService.FindOrder(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 88
+   at ExcelDesign.Class_Objects.CallService.OpenService(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 38
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 261
+ERROR 2018-12-18 09:16:38,313 778374ms ServiceCenter          ConnectToService   - The Writer is closed or in error state.
+System.Web.Services.Protocols.SoapException: The Writer is closed or in error state.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.SearchDetermineNoType(String sessionID, String searchNo, SearchResults& searchResults, Int32 _SearchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 289
+   at ExcelDesign.Class_Objects.WebService.FindOrder(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 88
+   at ExcelDesign.Class_Objects.CallService.OpenService(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 38
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 261
+ERROR 2018-12-20 09:36:34,031 50191ms LoginPage              UserLogin          - Unable to connect to the remote server
 System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
    at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
    at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
@@ -590,7 +428,309 @@ System.Net.WebException: Unable to connect to the remote server ---> System.Net.
    at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
    at System.Net.HttpWebRequest.GetRequestStream()
    at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
-   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 285
-   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 132
-   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 32
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 232
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 150
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 33
    at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-12-20 09:39:58,852 255013ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 232
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 150
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 33
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-12-20 09:43:05,954 27256ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 232
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 150
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 33
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-12-20 09:45:18,273 81598ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 232
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 150
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 33
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2018-12-20 09:47:49,147 232472ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 232
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 150
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 33
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2019-01-07 10:59:43,891 43015ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 232
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 150
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 33
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2019-01-07 11:01:59,017 178142ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 232
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 150
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 33
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2019-01-07 11:33:04,937 359392ms CreateReturn           Page_Load          - Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ExcelDesign.Forms.FunctionForms.CreateReturn.Page_Load(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\CreateReturn.aspx.cs:line 80
+ERROR 2019-01-07 11:34:17,630 432084ms ServiceCenter          ConnectToService   - The maximum length for a string value is 15.
+System.Web.Services.Protocols.SoapException: The maximum length for a string value is 15.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.SearchDetermineNoType(String sessionID, String searchNo, SearchResults& searchResults, Int32 _SearchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 299
+   at ExcelDesign.Class_Objects.WebService.FindOrder(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 92
+   at ExcelDesign.Class_Objects.CallService.OpenService(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 38
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 272
+ERROR 2019-01-07 11:35:50,156 38370ms ServiceCenter          ConnectToService   - Your connection to the JEG-SVR2 server is no longer responding. This can be caused by one of the following reasons:  * The server has been shut down manually or because of an error. * Your session was stopped by an administrator. * A network failure has occurred. * A hardware failure has occurred on the server or on your computer.  Try again later or contact your system administrator.
+System.Web.Services.Protocols.SoapException: Your connection to the JEG-SVR2 server is no longer responding. This can be caused by one of the following reasons:  * The server has been shut down manually or because of an error. * Your session was stopped by an administrator. * A network failure has occurred. * A hardware failure has occurred on the server or on your computer.  Try again later or contact your system administrator.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.SearchDetermineNoType(String sessionID, String searchNo, SearchResults& searchResults, Int32 _SearchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 299
+   at ExcelDesign.Class_Objects.WebService.FindOrder(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 92
+   at ExcelDesign.Class_Objects.CallService.OpenService(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 38
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 272
+ERROR 2019-01-07 16:05:41,287 46457ms LoginPage              UserLogin          - The remote name could not be resolved: 'jeg-svr2.jeg.local'
+System.Net.WebException: The remote name could not be resolved: 'jeg-svr2.jeg.local'
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 232
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 150
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 33
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2019-01-11 16:47:14,465 115980ms ServiceCenter          ConnectToService   - String was not recognized as a valid DateTime.
+System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2648
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1472
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 278
+ERROR 2019-01-11 16:49:54,813 34587ms ServiceCenter          ConnectToService   - String was not recognized as a valid DateTime.
+System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value, IFormatProvider provider)
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2649
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1472
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 278
+ERROR 2019-01-11 16:51:26,150 29533ms ServiceCenter          ConnectToService   - String was not recognized as a valid DateTime.
+System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value, IFormatProvider provider)
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2649
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1472
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 278
+ERROR 2019-01-11 16:53:47,128 35340ms ServiceCenter          ConnectToService   - String was not recognized as a valid DateTime.
+System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.DateTime.Parse(String s, IFormatProvider provider)
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2649
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1472
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 278
+ERROR 2019-01-14 08:31:02,679 228646ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 237
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 150
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 33
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2019-02-05 15:03:48,215 303412ms ServiceCenter          ConnectToService   - String reference not set to an instance of a String.
+Parameter name: s
+System.ArgumentNullException: String reference not set to an instance of a String.
+Parameter name: s
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.DateTime.Parse(String s, IFormatProvider provider)
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2649
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1472
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 281
+ERROR 2019-02-05 15:06:22,284 457481ms ServiceCenter          ConnectToService   - String reference not set to an instance of a String.
+Parameter name: s
+System.ArgumentNullException: String reference not set to an instance of a String.
+Parameter name: s
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.DateTime.Parse(String s, IFormatProvider provider)
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2649
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1472
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 281
+ERROR 2019-02-05 15:07:45,331 540527ms ServiceCenter          ConnectToService   - String reference not set to an instance of a String.
+Parameter name: s
+System.ArgumentNullException: String reference not set to an instance of a String.
+Parameter name: s
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.DateTime.Parse(String s, IFormatProvider provider)
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2649
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1472
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 281
+ERROR 2019-02-05 15:08:24,899 580096ms ServiceCenter          ConnectToService   - String reference not set to an instance of a String.
+Parameter name: s
+System.ArgumentNullException: String reference not set to an instance of a String.
+Parameter name: s
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.DateTime.Parse(String s, IFormatProvider provider)
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2649
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1472
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 281
+ERROR 2019-02-13 08:32:55,844 98719ms ServiceCenter          ConnectToService   - String was not recognized as a valid DateTime.
+System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2750
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1472
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 281
+ERROR 2019-02-22 08:43:32,393 135530ms ServiceCenter          ConnectToService   - String was not recognized as a valid DateTime.
+System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2658
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1472
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 281
+ERROR 2019-02-22 08:49:31,205 53624ms ServiceCenter          ConnectToService   - String was not recognized as a valid DateTime.
+System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2658
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1472
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 281
+ERROR 2019-02-22 08:51:49,443 191862ms ServiceCenter          ConnectToService   - String was not recognized as a valid DateTime.
+System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at ExcelDesign.Class_Objects.CallService.GetZendeskTickets(List`1& cust) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 2658
+   at ExcelDesign.Class_Objects.CallService.GetCustomerInfo() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 1472
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 281
+ERROR 2019-02-22 09:03:24,564 301144ms tatisticsSalesLineForm ProcessItems       - Metadata for object of type CodeUnit with id 50084 is in a failed state.  This is caused by a previous exception: 
+
+Object of type CodeUnit with id 50084 could not be found. 
+System.Web.Services.Protocols.SoapException: Metadata for object of type CodeUnit with id 50084 is in a failed state.  This is caused by a previous exception: 
+
+Object of type CodeUnit with id 50084 could not be found. 
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 836
+   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 217
+   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 483
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 602
+ERROR 2019-02-22 09:05:54,269 79997ms tatisticsSalesLineForm ProcessItems       - Metadata for object of type CodeUnit with id 50084 is in a failed state.  This is caused by a previous exception: 
+
+Object of type CodeUnit with id 50084 could not be found. 
+System.Web.Services.Protocols.SoapException: Metadata for object of type CodeUnit with id 50084 is in a failed state.  This is caused by a previous exception: 
+
+Object of type CodeUnit with id 50084 could not be found. 
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 836
+   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 217
+   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 483
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 602
+ERROR 2019-02-22 09:14:07,634 279117ms tatisticsSalesLineForm ProcessItems       - No lines with Qty. Received for Exchange found on Return Order RMA-257265.
+System.Web.Services.Protocols.SoapException: No lines with Qty. Received for Exchange found on Return Order RMA-257265.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 836
+   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 217
+   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 483
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 602
+ERROR 2019-02-22 09:15:29,358 37124ms tatisticsSalesLineForm ProcessItems       - No lines with Qty. Received for Exchange found on Return Order RMA-257274.
+System.Web.Services.Protocols.SoapException: No lines with Qty. Received for Exchange found on Return Order RMA-257274.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.ProcessReplacements(String rMAList, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 836
+   at ExcelDesign.Class_Objects.WebService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 217
+   at ExcelDesign.Class_Objects.SendService.ProcessItems(String rmaList, String sessionID, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 483
+   at ExcelDesign.Forms.UserControls.StatisticsControls.SalesLines.StatisticsSalesLineForm.ProcessItems(String rmaList, String type) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\StatisticsControls\SalesLines\StatisticsSalesLineForm.aspx.cs:line 602
+ERROR 2019-03-06 08:46:27,206  7385ms LoginPage              UserLogin          - The remote name could not be resolved: 'jeg-svr2.jeg.local'
+System.Net.WebException: The remote name could not be resolved: 'jeg-svr2.jeg.local'
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 242
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 154
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 33
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2019-03-06 08:47:32,638 72817ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 242
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 154
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 33
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2019-03-06 08:54:28,228 488406ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 242
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 154
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 33
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2019-03-06 08:56:39,560 113272ms LoginPage              UserLogin          - Username / password combination does not match.
+System.Web.Services.Protocols.SoapException: Username / password combination does not match.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 242
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 154
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 33
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2019-03-06 11:40:09,002 14311ms LoginPage              UserLogin          - The remote name could not be resolved: 'jeg-svr2.jeg.local'
+System.Net.WebException: The remote name could not be resolved: 'jeg-svr2.jeg.local'
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 242
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 154
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 37
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2019-03-12 16:21:48,049 65168ms ServiceCenter          ueReturnLabel>b__0 - SHELL Command Type must be .NET Automation when used on the Service Tier
+System.Web.Services.Protocols.SoapException: SHELL Command Type must be .NET Automation when used on the Service Tier
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String emailAddress, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String email, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 172
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String email, String sessionID) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 467
+   at ExcelDesign.Forms.ServiceCenter.<>c__DisplayClass23_1.<IssueReturnLabel>b__0() in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 448

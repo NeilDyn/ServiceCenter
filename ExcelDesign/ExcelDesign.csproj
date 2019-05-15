@@ -65,6 +65,9 @@
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="StackifyHttpTracer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=93c44ce23f2048dd, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackifyHttpModule.1.0.41\lib\net40\StackifyHttpTracer.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -136,6 +139,7 @@
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetail.ascx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoDetailHeader.ascx" />
     <Content Include="Forms\UserControls\CustomerInfo\CustomerInfoHeader.ascx" />
+    <Content Include="Forms\UserControls\IssueReturnLabel\ZendeskIssueReturnLabel.ascx" />
     <Content Include="Forms\UserControls\MainTables\CustomerInfoTable.ascx" />
     <Content Include="Forms\UserControls\MainTables\ReturnOrderHeaderTable.ascx" />
     <Content Include="Forms\ServiceCenter.aspx" />
@@ -176,6 +180,7 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Webservices\WebServiceFunctions.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class Objects\Comment.cs" />
@@ -384,6 +389,13 @@
     </Compile>
     <Compile Include="Forms\UserControls\CustomerInfo\CustomerInfoHeader.ascx.designer.cs">
       <DependentUpon>CustomerInfoHeader.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\IssueReturnLabel\ZendeskIssueReturnLabel.ascx.cs">
+      <DependentUpon>ZendeskIssueReturnLabel.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\IssueReturnLabel\ZendeskIssueReturnLabel.ascx.designer.cs">
+      <DependentUpon>ZendeskIssueReturnLabel.ascx</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserControls\MainTables\CustomerInfoTable.ascx.cs">
       <DependentUpon>CustomerInfoTable.ascx</DependentUpon>
@@ -615,6 +627,10 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Webservices\WebServiceFunctions.asmx.cs">
+      <DependentUpon>WebServiceFunctions.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ZendeskAPI\ZendDeskEmailParser.cs" />
     <Compile Include="ZendeskAPI\ZendeskHelper.cs" />

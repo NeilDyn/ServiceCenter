@@ -184,6 +184,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class Objects\Comment.cs" />
+    <Compile Include="Class Objects\ConfigurationSettings.cs" />
     <Compile Include="Class Objects\CreatedExchange\CreatedExchangeHeader.cs" />
     <Compile Include="Class Objects\CreatedExchange\CreatedExchangeLines.cs" />
     <Compile Include="Class Objects\CreatedPartRequest\CreatedPartRequestHeader.cs" />

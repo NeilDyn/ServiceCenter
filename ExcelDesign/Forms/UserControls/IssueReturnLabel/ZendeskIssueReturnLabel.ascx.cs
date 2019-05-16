@@ -334,6 +334,7 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
 
                     long? newZendeskTicketID = 0;
 
+                    ZendeskTicket = new Zendesk();
                     newZendeskTicketID = ZendeskTicket.CreateNewZendeskTicketWithPDFFile(pdf64String, no, amazonBucketURL, EmailTo, CustomerName, docNo);
 
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "issueReturnLabelNewTicket", "alert('New Zendesk Ticket is: " + newZendeskTicketID + ".\\n\\n" + no + ", Return label is being processed and will be emailed within 1 hour.');", true);

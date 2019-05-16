@@ -689,11 +689,11 @@ namespace ExcelDesign.Forms.PDAForms
                             crh = ss.CreateReturnOrder(no, docNo, string.Empty, notes, resources, printRMA, createLabel, email, lineValues, update, returnTrackingNo,
                                 shippingDetails, imeiNo, zendeskTicketNo);
 
-                            ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + ", Return label is being processed and will be emailed within 1-2 hours');", true);
+                            ClientScript.RegisterStartupScript(this.GetType(), "returnRMA", "alert('" + crh.RMANo + "');", true);
 
                             if (createLabel)
                             {
-                                ZendeskIssueReturnLabelControl.IssueZendeskReturnLabel(no, docNo, false, ticket);
+                                ZendeskIssueReturnLabelControl.IssueZendeskReturnLabel(crh.RMANo, docNo, false, ticket);
                             }
 
                             // Replace legacy with Zendesk return label

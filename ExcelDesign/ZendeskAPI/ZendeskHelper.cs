@@ -13,6 +13,7 @@ using ZendeskApi.Contracts.Requests;
 using System.Web.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Threading;
 
 namespace ExcelDesign.ZendeskAPI
 {
@@ -247,26 +248,26 @@ namespace ExcelDesign.ZendeskAPI
                 uploadToken = response.Item.Token;
                 newComment.AddAttachmentToComment(uploadToken);
 
-                newComment.Body = @"Hello,
-
+                newComment.HtmlBody = @"Hello,
+                <br/><br/>
                 Your return request has been approved.  Your Return Merchandise Authorization number is " + rmaNo + @".
-
-                Please see attached document for return instructions and shipping label. Alternatively [Click here](" + amazonBucketURL + @") to download your instructions return instructions and shipping label manually.
-
+                <br/><br/>
+                Please see attached document for return instructions and shipping label. Alternatively <a href='" + amazonBucketURL + @"'>Click Here</a> to download your instructions return instructions and shipping label manually.
+                <br/><br/>
                 IMPORTANT: Please remove ALL locks and passwords. Any device(s) received locked with your information will be denied, returned at your expense with no refund submitted for processing.
-
+                <br/><br/>
                 Thank You";
             }
             else
             {
-                newComment.Body = @"Hello,
-
+                newComment.HtmlBody = @"Hello,
+                <br/><br/>
                 Your return request has been approved.  Your Return Merchandise Authorization number is " + rmaNo + @".
-
-                [Click here](" + amazonBucketURL + @") to download your return instructions and shipping label.
-
+                <br/><br/>
+                <a href='" + amazonBucketURL + @"'>Click Here</a> to download your return instructions and shipping label.
+                <br/><br/>
                 IMPORTANT: Please remove ALL locks and passwords. Any device(s) received locked with your information will be denied, returned at your expense with no refund submitted for processing.
-
+                <br/><br/>
                 Thank You";
             }
 
@@ -325,17 +326,23 @@ namespace ExcelDesign.ZendeskAPI
             IResponse<Ticket> responseTicket = client.Tickets.Post(newRequest);
 
             // We need to retrieve the ticket ID of the newly created Ticket
+         
             createdTicketID = responseTicket.Item.Id;
+            string ticketID = createdTicketID.ToString() ;
+            long.TryParse(ticketID, out long updateTicketID);
 
             // Now we immediately update the newly created ticket with the return shipping information
             IResponse<Ticket> updateTicketResponse = client.Tickets.Get(createdTicketID.Value);
             ticketReponse = updateTicketResponse.Item;
             updateNewTicket = ticketReponse;
 
+            //UpdateZendeskTicketWithPDFFile(updateTicketID, file, rmaNo, amazonBucketURL, fileAttached);
+
             TicketComment comment = new TicketComment
             {
                 IsPublic = true,
-                Type = TicketEventType.Comment
+                Type = TicketEventType.Comment,
+                Id = createdTicketID
             };
 
             if (fileAttached)
@@ -348,31 +355,31 @@ namespace ExcelDesign.ZendeskAPI
                 uploadToken = response.Item.Token;
                 comment.AddAttachmentToComment(uploadToken);
 
-                comment.Body = @"Hello,
-
+                comment.HtmlBody = @"Hello,
+                <br/><br/>
                 Your return request has been approved.  Your Return Merchandise Authorization number is " + rmaNo + @".
-
-                Please see attached document for return instructions and shipping label. Alternatively [Click here](" + amazonBucketURL + @") to download your instructions return instructions and shipping label manually.
-
+                <br/><br/>
+                Please see attached document for return instructions and shipping label. Alternatively <a href='" + amazonBucketURL + @"'>Click Here</a> to download your instructions return instructions and shipping label manually.
+                <br/><br/>
                 IMPORTANT: Please remove ALL locks and passwords. Any device(s) received locked with your information will be denied, returned at your expense with no refund submitted for processing.
-
+                <br/><br/>
                 Thank You";
             }
             else
             {
-                comment.Body = @"Hello,
-
+                comment.HtmlBody = @"Hello,
+                <br/><br/>
                 Your return request has been approved.  Your Return Merchandise Authorization number is " + rmaNo + @".
-
-                [Click here](" + amazonBucketURL + @") to download your return instructions and shipping label.
-
+                <br/><br/>
+                <a href='" + amazonBucketURL + @"'>Click Here</a> to download your return instructions and shipping label.
+                <br/><br/>
                 IMPORTANT: Please remove ALL locks and passwords. Any device(s) received locked with your information will be denied, returned at your expense with no refund submitted for processing.
-
+                <br/><br/>
                 Thank You";
             }
 
             updateNewTicket.Comment = comment;
-            updateNewTicket.Status = TicketStatus.Solved;         
+            updateNewTicket.Status = TicketStatus.Solved;
 
             client.Tickets.Put(new TicketRequest { Item = updateNewTicket });
 

@@ -135,6 +135,11 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
                         {
                             if (!zendeskTickets.Any(t => t.TicketNo.Equals(ticket.TicketNo)))
                             {
+                                if (String.IsNullOrEmpty(ticket.ToEmailsAddress) && String.IsNullOrEmpty(ticket.ToEmailsName))
+                                {
+                                    ticket.GetRequester();
+                                }
+
                                 zendeskTickets.Add(ticket);
                             }
                         }
@@ -146,6 +151,10 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
                         {
                             if (!zendeskTickets.Any(t => t.TicketNo.Equals(ticket.TicketNo)))
                             {
+                                if (String.IsNullOrEmpty(ticket.ToEmailsAddress) && String.IsNullOrEmpty(ticket.ToEmailsName))
+                                {
+                                    ticket.GetRequester();
+                                }
                                 zendeskTickets.Add(ticket);
                             }
                         }
@@ -233,11 +242,16 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
 
                     if (ticketResult != 0)
                     {
-                        Zendesk ZendeskTicket = new Zendesk();
-                        zendeskTicket = ZendeskTicket.VerifyInsertedZendeskTicket(ticketResult);
+                        Zendesk Zendesk = new Zendesk();
+                        zendeskTicket = Zendesk.VerifyInsertedZendeskTicket(ticketResult);
 
-                        if (ZendeskTicket != null)
+                        if (zendeskTicket != null)
                         {
+                            if (String.IsNullOrEmpty(zendeskTicket.FromEmailAddress) && String.IsNullOrEmpty(zendeskTicket.FromEmailName))
+                            {
+                                zendeskTicket.GetRequester();
+                            }
+
                             validInput = true;
                         }
                         else
@@ -421,6 +435,15 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
 
                 return false;
             }
+        }
+
+        public string GetCustomerEmail()
+        {
+            string emailAddress = string.Empty;
+
+
+
+            return emailAddress;
         }
     }
 }

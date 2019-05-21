@@ -14,6 +14,7 @@ using System.Web.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Threading;
+using System.Configuration;
 
 namespace ExcelDesign.ZendeskAPI
 {
@@ -49,19 +50,21 @@ namespace ExcelDesign.ZendeskAPI
          * Updated the create and update zendesk ticket functions to accept and include in their comments the Amazon S3 bucket URL
          * 
          * Developed new function to verify a zendesk ticket. This is used when a user inputs an existing zendesk ticket manually.
+         * 
+         * 20 May 2019 - Neil Jansen
+         * Updated setup and configuration logic to be pulled from the Web.config file.
          */
 
         private static string zendeskUsername = string.Empty;
-        private static readonly string zendeskAPIToken = "9gryAaOh6JfSIaIWPetf42R4y4J0bPvdG3ta2uX9";
-        private static readonly string zendeskSandboxAPIToken = "TlULrYzysqHf7h0tk6pkPg6fbiuhamvBMNaLCBbm";
-        private static readonly string zendeskURL = "https://jegsons.zendesk.com";
-        private static readonly string zendeskSandboxURL = "https://jegsons1556527099.zendesk.com";
+
+        //private static readonly string zendeskAPIToken = "9gryAaOh6JfSIaIWPetf42R4y4J0bPvdG3ta2uX9";
+        //private static readonly string zendeskSandboxAPIToken = "TlULrYzysqHf7h0tk6pkPg6fbiuhamvBMNaLCBbm";
+        //private static readonly string zendeskURL = "https://jegsons.zendesk.com";
+        //private static readonly string zendeskSandboxURL = "https://jegsons1556527099.zendesk.com";
+
         private static ZendeskDefaultConfiguration configuration;
         private static Uri zendeskURI;
         private static IZendeskClient client;
-
-        //True to use Sandbox version, False for production
-        private static readonly bool versionTypeSandbox = true;
 
         public ZendeskHelper()
         {
@@ -77,7 +80,7 @@ namespace ExcelDesign.ZendeskAPI
              * Changed function name to specify 'CustomFields' - Updated Zendesk list object creation to include new parameters
              */
 
-            ConnectToZendesk(versionTypeSandbox);
+            ConnectToZendesk();
 
             List<Zendesk> zendeskTickets = new List<Zendesk>();
             IListResponse<Ticket> responses = client.Search.Find(new ZendeskQuery<Ticket>().WithCustomFilter("fieldvalue", searchCriteria));
@@ -93,8 +96,9 @@ namespace ExcelDesign.ZendeskAPI
                     fromEmails = ZendDeskEmailParser.GetEmailList(singleTicket.Via.Source.From);
                     toEmails = ZendDeskEmailParser.GetEmailList(singleTicket.Via.Source.To);
 
-                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, singleTicket.Subject,
-                        singleTicket.Status.ToString(), singleTicket.Priority, false, fromEmails.Address, fromEmails.Name, toEmails.Address, toEmails.Name));
+                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, 
+                        singleTicket.Subject, singleTicket.Status.ToString(), singleTicket.Priority, false, fromEmails.Address,
+                        fromEmails.Name, toEmails.Address, toEmails.Name, singleTicket.RequesterId.GetValueOrDefault()));
                     listTickets.Add(singleTicket.Id);
                 }
             }
@@ -108,7 +112,7 @@ namespace ExcelDesign.ZendeskAPI
              * Create a list of Zendesk objects through filtering the Subject field in Zendesk
              */
 
-            ConnectToZendesk(versionTypeSandbox);
+            ConnectToZendesk();
 
             List<Zendesk> zendeskTickets = new List<Zendesk>();
             IListResponse<Ticket> responses = client.Search.Find(new ZendeskQuery<Ticket>().WithCustomFilter("subject", searchCriteria));
@@ -124,8 +128,9 @@ namespace ExcelDesign.ZendeskAPI
                     fromEmails = ZendDeskEmailParser.GetEmailList(singleTicket.Via.Source.From);
                     toEmails = ZendDeskEmailParser.GetEmailList(singleTicket.Via.Source.To);
 
-                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, singleTicket.Subject,
-                        singleTicket.Status.ToString(), singleTicket.Priority, false, fromEmails.Address, fromEmails.Name, toEmails.Address, toEmails.Name));
+                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated,
+                        singleTicket.Subject, singleTicket.Status.ToString(), singleTicket.Priority, false, fromEmails.Address,
+                        fromEmails.Name, toEmails.Address, toEmails.Name, singleTicket.RequesterId.GetValueOrDefault()));
                     listTickets.Add(singleTicket.Id);
                 }
             }
@@ -139,7 +144,7 @@ namespace ExcelDesign.ZendeskAPI
              * Create a list of Zendesk objects through filtering the Description field in Zendesk
              */
 
-            ConnectToZendesk(versionTypeSandbox);
+            ConnectToZendesk();
 
             List<Zendesk> zendeskTickets = new List<Zendesk>();
             IListResponse<Ticket> responses = client.Search.Find(new ZendeskQuery<Ticket>().WithCustomFilter("description", searchCriteria));
@@ -155,8 +160,9 @@ namespace ExcelDesign.ZendeskAPI
                     fromEmails = ZendDeskEmailParser.GetEmailList(singleTicket.Via.Source.From);
                     toEmails = ZendDeskEmailParser.GetEmailList(singleTicket.Via.Source.To);
 
-                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, singleTicket.Subject,
-                        singleTicket.Status.ToString(), singleTicket.Priority, false, fromEmails.Address, fromEmails.Name, toEmails.Address, toEmails.Name));
+                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated,
+                        singleTicket.Subject, singleTicket.Status.ToString(), singleTicket.Priority, false, fromEmails.Address,
+                        fromEmails.Name, toEmails.Address, toEmails.Name, singleTicket.RequesterId.GetValueOrDefault()));
                     listTickets.Add(singleTicket.Id);
                 }
             }
@@ -171,7 +177,7 @@ namespace ExcelDesign.ZendeskAPI
              */
 
             //true if sandbox, false for production
-            ConnectToZendesk(versionTypeSandbox);
+            ConnectToZendesk();
 
             List<Zendesk> zendeskTickets = new List<Zendesk>();
             IListResponse<Ticket> responses = client.Search.Find(new ZendeskQuery<Ticket>().WithCustomFilter("requester", searchCriteria));
@@ -187,8 +193,9 @@ namespace ExcelDesign.ZendeskAPI
                     fromEmails = ZendDeskEmailParser.GetEmailList(singleTicket.Via.Source.From);
                     toEmails = ZendDeskEmailParser.GetEmailList(singleTicket.Via.Source.To);
 
-                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated, singleTicket.Subject,
-                        singleTicket.Status.ToString(), singleTicket.Priority, false, fromEmails.Address, fromEmails.Name, toEmails.Address, toEmails.Name));
+                    zendeskTickets.Add(new Zendesk(singleTicket.Id.ToString(), singleTicket.Created, singleTicket.Updated,
+                        singleTicket.Subject, singleTicket.Status.ToString(), singleTicket.Priority, false, fromEmails.Address,
+                        fromEmails.Name, toEmails.Address, toEmails.Name, singleTicket.RequesterId.GetValueOrDefault()));
                     listTickets.Add(singleTicket.Id);
                 }
             }
@@ -196,8 +203,23 @@ namespace ExcelDesign.ZendeskAPI
             return zendeskTickets;
         }
 
-        private static void ConnectToZendesk(bool sandbox)
+        private static void ConnectToZendesk()
         {
+            string mode = ConfigurationManager.AppSettings["zendeskMode"].ToString();
+            string apiToken = string.Empty;
+            string apiURL = string.Empty;
+
+            if ((mode != null) && (mode == "production"))
+            {
+                apiToken = ConfigurationManager.AppSettings["zendeskAPIToken"].ToString();
+                apiURL = ConfigurationManager.AppSettings["zendeskURL"].ToString();
+            }
+            else if ((mode != null) && (mode == "sandbox"))
+            {
+                apiToken = ConfigurationManager.AppSettings["zendeskSandboxAPIToken"].ToString();
+                apiURL = ConfigurationManager.AppSettings["zendeskSandboxURL"].ToString();
+            }
+
             if (HttpContext.Current.Session["ActiveUser"] != null)
             {
                 Class_Objects.User u = (Class_Objects.User)HttpContext.Current.Session["ActiveUser"];
@@ -207,16 +229,23 @@ namespace ExcelDesign.ZendeskAPI
                     throw new Exception("Your Zendesk email address credentials are not set up. Please see I.T.");
                 }
 
-                if (!sandbox)
-                {
-                    zendeskURI = new Uri(zendeskURL);
-                    configuration = new ZendeskDefaultConfiguration(zendeskUsername, zendeskAPIToken);
-                }
-                else
-                {
-                    zendeskURI = new Uri(zendeskSandboxURL);
-                    configuration = new ZendeskDefaultConfiguration(zendeskUsername, zendeskSandboxAPIToken);
-                }
+                zendeskURI = new Uri(apiURL);
+                configuration = new ZendeskDefaultConfiguration(zendeskUsername, apiToken);
+
+                //if (!sandbox)
+                //{
+                //    // zendeskURI = new Uri(zendeskURL);
+                //    // configuration = new ZendeskDefaultConfiguration(zendeskUsername, zendeskAPIToken);
+                //    zendeskURI = new Uri(apiURL);
+                //    configuration = new ZendeskDefaultConfiguration(zendeskUsername, apiToken);
+                //}
+                //else
+                //{
+                //    // zendeskURI = new Uri(zendeskSandboxURL);
+                //    // configuration = new ZendeskDefaultConfiguration(zendeskUsername, zendeskSandboxAPIToken);
+                //    zendeskURI = new Uri(apiURL);
+                //    configuration = new ZendeskDefaultConfiguration(zendeskUsername, apiToken);
+                //}
 
                 client = new ZendeskClient(zendeskURI, configuration);
                 ServicePointManager.Expect100Continue = true;
@@ -224,11 +253,11 @@ namespace ExcelDesign.ZendeskAPI
             }
         }
 
-        public void UpdateZendeskTicketWithPDFFile(long ticketNo, MemoryFile file, string rmaNo, string amazonBucketURL, bool fileAttached)
+        public void UpdateZendeskTicketWithPDFFile(long ticketNo, MemoryFile file, string rmaNo, string amazonBucketURL, bool fileAttached, bool validURL)
         {
-            ConnectToZendesk(versionTypeSandbox);
+            ConnectToZendesk();
 
-            
+
             IResponse<Ticket> ticketResponse = client.Tickets.Get(ticketNo);
             Ticket ticket = ticketResponse.Item;
             Ticket newTicket = ticket;
@@ -251,14 +280,19 @@ namespace ExcelDesign.ZendeskAPI
                 newComment.HtmlBody = @"Hello,
                 <br/><br/>
                 Your return request has been approved.  Your Return Merchandise Authorization number is " + rmaNo + @".
-                <br/><br/>
-                Please see attached document for return instructions and shipping label. Alternatively <a href='" + amazonBucketURL + @"'>Click Here</a> to download your instructions return instructions and shipping label manually.
-                <br/><br/>
-                IMPORTANT: Please remove ALL locks and passwords. Any device(s) received locked with your information will be denied, returned at your expense with no refund submitted for processing.
+                <br/><br/>";
+
+                if (validURL)
+                {
+
+                    newComment.HtmlBody += @"Please see attached document for return instructions and shipping label. Alternatively <a href = '" + amazonBucketURL + @"'> Click Here </a> to download your return instructions and shipping label manually.
+                    <br/><br/>";
+                }
+                newComment.HtmlBody += @"IMPORTANT: Please remove ALL locks and passwords. Any device(s) received locked with your information will be denied, returned at your expense with no refund submitted for processing.
                 <br/><br/>
                 Thank You";
             }
-            else
+            else if(validURL)
             {
                 newComment.HtmlBody = @"Hello,
                 <br/><br/>
@@ -273,16 +307,17 @@ namespace ExcelDesign.ZendeskAPI
 
             newComment.IsPublic = true;
             newComment.Type = TicketEventType.Comment;
-            
+
             newTicket.Comment = newComment;
             newTicket.Status = TicketStatus.Solved;
 
             client.Tickets.Put(new TicketRequest { Item = newTicket });
         }
 
-        public long? CreateNewZendeskTicketWithPDFFile(MemoryFile file, string rmaNo, string amazonBucketURL, string customerEmail, string customerName, bool fileAttached, string ExtDocNo)
+        public long? CreateNewZendeskTicketWithPDFFile(MemoryFile file, string rmaNo, string amazonBucketURL, string customerEmail, string customerName, 
+            bool fileAttached, string ExtDocNo, bool validURL)
         {
-            ConnectToZendesk(versionTypeSandbox);
+            ConnectToZendesk();
 
             string uploadToken = string.Empty;
             long? createdTicketID;
@@ -326,9 +361,9 @@ namespace ExcelDesign.ZendeskAPI
             IResponse<Ticket> responseTicket = client.Tickets.Post(newRequest);
 
             // We need to retrieve the ticket ID of the newly created Ticket
-         
+
             createdTicketID = responseTicket.Item.Id;
-            string ticketID = createdTicketID.ToString() ;
+            string ticketID = createdTicketID.ToString();
             long.TryParse(ticketID, out long updateTicketID);
 
             // Now we immediately update the newly created ticket with the return shipping information
@@ -358,14 +393,18 @@ namespace ExcelDesign.ZendeskAPI
                 comment.HtmlBody = @"Hello,
                 <br/><br/>
                 Your return request has been approved.  Your Return Merchandise Authorization number is " + rmaNo + @".
-                <br/><br/>
-                Please see attached document for return instructions and shipping label. Alternatively <a href='" + amazonBucketURL + @"'>Click Here</a> to download your instructions return instructions and shipping label manually.
-                <br/><br/>
-                IMPORTANT: Please remove ALL locks and passwords. Any device(s) received locked with your information will be denied, returned at your expense with no refund submitted for processing.
+                <br/><br/>";
+
+                if (validURL)
+                {
+                    comment.HtmlBody += @"Please see attached document for return instructions and shipping label. Alternatively <a href = '" + amazonBucketURL + @"'> Click Here </a> to download your return instructions and shipping label manually.
+                    <br/><br/>";
+                }
+                comment.HtmlBody += @"IMPORTANT: Please remove ALL locks and passwords. Any device(s) received locked with your information will be denied, returned at your expense with no refund submitted for processing.
                 <br/><br/>
                 Thank You";
             }
-            else
+            else if (validURL)
             {
                 comment.HtmlBody = @"Hello,
                 <br/><br/>
@@ -399,14 +438,28 @@ namespace ExcelDesign.ZendeskAPI
                 ZendDeskEmailEntry toEmails = ZendDeskEmailParser.GetEmailList(response.Via.Source.To);
 
                 ticket = new Zendesk(response.Id.ToString(), response.Created, response.Updated, response.Subject,
-                        response.Status.ToString(), response.Priority, false, fromEmails.Address, fromEmails.Name, toEmails.Address, toEmails.Name);
+                        response.Status.ToString(), response.Priority, false, fromEmails.Address, fromEmails.Name, 
+                        toEmails.Address, toEmails.Name, response.RequesterId.GetValueOrDefault());
             }
-            catch(Exception)
+            catch (Exception)
             {
                 ticket = null;
             }
 
             return ticket;
+        }
+
+        public TicketRequester GetRequester(long requesterID)
+        {
+            TicketRequester requester = new TicketRequester();
+
+            IResponse<ZendeskApi.Contracts.Models.User> user = client.Users.Get(requesterID);
+
+            requester.Email = user.Item.Email;
+            requester.Name = user.Item.Name;
+            requester.Locale = user.Item.LocalId;
+
+            return requester;
         }
     }
 }

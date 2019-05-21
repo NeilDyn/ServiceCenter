@@ -24,6 +24,9 @@ namespace ExcelDesign.Forms.PDAForms
 
     /* v11 - 15 May 2019 - Neil Jansen
      * Updated existing logic and design to include issueing of Zendesk tickets when Creating a return label
+     * 
+     * 21 May 2019 - Neil Jansen
+     * Email has been removed, replaced with Zendesk Email
      */
 
     public partial class CreateRMA : System.Web.UI.Page
@@ -543,7 +546,7 @@ namespace ExcelDesign.Forms.PDAForms
                 resources = cbxResources.Checked;
                 printRMA = cbxPrintRMA.Checked;
                 createLabel = cbxCreateLabel.Checked;
-                email = txtCustEmail.Text;
+                //email = txtCustEmail.Text;
                 returnTrackingNo = txtInsertTrackingNo.Text;
                 imeiNo = tcIMEINo.Text;
 
@@ -567,6 +570,15 @@ namespace ExcelDesign.Forms.PDAForms
 
                     if (process)
                     {
+                        if (ZendeskIssueReturnLabelControl.NewZendeskTicket)
+                        {
+                            email = ZendeskIssueReturnLabelControl.EmailTo;
+                        }
+                        else
+                        {
+                            email = String.IsNullOrEmpty(ticket.FromEmailAddress) ? string.Empty : ticket.FromEmailAddress;
+                        }
+
                         foreach (TableRow row in tblCreateReturnOrderTableDetails.Rows)
                         {
 
@@ -832,21 +844,26 @@ namespace ExcelDesign.Forms.PDAForms
 
                                                 if (activeUser.CreateReturnLabel || activeUser.Developer || activeUser.Admin)
                                                 {
-                                                    if (!String.IsNullOrWhiteSpace(email))
-                                                    {
-                                                        if (IsValidEmail(email))
-                                                        {
-                                                            return valid;
-                                                        }
-                                                        else
-                                                        {
-                                                            return "Invalid email address entered.";
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        return "Updated email is required for creating a return label.";
-                                                    }
+                                                    //if (!String.IsNullOrWhiteSpace(email))
+                                                    //{
+                                                    //    if (IsValidEmail(email))
+                                                    //    {
+                                                    //        return valid;
+                                                    //    }
+                                                    //    else
+                                                    //    {
+                                                    //        return "Invalid email address entered.";
+                                                    //    }
+                                                    //}
+                                                    //else
+                                                    //{
+                                                    //    return "Updated email is required for creating a return label.";
+                                                    //}
+
+                                                    /* v11 - 21 May 2019 - Neil Jansen
+                                                     * Email has been removed, replaced with Zendesk Email
+                                                     */
+                                                    return valid;
                                                 }
                                                 else
                                                 {

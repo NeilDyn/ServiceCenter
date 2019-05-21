@@ -25,6 +25,9 @@ namespace ExcelDesign.Forms.FunctionForms
 
     /* v11 - 15 May 2019 - Neil Jansen
      * Updated existing logic and design to include issueing of Zendesk tickets when Creating a return label
+     * 
+     * 21 May 2019 - Neil Jansen
+     * Email has been removed, replaced with Zendesk Email
      */
 
     public partial class CreateReturn : System.Web.UI.Page
@@ -432,7 +435,7 @@ namespace ExcelDesign.Forms.FunctionForms
                 resources = cbxResources.Checked;
                 printRMA = cbxPrintRMA.Checked;
                 createLabel = cbxCreateLabel.Checked;
-                email = txtCustEmail.Text;
+                //email = txtCustEmail.Text;
                 returnTrackingNo = txtInsertTrackingNo.Text;
                 Zendesk ticket = new Zendesk();
 
@@ -440,7 +443,7 @@ namespace ExcelDesign.Forms.FunctionForms
                 bool validateZendesk = false;
                 bool allValidLines = true;
                 int rowCount = 0;
-                int controlCount = 0;
+                int controlCount = 0;              
 
                 if (validateMsg == "All Input Valid")
                 {
@@ -454,6 +457,15 @@ namespace ExcelDesign.Forms.FunctionForms
 
                     if (process)
                     {
+                        if (ZendeskIssueReturnLabelControl.NewZendeskTicket)
+                        {
+                            email = ZendeskIssueReturnLabelControl.EmailTo;
+                        }
+                        else
+                        {
+                            email = String.IsNullOrEmpty(ticket.FromEmailAddress) ? string.Empty : ticket.FromEmailAddress;
+                        }
+
                         foreach (TableRow row in tblCreateReturnOrderTableDetails.Rows)
                         {
                             rowCount++;
@@ -706,21 +718,27 @@ namespace ExcelDesign.Forms.FunctionForms
 
                         if (activeUser.CreateReturnLabel || activeUser.Developer || activeUser.Admin)
                         {
-                            if (!String.IsNullOrWhiteSpace(email))
-                            {
-                                if (IsValidEmail(email))
-                                {
-                                    return valid;
-                                }
-                                else
-                                {
-                                    return "Invalid email address entered.";
-                                }
-                            }
-                            else
-                            {
-                                return "Updated email is required for creating a return label.";
-                            }
+                            //if (!String.IsNullOrWhiteSpace(email))
+                            //{
+                            //    if (IsValidEmail(email))
+                            //    {
+                            //        return valid;
+                            //    }
+                            //    else
+                            //    {
+                            //        return "Invalid email address entered.";
+                            //    }
+                            //}
+                            //else
+                            //{
+                            //    return "Updated email is required for creating a return label.";
+                            //}
+
+                            /* v11 - 21 May 2019 - Neil Jansen
+                             * Email has been removed, replaced with Zendesk Email
+                             */
+
+                            return valid;
                         }
                         else
                         {

@@ -194,12 +194,12 @@
                                 <asp:TextBox ID="txtNotes" Width="100%" runat="server" TextMode="MultiLine" MaxLength="160" CssClass="inputBox" />
                             </asp:TableCell>
                         </asp:TableRow>
-                        <asp:TableRow>
+                        <%--<asp:TableRow>
                             <asp:TableCell Text="Customer Email Address: " ForeColor="#0099FF" Font-Bold="true" Style="text-align: right; padding-right: 30px" />
                             <asp:TableCell Width="100%">
                                 <asp:TextBox ID="txtCustEmail" Width="50%" runat="server" CssClass="inputBox" />
                             </asp:TableCell>
-                        </asp:TableRow>
+                        </asp:TableRow>--%>
                         <asp:TableRow>
                             <asp:TableCell Text="Include Resource Lines: " Width="20%" ForeColor="#0099FF" Font-Bold="true" Style="text-align: right; padding-right: 30px" />
                             <asp:TableCell>

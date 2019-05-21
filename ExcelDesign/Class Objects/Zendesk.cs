@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using ZendeskApi.Contracts.Models;
 
 namespace ExcelDesign.Class_Objects
 {
@@ -24,6 +25,10 @@ namespace ExcelDesign.Class_Objects
         public string FromEmailName { get; set; }
         public string ToEmailsAddress { get; set; }
         public string ToEmailsName { get; set; }
+        public long RequesterID { get; set; }
+        public string SubmitterID { get; set; }
+
+        private ZendeskHelper helper = new ZendeskHelper();
 
         public Zendesk()
         {
@@ -31,7 +36,7 @@ namespace ExcelDesign.Class_Objects
         }
 
         public Zendesk(string ticketNoP, DateTime? createdDateP, DateTime? updatedDateP, string subjectP, string statusP, string priorityP, bool fromNAVP, 
-            string fromEmailAddressP, string fromEmailNameP, string toEmailAddressP, string toEmailNameP)
+            string fromEmailAddressP, string fromEmailNameP, string toEmailAddressP, string toEmailNameP, long requesterIDP)
         {
             TicketNo = ticketNoP;
             CreatedDate = createdDateP;
@@ -44,6 +49,7 @@ namespace ExcelDesign.Class_Objects
             FromEmailName = FromEmailName;
             ToEmailsAddress = toEmailAddressP;
             ToEmailsName = toEmailNameP;
+            RequesterID = requesterIDP;
         }
 
         public Zendesk(string ticketNoP, bool fromNAVP)
@@ -59,8 +65,8 @@ namespace ExcelDesign.Class_Objects
 
         public void UpdateZendeskTicketWithPDFFile(string pdf64String, string rmaFileName, string amazonBucketURL)
         {
-            ZendeskHelper helper = new ZendeskHelper();
             long.TryParse(TicketNo, out long updateTicketNo);
+            bool validURL = amazonBucketURL == string.Empty ? false : true;
 
             if (updateTicketNo != 0)
             {
@@ -71,13 +77,13 @@ namespace ExcelDesign.Class_Objects
                     {
                         using (MemoryFile file = new MemoryFile(stream, "application/pdf", rmaFileName + ".pdf"))
                         {
-                            helper.UpdateZendeskTicketWithPDFFile(updateTicketNo, file, rmaFileName, amazonBucketURL, true);
+                            helper.UpdateZendeskTicketWithPDFFile(updateTicketNo, file, rmaFileName, amazonBucketURL, true, validURL);
                         }
                     }
                 }
                 else
                 {
-                    helper.UpdateZendeskTicketWithPDFFile(updateTicketNo, null, rmaFileName, amazonBucketURL, false);
+                    helper.UpdateZendeskTicketWithPDFFile(updateTicketNo, null, rmaFileName, amazonBucketURL, false, validURL);
                 }
             }
             else
@@ -89,7 +95,7 @@ namespace ExcelDesign.Class_Objects
         public long? CreateNewZendeskTicketWithPDFFile(string pdf64String, string rmaFileName, string amazonBucketURL, string emailTo, string customerName, string extDocNo)
         {
             long? newZendeskTicket = 0;
-            ZendeskHelper helper = new ZendeskHelper();
+            bool validURL = amazonBucketURL == string.Empty ? false: true;
 
             if (pdf64String != string.Empty)
             {
@@ -98,13 +104,13 @@ namespace ExcelDesign.Class_Objects
                 {
                     using (MemoryFile file = new MemoryFile(stream, "application/pdf", rmaFileName + ".pdf"))
                     {
-                        newZendeskTicket = helper.CreateNewZendeskTicketWithPDFFile(file, rmaFileName, amazonBucketURL, emailTo, customerName, true, extDocNo);
+                        newZendeskTicket = helper.CreateNewZendeskTicketWithPDFFile(file, rmaFileName, amazonBucketURL, emailTo, customerName, true, extDocNo, validURL);
                     }
                 }
             }
             else
             {
-                newZendeskTicket = helper.CreateNewZendeskTicketWithPDFFile(null, rmaFileName, amazonBucketURL, emailTo, customerName, false, extDocNo);
+                newZendeskTicket = helper.CreateNewZendeskTicketWithPDFFile(null, rmaFileName, amazonBucketURL, emailTo, customerName, false, extDocNo, validURL);
             }
 
             return newZendeskTicket;
@@ -130,10 +136,16 @@ namespace ExcelDesign.Class_Objects
         }
 
         public Zendesk VerifyInsertedZendeskTicket(long zendeskTicket)
-        {
-            ZendeskHelper helper = new ZendeskHelper();
-
+        {         
             return helper.VerifyZendeskTicket(zendeskTicket);
+        }
+
+        public void GetRequester()
+        {
+            TicketRequester requester = new TicketRequester();
+            requester = helper.GetRequester(RequesterID);
+            FromEmailAddress = requester.Email;
+            FromEmailName = requester.Name;
         }
     }
 }

@@ -84,17 +84,19 @@ namespace ExcelDesign.Class_Objects
 
             if ((mode != null) && (mode == "Production"))
             {
-                baseURL = "http://jeg-psql1:7047/DynamicsNAV/WS/JEG_SONS,%20Inc/";
+                //baseURL = "http://jeg-psql1:7047/DynamicsNAV/WS/JEG_SONS,%20Inc/";
+                baseURL = ConfigurationManager.AppSettings["productionURL"].ToString();
             }
             else if((mode != null) && (mode == "Development"))
             {
-                baseURL = "http://jeg-svr2.jeg.local:7058/DynamicsNAV/WS/JEG_SONS,%20Inc/";
+                //baseURL = "http://jeg-svr2.jeg.local:7058/DynamicsNAV/WS/JEG_SONS,%20Inc/";
+                baseURL = ConfigurationManager.AppSettings["developmentURL"].ToString();
             }
 
             credentials = new NetworkCredential(username, password, domain);
             functions.Url = baseURL + functionsURL;
             functions.Credentials = credentials;
-            functions.Timeout = 300000;
+            functions.Timeout = 300000; // Prevent portal timeout when searching text criteria
         }
 
         public SearchResults FindOrder(string searchNo, int searchOption)

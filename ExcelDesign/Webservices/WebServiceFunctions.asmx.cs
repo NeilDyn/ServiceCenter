@@ -21,12 +21,20 @@ namespace ExcelDesign.Webservices
         public Zendesk GetTicketInformation(string ticketNo)
         {
             Zendesk ticket = new Zendesk();
-
+            
             try
             {              
                 long.TryParse(ticketNo, out long longTicketNo);
 
                 ticket = ticket.VerifyInsertedZendeskTicket(longTicketNo);
+
+                if (ticket != null)
+                {
+                    if (String.IsNullOrEmpty(ticket.FromEmailAddress) && String.IsNullOrEmpty(ticket.FromEmailName))
+                    {
+                        ticket.GetRequester();
+                    }
+                }
             }
             catch (Exception)
             {

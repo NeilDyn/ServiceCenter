@@ -132,9 +132,18 @@
     };
 
     function VerifyZendeskTicket(ticketNo) {
+        var currentURL = window.location.href;
+        var webServiceURL;
+
+        if (currentURL.indexOf('Portal') != -1) {
+            webServiceURL = "../../Webservices/WebServiceFunctions.asmx/GetTicketInformation";
+        } else {
+            webServiceURL = "../../../Webservices/WebServiceFunctions.asmx/GetTicketInformation";
+        }
+
         $.ajax({
             type: "POST",
-            url: "../../../Webservices/WebServiceFunctions.asmx/GetTicketInformation",
+            url: webServiceURL,
             data: JSON.stringify({ ticketNo: ticketNo }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",

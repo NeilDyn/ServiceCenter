@@ -333,7 +333,7 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
 
                     Session["NoUserInteraction"] = true;
 
-                    ticket.UpdateZendeskTicketWithPDFFile(pdf64String, no, amazonBucketURL);
+                    ZendeskTicket.UpdateZendeskTicketWithPDFFile(pdf64String, no, amazonBucketURL);
 
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "issueReturnLableExistingTicket", "alert('" + no + ", Return label is being processed and will be emailed within 1 hour.');", true);
                     if (closeWindow)

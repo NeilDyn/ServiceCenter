@@ -361,6 +361,8 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
 
                     if (pdf64String != string.Empty)
                     {
+                        ZendeskTicket = new Zendesk();
+
                         ZendeskTicket.DownloadRMAPDFManually(pdf64String, no);
 
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "manualDownloadExistingTicket", "alert('" + no + ", Return label has been successfully downloaded.');", true);

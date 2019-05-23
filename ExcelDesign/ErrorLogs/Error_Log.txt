@@ -88,3 +88,14 @@ ERROR 2019-05-22 09:03:15,961 83183ms endeskIssueReturnLabel ZendeskReturnLabel 
 System.Exception: Invalid Zendesk Ticket No. attempting to update
    at ExcelDesign.Class_Objects.Zendesk.UpdateZendeskTicketWithPDFFile(String pdf64String, String rmaFileName, String amazonBucketURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\Zendesk.cs:line 91
    at ExcelDesign.Forms.UserControls.IssueReturnLabel.ZendeskIssueReturnLabel.IssueZendeskReturnLabel(String no, String docNo, Boolean closeWindow, Zendesk ticket) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\IssueReturnLabel\ZendeskIssueReturnLabel.ascx.cs:line 336
+ERROR 2019-05-23 08:57:23,383 672981ms endeskIssueReturnLabel ZendeskReturnLabel - Object reference not set to an instance of an object.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ExcelDesign.Forms.UserControls.IssueReturnLabel.ZendeskIssueReturnLabel.IssueZendeskReturnLabel(String no, String docNo, Boolean closeWindow, Zendesk ticket) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\IssueReturnLabel\ZendeskIssueReturnLabel.ascx.cs:line 364
+ERROR 2019-05-23 08:59:31,580 61490ms endeskIssueReturnLabel ZendeskReturnLabel - Thread was being aborted.
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ExcelDesign.Class_Objects.Zendesk.DownloadRMAPDFManually(String pdf64String, String rmaFileName) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\Zendesk.cs:line 133
+   at ExcelDesign.Forms.UserControls.IssueReturnLabel.ZendeskIssueReturnLabel.IssueZendeskReturnLabel(String no, String docNo, Boolean closeWindow, Zendesk ticket) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\IssueReturnLabel\ZendeskIssueReturnLabel.ascx.cs:line 366

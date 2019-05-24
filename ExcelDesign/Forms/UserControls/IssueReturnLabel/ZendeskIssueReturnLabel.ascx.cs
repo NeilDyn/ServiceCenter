@@ -128,6 +128,7 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
 
                     zendeskTickets = new List<Zendesk>();
                     cust = (Customer)Session["SelectedCustomer"];
+                    zendeskTickets.Add(new Zendesk("", new DateTime(), new DateTime(), "", "", "", false, "", "", "", "", 0)); // set a blank default
 
                     foreach (SalesHeader head in cust.SalesHeader)
                     {
@@ -212,7 +213,7 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
                         }
                     }
 
-                    TicketNo = ddlZendeskTickets.SelectedValue;
+                   // TicketNo = ddlZendeskTickets.SelectedValue; ~ why are you here? Go away!
 
                     if (TicketNo != string.Empty)
                     {
@@ -225,7 +226,7 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
                                 FromEmailName = ticket.FromEmailName;
 
                                 EmailTo = ticket.ToEmailsAddress;
-                                ZendeskTicket = ticket;
+                                zendeskTicket = ticket;
                             }
                         }
 
@@ -311,9 +312,10 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
 
             try
             {
-
                 if (ExistingZendeskTicket)
                 {
+                    ZendeskTicket = ticket;
+
                     if (EmailTo != null)
                     {
                         int index = EmailTo.IndexOf('@');

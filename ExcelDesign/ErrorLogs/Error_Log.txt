@@ -139,3 +139,105 @@ ERROR 2019-05-24 09:38:53,647 149537ms endeskIssueReturnLabel ZendeskReturnLabel
 System.Exception: Invalid Zendesk Ticket No. attempting to update
    at ExcelDesign.Class_Objects.Zendesk.UpdateZendeskTicketWithPDFFile(String pdf64String, String rmaFileName, String amazonBucketURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\Zendesk.cs:line 91
    at ExcelDesign.Forms.UserControls.IssueReturnLabel.ZendeskIssueReturnLabel.IssueZendeskReturnLabel(String no, String docNo, Boolean closeWindow, Zendesk ticket) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\IssueReturnLabel\ZendeskIssueReturnLabel.ascx.cs:line 338
+ERROR 2019-05-27 12:05:08,438 100468ms endeskIssueReturnLabel ZendeskReturnLabel - Either the caller does not have the required permission or the specified path is read-only.
+System.Web.Services.Protocols.SoapException: Either the caller does not have the required permission or the specified path is read-only.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean getLinkForZendesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String, String& amazonS3BucketURL, Boolean generateURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject, String& amazonBucketURL, Boolean generateURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 181
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject, String& amazonBucketURL, Boolean generateURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 472
+   at ExcelDesign.Forms.UserControls.IssueReturnLabel.ZendeskIssueReturnLabel.IssueZendeskReturnLabel(String no, String docNo, Boolean closeWindow, Zendesk ticket) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\IssueReturnLabel\ZendeskIssueReturnLabel.ascx.cs:line 413
+ERROR 2019-05-29 10:37:59,394 18595ms LoginPage              UserLogin          - The following ODBC error occurred:  Error: [Microsoft][ODBC SQL Server Driver]Database is invalid or cannot be accessed State ID: HY024
+System.Web.Services.Protocols.SoapException: The following ODBC error occurred:  Error: [Microsoft][ODBC SQL Server Driver]Database is invalid or cannot be accessed State ID: HY024
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 247
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 164
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 41
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2019-05-30 08:27:21,779 24928ms LoginPage              UserLogin          - The remote name could not be resolved: 'jeg-svr2.jeg.local'
+System.Net.WebException: The remote name could not be resolved: 'jeg-svr2.jeg.local'
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 247
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 164
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 41
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2019-05-30 10:57:56,414 33889ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 247
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 164
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 41
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2019-06-03 10:26:54,094 60963ms LoginPage              UserLogin          - Unable to connect to the remote server
+System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.128:7058
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.LogIn(String userID, String password, UserSetup& webSvcUserSetup) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 247
+   at ExcelDesign.Class_Objects.WebService.UserLogin(String userName, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 164
+   at ExcelDesign.Class_Objects.CallService.LoginUser(String userID, String password) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 41
+   at ExcelDesign.Forms.LoginPage.UserLogin(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\LoginPage.aspx.cs:line 30
+ERROR 2019-06-03 10:59:59,790 93821ms endeskIssueReturnLabel ZendeskReturnLabel - Either the caller does not have the required permission or the specified path is read-only.
+System.Web.Services.Protocols.SoapException: Either the caller does not have the required permission or the specified path is read-only.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean getLinkForZendesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String, String& amazonS3BucketURL, Boolean generateURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject, String& amazonBucketURL, Boolean generateURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 181
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject, String& amazonBucketURL, Boolean generateURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 472
+   at ExcelDesign.Forms.UserControls.IssueReturnLabel.ZendeskIssueReturnLabel.IssueZendeskReturnLabel(String no, String docNo, Boolean closeWindow, Zendesk ticket) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\IssueReturnLabel\ZendeskIssueReturnLabel.ascx.cs:line 404
+ERROR 2019-06-03 11:44:40,137 108656ms endeskIssueReturnLabel ZendeskReturnLabel - UPS Return Label Created must be equal to 'No'  in Sales Header: Document Type=Return Order, No.=RMA-276779. Current value is 'Yes'.
+System.Web.Services.Protocols.SoapException: UPS Return Label Created must be equal to 'No'  in Sales Header: Document Type=Return Order, No.=RMA-276779. Current value is 'Yes'.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean getLinkForZendesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String, String& amazonS3BucketURL, Boolean generateURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject, String& amazonBucketURL, Boolean generateURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 181
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject, String& amazonBucketURL, Boolean generateURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 472
+   at ExcelDesign.Forms.UserControls.IssueReturnLabel.ZendeskIssueReturnLabel.IssueZendeskReturnLabel(String no, String docNo, Boolean closeWindow, Zendesk ticket) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\IssueReturnLabel\ZendeskIssueReturnLabel.ascx.cs:line 408
+ERROR 2019-06-03 12:00:25,928 165150ms endeskIssueReturnLabel ZendeskReturnLabel - Function ID 1102615007 was called. The object with ID 50065 does not have a member with that ID.
+System.Web.Services.Protocols.SoapException: Function ID 1102615007 was called. The object with ID 50065 does not have a member with that ID.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean getLinkForZendesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String, String& amazonS3BucketURL, Boolean generateURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 1198
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject, String& amazonBucketURL, Boolean generateURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 185
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject, String& amazonBucketURL, Boolean generateURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 476
+   at ExcelDesign.Forms.UserControls.IssueReturnLabel.ZendeskIssueReturnLabel.IssueZendeskReturnLabel(String no, String docNo, Boolean closeWindow, Zendesk ticket) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\IssueReturnLabel\ZendeskIssueReturnLabel.ascx.cs:line 348
+ERROR 2019-06-03 12:06:14,027 118541ms endeskIssueReturnLabel ZendeskReturnLabel - Function ID 1102615007 was called. The object with ID 50065 does not have a member with that ID.
+System.Web.Services.Protocols.SoapException: Function ID 1102615007 was called. The object with ID 50065 does not have a member with that ID.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.IssueReturnLabel(String rMANo, String sessionID, Boolean getLinkForZendesk, Boolean downloadManually, String emailTo, String fromEmail, String& pDFBase64String, String& amazonS3BucketURL, Boolean generateURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 431
+   at ExcelDesign.Class_Objects.WebService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject, String& amazonBucketURL, Boolean generateURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 185
+   at ExcelDesign.Class_Objects.SendService.IssueReturnLabel(String rmaNo, String emailTo, Boolean existingZendeskTicket, String fromEmail, Boolean downloadManually, String email, String fromEmailName, String emailSubject, String& amazonBucketURL, Boolean generateURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\SendService.cs:line 476
+   at ExcelDesign.Forms.UserControls.IssueReturnLabel.ZendeskIssueReturnLabel.IssueZendeskReturnLabel(String no, String docNo, Boolean closeWindow, Zendesk ticket) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\IssueReturnLabel\ZendeskIssueReturnLabel.ascx.cs:line 348
+ERROR 2019-06-03 12:31:08,286 143570ms endeskIssueReturnLabel ZendeskReturnLabel - {"error":"RecordInvalid","description":"Record validation errors","details":{"status":[{"description":"Status: closed prevents ticket update"}]}}
+System.Web.HttpException (0x80004005): {"error":"RecordInvalid","description":"Record validation errors","details":{"status":[{"description":"Status: closed prevents ticket update"}]}}
+   at ZendeskApi.Client.ClientBase.ValidateResponse(IHttpResponse response)
+   at ZendeskApi.Client.ClientBase.Put[T](Uri requestUri, Object item, String contentType, String resource, String operation)
+   at ZendeskApi.Client.Resources.ZendeskApi.Client.Resources.ZendeskResource`1.Put[TRequest,TResponse](TRequest request, String url)
+   at ZendeskApi.Client.Resources.TicketResource.Put(TicketRequest request)
+   at ExcelDesign.ZendeskAPI.ZendeskHelper.UpdateZendeskTicketWithPDFFile(Int64 ticketNo, MemoryFile file, String rmaNo, String amazonBucketURL, Boolean fileAttached, Boolean validURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\ZendeskAPI\ZendeskHelper.cs:line 314
+   at ExcelDesign.Class_Objects.Zendesk.UpdateZendeskTicketWithPDFFile(String pdf64String, String rmaFileName, String amazonBucketURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\Zendesk.cs:line 80
+   at ExcelDesign.Forms.UserControls.IssueReturnLabel.ZendeskIssueReturnLabel.IssueZendeskReturnLabel(String no, String docNo, Boolean closeWindow, Zendesk ticket) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\IssueReturnLabel\ZendeskIssueReturnLabel.ascx.cs:line 352
+ERROR 2019-06-03 13:40:46,301 219294ms endeskIssueReturnLabel ZendeskReturnLabel - Thread was being aborted.
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at ExcelDesign.Class_Objects.Zendesk.DownloadRMAPDFManually(String pdf64String, String rmaFileName) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\Zendesk.cs:line 133
+   at ExcelDesign.Forms.UserControls.IssueReturnLabel.ZendeskIssueReturnLabel.IssueZendeskReturnLabel(String no, String docNo, Boolean closeWindow, Zendesk ticket) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\IssueReturnLabel\ZendeskIssueReturnLabel.ascx.cs:line 392
+ERROR 2019-06-03 13:40:46,588 219582ms CreateReturn           BtnCreateRMA_Click - Thread was being aborted.
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at ExcelDesign.Forms.UserControls.IssueReturnLabel.ZendeskIssueReturnLabel.IssueZendeskReturnLabel(String no, String docNo, Boolean closeWindow, Zendesk ticket) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\IssueReturnLabel\ZendeskIssueReturnLabel.ascx.cs:line 450
+   at ExcelDesign.Forms.FunctionForms.CreateReturn.BtnCreateRMA_Click(Object sender, EventArgs e) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\FunctionForms\CreateReturn.aspx.cs:line 588

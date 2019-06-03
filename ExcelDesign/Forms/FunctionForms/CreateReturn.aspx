@@ -20,6 +20,10 @@
                     $("[id$=tblZendeskInformation]").hide()
                 }
             });
+
+            window["PostClipboard"] = function () {
+                OpenCreatedRMA();              
+            };
         });
 
         function CloseWindow() {

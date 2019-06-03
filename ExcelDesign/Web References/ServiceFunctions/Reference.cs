@@ -29,13 +29,19 @@ namespace ExcelDesign.ServiceFunctions {
     [System.Web.Services.WebServiceBindingAttribute(Name="Functions_Binding", Namespace="urn:microsoft-dynamics-schemas/codeunit/Functions")]
     public partial class Functions : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback ResetSessionOperationCompleted;
-        
         private System.Threading.SendOrPostCallback LogInOperationCompleted;
         
-        private System.Threading.SendOrPostCallback UpdateUserPasswordOperationCompleted;
+        private System.Threading.SendOrPostCallback GetStatisticsOperationCompleted;
         
         private System.Threading.SendOrPostCallback SearchDetermineNoTypeOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback CreateReturnOrderOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback IssueReturnLabelOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ResetSessionOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback UpdateUserPasswordOperationCompleted;
         
         private System.Threading.SendOrPostCallback FilterEbayUserIDSOImportBufferOperationCompleted;
         
@@ -49,8 +55,6 @@ namespace ExcelDesign.ServiceFunctions {
         
         private System.Threading.SendOrPostCallback CreateRefundOrderOperationCompleted;
         
-        private System.Threading.SendOrPostCallback CreateReturnOrderOperationCompleted;
-        
         private System.Threading.SendOrPostCallback DeleteReturnOrderOperationCompleted;
         
         private System.Threading.SendOrPostCallback PartialRefundOperationCompleted;
@@ -58,8 +62,6 @@ namespace ExcelDesign.ServiceFunctions {
         private System.Threading.SendOrPostCallback CancelOrderOperationCompleted;
         
         private System.Threading.SendOrPostCallback LegacyIssueReturnLabelOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetStatisticsOperationCompleted;
         
         private System.Threading.SendOrPostCallback ProcessReplacementsOperationCompleted;
         
@@ -84,8 +86,6 @@ namespace ExcelDesign.ServiceFunctions {
         private System.Threading.SendOrPostCallback a47a47a45a62_Monitoring_User_ActionsOperationCompleted;
         
         private System.Threading.SendOrPostCallback a47a47a45a62_CommentsOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback IssueReturnLabelOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -126,16 +126,25 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
-        public event ResetSessionCompletedEventHandler ResetSessionCompleted;
-        
-        /// <remarks/>
         public event LogInCompletedEventHandler LogInCompleted;
         
         /// <remarks/>
-        public event UpdateUserPasswordCompletedEventHandler UpdateUserPasswordCompleted;
+        public event GetStatisticsCompletedEventHandler GetStatisticsCompleted;
         
         /// <remarks/>
         public event SearchDetermineNoTypeCompletedEventHandler SearchDetermineNoTypeCompleted;
+        
+        /// <remarks/>
+        public event CreateReturnOrderCompletedEventHandler CreateReturnOrderCompleted;
+        
+        /// <remarks/>
+        public event IssueReturnLabelCompletedEventHandler IssueReturnLabelCompleted;
+        
+        /// <remarks/>
+        public event ResetSessionCompletedEventHandler ResetSessionCompleted;
+        
+        /// <remarks/>
+        public event UpdateUserPasswordCompletedEventHandler UpdateUserPasswordCompleted;
         
         /// <remarks/>
         public event FilterEbayUserIDSOImportBufferCompletedEventHandler FilterEbayUserIDSOImportBufferCompleted;
@@ -156,9 +165,6 @@ namespace ExcelDesign.ServiceFunctions {
         public event CreateRefundOrderCompletedEventHandler CreateRefundOrderCompleted;
         
         /// <remarks/>
-        public event CreateReturnOrderCompletedEventHandler CreateReturnOrderCompleted;
-        
-        /// <remarks/>
         public event DeleteReturnOrderCompletedEventHandler DeleteReturnOrderCompleted;
         
         /// <remarks/>
@@ -169,9 +175,6 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         public event LegacyIssueReturnLabelCompletedEventHandler LegacyIssueReturnLabelCompleted;
-        
-        /// <remarks/>
-        public event GetStatisticsCompletedEventHandler GetStatisticsCompleted;
         
         /// <remarks/>
         public event ProcessReplacementsCompletedEventHandler ProcessReplacementsCompleted;
@@ -210,37 +213,6 @@ namespace ExcelDesign.ServiceFunctions {
         public event a47a47a45a62_CommentsCompletedEventHandler a47a47a45a62_CommentsCompleted;
         
         /// <remarks/>
-        public event IssueReturnLabelCompletedEventHandler IssueReturnLabelCompleted;
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:ResetSession", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="ResetSession_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void ResetSession(string userID) {
-            this.Invoke("ResetSession", new object[] {
-                        userID});
-        }
-        
-        /// <remarks/>
-        public void ResetSessionAsync(string userID) {
-            this.ResetSessionAsync(userID, null);
-        }
-        
-        /// <remarks/>
-        public void ResetSessionAsync(string userID, object userState) {
-            if ((this.ResetSessionOperationCompleted == null)) {
-                this.ResetSessionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnResetSessionOperationCompleted);
-            }
-            this.InvokeAsync("ResetSession", new object[] {
-                        userID}, this.ResetSessionOperationCompleted, userState);
-        }
-        
-        private void OnResetSessionOperationCompleted(object arg) {
-            if ((this.ResetSessionCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ResetSessionCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:LogIn", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="LogIn_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
         public string LogIn(string userID, string password, ref UserSetup webSvcUserSetup) {
@@ -276,34 +248,33 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:UpdateUserPassword", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="UpdateUserPassword_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void UpdateUserPassword(string userID, string newPassword, string sessionID) {
-            this.Invoke("UpdateUserPassword", new object[] {
-                        userID,
-                        newPassword,
-                        sessionID});
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:GetStatistics", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="GetStatistics_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetStatistics(string sessionID, ref Statistics statistics) {
+            object[] results = this.Invoke("GetStatistics", new object[] {
+                        sessionID,
+                        statistics});
+            statistics = ((Statistics)(results[0]));
         }
         
         /// <remarks/>
-        public void UpdateUserPasswordAsync(string userID, string newPassword, string sessionID) {
-            this.UpdateUserPasswordAsync(userID, newPassword, sessionID, null);
+        public void GetStatisticsAsync(string sessionID, Statistics statistics) {
+            this.GetStatisticsAsync(sessionID, statistics, null);
         }
         
         /// <remarks/>
-        public void UpdateUserPasswordAsync(string userID, string newPassword, string sessionID, object userState) {
-            if ((this.UpdateUserPasswordOperationCompleted == null)) {
-                this.UpdateUserPasswordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateUserPasswordOperationCompleted);
+        public void GetStatisticsAsync(string sessionID, Statistics statistics, object userState) {
+            if ((this.GetStatisticsOperationCompleted == null)) {
+                this.GetStatisticsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetStatisticsOperationCompleted);
             }
-            this.InvokeAsync("UpdateUserPassword", new object[] {
-                        userID,
-                        newPassword,
-                        sessionID}, this.UpdateUserPasswordOperationCompleted, userState);
+            this.InvokeAsync("GetStatistics", new object[] {
+                        sessionID,
+                        statistics}, this.GetStatisticsOperationCompleted, userState);
         }
         
-        private void OnUpdateUserPasswordOperationCompleted(object arg) {
-            if ((this.UpdateUserPasswordCompleted != null)) {
+        private void OnGetStatisticsOperationCompleted(object arg) {
+            if ((this.GetStatisticsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.UpdateUserPasswordCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GetStatisticsCompleted(this, new GetStatisticsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -341,6 +312,222 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.SearchDetermineNoTypeCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.SearchDetermineNoTypeCompleted(this, new SearchDetermineNoTypeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CreateReturnOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CreateReturnOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public string CreateReturnOrder(
+                    string orderNo, 
+                    string extDocNo, 
+                    string returnReasonCode, 
+                    string notes, 
+                    bool includeResourceLines, 
+                    bool printRmaInstructions, 
+                    bool createUPSReturnLabel, 
+                    string emailAddress, 
+                    string lineDetails, 
+                    ref ReturnOrder createdReturn, 
+                    bool updateRMA, 
+                    string sessionID, 
+                    string returnTrackNo, 
+                    string shipToDetails, 
+                    string iMEI, 
+                    int zendeskTicketNo) {
+            object[] results = this.Invoke("CreateReturnOrder", new object[] {
+                        orderNo,
+                        extDocNo,
+                        returnReasonCode,
+                        notes,
+                        includeResourceLines,
+                        printRmaInstructions,
+                        createUPSReturnLabel,
+                        emailAddress,
+                        lineDetails,
+                        createdReturn,
+                        updateRMA,
+                        sessionID,
+                        returnTrackNo,
+                        shipToDetails,
+                        iMEI,
+                        zendeskTicketNo});
+            createdReturn = ((ReturnOrder)(results[1]));
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void CreateReturnOrderAsync(
+                    string orderNo, 
+                    string extDocNo, 
+                    string returnReasonCode, 
+                    string notes, 
+                    bool includeResourceLines, 
+                    bool printRmaInstructions, 
+                    bool createUPSReturnLabel, 
+                    string emailAddress, 
+                    string lineDetails, 
+                    ReturnOrder createdReturn, 
+                    bool updateRMA, 
+                    string sessionID, 
+                    string returnTrackNo, 
+                    string shipToDetails, 
+                    string iMEI, 
+                    int zendeskTicketNo) {
+            this.CreateReturnOrderAsync(orderNo, extDocNo, returnReasonCode, notes, includeResourceLines, printRmaInstructions, createUPSReturnLabel, emailAddress, lineDetails, createdReturn, updateRMA, sessionID, returnTrackNo, shipToDetails, iMEI, zendeskTicketNo, null);
+        }
+        
+        /// <remarks/>
+        public void CreateReturnOrderAsync(
+                    string orderNo, 
+                    string extDocNo, 
+                    string returnReasonCode, 
+                    string notes, 
+                    bool includeResourceLines, 
+                    bool printRmaInstructions, 
+                    bool createUPSReturnLabel, 
+                    string emailAddress, 
+                    string lineDetails, 
+                    ReturnOrder createdReturn, 
+                    bool updateRMA, 
+                    string sessionID, 
+                    string returnTrackNo, 
+                    string shipToDetails, 
+                    string iMEI, 
+                    int zendeskTicketNo, 
+                    object userState) {
+            if ((this.CreateReturnOrderOperationCompleted == null)) {
+                this.CreateReturnOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateReturnOrderOperationCompleted);
+            }
+            this.InvokeAsync("CreateReturnOrder", new object[] {
+                        orderNo,
+                        extDocNo,
+                        returnReasonCode,
+                        notes,
+                        includeResourceLines,
+                        printRmaInstructions,
+                        createUPSReturnLabel,
+                        emailAddress,
+                        lineDetails,
+                        createdReturn,
+                        updateRMA,
+                        sessionID,
+                        returnTrackNo,
+                        shipToDetails,
+                        iMEI,
+                        zendeskTicketNo}, this.CreateReturnOrderOperationCompleted, userState);
+        }
+        
+        private void OnCreateReturnOrderOperationCompleted(object arg) {
+            if ((this.CreateReturnOrderCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CreateReturnOrderCompleted(this, new CreateReturnOrderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:IssueReturnLabel", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="IssueReturnLabel_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void IssueReturnLabel(string rMANo, string sessionID, bool getLinkForZendesk, bool downloadManually, string emailTo, string fromEmail, ref string pDFBase64String, ref string amazonS3BucketURL, bool generateURL) {
+            object[] results = this.Invoke("IssueReturnLabel", new object[] {
+                        rMANo,
+                        sessionID,
+                        getLinkForZendesk,
+                        downloadManually,
+                        emailTo,
+                        fromEmail,
+                        pDFBase64String,
+                        amazonS3BucketURL,
+                        generateURL});
+            pDFBase64String = ((string)(results[0]));
+            amazonS3BucketURL = ((string)(results[1]));
+        }
+        
+        /// <remarks/>
+        public void IssueReturnLabelAsync(string rMANo, string sessionID, bool getLinkForZendesk, bool downloadManually, string emailTo, string fromEmail, string pDFBase64String, string amazonS3BucketURL, bool generateURL) {
+            this.IssueReturnLabelAsync(rMANo, sessionID, getLinkForZendesk, downloadManually, emailTo, fromEmail, pDFBase64String, amazonS3BucketURL, generateURL, null);
+        }
+        
+        /// <remarks/>
+        public void IssueReturnLabelAsync(string rMANo, string sessionID, bool getLinkForZendesk, bool downloadManually, string emailTo, string fromEmail, string pDFBase64String, string amazonS3BucketURL, bool generateURL, object userState) {
+            if ((this.IssueReturnLabelOperationCompleted == null)) {
+                this.IssueReturnLabelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIssueReturnLabelOperationCompleted);
+            }
+            this.InvokeAsync("IssueReturnLabel", new object[] {
+                        rMANo,
+                        sessionID,
+                        getLinkForZendesk,
+                        downloadManually,
+                        emailTo,
+                        fromEmail,
+                        pDFBase64String,
+                        amazonS3BucketURL,
+                        generateURL}, this.IssueReturnLabelOperationCompleted, userState);
+        }
+        
+        private void OnIssueReturnLabelOperationCompleted(object arg) {
+            if ((this.IssueReturnLabelCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.IssueReturnLabelCompleted(this, new IssueReturnLabelCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:ResetSession", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="ResetSession_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void ResetSession(string userID) {
+            this.Invoke("ResetSession", new object[] {
+                        userID});
+        }
+        
+        /// <remarks/>
+        public void ResetSessionAsync(string userID) {
+            this.ResetSessionAsync(userID, null);
+        }
+        
+        /// <remarks/>
+        public void ResetSessionAsync(string userID, object userState) {
+            if ((this.ResetSessionOperationCompleted == null)) {
+                this.ResetSessionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnResetSessionOperationCompleted);
+            }
+            this.InvokeAsync("ResetSession", new object[] {
+                        userID}, this.ResetSessionOperationCompleted, userState);
+        }
+        
+        private void OnResetSessionOperationCompleted(object arg) {
+            if ((this.ResetSessionCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ResetSessionCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:UpdateUserPassword", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="UpdateUserPassword_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void UpdateUserPassword(string userID, string newPassword, string sessionID) {
+            this.Invoke("UpdateUserPassword", new object[] {
+                        userID,
+                        newPassword,
+                        sessionID});
+        }
+        
+        /// <remarks/>
+        public void UpdateUserPasswordAsync(string userID, string newPassword, string sessionID) {
+            this.UpdateUserPasswordAsync(userID, newPassword, sessionID, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateUserPasswordAsync(string userID, string newPassword, string sessionID, object userState) {
+            if ((this.UpdateUserPasswordOperationCompleted == null)) {
+                this.UpdateUserPasswordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateUserPasswordOperationCompleted);
+            }
+            this.InvokeAsync("UpdateUserPassword", new object[] {
+                        userID,
+                        newPassword,
+                        sessionID}, this.UpdateUserPasswordOperationCompleted, userState);
+        }
+        
+        private void OnUpdateUserPasswordOperationCompleted(object arg) {
+            if ((this.UpdateUserPasswordCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateUserPasswordCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -555,116 +742,6 @@ namespace ExcelDesign.ServiceFunctions {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:CreateReturnOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="CreateReturnOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public string CreateReturnOrder(
-                    string orderNo, 
-                    string extDocNo, 
-                    string returnReasonCode, 
-                    string notes, 
-                    bool includeResourceLines, 
-                    bool printRmaInstructions, 
-                    bool createUPSReturnLabel, 
-                    string emailAddress, 
-                    string lineDetails, 
-                    ref ReturnOrder createdReturn, 
-                    bool updateRMA, 
-                    string sessionID, 
-                    string returnTrackNo, 
-                    string shipToDetails, 
-                    string iMEI, 
-                    int zendeskTicketNo) {
-            object[] results = this.Invoke("CreateReturnOrder", new object[] {
-                        orderNo,
-                        extDocNo,
-                        returnReasonCode,
-                        notes,
-                        includeResourceLines,
-                        printRmaInstructions,
-                        createUPSReturnLabel,
-                        emailAddress,
-                        lineDetails,
-                        createdReturn,
-                        updateRMA,
-                        sessionID,
-                        returnTrackNo,
-                        shipToDetails,
-                        iMEI,
-                        zendeskTicketNo});
-            createdReturn = ((ReturnOrder)(results[1]));
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void CreateReturnOrderAsync(
-                    string orderNo, 
-                    string extDocNo, 
-                    string returnReasonCode, 
-                    string notes, 
-                    bool includeResourceLines, 
-                    bool printRmaInstructions, 
-                    bool createUPSReturnLabel, 
-                    string emailAddress, 
-                    string lineDetails, 
-                    ReturnOrder createdReturn, 
-                    bool updateRMA, 
-                    string sessionID, 
-                    string returnTrackNo, 
-                    string shipToDetails, 
-                    string iMEI, 
-                    int zendeskTicketNo) {
-            this.CreateReturnOrderAsync(orderNo, extDocNo, returnReasonCode, notes, includeResourceLines, printRmaInstructions, createUPSReturnLabel, emailAddress, lineDetails, createdReturn, updateRMA, sessionID, returnTrackNo, shipToDetails, iMEI, zendeskTicketNo, null);
-        }
-        
-        /// <remarks/>
-        public void CreateReturnOrderAsync(
-                    string orderNo, 
-                    string extDocNo, 
-                    string returnReasonCode, 
-                    string notes, 
-                    bool includeResourceLines, 
-                    bool printRmaInstructions, 
-                    bool createUPSReturnLabel, 
-                    string emailAddress, 
-                    string lineDetails, 
-                    ReturnOrder createdReturn, 
-                    bool updateRMA, 
-                    string sessionID, 
-                    string returnTrackNo, 
-                    string shipToDetails, 
-                    string iMEI, 
-                    int zendeskTicketNo, 
-                    object userState) {
-            if ((this.CreateReturnOrderOperationCompleted == null)) {
-                this.CreateReturnOrderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateReturnOrderOperationCompleted);
-            }
-            this.InvokeAsync("CreateReturnOrder", new object[] {
-                        orderNo,
-                        extDocNo,
-                        returnReasonCode,
-                        notes,
-                        includeResourceLines,
-                        printRmaInstructions,
-                        createUPSReturnLabel,
-                        emailAddress,
-                        lineDetails,
-                        createdReturn,
-                        updateRMA,
-                        sessionID,
-                        returnTrackNo,
-                        shipToDetails,
-                        iMEI,
-                        zendeskTicketNo}, this.CreateReturnOrderOperationCompleted, userState);
-        }
-        
-        private void OnCreateReturnOrderOperationCompleted(object arg) {
-            if ((this.CreateReturnOrderCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.CreateReturnOrderCompleted(this, new CreateReturnOrderCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:DeleteReturnOrder", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="DeleteReturnOrder_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
         public string DeleteReturnOrder(string rmaNo, string sessionID) {
@@ -801,37 +878,6 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.LegacyIssueReturnLabelCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.LegacyIssueReturnLabelCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:GetStatistics", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="GetStatistics_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetStatistics(string sessionID, ref Statistics statistics) {
-            object[] results = this.Invoke("GetStatistics", new object[] {
-                        sessionID,
-                        statistics});
-            statistics = ((Statistics)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetStatisticsAsync(string sessionID, Statistics statistics) {
-            this.GetStatisticsAsync(sessionID, statistics, null);
-        }
-        
-        /// <remarks/>
-        public void GetStatisticsAsync(string sessionID, Statistics statistics, object userState) {
-            if ((this.GetStatisticsOperationCompleted == null)) {
-                this.GetStatisticsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetStatisticsOperationCompleted);
-            }
-            this.InvokeAsync("GetStatistics", new object[] {
-                        sessionID,
-                        statistics}, this.GetStatisticsOperationCompleted, userState);
-        }
-        
-        private void OnGetStatisticsOperationCompleted(object arg) {
-            if ((this.GetStatisticsCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetStatisticsCompleted(this, new GetStatisticsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1189,50 +1235,6 @@ namespace ExcelDesign.ServiceFunctions {
             if ((this.a47a47a45a62_CommentsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.a47a47a45a62_CommentsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/Functions:IssueReturnLabel", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", ResponseElementName="IssueReturnLabel_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/Functions", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void IssueReturnLabel(string rMANo, string sessionID, bool getLinkForZendesk, bool downloadManually, string emailTo, string fromEmail, ref string pDFBase64String, ref string amazonS3BucketURL) {
-            object[] results = this.Invoke("IssueReturnLabel", new object[] {
-                        rMANo,
-                        sessionID,
-                        getLinkForZendesk,
-                        downloadManually,
-                        emailTo,
-                        fromEmail,
-                        pDFBase64String,
-                        amazonS3BucketURL});
-            pDFBase64String = ((string)(results[0]));
-            amazonS3BucketURL = ((string)(results[1]));
-        }
-        
-        /// <remarks/>
-        public void IssueReturnLabelAsync(string rMANo, string sessionID, bool getLinkForZendesk, bool downloadManually, string emailTo, string fromEmail, string pDFBase64String, string amazonS3BucketURL) {
-            this.IssueReturnLabelAsync(rMANo, sessionID, getLinkForZendesk, downloadManually, emailTo, fromEmail, pDFBase64String, amazonS3BucketURL, null);
-        }
-        
-        /// <remarks/>
-        public void IssueReturnLabelAsync(string rMANo, string sessionID, bool getLinkForZendesk, bool downloadManually, string emailTo, string fromEmail, string pDFBase64String, string amazonS3BucketURL, object userState) {
-            if ((this.IssueReturnLabelOperationCompleted == null)) {
-                this.IssueReturnLabelOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIssueReturnLabelOperationCompleted);
-            }
-            this.InvokeAsync("IssueReturnLabel", new object[] {
-                        rMANo,
-                        sessionID,
-                        getLinkForZendesk,
-                        downloadManually,
-                        emailTo,
-                        fromEmail,
-                        pDFBase64String,
-                        amazonS3BucketURL}, this.IssueReturnLabelOperationCompleted, userState);
-        }
-        
-        private void OnIssueReturnLabelOperationCompleted(object arg) {
-            if ((this.IssueReturnLabelCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.IssueReturnLabelCompleted(this, new IssueReturnLabelCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1808,921 +1810,6 @@ namespace ExcelDesign.ServiceFunctions {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="ReturnsBuffer", Namespace="urn:microsoft-dynamics-nav/xmlports/x50016")]
-    public partial class ReturnsBuffer1 {
-        
-        private string orderDocTypeField;
-        
-        private string statusField;
-        
-        private string extDocNoField;
-        
-        private string customerNoField;
-        
-        private string itemNoField;
-        
-        private string descriptionField;
-        
-        private string rMANoField;
-        
-        private string exchangeOrderNoField;
-        
-        private string dateCreatedField;
-        
-        private string taxAmountField;
-        
-        private string shippingTaxField;
-        
-        private string exchangedQtyField;
-        
-        private string[] isOlderThan24Hrs2Field;
-        
-        private string[] isOlderThan48Hrs2Field;
-        
-        private string[] isOlderThan72Hrs2Field;
-        
-        /// <remarks/>
-        public string OrderDocType {
-            get {
-                return this.orderDocTypeField;
-            }
-            set {
-                this.orderDocTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Status {
-            get {
-                return this.statusField;
-            }
-            set {
-                this.statusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ExtDocNo {
-            get {
-                return this.extDocNoField;
-            }
-            set {
-                this.extDocNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CustomerNo {
-            get {
-                return this.customerNoField;
-            }
-            set {
-                this.customerNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ItemNo {
-            get {
-                return this.itemNoField;
-            }
-            set {
-                this.itemNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Description {
-            get {
-                return this.descriptionField;
-            }
-            set {
-                this.descriptionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string RMANo {
-            get {
-                return this.rMANoField;
-            }
-            set {
-                this.rMANoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ExchangeOrderNo {
-            get {
-                return this.exchangeOrderNoField;
-            }
-            set {
-                this.exchangeOrderNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string DateCreated {
-            get {
-                return this.dateCreatedField;
-            }
-            set {
-                this.dateCreatedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TaxAmount {
-            get {
-                return this.taxAmountField;
-            }
-            set {
-                this.taxAmountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShippingTax {
-            get {
-                return this.shippingTaxField;
-            }
-            set {
-                this.shippingTaxField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ExchangedQty {
-            get {
-                return this.exchangedQtyField;
-            }
-            set {
-                this.exchangedQtyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("IsOlderThan24Hrs2")]
-        public string[] IsOlderThan24Hrs2 {
-            get {
-                return this.isOlderThan24Hrs2Field;
-            }
-            set {
-                this.isOlderThan24Hrs2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("IsOlderThan48Hrs2")]
-        public string[] IsOlderThan48Hrs2 {
-            get {
-                return this.isOlderThan48Hrs2Field;
-            }
-            set {
-                this.isOlderThan48Hrs2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("IsOlderThan72Hrs2")]
-        public string[] IsOlderThan72Hrs2 {
-            get {
-                return this.isOlderThan72Hrs2Field;
-            }
-            set {
-                this.isOlderThan72Hrs2Field = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="urn:microsoft-dynamics-nav/xmlports/x50016")]
-    public partial class SalesLine4 {
-        
-        private string docTypeField;
-        
-        private string docNoField;
-        
-        private string itemNoField;
-        
-        private string qtyField;
-        
-        private string[] unitCostField;
-        
-        private string descriptionField;
-        
-        private string reqReturnActionField;
-        
-        private string customerNoField;
-        
-        private string[] externalDocumentNoField;
-        
-        private string[] isNotInvtAvailableField;
-        
-        private string[] isOlderThan24HrsField;
-        
-        private string[] isOlderThan48HrsField;
-        
-        private string[] isOlderThan72HrsField;
-        
-        private string[] isPendingSQApprovalField;
-        
-        private string[] noItemSubFoundField;
-        
-        private string[] createdDateField;
-        
-        private string[] custAllowRefundField;
-        
-        /// <remarks/>
-        public string DocType {
-            get {
-                return this.docTypeField;
-            }
-            set {
-                this.docTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string DocNo {
-            get {
-                return this.docNoField;
-            }
-            set {
-                this.docNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ItemNo {
-            get {
-                return this.itemNoField;
-            }
-            set {
-                this.itemNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Qty {
-            get {
-                return this.qtyField;
-            }
-            set {
-                this.qtyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("UnitCost")]
-        public string[] UnitCost {
-            get {
-                return this.unitCostField;
-            }
-            set {
-                this.unitCostField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Description {
-            get {
-                return this.descriptionField;
-            }
-            set {
-                this.descriptionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ReqReturnAction {
-            get {
-                return this.reqReturnActionField;
-            }
-            set {
-                this.reqReturnActionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CustomerNo {
-            get {
-                return this.customerNoField;
-            }
-            set {
-                this.customerNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ExternalDocumentNo")]
-        public string[] ExternalDocumentNo {
-            get {
-                return this.externalDocumentNoField;
-            }
-            set {
-                this.externalDocumentNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("IsNotInvtAvailable")]
-        public string[] IsNotInvtAvailable {
-            get {
-                return this.isNotInvtAvailableField;
-            }
-            set {
-                this.isNotInvtAvailableField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("IsOlderThan24Hrs")]
-        public string[] IsOlderThan24Hrs {
-            get {
-                return this.isOlderThan24HrsField;
-            }
-            set {
-                this.isOlderThan24HrsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("IsOlderThan48Hrs")]
-        public string[] IsOlderThan48Hrs {
-            get {
-                return this.isOlderThan48HrsField;
-            }
-            set {
-                this.isOlderThan48HrsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("IsOlderThan72Hrs")]
-        public string[] IsOlderThan72Hrs {
-            get {
-                return this.isOlderThan72HrsField;
-            }
-            set {
-                this.isOlderThan72HrsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("IsPendingSQApproval")]
-        public string[] IsPendingSQApproval {
-            get {
-                return this.isPendingSQApprovalField;
-            }
-            set {
-                this.isPendingSQApprovalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("NoItemSubFound")]
-        public string[] NoItemSubFound {
-            get {
-                return this.noItemSubFoundField;
-            }
-            set {
-                this.noItemSubFoundField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("CreatedDate")]
-        public string[] CreatedDate {
-            get {
-                return this.createdDateField;
-            }
-            set {
-                this.createdDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("CustAllowRefund")]
-        public string[] CustAllowRefund {
-            get {
-                return this.custAllowRefundField;
-            }
-            set {
-                this.custAllowRefundField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50016")]
-    public partial class Statistics {
-        
-        private SalesLine4[] salesLineField;
-        
-        private ReturnsBuffer1[] returnsBufferField;
-        
-        private string[] textField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
-        public SalesLine4[] SalesLine {
-            get {
-                return this.salesLineField;
-            }
-            set {
-                this.salesLineField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ReturnsBuffer")]
-        public ReturnsBuffer1[] ReturnsBuffer {
-            get {
-                return this.returnsBufferField;
-            }
-            set {
-                this.returnsBufferField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
-            get {
-                return this.textField;
-            }
-            set {
-                this.textField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="urn:microsoft-dynamics-nav/xmlports/x50002")]
-    public partial class SalesLine3 {
-        
-        private string docNoField;
-        
-        private string typeField;
-        
-        private string itemNoField;
-        
-        private string descriptionField;
-        
-        private string qtyField;
-        
-        private string qtyToReceiveField;
-        
-        private string qtyShippedField;
-        
-        private string unitPriceField;
-        
-        private string dateCreatedField;
-        
-        private string rEQReturnActionField;
-        
-        private string returnReasonCodeField;
-        
-        /// <remarks/>
-        public string DocNo {
-            get {
-                return this.docNoField;
-            }
-            set {
-                this.docNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Type {
-            get {
-                return this.typeField;
-            }
-            set {
-                this.typeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ItemNo {
-            get {
-                return this.itemNoField;
-            }
-            set {
-                this.itemNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Description {
-            get {
-                return this.descriptionField;
-            }
-            set {
-                this.descriptionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Qty {
-            get {
-                return this.qtyField;
-            }
-            set {
-                this.qtyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string QtyToReceive {
-            get {
-                return this.qtyToReceiveField;
-            }
-            set {
-                this.qtyToReceiveField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string QtyShipped {
-            get {
-                return this.qtyShippedField;
-            }
-            set {
-                this.qtyShippedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string UnitPrice {
-            get {
-                return this.unitPriceField;
-            }
-            set {
-                this.unitPriceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string DateCreated {
-            get {
-                return this.dateCreatedField;
-            }
-            set {
-                this.dateCreatedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string REQReturnAction {
-            get {
-                return this.rEQReturnActionField;
-            }
-            set {
-                this.rEQReturnActionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ReturnReasonCode {
-            get {
-                return this.returnReasonCodeField;
-            }
-            set {
-                this.returnReasonCodeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="Warranty2", Namespace="urn:microsoft-dynamics-nav/xmlports/x50002")]
-    public partial class Warranty22 {
-        
-        private string[] status2Field;
-        
-        private string[] policy2Field;
-        
-        private string[] daysRemaining2Field;
-        
-        private string[] textField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Status2")]
-        public string[] Status2 {
-            get {
-                return this.status2Field;
-            }
-            set {
-                this.status2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Policy2")]
-        public string[] Policy2 {
-            get {
-                return this.policy2Field;
-            }
-            set {
-                this.policy2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("DaysRemaining2")]
-        public string[] DaysRemaining2 {
-            get {
-                return this.daysRemaining2Field;
-            }
-            set {
-                this.daysRemaining2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
-            get {
-                return this.textField;
-            }
-            set {
-                this.textField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesHeader", Namespace="urn:microsoft-dynamics-nav/xmlports/x50002")]
-    public partial class SalesHeader3 {
-        
-        private string docTypeField;
-        
-        private string noField;
-        
-        private string extDocNoField;
-        
-        private string docDateField;
-        
-        private string returnTrackingNoField;
-        
-        private string sellToCustomerNameField;
-        
-        private string shipToNameField;
-        
-        private string shipToAddressField;
-        
-        private string shipToAddress2Field;
-        
-        private string shipToContactField;
-        
-        private string shipToCityField;
-        
-        private string shipToZipField;
-        
-        private string shipToStateField;
-        
-        private string shipToCountryField;
-        
-        private string iMEIField;
-        
-        private Warranty22[] warranty2Field;
-        
-        /// <remarks/>
-        public string DocType {
-            get {
-                return this.docTypeField;
-            }
-            set {
-                this.docTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string No {
-            get {
-                return this.noField;
-            }
-            set {
-                this.noField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ExtDocNo {
-            get {
-                return this.extDocNoField;
-            }
-            set {
-                this.extDocNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string DocDate {
-            get {
-                return this.docDateField;
-            }
-            set {
-                this.docDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ReturnTrackingNo {
-            get {
-                return this.returnTrackingNoField;
-            }
-            set {
-                this.returnTrackingNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SellToCustomerName {
-            get {
-                return this.sellToCustomerNameField;
-            }
-            set {
-                this.sellToCustomerNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShipToName {
-            get {
-                return this.shipToNameField;
-            }
-            set {
-                this.shipToNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShipToAddress {
-            get {
-                return this.shipToAddressField;
-            }
-            set {
-                this.shipToAddressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShipToAddress2 {
-            get {
-                return this.shipToAddress2Field;
-            }
-            set {
-                this.shipToAddress2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShipToContact {
-            get {
-                return this.shipToContactField;
-            }
-            set {
-                this.shipToContactField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShipToCity {
-            get {
-                return this.shipToCityField;
-            }
-            set {
-                this.shipToCityField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShipToZip {
-            get {
-                return this.shipToZipField;
-            }
-            set {
-                this.shipToZipField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShipToState {
-            get {
-                return this.shipToStateField;
-            }
-            set {
-                this.shipToStateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ShipToCountry {
-            get {
-                return this.shipToCountryField;
-            }
-            set {
-                this.shipToCountryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string IMEI {
-            get {
-                return this.iMEIField;
-            }
-            set {
-                this.iMEIField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Warranty2")]
-        public Warranty22[] Warranty2 {
-            get {
-                return this.warranty2Field;
-            }
-            set {
-                this.warranty2Field = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50002")]
-    public partial class ReturnOrder {
-        
-        private SalesHeader3[] salesHeaderField;
-        
-        private SalesLine3[] salesLineField;
-        
-        private string[] textField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SalesHeader")]
-        public SalesHeader3[] SalesHeader {
-            get {
-                return this.salesHeaderField;
-            }
-            set {
-                this.salesHeaderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
-        public SalesLine3[] SalesLine {
-            get {
-                return this.salesLineField;
-            }
-            set {
-                this.salesLineField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
-            get {
-                return this.textField;
-            }
-            set {
-                this.textField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="ExtendedSalesHeader", Namespace="urn:microsoft-dynamics-nav/xmlports/x50015")]
     public partial class ExtendedSalesHeader1 {
         
@@ -2793,7 +1880,7 @@ namespace ExcelDesign.ServiceFunctions {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="urn:microsoft-dynamics-nav/xmlports/x50015")]
-    public partial class SalesLine2 {
+    public partial class SalesLine4 {
         
         private string docNoField;
         
@@ -2971,7 +2058,7 @@ namespace ExcelDesign.ServiceFunctions {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesHeader", Namespace="urn:microsoft-dynamics-nav/xmlports/x50015")]
-    public partial class SalesHeader2 {
+    public partial class SalesHeader3 {
         
         private string docTypeField;
         
@@ -3229,9 +2316,9 @@ namespace ExcelDesign.ServiceFunctions {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50015")]
     public partial class CreatedPartialRequest {
         
-        private SalesHeader2[] salesHeaderField;
+        private SalesHeader3[] salesHeaderField;
         
-        private SalesLine2[] salesLineField;
+        private SalesLine4[] salesLineField;
         
         private ExtendedSalesHeader1[] extendedSalesHeaderField;
         
@@ -3239,7 +2326,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("SalesHeader")]
-        public SalesHeader2[] SalesHeader {
+        public SalesHeader3[] SalesHeader {
             get {
                 return this.salesHeaderField;
             }
@@ -3250,7 +2337,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
-        public SalesLine2[] SalesLine {
+        public SalesLine4[] SalesLine {
             get {
                 return this.salesLineField;
             }
@@ -3288,7 +2375,7 @@ namespace ExcelDesign.ServiceFunctions {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="urn:microsoft-dynamics-nav/xmlports/x50014")]
-    public partial class SalesLine1 {
+    public partial class SalesLine3 {
         
         private string docNoField;
         
@@ -3405,7 +2492,7 @@ namespace ExcelDesign.ServiceFunctions {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="Warranty2", Namespace="urn:microsoft-dynamics-nav/xmlports/x50014")]
-    public partial class Warranty21 {
+    public partial class Warranty22 {
         
         private string[] status2Field;
         
@@ -3466,7 +2553,7 @@ namespace ExcelDesign.ServiceFunctions {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesHeader", Namespace="urn:microsoft-dynamics-nav/xmlports/x50014")]
-    public partial class SalesHeader1 {
+    public partial class SalesHeader2 {
         
         private string docTypeField;
         
@@ -3504,7 +2591,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string rMANo1Field;
         
-        private Warranty21[] warranty2Field;
+        private Warranty22[] warranty2Field;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -3706,7 +2793,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Warranty2", Order=18)]
-        public Warranty21[] Warranty2 {
+        public Warranty22[] Warranty2 {
             get {
                 return this.warranty2Field;
             }
@@ -3724,9 +2811,461 @@ namespace ExcelDesign.ServiceFunctions {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50014")]
     public partial class CreatedExchangeOrder {
         
+        private SalesHeader2[] salesHeaderField;
+        
+        private SalesLine3[] salesLineField;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SalesHeader")]
+        public SalesHeader2[] SalesHeader {
+            get {
+                return this.salesHeaderField;
+            }
+            set {
+                this.salesHeaderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
+        public SalesLine3[] SalesLine {
+            get {
+                return this.salesLineField;
+            }
+            set {
+                this.salesLineField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="urn:microsoft-dynamics-nav/xmlports/x50002")]
+    public partial class SalesLine2 {
+        
+        private string docNoField;
+        
+        private string typeField;
+        
+        private string itemNoField;
+        
+        private string descriptionField;
+        
+        private string qtyField;
+        
+        private string qtyToReceiveField;
+        
+        private string qtyShippedField;
+        
+        private string unitPriceField;
+        
+        private string dateCreatedField;
+        
+        private string rEQReturnActionField;
+        
+        private string returnReasonCodeField;
+        
+        /// <remarks/>
+        public string DocNo {
+            get {
+                return this.docNoField;
+            }
+            set {
+                this.docNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ItemNo {
+            get {
+                return this.itemNoField;
+            }
+            set {
+                this.itemNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Qty {
+            get {
+                return this.qtyField;
+            }
+            set {
+                this.qtyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string QtyToReceive {
+            get {
+                return this.qtyToReceiveField;
+            }
+            set {
+                this.qtyToReceiveField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string QtyShipped {
+            get {
+                return this.qtyShippedField;
+            }
+            set {
+                this.qtyShippedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string UnitPrice {
+            get {
+                return this.unitPriceField;
+            }
+            set {
+                this.unitPriceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DateCreated {
+            get {
+                return this.dateCreatedField;
+            }
+            set {
+                this.dateCreatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string REQReturnAction {
+            get {
+                return this.rEQReturnActionField;
+            }
+            set {
+                this.rEQReturnActionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ReturnReasonCode {
+            get {
+                return this.returnReasonCodeField;
+            }
+            set {
+                this.returnReasonCodeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="Warranty2", Namespace="urn:microsoft-dynamics-nav/xmlports/x50002")]
+    public partial class Warranty21 {
+        
+        private string[] status2Field;
+        
+        private string[] policy2Field;
+        
+        private string[] daysRemaining2Field;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Status2")]
+        public string[] Status2 {
+            get {
+                return this.status2Field;
+            }
+            set {
+                this.status2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Policy2")]
+        public string[] Policy2 {
+            get {
+                return this.policy2Field;
+            }
+            set {
+                this.policy2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("DaysRemaining2")]
+        public string[] DaysRemaining2 {
+            get {
+                return this.daysRemaining2Field;
+            }
+            set {
+                this.daysRemaining2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesHeader", Namespace="urn:microsoft-dynamics-nav/xmlports/x50002")]
+    public partial class SalesHeader1 {
+        
+        private string docTypeField;
+        
+        private string noField;
+        
+        private string extDocNoField;
+        
+        private string docDateField;
+        
+        private string returnTrackingNoField;
+        
+        private string sellToCustomerNameField;
+        
+        private string shipToNameField;
+        
+        private string shipToAddressField;
+        
+        private string shipToAddress2Field;
+        
+        private string shipToContactField;
+        
+        private string shipToCityField;
+        
+        private string shipToZipField;
+        
+        private string shipToStateField;
+        
+        private string shipToCountryField;
+        
+        private string iMEIField;
+        
+        private Warranty21[] warranty2Field;
+        
+        /// <remarks/>
+        public string DocType {
+            get {
+                return this.docTypeField;
+            }
+            set {
+                this.docTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string No {
+            get {
+                return this.noField;
+            }
+            set {
+                this.noField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ExtDocNo {
+            get {
+                return this.extDocNoField;
+            }
+            set {
+                this.extDocNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DocDate {
+            get {
+                return this.docDateField;
+            }
+            set {
+                this.docDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ReturnTrackingNo {
+            get {
+                return this.returnTrackingNoField;
+            }
+            set {
+                this.returnTrackingNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SellToCustomerName {
+            get {
+                return this.sellToCustomerNameField;
+            }
+            set {
+                this.sellToCustomerNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToName {
+            get {
+                return this.shipToNameField;
+            }
+            set {
+                this.shipToNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToAddress {
+            get {
+                return this.shipToAddressField;
+            }
+            set {
+                this.shipToAddressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToAddress2 {
+            get {
+                return this.shipToAddress2Field;
+            }
+            set {
+                this.shipToAddress2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToContact {
+            get {
+                return this.shipToContactField;
+            }
+            set {
+                this.shipToContactField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToCity {
+            get {
+                return this.shipToCityField;
+            }
+            set {
+                this.shipToCityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToZip {
+            get {
+                return this.shipToZipField;
+            }
+            set {
+                this.shipToZipField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToState {
+            get {
+                return this.shipToStateField;
+            }
+            set {
+                this.shipToStateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShipToCountry {
+            get {
+                return this.shipToCountryField;
+            }
+            set {
+                this.shipToCountryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string IMEI {
+            get {
+                return this.iMEIField;
+            }
+            set {
+                this.iMEIField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Warranty2")]
+        public Warranty21[] Warranty2 {
+            get {
+                return this.warranty2Field;
+            }
+            set {
+                this.warranty2Field = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50002")]
+    public partial class ReturnOrder {
+        
         private SalesHeader1[] salesHeaderField;
         
-        private SalesLine1[] salesLineField;
+        private SalesLine2[] salesLineField;
         
         private string[] textField;
         
@@ -3743,7 +3282,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
-        public SalesLine1[] SalesLine {
+        public SalesLine2[] SalesLine {
             get {
                 return this.salesLineField;
             }
@@ -4368,8 +3907,8 @@ namespace ExcelDesign.ServiceFunctions {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
-    public partial class ReturnsBuffer {
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="ReturnsBuffer", Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
+    public partial class ReturnsBuffer1 {
         
         private string statusField;
         
@@ -6734,8 +6273,8 @@ namespace ExcelDesign.ServiceFunctions {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
-    public partial class SalesLine {
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="SalesLine", Namespace="<urn:microsoft-dynamics-nav/xmlports/searchresults>")]
+    public partial class SalesLine1 {
         
         private string docTypeField;
         
@@ -7291,7 +6830,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         private SalesHeader[] salesHeaderField;
         
-        private SalesLine[] salesLineField;
+        private SalesLine1[] salesLineField;
         
         private SalesShipmentHeader[] salesShipmentHeaderField;
         
@@ -7321,7 +6860,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         private ExtendedSalesHeader[] extendedSalesHeaderField;
         
-        private ReturnsBuffer[] returnsBufferField;
+        private ReturnsBuffer1[] returnsBufferField;
         
         private ReturnReasonCode[] returnReasonCodeField;
         
@@ -7348,7 +6887,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
-        public SalesLine[] SalesLine {
+        public SalesLine1[] SalesLine {
             get {
                 return this.salesLineField;
             }
@@ -7513,7 +7052,7 @@ namespace ExcelDesign.ServiceFunctions {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("ReturnsBuffer")]
-        public ReturnsBuffer[] ReturnsBuffer {
+        public ReturnsBuffer1[] ReturnsBuffer {
             get {
                 return this.returnsBufferField;
             }
@@ -7590,8 +7129,467 @@ namespace ExcelDesign.ServiceFunctions {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
-    public delegate void ResetSessionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50016")]
+    public partial class ReturnsBuffer {
+        
+        private string orderDocTypeField;
+        
+        private string statusField;
+        
+        private string extDocNoField;
+        
+        private string customerNoField;
+        
+        private string itemNoField;
+        
+        private string descriptionField;
+        
+        private string rMANoField;
+        
+        private string exchangeOrderNoField;
+        
+        private string dateCreatedField;
+        
+        private string taxAmountField;
+        
+        private string shippingTaxField;
+        
+        private string exchangedQtyField;
+        
+        private string[] isOlderThan24Hrs2Field;
+        
+        private string[] isOlderThan48Hrs2Field;
+        
+        private string[] isOlderThan72Hrs2Field;
+        
+        /// <remarks/>
+        public string OrderDocType {
+            get {
+                return this.orderDocTypeField;
+            }
+            set {
+                this.orderDocTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ExtDocNo {
+            get {
+                return this.extDocNoField;
+            }
+            set {
+                this.extDocNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CustomerNo {
+            get {
+                return this.customerNoField;
+            }
+            set {
+                this.customerNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ItemNo {
+            get {
+                return this.itemNoField;
+            }
+            set {
+                this.itemNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RMANo {
+            get {
+                return this.rMANoField;
+            }
+            set {
+                this.rMANoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ExchangeOrderNo {
+            get {
+                return this.exchangeOrderNoField;
+            }
+            set {
+                this.exchangeOrderNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DateCreated {
+            get {
+                return this.dateCreatedField;
+            }
+            set {
+                this.dateCreatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string TaxAmount {
+            get {
+                return this.taxAmountField;
+            }
+            set {
+                this.taxAmountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ShippingTax {
+            get {
+                return this.shippingTaxField;
+            }
+            set {
+                this.shippingTaxField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ExchangedQty {
+            get {
+                return this.exchangedQtyField;
+            }
+            set {
+                this.exchangedQtyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("IsOlderThan24Hrs2")]
+        public string[] IsOlderThan24Hrs2 {
+            get {
+                return this.isOlderThan24Hrs2Field;
+            }
+            set {
+                this.isOlderThan24Hrs2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("IsOlderThan48Hrs2")]
+        public string[] IsOlderThan48Hrs2 {
+            get {
+                return this.isOlderThan48Hrs2Field;
+            }
+            set {
+                this.isOlderThan48Hrs2Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("IsOlderThan72Hrs2")]
+        public string[] IsOlderThan72Hrs2 {
+            get {
+                return this.isOlderThan72Hrs2Field;
+            }
+            set {
+                this.isOlderThan72Hrs2Field = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50016")]
+    public partial class SalesLine {
+        
+        private string docTypeField;
+        
+        private string docNoField;
+        
+        private string itemNoField;
+        
+        private string qtyField;
+        
+        private string[] unitCostField;
+        
+        private string descriptionField;
+        
+        private string reqReturnActionField;
+        
+        private string customerNoField;
+        
+        private string[] externalDocumentNoField;
+        
+        private string[] isNotInvtAvailableField;
+        
+        private string[] isOlderThan24HrsField;
+        
+        private string[] isOlderThan48HrsField;
+        
+        private string[] isOlderThan72HrsField;
+        
+        private string[] isPendingSQApprovalField;
+        
+        private string[] noItemSubFoundField;
+        
+        private string[] createdDateField;
+        
+        private string[] custAllowRefundField;
+        
+        /// <remarks/>
+        public string DocType {
+            get {
+                return this.docTypeField;
+            }
+            set {
+                this.docTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DocNo {
+            get {
+                return this.docNoField;
+            }
+            set {
+                this.docNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ItemNo {
+            get {
+                return this.itemNoField;
+            }
+            set {
+                this.itemNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Qty {
+            get {
+                return this.qtyField;
+            }
+            set {
+                this.qtyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("UnitCost")]
+        public string[] UnitCost {
+            get {
+                return this.unitCostField;
+            }
+            set {
+                this.unitCostField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ReqReturnAction {
+            get {
+                return this.reqReturnActionField;
+            }
+            set {
+                this.reqReturnActionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CustomerNo {
+            get {
+                return this.customerNoField;
+            }
+            set {
+                this.customerNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ExternalDocumentNo")]
+        public string[] ExternalDocumentNo {
+            get {
+                return this.externalDocumentNoField;
+            }
+            set {
+                this.externalDocumentNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("IsNotInvtAvailable")]
+        public string[] IsNotInvtAvailable {
+            get {
+                return this.isNotInvtAvailableField;
+            }
+            set {
+                this.isNotInvtAvailableField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("IsOlderThan24Hrs")]
+        public string[] IsOlderThan24Hrs {
+            get {
+                return this.isOlderThan24HrsField;
+            }
+            set {
+                this.isOlderThan24HrsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("IsOlderThan48Hrs")]
+        public string[] IsOlderThan48Hrs {
+            get {
+                return this.isOlderThan48HrsField;
+            }
+            set {
+                this.isOlderThan48HrsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("IsOlderThan72Hrs")]
+        public string[] IsOlderThan72Hrs {
+            get {
+                return this.isOlderThan72HrsField;
+            }
+            set {
+                this.isOlderThan72HrsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("IsPendingSQApproval")]
+        public string[] IsPendingSQApproval {
+            get {
+                return this.isPendingSQApprovalField;
+            }
+            set {
+                this.isPendingSQApprovalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("NoItemSubFound")]
+        public string[] NoItemSubFound {
+            get {
+                return this.noItemSubFoundField;
+            }
+            set {
+                this.noItemSubFoundField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("CreatedDate")]
+        public string[] CreatedDate {
+            get {
+                return this.createdDateField;
+            }
+            set {
+                this.createdDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("CustAllowRefund")]
+        public string[] CustAllowRefund {
+            get {
+                return this.custAllowRefundField;
+            }
+            set {
+                this.custAllowRefundField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50016")]
+    public partial class Statistics {
+        
+        private SalesLine[] salesLineField;
+        
+        private ReturnsBuffer[] returnsBufferField;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SalesLine")]
+        public SalesLine[] SalesLine {
+            get {
+                return this.salesLineField;
+            }
+            set {
+                this.salesLineField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ReturnsBuffer")]
+        public ReturnsBuffer[] ReturnsBuffer {
+            get {
+                return this.returnsBufferField;
+            }
+            set {
+                this.returnsBufferField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
@@ -7629,7 +7627,29 @@ namespace ExcelDesign.ServiceFunctions {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
-    public delegate void UpdateUserPasswordCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void GetStatisticsCompletedEventHandler(object sender, GetStatisticsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetStatisticsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetStatisticsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Statistics statistics {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Statistics)(this.results[0]));
+            }
+        }
+    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
@@ -7664,6 +7684,82 @@ namespace ExcelDesign.ServiceFunctions {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
+    public delegate void CreateReturnOrderCompletedEventHandler(object sender, CreateReturnOrderCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CreateReturnOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal CreateReturnOrderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public ReturnOrder createdReturn {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ReturnOrder)(this.results[1]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
+    public delegate void IssueReturnLabelCompletedEventHandler(object sender, IssueReturnLabelCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class IssueReturnLabelCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal IssueReturnLabelCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string pDFBase64String {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public string amazonS3BucketURL {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[1]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
+    public delegate void ResetSessionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
+    public delegate void UpdateUserPasswordCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
@@ -7817,40 +7913,6 @@ namespace ExcelDesign.ServiceFunctions {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
-    public delegate void CreateReturnOrderCompletedEventHandler(object sender, CreateReturnOrderCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class CreateReturnOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal CreateReturnOrderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-        
-        /// <remarks/>
-        public ReturnOrder createdReturn {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((ReturnOrder)(this.results[1]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void DeleteReturnOrderCompletedEventHandler(object sender, DeleteReturnOrderCompletedEventArgs e);
     
     /// <remarks/>
@@ -7930,32 +7992,6 @@ namespace ExcelDesign.ServiceFunctions {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void LegacyIssueReturnLabelCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
-    public delegate void GetStatisticsCompletedEventHandler(object sender, GetStatisticsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetStatisticsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetStatisticsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public Statistics statistics {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((Statistics)(this.results[0]));
-            }
-        }
-    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
@@ -8070,40 +8106,6 @@ namespace ExcelDesign.ServiceFunctions {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void a47a47a45a62_CommentsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
-    public delegate void IssueReturnLabelCompletedEventHandler(object sender, IssueReturnLabelCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class IssueReturnLabelCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal IssueReturnLabelCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string pDFBase64String {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-        
-        /// <remarks/>
-        public string amazonS3BucketURL {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[1]));
-            }
-        }
-    }
 }
 
 #pragma warning restore 1591

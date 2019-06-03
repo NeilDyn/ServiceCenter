@@ -29,6 +29,10 @@ namespace ExcelDesign.Forms.PDAForms
      * Email has been removed, replaced with Zendesk Email
      */
 
+    /* v11.1 - 3 June 2019 - Neil Jansen
+     * Added functionality to incorporate Copy to Clipboard functionality and Generate URL
+     */
+
     public partial class CreateRMA : System.Web.UI.Page
     {
         protected List<SalesHeader> Sh;
@@ -727,7 +731,10 @@ namespace ExcelDesign.Forms.PDAForms
                             Session["CreatedRMA"] = crh;
                             Session["NoUserInteraction"] = true;
 
-                            ClientScript.RegisterStartupScript(this.GetType(), "openCreatedRMA", "OpenCreatedRMA();", true);
+                            if (!ZendeskIssueReturnLabelControl.GenerateURL)
+                            {
+                                ClientScript.RegisterStartupScript(this.GetType(), "openCreatedRMA", "OpenCreatedRMA();", true);
+                            }
                         }
                         else
                         {

@@ -18,7 +18,7 @@ namespace ExcelDesign.Forms.FunctionForms
     /* v7.1 - 3 October 2018 - Neil Jansen
      * Updated logic to filter out incorrect catagories for Return Reason Code
      */
-     
+
     /* v9.2 - 12 December 2018- Neil Jansen
     * Added Zendesk Ticket # field to design and added logic to send through webservice to NAV
     */
@@ -30,6 +30,10 @@ namespace ExcelDesign.Forms.FunctionForms
      * Email has been removed, replaced with Zendesk Email
      */
 
+    /* v11.1 - 3 June 2019 - Neil Jansen
+     * Added functionality to incorporate Copy to Clipboard functionality and Generate URL
+     */
+    
     public partial class CreateReturn : System.Web.UI.Page
     {
         protected List<SalesHeader> Sh;
@@ -89,7 +93,7 @@ namespace ExcelDesign.Forms.FunctionForms
                         noTitle.Text = "RMA No:";
                         BtnCreateRMA.Text = "Update RMA";
                         BtnCancelRMA.Visible = true;
-                    
+
                         lblInsertTrackingNo.Visible = true;
                         txtInsertTrackingNo.Visible = true;
 
@@ -443,7 +447,7 @@ namespace ExcelDesign.Forms.FunctionForms
                 bool validateZendesk = false;
                 bool allValidLines = true;
                 int rowCount = 0;
-                int controlCount = 0;              
+                int controlCount = 0;
 
                 if (validateMsg == "All Input Valid")
                 {
@@ -584,26 +588,29 @@ namespace ExcelDesign.Forms.FunctionForms
                                 ZendeskIssueReturnLabelControl.IssueZendeskReturnLabel(crh.RMANo, docNo, false, ticket);
                             }
 
-                                // Replace legacy with Zendesk return label
-                                //worker = new Thread(() =>
-                                //{
-                                //    try
-                                //    {
-                                //        ss.LegacyReturnLabel(crh.RMANo, email, sessionID);
-                                //    }
-                                //    catch (Exception workerE)
-                                //    {
-                                //        Log.Error(workerE.Message, workerE);
-                                //        ClientScript.RegisterStartupScript(this.GetType(), "labelError", "alert('" + workerE.Message.Replace("'", "\"") + "');", true);
-                                //    }
-                                //});
+                            // Replace legacy with Zendesk return label
+                            //worker = new Thread(() =>
+                            //{
+                            //    try
+                            //    {
+                            //        ss.LegacyReturnLabel(crh.RMANo, email, sessionID);
+                            //    }
+                            //    catch (Exception workerE)
+                            //    {
+                            //        Log.Error(workerE.Message, workerE);
+                            //        ClientScript.RegisterStartupScript(this.GetType(), "labelError", "alert('" + workerE.Message.Replace("'", "\"") + "');", true);
+                            //    }
+                            //});
 
-                                //worker.Start();
+                            //worker.Start();
 
                             Session["CreatedRMA"] = crh;
                             Session["NoUserInteraction"] = true;
 
-                            ClientScript.RegisterStartupScript(this.GetType(), "openCreatedRMA", "OpenCreatedRMA();", true);
+                            if (!ZendeskIssueReturnLabelControl.GenerateURL)
+                            {
+                                ClientScript.RegisterStartupScript(this.GetType(), "openCreatedRMA", "OpenCreatedRMA();", true);
+                            }
                         }
                         else
                         {
@@ -669,9 +676,9 @@ namespace ExcelDesign.Forms.FunctionForms
                         {
                             if (reqReturnActionP > 0)
                             {
-                                if(reqReturnActionP == 2 && !refundAllow)
+                                if (reqReturnActionP == 2 && !refundAllow)
                                 {
-                                    return "Refund warranty has expired for the policy of 30 Day Refund and 90 Exchange.";             
+                                    return "Refund warranty has expired for the policy of 30 Day Refund and 90 Exchange.";
                                 }
                                 else
                                 {
@@ -762,7 +769,7 @@ namespace ExcelDesign.Forms.FunctionForms
                         {
                             return "Maximum length for a Return Tracking No is 40.";
                         }
-                    }     
+                    }
                     else
                     {
                         return valid;

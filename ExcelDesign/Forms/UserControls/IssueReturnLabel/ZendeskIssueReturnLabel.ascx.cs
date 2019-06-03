@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -21,6 +22,10 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
      * Update overall logic to be incorporated as binding.
      * Developed and update functions to validate data entries respectively of what process is being called.
      * Developed function to allow validation to be called from parent pages.
+     */
+
+    /* v11.1 - 3 June 2019 - Neil Jansen
+     * Added functionality to incorporate Copy to Clipboard functionality and Generate URL
      */
 
     public partial class ZendeskIssueReturnLabel : System.Web.UI.UserControl
@@ -51,6 +56,10 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
         public bool DownloadManually
         {
             get { return cbxDownloadManually.Checked; }
+        }
+        public bool GenerateURL
+        {
+            get { return cbxGenerateURL.Checked; }
         }
         public string ZendeskTickets
         {
@@ -299,6 +308,10 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
             {
                 validInput = true;
             }
+            else if (GenerateURL)
+            {
+                validInput = true;
+            }
 
             return validInput;
         }
@@ -314,6 +327,7 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
             {
                 if (ExistingZendeskTicket)
                 {
+                    string message = string.Empty;
                     ZendeskTicket = ticket;
 
                     if (EmailTo != null)
@@ -331,13 +345,16 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
                         FromEmail = string.Empty;
                     }
 
-                    pdf64String = ss.IssueReturnLabel(no, EmailTo, ExistingZendeskTicket, FromEmail, DownloadManually, CustomerEmailAddress, FromEmailName, EmailSubject, ref amazonBucketURL);
+                    pdf64String = ss.IssueReturnLabel(no, EmailTo, ExistingZendeskTicket, FromEmail, DownloadManually, CustomerEmailAddress, FromEmailName, EmailSubject, ref amazonBucketURL, GenerateURL);
 
                     Session["NoUserInteraction"] = true;
 
                     ZendeskTicket.UpdateZendeskTicketWithPDFFile(pdf64String, no, amazonBucketURL);
 
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "issueReturnLableExistingTicket", "alert('" + no + ", Return label is being processed and will be emailed within 1 hour.');", true);
+                    message = no + ", Return label is being processed and will be emailed within 1 hour.";
+
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "issueReturnLableExistingTicket", "alert('" + Json.Encode(message) + "');", true);
+
                     if (closeWindow)
                     {
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "closeAfterProcessing", "parent.window.close();", true);
@@ -345,7 +362,9 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
                 }
                 else if (NewZendeskTicket)
                 {
-                    pdf64String = ss.IssueReturnLabel(no, EmailTo, ExistingZendeskTicket, FromEmail, DownloadManually, CustomerEmailAddress, FromEmailName, EmailSubject, ref amazonBucketURL);
+                    string message = string.Empty;
+
+                    pdf64String = ss.IssueReturnLabel(no, EmailTo, ExistingZendeskTicket, FromEmail, DownloadManually, CustomerEmailAddress, FromEmailName, EmailSubject, ref amazonBucketURL, GenerateURL);
                     Session["NoUserInteraction"] = true;
 
                     long? newZendeskTicketID = 0;
@@ -353,26 +372,64 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
                     ZendeskTicket = new Zendesk();
                     newZendeskTicketID = ZendeskTicket.CreateNewZendeskTicketWithPDFFile(pdf64String, no, amazonBucketURL, EmailTo, CustomerName, docNo);
 
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "issueReturnLabelNewTicket", "alert('New Zendesk Ticket is: " + newZendeskTicketID + ".\\n\\n" + no + ", Return label is being processed and will be emailed within 1 hour.');", true);
+                    message = "New Zendesk Ticket is: " + newZendeskTicketID + @".
+
+" + no + ", Return label is being processed and will be emailed within 1 hour.";
+
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "issueReturnLabelNewTicket", "alert('" + Json.Encode(message) + "');", true);
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "closeErrorAlert", "parent.window.close();", true);
                 }
                 else if (DownloadManually)
                 {
-                    pdf64String = ss.IssueReturnLabel(no, string.Empty, ExistingZendeskTicket, string.Empty, DownloadManually, CustomerEmailAddress, FromEmailName, EmailSubject, ref amazonBucketURL);
+                    string message = string.Empty;
+                    pdf64String = ss.IssueReturnLabel(no, string.Empty, ExistingZendeskTicket, string.Empty, DownloadManually, CustomerEmailAddress, FromEmailName, EmailSubject, ref amazonBucketURL, GenerateURL);
                     Session["NoUserInteraction"] = true;
 
-                    if (pdf64String != string.Empty)
+                    if (pdf64String != string.Empty) // Display only the URL
                     {
                         ZendeskTicket = new Zendesk();
 
                         ZendeskTicket.DownloadRMAPDFManually(pdf64String, no);
 
-                        Page.ClientScript.RegisterStartupScript(this.GetType(), "manualDownloadExistingTicket", "alert('" + no + ", Return label has been successfully downloaded.');", true);
+                        message = no + ", Return label has been successfully downloaded.";
+
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "manualDownloadExistingTicket", "alert('" + Json.Encode(message) + "');", true);
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "closeAfterDownload", "parent.window.close();", true);
                     }
                     else
                     {
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "manualDownloadExistingTicket", "alert('The file could not be downloaded.');", true);
+                    }
+                }
+                else if (GenerateURL)
+                {
+                    string message = string.Empty;
+                    string clipboardMessage = string.Empty;
+                    pdf64String = ss.IssueReturnLabel(no, string.Empty, ExistingZendeskTicket, string.Empty, DownloadManually, CustomerEmailAddress, FromEmailName, EmailSubject, ref amazonBucketURL, GenerateURL);
+                    Session["NoUserInteraction"] = true;
+
+                    if (amazonBucketURL != string.Empty) // Display only the URL
+                    {
+                        message = no + ", Return label URL has been successfully generated.";
+
+                        clipboardMessage = @"Hello, 
+
+Your return request has been approved.  Your Return Merchandise Authorization number is " + no + @"
+
+Follow the link below to download your return instructions and shipping label.
+
+" + amazonBucketURL + @"
+
+IMPORTANT: Please remove ALL locks and passwords. Any device(s) received locked with your information will be denied, returned at your expense with no refund submitted for processing.
+
+Thank You";
+
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "testa", "CopyToClipboard('" + Json.Encode(clipboardMessage) + "');", true);
+                        //Page.ClientScript.RegisterStartupScript(this.GetType(), "closeAfterDownload", "parent.window.close();", true);
+                    }
+                    else
+                    {
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "manualGenerateURL", "alert('The URL could not be generated.');", true);
                     }
                 }
                 else
@@ -439,15 +496,6 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
 
                 return false;
             }
-        }
-
-        public string GetCustomerEmail()
-        {
-            string emailAddress = string.Empty;
-
-
-
-            return emailAddress;
         }
     }
 }

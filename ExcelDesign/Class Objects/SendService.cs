@@ -47,6 +47,10 @@ namespace ExcelDesign.Class_Objects
     * Updated IssueReturnLabel function to send a reference variable for the Amazon S3 Bucket URL
     */
 
+    /* v11.1 - 3 June 2019 - Neil Jansen
+     * Update issue return label function to return a URL parameter
+     */
+
     public class SendService
     {
         public List<Customer> CustomerList { get; set; }
@@ -467,9 +471,9 @@ namespace ExcelDesign.Class_Objects
         }
 
         public string IssueReturnLabel(string rmaNo, string emailTo, bool existingZendeskTicket, string fromEmail, bool downloadManually, string email, 
-             string fromEmailName, string emailSubject, ref string amazonBucketURL)
+             string fromEmailName, string emailSubject, ref string amazonBucketURL, bool generateURL)
         {
-            return webService.IssueReturnLabel(rmaNo, emailTo, existingZendeskTicket, fromEmail, downloadManually, email, fromEmailName, emailSubject, ref amazonBucketURL);
+            return webService.IssueReturnLabel(rmaNo, emailTo, existingZendeskTicket, fromEmail, downloadManually, email, fromEmailName, emailSubject, ref amazonBucketURL, generateURL);
         }
 
         public void UpdateUserPassword(string currentUser, string newPassword)

@@ -38,7 +38,12 @@
                     $("[id$=txtShipToCode").val("");
                 }
             });
+
+            window["PostClipboard"] = function () {
+                OpenCreatedRMA();              
+            };
         });
+
         function CloseWindow() {
             var c;
 

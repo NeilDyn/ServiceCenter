@@ -6,6 +6,11 @@
 <head runat="server">
     <title>Create Return Order</title>
     <link href="../../css/mainpage.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            window["PostClipboard"] = null;
+        });
+    </script>
 </head>
 <body>
     <form id="IssueReturnLabelForm" runat="server">

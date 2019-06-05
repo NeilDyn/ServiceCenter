@@ -148,46 +148,6 @@ namespace ExcelDesign.Class_Objects
             requester = helper.GetRequester(RequesterID);
             FromEmailAddress = requester.Email;
             FromEmailName = requester.Name;
-        }
-
-        public string ShortenURL()
-        {
-            string username = string.Empty;
-            string accessToken = string.Empty;
-            string url = string.Empty;
-
-            string shortenedURL = string.Empty;
-
-            
-
-            
-
-            StringBuilder bitlyQuery = new StringBuilder(url);
-            bitlyQuery.Append("shorten?");
-            bitlyQuery.Append("&format=txt");
-            bitlyQuery.Append("&longUrl=");
-            bitlyQuery.Append(HttpUtility.UrlEncode(url));
-            bitlyQuery.Append("&login=");
-            bitlyQuery.Append(HttpUtility.UrlEncode(username));
-            //bitlyQuery.Append("&apiKey=");
-            //bitlyQuery.Append(HttpUtility.UrlEncode(accessToken));
-
-            HttpWebRequest request = WebRequest.Create(bitlyQuery.ToString()) as HttpWebRequest;
-            request.Headers.Add("Authorization", "Bearer " + HttpUtility.UrlEncode(accessToken));
-
-            request.Method = "GET";
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ServicePoint.Expect100Continue = false;
-            request.ContentLength = 0;
-
-
-            WebResponse webResponse = request.GetResponse();
-            using (StreamReader reader = new StreamReader(webResponse.GetResponseStream()))
-            {
-                shortenedURL = reader.ReadLine();
-            }
-
-            return shortenedURL;
-        }
+        }     
     }
 }

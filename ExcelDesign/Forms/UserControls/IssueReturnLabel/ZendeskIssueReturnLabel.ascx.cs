@@ -421,7 +421,7 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
 
 Your return request has been approved.  Your Return Merchandise Authorization number is " + no + @"
 
-Follow the link below to download your return instructions and shipping label.
+Follow the link below to download your return instructions and shipping label. Or copy and paste the link into your browser.
 
 " + url + @"
 

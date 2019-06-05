@@ -277,6 +277,11 @@ namespace ExcelDesign.Class_Objects
         {
             functions.DeleteZendeskTicket(sessionID, currentTicketNo);
         }
+
+        public void GetAPISetup(ref string accessToken, ref string url, ref string hostname)
+        {
+            functions.ReturnAPISetup(ref accessToken, ref url, ref hostname, SessionID());
+        }
     }
 }
  

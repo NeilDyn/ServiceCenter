@@ -1,4 +1,5 @@
 ﻿using ExcelDesign.Class_Objects;
+using ExcelDesign.Class_Objects.BitlyAPI;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -410,6 +411,10 @@ namespace ExcelDesign.Forms.UserControls.IssueReturnLabel
 
                     if (amazonBucketURL != string.Empty) // Display only the URL
                     {
+                        BitlyAPI bitlyAPI = new BitlyAPI();
+
+                        string url = bitlyAPI.ShortenURL(amazonBucketURL);
+
                         message = no + ", Return label URL has been successfully generated.";
 
                         clipboardMessage = @"Hello, 
@@ -418,14 +423,13 @@ Your return request has been approved.  Your Return Merchandise Authorization nu
 
 Follow the link below to download your return instructions and shipping label.
 
-" + amazonBucketURL + @"
+" + url + @"
 
 IMPORTANT: Please remove ALL locks and passwords. Any device(s) received locked with your information will be denied, returned at your expense with no refund submitted for processing.
 
 Thank You";
 
-                        Page.ClientScript.RegisterStartupScript(this.GetType(), "testa", "CopyToClipboard('" + Json.Encode(clipboardMessage) + "');", true);
-                        //Page.ClientScript.RegisterStartupScript(this.GetType(), "closeAfterDownload", "parent.window.close();", true);
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "clipboardMessage", "CopyToClipboard('" + Json.Encode(clipboardMessage) + "');", true);
                     }
                     else
                     {

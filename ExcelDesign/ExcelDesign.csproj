@@ -213,6 +213,10 @@
     <Content Include="Webservices\WebServiceFunctions.asmx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class Objects\BitlyAPI\BitlyAPI.cs" />
+    <Compile Include="Class Objects\BitlyAPI\BitlyAPIErrorHandler.cs" />
+    <Compile Include="Class Objects\BitlyAPI\BitlyGroup.cs" />
+    <Compile Include="Class Objects\BitlyAPI\BitlyShorten.cs" />
     <Compile Include="Class Objects\Comment.cs" />
     <Compile Include="Class Objects\ConfigurationSettings.cs" />
     <Compile Include="Class Objects\CreatedExchange\CreatedExchangeHeader.cs" />

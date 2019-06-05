@@ -4,9 +4,9 @@
 <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/themes/ui-lightness/jquery-ui.css" type="text/css" />
-<link rel="stylesheet" href="../../../lobibox/dist/css/lobibox.min.css" />
+<link rel="stylesheet" href="../../lobibox/dist/css/lobibox.min.css" />
 <%--<script src="../../../lobibox/lib/jquery.1.11.min.js"></script>--%>
-<script src="../../../lobibox/dist/js/lobibox.min.js"></script>
+<script src="../../lobibox/dist/js/lobibox.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {

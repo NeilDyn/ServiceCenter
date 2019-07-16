@@ -371,3 +371,19 @@ Message - INVALID_ARG_LONG_URL
 Description - The value provided is invalid.
    at ExcelDesign.Class_Objects.BitlyAPI.BitlyAPI.ShortenURL(String longURL) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\BitlyAPI\BitlyAPI.cs:line 130
    at ExcelDesign.Forms.UserControls.IssueReturnLabel.ZendeskIssueReturnLabel.IssueZendeskReturnLabel(String no, String docNo, Boolean closeWindow, Zendesk ticket) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\UserControls\IssueReturnLabel\ZendeskIssueReturnLabel.ascx.cs:line 416
+ERROR 2019-07-15 14:20:55,899 172290ms ServiceCenter          ConnectToService   - Could not process node searchResults.
+System.Web.Services.Protocols.SoapException: Could not process node searchResults.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.SearchDetermineNoType(String sessionID, String searchNo, SearchResults& searchResults, Int32 _SearchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 319
+   at ExcelDesign.Class_Objects.WebService.FindOrder(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 110
+   at ExcelDesign.Class_Objects.CallService.OpenService(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 46
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 279
+ERROR 2019-07-15 14:26:31,228 507619ms ServiceCenter          ConnectToService   - Could not process node searchResults.
+System.Web.Services.Protocols.SoapException: Could not process node searchResults.
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   at System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   at ExcelDesign.ServiceFunctions.Functions.SearchDetermineNoType(String sessionID, String searchNo, SearchResults& searchResults, Int32 _SearchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Web References\ServiceFunctions\Reference.cs:line 319
+   at ExcelDesign.Class_Objects.WebService.FindOrder(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\WebService.cs:line 110
+   at ExcelDesign.Class_Objects.CallService.OpenService(String searchNo, Int32 searchOption) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Class Objects\CallService.cs:line 46
+   at ExcelDesign.Forms.ServiceCenter.ConnectToService(String searchValue, Int32 searchSelection) in D:\Work Data\Jeg&Sons\InitialDesign\ExcelDesign\ExcelDesign\Forms\ServiceCenter.aspx.cs:line 279

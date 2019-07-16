@@ -71,6 +71,7 @@
           <element minOccurs="1" maxOccurs="unbounded" name="ExchangeOrderNos" type="string" />
           <element minOccurs="1" maxOccurs="1" name="IMEI" type="string" />
           <element minOccurs="0" maxOccurs="unbounded" name="Warranty2" type="tns:Warranty2" />
+          <element minOccurs="1" maxOccurs="unbounded" name="CreateLegacyReturnLabel1" type="string" />
         </sequence>
       </complexType>
       <complexType name="SalesLine">
@@ -122,6 +123,7 @@
           <element minOccurs="1" maxOccurs="1" name="ShippingAgentCode" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShippingAgentService" type="string" />
           <element minOccurs="0" maxOccurs="unbounded" name="Warranty3" type="tns:Warranty3" />
+          <element minOccurs="1" maxOccurs="unbounded" name="CreateLegacyReturnLabel2" type="string" />
         </sequence>
       </complexType>
       <complexType name="SalesShipmentLine">
@@ -208,6 +210,7 @@
           <element minOccurs="1" maxOccurs="1" name="ShipToZip" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToState" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="CreateLegacyReturnLabel4" type="string" />
         </sequence>
       </complexType>
       <complexType name="ReturnReceiptLine">
@@ -313,6 +316,7 @@
           <element minOccurs="1" maxOccurs="1" name="ShipToCountry" type="string" />
           <element minOccurs="0" maxOccurs="unbounded" name="Warranty" type="tns:Warranty" />
           <element minOccurs="1" maxOccurs="1" name="EbayUserID" type="string" />
+          <element minOccurs="1" maxOccurs="unbounded" name="CreateLegacyReturnLabel3" type="string" />
         </sequence>
       </complexType>
       <complexType name="ExtendedSalesHeader">
@@ -424,6 +428,7 @@
           <element minOccurs="1" maxOccurs="unbounded" name="SalesCommentLine" type="tns:SalesCommentLine" />
           <element minOccurs="1" maxOccurs="unbounded" name="PartReqOption" type="string" />
           <element minOccurs="1" maxOccurs="unbounded" name="CustSvcLog" type="tns:CustSvcLog" />
+          <element minOccurs="1" maxOccurs="unbounded" name="CreateLegacyReturnLabel" type="string" />
         </sequence>
       </complexType>
       <element name="SearchResults" type="tns:SearchResults" />

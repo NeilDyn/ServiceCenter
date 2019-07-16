@@ -4787,6 +4787,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string ebayUserIDField;
         
+        private string[] createLegacyReturnLabel3Field;
+        
         /// <remarks/>
         public string ExternalDocumentNo {
             get {
@@ -4976,6 +4978,17 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.ebayUserIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("CreateLegacyReturnLabel3")]
+        public string[] CreateLegacyReturnLabel3 {
+            get {
+                return this.createLegacyReturnLabel3Field;
+            }
+            set {
+                this.createLegacyReturnLabel3Field = value;
             }
         }
     }
@@ -5689,6 +5702,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private string shipToCountryField;
         
+        private string[] createLegacyReturnLabel4Field;
+        
         /// <remarks/>
         public string No {
             get {
@@ -5846,6 +5861,17 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.shipToCountryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("CreateLegacyReturnLabel4")]
+        public string[] CreateLegacyReturnLabel4 {
+            get {
+                return this.createLegacyReturnLabel4Field;
+            }
+            set {
+                this.createLegacyReturnLabel4Field = value;
             }
         }
     }
@@ -6591,6 +6617,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private Warranty3[] warranty3Field;
         
+        private string[] createLegacyReturnLabel2Field;
+        
         /// <remarks/>
         public string No {
             get {
@@ -6769,6 +6797,17 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.warranty3Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("CreateLegacyReturnLabel2")]
+        public string[] CreateLegacyReturnLabel2 {
+            get {
+                return this.createLegacyReturnLabel2Field;
+            }
+            set {
+                this.createLegacyReturnLabel2Field = value;
             }
         }
     }
@@ -7112,6 +7151,8 @@ namespace ExcelDesign.ServiceFunctions {
         
         private Warranty2[] warranty2Field;
         
+        private string[] createLegacyReturnLabel1Field;
+        
         /// <remarks/>
         public string DocType {
             get {
@@ -7323,6 +7364,17 @@ namespace ExcelDesign.ServiceFunctions {
                 this.warranty2Field = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("CreateLegacyReturnLabel1")]
+        public string[] CreateLegacyReturnLabel1 {
+            get {
+                return this.createLegacyReturnLabel1Field;
+            }
+            set {
+                this.createLegacyReturnLabel1Field = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -7376,6 +7428,8 @@ namespace ExcelDesign.ServiceFunctions {
         private string[] partReqOptionField;
         
         private CustSvcLog[] custSvcLogField;
+        
+        private string[] createLegacyReturnLabelField;
         
         private string[] textField;
         
@@ -7618,6 +7672,17 @@ namespace ExcelDesign.ServiceFunctions {
             }
             set {
                 this.custSvcLogField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("CreateLegacyReturnLabel")]
+        public string[] CreateLegacyReturnLabel {
+            get {
+                return this.createLegacyReturnLabelField;
+            }
+            set {
+                this.createLegacyReturnLabelField = value;
             }
         }
         

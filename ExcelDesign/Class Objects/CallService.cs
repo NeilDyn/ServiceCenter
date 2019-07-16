@@ -613,6 +613,8 @@ namespace ExcelDesign.Class_Objects
             string sellToCustomerNo = string.Empty;
             List<Comment> commentLines = new List<Comment>();
             string imeiNo = string.Empty;
+            bool customerLegacyReturnLabel = false;
+            bool legacyReturnLabel = false;
 
             string shipToName = string.Empty;
             string shipToAddress1 = string.Empty;
@@ -678,6 +680,9 @@ namespace ExcelDesign.Class_Objects
                                         }
                                     }
 
+                                    legacyReturnLabel = currResults.SOImportBuffer[so].CreateLegacyReturnLabel3[0] == "Yes" ? true : false;
+                                    customerLegacyReturnLabel = currResults.CreateLegacyReturnLabel[0] == "Yes" ? true : false;
+
                                     shipToName = currResults.SalesHeader[so].ShipToName;
                                     shipToAddress1 = currResults.SalesHeader[so].ShipToAddress;
                                     shipToAddress2 = currResults.SalesHeader[so].ShipToAddress2;
@@ -695,7 +700,8 @@ namespace ExcelDesign.Class_Objects
                                     }
                                     returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo,
                                         orderDate, rmaNo, externalDocumentNo, email, false, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines, imeiNo,
-                                        shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
+                                        shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry,
+                                        customerLegacyReturnLabel, legacyReturnLabel));
 
                                     insertedReturnNumbners.Add(rmaNo);
                                     readRMA.Add(rmaNo);
@@ -716,6 +722,8 @@ namespace ExcelDesign.Class_Objects
                                     sellToCustomerNo = string.Empty;
                                     commentLines = new List<Comment>();
                                     imeiNo = string.Empty;
+                                    customerLegacyReturnLabel = false;
+                                    legacyReturnLabel = false;
 
                                     shipToName = string.Empty;
                                     shipToAddress1 = string.Empty;
@@ -828,6 +836,9 @@ namespace ExcelDesign.Class_Objects
                                         }
                                     }
 
+                                    legacyReturnLabel = currResults.SalesHeader[so].CreateLegacyReturnLabel1[0] == "Yes" ? true : false;
+                                    customerLegacyReturnLabel = currResults.CreateLegacyReturnLabel[0] == "Yes" ? true : false;
+
                                     shipToName = currResults.SalesHeader[so].ShipToName;
                                     shipToAddress1 = currResults.SalesHeader[so].ShipToAddress;
                                     shipToAddress2 = currResults.SalesHeader[so].ShipToAddress2;
@@ -845,7 +856,9 @@ namespace ExcelDesign.Class_Objects
                                     }
                                     returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
                                         rmaNo, externalDocumentNo, email, returnLabelCreated, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines, imeiNo,
-                                        shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
+                                        shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry,
+                                        customerLegacyReturnLabel, legacyReturnLabel));
+
                                     insertedReturnNumbners.Add(rmaNo);
                                     readRMA.Add(rmaNo);
 
@@ -865,6 +878,8 @@ namespace ExcelDesign.Class_Objects
                                     sellToCustomerNo = string.Empty;
                                     commentLines = new List<Comment>();
                                     imeiNo = string.Empty;
+                                    customerLegacyReturnLabel = false;
+                                    legacyReturnLabel = false;
 
                                     shipToName = string.Empty;
                                     shipToAddress1 = string.Empty;
@@ -929,6 +944,9 @@ namespace ExcelDesign.Class_Objects
                                     }
                                 }
 
+                                legacyReturnLabel = currResults.ReturnReceiptHeader[so].CreateLegacyReturnLabel4[0] == "Yes" ? true : false;
+                                customerLegacyReturnLabel = currResults.CreateLegacyReturnLabel[0] == "Yes" ? true : false;
+
                                 shipToName = currResults.SalesHeader[so].ShipToName;
                                 shipToAddress1 = currResults.SalesHeader[so].ShipToAddress;
                                 shipToAddress2 = currResults.SalesHeader[so].ShipToAddress2;
@@ -946,7 +964,9 @@ namespace ExcelDesign.Class_Objects
                                 }
                                 returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
                                     rmaNo, externalDocumentNo, email, false, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines, imeiNo,
-                                        shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
+                                        shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry,
+                                        customerLegacyReturnLabel, legacyReturnLabel));
+
                                 insertedReturnNumbners.Add(rmaNo);
                                 readRMA.Add(rmaNo);
 
@@ -964,6 +984,8 @@ namespace ExcelDesign.Class_Objects
                                 exchangeOrderNo = new List<string>();
                                 commentLines = new List<Comment>();
                                 imeiNo = string.Empty;
+                                customerLegacyReturnLabel = false;
+                                legacyReturnLabel = false;
 
                                 shipToName = string.Empty;
                                 shipToAddress1 = string.Empty;
@@ -1526,6 +1548,8 @@ namespace ExcelDesign.Class_Objects
             string sellToCustomerNo = string.Empty;
             List<Comment> commentLines = new List<Comment>();
             string imeiNo = string.Empty;
+            bool customerLegacyReturnLabel = false;
+            bool legacyReturnLabel = false;
 
             string shipToName = string.Empty;
             string shipToAddress1 = string.Empty;
@@ -1652,6 +1676,9 @@ namespace ExcelDesign.Class_Objects
                                                             }
                                                         }
 
+                                                        legacyReturnLabel = currResults.SalesHeader[so].CreateLegacyReturnLabel1[0] == "Yes" ? true : false;
+                                                        customerLegacyReturnLabel = currResults.CreateLegacyReturnLabel[0] == "Yes" ? true : false;
+
                                                         shipToName = currResults.SalesHeader[so].ShipToName;
                                                         shipToAddress1 = currResults.SalesHeader[so].ShipToAddress;
                                                         shipToAddress2 = currResults.SalesHeader[so].ShipToAddress2;
@@ -1669,7 +1696,9 @@ namespace ExcelDesign.Class_Objects
                                                         }
                                                         returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
                                                             rmaNo, externalDocumentNo, email, returnLabelCreated, exchangeCreated, exchangeOrderNo, sellToCustomerNo, commentLines, imeiNo,
-                                                        shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
+                                                        shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry,
+                                                        customerLegacyReturnLabel, legacyReturnLabel));
+
                                                         insertedReturnNumbners.Add(rmaNo);
                                                         readRMA.Add(rmaNo);
 
@@ -1688,6 +1717,8 @@ namespace ExcelDesign.Class_Objects
                                                         exchangeOrderNo = new List<string>();
                                                         commentLines = new List<Comment>();
                                                         imeiNo = string.Empty;
+                                                        customerLegacyReturnLabel = false;
+                                                        legacyReturnLabel = false;
 
                                                         shipToName = string.Empty;
                                                         shipToAddress1 = string.Empty;
@@ -1732,6 +1763,8 @@ namespace ExcelDesign.Class_Objects
             string sellToCustomerNo = string.Empty;
             List<Comment> commentLines = new List<Comment>();
             string imeiNo = string.Empty;
+            bool customerLegacyReturnLabel = false;
+            bool legacyReturnLabel = false;
 
             string shipToName = string.Empty;
             string shipToAddress1 = string.Empty;
@@ -1798,6 +1831,9 @@ namespace ExcelDesign.Class_Objects
                                             }
                                         }
 
+                                        legacyReturnLabel = currResults.ReturnReceiptHeader[so].CreateLegacyReturnLabel4[0] == "Yes" ? true : false;
+                                        customerLegacyReturnLabel = currResults.CreateLegacyReturnLabel[0] == "Yes" ? true : false;
+
                                         shipToName = currResults.ReturnReceiptHeader[so].ShipToName;
                                         shipToAddress1 = currResults.ReturnReceiptHeader[so].ShipToAddress;
                                         shipToAddress2 = currResults.ReturnReceiptHeader[so].ShipToAddress2;
@@ -1815,7 +1851,9 @@ namespace ExcelDesign.Class_Objects
                                         }
                                         returnHead.Add(new ReturnHeader(returnStatus, dateCreated, channelName, receiptHeader, postedReceive, returnTrackingNo, orderDate,
                                             rmaNo, externalDocumentNo, email, false, false, new List<string>(), sellToCustomerNo, commentLines, imeiNo,
-                                        shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry));
+                                        shipToName, shipToAddress1, shipToAddress2, shipToContact, shipToCity, shipToCode, shipToState, shipToCountry,
+                                        customerLegacyReturnLabel, legacyReturnLabel));
+
                                         insertedReturnNumbners.Add(rmaNo);
                                         readRMA.Add(rmaNo);
 
@@ -1831,6 +1869,8 @@ namespace ExcelDesign.Class_Objects
                                         email = string.Empty;
                                         commentLines = new List<Comment>();
                                         imeiNo = string.Empty;
+                                        customerLegacyReturnLabel = false;
+                                        legacyReturnLabel = false;
 
                                         shipToName = string.Empty;
                                         shipToAddress1 = string.Empty;

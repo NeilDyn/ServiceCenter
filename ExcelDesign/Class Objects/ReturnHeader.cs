@@ -32,6 +32,8 @@ namespace ExcelDesign.Class_Objects
         public string ShipToState { get; set; }
         public string ShipToCountry { get; set; }
         public List<Zendesk> Tickets { get; set; }
+        public bool CustomerLegacyReturnLabel { get; set; }
+        public bool LegacyReturnLabelSetup { get; set; }
 
         public ReturnHeader()
         {
@@ -42,7 +44,7 @@ namespace ExcelDesign.Class_Objects
                  List<PostedReceive> postedReceiveObjP, string returnTrackingNoP, string orderDateP, string rmaNoP, string externalDocumentNoP, string emailP,
                  bool returnLabelCreatedP, bool exchangeCreatedP, List<string> exchangeOrderNoP, string sellToCustomerNoP, List<Comment> comments, string imeiNoP,
                  string shipToNameP, string shipToAddress1P, string shipToAddress2P, string shipToContactP, string shipToCityP, string shipToZipP, string shipToStateP,
-                 string shipToCountryP)
+                 string shipToCountryP, bool customerLegacyReturnLabelP, bool legacyReturnLabelSetupP)
         {
             this.ReturnStatus = returnStatusP;
             this.DateCreated = dateCreatedP;
@@ -68,6 +70,8 @@ namespace ExcelDesign.Class_Objects
             this.ShipToCode = shipToZipP;
             this.ShipToState = shipToStateP;
             this.ShipToCountry = shipToCountryP;
+            this.CustomerLegacyReturnLabel = customerLegacyReturnLabelP;
+            this.LegacyReturnLabelSetup = legacyReturnLabelSetupP;
         }
     }
 }

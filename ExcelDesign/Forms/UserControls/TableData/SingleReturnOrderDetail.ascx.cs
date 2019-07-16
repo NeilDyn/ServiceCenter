@@ -135,9 +135,12 @@ namespace ExcelDesign.Forms.UserControls.TableData
             btnUpdateRMA.ID = "BtnUpdateRMA" + CustID.ToString() + "_" + CountID.ToString();
             btnUpdateRMA.OnClientClick = "return false;";
 
-            btnLegacyReturnLabel.Text = "Legacy Return Label";
-            btnLegacyReturnLabel.ID = "btnLegacyReturnLabel" + CustID.ToString() + "_" + CountID.ToString();
-            btnLegacyReturnLabel.OnClientClick = "return false;";
+            if (Rh.CustomerLegacyReturnLabel && Rh.LegacyReturnLabelSetup)
+            {
+                btnLegacyReturnLabel.Text = "Legacy Return Label";
+                btnLegacyReturnLabel.ID = "btnLegacyReturnLabel" + CustID.ToString() + "_" + CountID.ToString();
+                btnLegacyReturnLabel.OnClientClick = "return false;";
+            }           
 
             btnReturnLabel.Text = "Return Label";
             btnReturnLabel.ID = "btnReturnLabel" + CustID.ToString() + "_" + CountID.ToString();
@@ -484,7 +487,12 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 issueRefundCell.Controls.Add(btnIssueRefund);
                 updateRMA.Controls.Add(btnUpdateRMA);
                 printRMAInstructions.Controls.Add(btnPrintRMAInstructions);
-                legacyReturnLabel.Controls.Add(btnLegacyReturnLabel);
+
+                if (Rh.CustomerLegacyReturnLabel && Rh.LegacyReturnLabelSetup)
+                {
+                    legacyReturnLabel.Controls.Add(btnLegacyReturnLabel);
+                }
+
                 issueReturnLabel.Controls.Add(btnReturnLabel);
 
                 buttonRow.Cells.Add(new TableCell());
@@ -492,10 +500,20 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
-                buttonRow.Cells.Add(updateRMA);
+                buttonRow.Cells.Add(new TableCell());
+
+                if (!Rh.CustomerLegacyReturnLabel || !Rh.LegacyReturnLabelSetup)
+                {
+                    buttonRow.Cells.Add(new TableCell());
+                }
+
                 buttonRow.Cells.Add(createExchangeCell);
                 buttonRow.Cells.Add(issueRefundCell);
-                buttonRow.Cells.Add(legacyReturnLabel);
+
+                if (Rh.CustomerLegacyReturnLabel && Rh.LegacyReturnLabelSetup)
+                {
+                    buttonRow.Cells.Add(legacyReturnLabel);
+                }
                 buttonRow.Cells.Add(issueReturnLabel);
                 buttonRow.Cells.Add(printRMAInstructions);
 

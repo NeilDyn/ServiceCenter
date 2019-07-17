@@ -680,8 +680,8 @@ namespace ExcelDesign.Class_Objects
                                         }
                                     }
 
-                                    legacyReturnLabel = currResults.SOImportBuffer[so].CreateLegacyReturnLabel3[0] == "Yes" ? true : false;
-                                    customerLegacyReturnLabel = currResults.CreateLegacyReturnLabel[0] == "Yes" ? true : false;
+                                    customerLegacyReturnLabel = currResults.SOImportBuffer[so].CreateLegacyReturnLabel3[0] == "Yes" ? true : false;
+                                    legacyReturnLabel = currResults.CreateLegacyReturnLabel[0] == "Yes" ? true : false;
 
                                     shipToName = currResults.SalesHeader[so].ShipToName;
                                     shipToAddress1 = currResults.SalesHeader[so].ShipToAddress;
@@ -836,8 +836,8 @@ namespace ExcelDesign.Class_Objects
                                         }
                                     }
 
-                                    legacyReturnLabel = currResults.SalesHeader[so].CreateLegacyReturnLabel1[0] == "Yes" ? true : false;
-                                    customerLegacyReturnLabel = currResults.CreateLegacyReturnLabel[0] == "Yes" ? true : false;
+                                    customerLegacyReturnLabel = currResults.SalesHeader[so].CreateLegacyReturnLabel1[0] == "Yes" ? true : false;
+                                    legacyReturnLabel = currResults.CreateLegacyReturnLabel[0] == "Yes" ? true : false;
 
                                     shipToName = currResults.SalesHeader[so].ShipToName;
                                     shipToAddress1 = currResults.SalesHeader[so].ShipToAddress;
@@ -944,8 +944,8 @@ namespace ExcelDesign.Class_Objects
                                     }
                                 }
 
-                                legacyReturnLabel = currResults.ReturnReceiptHeader[so].CreateLegacyReturnLabel4[0] == "Yes" ? true : false;
-                                customerLegacyReturnLabel = currResults.CreateLegacyReturnLabel[0] == "Yes" ? true : false;
+                                customerLegacyReturnLabel = currResults.ReturnReceiptHeader[so].CreateLegacyReturnLabel4[0] == "Yes" ? true : false;
+                                legacyReturnLabel = currResults.CreateLegacyReturnLabel[0] == "Yes" ? true : false;
 
                                 shipToName = currResults.SalesHeader[so].ShipToName;
                                 shipToAddress1 = currResults.SalesHeader[so].ShipToAddress;
@@ -1676,8 +1676,8 @@ namespace ExcelDesign.Class_Objects
                                                             }
                                                         }
 
-                                                        legacyReturnLabel = currResults.SalesHeader[so].CreateLegacyReturnLabel1[0] == "Yes" ? true : false;
-                                                        customerLegacyReturnLabel = currResults.CreateLegacyReturnLabel[0] == "Yes" ? true : false;
+                                                        customerLegacyReturnLabel = currResults.SalesHeader[so].CreateLegacyReturnLabel1[0] == "Yes" ? true : false;
+                                                        legacyReturnLabel = currResults.CreateLegacyReturnLabel[0] == "Yes" ? true : false;
 
                                                         shipToName = currResults.SalesHeader[so].ShipToName;
                                                         shipToAddress1 = currResults.SalesHeader[so].ShipToAddress;
@@ -1831,8 +1831,8 @@ namespace ExcelDesign.Class_Objects
                                             }
                                         }
 
-                                        legacyReturnLabel = currResults.ReturnReceiptHeader[so].CreateLegacyReturnLabel4[0] == "Yes" ? true : false;
-                                        customerLegacyReturnLabel = currResults.CreateLegacyReturnLabel[0] == "Yes" ? true : false;
+                                        customerLegacyReturnLabel = currResults.ReturnReceiptHeader[so].CreateLegacyReturnLabel4[0] == "Yes" ? true : false;
+                                        legacyReturnLabel = currResults.CreateLegacyReturnLabel[0] == "Yes" ? true : false;
 
                                         shipToName = currResults.ReturnReceiptHeader[so].ShipToName;
                                         shipToAddress1 = currResults.ReturnReceiptHeader[so].ShipToAddress;

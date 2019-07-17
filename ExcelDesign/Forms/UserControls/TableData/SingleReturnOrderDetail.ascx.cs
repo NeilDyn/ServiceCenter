@@ -37,6 +37,8 @@ namespace ExcelDesign.Forms.UserControls.TableData
         public string CanRefundPDA { get; set; }
         public string UPSLabelCreated { get; set; }
 
+        private bool AllowLegacyReturnLabel { get; set; }
+
         protected TableRow buttonRow = new TableRow();
 
         protected TableCell createExchangeCell = new TableCell();
@@ -75,6 +77,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
         {
             if (CustomerCount == 1)
             {
+                AllowLegacyReturnLabel = Rh.CustomerLegacyReturnLabel && !Rh.LegacyReturnLabelSetup;
                 CreateButtons();
             }
 
@@ -135,7 +138,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
             btnUpdateRMA.ID = "BtnUpdateRMA" + CustID.ToString() + "_" + CountID.ToString();
             btnUpdateRMA.OnClientClick = "return false;";
 
-            if (Rh.CustomerLegacyReturnLabel && Rh.LegacyReturnLabelSetup)
+            if (AllowLegacyReturnLabel)
             {
                 btnLegacyReturnLabel.Text = "Legacy Return Label";
                 btnLegacyReturnLabel.ID = "btnLegacyReturnLabel" + CustID.ToString() + "_" + CountID.ToString();
@@ -488,7 +491,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 updateRMA.Controls.Add(btnUpdateRMA);
                 printRMAInstructions.Controls.Add(btnPrintRMAInstructions);
 
-                if (Rh.CustomerLegacyReturnLabel && Rh.LegacyReturnLabelSetup)
+                if (AllowLegacyReturnLabel)
                 {
                     legacyReturnLabel.Controls.Add(btnLegacyReturnLabel);
                 }
@@ -501,8 +504,9 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
                 buttonRow.Cells.Add(new TableCell());
+                buttonRow.Cells.Add(new TableCell());
 
-                if (!Rh.CustomerLegacyReturnLabel || !Rh.LegacyReturnLabelSetup)
+                if (!AllowLegacyReturnLabel)
                 {
                     buttonRow.Cells.Add(new TableCell());
                 }
@@ -510,7 +514,7 @@ namespace ExcelDesign.Forms.UserControls.TableData
                 buttonRow.Cells.Add(createExchangeCell);
                 buttonRow.Cells.Add(issueRefundCell);
 
-                if (Rh.CustomerLegacyReturnLabel && Rh.LegacyReturnLabelSetup)
+                if (AllowLegacyReturnLabel)
                 {
                     buttonRow.Cells.Add(legacyReturnLabel);
                 }
